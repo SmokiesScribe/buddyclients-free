@@ -1,0 +1,4 @@
+/* Settings icon */
+#bc-files::before {
+    content: "\e980";
+}

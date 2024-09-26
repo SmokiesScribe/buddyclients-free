@@ -1,0 +1,4 @@
+[19-Sep-2024 15:58:04 UTC] PHP Fatal error:  Uncaught Error: Call to undefined function bc_stripe_library() in /home/inkburyc/staging.conference.bluepenbooks.com/wp-content/plugins/buddyclients/components/Stripe/stripe-assets/create-payment-intent.php:14
+Stack trace:
+#0 {main}
+  thrown in /home/inkburyc/staging.conference.bluepenbooks.com/wp-content/plugins/buddyclients/components/Stripe/stripe-assets/create-payment-intent.php on line 14

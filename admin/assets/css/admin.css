@@ -1,0 +1,167 @@
+/** Admin CSS **/
+/* Grouped Meta Boxes */
+.bc-meta-field {
+    width: 100%
+}
+
+/* Non Gutenburg Meta Boxes */
+.bc-meta-container {
+    display: flex;
+    flex-wrap: wrap; /* Allow items to wrap onto new lines */
+}
+
+.bc-meta-container input:not([type="checkbox"]),
+.bc-meta-container select {
+    /* Make input fields and select dropdowns take up available space */
+    flex: 1;
+    /* Optionally, add additional styling properties as needed */
+    width: 100%; /* Ensure the input fields and select dropdowns take up the entire width */
+    margin-top: 5px;
+}
+
+.bc-meta-status-icon {
+    margin-right: 5px;
+    margin-top: 3px;
+}
+
+.bc-meta-description {
+    flex-basis: 100%; /* Force description onto a new line */
+    margin-bottom: 10px;
+}
+
+/* Freelancer Mode Message */
+.bc-freelancer-mode-message {
+    margin: 40px;
+    background-color: #fff;
+    border-radius: 10px;
+    padding: 20px 40px;
+    width: 50%;
+    border: solid 1px #e7e9ec;
+}
+.bc-freelancer-mode-message p {
+    font-size: 16px;
+}
+
+/* Upgrade Message */
+.bc-upgrade-link-container {
+    margin: 40px;
+    background-color: #fff;
+    border-radius: 10px;
+    padding: 20px 40px;
+    width: 50%;
+    border: solid 1px #e7e9ec;
+}
+.bc-upgrade-link {
+    font-size: 16px;
+}
+.bc-upgrade-link i {
+    color: #037AAD;
+    margin-right: 5px;
+}
+
+.buddyclients-settings-section {
+    background-color: #fff;
+    padding: 20px;
+    border: solid 1px #D4D6D8;
+    border-radius: 10px;
+    margin: 25px;
+}
+
+.buddyclients-settings-section-title-wrap {
+    margin: 10px;
+}
+
+.buddyclients-settings-section-title {
+    margin-bottom: 15px;
+    margin-top: 0;
+    font-size: 20px;
+}
+
+.buddyclients-settings-section-title-divider {
+    color: #D4D6D8;
+    margin: 20px 0;
+}
+
+.buddyclients-admin-field {
+    margin-bottom: 15px;
+}
+
+.buddyclients-admin-field > label {
+    display: inline-block;
+    width: 200px; /* Adjust the width as needed */
+    font-weight: bold; /* Optionally make labels bold */
+}
+
+.buddyclients-admin-field-input-wrap > input,
+.buddyclients-admin-field-input-wrap > select {
+    width: 300px;
+    padding: 5px;
+    border-radius: 5px;
+    border: solid 1px #b6b8ba;
+}
+
+/* Components table */
+.bc-checkbox-table {
+    border-collapse: collapse;
+    width: 100%;
+}
+
+.bc-checkbox-table td {
+    border: 1px solid #ccc;
+    padding: 8px;
+    height: 50px;
+}
+
+.bc-checkbox-table td:first-child {
+    width: 30%;
+    border-right: none;
+}
+
+.bc-checkbox-table td:not(:first-child) {
+    border-left: none;
+}
+
+/* Style selected row */
+.bc-checkbox-table tr.checked {
+    background-color: #f1f6fb;
+    border-left: solid 5px #7face1;
+}
+
+/* Hide required checkbox */
+.bc-checkbox-table tr.required input {
+    opacity: 0;
+}
+
+.bc-checkbox-table label {
+    display: block;
+    font-size: 14px;
+    font-weight: 600;
+}
+
+.bc-checkbox-table .description {
+    color: #565656;
+}
+
+.bc-checkbox-table label input[type="checkbox"] {
+    margin: 0 20px 0 10px;
+}
+
+.buddyclients-admin-field-input-wrap {
+    display: inline-block;
+    width: calc(100% - 210px); /* Adjust based on label width */
+    vertical-align: top; /* Align input fields with labels */
+}
+
+.buddyclients-nav-tab {
+    border-radius: 5px 5px 0 0;
+}
+/* Submenu Separator */
+ul.wp-submenu.wp-submenu-wrap li a[href="bc-separator"] {
+    color: transparent; /* Make the text invisible */
+    pointer-events: none; /* Make the link unclickable */
+    display: block; /* Ensure it takes up full width */
+    width: 70%; /* Set the desired width, e.g., 80% of the parent width */
+    margin: auto !important; /* Center the separator horizontally */
+    margin-top: 10px !important;
+    border-top: 1px solid #555555; /* Grey border as separator */
+}
