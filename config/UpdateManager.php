@@ -62,6 +62,9 @@ class UpdateManager {
         
         // Track updates
         add_action( 'upgrader_process_complete', [$this, 'track_update'], 10, 2 );
+
+        // Modify upgrade package options for GitHub versioning
+        add_filter('upgrader_package_options', [&$this, 'modify_package_options']);
     }
     
     /**
@@ -87,6 +90,36 @@ class UpdateManager {
         list ( $t1, $t2 ) = explode( '/', $plugin_slug );
         return str_replace( '.php', '', $t2 );
     }
+
+    /**
+     * Modifies the package options to remove version number from the directory name.
+     * 
+     * @since 1.0.9
+     *
+     * @param array $options The options for the upgrader.
+     * @return array The modified options.
+     */
+    public function modify_package_options( $options ) {
+        
+        $package = $options['package'] ?? '';
+        $destination = $options['destination'] ?? '';
+
+        // Get the plugin slug from the options
+        $plugin_slug = isset( $options['hook_extra']['plugin'] ) 
+                    ? $options['hook_extra']['plugin'] 
+                    : '';
+
+        // Check if the package is from GitHub and matches your plugin slug
+        if ( strpos( $package, 'buddyclients.com' ) !== false && 
+            $destination === WP_PLUGIN_DIR && 
+            $plugin_slug === $this->plugin_slug ) {
+                
+                // Modify the destination path to avoid the version number
+                $options['destination'] = path_join( WP_PLUGIN_DIR, dirname( $plugin_slug ) );
+        }
+
+        return $options;
+    }
     
     /**
      * Checks for plugin updates.
@@ -107,8 +140,7 @@ class UpdateManager {
     
         // Fetch the version of the plugin from the remote server.
         $remote_version = $this->get_remote( 'version' );
-        
-        error_log( 'Remote version: ' . $remote_version );
+        $package_url = $this->get_remote( 'package' );
     
         // Compare the current version with the remote version.
         // If the remote version is newer, add the update details to the transient.
@@ -117,7 +149,7 @@ class UpdateManager {
             $obj->slug = $this->slug; // Plugin slug identifier.
             $obj->new_version = $remote_version; // The new version available.
             $obj->url = $this->update_path; // URL to more info about the update.
-            $obj->package = $this->update_path; // URL to download the update package.
+            $obj->package = $package_url; // URL to download the update package.
             
             // Add the update information to the transient's response property.
             $transient->response[$this->plugin_slug] = $obj;
@@ -144,7 +176,7 @@ class UpdateManager {
         if ( property_exists( $arg, 'slug' ) && $arg->slug === $this->slug ) {
             // Retrieve plugin information from external server
             $information = $this->get_remote( 'info' );
-            
+
             // Return the plugin information object to provide details for the 'View details' link.
             return $information;
         }

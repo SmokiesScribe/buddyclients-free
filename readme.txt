@@ -56,6 +56,9 @@ Banner URL: /assets/media/banner-772x250/banner.png
 
 == Changelog ==
 
+= 1.0.9 - September 27, 2024 =
+* Improvement: Modified auto updater.
+
 = 1.0.8 - September 26, 2024 =
 * Improvement: Modified file names for compatibility outside Linux environment.
 * Improvement: Corrected path creation logic in autoloader.
