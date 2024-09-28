@@ -138,8 +138,7 @@ if ( ! class_exists( 'BuddyClients' ) ) {
     		new BuddyClients\Config\LicenseHandler;
     		
     		// Run activator
-    		//add_action( 'init', [$this, 'activate'] );
-			$this->activate();
+    		add_action( 'init', [$this, 'activate'] );
     		
     		// Initialize classes
     		$this->init_classes();

@@ -56,19 +56,22 @@ Banner URL: /assets/media/banner-772x250/banner.png
 
 == Changelog ==
 
+= 1.0.10 - Uncommitted =
+* Fixed: Moved the Activator initialization to a later point in the plugin lifecycle to prevent issues with page creation.
+
 = 1.0.9 - September 27, 2024 =
 * Improvement: Modified auto updater.
 
 = 1.0.8 - September 26, 2024 =
 * Improvement: Modified file names for compatibility outside Linux environment.
 * Improvement: Corrected path creation logic in autoloader.
-* Bug: Allowed for initial license check in LicenseHandler.
+* Fixed: Allowed for initial license check in LicenseHandler.
 
 = 1.0.7 - September 25, 2024 =
 * Improvement: Checks for BuddyClients Free plugin.
 
 = 1.0.6 - September 25, 2024 =
-* Bug: Suppressed session-related errors.
+* Fixed: Suppressed session-related errors.
 
 = 1.0.5 - September 20, 2024 =
 * New Feature! Automatic updates.
@@ -76,7 +79,7 @@ Banner URL: /assets/media/banner-772x250/banner.png
 = 1.0.4 - September 19, 2024 =
 * Improvement: Added AlertManager class to handle all alerts.
 * Improvement: Added ExtensionManager class to handle all profile extensions.
-* Bug: Fixed link comparison in Alert class.
+* Fixed: Fixed link comparison in Alert class.
 
 = 1.0.3 - September 17, 2024 =
 * New Feature! Preview briefs for brief types in the admin area.
@@ -86,18 +89,18 @@ Banner URL: /assets/media/banner-772x250/banner.png
 * Improvement: Added ParamManager class to modify url params.
 * Improvement: Improved formatting of admin tips content.
 * Improvement: Pass items per page value to AdminTable.
-* Bug: Added settings check before requiring team member agreement.
-* Bug: Registered file upload post type.
-* Bug: Removed escaping on settings checkbox labels.
+* Fixed: Added settings check before requiring team member agreement.
+* Fixed: Registered file upload post type.
+* Fixed: Removed escaping on settings checkbox labels.
 
 = 1.0.2 - September 16, 2024 =
 * Improvement: Added charts to admin dashboard.
 
 = 1.0.1 - September 12, 2024 =
-* Bug: Fixed type in team and client type functions.
-* Bug: Wrapped content in profile extension table.
-* Bug: Renamed javascript copy to clipboard function to avoid conflicts.
-* Bug: Re-added methods to AdminTableItem class.
+* Fixed: Fixed type in team and client type functions.
+* Fixed: Wrapped content in profile extension table.
+* Fixed: Renamed javascript copy to clipboard function to avoid conflicts.
+* Fixed: Re-added methods to AdminTableItem class.
 
 = 1.0.0 - September 6, 2024 =
 * Initial Release
@@ -106,9 +109,9 @@ Banner URL: /assets/media/banner-772x250/banner.png
 * Improvement: Handles account creation and payment processing dependently.
 * Improvement: Throws an error when social groups are disabled.
 * Improvement: Added sanity checks.
-* Bug: Fixed bug resetting booking form submit text.
-* Bug: Fixed output after sales booking creation.
-* Bug: Fixed file and email log cleanup methods.
+* Fixed: Fixed bug resetting booking form submit text.
+* Fixed: Fixed output after sales booking creation.
+* Fixed: Fixed file and email log cleanup methods.
 
 = 0.4.2 - August 29, 2024 =
 * New Feature! Added support for Meta/Facebook ads events.
@@ -134,14 +137,14 @@ Banner URL: /assets/media/banner-772x250/banner.png
 = 0.3.3 - July 25, 2024 =
 * Improvement: Added method to update Payment property.
 * Improvement: Added method to make admin columns sortable.
-* Bug: Fixed error preventing attachment of project ID to Payment.
+* Fixed: Fixed error preventing attachment of project ID to Payment.
 
 = 0.3.2 - July 23, 2024 =
 * Improvement: Added admin columns to brief fields.
-* Bug: Fixed typo in brief submitted email trigger.
-* Bug: Sanitize html when populating brief form.
-* Bug: Added support for 'text_area' type to FormField class.
-* Bug: Updated FormField class to populate textarea with value.
+* Fixed: Fixed typo in brief submitted email trigger.
+* Fixed: Sanitize html when populating brief form.
+* Fixed: Added support for 'text_area' type to FormField class.
+* Fixed: Updated FormField class to populate textarea with value.
 
 = 0.3.1 - July 19, 2024 =
 * New Feature! Manually check for succeeded payments.
@@ -149,33 +152,33 @@ Banner URL: /assets/media/banner-772x250/banner.png
 = 0.3.0 - July 16, 2024 =
 * New Feature! Added admin tips to help navigate the plugin.
 * Improvement: Added mobile-styled summary to booking and checkout.
-* Bug: Updates htaccess file on change to site url.
-* Bug: Updates file urls on change to site url.
+* Fixed: Updates htaccess file on change to site url.
+* Fixed: Updates file urls on change to site url.
 
 = 0.2.12 - July 12, 2024 =
-* Bug: Makes sure booked services do not exist before creating them.
-* Bug: Fixed bug preventing brief creation on successful booking.
-* Bug: Prevents duplicate payment groups.
+* Fixed: Makes sure booked services do not exist before creating them.
+* Fixed: Fixed bug preventing brief creation on successful booking.
+* Fixed: Prevents duplicate payment groups.
 
 = 0.2.11 - July 7, 2024 =
 * Improvement: Removed the deprecated AdjustmentLineItem class.
 * Improvement: Updated class documentation.
-* Bug: Makes sure post exists before generating PDF.
+* Fixed: Makes sure post exists before generating PDF.
 
 = 0.2.10 - July 5, 2024 =
 * Improvement: Added reference post type.
 * Improvement: Added displayed explanation of team member dropdown and availability.
-* Bug: Fixed error in RepairButton class on post archive admin screen.
-* Bug: Fixed issue populating file upload field with correct label.
+* Fixed: Fixed error in RepairButton class on post archive admin screen.
+* Fixed: Fixed issue populating file upload field with correct label.
 
 = 0.2.9 - June 29, 2024 =
 * Improvement: Added Options class.
 
 = 0.2.8 - June 28, 2024 =
-* Bug: Added required component to quote post type.
-* Bug: Disables floating contact when Contact component is disabled.
-* Bug: Adds email link instead of contact form when Contact component is disabled.
-* Bug: Disables availability components when disabled.
+* Fixed: Added required component to quote post type.
+* Fixed: Disables floating contact when Contact component is disabled.
+* Fixed: Adds email link instead of contact form when Contact component is disabled.
+* Fixed: Disables availability components when disabled.
 
 = 0.2.7 - June 27, 2024 =
 * Improvement: Updated tags for better documentation organization.
@@ -188,19 +191,19 @@ Banner URL: /assets/media/banner-772x250/banner.png
 * Improvement: Removed loader and added trailing slash to link comparison in Alert class.
 * Improvement: Updated admin menu order.
 * Improvement: Deletes associated Payments and Booked Services when Booking Intent is deleted.
-* Bug: Defined ServiceType class in Quote class.
-* Bug: Fixed duplicate admin column values.
-* Bug: Fixed timing when validating custom quote post.
-* Bug: Fixed payment updated email.
-* Bug: Uncommented line that prevents duplicate project groups.
-* Bug: Fixed issue with service fees over $1,000.
-* Bug: Fixed formatting issue affecting team payment calculation.
+* Fixed: Defined ServiceType class in Quote class.
+* Fixed: Fixed duplicate admin column values.
+* Fixed: Fixed timing when validating custom quote post.
+* Fixed: Fixed payment updated email.
+* Fixed: Uncommented line that prevents duplicate project groups.
+* Fixed: Fixed issue with service fees over $1,000.
+* Fixed: Fixed formatting issue affecting team payment calculation.
 
 = 0.2.4 =
 * New Feature! Manually create previously paid bookings.
 * New Feature! Delete bookings in the admin area.
-* Bug: Fixed issue with team filtering.
-* Bug: Fixed errors on booking form submission.
+* Fixed: Fixed issue with team filtering.
+* Fixed: Fixed errors on booking form submission.
 
 = 0.2.3 =
 * New Feature! Attach rate numbers to individual services.
@@ -211,12 +214,12 @@ Banner URL: /assets/media/banner-772x250/banner.png
 * Improvement: Disables booking form submit button during processing.
 * Improvement: Improved checkout table styling.
 * Improvement: Added nicename to client dropdown in sales form.
-* Bug: Fixed function to retrieve all clients.
-* Bug: Fixed floating contact button display.
+* Fixed: Fixed function to retrieve all clients.
+* Fixed: Fixed floating contact button display.
 
 = 0.2.2 =
 * Improvement: Adds availability to booking form.
-* Bug: Fixed issue preventing availability alert from displaying.
+* Fixed: Fixed issue preventing availability alert from displaying.
 
 = 0.2.1 =
 * Improvement: New admin plugin links.
@@ -227,15 +230,15 @@ Banner URL: /assets/media/banner-772x250/banner.png
 * New Feature! Team members for each role can be locked for a project.
 
 = 0.1.3 =
-* Bug: Fixed typo in FloatingContact.
-* Bug: Role label defaults to title, eliminating error when singular label is missing.
-* Bug: XprofileField was creating duplicate fields.
-* Bug: Fixed upload field display on booking form.
+* Fixed: Fixed typo in FloatingContact.
+* Fixed: Role label defaults to title, eliminating error when singular label is missing.
+* Fixed: XprofileField was creating duplicate fields.
+* Fixed: Fixed upload field display on booking form.
 * Improvement: Checks whether default pages exist before creating them.
 * Improvement: Adjustment options require only a label to be valid.
 
 = 0.1.1 =
-* Bug: Fixed compatibility with BuddyPress.
+* Fixed: Fixed compatibility with BuddyPress.
 
 = 0.1.0 =
 * Initial Beta Version
