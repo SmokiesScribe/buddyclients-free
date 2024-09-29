@@ -57,7 +57,7 @@ Banner URL: /assets/media/banner-772x250/banner.png
 == Changelog ==
 
 = 1.0.11 - September 29, 2024 =
-* Fixed: Added functino to ensure the plugin is placed in the correct directory on initial install.
+* 
 
 = 1.0.10 - September 28, 2024 =
 * Fixed: Moved the Activator initialization to a later point in the plugin lifecycle to prevent issues with page creation.

@@ -5,7 +5,7 @@
  * Description: BuddyClients is a flexible and comprehensive platform for any service-based business. Compatible with BuddyPress and BuddyBoss.
  * Author:      Victoria Griffin
  * Author URI:  https://victoriagriffin.com/
- * Version:     1.0.9
+ * Version:     1.0.11
  * Text Domain: buddyclients
  * Domain Path: /languages/
  * License:     GPL-2.0-or-later
@@ -18,7 +18,7 @@ defined( 'ABSPATH' ) || exit;
 
 // Define constants
 if ( ! defined( 'BC_PLUGIN_VERSION' ) ) {
-	define( 'BC_PLUGIN_VERSION', '1.0.9' );
+	define( 'BC_PLUGIN_VERSION', '1.0.11' );
 }
 
 if ( ! defined( 'BC_PLUGIN_FILE' ) ) {
@@ -172,31 +172,3 @@ function bc_sanity_check_notice() {
 	}
 }
 add_action( 'admin_notices', 'bc_sanity_check_notice' );
-
-/**
- * Ensures the plugin is installed in the correct directory.
- * 
- * @since 1.0.11
- */
-public function bc_rename_dir( $source, $remote_source, $upgrader ) {
-    global $wp_filesystem;
-
-    // Check if it's the right plugin by matching the slug
-    if ( strpos( $source, 'buddyclients' ) !== false ) {
-        
-        // Define the correct folder name
-        $corrected_folder_name = trailingslashit( dirname( $source ) ) . 'buddyclients';
-
-        // Rename the unpacked folder to the correct name
-        if ( ! $wp_filesystem->move( $source, $corrected_folder_name ) ) {
-            return new WP_Error( 'rename_failed', __( 'Unable to rename plugin folder.' ) );
-        }
-
-        // Return the new folder name
-        return $corrected_folder_name;
-    }
-
-    // If this isn't the plugin, return the original source
-    return $source;
-}
-add_filter( 'upgrader_source_selection', [ $this, 'bc_rename_dir' ], 10, 3 );
