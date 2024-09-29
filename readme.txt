@@ -56,7 +56,7 @@ Banner URL: /assets/media/banner-772x250/banner.png
 
 == Changelog ==
 
-= 1.0.10 - Unreleased =
+= 1.0.10 - September 28, 2024 =
 * Fixed: Moved the Activator initialization to a later point in the plugin lifecycle to prevent issues with page creation.
 
 = 1.0.9 - September 27, 2024 =
