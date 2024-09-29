@@ -221,7 +221,7 @@ class UpdateManager {
      */
     public function track_update( $upgrader_object, $hook_extra ) {
         // Check if the action was for updating a plugin
-        if ( $hook_extra['type'] === 'plugin' ) {
+        if ( $hook_extra['type'] === 'plugin' && isset( $hook_extra['plugins'] ) ) {
             // Get the updated plugin slug
             $plugin = $hook_extra['plugins'][0];
     

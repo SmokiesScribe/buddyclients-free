@@ -56,6 +56,9 @@ Banner URL: /assets/media/banner-772x250/banner.png
 
 == Changelog ==
 
+= 1.0.12 - September 29, 2024 =
+* Fixed: Ensure correct plugin is being updated before attempting to track update.
+
 = 1.0.11 - September 29, 2024 =
 * Fixed: Stabilized initial installation process.
 
