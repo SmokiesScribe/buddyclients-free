@@ -1,17 +1,17 @@
 <?php
 defined( 'ABSPATH' ) || exit;
 
-if ( ! class_exists( 'BuddyClients' ) ) {
+if ( ! class_exists( 'BuddyClientsFree' ) ) {
 
 	/**
-	 * BuddyClients Main Class.
+	 * BuddyClientsFree Main Class.
 	 * 
 	 * @since 0.1.0
 	 * 
 	 * @internal
 	 */
 	#[\AllowDynamicProperties]
-	final class BuddyClients {
+	final class BuddyClientsFree {
 	    
 		/**
 		 * The single instance of the main class.
@@ -26,7 +26,7 @@ if ( ! class_exists( 'BuddyClients' ) ) {
     	public $bb_theme;
     	
     	/**
-    	 * Generates the main BuddyClients instance.
+    	 * Generates the main BuddyClientsFree instance.
     	 *
     	 * Ensures only one instance of BuddyClients is loaded.
     	 *

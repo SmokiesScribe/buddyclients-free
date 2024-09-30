@@ -1,6 +1,6 @@
 <?php
 /**
- * Plugin Name: BuddyClients
+ * Plugin Name: BuddyClients Free
  * Plugin URI:  https://buddyclients.com
  * Description: BuddyClients is a flexible and comprehensive platform for any service-based business. Compatible with BuddyPress and BuddyBoss.
  * Author:      Victoria Griffin
@@ -25,8 +25,7 @@ if ( ! defined( 'BC_PLUGIN_FILE' ) ) {
 	define( 'BC_PLUGIN_FILE', __FILE__ );
 }
 
-require_once(plugin_dir_path(__FILE__) . 'BuddyClients-class.php');
-require_once( plugin_dir_path(__FILE__) . 'config/helpers/sanity-check.php' );
+require_once(plugin_dir_path(__FILE__) . 'BuddyClientsFree-class.php');
 
 /**
  * Returns the one true BuddyClients Instance.
@@ -35,9 +34,9 @@ require_once( plugin_dir_path(__FILE__) . 'config/helpers/sanity-check.php' );
  *
  * @return BuddyClients|null The one true BuddyClients Instance.
  */
-function buddyclients() {
-    if ( function_exists( 'buddypress' ) && ! function_exists( 'buddyclients_free' ) && class_exists( 'BuddyClients' ) ) {
-	    return BuddyClients::instance();
+function buddyclients_free() {
+    if ( function_exists( 'buddypress' ) && ! function_exists( 'buddyclients' ) && class_exists( 'BuddyClientsFree' ) ) {
+	    return BuddyClientsFree::instance();
     }
 }
 
@@ -48,7 +47,7 @@ function buddyclients() {
  * 
  * @since 0.1.0
  */
-add_action( 'plugins_loaded', 'buddyclients' );
+add_action( 'plugins_loaded', 'buddyclients_free' );
 
 /**
  * Displays an admin notice if multiple versions of BuddyClients are installed.

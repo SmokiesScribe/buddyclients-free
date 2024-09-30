@@ -1,3 +1,156 @@
-<?php namespace BuddyClients\Config;use BuddyClients\Includes\DatabaseManager;use BuddyClients\Admin\Settings;use BuddyClients\Admin\AdminNotice;/**
+<?php
+namespace BuddyClients\Config;
+
+use BuddyClients\Includes\DatabaseManager;
+use BuddyClients\Admin\Settings;
+use BuddyClients\Admin\AdminNotice;
+
+/**
+ * Handles plugin components.
+ * 
+ * @since 0.1.0
+ * 
  * @ignore
- */ class ComponentsHandler{private static $database=null;private static $encryption_key='mellons';private $components;private static function init_database(){if(!self::$database){self::$database=new DatabaseManager('components');}}public function __construct(){self::init_database();}public static function get_components(){$decrypted_components=[];self::init_database();$record=self::$database->get_record_by_id(1);if($record){$encrypted_components=$record->components;$decrypted_components=self::decrypt($encrypted_components);}return is_array($decrypted_components)?$decrypted_components:[];}public static function required_components(){return['Booking','Checkout','Service',];}public static function dependent_components(){return['Affiliate'=>'Legal',];}public static function update_components($components){self::init_database();if(!$components){$components=[];}$required_components=self::required_components();foreach($required_components as $required_component){if(!in_array($required_component,$components)){$components[]=$required_component;}}$record=self::$database->get_record_by_id(1);$encrypted_components=self::encrypt($components);if($record){self::$database->update_record(1,['components'=>$encrypted_components]);}else{self::$database->insert_record(['components'=>$encrypted_components]);}}public static function in_components($component){$components=self::get_components();if(!in_array($component,$components)){return false;}$enabled_components=Settings::get_value('components','components');if(!in_array($component,$enabled_components)){return false;}$dependent_components=self::dependent_components();if(isset($dependent_components[$component])){$necessary_component=$dependent_components[$component];if(!in_array($necessary_component,$enabled_components)){$notice_args=['repair_link'=>'admin.php?page=bc-components-settings','message'=>'The '.$component.' component requires the '.$necessary_component.' component to be enabled.','color'=>'orange'];new AdminNotice($notice_args);return false;}}return true;}public static function component_exists($component){$components=self::get_components();if(!in_array($component,$components)){return false;}else{return true;}}private static function encrypt($data){$iv=openssl_random_pseudo_bytes(16);$encrypted_data=openssl_encrypt(serialize($data),'AES-256-CBC',self::$encryption_key,0,$iv);return base64_encode($iv.$encrypted_data);}private static function decrypt($data){$data=base64_decode($data);$iv=substr($data,0,16);$encrypted_data=substr($data,16);return unserialize(openssl_decrypt($encrypted_data,'AES-256-CBC',self::$encryption_key,0,$iv));}}?>
+ */
+class ComponentsHandler {
+    
+    /**
+     * DatabaseManager instance.
+     * 
+     * @var DatabaseManager
+     */
+    private static $database = null;
+    
+    /**
+     * Components data.
+     * 
+     * @var array
+     */
+    private $components;
+    
+    /**
+     * Initializes the DatabaseManager.
+     * 
+     * @since 0.1.0
+     */
+    private static function init_database() {
+        if ( ! self::$database ) {
+            self::$database = new DatabaseManager( 'components' );
+        }
+    }
+    
+    /**
+     * Constructor method.
+     * 
+     * @since 0.1.0
+     */
+    public function __construct() {
+        // Initialize DatabaseManager
+        self::init_database();
+    }
+    
+    /**
+     * Retrieves components.
+     * 
+     * @since 0.1.0
+     */
+    public static function get_components() {
+        return [
+            // Required
+            'Booking',
+            'Checkout',
+            'Service',
+            // Core
+            'Email',
+            'Brief',
+        ];
+    }
+    
+    /**
+     * Defines required components.
+     * 
+     * @since 0.1.0
+     */
+    public static function required_components() {
+        return [
+            'Booking',
+            'Checkout',
+            'Service',
+        ];
+    }
+    
+    /**
+     * Defines dependent components.
+     * 
+     * @since 0.1.0
+     */
+    public static function dependent_components() {
+        return [];
+    }
+    
+    /**
+     * Checks whether an item is in the components.
+     * 
+     * @since 0.1.0
+     * 
+     * @param   string  $component  The component to check.
+     * @return  bool
+     */
+    public static function in_components( $component ) {
+        
+        // Retrieve components
+        $components = self::get_components();
+        
+        // Check if the component is in the array
+        if ( ! in_array( $component, $components ) ) {
+            return false;
+        }
+        
+        // Make sure the component is not disabled
+        $enabled_components = Settings::get_value( 'components', 'components' );
+        if ( ! in_array( $component, $enabled_components ) ) {
+            return false;
+        }
+        
+        // Get dependent components
+        $dependent_components = self::dependent_components();
+        
+        // Check if the component is dependent
+        if ( isset( $dependent_components[$component] ) ) {
+            $necessary_component = $dependent_components[$component];
+            if ( ! in_array( $necessary_component, $enabled_components ) ) {
+                $notice_args = [
+                    'repair_link'   => 'admin.php?page=bc-components-settings',
+                    'message'       => 'The ' . $component . ' component requires the ' . $necessary_component . ' component to be enabled.',
+                    'color'         => 'orange'
+                ];
+                new AdminNotice( $notice_args );
+                return false;
+            }
+        }
+        
+        // Checks passed
+        return true;
+    }
+    
+    /**
+     * Checks if the component exists.
+     * 
+     * @since 0.1.0
+     * 
+     * @param   string  $component  The component to check.
+     * @return  bool
+     */
+    public static function component_exists( $component ) {
+        
+        // Retrieve components
+        $components = self::get_components();
+        
+        // Check if the component is in the array
+        if ( ! in_array( $component, $components ) ) {
+            return false;
+        } else {
+            return true;
+        }        
+    }
+}
