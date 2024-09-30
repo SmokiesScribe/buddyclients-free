@@ -56,6 +56,9 @@ Banner URL: /assets/media/banner-772x250/banner.png
 
 == Changelog ==
 
+= 1.0.13 - September 30, 2024 =
+* Fixed: Remove extra fee number fields from booking form when services are deselected.
+
 = 1.0.12 - September 29, 2024 =
 * Fixed: Ensure correct plugin is being updated before attempting to track update.
 

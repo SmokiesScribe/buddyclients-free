@@ -41,8 +41,8 @@
                 // Rate count fields
                 if ( isSelected ) {
                     // Push ids to arrays
-                    rateIds.push(rateType);
-                    selectedServiceIds.push(serviceId);
+                    rateIds.push( rateType );
+                    selectedServiceIds.push( serviceId );
                 }
 
                 // Adjustment fields
@@ -67,8 +67,8 @@
                 }
 
                 // Create role ids array
-                if (roleId && !assignedId && isSelected && !roleIds.includes(roleId)) {
-                    roleIds.push(roleId);
+                if (roleId && ! assignedId && isSelected && ! roleIds.includes( roleId )) {
+                    roleIds.push( roleId );
                 }
             });
             
@@ -93,70 +93,58 @@
             }
             
             // Fee number fields
-            if ( feeNumFields ) {
+            if (feeNumFields) {
                 feeNumFields.forEach(feeNumField => {
                     const rateType = feeNumField.getAttribute('data-rate-type');
                     const attach = feeNumField.getAttribute('data-attach');
                     const feeNumFieldDiv = feeNumField.parentElement;
-                    
+
                     // Check if attach to service
-                    if ( attach === 'service' ) {
-                        
-                        // Loop through service options
+                    if (attach === 'service') {
                         serviceOptions.forEach(option => {
                             const serviceId = option.value;
                             const serviceRateType = option.getAttribute('data-rate-type');
                             const isSelected = option.checked || option.selected;
-                            
+
                             const newId = 'fee-number-' + rateType + '-' + serviceId;
-                            
-                            // Check for existing field
+
+                            // Check if the service is selected and matches the rate type
                             const existingField = document.getElementById(newId);
-                            
-                            if ( ! existingField ) {
-                            
-                                // Check if the service is selected and matches the rate type
-                                if ( isSelected && serviceRateType == rateType ) {
-                                    // Clone feeNumFieldDiv
-                                    const clonedDiv = feeNumFieldDiv.cloneNode(true); // true indicates deep cloning with children
-                                    const clonedField = clonedDiv.closest('.fee-num-field');
-                                    
-                                    // Append clonedDiv after the original feeNumFieldDiv
-                                    feeNumFieldDiv.parentNode.insertBefore(clonedDiv, feeNumFieldDiv.nextSibling);
-                                    
-                                    // Display and require clone
-                                    clonedDiv.style.display = 'block';
-                                    clonedDiv.required = true;
-                                    
-                                    // Find and update the legend (assuming it's a <legend> element within clonedDiv)
-                                    const legend = clonedDiv.querySelector('legend');
-                                    if ( legend ) {
-                                        // Append service name to legend
-                                        const label = getOptionLabel( option );
-                                        legend.textContent += ` - ${label}`;
-                                    }
-                            
-                                    // Find and update the ID of the field
-                                    const field = clonedDiv.querySelector('.fee-num-field');
-                                    if (field) {
-                                        // Update field id and name
-                                        field.id = newId;
-                                        field.name = newId;
-                                    }
+                            if (isSelected && serviceRateType == rateType && !existingField) {
+                                // Clone feeNumFieldDiv
+                                const clonedDiv = feeNumFieldDiv.cloneNode(true);
+                                const clonedField = clonedDiv.querySelector('.fee-num-field');
+
+                                // Append clonedDiv after the original feeNumFieldDiv
+                                feeNumFieldDiv.parentNode.insertBefore(clonedDiv, feeNumFieldDiv.nextSibling);
+
+                                // Display and require the clonedDiv
+                                clonedDiv.style.display = 'block';
+                                clonedField.required = true;
+
+                                // Update legend and field ID/name
+                                const legend = clonedDiv.querySelector('legend');
+                                if (legend) {
+                                    const label = getOptionLabel(option);
+                                    legend.textContent += ` - ${label}`;
                                 }
+
+                                clonedField.id = newId;
+                                clonedField.name = newId;
+                            } else if (!isSelected && existingField) {
+                                // Service deselected: Hide or remove the cloned field
+                                existingField.closest('.bc-form-group-container').style.display = 'none';
+                                existingField.required = false;
                             }
                         });
                     }
-                    
-                    // Check if the rate type exists in the array
-                    const inArray = rateIds.includes( rateType );
-                        
-                    // Display
+
+                    // Check if the rate type exists in the array (for non-service attached fields)
+                    const inArray = rateIds.includes(rateType);
+
+                    // Display or hide the field
                     feeNumFieldDiv.style.display = inArray && attach !== 'service' ? 'block' : 'none';
-                    
-                    // Require
                     feeNumField.required = inArray && attach !== 'service';
-                    
                 });
             }
 
