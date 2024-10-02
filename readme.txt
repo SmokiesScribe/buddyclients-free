@@ -14,6 +14,7 @@ BuddyClients is a versatile and feature-rich platform designed to streamline and
 - [Documentation](https://buddyclients.com/docs/)
 - [User Guides](https://buddyclients.com/help/)
 - [Roadmap](https://buddyclients.com/roadmap/)
+- [Source Code on GitHub](https://github.com/SmokiesScribe/buddyclients-free)
 
 == Requirements ==
 
