@@ -38,11 +38,8 @@ class Autoloader {
         // Format path
         $path = self::get_path( $class );
 
-
-
         // Make sure the file exists
-        if ( ! file_exists( $path ) ) {  
-            error_log( "Autoloader: File not found - $path" );
+        if ( ! $path || ! file_exists( $path ) ) {  
             return;
         }
         
@@ -79,8 +76,13 @@ class Autoloader {
      * @since 1.0.4
      */
     private static function get_path( $class ) {
+        if ( ! $class ) {
+            return '';
+        }
+
         // Remove primary namespace
         $stripped_class = str_replace('BuddyClients', '', $class);
+
         $formatted_class = str_replace( '\\', '/', $stripped_class);
         
         // Lowercase dir name
