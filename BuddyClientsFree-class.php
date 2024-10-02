@@ -128,15 +128,6 @@ if ( ! class_exists( 'BuddyClientsFree' ) ) {
     		// Require settings function
     		require_once( plugin_dir_path( __FILE__ ) . 'includes/helpers/settings.php' );
     		
-    		// Sanity check
-    		bc_sanity_check();
-            if ( apply_filters( 'bc_sanity_check', true ) === false ) {
-                return;
-            }
-    		
-    		// Initialize license handler
-    		new BuddyClients\Config\LicenseHandler;
-    		
     		// Run activator
     		add_action( 'init', [$this, 'activate'] );
     		
