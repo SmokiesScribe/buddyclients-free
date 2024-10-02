@@ -1,8 +1,7 @@
 <?php
 namespace BuddyClients\Admin;
 
-use BuddyClients\Config\AssetManager as AssetManager;
-
+use BuddyClients\Config\AssetManager;
 
 /**
  * Admin-specific functionality of the plugin.
