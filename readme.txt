@@ -51,6 +51,9 @@ Banner URL: /assets/media/banner-772x250/banner.png
 
 == Changelog ==
 
+= 1.0.2 - October 2, 2024 =
+* Improvement: Removed Stripe vendor files.
+
 = 1.0.1 - October 2, 2024 =
 * Improvement: Add contact link to Checkout when payments disabled.
 
