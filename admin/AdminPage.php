@@ -228,7 +228,7 @@ class AdminPage {
      */
     public function add_submenu( $key, $args ) {
         add_submenu_page(
-            $args['parent_slug'] ?? null,
+            $args['parent_slug'] ?? '',
             $args['title'] ?? '',
             $args['title'] ?? '',
             $args['cap'] ?? 'manage_options',

@@ -27,8 +27,7 @@ class Autoloader {
      * 
      * @since 0.4.3
      */
-    private static function autoload( $class ) {    
- 
+    private static function autoload( $class ) {
 
         // Not a BuddyClients class
         if ( strpos( $class, 'BuddyClients' ) === false ) {
@@ -38,8 +37,13 @@ class Autoloader {
         // Format path
         $path = self::get_path( $class );
 
+        // Make sure the path exists
+        if ( ! $path ) {
+            return;
+        }
+
         // Make sure the file exists
-        if ( ! $path || ! file_exists( $path ) ) {  
+        if ( ! file_exists( $path ) ) {
             return;
         }
         
@@ -66,7 +70,9 @@ class Autoloader {
             $path = self::get_path( $class );
             
             // Autoload assets
-            new AssetAutoloader( $path );
+            if ( $path ) {
+                new AssetAutoloader( $path );
+            }
         }
     }
     
