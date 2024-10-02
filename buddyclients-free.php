@@ -5,7 +5,7 @@
  * Description: BuddyClients is a flexible and comprehensive platform for any service-based business. Compatible with BuddyPress and BuddyBoss.
  * Author:      Victoria Griffin
  * Author URI:  https://victoriagriffin.com/
- * Version:     1.0.12
+ * Version:     1.0.0
  * Text Domain: buddyclients
  * Domain Path: /languages/
  * License:     GPL-2.0-or-later
@@ -18,7 +18,7 @@ defined( 'ABSPATH' ) || exit;
 
 // Define constants
 if ( ! defined( 'BC_PLUGIN_VERSION' ) ) {
-	define( 'BC_PLUGIN_VERSION', '1.0.12' );
+	define( 'BC_PLUGIN_VERSION', '1.0.0' );
 }
 
 if ( ! defined( 'BC_PLUGIN_FILE' ) ) {
@@ -60,7 +60,7 @@ function bc_free_installed_notice() {
     }
 
     // Disable BuddyClients Free message.
-    if ( function_exists( 'buddyclients_free' ) ) {
+    if ( function_exists( 'buddyclients' ) ) {
         $plugins_url = is_network_admin() ? network_admin_url( 'plugins.php' ) : admin_url( 'plugins.php' );
         ?>
 
