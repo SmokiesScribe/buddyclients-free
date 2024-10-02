@@ -553,7 +553,7 @@ class Checkout {
         if ( class_exists( StripeForm::class ) ) {
             return (new StripeForm)->build();
         } else {
-            echo '<p>' . __( 'Payments are not enabled on this website. Please contact the site administrator.', 'buddyclients' ) . '</p>';
+            echo '<p>' . __( 'Payments are not enabled on this website. ', 'buddyclients' ) . bc_contact_message() . '</p>';
         }
     }
 }
