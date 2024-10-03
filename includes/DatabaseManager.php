@@ -143,11 +143,21 @@ class DatabaseManager {
         global $wpdb;
         
         // Build table name
-        $this->table_key = $table_key;
+        $this->table_key = $this->clean_table_key($table_key);
         $this->table_name = $wpdb->prefix . 'bc_' . $table_key;
         
         // Create table if necessary
         $this->check_table( $table_key );
+    }
+
+    /**
+     * Cleans the table key.
+     * 
+     * @since 1.0.4
+     */
+    private function clean_table_key( $key ) {
+        // Remove all characters that are not letters, numbers, or underscores
+        return preg_replace( '/[^a-zA-Z0-9_]/', '', $key );
     }
     
     /**
@@ -303,14 +313,20 @@ class DatabaseManager {
      */
     public function get_all_records( $order_key = null, $order = null ) {
         global $wpdb;
-        
+
         // Default to newest first
         $order_key = $order_key ?? 'created_at';
         $order = $order ?? 'DESC';
         
-        $orderby = $order_key && $order ? 'ORDER BY ' . $order_key . ' ' . $order : '';
-        $query = 'SELECT * FROM ' . $this->table_name . ' ' . $orderby;
-        return $wpdb->get_results($query);
+        // Ensure order key and order are valid
+        $order_key = in_array($order_key, ['created_at', 'another_column']) ? $order_key : 'created_at';
+        $order = strtoupper($order) === 'ASC' ? 'ASC' : 'DESC';
+        
+        // Prepare the query with placeholders
+        $query = "SELECT * FROM {$this->table_name} ORDER BY $order_key $order";
+        $prepared_query = $wpdb->prepare($query);
+        
+        return $wpdb->get_results($prepared_query);
     }
     
     /**
