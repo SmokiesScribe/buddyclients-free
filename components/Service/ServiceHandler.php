@@ -56,6 +56,7 @@ class ServiceHandler {
         // Validate all Services
         add_action( 'update_option_bc_components_settings', [$this, 'validate_all_services'] );
         add_action( 'update_option_bc_booking_settings', [$this, 'validate_all_services'] );
+        add_action( 'bc_version_switch', [$this, 'validate_all_services'] );        
         
         // Validate single Quote
         add_action( 'updated_post_meta', [$this, 'update_meta_flags'], 10, 4 );
@@ -63,6 +64,7 @@ class ServiceHandler {
         // Validate all Quotes
         add_action( 'update_option_bc_components_settings', [$this, 'validate_all_quotes'] );
         add_action( 'update_option_bc_booking_settings', [$this, 'validate_all_quotes'] );
+        add_action( 'bc_version_switch', [$this, 'validate_all_quotes'] ); 
     }
     
     /**
