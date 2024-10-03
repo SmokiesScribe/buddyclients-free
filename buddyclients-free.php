@@ -54,7 +54,7 @@ add_action( 'plugins_loaded', 'buddyclients_free' );
  *
  * @since 0.1.0
  */
-function bc_free_installed_notice() {
+function bc_installed_notice() {
     if ( ! current_user_can( 'activate_plugins' ) ) {
         return;
     }
@@ -77,7 +77,7 @@ function bc_free_installed_notice() {
 /**
  * You can't have BuddyClients without BuddyPress!
  */
-add_action( 'admin_notices', 'bc_free_installed_notice' );
+add_action( 'admin_notices', 'bc_installed_notice' );
 
 /**
  * Displays an admin notice when BuddyPress is missing.

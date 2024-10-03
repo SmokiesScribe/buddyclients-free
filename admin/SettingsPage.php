@@ -79,7 +79,7 @@ class SettingsPage {
         
         // Extract data
         $this->key = $args['key'];
-        $this->title = $args['title'];
+        $this->title = $args['title'] ?? 'Settings';
         $this->name = $this->build_settings_name();
         
         // Define hooks
@@ -171,7 +171,7 @@ class SettingsPage {
         ?>
         <div class="buddyclients-settings-section">
             <div class="buddyclients-settings-section-title-wrap">
-                <h2 class="buddyclients-settings-section-title"><?php echo esc_html($section_data['title']); ?></h2>
+                <h2 class="buddyclients-settings-section-title"><?php echo esc_html($section_data['title'] ?? ''); ?></h2>
                 <p class="description"><?php echo $section_data['description']; ?></p>
                 <hr class="buddyclients-settings-section-title-divider">
             </div>
