@@ -53,6 +53,7 @@ Banner URL: /assets/media/banner-772x250/banner.png
 
 = Unreleased =
 * Improvement: Require enabled components for admin info notices.
+* Improvement: Added logic to handle version switches.
 
 = 1.0.2 - October 2, 2024 =
 * Improvement: Removed Stripe vendor files.
