@@ -6,7 +6,7 @@
  * Author:      Victoria Griffin
  * Author URI:  https://victoriagriffin.com/
  * Version:     1.0.3
- * Text Domain: buddyclients
+ * Text Domain: buddyclients-free
  * Domain Path: /languages/
  * License:     GPL-2.0-or-later
  * License URI: https://www.gnu.org/licenses/gpl-2.0.html

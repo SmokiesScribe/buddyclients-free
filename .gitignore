@@ -1,0 +1,6 @@
+# Ignore hidden files from Mac OS
+.DS_Store
+
+# Ignore phpDocumentor's local config and artifacts
+.phpdoc/*
+phpdoc.dist.xml
