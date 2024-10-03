@@ -5,8 +5,23 @@ namespace BuddyClients\Admin;
  * Displays info messages in the admin area.
  * 
  * @since 0.3.0
+ * @since 1.0.3 Require enabled components.
  */
 class AdminInfo {
+
+    /**
+     * The formatted tab label. 
+     * 
+     * @var string
+     */
+    private $key;
+
+    /**
+     * The required component. 
+     * 
+     * @var ?string
+     */
+    private $required_component;
     
     /**
      * Constructor method.
@@ -16,18 +31,27 @@ class AdminInfo {
      * @param   string  $tab_label  The label of the active nav tab.
      */
     public function __construct( $tab_label ) {
+        $this->key = strtolower( $tab_label );
+        $this->required_component = self::required_component( $this->key );
         
-        // Check setting
+        // Make sure admin info notices are enabled
         if ( bc_get_setting( 'general', 'admin_info' ) === 'disable' ) {
+            return;
+        }
+
+        // Check for required component
+        $disabled = $this->component_disabled();
+        if ( $disabled ) {
             return;
         }
         
         // Retrieve message
-        $message = $this->info_message( $tab_label );
+        $message = $this->info_message();
         
         // Generate notice
-        $this->generate_notice( $message );
-
+        if ( $message ) {
+            $this->generate_notice( $message );
+        }
     }
     
     /**
@@ -39,7 +63,7 @@ class AdminInfo {
      */
     private function generate_notice( $message ) {
         // Make sure message exists
-        if ( $message ) {
+        if ( ! empty( $message ) ) {
             
             // Define notice args
             $notice_args = [
@@ -54,19 +78,14 @@ class AdminInfo {
             bc_admin_notice( $notice_args );
         }
     }
-    
+
     /**
-     * Defines the info messages by nav tab label.
+     * Defines the array of info messages.
      * 
-     * @since 0.3.0
+     * @since 1.0.3
      */
-    private function info_message( $tab_label ) {
-        // Format tab label
-        $key = strtolower( $tab_label );
-        
-        // Define messages
-        $messages = [
-            
+    private static function messages() {
+        return [            
             // Dashboard
             'all bookings'          => __( 'This page displays all successful and abandoned bookings. You can filter bookings by status.<p>Click each booking\'s services to view detailed information about each of the services, including each service\'s team member, status, and files.</p><p>Please be cautious when deleting bookings. They cannot be recovered.</p>', 'buddyclients' ),
             'overview'              => __( 'Evaluate your business with this overview of all bookings for a specified timeframe.<p>The net fee represents the total fees minus team member payments, affiliate commission, and sales commission.</p>', 'buddyclients' ),
@@ -115,8 +134,58 @@ class AdminInfo {
             // Misc
             'misc'                  => __( 'Manage various settings for the BuddyClients plugin that do not fall into other categories.<p>Ensure that all necessary configurations are made to ensure the proper functionality of the plugin.', 'buddyclients' )
         ];
+    }
+    
+    /**
+     * Defines the info messages by nav tab label.
+     * 
+     * @since 0.3.0
+     */
+    private function info_message() {        
+        // Define messages
+        $messages = self::messages();
         
         // Return message
-        return isset( $messages[ $key ] ) ? $messages[ $key ] : '';
+        return $messages[ $this->key ] ?? null;
+    }
+
+    /**
+     * Checks whether a required component is disabled.
+     * 
+     * @since 1.0.3
+     * 
+     * @return  bool    True if the component exists and is disabled, false if not.
+     */
+    private function component_disabled() {
+        if ( $this->required_component ) {
+            return ! bc_component_enabled( $this->required_component );
+        } else {
+            return false;
+        }
+    }
+
+    /**
+     * Retrieves the required component for a tab label. 
+     * 
+     * @since 1.0.3
+     * 
+     * @param   string  $key  The formatted label of the active nav tab.
+     */
+    private static function required_component( $key ) {
+        $required_components = [
+            'stripe'        => 'Stripe',
+            'briefs'        => 'Brief',
+            'legal'         => 'Legal',
+            'sales'         => 'Sales',
+            'testimonials'  => 'Testimonial',
+            'affiliate'     => 'Affiliate',
+            'availability'  => 'Availability',
+            'emails'        => 'Email',
+            'bookings'      => 'Booking',
+            //'contact'       => 'Contact',
+            //'quote'         => 'Quote',
+        ];
+
+        return $required_components[$key] ?? null;
     }
 }

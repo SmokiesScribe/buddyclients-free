@@ -1,5 +1,5 @@
 <?php
-use BuddyClients\Admin\AdminInfo as AdminInfo;
+use BuddyClients\Admin\AdminInfo;
 /**
  * Initializes the AdminInfo class.
  * 
