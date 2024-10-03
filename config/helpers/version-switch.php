@@ -4,7 +4,7 @@
  *
  * @since 1.0.14
  */
-public function bc_handle_version_switch() {
+function bc_handle_version_switch() {
     // Initialize flag
     $new_version = false;
 
