@@ -284,7 +284,7 @@ class FileHandler {
             // Ensure the file path is set
             if ( ! empty( $file->file_path ) && file_exists( $file->file_path ) ) {
                 // Attempt to delete the file
-                if ( unlink( $file->file_path ) ) {
+                if ( wp_delete_file( $file->file_path ) ) {
                     $deleted_files[] = $file;
                 }
             }
