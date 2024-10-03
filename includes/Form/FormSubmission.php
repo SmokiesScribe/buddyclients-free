@@ -9,6 +9,8 @@ use BuddyClients\Includes\Popup;
  * Handles all form submissions.
  *
  * @since 0.1.0
+ * 
+ * @todo Review warning: Processing form data without nonce verification.
  */
 class FormSubmission {
     
@@ -28,7 +30,7 @@ class FormSubmission {
         
         // Check for submission
         if ( isset( $_POST['bc_submission'] ) ) {
-            $this->form_key = $_POST['bc_submission'];
+            $this->form_key = sanitize_text_field( wp_unslash( $_POST['bc_submission'] ) );
 
             // Verify nonce
             if ( $this->check_nonce() ) {
@@ -101,7 +103,7 @@ class FormSubmission {
         
         // Retrieve callback class
         if ( isset($_POST['submission_class'] ) ) {
-            $submission_class = stripslashes( $_POST['submission_class'] );
+            $this->form_key = sanitize_text_field( wp_unslash( $_POST['submission_class'] ) );
             
             // Make sure the class exists
             if ( class_exists( $submission_class ) ) {
