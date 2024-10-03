@@ -2,26 +2,14 @@
 /**
  * Handles switch between BuddyClients and BuddyClients Free.
  *
- * @since 1.0.14
+ * @since 1.0.3
  */
 function bc_handle_version_switch() {
-    // Initialize flag
-    $new_version = false;
-
     // Check the current version
-    $current_version = get_option( 'bc_plugin_name', 'BuddyClients Free' ); // Default to free if not set
+    $prev_version = get_option( 'bc_plugin_name', null );
 
-    // Perform actions based on the version switch
-    if ( BC_PLUGIN_NAME === 'BuddyClients' && $current_version !== 'BuddyClients' ) {        
-        update_option( 'bc_plugin_name', 'BuddyClients' );
-        $new_version = 'BuddyClients';
-
-    } else if ( BC_PLUGIN_NAME === 'BuddyClients Free' && $current_version !== 'BuddyClients Free' ) {
-        update_option( 'bc_plugin_name', 'BuddyClients Free' );
-        $new_version = 'BuddyClients Free';
-    }
-
-    if ( $new_version ) {
+    if ( $prev_version && $prev_version !== BC_PLUGIN_NAME ) {
+        $new_version = BC_PLUGIN_NAME;
         /**
          * Fires on a switch between BuddyClients and BuddyClients Free.
          *
@@ -32,5 +20,8 @@ function bc_handle_version_switch() {
          */
         do_action( 'bc_version_switch', $new_version );
     }
+
+    // Update option
+    update_option( 'bc_plugin_name', BC_PLUGIN_NAME );
 }
-add_action( 'plugins_loaded', 'bc_handle_version_switch' );
+add_action( 'init', 'bc_handle_version_switch' );

@@ -75,16 +75,19 @@ function bc_installed_notice() {
 }
 
 /**
- * You can't have BuddyClients without BuddyPress!
+ * Only one version of BuddyClients can be installed at a time.
  */
-add_action( 'admin_notices', 'bc_installed_notice' );
+if ( function_exists( 'buddyclients' ) ) {
+	add_action( 'admin_notices', 'bc_installed_notice' );
+	return;
+}
 
 /**
  * Displays an admin notice when BuddyPress is missing.
  *
  * @since 0.1.0
  */
-function bc_missing_bp_notice() {
+function bc_missing_bp_notice_free() {
 
 	if ( ! current_user_can( 'activate_plugins' ) ) {
 		return;
@@ -110,14 +113,14 @@ function bc_missing_bp_notice() {
 /**
  * You can't have BuddyClients without BuddyPress!
  */
-add_action( 'admin_notices', 'bc_missing_bp_notice' );
+add_action( 'admin_notices', 'bc_missing_bp_notice_free' );
 
 /**
  * Displays an admin notice when groups are not enabled.
  *
  * @since 0.4.3
  */
-function bc_groups_disabled_notice() {
+function bc_groups_disabled_notice_free() {
 
 	if ( ! current_user_can( 'activate_plugins' ) ) {
 		return;
@@ -141,33 +144,4 @@ function bc_groups_disabled_notice() {
 		<?php
 	}
 }
-add_action( 'admin_notices', 'bc_groups_disabled_notice' );
-
-/**
- * Displays an admin notice when the sanity check fails.
- *
- * @since 0.4.3
- */
-function bc_sanity_check_notice() {
-
-	if ( ! current_user_can( 'activate_plugins' ) ) {
-		return;
-	}
-
-	// Admin message.
-	if ( defined( 'BC_SANITY_ALERT' ) ) {
-		$bp_plugins_url = is_network_admin() ? network_admin_url( 'plugins.php' ) : admin_url( 'plugins.php' );
-		$link_plugins   = sprintf( "<a href='%s'>%s</a>", $bp_plugins_url, __( 'deactivate', 'buddyclients' ) );
-		$bc_install     = admin_url( '/plugin-install.php?s=buddyclients&tab=search&type=term' );
-		?>
-
-		<div id="message" class="error notice">
-			<p><strong><?php esc_html_e( 'BuddyClients Plugin Error', 'buddyclients' ); ?></strong></p>
-			<p><?php printf( __( '%s', 'buddyclients' ), BC_SANITY_ALERT ); ?></p>
-			<p><?php printf( __( 'Please <a href="%s">reinstall the BuddyClients plugin</a>.', 'buddyclients' ), $bc_install ); ?></p>
-		</div>
-
-		<?php
-	}
-}
-add_action( 'admin_notices', 'bc_sanity_check_notice' );
+add_action( 'admin_notices', 'bc_groups_disabled_notice_free' );
