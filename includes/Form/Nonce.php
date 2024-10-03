@@ -63,16 +63,25 @@ class Nonce {
      * 
      * @since 0.1.0
      */
-    public function check() {
-        
+    public function check() {        
         // Build full field name
         $nonce_field_name = $this->field_name();
-        
+
         // Check if nonce is set and verified
-        if (isset($_POST[$nonce_field_name]) && wp_verify_nonce($_POST[$nonce_field_name], $this->key)) {
-            return true;
-        } else {
-            return false;
+        if ( isset( $_POST[$nonce_field_name] ) ) {
+            // Unsplash the nonce value
+            $nonce_value = sanitize_text_field( wp_unslash( $_POST[$nonce_field_name] ) );
+
+            // Sanitize the nonce value
+            $sanitized_nonce = sanitize_text_field( wp_unslash( $_POST[$nonce_field_name] ) );
+
+            // Verify the nonce
+            if ( wp_verify_nonce( $sanitized_nonce, $this->key ) ) {
+                return true; // Nonce verification successful
+            }
         }
+
+        // Return false if nonce is not set or verification fails
+        return false;
     }
 }
