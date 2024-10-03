@@ -33,10 +33,12 @@ class ParamManager {
      * @since 1.0.3
      */
     private function current_url() {
-        // Get the full URL with query parameters
-        return ( isset( $_SERVER['HTTPS'] ) && $_SERVER['HTTPS'] === 'on' ? 'https' : 'http' ) 
-                      . '://' . $_SERVER['HTTP_HOST'] 
-                      . $_SERVER['REQUEST_URI'];
+        $host = isset( $_SERVER['HTTP_HOST'] ) ? sanitize_text_field( wp_unslash( $_SERVER['HTTP_HOST'] ) ) : 'default-host.com';
+        $request_uri = isset( $_SERVER['REQUEST_URI'] ) ? sanitize_text_field( wp_unslash( $_SERVER['REQUEST_URI'] ) ) : '/';
+        
+        return ( isset( $_SERVER['HTTPS'] ) && $_SERVER['HTTPS'] === 'on' ? 'https' : 'http' )
+               . '://' . $host . $request_uri;
+                
     }
     
     /**
@@ -51,7 +53,7 @@ class ParamManager {
      */
     public function add_param( $param, $value ) {
         // Parse existing query parameters from the URL
-        $parsed_url = parse_url( $this->url );
+        $parsed_url = wp_parse_url( $this->url );
         $query_params = array();
 
         // Check if 'query' exists and parse it
@@ -90,7 +92,7 @@ class ParamManager {
      */
     public function remove_param( $param ) {
         // Parse existing query parameters from the URL
-        $parsed_url = parse_url( $this->url );
+        $parsed_url = wp_parse_url( $this->url );
         $query_params = array();
 
         // Check if 'query' exists and parse it
