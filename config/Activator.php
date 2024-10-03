@@ -132,10 +132,11 @@ class Activator {
         foreach ( $defaults as $post_type => $post_data ) {
             // Loop through post data
             foreach ( $post_data as $post_title => $post_data ) {
+
                 // Check if a post with the title already exists
-                $existing_post = get_page_by_title( $post_title, OBJECT, $post_type );
-                
-                if ( $existing_post ) {
+                $post_exists = self::get_post_by_title( $post_type, $post_title );
+
+                if ( $post_exists ) {
                     // Skip creating the post if it already exists
                     $error_message = sprintf(
                         __( 'Post with title "%s" already exists. Skipping creation.', 'buddyclients' ),
@@ -177,6 +178,31 @@ class Activator {
                 }
             }
         }
+    }
+
+    /**
+     * Checks whether a post with the title already exists.
+     * 
+     * @since 1.0.4
+     * 
+     * @param   string  $post_type   The post type.
+     * @param   string  $post_title  The title to search for.
+     * 
+     * @return bool True if the post exists.
+     */
+    private static function get_post_by_title( $post_type, $post_title ) {
+        $args = array(
+            'post_type'      => $post_type,
+            'title'          => $post_title, // Use a custom query to match the title
+            'posts_per_page' => 1,
+            'fields'         => 'ids', // Only return post IDs for better performance
+        );
+    
+        // Retrieve the posts
+        $existing_posts = get_posts( $args );
+    
+        // Check if posts were found
+        return ! empty( $existing_posts );
     }
     
     /**
