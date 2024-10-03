@@ -77,7 +77,7 @@ if ( ! class_exists( 'BuddyClientsFree' ) ) {
     	    
     	    // Plugin name
     		if ( ! defined( 'BC_PLUGIN_NAME' ) ) {
-    			define( 'BC_PLUGIN_NAME', 'BuddyClients' );
+    			define( 'BC_PLUGIN_NAME', 'BuddyClients Free' );
     		}
     		// Path and URL.
     		if ( ! defined( 'BC_PLUGIN_DIR' ) ) {
