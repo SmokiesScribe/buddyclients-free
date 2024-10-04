@@ -99,8 +99,13 @@ class Pagination {
         }
 
         // Get the current URL without the page parameter
-        $url = strtok( $_SERVER["REQUEST_URI"], '?' );
-        parse_str( $_SERVER["QUERY_STRING"], $query_params );
+        $url = isset( $_SERVER["REQUEST_URI"] ) ? sanitize_text_field( wp_unslash( $_SERVER["REQUEST_URI"] ) ) : '';
+        $url = strtok( $url, '?' );
+
+        if ( isset( $_SERVER["QUERY_STRING"] ) ) {
+            $query_string = sanitize_text_field( wp_unslash( $_SERVER["QUERY_STRING"] ) );
+            parse_str( $query_string, $query_params );
+        }        
 
         // Initialize the content for pagination controls
         $content = '<div class="pagination">';
