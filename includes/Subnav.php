@@ -23,7 +23,7 @@ class Subnav {
      * @since 0.1.0
      */
     public function __construct() {
-        $this->curr_url = $_SERVER['REQUEST_URI'];
+        $this->curr_url = sanitize_text_field( wp_unslash( $_SERVER['REQUEST_URI'] ?? '' ) );
     }
     
     /**
@@ -69,7 +69,7 @@ class Subnav {
     private function generate_link( $param_value ) {
         
         // Parse the current URL
-        $url_parts = parse_url( $this->curr_url );
+        $url_parts = wp_parse_url( $this->curr_url );
     
         // Add or replace the specified parameter
         if (isset($url_parts['query'])) {
