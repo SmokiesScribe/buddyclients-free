@@ -2,6 +2,7 @@
 namespace BuddyClients\Includes;
 
 use BuddyClients\Components\Booking\BookedService\BookedService;
+use WP_Filesystem;
 
 /**
  * Single uploaded file.
@@ -156,16 +157,32 @@ class File {
         $new_dir = (new Directory( $args['user_id'] ?? '' ))->full_path();
         $target_file = $this->build_file_path( $new_dir, $file_info['name'] );
 
-        // Move file to target
-        if ( move_uploaded_file($file_info['tmp_name'], $target_file )) {
-            
-            // Return file path
-            $this->file_path = $target_file;
-            
-            // Add object to database
-            $this->ID = $this->add_to_database();
+        // Set the upload directory
+        add_filter('upload_dir', function() use ($new_dir) {
+            return [
+                'path'   => $new_dir,
+                'url'    => $new_dir,
+                'subdir' => '',
+                'basedir' => $new_dir,
+                'baseurl' => $new_dir,
+                'error'  => false,
+            ];
+        });
+
+        // Use WordPress's wp_handle_upload function
+        $uploaded_file = wp_handle_upload($file_info, ['test_form' => false]);
+
+        if (isset($uploaded_file['error'])) {
+            error_log('Upload error: ' . $uploaded_file['error']);
+            return false; // or handle the error as needed
         }
-        
+
+        // Return file path
+        $this->file_path = $uploaded_file['file']; // Get the file path from the uploaded file array
+
+        // Add object to database
+        $this->ID = $this->add_to_database();
+
         // Return File ID
         return $this->ID;
     }
@@ -198,17 +215,18 @@ class File {
      * @param   int     $user_id            The ID of the user to whom the signature belongs.
      */
     public function upload_signature( $decoded_signature, $file_name, $user_id ) {
-        
         // Extract args
-        $this->user_id      = $args['user_id'] ?? null;
+        $this->user_id = $user_id; // Update to use the passed user_id directly
         
         // Build new file path
         $new_dir = (new Directory( 'signatures' ))->full_path();
         $target_file = $this->build_file_path( $new_dir, $file_name );
-
-        // Move file to target
-        if ( file_put_contents( $target_file, $decoded_signature ) ) {
-            
+    
+        // Initialize the WordPress filesystem
+        WP_Filesystem(); // Initializes the global filesystem variable
+    
+        // Move file to target using WP_Filesystem
+        if ( $GLOBALS['wp_filesystem']->put_contents( $target_file, $decoded_signature ) ) {
             // Return file path
             $this->file_path = $target_file;
             
@@ -218,7 +236,7 @@ class File {
         
         // Return File ID
         return $this->ID;
-    }
+    }    
     
     /**
      * Adds object to database.
@@ -417,19 +435,17 @@ class File {
      * @return bool True if the file was successfully deleted, false otherwise.
      */
     public static function delete( $file_id ) {
-        
         // Initialize object handler
         self::init_object_handler();
-        
+    
         // Get File object
         $file = self::$object_handler->get_object( $file_id );
-        
+    
         // Check if file exists before attempting to delete
         if ( file_exists( $file->file_path ) ) {
-            
-            // Attempt to delete the file
-            $deleted = unlink( $file->file_path );
-            
+            // Attempt to delete the file using wp_delete_file
+            $deleted = wp_delete_file( $file->file_path );
+    
             if ( $deleted ) {
                 // Update database only if file deletion was successful
                 $deleted = self::$object_handler->delete_object( $file_id );
@@ -439,11 +455,10 @@ class File {
                 return false;
             }
         }
-        
+    
         // File does not exist
         return false;
     }
-
     
     /**
      * Moves File to new location.
@@ -453,35 +468,42 @@ class File {
      * @param int       $file_id    The ID of the File.
      * @param string    $new_path   New location for the file.
      */
-     public function move_file( $file_id, $new_path ) {
-         
+    public function move_file( $file_id, $new_path ) {
         // Initialize object handler
         self::init_object_handler();
-        
+    
         // Get File object
         $file = self::$object_handler->get_object( $file_id );
-
+    
         // Get original file path and name
         $old_file = $file->file_path;
         $file_name = $file->file_name;
-        
+    
         // Build new file path
         $new_dir = (new Directory( $new_path ))->full_path();
         $target_file = $this->build_file_path( $new_dir, $file_name );
         
+        // Initialize the WP_Filesystem
+        global $wp_filesystem;
+        if ( empty( $wp_filesystem ) ) {
+            WP_Filesystem();
+        }
+    
         // Check if file exists and the new location is different from the old one
-        if ( file_exists( $old_file ) && $old_file !==  $target_file ) {
-        
-            // Attempt to move the file to the new location
-            $moved = rename( $old_file, $target_file );
-            
+        if ( file_exists( $old_file ) && $old_file !== $target_file ) {
+            // Attempt to move the file to the new location using WP_Filesystem
+            $moved = $wp_filesystem->move( $old_file, $target_file );
+    
             // Check if successful
             if ( $moved ) {
-                 // Update object
-                 $updated = self::$object_handler->update_object_properties( $file_id, ['file_path' => $target_file] );
+                // Update object
+                $updated = self::$object_handler->update_object_properties( $file_id, ['file_path' => $target_file] );
+                return $updated; // Return the result of the update operation
             }
         }
-     }
+    
+        return false; // Return false if the file wasn't moved
+    }    
      
      /**
       * Retrieves a file's status.
