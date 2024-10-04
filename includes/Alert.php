@@ -96,8 +96,8 @@ class Alert {
         }
         
         // Get current url
-         $current_url = trailingslashit( site_url( $_SERVER['REQUEST_URI'] ) );
-         
+        $current_url = bc_curr_url();
+
          // Loop through the links
          foreach ( $links as $link ) {
              $link = trailingslashit( $link );

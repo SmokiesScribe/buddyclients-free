@@ -11,3 +11,22 @@ function bc_print( $value ) {
     print_r( $value );
     echo '</pre>';
 }
+
+/**
+ * Retrieves the current url.
+ * 
+ * @since 1.0.4
+ * 
+ * @return  string  The current url, or an empty string on failure.
+ */
+function bc_curr_url() {
+    $current_url = '';
+    if ( isset( $_SERVER['REQUEST_URI'] ) ) {
+        // Unsplash and sanitize the request URI
+        $request_uri = wp_unslash( $_SERVER['REQUEST_URI'] );
+        
+        // Sanitize the request URI (you can use wp_sanitize_url() or any appropriate sanitization function)
+        $current_url = trailingslashit( site_url( $request_uri ) );
+    }
+    return $current_url;
+}
