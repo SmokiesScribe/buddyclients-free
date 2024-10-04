@@ -165,7 +165,7 @@ use BuddyEvents\Includes\Registration\SponsorIntent;
         $original_login_name = $login_name; // Store the original login name without suffix
         while (username_exists($login_name)) {
             // If the login name exists, add a random number suffix and try again
-            $login_name = $original_login_name . rand(1, 999); // Add a random number
+            $login_name = $original_login_name . wp_rand(1, 999); // Add a random number
             $suffix++;
         }
         return $login_name;
