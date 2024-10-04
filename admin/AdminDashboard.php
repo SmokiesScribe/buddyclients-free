@@ -93,7 +93,7 @@ class AdminDashboard {
      * @since 1.0.2
      */
     private function define_date_range() {
-        return $_GET['date_range_filter'] ?? 'year_to_date';
+        return isset( $_GET['date_range_filter'] ) ? sanitize_text_field( wp_unslash($_GET['date_range_filter'] ) ) : 'year_to_date';
     }
     
     /**
@@ -269,15 +269,15 @@ class AdminDashboard {
         }
     
         // Format input date
-        $formatted_date = date( 'Y-m-d', strtotime( $date ) );
+        $formatted_date = gmdate( 'Y-m-d', strtotime( $date ) );
     
         // Extract start and end dates
         $start_date = $this->date_range_data['start_date'];
         $end_date = $this->date_range_data['end_date'];
     
         // Ensure start and end dates are formatted correctly
-        $start_date = date( 'Y-m-d', strtotime( $start_date ) );
-        $end_date = date( 'Y-m-d', strtotime( $end_date ) );
+        $start_date = gmdate( 'Y-m-d', strtotime( $start_date ) );
+        $end_date = gmdate( 'Y-m-d', strtotime( $end_date ) );
     
         // Check if date is within the range
         return ( $formatted_date >= $start_date && $formatted_date <= $end_date );
@@ -292,28 +292,28 @@ class AdminDashboard {
         $date_range = $this->define_date_range();
         switch ( $date_range ) {
             case 'year_to_date':
-                $start_date = date('Y-01-01');
-                $end_date = date('Y-m-d');
+                $start_date = gmdate('Y-01-01');
+                $end_date = gmdate('Y-m-d');
                 break;
             case 'month_to_date':
-                $start_date = date('Y-m-01');
-                $end_date = date('Y-m-d');
+                $start_date = gmdate('Y-m-01');
+                $end_date = gmdate('Y-m-d');
                 break;
             case 'last_30_days':
-                $start_date = date('Y-m-d', strtotime('-30 days'));
-                $end_date = date('Y-m-d');
+                $start_date = gmdate('Y-m-d', strtotime('-30 days'));
+                $end_date = gmdate('Y-m-d');
                 break;
             case 'last_365_days':
-                $start_date = date('Y-m-d', strtotime('-365 days'));
-                $end_date = date('Y-m-d');
+                $start_date = gmdate('Y-m-d', strtotime('-365 days'));
+                $end_date = gmdate('Y-m-d');
                 break;
             case 'today_only':
-                $start_date = date('Y-m-d');
-                $end_date = date('Y-m-d');
+                $start_date = gmdate('Y-m-d');
+                $end_date = gmdate('Y-m-d');
                 break;
             case 'yesterday_only':
-                $start_date = date('Y-m-d', strtotime('-1 day'));
-                $end_date = date('Y-m-d', strtotime('-1 day'));
+                $start_date = gmdate('Y-m-d', strtotime('-1 day'));
+                $end_date = gmdate('Y-m-d', strtotime('-1 day'));
                 break;
             default:
                 $start_date = '';
@@ -491,8 +491,8 @@ class AdminDashboard {
     
         if ( $booking_intents ) {
             foreach ( $booking_intents as $booking_intent ) {
-                $date = date( 'Y-m-d', strtotime( $booking_intent->created_at ) );
-                $formatted_date = date( 'M j, Y', strtotime( $date ) ); // Human-readable date
+                $date = gmdate( 'Y-m-d', strtotime( $booking_intent->created_at ) );
+                $formatted_date = gmdate( 'M j, Y', strtotime( $date ) ); // Human-readable date
                 $gross_revenue = $booking_intent->total_fee ?? 0;
                 $net_revenue = $booking_intent->net_fee ?? 0;
                 
@@ -586,10 +586,10 @@ class AdminDashboard {
     
         if ( $booking_intents ) {
             foreach ( $booking_intents as $booking_intent ) {
-                $date = date( 'Y-m-d', strtotime( $booking_intent->created_at ) );
+                $date = gmdate( 'Y-m-d', strtotime( $booking_intent->created_at ) );
                 
                 // Use a human-readable date format for labels
-                $formatted_date = date( 'M j, Y', strtotime( $date ));
+                $formatted_date = gmdate( 'M j, Y', strtotime( $date ));
     
                 // Track the number of completed and abandoned bookings
                 if ( $booking_intent->status === 'succeeded' ) {
