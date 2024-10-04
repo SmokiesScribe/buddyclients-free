@@ -6,9 +6,12 @@
  * @updated 0.4.0
  */
 function bc_update_booking_intent_email() {
-    $email = $_POST['email'] ?? null;
-    $booking_intent_id = $_POST['booking_intent_id'] ?? null;
-    $registration_intent_id = $_POST['registration_intent_id'] ?? null;
+    $email = isset( $_POST['email'] ) ? sanitize_email( wp_unslash( $_POST['email'] ) ) : null;
+    if ( ! is_email( $email ) ) {
+        return;
+    }
+    $booking_intent_id = isset( $_POST['booking_intent_id'] ) ? sanitize_text_field( wp_unslash( $_POST['booking_intent_id'] ) ) : null;
+    $registration_intent_id = isset( $_POST['registration_intent_id'] ) ? sanitize_text_field( wp_unslash( $_POST['registration_intent_id'] ) ) : null;
 
     // Update BookingIntent with email
     if ( $booking_intent_id && $booking_intent_id !== '' ) {
