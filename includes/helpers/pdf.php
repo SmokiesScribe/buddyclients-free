@@ -127,7 +127,7 @@ function generate_service_agreement_pdf( $booking_intent ) {
     
     // Add date
     $date = strtotime( $booking_intent->created_at );
-    $date_human_readable = date( 'F d, Y', $date );
+    $date_human_readable = gmdate( 'F d, Y', $date );
     $message = __('%s accepted this agreement by selecting a checkbox on %s at the website %s.', 'buddyclients');
     $date_string = sprintf( $message, $client_name, $date_human_readable, site_url() );
     $pdf->MultiCell( 0, 10, $date_string, 0, 'L' );
@@ -188,7 +188,7 @@ function generate_legal_pdf_from_user_data( $data, $type ) {
     $pdf->SetFont('helvetica', 'I', 12);
     
     // Add status string
-    $curr_date = date('F j, Y');
+    $curr_date = gmdate('F j, Y');
     $status = $data['status'] ?? __( 'inactive', 'buddyclients' );
     $uc_status = strtoupper( $status );
     $message = __('This agreement is %s as of %s.', 'buddyclients');
@@ -214,7 +214,7 @@ function generate_legal_pdf_from_user_data( $data, $type ) {
     $pdf->MultiCell(0, 10, $data['name'], 0, 'L');
     
     // Add date
-    $date_human_readable = date( 'F d, Y', $data['date'] );
+    $date_human_readable = gmdate( 'F d, Y', $data['date'] );
     $pdf->MultiCell( 0, 10, $date_human_readable, 0, 'L' );
     
     // Save the PDF to a file on the server
