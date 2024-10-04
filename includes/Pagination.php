@@ -113,7 +113,7 @@ class Pagination {
         // Previous page link
         if ( $this->current_page > 1 ) {
             $query_params['page'] = $this->current_page - 1;
-            $content .= '<a href="' . $url . '?' . http_build_query( $query_params ) . '">&laquo; ' . __( 'Previous', 'buddyclients' ) . '</a>';
+            $content .= '<ga href="' . $url . '?' . http_build_query( $query_params ) . '">&laquo; ' . __( 'Previous', 'buddyclients' ) . '</a>';
         }
         
         // Page number links
