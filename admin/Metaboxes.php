@@ -77,17 +77,20 @@ class Metaboxes {
                 foreach ( $table_data['meta'] as $meta_key => $field_data ) {
                     if ( $field_data['type'] === 'checkbox' ) {
                         // Check if the checkbox field is submitted
-                        if ( isset( $_POST[$meta_key] ) && is_array( $_POST[$meta_key] ) ) {
-                            // Save the array of values without serializing
-                            update_post_meta( $post_id, $meta_key, $_POST[$meta_key] );
+                        if ( isset( $_POST[ $meta_key ] ) && is_array( $_POST[ $meta_key ] ) ) {
+                            // Sanitize each item in the array
+                            $sanitized_values = array_map( 'sanitize_text_field', wp_unslash( $_POST[ $meta_key ] ) );
+                        
+                            // Save the sanitized array of values
+                            update_post_meta( $post_id, $meta_key, $sanitized_values );
                         } else {
-                            // If checkbox field is not submitted, delete the meta
+                            // If the checkbox field is not submitted, delete the meta
                             delete_post_meta( $post_id, $meta_key );
-                        }
+                        }                        
                     } else {
                         // For other types of fields, sanitize and save the value
                         if ( isset( $_POST[$meta_key] ) ) {
-                            $field_value = sanitize_text_field( $_POST[$meta_key] );
+                            $field_value = sanitize_text_field( wp_unslash( $_POST[$meta_key] ) );
                             update_post_meta( $post_id, $meta_key, $field_value );
                         }
                     }
@@ -474,7 +477,7 @@ class Metaboxes {
      * @param array $args Field arguments.
      */
     private function display_date( $args ) {
-        return date( 'F j, Y,  h:i A', strtotime($args['field_value']) );
+        return gmdate( 'F j, Y,  h:i A', strtotime($args['field_value']) );
     }
     
     /**
