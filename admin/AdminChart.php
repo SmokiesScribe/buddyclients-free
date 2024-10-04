@@ -56,10 +56,10 @@ class AdminChart {
                 }
                 
                 const chart = new Chart(ctx, {
-                    type: <?php echo json_encode($this->chart_type); ?>,
+                    type: <?php echo wp_json_encode($this->chart_type); ?>,
                     data: {
-                        labels: <?php echo json_encode($this->data['labels']); ?>,
-                        datasets: <?php echo json_encode($this->data['datasets']); ?>
+                        labels: <?php echo wp_json_encode($this->data['labels']); ?>,
+                        datasets: <?php echo wp_json_encode($this->data['datasets']); ?>
                     },
                     options: {
                         responsive: true,
@@ -68,7 +68,7 @@ class AdminChart {
                             x: {
                                 title: {
                                     display: true,
-                                    text: <?php echo json_encode($this->labels['x_label'] ?? ''); ?>,
+                                    text: <?php echo wp_json_encode($this->labels['x_label'] ?? ''); ?>,
                                     color: '#000',
                                     font: {
                                         weight: 'bold' // Bold x-axis label
@@ -78,7 +78,7 @@ class AdminChart {
                             y: {
                                 title: {
                                     display: true,
-                                    text: <?php echo json_encode($this->labels['y_label'] ?? ''); ?>,
+                                    text: <?php echo wp_json_encode($this->labels['y_label'] ?? ''); ?>,
                                     color: '#000',
                                     font: {
                                         weight: 'bold' // Bold y-axis label
@@ -95,7 +95,7 @@ class AdminChart {
                                             label += ': ';
                                         }
                                         if (context.raw !== null) {
-                                            if (<?php echo json_encode($this->tooltip_format); ?> === 'currency') {
+                                            if (<?php echo wp_json_encode($this->tooltip_format); ?> === 'currency') {
                                                 label += '$' + context.raw.toFixed(2); // Currency format
                                             } else {
                                                 label += context.raw.toFixed(0); // Whole number format
