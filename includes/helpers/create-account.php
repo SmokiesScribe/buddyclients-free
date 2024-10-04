@@ -1,11 +1,9 @@
 <?php
-use BuddyClients\Components\Booking\BookingIntent   as BookingIntent;
-use BuddyClients\Includes\Project                   as Project;
+use BuddyClients\Components\Booking\BookingIntent;
+use BuddyClients\Includes\Project;
 
-use BuddyEvents\Includes\{
-    Registration\RegistrationIntent as RegistrationIntent,
-    SponsorIntent as SponsorIntent
-};
+use BuddyEvents\Includes\Registration\RegistrationIntent;
+use BuddyEvents\Includes\Registration\SponsorIntent;
 
 /**
  * Checkout page new account form submission.
@@ -29,12 +27,12 @@ use BuddyEvents\Includes\{
         // Make sure all data is present
         if (isset($_POST['username']) && isset($_POST['email']) && isset($_POST['password'])
         && ( isset( $_POST['booking_intent_id'] ) || isset( $_POST['registration_intent_id'] ) || isset( $_POST['sponsor_intent_id'] ) ) ) {
-            $user_name = $_POST['username'];
-            $user_email = $_POST['email'];
-            $user_password = $_POST['password'];
-            $booking_intent_id = $_POST['booking_intent_id'] ?? null;
-            $registration_intent_id = $_POST['registration_intent_id'] ?? null;
-            $sponsor_intent_id = $_POST['sponsor_intent_id'] ?? null;
+            $user_name = isset( $_POST['username'] ) ? sanitize_text_field( wp_unslash( $_POST['username'] ) ) : null;
+            $user_email = isset( $_POST['email'] ) ? sanitize_email( wp_unslash( $_POST['email'] ) ) : null;
+            $user_password = isset( $_POST['password'] ) ? sanitize_text_field( wp_unslash( $_POST['password'] ) ) : null;
+            $booking_intent_id = isset( $_POST['booking_intent_id'] ) ? sanitize_text_field( wp_unslash( $_POST['booking_intent_id'] ) ) : null;
+            $registration_intent_id = isset( $_POST['registration_intent_id'] ) ? sanitize_text_field( wp_unslash( $_POST['registration_intent_id'] ) ) : null;
+            $sponsor_intent_id = isset( $_POST['sponsor_intent_id'] ) ? sanitize_text_field( wp_unslash( $_POST['sponsor_intent_id'] ) ) : null;            
             
             // Validate password strength
             $password_error = bc_validate_password_strength( $user_password );
