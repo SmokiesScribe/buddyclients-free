@@ -141,7 +141,7 @@ class Nav {
         $tabs = '';
         
         // Get group parameter from URL or set to null
-        $group = $_GET['group'] ?? null;
+        $group = isset( $_GET['group'] ) ? intval( wp_unslash( $_GET['group'] ) ) : null;
         
         // Determine if an active tab was found and if the group exists
         if ( ($active_tab && isset($tabs_array[$active_tab['group']])) || $group ) {
@@ -349,7 +349,7 @@ class Nav {
             $array = $_GET;
         } else {
             // Parse the provided URL
-            $url_components = parse_url( $link );
+            $url_components = wp_parse_url( $link );
     
             // Check if the URL has a query component
             if ( isset( $url_components['query'] ) ) {
