@@ -559,13 +559,13 @@ class SettingsPage {
             $publish_date = get_post_field('post_date', $value);
             $deadline_setting = bc_get_setting('legal', 'legal_deadline');
             if ($deadline_setting !== '') {
-                $deadline = date('Y-m-d H:i:s', strtotime($publish_date . ' +' . $deadline_setting . ' days'));
+                $deadline = gmdate('Y-m-d H:i:s', strtotime($publish_date . ' +' . $deadline_setting . ' days'));
                 // Get the current date and time
-                $current_datetime = date('Y-m-d H:i:s');
+                $current_datetime = gmdate('Y-m-d H:i:s');
                 
                 // Compare the deadline with the current date and time
                 if ($deadline > $current_datetime) {
-                    $human_readable_deadline = date('F j, Y, g:i a', strtotime($deadline));
+                    $human_readable_deadline = gmdate('F j, Y, g:i a', strtotime($deadline));
                     $version_trans_message = sprintf(esc_html__('Users have until %s to accept the new %s.', 'buddyclients'), $human_readable_deadline, $field_data['label']);
                 }
     
