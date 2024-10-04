@@ -491,7 +491,7 @@ class AdminTableItem extends AdminTable {
      */
     protected static function date( $property, $value ) {
         if ( $value && $value !== '0000-00-00 00:00:00') {
-            return date( 'F j, Y', strtotime( $value ) );
+            return gmdate( 'F j, Y', strtotime( $value ) );
         }
     }
 }
