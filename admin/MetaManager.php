@@ -520,7 +520,7 @@ class MetaManager {
             $options_count = 10;
         } else {
             // Get post ID being edited
-            $post_id = $_GET['post'];
+            $post_id = isset( $_GET['post'] ) ? absint( wp_unslash( $_GET['post'] ) ) : null;
             
             // Get options count
             $adjustment = new Adjustment( $post_id );
