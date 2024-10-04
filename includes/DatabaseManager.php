@@ -143,11 +143,11 @@ class DatabaseManager {
         global $wpdb;
         
         // Build table name
-        $this->table_key = $this->clean_table_key($table_key);
-        $this->table_name = $wpdb->prefix . 'bc_' . $table_key;
+        $this->table_key = $this->clean_table_key( $table_key );
+        $this->table_name = $wpdb->prefix . 'bc_' . $this->table_key;
         
         // Create table if necessary
-        $this->check_table( $table_key );
+        $this->check_table( $this->table_key );
     }
 
     /**
@@ -201,9 +201,8 @@ class DatabaseManager {
      */
     private function get_table_structure() {
         global $wpdb;
-        $table_name = $this->table_name;
         $current_structure = [];
-        $columns = $wpdb->get_results("DESCRIBE $table_name");
+        $columns = $wpdb->get_results( $wpdb->prepare( "DESCRIBE %i", $this->table_name ) );
         foreach ($columns as $column) {
             $current_structure[$column->Field] = $column->Type;
         }
@@ -217,21 +216,26 @@ class DatabaseManager {
      */
     private function update_table($new_structure) {
         global $wpdb;
+    
         $table_name = $this->table_name;
         $temp_table_name = $table_name . '_temp'; // Temporary table name
     
         // Create a temporary table with the new structure
-        $this->create_table($new_structure, $temp_table_name);
+        $this->create_table( $new_structure, $temp_table_name );
     
-        // Copy data from the existing table to the temporary table
-        $wpdb->query("INSERT INTO $temp_table_name SELECT * FROM $table_name");
-    
-        // Drop the existing table
-        $wpdb->query("DROP TABLE IF EXISTS $table_name");
-    
-        // Rename the temporary table to the original table name
-        $wpdb->query("ALTER TABLE $temp_table_name RENAME TO $table_name");
-    }
+        // Insert query
+        $wpdb->query( $wpdb->prepare(
+            "INSERT INTO %i SELECT * FROM %s",
+            $temp_table_name,
+            $table_name
+        ));
+
+        // Drop query
+        $wpdb->query( $wpdb->prepare("DROP TABLE IF EXISTS %i", $table_name) );
+
+        // Rename query
+        $wpdb->query( $wpdb->prepare("ALTER TABLE %i RENAME TO %s", $temp_table_name, $table_name) );
+    }    
 
     /**
      * Creates the custom table if it doesn't exist.
@@ -247,15 +251,17 @@ class DatabaseManager {
             error_log("Table structure is empty. Cannot create table.");
             return;
         }
-    
+        
         // Construct the CREATE TABLE SQL query
         $sql = "CREATE TABLE {$this->table_name} (";
         foreach ($table_structure as $column_name => $column_type) {
+            // Prepare the column names to prevent SQL injection
+            $column_name = sanitize_key($column_name);
             $sql .= "`$column_name` $column_type, ";
         }
         $sql = rtrim($sql, ', '); // Remove the trailing comma and space
         $sql .= ") $charset_collate;";
-    
+        
         // Include WordPress upgrade.php for dbDelta()
         require_once(ABSPATH . 'wp-admin/includes/upgrade.php');
         
@@ -263,15 +269,14 @@ class DatabaseManager {
         dbDelta($sql);
         
         // Log the result of dbDelta() for debugging
-        global $wpdb;
         $table_exists = $this->table_exists();
         
-        if (! $table_exists ) {
+        if (!$table_exists) {
             error_log("Failed to create table {$this->table_name}.");
         }
         
         // Log the list of existing tables for debugging
-        $tables = $wpdb->get_col("SHOW TABLES LIKE '{$this->table_name}'");
+        $tables = $wpdb->get_col($wpdb->prepare("SHOW TABLES LIKE %s", $this->table_name));        
     }
 
     /**
@@ -283,10 +288,9 @@ class DatabaseManager {
     public function insert_record( $data = null ) {
         global $wpdb;
     
-        if ($data === null) {
+        if ( $data === null ) {
             // Insert a blank record
-            $wpdb->query("INSERT INTO $this->table_name () VALUES ()");
-            return $wpdb->insert_id;
+            return $wpdb->query( $wpdb->prepare( "INSERT INTO %i DEFAULT VALUES", $this->table_name ) );
         }
     
         // Insert the record with provided data
@@ -311,23 +315,38 @@ class DatabaseManager {
      *
      * @return array|null An array of records or null if no records found.
      */
-    public function get_all_records( $order_key = null, $order = null ) {
+    public function get_all_records($order_key = null, $order = null) {
         global $wpdb;
 
         // Default to newest first
         $order_key = $order_key ?? 'created_at';
         $order = $order ?? 'DESC';
-        
-        // Ensure order key and order are valid
-        $order_key = in_array($order_key, ['created_at', 'another_column']) ? $order_key : 'created_at';
-        $order = strtoupper($order) === 'ASC' ? 'ASC' : 'DESC';
-        
-        // Prepare the query with placeholders
-        $query = "SELECT * FROM {$this->table_name} ORDER BY $order_key $order";
-        $prepared_query = $wpdb->prepare($query);
-        
-        return $wpdb->get_results($prepared_query);
+
+        // Define valid order keys and orders
+        $valid_order_keys = ['created_at', 'another_column'];
+        $valid_orders = ['ASC', 'DESC'];
+
+        // Ensure order key is valid
+        if (!in_array($order_key, $valid_order_keys)) {
+            $order_key = 'created_at'; // default if invalid
+        }
+
+        // Ensure order direction is valid
+        if (!in_array(strtoupper($order), $valid_orders)) {
+            $order = 'DESC'; // default if invalid
+        }
+
+        // Prepare and process the query
+        return $wpdb->get_results(
+            $wpdb->prepare(
+                "SELECT * FROM %i ORDER BY %s %s",
+                $this->table_name,  // table name (identifier)
+                $order_key,         // order column name (string)
+                $order              // order direction (string)
+            )
+        );
     }
+
     
     /**
      * Get a single record from the custom table by its ID.
@@ -337,8 +356,7 @@ class DatabaseManager {
      */
     public function get_record_by_id($record_id) {
         global $wpdb;
-        $query = $wpdb->prepare("SELECT * FROM $this->table_name WHERE ID = %d", $record_id);
-        return $wpdb->get_row($query);
+        return $wpdb->get_row( $wpdb->prepare("SELECT * FROM %i WHERE ID = %d", $this->table_name, $record_id) );
     }
     
     /**
@@ -350,11 +368,13 @@ class DatabaseManager {
      */
     public function get_record_by_column($column_name, $column_value) {
         global $wpdb;
-        $query = $wpdb->prepare(
-            "SELECT * FROM $this->table_name WHERE $column_name = %s ORDER BY created_at DESC",
-            $column_value
-        );
-        return $wpdb->get_row($query);
+        return $wpdb->get_row(
+            $wpdb->prepare(
+                "SELECT * FROM %i WHERE %i = %s ORDER BY created_at DESC",
+                $this->table_name,
+                $column_name,
+                $column_value
+            ));
     }
     
     /**
@@ -377,19 +397,20 @@ class DatabaseManager {
             // Escape and serialize the column value for searching within serialized arrays
             $escaped_column_value = '%' . $wpdb->esc_like(serialize($column_value)) . '%';
             $query = $wpdb->prepare(
-                "SELECT * FROM $this->table_name WHERE $column_name LIKE %s ORDER BY created_at DESC",
+                "SELECT * FROM %i WHERE %i LIKE %s ORDER BY created_at DESC",
+                $this->table_name,
+                $column_name,
                 $escaped_column_value
             );
         } else {
             // Prepare the query for exact match
-            $query = $wpdb->prepare(
-                "SELECT * FROM $this->table_name WHERE $column_name = %s ORDER BY created_at DESC",
+            $results = @$wpdb->get_results( $wpdb->prepare(
+                "SELECT * FROM %i WHERE %i = %s ORDER BY created_at DESC",
+                $this->table_name,
+                $column_name,
                 $column_value
-            );
+            ));
         }
-    
-        // Suppress errors and execute the query
-        $results = @$wpdb->get_results($query);
     
         // Treat as no results if results are empty, null, or if a column error occurred
         if (empty($results) || $results === false) {
@@ -431,10 +452,13 @@ class DatabaseManager {
      */
     public function table_exists() {
         global $wpdb;
-        $sql = "SHOW TABLES LIKE '{$this->table_name}'";
-        $result = $wpdb->get_var($sql);
+    
+        // Prepare the SQL query with a placeholder for the table name
+        $result = $wpdb->get_var( $wpdb->prepare( "SHOW TABLES LIKE %s", $this->table_name ) );
+    
+        // Check if the result is not false or null
         return $result !== null;
-    }
+    }    
     
     /**
      * Delete the table from the database.
@@ -447,10 +471,7 @@ class DatabaseManager {
         global $wpdb;
     
         // Construct the SQL query to drop the table
-        $sql = "DROP TABLE IF EXISTS $this->table_name";
-    
-        // Execute the SQL query
-        $result = $wpdb->query($sql);
+        $result = $wpdb->query( $wpdb->prepare( "DROP TABLE IF EXISTS %i", $this->table_name ) );
     
         // Return true if the query was successful, false otherwise
         return $result !== false;
