@@ -51,6 +51,9 @@ Banner URL: /assets/media/banner-772x250/banner.png
 
 == Changelog ==
 
+= 1.0.4 - Unreleased =
+* Fixed: Fixed errors and warnings from Plugin Check.
+
 = 1.0.3 - October 3, 2024 =
 * Improvement: Require enabled components for admin info notices.
 * Improvement: Added logic to handle version switches.
