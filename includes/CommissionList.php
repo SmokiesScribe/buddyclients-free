@@ -147,7 +147,7 @@ class CommissionList {
         
         // Define column data
         $columns = [
-            'Date' => date( 'F j, Y', strtotime( $item->created_at ) ),
+            'Date' => gmdate( 'F j, Y', strtotime( $item->created_at ) ),
             'Service' => $item->service_name ?? $item->service_names,
             'Client' => bp_core_get_user_displayname( $item->client_id ),
             'Commission' => '$' . $item->amount,
