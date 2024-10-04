@@ -172,7 +172,7 @@ class AdminNotice {
         $formatted_links = [];
         
         // Get current site's hostname
-        $current_site = parse_url( home_url(), PHP_URL_HOST );
+        $current_site = wp_parse_url( home_url(), PHP_URL_HOST );
         
         // Make sure the repair link exists and we are not on the repair page
         if ( $this->repair_link && ! $this->on_repair_page() ) {
@@ -183,7 +183,7 @@ class AdminNotice {
                 $repair_link_text = isset( $this->repair_link_text[ $index ] ) ? $this->repair_link_text[ $index ] : 'Repair';
                 
                 // Parse the repair link to get its hostname
-                $parsed_link = parse_url( $repair_link );
+                $parsed_link = wp_parse_url( $repair_link );
                 $link_host = isset( $parsed_link['host'] ) ? $parsed_link['host'] : '';
                 
                 // Check if the link is external
@@ -207,7 +207,7 @@ class AdminNotice {
         if ( ! $this->repair_link ) {
             return false;
         }
-        $current_url = $_SERVER['REQUEST_URI'];
+        $current_url = bc_curr_url();
         foreach ( $this->repair_link as $repair_link ) {
             if ( basename( $current_url ) === basename( $repair_link ) ) {
                 return true;
