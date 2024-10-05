@@ -263,7 +263,7 @@ class BookingIntent {
         
         // Check for affiliate ID in session
         if ( ! $affiliate_id && isset( $_SESSION['bc_affiliate'] ) ) {
-            $affiliate_id = $_SESSION['bc_affiliate'];
+            $affiliate_id = isset( $_SESSION['bc_affiliate'] ) ? sanitize_text_field( wp_unslash( $_SESSION['bc_affiliate'] ) ) : null;
         }
         
         return $affiliate_id;
@@ -322,7 +322,7 @@ class BookingIntent {
                         __('Accepted via checkbox on %s', 'buddyclients'),
                         site_url()
                     ),
-                    date('F d, Y')
+                    gmdate('F d, Y')
                 ],
             ];
             
