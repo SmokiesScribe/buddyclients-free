@@ -133,7 +133,7 @@ class BookingForm {
         
         // Check for url param
         if ( isset( $_GET['sales_client_id'] ) ) {
-            $this->client_id = $_GET['sales_client_id'];
+            $this->client_id = sanitize_text_field( wp_unslash( $_GET['sales_client_id'] ) );
             
         // Check if user is logged in
         } else if ( is_user_logged_in() ) {
@@ -372,13 +372,20 @@ class BookingForm {
          
          // Initialize
          $args = [];
+
+         // Define values
+         $sales_id = isset( $_GET['sales_id'] ) ? sanitize_text_field( wp_unslash( $_GET['sales_id'] ) ) : null;
+         $prev_paid = isset( $_GET['prev_paid'] ) ? sanitize_text_field( wp_unslash( $_GET['prev_paid'] ) ) : null;
+         $user_email = isset( $_GET['sales_client_email'] ) && $_GET['sales_client_email'] !== '' 
+            ? sanitize_email( wp_unslash( $_GET['sales_client_email'] ) ) 
+            : bp_core_get_user_email( $this->client_id );
          
          // Define fields
             $hidden_fields = [
              'user-id'                  => $this->client_id,
-             'sales-id'                 => $_GET['sales_id'] ?? null,
-             'previously-paid'          => $_GET['prev_paid'] ?? null,
-             'user-email'               => isset( $_GET['sales_client_email'] ) && $_GET['sales_client_email'] !== '' ? $_GET['sales_client_email'] : bp_core_get_user_email( $this->client_id ),
+             'sales-id'                 => $sales_id,
+             'previously-paid'          => $prev_paid,
+             'user-email'               => $user_email,
              'hidden-line-items'        => '',
              'total-fee'                => '',
              'minimum-fee'              => bc_get_setting('booking', 'minimum_fee'),
@@ -420,7 +427,7 @@ class BookingForm {
                     'value' => $project->ID,
                     'data_atts' => [
                         'project-name'      => $project->name,
-                        'filter-data'       => is_array( $project->filter_data ) ? json_encode( $project->filter_data ) : '',
+                        'filter-data'       => is_array( $project->filter_data ) ? wp_json_encode( $project->filter_data ) : '',
                         'booked-services'   => serialize( $project->filter_data ),
                         'team-members'      => serialize( $project->team_data ),
                     ]
