@@ -1,4 +1,5 @@
 <?php
+use BuddyClients\Includes\ParamManager;
 /**
  * Checks for admin table filter form submission.
  * 
@@ -20,23 +21,12 @@ function bc_admin_filter_submission() {
             // Add to params
             $url_params[$key] = $value;
         }
-        
-        // Get the current URL
-        $url = $_SERVER['REQUEST_URI'];
-        
-        // Parse the URL to extract existing parameters
-        $parts = parse_url($url);
-        $query = isset($parts['query']) ? $parts['query'] : '';
-        parse_str($query, $query_params);
-        
-        // Merge existing parameters with new parameters
-        $merged_params = array_merge($query_params, $url_params);
-        
-        // Rebuild the query string
-        $new_query = http_build_query($merged_params);
-        
-        // Rebuild the URL with the new query string
-        $new_url = $parts['path'] . ($new_query ? '?' . $new_query : '');
+
+        // Initialize param manager with current url
+        $param_manager = new ParamManager;
+
+        // Add params to the url
+        $new_url = $param_manager->add_params( $url_params );
     
         // Redirect to the new URL
         header('Location: ' . $new_url);
