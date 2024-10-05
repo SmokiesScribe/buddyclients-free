@@ -289,7 +289,7 @@ class Payment {
             if ( $new_status === 'paid' ) {
                 
                 // Update paid date
-                self::$object_handler->update_object_properties( $ID, ['paid_date' => date('Y-m-d H:i:s')] );
+                self::$object_handler->update_object_properties( $ID, ['paid_date' => gmdate('Y-m-d H:i:s')] );
                 
                 /**
                  * Fires on change of Payment status to 'paid'.

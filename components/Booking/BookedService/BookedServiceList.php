@@ -249,7 +249,7 @@ class BookedServiceList {
         $group = ob_get_clean();
     
         return [
-            __('Date', 'buddyclients')            => date('F j, Y', strtotime($item->created_at)),
+            __('Date', 'buddyclients')            => gmdate('F j, Y', strtotime($item->created_at)),
             __('Service', 'buddyclients')         => $item->name,
             __('Client', 'buddyclients')          => bp_core_get_userlink($item->client_id),
             __('Project', 'buddyclients')         => $group,

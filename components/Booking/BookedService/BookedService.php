@@ -158,7 +158,7 @@ class BookedService {
         // Retrieve variables
         $this->booking_intent_id    = $booking_intent_id;
         $this->status               = 'pending';
-        $this->created_at           = $this->created_at ?? date('Y-m-d H:i:s');
+        $this->created_at           = $this->created_at ?? gmdate('Y-m-d H:i:s');
         
         $this->booking_intent_var( $booking_intent )->line_items_var( $line_item );
         
