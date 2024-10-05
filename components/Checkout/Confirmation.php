@@ -1,10 +1,8 @@
 <?php
 namespace BuddyClients\Components\Checkout;
 
-use BuddyClients\Includes\{
-    PostQuery as PostQuery,
-    Project as Project
-};
+use BuddyClients\Includes\PostQuery;
+use BuddyClients\Includes\Project;
 use BuddyClients\Components\Brief\GroupBriefs;
 use BuddyClients\Components\Booking\BookingIntent;
 
@@ -140,17 +138,20 @@ class Confirmation {
     private function get_booking_intent() {
         // Retrieve booking intent
         if ( isset( $_GET['booking_id'] ) ) {
-            $this->booking_intent = BookingIntent::get_booking_intent( $_GET['booking_id'] );
+            // Unsplash and sanitize the booking_id
+            $booking_id = intval( wp_unslash( $_GET['booking_id'] ) ); // Cast to an integer to ensure it's a valid ID
+            $this->booking_intent = BookingIntent::get_booking_intent( $booking_id );
             $_SESSION['booking_intent'] = $this->booking_intent;
-        } else if ( isset( $_SESSION['booking_intent'] ) ) {
-            $booking_intent_id = ( $_SESSION['booking_intent'] )->ID;
+
+        } else if ( isset( $_SESSION['booking_intent'] ) && is_object( $_SESSION['booking_intent'] ) ) {
+            $booking_intent_id = intval( wp_unslash( $_SESSION['booking_intent']->ID ) ); // Ensure it's an object before accessing ID
             $this->booking_intent = BookingIntent::get_booking_intent( $booking_intent_id );
             $_SESSION['booking_intent'] = $this->booking_intent;
         }
         
         // Check for registration intent
         if ( isset( $_SESSION['registration_intent'] ) ) {
-            $this->booking_intent = unserialize( $_SESSION['registration_intent'] ) ?? null;
+            $this->booking_intent = isset( $_SESSION['registration_intent'] ) ? unserialize( sanitize_text_field( wp_unslash( $_SESSION['registration_intent'] ) ) ) : null;
             $this->is_registration = true;
         } else {
             $this->is_registration = false;
@@ -158,7 +159,7 @@ class Confirmation {
         
         // Check for sponsorship intent
         if ( isset( $_SESSION['sponsor_intent'] ) ) {
-            $this->booking_intent = unserialize( $_SESSION['sponsor_intent'] ) ?? null;
+            $this->booking_intent = isset( $_SESSION['sponsor_intent'] ) ? unserialize( sanitize_text_field( wp_unslash( $_SESSION['sponsor_intent'] ) ) ) : null;
             $this->is_sponsor = true;
         } else {
             $this->is_sponsor = false;
@@ -199,7 +200,7 @@ class Confirmation {
      * @since 0.4.3
      */
     private function destroy_session() {
-        $affiliate_id = $_SESSION['affiliate_id'] ?? null;
+        $affiliate_id = isset( $_SESSION['affiliate_id'] ) ? intval( wp_unslash( $_SESSION['affiliate_id'] ) ) : null;
         session_destroy();
         if ( $affiliate_id ) {
             $_SESSION['affiliate_id'] = $affiliate_id;
