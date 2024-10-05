@@ -134,7 +134,7 @@ class SingleBrief {
         $content = '';
         
         // Check brief view
-        $brief_view = $_GET['brief-view'] ?? null;
+        $brief_view = isset( $_GET['brief-view'] ) ? sanitize_text_field( wp_unslash( $_GET['brief-view'] ) ) : null;
         
         // Get brief type
         $brief_type_name = implode(', ', wp_get_post_terms($this->brief_id, 'brief_type', array('fields' => 'names')));
@@ -305,7 +305,7 @@ private function toggle_button( $show_form, $is_admin, $updated_date ) {
         
         // Display last updated date
         if ($updated_date) {
-            $content .= '<p>' . __('Last Updated:', 'buddyclients') . ' ' . date('F j, Y,  h:i A', strtotime($updated_date)) . '</p>';
+            $content .= '<p>' . __('Last Updated:', 'buddyclients') . ' ' . gmdate('F j, Y,  h:i A', strtotime($updated_date)) . '</p>';
         }
         
         // Display toggle button

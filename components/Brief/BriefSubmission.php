@@ -46,7 +46,7 @@ class BriefSubmission extends SingleBrief {
         $this->handle_files( $files );
         
         // Add last updated date
-        update_post_meta( $this->brief_id, 'updated_date', date( 'Y-m-d H:i:s' ) );
+        update_post_meta( $this->brief_id, 'updated_date', gmdate( 'Y-m-d H:i:s' ) );
         
         // Check whether values were updated
         if ( $this->updated ) {
@@ -71,7 +71,7 @@ class BriefSubmission extends SingleBrief {
     private function redirect() {
         
         // Get current url
-        $curr_url = $_SERVER['REQUEST_URI'];
+        $curr_url = bc_curr_url();
         
         // Completed param
         $target_url = str_replace( 'brief-view=form', 'brief-view=completed', $curr_url );
