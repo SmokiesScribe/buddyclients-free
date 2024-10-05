@@ -40,7 +40,8 @@ class BookingFormSubmission {
         $booking_intent = new BookingIntent($post_data, $files_data);
         
         // Store in session
-        $_SESSION['booking_intent'] = $booking_intent;
+        //$_SESSION['booking_intent'] = $booking_intent;
+        $_SESSION['booking_id'] = $booking_intent->ID;
         
         /**
          * Fires on Booking Form submission.

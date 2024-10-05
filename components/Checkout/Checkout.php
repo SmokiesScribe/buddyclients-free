@@ -1,23 +1,15 @@
 <?php
 namespace BuddyClients\Components\Checkout;
 
-use BuddyEvents\Includes\{
-    Registration\RegistrationIntent as RegistrationIntent,
-    Sponsor\SponsorIntent as SponsorIntent
-};
+use BuddyEvents\Includes\Registration\RegistrationIntent;
+use BuddyEvents\Includes\Sponsor\SponsorIntent;
 
-use BuddyClients\Components\{
-    Booking\BookingIntent as BookingIntent,
-    Stripe\StripeForm as StripeForm,
-    Stripe\StripeKeys as StripeKeys
-};
-
-use BuddyClients\Includes\{
-    Form\Form as Form,
-    Client as Client,
-    Popup as Popup
-};
-
+use BuddyClients\Components\Booking\BookingIntent;
+use BuddyClients\Components\Stripe\StripeForm;
+use BuddyClients\Components\Stripe\StripeKeys;
+use BuddyClients\Includes\Form\Form;
+use BuddyClients\Includes\Client;
+use BuddyClients\Includes\Popup;
 
 /**
  * Checkout page content.
@@ -84,45 +76,36 @@ class Checkout {
 
         // Retrieve booking intent
         if ( isset( $_GET['booking_id'] ) ) {
-            $this->booking_intent = BookingIntent::get_booking_intent( $_GET['booking_id'] );
-            $_SESSION['booking_intent'] = $this->booking_intent;
-            $this->client_email = $this->booking_intent->client_email;
-        } else if ( isset( $_SESSION['booking_intent'] ) ) {
-            $this->booking_intent = BookingIntent::get_booking_intent( $_SESSION['booking_intent']->ID );
-            $_SESSION['booking_intent'] = $this->booking_intent;
+            // Get BookingIntent ID from session
+            $booking_id = intval( wp_unslash( $_GET['booking_id'] ) );
+
+            // Retrieve BookingIntent by ID
+            $this->booking_intent = BookingIntent::get_booking_intent( $booking_id );
+
+            // Set client email
             $this->client_email = $this->booking_intent->client_email;
         }
         
         // Check for registration intent
         if ( isset( $_GET['registration_id'] ) && class_exists( RegistrationIntent::class ) ) {
-            $this->booking_intent = RegistrationIntent::get_registration_intent( $_GET['registration_id'] );
-            $_SESSION['registration_intent'] = serialize( $this->booking_intent );
+            $registration_id = intval( wp_unslash( $_GET['registration_id'] ) );
+            $this->booking_intent = RegistrationIntent::get_registration_intent( $registration_id );
             $this->client_email = $this->booking_intent->attendee_email;
-        } else if ( isset( $_SESSION['registration_intent'] ) ) {
-            $this->booking_intent = unserialize( $_SESSION['registration_intent'] ) ?? null;
-            $this->client_email = $this->booking_intent->attendee_email;
-            $this->is_registration = true;
         } else {
             $this->is_registration = false;
         }
         
         // Check for sponsorship intent
-        if ( isset( $_GET['sponsor_id'] ) ) {
-            $this->booking_intent = SponsorIntent::get_sponsor_intent( $_GET['sponsor_id'] );
-            $_SESSION['sponsor_intent'] = serialize( $this->booking_intent );
+        if ( isset( $_GET['sponsor_id'] ) && class_exists( SponsorIntent::class ) ) {
+            $sponsor_id = intval( wp_unslash( $_GET['sponsor_id'] ) );
+            $this->booking_intent = SponsorIntent::get_sponsor_intent( $sponsor_id );
             $this->client_email = $this->booking_intent->user_email;
-        } else if ( isset( $_SESSION['sponsor_intent'] ) ) {
-            $this->booking_intent = unserialize( $_SESSION['sponsor_intent'] ) ?? null;
-            $this->client_email = $this->booking_intent->user_email;
-            $this->is_sponsor = true;
         } else {
             $this->is_sponsor = false;
         }
         
         // Enqueue scripts
         $this->enqueue_free_checkout_script();
-        
-        //bc_print($this->booking_intent);
     }
     
     /**
