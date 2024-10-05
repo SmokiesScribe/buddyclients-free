@@ -508,7 +508,7 @@ class AdminColumns {
         // Format the date
         $date = strtotime( $value );
         if ( $date ) {
-            $readable_date = date( 'F j, Y', $date );
+            $readable_date = gmdate( 'F j, Y', $date );
             return $readable_date;
         }
     }
@@ -534,7 +534,7 @@ class AdminColumns {
      * @param mixed $value The value of the meta field.
      */
     private function submitted_column( $value ) {
-        return $value ? bc_admin_icon('check') . '<br>' . __( 'Last Update: ', 'buddyclients' ) . date('F j, Y', strtotime($value)) : bc_admin_icon('x');
+        return $value ? bc_admin_icon('check') . '<br>' . __( 'Last Update: ', 'buddyclients' ) . gmdate('F j, Y', strtotime($value)) : bc_admin_icon('x');
     }
     
     /**
