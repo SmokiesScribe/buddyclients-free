@@ -1,5 +1,5 @@
 <?php
-use BuddyClients\Includes\Project as Project;
+use BuddyClients\Includes\Project;
 /**
  * Handles AJAX calls to retrieve project data.
  * 
@@ -10,13 +10,13 @@ use BuddyClients\Includes\Project as Project;
 function bc_get_project() {
     
     // Get project id from javascript post
-    $project_id = $_POST['project_id'];
+    $project_id = isset($_POST['project_id']) ? intval(wp_unslash($_POST['project_id'])) : null;
     
     // Get project object
     $project = new Project( $project_id );
     
     // Return the object
-    echo json_encode( $project );
+    echo wp_json_encode( $project );
 
     wp_die(); // Terminate
 }
