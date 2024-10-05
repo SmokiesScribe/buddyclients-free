@@ -1,4 +1,5 @@
 <?php
+use BuddyClients\Components\Booking\LineItems;
 /**
  * Handles AJAX calls to create line items.
  * 
@@ -7,17 +8,17 @@
 function bc_create_line_item() {
     
     $args = [
-        'service_id'        => intval($_POST['service_id']),
-        'adjustment_options'=> $_POST['adjustments'] ?? null,
-        'rate_count'        => intval($_POST['fee_num']),
-        'team_id'           => intval($_POST['team_id']) ?? null,
-        'team_member_role'  => intval($_POST['team_member_role']) ?? null
+        'service_id'        => isset($_POST['service_id']) ? intval(wp_unslash($_POST['service_id'])) : null,
+        'adjustment_options'=> isset($_POST['adjustments']) ? array_map('sanitize_text_field', wp_unslash($_POST['adjustments'])) : null,
+        'rate_count'        => isset($_POST['fee_num']) ? intval(wp_unslash($_POST['fee_num'])) : null,
+        'team_id'           => isset($_POST['team_id']) ? intval(wp_unslash($_POST['team_id'])) : null,
+        'team_member_role'  => isset($_POST['team_member_role']) ? intval(wp_unslash($_POST['team_member_role'])) : null
     ];
     
-    $line_items = new BuddyClients\Components\Booking\LineItems( $args );
+    $line_items = new LineItems($args);
     
     // Return encoded line item object
-    echo json_encode($line_items);
+    echo wp_json_encode($line_items);
     
     wp_die(); // Terminate
 }
