@@ -1,5 +1,5 @@
 <?php
-use BuddyClients\Includes\Project as Project;
+use BuddyClients\Includes\Projectg;
 /**
  * Handles AJAX calls to check team filter matches.
  * 
@@ -12,9 +12,9 @@ function bc_team_filter_match() {
     // Initialize
     $match = true;
     
-    // Get data from javascript post
-    $team_id = $_POST['team_id'];
-    $filter_values = $_POST['filter_values'];
+    // Get data from JavaScript post
+    $team_id = isset($_POST['team_id']) ? intval(wp_unslash($_POST['team_id'])) : null;
+    $filter_values = isset($_POST['filter_values']) ? array_map('sanitize_text_field', wp_unslash($_POST['filter_values'])) : null;
     
     // Make sure all params available
     if ( $team_id && $filter_values ) {
@@ -64,7 +64,7 @@ function bc_team_filter_match() {
     }
     
     // Return the object
-    echo json_encode( $match );
+    echo wp_json_encode( $match );
 
     wp_die(); // Terminate
 }
