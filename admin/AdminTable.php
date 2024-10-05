@@ -462,7 +462,7 @@ class AdminTable {
             $item_value = $property ? $item->$property : $item[$array_key];
             
             // Get current filter value
-            $filter_value = $_GET[$key . '_filter'] ?? null;
+            $filter_value = isset( $_GET[$key . '_filter'] ) ? sanitize_text_field( wp_unslash( $_GET[$key . '_filter'] ) ) : null;
             
             // No filters value
             if ( ! $filter_value ) {
