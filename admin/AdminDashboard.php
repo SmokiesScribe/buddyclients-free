@@ -345,7 +345,7 @@ class AdminDashboard {
         echo '<select name="' .  esc_attr( $name ) . '" id="' . esc_attr( $name ) . '" style="margin-right: 5px;">';
         
         // Loop through the options
-        foreach ( bc_bookings_dashboard_filter_options() as $option_key => $option_label ) {
+        foreach ( $this->filter_options() as $option_key => $option_label ) {
             echo '<option value="' . esc_attr( $option_key ) . '"' . ( ( isset($_GET[$name]) && $_GET[$name] == $option_key ) ? ' selected' : '' ) . '>' . esc_html( $option_label ) . '</option>';
         }
     
@@ -362,6 +362,22 @@ class AdminDashboard {
         
         // Close the form
         echo '</form>';
+    }
+
+    /**
+     * Defines the filter options.
+     * 
+     * @since 1.0.4
+     */
+    private function filter_options() {
+        return [
+            'year_to_date'      => __( 'Year to Date', 'buddyclients' ),
+            'month_to_date'     => __( 'Month to Date', 'buddyclients' ),
+            'last_30_days'      => __( 'Last 30 Days', 'buddyclients' ),
+            'last_365_days'     => __( 'Last 365 Days', 'buddyclients' ),
+            'today_only'        => __( 'Today Only', 'buddyclients' ),
+            'yesterday_only'    => __( 'Yesterday Only', 'buddyclients' ),
+        ];
     }
     
     /**
