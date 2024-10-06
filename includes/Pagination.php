@@ -52,8 +52,10 @@ class Pagination {
      * }
      */
     public function __construct( $items, $args = null) {
-        $this->per_page = $args['per_page'] ?? 10;
-        $this->current_page = isset( $_GET['page'] ) ? intval( $_GET['page'] ) : 1;
+        $param_manager = bc_param_manager();
+        $this->per_page = $param_manager->get( 'per_page' ) ?? 10;
+        $this->current_page = $param_manager->get( 'page' ) ?? 1;
+        
         $this->total_pages = $this->calculate_total_pages( $items );
         $this->paginated_items = $this->paginated_items( $items );
     }

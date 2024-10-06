@@ -37,6 +37,21 @@ class ParamManager {
     }
 
     /**
+     * Adds a nonce to the URL.
+     * 
+     * @since 1.0.4
+     * 
+     * @param string $action Optional. Nonce action name. Defaults to 'bc_action'.
+     * @param string $name   Optional. Nonce field name. Defaults to '_bc_nonce'.
+     * 
+     * @return string The URL with the nonce added.
+     */
+    public function add_nonce( $action = 'bc_action', $name = '_bc_nonce' ) {
+        $nonce = wp_create_nonce( $action );
+        return $this->add_param( $name, $nonce, $this->url );
+    }
+
+    /**
      * Adds multiple parameters to the URL.
      * 
      * @since 1.0.4
@@ -140,6 +155,31 @@ class ParamManager {
         }
         
         return $this->url;
+    }
+
+    /**
+     * Retrieves the value of a url param.
+     * 
+     * @since 1.0.4
+     * 
+     * @param string $param  The param key.
+     */
+    public function get( $param ) {
+        $action = 'bc_action';
+        $name = '_bc_nonce';
+
+        if ( isset( $_GET[$name] ) ) {
+            $nonce = sanitize_text_field( wp_unslash( $_GET[$name] ) );
+            if ( ! wp_verify_nonce( $nonce, $action ) ) {
+                return;
+            }
+        }
+
+        if ( $this->verify_nonce() ) {
+            if ( isset( $_GET[$param] ) ) {
+                return sanitize_text_field( wp_unslash ($_GET[$param] ) ) ?? null;
+            }
+        }
     }
 
     /**

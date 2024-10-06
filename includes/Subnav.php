@@ -99,9 +99,9 @@ class Subnav {
         $active = false;
         
         // Check if the param is set
-        if ( isset( $_GET['subnav'] ) ) {
-            $active = $_GET['subnav'] == $key ? true : false;
-        }
+        $param_manager = bc_param_manager();
+        $subnav = $param_manager->get( 'subnav' );
+        $active = $subnav == $key ? true : false;
         return $active;
     }
     
