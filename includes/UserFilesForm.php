@@ -61,13 +61,15 @@ class UserFilesForm {
     public function build() {
         
         // Check if the deletion form was submitted
-        if ( isset( $_POST['bc_submission'] ) && $_POST['bc_submission'] === 'manage-user-files' ) {
+        if ( isset( $_SESSION['bc_user_files'] ) && is_array( $_SESSION['bc_user_files'] ) ) {
+            $post_data = array_map( 'sanitize_text_field', $_SESSION['bc_user_files'] );
+
             // Initialize
             $file_ids = [];
             $file_names = [];
             
             // Loop through post data
-            foreach ( $_POST as $key => $value ) {
+            foreach ( $post_data as $key => $value ) {
                 
                 // Integers are file ids
                 if ( is_int( $key ) ) {
