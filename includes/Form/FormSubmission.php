@@ -20,6 +20,20 @@ class FormSubmission {
      * @var string
      */
     public $form_key;
+
+    /**
+     * Nonce field name.
+     * 
+     * @var string
+     */
+    private $nonce_field_name;
+
+    /**
+     * Nonce action name.
+     * 
+     * @var string
+     */
+    private $nonce_action_name;
     
     /**
      * Constructor method.
@@ -27,34 +41,35 @@ class FormSubmission {
      * @since 0.1.0
      */
     public function __construct() {
-        
-        // Check for submission
-        if ( isset( $_POST['bc_submission'] ) ) {
-            $this->form_key = sanitize_text_field( wp_unslash( $_POST['bc_submission'] ) );
+        $this->nonce_action_name = 'submission';
+        $this->nonce_field_name = 'buddyclients_' . $this->nonce_action_name . '_nonce';
 
-            // Verify nonce
-            if ( $this->check_nonce() ) {
-            
-                // Check for spam
-                if ( $this->is_spam() ) {
-                    $this->failure_message();
-                    return;
-                }
-                
-                // Handle submission
-                $this->handle_submission();
+        // Check if nonce is set and verified
+        if ( isset( $_POST[$this->nonce_field_name] ) ) {
+            // Unsplash the nonce value
+            $nonce_value = sanitize_text_field( wp_unslash( $_POST[$this->nonce_field_name] ) );
+
+            // Sanitize the nonce value
+            $sanitized_nonce = sanitize_text_field( wp_unslash( $_POST[$this->nonce_field_name] ) );
+
+            // Verify the nonce
+            if ( ! wp_verify_nonce( $sanitized_nonce, $action_name ) ) {
+                return;
             }
         }
-    }
-    
-    /**
-     * Checks nonce.
-     * 
-     * @since 0.1.0
-     */
-    private function check_nonce() {
-        $nonce = new Nonce( $this->form_key );
-        return $nonce->check();
+
+        // Check for submission
+        if ( isset( $_POST['bc_submission']) ) {
+        
+            // Check for spam
+            if ( $this->is_spam() ) {
+                $this->failure_message();
+                return;
+            }
+            
+            // Handle submission
+            $this->handle_submission();
+        }
     }
     
     /**
@@ -63,6 +78,21 @@ class FormSubmission {
      * @since 0.1.0
      */
     private function is_spam() {
+        // Check if nonce is set and verified
+        if ( isset( $_POST[$this->nonce_field_name] ) ) {
+            // Unsplash the nonce value
+            $nonce_value = sanitize_text_field( wp_unslash( $_POST[$this->nonce_field_name] ) );
+
+            // Sanitize the nonce value
+            $sanitized_nonce = sanitize_text_field( wp_unslash( $_POST[$this->nonce_field_name] ) );
+
+            // Verify the nonce
+            if ( ! wp_verify_nonce( $sanitized_nonce, $action_name ) ) {
+                return;
+            }
+        }
+
+        // Check for honeypot submission
         if ( isset( $_POST['website'] ) && ! empty( $_POST['website'] ) ) {
             return true;
         } else {
@@ -101,6 +131,20 @@ class FormSubmission {
      */
     private function handle_submission() {
         
+        // Check if nonce is set and verified
+        if ( isset( $_POST[$this->nonce_field_name] ) ) {
+            // Unsplash the nonce value
+            $nonce_value = sanitize_text_field( wp_unslash( $_POST[$this->nonce_field_name] ) );
+
+            // Sanitize the nonce value
+            $sanitized_nonce = sanitize_text_field( wp_unslash( $_POST[$this->nonce_field_name] ) );
+
+            // Verify the nonce
+            if ( ! wp_verify_nonce( $sanitized_nonce, $action_name ) ) {
+                return;
+            }
+        }
+
         // Retrieve callback class
         if ( isset($_POST['submission_class'] ) ) {
             $this->form_key = sanitize_text_field( wp_unslash( $_POST['submission_class'] ) );

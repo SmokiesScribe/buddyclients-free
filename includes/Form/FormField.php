@@ -590,6 +590,19 @@ class FormField {
         $field = '<input type="hidden" name="bc_submission" value="' . $this->key . '">';
         return $field;
     }
+
+    /**
+     * Generates the nonce field.
+     * 
+     * @since 0.1.0
+     */
+    private function nonce_field() {
+        $prefix = 'buddyclients_';
+        $action_name = 'submission';
+        $field_name = $prefix . $action_name . '_nonce';
+        $nonce_field = wp_nonce_field( $action_name, $field_name );
+        return $nonce_field;
+    }
     
     /**
      * Displays value directly.

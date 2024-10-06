@@ -11,13 +11,6 @@ namespace BuddyClients\Includes\Form;
 class Form {
     
     /**
-     * Nonce instance.
-     * 
-     * @var Nonce
-     */
-    private $nonce;
-    
-    /**
      * The form key.
      * 
      * @var string
@@ -52,14 +45,9 @@ class Form {
      *                          
      * }
      */
-    public function __construct( $args ) {
-        
-        // Extract var
+    public function __construct( $args ) { 
         $this->args = $args;
         $this->key = $args['key'];
-        
-        // Initialize nonce
-        $this->nonce = new Nonce( $this->key );
     }
 
     /**
@@ -102,7 +90,7 @@ class Form {
         $form .= $this->honeypot_field();
         
         // Nonce
-        $form .= $this->nonce->build();
+        $form .= $this->nonce_field();
         
         // Submit button
         $form .= $this->submit_field();
@@ -201,6 +189,21 @@ class Form {
             'id'            => $this->key . '-website',
             'type'          => 'text',
             'style'         => 'display: none;'
+        ];
+        
+        // Add the field to the content
+        return ( new FormField( $args ) )->build();
+    }
+
+    /**
+     * Creates a nonce field.
+     *
+     * @since 1.0.4
+     */
+    private function nonce_field() {
+        $args = [
+            'key'           => $this->key,
+            'type'          => 'nonce',
         ];
         
         // Add the field to the content
