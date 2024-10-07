@@ -171,6 +171,9 @@ class AssetManager {
 			],
 			'help-popup'	=> [
 				'nonce' => wp_create_nonce( $this->build_handle( 'help-popup') ),
+			],
+			'create-account'	=> [
+				'nonce' => wp_create_nonce( $this->build_handle( 'create-account') ),
 			]
 		];
 

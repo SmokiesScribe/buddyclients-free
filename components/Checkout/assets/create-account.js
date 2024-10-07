@@ -11,27 +11,21 @@
  */
 export function handleCreateAccount(e, ajaxurl, submitButton) {
   e.preventDefault();
-  console.log("Form submission event prevented.");
 
   // Start account creation process first
   const createAccountForm = document.getElementById("bc-create-account-form");
-  
-  console.log("Checking if the account creation form is present:", createAccountForm);
 
   // Disable the submit button to prevent multiple submissions
   submitButton.disabled = true;
-  console.log("Submit button disabled.");
 
   // Check if the account creation form is present
   if (!createAccountForm) {
-    console.log("Account creation form not found; assuming positive result for logged-in users.");
     // No account creation needed; assume positive result for logged-in users
     return true;
   }
   
   // Return a Promise for async handling
   return new Promise((resolve) => {
-    console.log("Starting AJAX request for account creation.");
 
     // AJAX request for account creation
     jQuery.ajax({
@@ -45,13 +39,12 @@ export function handleCreateAccount(e, ajaxurl, submitButton) {
         booking_intent_id: document.querySelector('input[name="booking-intent-id"]').value,
         registration_intent_id: document.querySelector('input[name="registration-intent-id"]').value,
         sponsor_intent_id: document.querySelector('input[name="sponsor-intent-id"]').value,
+        nonce: bcData.nonce
       },
       success: function (response) {
-        console.log("AJAX request successful. Response:", response);
 
         if (response.success) {
           // Account created successfully
-          console.log("Account created successfully.");
           resolve(true);
         } else {
           const errorMessage = response.data;
@@ -70,7 +63,6 @@ export function handleCreateAccount(e, ajaxurl, submitButton) {
 
           // Re-enable the submit button
           submitButton.disabled = false;
-          console.log("Submit button re-enabled after error.");
           resolve(false);
         }
       },
@@ -81,7 +73,6 @@ export function handleCreateAccount(e, ajaxurl, submitButton) {
 
         // Re-enable the submit button
         submitButton.disabled = false;
-        console.log("Submit button re-enabled after AJAX error.");
         resolve(false);
       },
     });

@@ -23,6 +23,12 @@ use BuddyEvents\Includes\Registration\SponsorIntent;
             wp_send_json_error(__('Invalid request', 'buddyclients'));
             wp_die();
         }
+
+        // Verify nonce
+        $nonce = isset( $_POST['nonce'] ) ? sanitize_text_field( wp_unslash( $_POST['nonce'] ) ) : null;
+        if ( ! wp_verify_nonce( $nonce, 'bc_create_account' ) ) {
+            return;
+        }
         
         // Make sure all data is present
         if (isset($_POST['username']) && isset($_POST['email']) && isset($_POST['password'])
