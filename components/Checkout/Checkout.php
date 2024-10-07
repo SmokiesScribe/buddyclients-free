@@ -80,6 +80,10 @@ class Checkout {
         // Fetch intent object
         $this->booking_intent = $intent_handler->intent;
 
+        if ( ! $this->booking_intent ) {
+            return;
+        }
+
         // Check intent type
         $this->is_registration = $intent_handler->intent_type === 'registration';
         $this->is_sponsor = $intent_handler->intent_type === 'sponsor';

@@ -1,7 +1,7 @@
 <?php
 namespace BuddyClients\Components\Booking\BookedService;
 
-use BuddyClients\Includes\ObjectHandler as ObjectHandler;
+use BuddyClients\Includes\ObjectHandler;
 
 /**
  * Payment.

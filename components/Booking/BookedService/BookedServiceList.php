@@ -1,12 +1,9 @@
 <?php
 namespace BuddyClients\Components\Booking\BookedService;
 
-use BuddyClients\Components\Booking\BookingIntent   as BookingIntent;
-
-use BuddyClients\Includes\{
-    Form\Form          as Form,
-    Pagination          as Pagination
-};
+use BuddyClients\Components\Booking\BookingIntent;
+use BuddyClients\Includes\Form\Form;
+use BuddyClients\Includes\Pagination;
 
 /**
  * List of booked services for a user or group.
@@ -383,6 +380,4 @@ class BookedServiceList {
         }
         return $fields;
     }
-    
-    
 }

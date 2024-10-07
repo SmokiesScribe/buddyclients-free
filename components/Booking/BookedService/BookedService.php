@@ -11,8 +11,6 @@ use BuddyClients\Includes\File                      as File;
  * 
  * Handles individual services for a succeeded BookingIntent.
  *
- * 
- *
  * @since 0.1.0
  */
 class BookedService {
@@ -438,5 +436,4 @@ class BookedService {
         // Delete object
         self::$object_handler->delete_object( $booked_service_id );
     }
-    
 }

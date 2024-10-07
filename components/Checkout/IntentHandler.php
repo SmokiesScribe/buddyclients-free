@@ -58,7 +58,7 @@ class IntentHandler {
      */
     private function fetch_intent() {
         // Make sure intent class exists
-        if ( class_exists( $this->intent_class ) ) {
+        if ( $this->intent_class && class_exists( $this->intent_class ) ) {
             // Get intent object by type
             switch ( $this->intent_type ) {
                 case 'booking':
