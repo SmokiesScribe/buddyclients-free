@@ -8,6 +8,12 @@ use BuddyClients\Admin\PluginPage;
  */
 function bc_create_plugin_page() {
 
+    // Verify nonce
+    $nonce = isset( $_POST['nonce'] ) ? sanitize_text_field( wp_unslash( $_POST['nonce'] ) ) : null;
+    if ( ! wp_verify_nonce( $nonce, 'bc_create_new_page_nonce' ) ) {
+        return;
+    }
+
     // Check for args
     if ( isset( $_POST['args']['page_key'], $_POST['args'] ) ) {
         

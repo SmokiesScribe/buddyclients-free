@@ -574,15 +574,19 @@ class SettingsPage {
         if ( $draft_id ) {
             $edit_button = '<a href="' . get_edit_post_link($draft_id) . '"><button type="button" class="button button-secondary" style="margin-right: 5px">' . sprintf(esc_html__('Edit %s Draft', 'buddyclients'), $field_data['label']) . '</button></a>';
         } else {
-            // Create button
+            // Generate a nonce
+            $create_nonce = wp_create_nonce( 'bc_create_new_page_nonce' );
+            
+            // Build create page button
             $create_button = '<button onclick="createNewPage({
-                page_key: \'' . $field_id . '\',
-                settings_key: \'' . 'legal' . '\',
-                post_title: \'' . $field_data['label'] . '\',
+                page_key: \'' . esc_js($field_id) . '\',
+                settings_key: \'' . esc_js('legal') . '\',
+                post_title: \'' . esc_js($field_data['label']) . '\',
                 post_content: \'\',
-                post_type: \'' . 'bc_legal' . '\',
-                post_status: \'' . 'draft' . '\'
-            });" type="button" class="button button-secondary" style="margin-right: 5px">' . sprintf(esc_html__('Create New %s', 'buddyclients'), $field_data['label']) . '</button>';
+                post_type: \'' . esc_js('bc_legal') . '\',
+                post_status: \'' . esc_js('draft') . '\',
+                nonce: \'' . esc_js($create_nonce) . '\'
+            });" type="button" class="button button-secondary" style="margin-right: 5px">' . sprintf(esc_html__('Create New %s', 'buddyclients'), esc_html($field_data['label'])) . '</button>';
         }
         
         // Get previous version and deadline

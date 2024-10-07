@@ -10,6 +10,7 @@ function createNewPage(args) {
     jQuery.post(ajaxurl, {
         action: 'bc_admin_create_new_page',
         args: args,
+        nonce: args.nonce
     })
     .done(function(response) {
         // Parse the JSON response
