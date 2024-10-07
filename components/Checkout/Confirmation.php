@@ -8,6 +8,7 @@ use BuddyClients\Includes\PostQuery;
 use BuddyClients\Includes\Project;
 use BuddyClients\Components\Brief\GroupBriefs;
 use BuddyClients\Components\Booking\BookingIntent;
+use BuddyClients\Components\Checkout\IntentHandler;
 
 /**
  * Confirmation page content.
@@ -139,31 +140,15 @@ class Confirmation {
      * @since 0.4.0
      */
     private function get_booking_intent() {
-        // Retrieve booking intent
-        $booking_id = bc_get_param( 'booking_id' );
-        if ( $booking_id ) {
-            // Unsplash and sanitize the booking_id
-            $booking_id = intval( $booking_id );
-            $this->booking_intent = BookingIntent::get_booking_intent( $booking_id );
-        }
+        // Init IntentHandler
+        $intent_handler = new IntentHandler;
 
-        // Check for registration intent
-        $registration_id = bc_get_param( 'registration_id' );
-        if ( $registration_id && class_exists( RegistrationIntent::class ) ) {
-            $registration_id = intval( $registration_id ) );
-            $this->booking_intent = RegistrationIntent::get_registration_intent( $registration_id );
-        } else {
-            $this->is_registration = false;
-        }
-        
-        // Check for sponsorship intent
-        $sponsor_id = bc_get_param( 'sponsor_id' );
-        if ( $sponsor_id && class_exists( SponsorIntent::class ) ) {
-            $sponsor_id = intval( $sponsor_id ) );
-            $this->booking_intent = SponsorIntent::get_sponsor_intent( $sponsor_id );
-        } else {
-            $this->is_sponsor = false;
-        }
+        // Fetch intent object
+        $this->booking_intent = $intent_handler->intent;
+
+        // Check intent type
+        $this->is_registration = $intent_handler->intent_type === 'registration';
+        $this->is_sponsor = $intent_handler->intent_type === 'sponsor';
     }
     
     /**

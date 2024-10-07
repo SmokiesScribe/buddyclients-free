@@ -74,35 +74,18 @@ class Checkout {
         // Skip payment setting
         $this->skip_payment = bc_get_setting( 'booking', 'skip_payment' ) === 'yes';
 
-        // Retrieve booking intent
-        if ( isset( $_GET['booking_id'] ) ) {
-            // Get BookingIntent ID from session
-            $booking_id = intval( wp_unslash( $_GET['booking_id'] ) );
+        // Init IntentHandler
+        $intent_handler = new IntentHandler;
 
-            // Retrieve BookingIntent by ID
-            $this->booking_intent = BookingIntent::get_booking_intent( $booking_id );
+        // Fetch intent object
+        $this->booking_intent = $intent_handler->intent;
 
-            // Set client email
-            $this->client_email = $this->booking_intent->client_email;
-        }
-        
-        // Check for registration intent
-        if ( isset( $_GET['registration_id'] ) && class_exists( RegistrationIntent::class ) ) {
-            $registration_id = intval( wp_unslash( $_GET['registration_id'] ) );
-            $this->booking_intent = RegistrationIntent::get_registration_intent( $registration_id );
-            $this->client_email = $this->booking_intent->attendee_email;
-        } else {
-            $this->is_registration = false;
-        }
-        
-        // Check for sponsorship intent
-        if ( isset( $_GET['sponsor_id'] ) && class_exists( SponsorIntent::class ) ) {
-            $sponsor_id = intval( wp_unslash( $_GET['sponsor_id'] ) );
-            $this->booking_intent = SponsorIntent::get_sponsor_intent( $sponsor_id );
-            $this->client_email = $this->booking_intent->user_email;
-        } else {
-            $this->is_sponsor = false;
-        }
+        // Check intent type
+        $this->is_registration = $intent_handler->intent_type === 'registration';
+        $this->is_sponsor = $intent_handler->intent_type === 'sponsor';
+
+        // Set email
+        $this->client_email = $this->booking_intent->client_email;
         
         // Enqueue scripts
         $this->enqueue_free_checkout_script();
