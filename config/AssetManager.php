@@ -168,6 +168,9 @@ class AssetManager {
 		$localization_info = [
 			'email-entered' => [
 				'nonce' => wp_create_nonce( $this->build_handle( 'email-entered') ),
+			],
+			'help-popup'	=> [
+				'nonce' => wp_create_nonce( $this->build_handle( 'help-popup') ),
 			]
 		];
 

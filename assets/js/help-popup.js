@@ -35,6 +35,7 @@ document.addEventListener('DOMContentLoaded', function () {
                     postId: postId,
                     url: url,
                     rawContent: rawContent,
+                    nonce: bcData.nonce
                 },
                 success: function(data){
                     jQuery('#bc-popup-content').html(data);

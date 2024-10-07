@@ -8,6 +8,12 @@ use BuddyEvents\Includes\Registration\RegistrationIntent;
  * @updated 0.4.0
  */
 function bc_update_booking_intent_email() {
+    
+    $nonce = isset( $_POST['nonce'] ) ? sanitize_text_field( wp_unslash( $_POST['nonce'] ) ) : null;
+    if ( ! wp_verify_nonce( $nonce, 'bc_new_email' ) ) {
+        return;
+    }
+
     $email = isset( $_POST['email'] ) ? sanitize_email( wp_unslash( $_POST['email'] ) ) : null;
     if ( ! is_email( $email ) ) {
         return;

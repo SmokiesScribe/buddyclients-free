@@ -1,13 +1,19 @@
 <?php
 use BuddyClients\Includes\Popup;
 /**
- * Get help doc content.
+ * Retrieves help doc content.
  * 
  * AJAX callback.
  * 
  * @since 0.1.0
  */
 function bc_get_popup_content() {
+
+    // Verify nonce
+    $nonce = isset( $_POST['nonce'] ) ? sanitize_text_field( wp_unslash( $_POST['nonce'] ) ) : null;
+    if ( ! wp_verify_nonce( $nonce, 'bc_help_popup' ) ) {
+        return;
+    }
     
     // Get post ID from ajax
     $post_id = isset( $_POST['postId'] ) ? intval( wp_unslash( $_POST['postId'] ) ) : null;
