@@ -178,6 +178,9 @@ class AssetManager {
 			'line-items-table'	=> [
 				'nonce' => wp_create_nonce( $this->build_handle( 'line-items-table') ),
 			],
+			'service-fields'	=> [
+				'nonce' => wp_create_nonce( $this->build_handle( 'service-fields') ),
+			],
 		];
 
 	 	/**

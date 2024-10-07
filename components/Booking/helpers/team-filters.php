@@ -11,6 +11,12 @@ function bc_team_filter_match() {
     
     // Initialize
     $match = true;
+
+    // Verify nonce
+    $nonce = isset( $_POST['nonce'] ) ? sanitize_text_field( wp_unslash( $_POST['nonce'] ) ) : null;
+    if ( ! wp_verify_nonce( $nonce, 'bc_service_fields' ) ) {
+        return;
+    }
     
     // Get data from JavaScript post
     $team_id = isset($_POST['team_id']) ? intval(wp_unslash($_POST['team_id'])) : null;

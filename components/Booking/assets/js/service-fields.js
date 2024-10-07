@@ -343,6 +343,7 @@
                         action: 'bc_team_filter_match',
                         team_id: teamID,
                         filter_values: filterValues,
+                        nonce: bcData.nonce
                     },
                     success: function(response) {
                         var match = JSON.parse(response);
