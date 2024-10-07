@@ -9,6 +9,13 @@ namespace BuddyClients\Config;
  * @since 0.1.0
  */
 class AssetManager {
+
+	/**
+	 * The array of script localization data.
+	 * 
+	 * @var array
+	 */
+	protected $localization_info;
 	
 	/**
 	 * The directory path of scripts or styles.
@@ -52,10 +59,13 @@ class AssetManager {
         // Define variables
 		$this->dir_path = plugin_dir_path( $source_file ) . $dir;
 		$this->dir_url = plugin_dir_url( $source_file ) . $dir;
-		$this->file = $file ?? null;
+		$this->file = $file ?? null;		
 		
 		// Get source file name for handle
         $this->source = pathinfo( basename( $source_file ), PATHINFO_FILENAME );
+
+		// Get script localization data
+		$this->localization_info = $this->localization_info();
 	}
 	
 	/**
@@ -140,11 +150,56 @@ class AssetManager {
         
         if ($extension === 'js') {
             // Enqueue script
+			$this->enqueue_js( $handle, $file_url, $file_name );
             wp_enqueue_script($handle, $file_url, array(), BC_PLUGIN_VERSION, 'all');
+
         } else if ($extension === 'css') {
             // Enqueue style
             wp_enqueue_style($handle, $file_url, array(), BC_PLUGIN_VERSION, 'all');
         }
+	}
+
+	/**
+	 * Defines localization data.
+	 * 
+	 * @since 1.0.15
+	 */
+	private function localization_info() {
+		$localization_info = [
+			'email-entered' => [
+				'nonce' => wp_create_nonce( $this->build_handle( 'email-entered') ),
+			]
+		];
+
+	 	/**
+		 * Filters the script localization info.
+		 * 
+		 * @since 1.0.15
+		 */
+		$localization_info = apply_filters( 'bc_script_localization', $localization_info );		
+
+		return $localization_info;
+	}
+
+	/**
+	 * Enqueues and localizes Javascript file.
+	 * 
+	 * @since 1.0.15
+	 * 
+	 * @param   string  $handle     The script handle.
+	 * @param   string  $file_url   The full file url.
+	 * @param	string	$file_name	The file name without extension.
+	 */
+	private function enqueue_js( $handle, $file_url, $file_name ) {
+		// Enqueue script
+		wp_enqueue_script( $handle, $file_url, array(), BC_PLUGIN_VERSION, 'all' );
+
+		// Check if localization info exists for the file
+		$file_localization_info = $this->localization_info[$file_name] ?? null;
+		if ( is_array( $file_localization_info ) ) {
+			// Localize and pass data
+	        wp_localize_script( $handle, 'bcData', $file_localization_info );
+		}
 	}
 	
 	/**

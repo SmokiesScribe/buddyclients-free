@@ -1,4 +1,6 @@
 <?php
+use BuddyClients\Components\Booking\BookingIntent;
+use BuddyEvents\Includes\Registration\RegistrationIntent;
 /**
  * Handles AJAX calls to update BookingIntent with newly entered email.
  * 
@@ -15,12 +17,12 @@ function bc_update_booking_intent_email() {
 
     // Update BookingIntent with email
     if ( $booking_intent_id && $booking_intent_id !== '' ) {
-        BuddyClients\Components\Booking\BookingIntent::update_client_email( $booking_intent_id, $email );
+        BookingIntent::update_client_email( $booking_intent_id, $email );
     }
     
     // Update RegistrationIntent with email
     if ( $registration_intent_id && $registration_intent_id !== '' ) {
-        BuddyEvents\Includes\Registration\RegistrationIntent::update_attendee_email( $registration_intent_id, $email );
+        RegistrationIntent::update_attendee_email( $registration_intent_id, $email );
     }
     
     wp_die(); // Terminate
