@@ -342,7 +342,7 @@ class Nav {
      */
     private static function get_params( $link = null ) {
         // Get all url params for provided link or curr url
-        $array = bc_get_all_params( $link );g
+        $array = bc_get_all_params( $link );
     
         // Extract parameters
         return [

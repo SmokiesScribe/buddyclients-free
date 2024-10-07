@@ -62,6 +62,12 @@ class Metaboxes {
         
         // Exit if autosave
         if ( defined( 'DOING_AUTOSAVE' ) && DOING_AUTOSAVE ) return;
+
+        // Verify nonce
+        if ( ! isset( $_POST[ $this->post_type . '_meta_nonce' ] ) ||
+            ! wp_verify_nonce( wp_unslash( $_POST[ $this->post_type . '_meta_nonce' ] ), 'save_' . $this->post_type . '_meta' ) ) {
+            return;
+        }
         
         // Check if user has permission
         if ( !current_user_can( 'edit_post', $post_id ) ) return;
@@ -159,6 +165,9 @@ class Metaboxes {
     public function metabox_callback( $post, $metabox ) {
         // Get data passed to callback
         $data = $metabox['args']['data'];
+
+        // Generate a nonce field for this meta box
+        wp_nonce_field( 'save_' . $this->post_type . '_meta', $this->post_type . '_meta_nonce' );
         
         // Echo metabox category description
         echo isset( $data['description'] ) ? $data['description'] : '';
