@@ -51,9 +51,10 @@ add_action( 'manage_brief_type_custom_column', 'bc_render_preview_button', 10, 3
  * @since 1.0.3
  */
 function bc_handle_preview_request() {
-    if ( isset( $_GET['preview_brief'] ) && isset( $_GET['taxonomy_term_id'] ) ) {
-        $taxonomy_term_id = intval( $_GET['taxonomy_term_id'] );
-        bc_redirect_to_preview( $taxonomy_term_id );
+    $preview_brief = bc_get_param( 'preview_brief' );
+    $taxonomy_term_id = bc_get_param( 'taxonomy_term_id' );
+    if ( $preview_brief && $taxonomy_term_id ) {        
+        bc_redirect_to_preview( intval( $taxonomy_term_id ) );
         exit;
     }
 }
@@ -114,7 +115,8 @@ function bc_redirect_to_preview( $taxonomy_term_id ) {
  * @since 1.0.3
  */
 function bc_delete_brief_preview_drafts() {
-    if ( ! is_admin() || empty( $_GET['post_type'] ) || $_GET['post_type'] !== 'bc_brief' ) {
+    $post_type = bc_get_param( 'post_type' );
+    if ( ! is_admin() || empty( $post_type ) || $post_typeg !== 'bc_brief' ) {
         return;
     }
 
