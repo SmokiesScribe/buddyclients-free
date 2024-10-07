@@ -65,7 +65,7 @@ class Metaboxes {
 
         // Verify nonce
         if ( ! isset( $_POST[ $this->post_type . '_meta_nonce' ] ) ||
-            ! wp_verify_nonce( wp_unslash( $_POST[ $this->post_type . '_meta_nonce' ] ), 'save_' . $this->post_type . '_meta' ) ) {
+            ! wp_verify_nonce( sanitize_text_field( wp_unslash( $_POST[ $this->post_type . '_meta_nonce' ] ) ), 'save_' . $this->post_type . '_meta' ) ) {
             return;
         }
         
