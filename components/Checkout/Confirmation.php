@@ -117,19 +117,19 @@ class Confirmation {
     private function get_status() {
         // Initialize to failed
         $this->status = 'failed';
+
+        // Fetch redirect status param
+        $redirect_status = bc_get_param( 'redirect_status' );
         
-        // Check that the redirect_status parameter exists in the url
-        if ( isset($_GET['redirect_status'] ) ) {
-        
-            // Check if redirect_status is 'succeeded'
-            if ( isset($_GET['redirect_status'] ) && $_GET['redirect_status'] === 'succeeded' ) {
-                
-                // Set to succeeded
-                $this->status = 'succeeded';
-                
-                // Check if free
-                $this->free = isset($_GET['free'] ) && $_GET['free'] === 'true';
-            }
+        // Check if redirect_status is 'succeeded'
+        if ( $redirect_status === 'succeeded' ) {
+            
+            // Set to succeeded
+            $this->status = 'succeeded';
+            
+            // Check if free
+            $free = bc_get_param( 'free' );
+            $this->free = $free === 'true';
         }
     }
     
@@ -140,23 +140,26 @@ class Confirmation {
      */
     private function get_booking_intent() {
         // Retrieve booking intent
-        if ( isset( $_GET['booking_id'] ) ) {
+        $booking_id = bc_get_param( 'booking_id' );
+        if ( $booking_id ) {
             // Unsplash and sanitize the booking_id
-            $booking_id = intval( wp_unslash( $_GET['booking_id'] ) );
+            $booking_id = intval( $booking_id );
             $this->booking_intent = BookingIntent::get_booking_intent( $booking_id );
         }
 
         // Check for registration intent
-        if ( isset( $_GET['registration_id'] ) && class_exists( RegistrationIntent::class ) ) {
-            $registration_id = intval( wp_unslash( $_GET['registration_id'] ) );
+        $registration_id = bc_get_param( 'registration_id' );
+        if ( $registration_id && class_exists( RegistrationIntent::class ) ) {
+            $registration_id = intval( $registration_id ) );
             $this->booking_intent = RegistrationIntent::get_registration_intent( $registration_id );
         } else {
             $this->is_registration = false;
         }
         
         // Check for sponsorship intent
-        if ( isset( $_GET['sponsor_id'] ) && class_exists( SponsorIntent::class ) ) {
-            $sponsor_id = intval( wp_unslash( $_GET['sponsor_id'] ) );
+        $sponsor_id = bc_get_param( 'sponsor_id' );
+        if ( $sponsor_id && class_exists( SponsorIntent::class ) ) {
+            $sponsor_id = intval( $sponsor_id ) );
             $this->booking_intent = SponsorIntent::get_sponsor_intent( $sponsor_id );
         } else {
             $this->is_sponsor = false;
