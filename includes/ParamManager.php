@@ -184,6 +184,30 @@ class ParamManager {
     }
 
     /**
+     * Retrieves all url parameters.
+     * 
+     * @since 1.0.15
+     * 
+     * @return  array   An array of url params.
+     */
+    public function get_all_params() {
+        $nonce_action = 'bc_action';
+        $nonce_name = '_bc_nonce';
+
+        // Verify nonce
+        if ( isset( $_GET[$nonce_name] ) ) {
+            $nonce = sanitize_text_field( wp_unslash( $_GET[$nonce_name] ) );
+            if ( ! wp_verify_nonce( $nonce, $nonce_action ) ) {
+                // Exit if nonce fails
+                return;
+            }
+        }
+
+        // Return all url params        
+        return $_GET;
+    }
+
+    /**
      * Retrieves the modified URL.
      * 
      * @since 1.0.3

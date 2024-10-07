@@ -139,9 +139,9 @@ class Nav {
         
         // Initialize tabs HTML
         $tabs = '';
-        
-        // Get group parameter from URL or set to null
-        $group = isset( $_GET['group'] ) ? intval( wp_unslash( $_GET['group'] ) ) : null;
+
+        // Handle params
+        $group = bc_get_param( 'group' );
         
         // Determine if an active tab was found and if the group exists
         if ( ($active_tab && isset($tabs_array[$active_tab['group']])) || $group ) {
@@ -340,23 +340,9 @@ class Nav {
      * 
      * @param   ?string $link   Defaults to current url.
      */
-    private static function get_params($link = null) {
-        // Initialize $array to hold parameters
-        $array = [];
-    
-        // No link provided, use current URL parameters
-        if ( ! $link ) {
-            $array = $_GET;
-        } else {
-            // Parse the provided URL
-            $url_components = wp_parse_url( $link );
-    
-            // Check if the URL has a query component
-            if ( isset( $url_components['query'] ) ) {
-                // Parse the query string into variables
-                parse_str( $url_components['query'], $array );
-            }
-        }
+    private static function get_params( $link = null ) {
+        // Get all url params for provided link or curr url
+        $array = bc_get_all_params( $link );g
     
         // Extract parameters
         return [
