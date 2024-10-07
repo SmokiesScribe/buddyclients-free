@@ -132,8 +132,9 @@ class BookingForm {
     private function define_client() {
         
         // Check for url param
-        if ( isset( $_GET['sales_client_id'] ) ) {
-            $this->client_id = sanitize_text_field( wp_unslash( $_GET['sales_client_id'] ) );
+        $sales_client_id = bc_get_param( 'sales_client_id' );
+        if ( $sales_client_id ) {
+            $this->client_id = $sales_client_id;
             
         // Check if user is logged in
         } else if ( is_user_logged_in() ) {
@@ -374,11 +375,11 @@ class BookingForm {
          $args = [];
 
          // Define values
-         $sales_id = isset( $_GET['sales_id'] ) ? sanitize_text_field( wp_unslash( $_GET['sales_id'] ) ) : null;
-         $prev_paid = isset( $_GET['prev_paid'] ) ? sanitize_text_field( wp_unslash( $_GET['prev_paid'] ) ) : null;
-         $user_email = isset( $_GET['sales_client_email'] ) && $_GET['sales_client_email'] !== '' 
-            ? sanitize_email( wp_unslash( $_GET['sales_client_email'] ) ) 
-            : bp_core_get_user_email( $this->client_id );
+         $sales_id = bc_get_param( 'sales_id' );
+         $sales_id = bc_get_param( 'prev_paid' );
+
+         $sales_client_email = bc_get_param( 'sales_client_email' );         
+         $user_email = ! empty( $sales_client_email ) ? sanitize_email( $sales_client_email ) : bp_core_get_user_email( $this->client_id );
          
          // Define fields
             $hidden_fields = [
@@ -866,7 +867,7 @@ class BookingForm {
      */
     private function terms_checkbox() {
         
-        if ( isset( $_GET['sales_id'] ) ) {
+        if ( bc_get_param( 'sales_id' ) ) {
             return;
         }
         
