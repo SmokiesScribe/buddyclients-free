@@ -398,10 +398,9 @@ class SettingsPage {
      *
      * @since 0.1.0
      */
-    public function stripe_input_field($type, $field_id, $field_data, $value) {
-        $icon = isset($_GET['validate']) && $_GET['validate'] === 'stripe' 
-            ? bc_stripe_valid_icon($field_data['stripe_key'] ?? null, $value) 
-            : '';
+    public function stripe_input_field( $type, $field_id, $field_data, $value ) {
+        $icon = $this->validate_stripe_icon( 'field', $field_data );
+        
         ?>
         <div class="buddyclients-admin-field">
             <label for="<?php echo esc_attr($this->name . '[' . $field_id . ']'); ?>">
@@ -424,9 +423,8 @@ class SettingsPage {
      * @since 0.1.0
      */
     public function stripe_select_field($type, $field_id, $field_data, $value) {
-        $icon = isset($_GET['validate']) && $_GET['validate'] === 'stripe' 
-            ? bc_stripe_mode_valid_icon() 
-            : '';
+        $icon = $this->validate_stripe_icon( 'mode' );
+        
         ?>
         <div class="buddyclients-admin-field">
             <label for="<?php echo esc_attr($this->name . '[' . $field_id . ']'); ?>">
@@ -449,6 +447,42 @@ class SettingsPage {
             </div>
         </div>
         <?php
+    }
+
+    /**
+     * Checks for Stripe validation and outputs an icon.
+     * 
+     * @since 1.0.15
+     * 
+     * @param   string  $type           The type of validation.
+     *                                  Accepts 'mode' and 'field'.
+     * @param   array   $field_data     The data for field validation.
+     * 
+     * @return  string  Icon html or empty string.
+     */
+    private function validate_stripe_icon( $type, $field_data = null ) {
+        // Initialize
+        $icon = '';
+
+        // Check for validate url param
+        $param_manager = bc_param_manager();
+        $validate_param = $param_manager->get( 'validate' );
+
+        // Make sure we're validating
+        if ( $validate_param !== 'stripe' ) {
+            return $icon;
+        }
+
+        // Validate full stripe mode
+        if ( $type === 'mode' ) {
+            $icon = bc_stripe_mode_valid_icon();
+        }
+
+        // Validate field
+        if ( $type === 'field' && is_array( $field_data ) && isset( $field_data['stripe_key'] ) ) {
+            $icon = bc_stripe_valid_icon( $field_data['stripe_key'] );
+        }
+        return $icon;
     }
     
     /**
