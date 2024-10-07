@@ -8,6 +8,12 @@ use BuddyClients\Includes\Project;
  * @pararm  int $project_id The ID of the project to retrieve.
  */
 function bc_get_project() {
+
+    // Verify nonce
+    $nonce = isset( $_POST['nonce'] ) ? sanitize_text_field( wp_unslash( $_POST['nonce'] ) ) : null;
+    if ( ! wp_verify_nonce( $nonce, 'bc_create_project_fields' ) ) {
+        return;
+    }
     
     // Get project id from javascript post
     $project_id = isset($_POST['project_id']) ? intval(wp_unslash($_POST['project_id'])) : null;

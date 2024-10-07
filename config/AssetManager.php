@@ -181,6 +181,9 @@ class AssetManager {
 			'service-fields'	=> [
 				'nonce' => wp_create_nonce( $this->build_handle( 'service-fields') ),
 			],
+			'create-project-fields'	=> [
+				'nonce' => wp_create_nonce( $this->build_handle( 'create-project-fields') ),
+			],
 		];
 
 	 	/**
