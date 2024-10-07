@@ -251,6 +251,7 @@ function updateServiceValues() {
                         adjustments: selectedAdjustments,
                         team_id: teamID,
                         team_member_role: roleID,
+                        nonce: bcData.nonce
                     },
                     success: function(response) {
                         var lineItem = JSON.parse(response);

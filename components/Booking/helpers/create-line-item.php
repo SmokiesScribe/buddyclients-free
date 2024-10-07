@@ -6,6 +6,11 @@ use BuddyClients\Components\Booking\LineItems;
  * @since 0.1.0
  */
 function bc_create_line_item() {
+
+    $nonce = isset( $_POST['nonce'] ) ? sanitize_text_field( wp_unslash( $_POST['nonce'] ) ) : null;
+    if ( ! wp_verify_nonce( $nonce, 'bc_line_items_table' ) ) {
+        return;
+    }
     
     $args = [
         'service_id'        => isset($_POST['service_id']) ? intval(wp_unslash($_POST['service_id'])) : null,
@@ -18,7 +23,7 @@ function bc_create_line_item() {
     $line_items = new LineItems($args);
     
     // Return encoded line item object
-    echo wp_json_encode($line_items);
+    echo wp_json_encode( $line_items );
     
     wp_die(); // Terminate
 }

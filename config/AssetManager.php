@@ -174,7 +174,10 @@ class AssetManager {
 			],
 			'create-account'	=> [
 				'nonce' => wp_create_nonce( $this->build_handle( 'create-account') ),
-			]
+			],
+			'line-items-table'	=> [
+				'nonce' => wp_create_nonce( $this->build_handle( 'line-items-table') ),
+			],
 		];
 
 	 	/**
