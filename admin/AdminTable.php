@@ -383,6 +383,9 @@ class AdminTable {
         
         // Start building the filter form
         echo '<form method="POST" style="margin-bottom: 20px;">';
+
+        // Nonce field
+        wp_nonce_field( 'bc_filter_nonce_action', 'bc_filter_nonce' );
         
         // Loop through the filters
         foreach ( $this->filters as $key => $data ) {

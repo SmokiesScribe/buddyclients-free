@@ -6,8 +6,15 @@ use BuddyClients\Includes\ParamManager;
  * @since 0.1.0
  */
 function bc_admin_filter_submission() {
+
     // Check for filter form submission
-    if ( isset( $_POST['bc_admin_filter_key'] ) ) {
+    if ( isset( $_POST['bc_admin_filter_key'] ) && isset( $_POST['bc_filter_nonce'] ) ) {
+
+        // Verify the nonce
+        $nonce = sanitize_text_field( wp_unslash( $_POST['bc_filter_nonce'] ) );
+        if ( ! wp_verify_nonce( $nonce, 'bc_filter_nonce_action' ) ) {
+            return;
+        }
         
         // Initialize params by resetting to page 1
         $url_params = ['paged' => 1];
