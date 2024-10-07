@@ -93,7 +93,7 @@ class AdminDashboard {
      * @since 1.0.2
      */
     private function define_date_range() {
-        return isset( $_GET['date_range_filter'] ) ? sanitize_text_field( wp_unslash($_GET['date_range_filter'] ) ) : 'year_to_date';
+        return bc_get_param( 'date_range_filter' ) ?? 'year_to_date';
     }
     
     /**
@@ -346,7 +346,8 @@ class AdminDashboard {
         
         // Loop through the options
         foreach ( $this->filter_options() as $option_key => $option_label ) {
-            echo '<option value="' . esc_attr( $option_key ) . '"' . ( ( isset($_GET[$name]) && $_GET[$name] == $option_key ) ? ' selected' : '' ) . '>' . esc_html( $option_label ) . '</option>';
+            $date_range = bc_get_param( $name );
+            echo '<option value="' . esc_attr( $option_key ) . '"' . ( ( $date_range == $option_key ) ? ' selected' : '' ) . '>' . esc_html( $option_label ) . '</option>';
         }
     
         // Close the dropdown
