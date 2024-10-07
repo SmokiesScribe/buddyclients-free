@@ -1,16 +1,21 @@
 <?php
-use BuddyClients\Components\Booking\BookingIntent as BookingIntent;
+use BuddyClients\Components\Booking\BookingIntent;
 /**
  * Handles booking deletions.
  * 
  * @since 0.2.4
  */
 function bc_handle_delete_booking() {
-    // Check if action is set and matches your action
-    if ( isset( $_GET['action'] ) && $_GET['action'] === 'delete_booking' ) {
+    $action = bc_get_param( 'action' );
+
+    // Check if action is delete booking
+    if ( $action === 'delete_booking' ) {
+        
         // Ensure booking_id is set
-        if ( isset( $_GET['booking_id'] ) && is_numeric( $_GET['booking_id'] ) && $_GET['booking_id'] > 0 ) {
-            $booking_id = intval( $_GET['booking_id'] );
+        $booking_id = bc_get_param( 'booking_id' );
+        if ( is_numeric( $booking_id ) && $booking_id > 0 ) {
+            // Cast to integer
+            $booking_id = intval( $booking_id );
             
             // Delete booking intent
             BookingIntent::delete_booking_intent( $booking_id );
