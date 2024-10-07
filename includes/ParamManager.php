@@ -14,6 +14,20 @@ class ParamManager {
      * @var string
      */
     private $url;
+
+    /**
+     * The nonce action.
+     * 
+     * @var string
+     */
+    private $nonce_action = 'bc_action';
+
+    /**
+     * The nonce name.
+     * 
+     * @var string
+     */
+    private $nonce_name = '_bc_nonce';
     
     /**
      * Constructor method.
@@ -41,14 +55,11 @@ class ParamManager {
      * 
      * @since 1.0.4
      * 
-     * @param string $action Optional. Nonce action name. Defaults to 'bc_action'.
-     * @param string $name   Optional. Nonce field name. Defaults to '_bc_nonce'.
-     * 
      * @return string The URL with the nonce added.
      */
-    public function add_nonce( $action = 'bc_action', $name = '_bc_nonce' ) {
-        $nonce = wp_create_nonce( $action );
-        return $this->add_param( $name, $nonce, $this->url );
+    public function add_nonce() {
+        $nonce = wp_create_nonce( $this->nonce_action );
+        return $this->add_param( $this->nonce_name, $nonce, $this->url );
     }
 
     /**
@@ -94,6 +105,15 @@ class ParamManager {
         // Check if 'query' exists and parse it
         if ( isset( $parsed_url['query'] ) ) {
             parse_str( $parsed_url['query'], $query_params );
+        }
+
+        // Check if the url includes nonce
+        if ( ! isset( $query_params[$this->nonce_name] ) ) {
+            // Define nonce
+            $nonce = wp_create_nonce( $this->nonce_action );
+
+            // Add nonce to params
+            $query_params[$this->nonce_name] = $nonce;
         }
 
         // Add the new parameter
@@ -165,13 +185,11 @@ class ParamManager {
      * @param string $param  The param key.
      */
     public function get( $param ) {
-        $nonce_action = 'bc_action';
-        $nonce_name = '_bc_nonce';
 
         // Verify nonce
-        if ( isset( $_GET[$nonce_name] ) ) {
-            $nonce = sanitize_text_field( wp_unslash( $_GET[$nonce_name] ) );
-            if ( ! wp_verify_nonce( $nonce, $nonce_action ) ) {
+        if ( isset( $_GET[$this->nonce_name] ) ) {
+            $nonce = sanitize_text_field( wp_unslash( $_GET[$this->nonce_name] ) );
+            if ( ! wp_verify_nonce( $nonce, $this->nonce_action ) ) {
                 // Exit if nonce fails
                 return;
             }
@@ -191,13 +209,11 @@ class ParamManager {
      * @return  array   An array of url params.
      */
     public function get_all_params() {
-        $nonce_action = 'bc_action';
-        $nonce_name = '_bc_nonce';
-
+        
         // Verify nonce
-        if ( isset( $_GET[$nonce_name] ) ) {
-            $nonce = sanitize_text_field( wp_unslash( $_GET[$nonce_name] ) );
-            if ( ! wp_verify_nonce( $nonce, $nonce_action ) ) {
+        if ( isset( $_GET[$this->nonce_name] ) ) {
+            $nonce = sanitize_text_field( wp_unslash( $_GET[$this->nonce_name] ) );
+            if ( ! wp_verify_nonce( $nonce, $this->nonce_action ) ) {
                 // Exit if nonce fails
                 return;
             }

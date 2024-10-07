@@ -134,7 +134,7 @@ class SingleBrief {
         $content = '';
         
         // Check brief view
-        $brief_view = isset( $_GET['brief-view'] ) ? sanitize_text_field( wp_unslash( $_GET['brief-view'] ) ) : null;
+        $brief_view = bc_get_param( 'brief-view' );
         
         // Get brief type
         $brief_type_name = implode(', ', wp_get_post_terms($this->brief_id, 'brief_type', array('fields' => 'names')));
