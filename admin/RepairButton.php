@@ -82,16 +82,29 @@ class RepairButton {
      */
     public function form() {
         global $pagenow;
+        $post_type = bc_get_param( 'post_type' );
     
         // Check if it's the admin page for the post type
-        if ( $pagenow == 'edit.php' && isset( $_GET['post_type']) && $_GET['post_type'] == $this->post_type ) {
+        if ( $pagenow == 'edit.php' && $post_type == $this->post_type ) {
             
+            // Open form
             $form = '';
             $form .= '<br>';
             $form .= '<form method="post" action="' . admin_url("admin-post.php") . '">';
-            $form .= '    <input type="hidden" name="action" value="repair_' . esc_attr( $this->key ) . '">';
-            $form .= '    <button type="submit" name="repair_' . esc_attr( $this->key ) . '_submit" class="button button-secondary">';
+
+            // Hidden input
+            $form .= '<input type="hidden" name="action" value="repair_' . esc_attr( $this->key ) . '">';
+
+            // Nonce
+            $form .= wp_nonce_field( 'repair_' . esc_attr( $this->key ) . '_nonce', 'repair_' . esc_attr( $this->key ) . '_nonce', true, false );
+            
+            // Submit button
+            $form .= '<button type="submit" name="repair_' . esc_attr( $this->key ) . '_submit" class="button button-secondary">';
+            
+            // Label
             $form .= esc_html__( 'Repair', 'buddyclients' ) . ' ' . esc_html( $this->get_label() );
+
+            // Close button and form
             $form .= '</button>';
             $form .= '</form>';
             
@@ -107,6 +120,12 @@ class RepairButton {
     public function submission() {
         // Check if the form has been submitted
         if (isset($_POST['repair_' . esc_attr( $this->key ) . '_submit'])) {
+
+            // Verify nonce
+            $nonce = isset( $_POST['repair_' . esc_attr( $this->key ) . '_nonce'] ) ? sanitize_text_field( wp_unslash( $_POST['repair_' . esc_attr( $this->key  ) . '_nonce'] ) ) : '';
+            if ( ! wp_verify_nonce( $nonce, 'repair_' . esc_attr( $this->key ) . '_nonce' ) ) {
+                return;
+            }
             
             // If a repair callback function is provided, call it
             if (is_callable($this->callback)) {
