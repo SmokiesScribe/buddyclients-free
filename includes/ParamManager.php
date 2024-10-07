@@ -64,7 +64,7 @@ class ParamManager {
      */
     public function add_params( $params, $url = null ) {
         $url = $url ?? $this->url;
-        if ( is_array( if ( ! empty( $params ) ) ) && ! empty( $params ) ) {
+        if ( is_array( $params ) && ! empty( $params ) ) {
             foreach ( $params as $param => $value ) {
                 $url = $this->add_param( $param, $value, $url );
             }
@@ -165,20 +165,21 @@ class ParamManager {
      * @param string $param  The param key.
      */
     public function get( $param ) {
-        $action = 'bc_action';
-        $name = '_bc_nonce';
+        $nonce_action = 'bc_action';
+        $nonce_name = '_bc_nonce';
 
-        if ( isset( $_GET[$name] ) ) {
-            $nonce = sanitize_text_field( wp_unslash( $_GET[$name] ) );
-            if ( ! wp_verify_nonce( $nonce, $action ) ) {
+        // Verify nonce
+        if ( isset( $_GET[$nonce_name] ) ) {
+            $nonce = sanitize_text_field( wp_unslash( $_GET[$nonce_name] ) );
+            if ( ! wp_verify_nonce( $nonce, $nonce_action ) ) {
+                // Exit if nonce fails
                 return;
             }
         }
 
-        if ( $this->verify_nonce() ) {
-            if ( isset( $_GET[$param] ) ) {
-                return sanitize_text_field( wp_unslash ($_GET[$param] ) ) ?? null;
-            }
+        // Get value of url param
+        if ( isset( $_GET[$param] ) ) {
+            return sanitize_text_field( wp_unslash ($_GET[$param] ) ) ?? null;
         }
     }
 

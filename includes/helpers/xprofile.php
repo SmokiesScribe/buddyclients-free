@@ -119,6 +119,9 @@ function bc_no_roles_updates() {
     if ( ! $roles_field_id ) {
         return;
     }
+
+    // Init param manager
+    $param_manager = bc_param_manager();
     
     // Define url params to check
     $params = [
@@ -129,7 +132,7 @@ function bc_no_roles_updates() {
     
     // Check all params
     foreach ( $params as $param => $value ) {
-        if ( ! isset( $_GET[$param] ) || $_GET[$param] !== $value ) {
+        if ( $param_manager->get( $param ) !== $value ) {
             // Exit if not a match
             return;
         }
