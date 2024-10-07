@@ -514,13 +514,15 @@ class MetaManager {
         
         // Initialize array
         $meta_fields = [];
+
+        // Handle params
+        $param_manager = bc_param_manager();
+        $post_id = $param_manager->get( 'post' );
         
         // Default to 10 while saving
-        if ( ! isset( $_GET['post'] ) ) {
+        if ( ! $post_id ) {
             $options_count = 10;
         } else {
-            // Get post ID being edited
-            $post_id = isset( $_GET['post'] ) ? absint( wp_unslash( $_GET['post'] ) ) : null;
             
             // Get options count
             $adjustment = new Adjustment( $post_id );
