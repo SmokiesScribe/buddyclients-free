@@ -3,13 +3,12 @@ Contributors: Victoria Griffin
 Requires at least: 4.9.1
 Tested up to: 6.6.2
 Requires PHP: 7.2
-Stable tag: 1.0.0
+Stable tag: 1.0.3
 License: GPL-2.0-or-later
 License URI: https://www.gnu.org/licenses/gpl-2.0.html
+BuddyClients is a flexible and comprehensive platform for any service-based business. This free version includes core functionality.
 
-BuddyClients is a versatile and feature-rich platform designed to streamline and enhance operations for service-based businesses. This free version includes core functionality.
-
-= Documentation =
+== Documentation ==
 
 - [Documentation](https://buddyclients.com/docs/)
 - [User Guides](https://buddyclients.com/help/)
