@@ -115,7 +115,8 @@ class AdminTable {
         $this->extract_args( $args );
         
         // Calculate current page based on URL parameter or default to 1
-        $this->current_page = isset( $_GET['paged'] ) ? absint( $_GET['paged'] ) : 1;
+        $paged = bc_get_param( 'paged' );
+        $this->current_page = $paged ? absint( $paged ) : 1;
         
         echo $this->build_table();
     }
@@ -411,7 +412,8 @@ class AdminTable {
             
             // Loop through the options
             foreach ( $data['options'] as $option_key => $option_label ) {
-                echo '<option value="' . esc_attr( $option_key ) . '"' . ( ( isset($_GET[$name]) && $_GET[$name] == $option_key ) ? ' selected' : '' ) . '>' . esc_html( $option_label ) . '</option>';
+                $name = bc_get_param( $name );
+                echo '<option value="' . esc_attr( $option_key ) . '"' . ( $name == $option_key ? ' selected' : '' ) . '>' . esc_html( $option_label ) . '</option>';
             }
         
             // Close the dropdown
@@ -465,7 +467,7 @@ class AdminTable {
             $item_value = $property ? $item->$property : $item[$array_key];
             
             // Get current filter value
-            $filter_value = isset( $_GET[$key . '_filter'] ) ? sanitize_text_field( wp_unslash( $_GET[$key . '_filter'] ) ) : null;
+            $filter_value = bc_get_param( $key . '_filter' );
             
             // No filters value
             if ( ! $filter_value ) {
