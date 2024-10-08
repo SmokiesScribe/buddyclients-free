@@ -95,20 +95,48 @@ class PostType {
         $menu_name     = $args['menu_name'] ?? $args['plural_name'];
         
         $this->labels = array(
-            'name'               => __( $plural_name, 'buddyclients' ),
-            'singular_name'      => __( $singular_name, 'buddyclients' ),
+            'name'               => $plural_name,
+            'singular_name'      => $singular_name,
             'add_new'            => __( 'Add New', 'buddyclients' ),
-            'add_new_item'       => __( 'Add New ' . $singular_name, 'buddyclients' ),
-            'edit_item'          => __( 'Edit ' . $singular_name, 'buddyclients' ),
-            'new_item'           => __( 'New ' . $singular_name, 'buddyclients' ),
-            'all_items'          => __( $menu_name, 'buddyclients' ),
-            'view_item'          => __( 'View ' . $singular_name, 'buddyclients' ),
-            'search_items'       => __( 'Search ' . $plural_name, 'buddyclients' ),
-            'not_found'          => __( 'No ' . strtolower($plural_name) . ' found', 'buddyclients' ),
-            'not_found_in_trash' => __( 'No ' . strtolower($plural_name) . ' found in trash', 'buddyclients' ),
+            'add_new_item'       => sprintf(
+                /* translators: %s: label of the singular item */
+                __( 'Add New %s', 'buddyclients' ),
+                $singular_name
+            ),
+            'edit_item'          => sprintf(
+                /* translators: %s: label of the singular item */
+                __( 'Edit %s', 'buddyclients' ),
+                $singular_name
+            ),
+            'new_item'           => sprintf(
+                /* translators: %s: label of the singular item */
+                __( 'New %s', 'buddyclients' ),
+                $singular_name
+            ),
+            'all_items'          => $menu_name,
+            'view_item'          => sprintf(
+                /* translators: %s: label of the singular item */
+                __( 'View %s', 'buddyclients' ),
+                $singular_name
+            ),
+            'search_items'       => sprintf(
+                /* translators: %s: label of the plural item */
+                __( 'Search %s', 'buddyclients' ),
+                $plural_name
+            ),
+            'not_found'          => sprintf(
+                /* translators: %s: label of the plural item */
+                __( 'No %s found', 'buddyclients' ),
+                strtolower($plural_name)
+            ),
+            'not_found_in_trash' => sprintf(
+                /* translators: %s: label of the plural item */
+                __( 'No %s found in trash', 'buddyclients' ),
+                strtolower($plural_name)
+            ),
             'parent_item_colon'  => '',
-            'menu_name'          => __( $menu_name, 'buddyclients' ),
-        );
+            'menu_name'          => $menu_name,
+        );        
     }
     
     /**

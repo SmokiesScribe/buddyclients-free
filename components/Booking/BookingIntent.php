@@ -319,6 +319,7 @@ class BookingIntent {
                 'title'         => get_the_title($post_id),
                 'items'         => [
                     sprintf(
+                        /* translators: %s: the url of the site */
                         __('Accepted via checkbox on %s', 'buddyclients'),
                         site_url()
                     ),

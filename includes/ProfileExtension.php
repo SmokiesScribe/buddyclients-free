@@ -137,7 +137,7 @@ class ProfileExtension {
         global $bp;
          
         bp_core_new_nav_item( array(
-            'name'            => __( $this->args['name'] ),
+            'name'            =>  $this->args['name'],
             'slug'            => $this->args['slug'],
             'parent_url'      => $bp->loggedin_user->domain . $bp->slug . '/',
             'parent_slug'     => $bp->slug,
@@ -184,7 +184,7 @@ class ProfileExtension {
      * @since 0.1.0
      */
     function title() {
-        echo esc_html__( $this->args['title'] ?? $this->args['name'] );
+        echo esc_html( $this->args['title'] ?? $this->args['name'] );
     }
     
     /**

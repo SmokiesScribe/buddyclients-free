@@ -448,7 +448,11 @@ class Metaboxes {
             
             // Display title, name, or value
             $display = $title ? $title : ($name ?? $args['field_value']);
-            $field .= sprintf(__('Unavailable: %s', 'buddyclients'), esc_html($display));
+            $field .= sprintf(
+                /* translators: %s: the field title, name, or value */
+                __('Unavailable: %s', 'buddyclients'),
+                esc_html( $display )
+            );
         }
         return $field;
     }

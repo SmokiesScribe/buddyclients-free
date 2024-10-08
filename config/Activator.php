@@ -137,8 +137,9 @@ class Activator {
                 $post_exists = self::get_post_by_title( $post_type, $post_title );
 
                 if ( $post_exists ) {
-                    // Skip creating the post if it already exists
+                    // Skip creating the post if it already exists                    
                     $error_message = sprintf(
+                        /* translators: %s: post title */
                         __( 'Post with title "%s" already exists. Skipping creation.', 'buddyclients' ),
                         $post_title
                     );
@@ -163,6 +164,7 @@ class Activator {
                 // Check for errors
                 if ( is_wp_error( $post_id ) ) {
                     $error_message = sprintf(
+                        /* translators: %s: post title */
                         __( 'Error creating post: %s', 'buddyclients' ),
                         $post_id->get_error_message()
                     );

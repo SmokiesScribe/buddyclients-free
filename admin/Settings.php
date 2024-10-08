@@ -789,7 +789,12 @@ class Settings {
             return [
                 'current_legal' => [
                     'title' => __( 'Current Legal Agreements', 'buddyclients' ),
-                    'description' => __( 'Select the current version of each legal agreement type. If transitioning to a new version, select the previous version and add a deadline for accepting the new agreement.<br><a href="' . admin_url( 'edit.php?post_type=bc_legal_mod' ) . '">' . __( 'Add content to legal agreements for individual users.', 'buddyclients' ) . '</a>', 'buddyclients' ),
+                    'description' => sprintf(
+                        /* translators: %1$s: URL to add content to legal agreements; %2$s: link text */
+                        __('Select the current version of each legal agreement type. If transitioning to a new version, select the previous version and add a deadline for accepting the new agreement.<br><a href="%1$s">%2$s</a>', 'buddyclients'),
+                        esc_url(admin_url('edit.php?post_type=bc_legal_mod')),
+                        __('Add content to legal agreements for individual users.', 'buddyclients')
+                    ),
                     'fields' => self::current_legal_fields(),
                 ],
                 'deadline' => [
@@ -893,7 +898,11 @@ class Settings {
                 ],
                 'log' => [
                     'title' => __( 'Email Log', 'buddyclients' ),
-                    'description' => __( 'Email log settings. <a href="' . admin_url('/admin.php?page=bc-email-log') . '">' . __( 'View the email log.', 'buddyclients' ) . '</a>', 'buddyclients' ),
+                    'description' => sprintf(
+                        /* translators: %s: URL to view the email log */
+                        __('Email log settings. <a href="%s">View the email log.</a>', 'buddyclients'),
+                        esc_url(admin_url('/admin.php?page=bc-email-log')),
+                    ),
                     'fields' => [
                         'email_log_time' => [
                             'label' => __( 'Email Log Time', 'buddyclients' ),
@@ -1016,13 +1025,21 @@ class Settings {
             // Loop through page types
             foreach ($pages as $page_type => $pages) {
                 $settings[$page_type] = [
-                    'title' => __( ucfirst($page_type) . ' Pages', 'buddyclients' ),
-                    'description' => __( 'Choose or create your ' . $page_type . ' pages.', 'buddyclients' ),
+                    'title' => sprintf(
+                        /* translators: %s: page type (e.g., 'Service', 'Product') */
+                        __('%s Pages.', 'buddyclients'),
+                        esc_html( ucfirst( $page_type ) ),
+                    ),
+                    'description' => sprintf(
+                        /* translators: %s: page type (e.g., 'service', 'product') */
+                        __('Choose or create your %s pages.', 'buddyclients'),
+                        esc_html( $page_type )
+                    ),
                 ];
                 
                 foreach ($pages as $page_key => $page_data) {
                     $settings[$page_type]['fields'][$page_key] = [
-                        'label' => __( $page_data['label'], 'buddyclients' ),
+                        'label' => $page_data['label'],
                         'type' => 'page',
                         'options' => self::page_options(),
                         'post_title' => $page_data['post_title'] ?? '',

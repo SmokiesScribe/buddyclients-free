@@ -524,6 +524,7 @@ class BookingForm {
             if ($service_type->form_field_type === 'dropdown') {
                 $options[] = [
                     'label' => sprintf(
+                        /* translators: %s: the name of the service */
                         __( 'Select Your %s Service', 'buddyclients' ),
                         $service_type->title
                     ),
@@ -661,6 +662,7 @@ class BookingForm {
                 if ( $adjustment->form_field_type === 'dropdown' ) {
                     $options[] = [
                         'label' => sprintf(
+                            /* translators: %s: the name of the rate adjustment */
                             __( 'Select %s', 'buddyclients' ),
                             $adjustment->label
                         ),
@@ -790,6 +792,7 @@ class BookingForm {
                 $team_options = [
                     '' => [
                         'label' => sprintf(
+                            /* translators: %s: the singular name of the team member role (e.g. Editor) */
                             __( 'Select Your %s', 'buddyclients' ),
                             $role->singular
                         ),
@@ -847,6 +850,7 @@ class BookingForm {
                     'type'          => 'dropdown',
                     'label'         => $role->plural,
                     'description'   => sprintf(
+                        /* translators: %s: the singular name of the team member role (e.g. editor) */
                         __( 'Select your %s.', 'buddyclients' ),
                         strtolower( $role->singular )
                     ) . bc_team_select_help(),
@@ -880,6 +884,7 @@ class BookingForm {
         
         if ( $service_agreement_id ) {
             $option_label = sprintf(
+                /* translators: %s: the terms being agreed to (e.g. service terms) */
                 __( 'I agree to the %s.', 'buddyclients' ),
                 bc_help_link( $service_agreement_id, __( 'service terms', 'buddyclients' ) )
             );

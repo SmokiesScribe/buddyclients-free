@@ -88,7 +88,11 @@ function bc_project_briefs($group_id) {
             // Output the term card
             echo '<a class="brief-type-term-link" href="' . $card_link . '">';
             echo '<div class="brief-type-term">';
-            echo '<h3 style="margin-bottom: 10px;">' . sprintf(__('%s Brief', 'buddyclients'), $brief_type) . '</h3>';
+            echo '<h3 style="margin-bottom: 10px;">' . sprintf(
+                /* translators: %s: the brief type (e.g. Editing) */
+                __('%s Brief', 'buddyclients'),
+                $brief_type)
+                . '</h3>';
             echo '<icon class="' . $icon_class . '" style="font-size: 24px; color: ' . bc_color('accent') . ';"></icon>';
             echo '<p>Click to ' . $click_to . '.</p>';
             echo '</div>';

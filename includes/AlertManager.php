@@ -73,9 +73,9 @@ class AlertManager {
         // Check if the availability is expired
         } else if ( Availability::expired( $availability ) ) {
             $content = sprintf(
-                __( 'Your availability has expired. <a href="%s">%s</a>', 'buddyclients' ),
+                /* translators: %s: url to update availability */
+                __( 'Your availability has expired. <a href="%s">Update your availability.</a>', 'buddyclients' ),
                 esc_url( $link ),
-                __( 'Update your availability.', 'buddyclients' )
             );
         }
             
@@ -136,14 +136,16 @@ class AlertManager {
         // Transitioning and not current
         if ( $legal->status === 'transition' && $user_data['status'] !== 'current' ) {
             $content = sprintf(
-                __( 'Complete your <a href="%s">new team member agreement</a> by %s.', 'buddyclients' ),
+                /* translators: %1$s: url to complete agreement; %2$s: deadline for the agreement */
+                __( 'Complete your <a href="%1$s">new team member agreement</a> by %2$s.', 'buddyclients' ),
                 esc_url( $link ),
                 esc_html( $legal->deadline )
-            );
+            );            
             
         // Stable and not current
         } else if ( $user_data['status'] !== 'current' ) {
             $content = sprintf(
+                /* translators: %1$s: url to complete agreement */
                 __( 'Complete your <a href="%s">team member agreement</a>.', 'buddyclients' ),
                 esc_url( $link )
             );

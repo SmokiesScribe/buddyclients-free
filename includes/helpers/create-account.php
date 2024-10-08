@@ -136,6 +136,7 @@ use BuddyEvents\Includes\Registration\SponsorIntent;
     
         // Check password against criteria
         if (strlen($password) < $min_length) {
+            /* translators: %d: the number of characters */
             return sprintf(__('Password must be at least %d characters long.', 'buddyclients'), $min_length);
         }
         if (!$has_uppercase) {

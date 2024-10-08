@@ -75,7 +75,11 @@ class GroupBriefs {
                 
                 // Build click to message
                 $click_action = $brief->updated_date ? __( 'view', 'buddyclients' ) : __( 'complete', 'buddyclients' );
-                $click_to_message = sprintf( __( 'Click to %s.', 'buddyclients' ), $click_action );
+                $click_to_message = sprintf(
+                    /* translators: %s: the click action (e.g. view) */
+                    __( 'Click to %s.', 'buddyclients' ),
+                    $click_action
+                );
                 
                 // Output the term card
                 echo '<a class="brief-type-term-link" href="' . get_permalink( $brief->ID ) . '">';

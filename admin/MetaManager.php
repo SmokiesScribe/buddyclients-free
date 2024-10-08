@@ -7,7 +7,6 @@ use BuddyClients\Components\Service\Adjustment as Adjustment;
  * Manages meta fields for all post types.
  *
  * @since 0.1.0
- * @updated 0.3.4
  */
 class MetaManager {
     
@@ -104,6 +103,7 @@ class MetaManager {
                             'service_type' => [
                                 'label' => __( 'Service Type', 'buddyclients' ),
                                 'description' => sprintf(
+                                    /* translators: %s: the url to add service types */
                                     __( 'Select the category for this service. <a href="%s">Add service types.</a>', 'buddyclients' ),
                                     admin_url('/edit.php?post_type=bc_service_type')
                                 ),
@@ -122,6 +122,7 @@ class MetaManager {
                             'team_member_role' => [
                                 'label' => __( 'Team Member Role', 'buddyclients' ),
                                 'description' => sprintf(
+                                    /* translators: %s: the url to add roles */
                                     __( 'Select which team member role applies to this service. <a href="%s">Add roles.</a>', 'buddyclients' ),
                                     admin_url('/edit.php?post_type=bc_role')
                                 ),
@@ -154,6 +155,7 @@ class MetaManager {
                             'rate_type' => [
                                 'label' => __( 'Rate Type', 'buddyclients' ),
                                 'description' => sprintf(
+                                    /* translators: %s: the url to add rate types */
                                     __( 'Select the type of fee entered above. <a href="%s">Add rate types.</a>', 'buddyclients' ),
                                     admin_url('/edit.php?post_type=bc_rate_type')
                                 ),
@@ -194,6 +196,7 @@ class MetaManager {
                             'brief_type' => [
                                 'label' => __( 'Brief Type', 'buddyclients' ),
                                 'description' => sprintf(
+                                    /* translators: %s: the url to add brief types */
                                     __( 'Select the brief type(s) to create for this service. <a href="%s">Add brief types.</a>', 'buddyclients' ),
                                     admin_url('/edit-tags.php?taxonomy=brief_type&&post_type=bc_brief')
                                 ),
@@ -319,6 +322,7 @@ class MetaManager {
                             'xprofile_field' => [
                                 'label' => __( 'Xprofile Field', 'buddyclients' ),
                                 'description' => sprintf(
+                                    /* translators: %s: the url to add xprofile fields */
                                     __( 'Choose from checkbox and dropdown Xprofile fields. <a href="%s">Create a new field.</a>', 'buddyclients' ),
                                     admin_url('/admin.php?page=bp-profile-setup')
                                 ),
@@ -496,10 +500,7 @@ class MetaManager {
                 'tables' => self::adjustment_options(),
             ],
             'New Option' => [
-                'description' => sprintf(
-                    __( '<a id="bc_adjustment_create_option" class="button-secondary">%s</a>', 'buddyclients' ),
-                    __( 'Add Option', 'buddyclients' )
-                ),
+                'description' => __( '<a id="bc_adjustment_create_option" class="button-secondary">Add Option</a>', 'buddyclients' ),
                 'tables' => [],
             ],
         ];
@@ -899,7 +900,11 @@ class MetaManager {
                         'meta' => [
                             'team_member_role' => [
                                 'label' => __('Team Member Role', 'buddyclients'),
-                                'description' => __('Select which team member role applies to this quote. <a href="' . admin_url('/edit.php?post_type=bc_role') . '">Add roles.</a>', 'buddyclients'),
+                                'description' => sprintf(
+                                    /* translators: %s: URL to add roles */
+                                    __('Select which team member role applies to this quote. <a href="%s">Add roles.</a>', 'buddyclients'),
+                                    esc_url(admin_url('/edit.php?post_type=bc_role'))
+                                ),
                                 'type' => 'dropdown',
                                 'options' => 'bc_role',
                                 'required' => true,
@@ -928,7 +933,11 @@ class MetaManager {
                             ],
                             'rate_type' => [
                                 'label' => __('Rate Type', 'buddyclients'),
-                                'description' => __('Select the type of fee entered above. <a href="' . admin_url('/edit.php?post_type=bc_rate_type') . '">Add rate types.</a>', 'buddyclients'),
+                                'description' => sprintf(
+                                    /* translators: %s: URL to add rate types */
+                                    __('Select the type of fee entered above. <a href="%s">Add rate types.</a>', 'buddyclients'),
+                                    esc_url(admin_url('/edit.php?post_type=bc_rate_type'))
+                                ),
                                 'type' => 'dropdown',
                                 'options' => 'bc_rate_type',
                             ],
@@ -965,7 +974,11 @@ class MetaManager {
                         'meta' => [
                             'brief_type' => [
                                 'label' => __('Brief Type', 'buddyclients'),
-                                'description' => __('Select the brief type(s) to create for this service. <a href="' . admin_url('/edit-tags.php?taxonomy=brief_type&&post_type=bc_brief') . '">Add brief types.</a>', 'buddyclients'),
+                                'description' => sprintf(
+                                    /* translators: %s: URL to add brief types */
+                                    __('Select the brief type(s) to create for this service. <a href="%s">Add brief types.</a>', 'buddyclients'),
+                                    esc_url(admin_url('/edit-tags.php?taxonomy=brief_type&post_type=bc_brief'))
+                                ),
                                 'required' => false,
                                 'required_component' => 'briefs',
                                 'type' => 'checkbox',

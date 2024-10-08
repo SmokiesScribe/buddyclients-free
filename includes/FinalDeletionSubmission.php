@@ -93,6 +93,7 @@ class FinalDeletionSubmission {
         
         if ( ! empty( $successful_deletions ) ) {
             $alert_message .= sprintf(
+                /* translators: %d: number of successful deletions */
                 _n( '%d file successfully deleted.', '%d files successfully deleted.', count( $successful_deletions ), 'buddyclients' ),
                 count( $successful_deletions )
             );
@@ -100,6 +101,7 @@ class FinalDeletionSubmission {
             
         if ( ! empty( $failed_deletions ) ) {
             $alert_message .= sprintf(
+                /* translators: %d: number of failed deletions */
                 _n( '%d file was not deleted. Please try again.', '%d files were not deleted. Please try again.', count( $failed_deletions ), 'buddyclients' ),
                 count( $failed_deletions )
             );

@@ -566,13 +566,24 @@ class SettingsPage {
         
         // If post exists, show view button
         if ( $post ) {
-            $view_button = $post ? '<a href="' . get_permalink($value) . '" target="_blank"><button type="button" class="button button-primary" style="margin-right: 5px">' . sprintf(esc_html__('View Active %s', 'buddyclients'), $field_data['label']) . '</button></a>' : '';
+            $view_button = $post ? 
+            '<a href="' . get_permalink($value) . '" target="_blank">
+                <button type="button" class="button button-primary" style="margin-right: 5px">' . 
+                    /* translators: %s: label of the field */
+                    sprintf( esc_html__('View Active %s', 'buddyclients'), $field_data['label'] ) . 
+                '</button>
+            </a>' : '';
         }
         
         // Continue editing button
         $draft_id = bc_get_setting('legal', $field_id . '_draft');
         if ( $draft_id ) {
-            $edit_button = '<a href="' . get_edit_post_link($draft_id) . '"><button type="button" class="button button-secondary" style="margin-right: 5px">' . sprintf(esc_html__('Edit %s Draft', 'buddyclients'), $field_data['label']) . '</button></a>';
+            $edit_button = '<a href="' . get_edit_post_link($draft_id) . '">
+                <button type="button" class="button button-secondary" style="margin-right: 5px">' . 
+                    /* translators: %s: label of the field */
+                    sprintf( esc_html__('Edit %s Draft', 'buddyclients'), $field_data['label'] ) . 
+                '</button>
+            </a>';
         } else {
             // Generate a nonce
             $create_nonce = wp_create_nonce( 'bc_create_new_page_nonce' );
@@ -586,7 +597,10 @@ class SettingsPage {
                 post_type: \'' . esc_js('bc_legal') . '\',
                 post_status: \'' . esc_js('draft') . '\',
                 nonce: \'' . esc_js($create_nonce) . '\'
-            });" type="button" class="button button-secondary" style="margin-right: 5px">' . sprintf(esc_html__('Create New %s', 'buddyclients'), esc_html($field_data['label'])) . '</button>';
+            });" type="button" class="button button-secondary" style="margin-right: 5px">' . 
+                /* translators: %s: label of the field */
+                sprintf( esc_html__('Create New %s', 'buddyclients'), esc_html($field_data['label'])) . 
+            '</button>';
         }
         
         // Get previous version and deadline
@@ -604,11 +618,21 @@ class SettingsPage {
                 // Compare the deadline with the current date and time
                 if ($deadline > $current_datetime) {
                     $human_readable_deadline = gmdate('F j, Y, g:i a', strtotime($deadline));
-                    $version_trans_message = sprintf(esc_html__('Users have until %s to accept the new %s.', 'buddyclients'), $human_readable_deadline, $field_data['label']);
+                    $version_trans_message = sprintf(
+                        /* translators: %s: human-readable deadline */
+                        /* translators: %s: label of the field */
+                        esc_html__('Users have until %1$s to accept the new %2$s.', 'buddyclients'),
+                        $human_readable_deadline,
+                        $field_data['label']
+                    );
                 }
     
             } else {
-                $version_trans_message = sprintf(esc_html__('Users have forever to accept the new %s.', 'buddyclients'), $field_data['label']);
+                $version_trans_message = sprintf(
+                    /* translators: %s: label of the field */
+                    esc_html__('Users have forever to accept the new %s.', 'buddyclients'),
+                    $field_data['label']
+                );
             }
         }
         

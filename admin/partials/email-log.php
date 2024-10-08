@@ -61,12 +61,14 @@ function bc_email_log_admin_notice() {
         $email_setting = bc_get_setting( 'email', 'email_log_time');
         
         // Format setting value
-        $email_setting = is_numeric( $email_setting ) 
+        $email_setting = is_numeric( $email_setting )
+            /* translators: %d: the numnber of days emails are retained */
             ? sprintf( __( 'for %d days', 'buddyclients' ), $email_setting ) 
             : __( 'forever', 'buddyclients' );
             
         // Build note
         $message = sprintf(
+            /* translators: %s: the amount of time emails are stored (e.g. for 90 days or forever) */
             __('Emails are currently stored %s.', 'buddyclients'),
             $email_setting
         );

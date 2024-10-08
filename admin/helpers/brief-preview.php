@@ -74,6 +74,7 @@ function bc_create_preview_draft( $taxonomy_term_id ) {
 
     $post_id = wp_insert_post( array(
         'post_title' => sprintf(
+            /* translators: %s: the name of the brief type (e.g. Editing) */
             __( 'Preview %s Brief', 'buddyclients' ),
             ucfirst( $term_name )
         ),

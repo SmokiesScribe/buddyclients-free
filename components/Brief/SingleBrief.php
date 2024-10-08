@@ -267,6 +267,7 @@ private function toggle_button( $show_form, $is_admin, $updated_date ) {
         if ( ! $is_logged_in ) {
             $content .= '<div class="login-options">';
             $content .= '<p>' . sprintf(
+                /* translators: %s: the login url */
                 __('Please <a href="%s">log in</a> to access this brief.', 'buddyclients'),
                 esc_url(wp_login_url(esc_html($current_url)))
             ) . '</p>';

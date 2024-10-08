@@ -30,7 +30,7 @@ function bc_admin_loading( $message ) {
     </style>';
     echo '<div id="bc-admin-loading">
             <i class="fa-solid fa-circle-notch" id="bc-admin-spinner"></i>
-            <div>' . esc_html__( $message, 'buddyclients' ) . '</div>
+            <div>' . esc_html( $message ) . '</div>
           </div>';
     ob_end_flush();
     flush();

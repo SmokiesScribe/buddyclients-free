@@ -210,11 +210,21 @@ class Checkout {
     
             // Check if emails are enabled
             if ( function_exists( 'bc_email_enabled' ) && bc_email_enabled( 'sales_sub' ) ) {
-                $content .= '<p>' . sprintf( __( '%s has been notified at %s.', 'buddyclients' ), $client_name, $this->client_email ) . '</p>';
+                $content .= '<p>' . sprintf(
+                    /* translators: %1$s: the name of the client; %2$s: the email address of the client */
+                    __( '%1$s has been notified at %2$s.', 'buddyclients' ),
+                    $client_name,
+                    $this->client_email )
+                    . '</p>';
     
             // Emails not enabled
             } else {
-                $content .= '<p>' . sprintf( __( 'Emails are not enabled. %s has NOT been notified at %s.', 'buddyclients' ), $client_name, $this->client_email ) . '</p>';
+                $content .= '<p>' . sprintf(
+                    /* translators: %1$s: the name of the client; %2$s: the email address of the client */
+                    __( 'Emails are not enabled. %1$s has NOT been notified at %2$s.', 'buddyclients' ),
+                    $client_name,
+                    $this->client_email )
+                    . '</p>';
             }
     
             // Copy paste link
@@ -333,7 +343,12 @@ class Checkout {
             'name' => [
                 'key'           => 'create-account-name',
                 'type'          => 'text',
-                'description' => __( 'Have an account? <a href="' . wp_login_url( esc_html( get_permalink() ) ) . '">Log in here</a><br>' . $this->policies(), 'buddyclients' ),
+                'description' => sprintf(
+                    /* translators: %1$s: the login url, %2$s: html linking to the privacy policy and/or service terms */
+                    __( 'Have an account? <a href="%1$s">Log in here</a><br>%2$s', 'buddyclients' ),
+                    esc_url( wp_login_url( get_permalink() ) ),
+                    $this->policies()
+                ),
                 'placeholder'   => 'Your name',
                 'field_classes' => 'bc-create-account-field margin-free',
                 'required'      => true
@@ -402,6 +417,7 @@ class Checkout {
         if ( ! empty($policies) ) {
             $policies_text = implode(' and ',$policies);
             return sprintf(
+                /* translators: %s: the policies the user is agreeing to (e.g. privacy policy and service terms) */
                 __('By creating an account, you agree to the %s.', 'buddyclients'),
                 $policies_text
             );
@@ -462,6 +478,7 @@ class Checkout {
                 'options'       => [
                     'checkout-agree-terms-checkbox' => [
                     'label' => sprintf(
+                        /* translators: %s: the html linking to the service terms */
                         __( 'I agree to the %s.', 'buddyclients' ),
                         Popup::link($service_terms, __( 'service terms', 'buddyclients' ) )
                     ),

@@ -136,7 +136,7 @@ class AdminTable {
         $this->title            = isset( $args['title'] ) ? '<h1>' . esc_html( $args['title'] ) . '</h1>' : '';
         $this->description      = isset( $args['description'] ) ? '<p>' . $args['description'] . '</p>' : '';
         $this->filters          = $args['filters'] ?? null;
-        $this->table_header     = isset( $args['header'] ) ? '<h2>' . esc_html__( $args['header'], 'buddyclients' ) . '</h2>' : '';
+        $this->table_header     = isset( $args['header'] ) ? '<h2>' . esc_html( $args['header'] ) . '</h2>' : '';
         $this->items_per_page   = $args['items_per_page'] ?? 10;
         
         // Ensure items are always an array
@@ -229,6 +229,7 @@ class AdminTable {
     private function build_pagination_html( $total_pages ) {
         $output = '<div class="tablenav">';
         $output .= '<div class="tablenav-pages">';
+        /* translators: %d: the number of items being displayed */
         $output .= '<span class="displaying-num">' . sprintf( esc_html__( '%d items', 'buddyclients' ), count( $this->filtered_items ) ) . '</span>';
         $output .= '<span class="pagination-links">';
         
@@ -245,7 +246,12 @@ class AdminTable {
         // Current page number of total
         $output .= '<span class="tablenav-pages-navspan screen-reader-text">' . esc_html__( 'Current Page', 'buddyclients' ) . '</span>';
         $output .= '<span id="table-paging" class="paging-input">';
-        $output .= '<span class="tablenav-paging-text">' . sprintf( esc_html__( '%d of %d', 'buddyclients' ), $this->current_page, $total_pages ) . '</span>';
+        $output .= '<span class="tablenav-paging-text">' . sprintf(
+            /* translators: %1$d: the number of the current page being displayed; %2$d: the total number of pages */
+            esc_html__( '%1$d of %2$d', 'buddyclients' ),
+            $this->current_page,
+            $total_pages )
+            . '</span>';
         
         // Next page link
         $output .= $this->current_page == $total_pages ? '<span class="tablenav-pages-navspan button disabled margin-3" aria-hidden="true">' : '';
@@ -551,8 +557,8 @@ class AdminTable {
     public function add_submenu() {
         add_submenu_page(
             $this->data['parent_slug'] ?? null,
-            __($this->data['title'] ?? '', 'buddyclients'),
-            __($this->data['title'] ?? '', 'buddyclients'),
+            $this->data['title'] ?? '',
+            $this->data['title'] ?? '',
             $this->data['cap'] ?? 'manage_options',
             $this->build_slug(),
             $this->callback,
