@@ -4,6 +4,7 @@ namespace BuddyClients\Components\Checkout;
 use BuddyEvents\Includes\Registration\RegistrationIntent;
 use BuddyEvents\Includes\Sponsor\SponsorIntent;
 
+use BuddyClients\Components\Checkout\IntentHandler;
 use BuddyClients\Components\Booking\BookingIntent;
 use BuddyClients\Components\Stripe\StripeForm;
 use BuddyClients\Components\Stripe\StripeKeys;
