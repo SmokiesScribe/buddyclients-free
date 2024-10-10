@@ -1,5 +1,5 @@
 <?php
-use BuddyClients\Includes\PostQuery as PostQuery;
+use BuddyClients\Includes\PostQuery;
 /**
  * Performs a post query.
  * 

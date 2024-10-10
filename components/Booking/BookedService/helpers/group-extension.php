@@ -28,11 +28,13 @@ function bc_services_add_group_extension() {
 				$group_id = bp_get_group_id();
 
 				$group_extension_status = groups_get_groupmeta( $group_id, 'group_extension_setting' );
-				echo '<h3 class="project-brief-title">' . __( 'Project Services', 'buddyclients' ) . '</h3>' . esc_attr( $group_extension_status );
+				$brief_title = '<h3 class="project-brief-title">' . __( 'Project Services', 'buddyclients' ) . '</h3>' . esc_attr( $group_extension_status );
+				echo wp_kses_post( $brief_title );
 				
 				// List project briefs
 			    $list = new BookedServiceList;
-                echo $list->build( $group_id );
+				$service_list = $list->build( $group_id );
+                echo wp_kses_post( $service_list );
 			}
     }
     

@@ -9,15 +9,22 @@ use BuddyEvents\Includes\Registration\RegistrationIntent;
  */
 function bc_update_booking_intent_email() {
     
-    $nonce = isset( $_POST['nonce'] ) ? sanitize_text_field( wp_unslash( $_POST['nonce'] ) ) : null;
-    if ( ! wp_verify_nonce( $nonce, 'bc_new_email' ) ) {
+    // Log the nonce being sent in the AJAX request
+    $nonce = isset( $_POST['nonce'] ) ? trim( sanitize_text_field( wp_unslash( $_POST['nonce'] ) ) ) : null;
+    $nonce_action = isset( $_POST['nonceAction'] ) ? trim( sanitize_text_field( wp_unslash( $_POST['nonceAction'] ) ) ) : null;
+
+    // Verify nonce
+    if ( ! wp_verify_nonce( $nonce, $nonce_action ) ) {
         return;
     }
 
+    // Get email
     $email = isset( $_POST['email'] ) ? sanitize_email( wp_unslash( $_POST['email'] ) ) : null;
     if ( ! is_email( $email ) ) {
         return;
     }
+
+    // Get intent id
     $booking_intent_id = isset( $_POST['booking_intent_id'] ) ? sanitize_text_field( wp_unslash( $_POST['booking_intent_id'] ) ) : null;
     $registration_intent_id = isset( $_POST['registration_intent_id'] ) ? sanitize_text_field( wp_unslash( $_POST['registration_intent_id'] ) ) : null;
 

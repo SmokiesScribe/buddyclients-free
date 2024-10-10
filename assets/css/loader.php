@@ -16,7 +16,7 @@
     margin-bottom: 10px; /* Space between spinner and message */
     border: 16px solid #f3f3f3; /* Light grey border */
     border-radius: 50%; /* Circular shape */
-    border-top: 16px solid <?php echo bc_color( 'accent' ) ?>; /* Blue border on top */
+    border-top: 16px solid <?php echo esc_attr( bc_color( 'accent' ) ) ?>; /* Blue border on top */
     width: 60px; /* Adjust size if needed */
     height: 60px; /* Adjust size if needed */
     animation: spin 2s linear infinite; /* Spinning animation */

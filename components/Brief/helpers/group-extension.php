@@ -28,7 +28,8 @@ function brief_add_group_extension() {
 				$group_id = bp_get_group_id();
 
 				$group_extension_status = groups_get_groupmeta( $group_id, 'group_extension_setting' );
-				echo '<h3 class="project-brief-title">' . __( 'Project Briefs', 'buddyclients' ) . '</h3>' . esc_attr( $group_extension_status );
+				$title = '<h3 class="project-brief-title">' . __( 'Project Briefs', 'buddyclients' ) . '</h3>' . esc_attr( $group_extension_status );
+                echo wp_kses_post( $title );
 				
 				// List project briefs
 				( new GroupBriefs( $group_id ) )->build();
@@ -45,12 +46,11 @@ add_action('bp_init', 'brief_add_group_extension');
  * 
  * @since 0.1.0
  */
-function bc_project_briefs($group_id) {
+function bc_project_briefs( $group_id ) {
+    // Initialize
+    $content = '';
     
-    // Styles
-    bc_briefs_styles();
-    
-    echo '<div class="brief-type-terms-container">';
+    $content .= '<div class="brief-type-terms-container">';
     
     // Initialize card link
     $card_link = '#';
@@ -86,17 +86,17 @@ function bc_project_briefs($group_id) {
             $click_to = $updated_date ? 'view' : 'complete';
             
             // Output the term card
-            echo '<a class="brief-type-term-link" href="' . $card_link . '">';
-            echo '<div class="brief-type-term">';
-            echo '<h3 style="margin-bottom: 10px;">' . sprintf(
+            $content .= '<a class="brief-type-term-link" href="' . esc_url( $card_link ) . '">';
+            $content .= '<div class="brief-type-term">';
+            $content .= '<h3 style="margin-bottom: 10px;">' . sprintf(
                 /* translators: %s: the brief type (e.g. Editing) */
                 __('%s Brief', 'buddyclients'),
-                $brief_type)
+                $brief_type )
                 . '</h3>';
-            echo '<icon class="' . $icon_class . '" style="font-size: 24px; color: ' . bc_color('accent') . ';"></icon>';
-            echo '<p>Click to ' . $click_to . '.</p>';
-            echo '</div>';
-            echo '</a>';
+                $content .= '<icon class="' . esc_attr( $icon_class ) . '" style="font-size: 24px; color: ' . bc_color('accent') . ';"></icon>';
+                $content .= '<p>Click to ' . esc_html( $click_to ) . '.</p>';
+                $content .= '</div>';
+                $content .= '</a>';
         }
     
         // Reset post data after the loop
@@ -106,7 +106,9 @@ function bc_project_briefs($group_id) {
         __e( 'No briefs available.', 'buddyclients' );
     }
     
-    echo '</div>'; // Close terms container
+    $content .= '</div>'; // Close terms container
+
+    echo wp_kses_post( $content );
 }
 
 /**

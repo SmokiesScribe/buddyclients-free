@@ -1,5 +1,5 @@
 <?php
-use BuddyClients\Includes\FileHandler as FileHandler;
+use BuddyClients\Includes\FileHandler;
 /**
  * Sets featured image for a post.
  * 

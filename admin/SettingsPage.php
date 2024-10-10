@@ -154,11 +154,12 @@ class SettingsPage {
             // Loop through settings data
             foreach ($this->data as $section_key => $section_data) {
                 // Output section header
-                echo $this->section_group($section_key, $section_data);
+                $section_header = $this->section_group( $section_key, $section_data ) ?? '';
+                echo wp_kses_post( $section_header );
             }
         // No settings data available
         } else {
-            echo __('Not available.', 'buddyclients');
+            echo wp_kses_post( __('Not available.', 'buddyclients') );
         }
     }
     
@@ -172,7 +173,7 @@ class SettingsPage {
         <div class="buddyclients-settings-section">
             <div class="buddyclients-settings-section-title-wrap">
                 <h2 class="buddyclients-settings-section-title"><?php echo esc_html($section_data['title'] ?? ''); ?></h2>
-                <p class="description"><?php echo $section_data['description']; ?></p>
+                <p class="description"><?php echo wp_kses_post( $section_data['description'] ); ?></p>
                 <hr class="buddyclients-settings-section-title-divider">
             </div>
             
@@ -188,59 +189,67 @@ class SettingsPage {
      * @since 0.1.0
      */
     public function section_group_field($section_key, $section_data) {
-        
-        foreach ($section_data['fields'] as $field_id => $field_data) {
-            // Output individual fields
+        // Initialize output
+        $output = '';
+
+        // Loop thorugh section fields
+        foreach ( $section_data['fields'] as $field_id => $field_data ) {
+            
+            // Define field info
             $type = $field_data['type'];
             $settings_key = $this->key;
             
+            // Get current field value
             $value = bc_get_setting( $settings_key, $field_id );
             
-            switch ($type) {
+            // Define output by field type
+            switch ( $type ) {
                 case 'display':
-                    echo $this->display($type, $field_id, $field_data, $value);
+                    $output .= $this->display($type, $field_id, $field_data, $value);
                     break;
                 case 'checkboxes':
-                    echo $this->checkbox_field($type, $field_id, $field_data, $value);
+                    $output .= $this->checkbox_field($type, $field_id, $field_data, $value);
                     break;
                 case 'checkbox_table':
-                    echo $this->checkbox_table($type, $field_id, $field_data, $value);
+                    $output .= $this->checkbox_table($type, $field_id, $field_data, $value);
                     break;
                 case 'dropdown':
-                    echo $this->select_field($type, $field_id, $field_data, $value);
+                    $output .= $this->select_field($type, $field_id, $field_data, $value);
                     break;
                 case 'text':
                 case 'number':
                 case 'date':
                 case 'email':
-                    echo $this->input_field($type, $field_id, $field_data, $value);
+                    $output .= $this->input_field($type, $field_id, $field_data, $value);
                     break;
                 case 'stripe_input':
-                    echo $this->stripe_input_field($type, $field_id, $field_data, $value);
+                    $output .= $this->stripe_input_field($type, $field_id, $field_data, $value);
                     break;
                 case 'stripe_dropdown':
-                    echo $this->stripe_select_field($type, $field_id, $field_data, $value);
+                    $output .= $this->stripe_select_field($type, $field_id, $field_data, $value);
                     break;
                 case 'hidden':
-                    echo $this->hidden_field($type, $field_id, $field_data, $value);
+                    $output .= $this->hidden_field($type, $field_id, $field_data, $value);
                     break;
                 case 'color':
-                    echo $this->color_field($field_id, $field_data, $value);
+                    $output .= $this->color_field($field_id, $field_data, $value);
                     break;
                 case 'page':
-                    echo $this->select_field($type, $field_id, $field_data, $value);
+                    $output .= $this->select_field($type, $field_id, $field_data, $value);
                     break;
                 case 'legal':
-                    echo $this->legal_field($type, $field_id, $field_data, $value);
+                    $output .= $this->legal_field($type, $field_id, $field_data, $value);
                     break;
                 case 'copy':
-                    echo $this->copy_field($type, $field_id, $field_data);
+                    $output .= $this->copy_field($type, $field_id, $field_data);
                     break;
                 default:
-                    echo $this->input_field('text', $field_id, $field_data, $value);
+                    $output .= $this->input_field('text', $field_id, $field_data, $value);
                     break;
             }
-        }        
+        }
+        // Echo output
+        echo wp_kses_post( $output );
     }
     
     /**
@@ -269,12 +278,12 @@ class SettingsPage {
     public function display($type, $field_id, $field_data, $value) {
         ?>
         <div class="buddyclients-admin-field">
-            <label for="<?php echo esc_attr($this->name . '[' . $field_id . ']'); ?>">
-                <?php echo esc_html($field_data['label']); ?>
+            <label for="<?php echo esc_attr( $this->name . '[' . $field_id . ']' ); ?>">
+                <?php echo esc_html( $field_data['label'] ); ?>
             </label>
             <div class="buddyclients-admin-field-input-wrap">
                 <?php echo wp_kses_post($field_data['content']); ?>
-                <p class="description"><?php echo $field_data['description']; ?></p>
+                <p class="description"><?php echo wp_kses_post( $field_data['description'] ); ?></p>
             </div>
         </div>
         <?php
@@ -296,11 +305,11 @@ class SettingsPage {
                     $checked = is_array($value) && in_array($option_key, $value) ? 'checked' : ''; ?>
                     <label>
                         <input type="checkbox" name="<?php echo esc_attr($this->name . '[' . $field_id . '][]'); ?>" 
-                               value="<?php echo esc_attr($option_key); ?>" <?php echo $checked; ?>>
-                        <?php echo $option_label; ?>
+                               value="<?php echo esc_attr($option_key); ?>" <?php echo esc_attr( $checked ); ?>>
+                        <?php echo wp_kses_post( $option_label ); ?>
                     </label><br>
                 <?php endforeach; ?>
-                <p class="description"><?php echo $field_data['description']; ?></p>
+                <p class="description"><?php echo wp_kses_post( $field_data['description'] ); ?></p>
             </div>
         </div>
         <?php
@@ -323,7 +332,7 @@ class SettingsPage {
                             <td>
                                 <label>
                                     <input type="checkbox" name="<?php echo esc_attr($this->name . '[' . $field_id . '][]'); ?>" 
-                                           value="<?php echo esc_attr($option_key); ?>" <?php echo $checked; ?>>
+                                           value="<?php echo esc_attr($option_key); ?>" <?php echo esc_attr($checked); ?>>
                                     <?php echo esc_html($option_label); ?>
                                 </label>
                             </td>
@@ -356,7 +365,7 @@ class SettingsPage {
                 <select name="<?php echo esc_attr($this->name . '[' . $field_id . ']'); ?>">
                     <?php foreach ($field_data['options'] as $option_key => $option_label) : 
                         $selected = ($value == $option_key) ? ' selected' : ''; ?>
-                        <option value="<?php echo esc_attr($option_key); ?>" <?php echo $selected; ?>>
+                        <option value="<?php echo esc_attr($option_key); ?>" <?php echo esc_attr($selected); ?>>
                             <?php echo esc_html($option_label); ?>
                         </option>
                     <?php endforeach; ?>
@@ -364,7 +373,7 @@ class SettingsPage {
                 <?php if ($type === 'page') {
                     self::page_button($field_id, $field_data, $value);
                 } ?>
-                <p class="description"><?php echo $field_data['description']; ?></p>
+                <p class="description"><?php echo wp_kses_post( $field_data['description'] ); ?></p>
             </div>
         </div>
         <?php
@@ -387,7 +396,7 @@ class SettingsPage {
                 <input type="<?php echo esc_attr($type); ?>" 
                        name="<?php echo esc_attr($this->name . '[' . $field_id . ']'); ?>" 
                        value="<?php echo esc_attr($value); ?>" />
-                <p class="description"><?php echo $field_data['description']; ?></p>
+                <p class="description"><?php echo wp_kses_post( $field_data['description'] ); ?></p>
             </div>
         </div>
         <?php
@@ -410,8 +419,8 @@ class SettingsPage {
                 <input type="<?php echo esc_attr($type); ?>" 
                        name="<?php echo esc_attr($this->name . '[' . $field_id . ']'); ?>" 
                        value="<?php echo esc_attr($value); ?>" />
-                <?php echo $icon; ?>
-                <p class="description"><?php echo $field_data['description']; ?></p>
+                <?php echo wp_kses_post( $icon ); ?>
+                <p class="description"><?php echo wp_kses_post( $field_data['description'] ); ?></p>
             </div>
         </div>
         <?php
@@ -434,16 +443,16 @@ class SettingsPage {
                 <select name="<?php echo esc_attr($this->name . '[' . $field_id . ']'); ?>">
                     <?php foreach ($field_data['options'] as $option_key => $option_label) : 
                         $selected = ($value == $option_key) ? ' selected' : ''; ?>
-                        <option value="<?php echo esc_attr($option_key); ?>" <?php echo $selected; ?>>
+                        <option value="<?php echo esc_attr($option_key); ?>" <?php echo esc_attr( $selected ); ?>>
                             <?php echo esc_html($option_label); ?>
                         </option>
                     <?php endforeach; ?>
                 </select>
-                <?php echo $icon; ?>
+                <?php echo wp_kses_post( $icon ); ?>
                 <?php if ($type === 'page') {
                     self::page_button($field_id, $field_data, $value);
                 } ?>
-                <p class="description"><?php echo $field_data['description']; ?></p>
+                <p class="description"><?php echo wp_kses_post( $field_data['description'] ); ?></p>
             </div>
         </div>
         <?php
@@ -510,7 +519,7 @@ class SettingsPage {
             <div class="buddyclients-admin-field-input-wrap">
                 <input type="color" name="<?php echo esc_attr($this->name . '[' . $field_id . ']'); ?>" 
                        value="<?php echo esc_attr($value); ?>" class="color-field" />
-                <p class="description"><?php echo $field_data['description']; ?></p>
+                <p class="description"><?php echo wp_kses_post( $field_data['description'] ); ?></p>
             </div>
         </div>
         <?php
@@ -544,8 +553,20 @@ class SettingsPage {
             });" type="button" class="button button-secondary">' . __('Create Page', 'buddyclients') . '</button>';
         }
 
-        // Create Page button...
-        echo $button;
+        // Escape the entire button HTML
+        echo wp_kses( $button, [
+            'button' => [
+                'onclick' => [],
+                'type'    => [],
+                'class'   => []
+            ],
+            'a' => [
+                'href' => [],
+                'target' => [],
+                'class' => [],
+                'rel' => []
+            ],
+        ]);
     }
     
     /**
@@ -649,8 +670,37 @@ class SettingsPage {
         
         $output .= '</div>';
         $output .= '</div>';
-        
-        echo $output;
+            
+        // Escape the entire output with allowed tags
+        $allowed_html = [
+            'div' => [
+                'class' => [],
+                'style' => []
+            ],
+            'label' => [
+                'for' => []
+            ],
+            'input' => [
+                'type' => [],
+                'name' => [],
+                'value' => [],
+                'class' => []
+            ],
+            'a' => [
+                'href' => [],
+                'target' => []
+            ],
+            'button' => [
+                'type' => [],
+                'class' => [],
+                'style' => [],
+                'onclick' => []
+            ],
+            'br' => []
+        ];
+
+        // Output escaped HTML
+        echo wp_kses( $output, $allowed_html );
     }
     
     /**
@@ -663,8 +713,8 @@ class SettingsPage {
         <div class="buddyclients-admin-field">
             <label for="<?php echo esc_attr($this->name . '[' . $field_id . ']'); ?>"><?php echo esc_html($field_data['label']); ?></label>
             <div class="buddyclients-admin-field-input-wrap">
-                <?php echo bc_copy_to_clipboard($field_data['content'], $field_id); ?>
-                <p class="description"><?php echo $field_data['description']; ?></p>
+                <?php echo wp_kses_post( bc_copy_to_clipboard($field_data['content'], $field_id) ); ?>
+                <p class="description"><?php echo wp_kses_post( $field_data['description'] ); ?></p>
             </div>
         </div>
         <?php

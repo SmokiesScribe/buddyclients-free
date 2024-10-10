@@ -10,22 +10,54 @@ use BuddyClients\Components\Booking\BookingIntent;
  */
 class AdminChart {
     
+    /** 
+     * The chart type (e.g. line, bar)
+     * 
+     * @var string
+     */
     private $chart_type;
+
+    /**
+     * The data to be displayed on the chart.
+     * 
+     * @var array
+     */
     private $data;
+
+    /**
+     * Additional labels for the chart.
+     * 
+     * @var array
+     */
     private $labels;
+
+    /**
+     * The ID of the canvas element.
+     * 
+     * @var string
+     */
     private $canvas_id;
+
+    /**
+     * The title of the chart.
+     * 
+     * @var string
+     */
     private $title;
 
     /**
      * Constructor to initialize chart settings.
      *
-     * @param array $args Associative array containing chart settings.
-     *                    - 'chart_type': The type of chart (e.g., 'line', 'bar').
-     *                    - 'data': The data to be displayed on the chart.
-     *                    - 'labels': Additional labels for the chart.
-     *                    - 'tooltip_format': Format for tooltip ('currency' or 'number').
-     *                    - 'canvas_id': The ID of the canvas element.
-     *                    - 'title': The title of the chart.
+     * @param array $args {
+     *     An associative array of chart settings.
+     * 
+     *     @type    string  $chart_type     The type of chart (e.g., 'line', 'bar').
+     *     @type    array   $data           The data to be displayed on the chart.
+     *     @type    array   $labels         Additional labels for the chart.
+     *     @type    string  $tooltip_format The format for tooltip ('currency' or 'number').
+     *     @type    string  $canvas_id      The ID of the canvas element.
+     *     @type    string  $title          The title fo the chart.
+     * }
      */
     public function __construct( $args = [] ) {
         $this->chart_type = $args['type'] ?? 'line';
@@ -40,8 +72,9 @@ class AdminChart {
      * Renders the chart HTML and JavaScript.
      */
     public function render_chart() {
+        ob_start();
         ?>
-        <div class="bc-chart <?php echo esc_html( $this->type ); ?>">
+        <div class="bc-chart <?php echo esc_html( $this->chart_type ); ?>">
         <h3><?php echo esc_html( $this->title ); ?></h3>
         <canvas id="<?php echo esc_attr( $this->canvas_id ); ?>" class="bc-canvas"></canvas>
         </div>
@@ -111,12 +144,6 @@ class AdminChart {
             });
         </script>
         <?php
-    }
-
-    /**
-     * Displays the chart by rendering it.
-     */
-    public function display_chart() {
-        $this->render_chart();
+        return ob_get_clean();
     }
 }

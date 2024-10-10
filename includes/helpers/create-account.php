@@ -24,9 +24,12 @@ use BuddyEvents\Includes\Registration\SponsorIntent;
             wp_die();
         }
 
+        // Log the nonce being sent in the AJAX request
+        $nonce = isset( $_POST['nonce'] ) ? trim( sanitize_text_field( wp_unslash( $_POST['nonce'] ) ) ) : null;
+        $nonce_action = isset( $_POST['nonceAction'] ) ? trim( sanitize_text_field( wp_unslash( $_POST['nonceAction'] ) ) ) : null;
+
         // Verify nonce
-        $nonce = isset( $_POST['nonce'] ) ? sanitize_text_field( wp_unslash( $_POST['nonce'] ) ) : null;
-        if ( ! wp_verify_nonce( $nonce, 'bc_create_account' ) ) {
+        if ( ! wp_verify_nonce( $nonce, $nonce_action ) ) {
             return;
         }
         

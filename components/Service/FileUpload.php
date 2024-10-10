@@ -130,6 +130,7 @@ class FileUpload extends ServiceComponent {
         
         // Build label
         $this->field_label = sprintf(
+            /* translators: %s: the plural or singular file type name (e.g. File or Files) */
             __( 'Upload Your %s', 'buddyclients' ),
             esc_html( $item )
         );

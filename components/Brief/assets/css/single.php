@@ -41,18 +41,18 @@
         margin: 30px auto;
     }
     .bc-back-to-briefs-link:hover {
-        color: <?php echo bc_color('tertiary') ?>;
+        color: <?php echo esc_attr( bc_color('tertiary') ) ?>;
     }
     .show-hide-brief-btn {
-        color: <?php echo bc_color('primary') ?>;
-        border: solid 1.5px <?php echo bc_color('primary') ?>;
+        color: <?php echo esc_attr( bc_color('primary') ) ?>;
+        border: solid 1.5px <?php echo esc_attr( bc_color('primary') ) ?>;
         padding: 10px;
         border-radius: 5px;
         display: inline-block;
         text-decoration: none;
     }
     .show-hide-brief-btn:hover {
-        color: <?php echo bc_color('tertiary') ?>;
-        border-color: <?php echo bc_color('tertiary') ?>;
+        color: <?php echo esc_attr( bc_color('tertiary') ) ?>;
+        border-color: <?php echo esc_attr( bc_color('tertiary') ) ?>;
     }
 </style>

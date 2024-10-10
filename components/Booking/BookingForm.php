@@ -376,7 +376,7 @@ class BookingForm {
 
          // Define values
          $sales_id = bc_get_param( 'sales_id' );
-         $sales_id = bc_get_param( 'prev_paid' );
+         $prev_paid = bc_get_param( 'prev_paid' );
 
          $sales_client_email = bc_get_param( 'sales_client_email' );         
          $user_email = ! empty( $sales_client_email ) ? sanitize_email( $sales_client_email ) : bp_core_get_user_email( $this->client_id );

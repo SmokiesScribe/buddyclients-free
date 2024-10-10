@@ -14,7 +14,6 @@ class Nav {
      * Defines the array of tab groups and links.
      * 
      * @since 0.1.0
-     * @updated 0.3.4
      *
      * @var array
      * 
@@ -177,7 +176,19 @@ class Nav {
             $tabs .= '</h2>';
         }
         
-        echo $tabs;
+        // Escape the entire output with allowed HTML tags and attributes
+        $allowed_tags = [
+            'h1' => ['class' => []],
+            'span' => ['class' => []],
+            'h2' => ['class' => []],
+            'a' => [
+                'href' => [],
+                'class' => [],
+                'target' => [],
+            ],
+        ];
+
+        echo wp_kses( $tabs, $allowed_tags );
     }
 
     

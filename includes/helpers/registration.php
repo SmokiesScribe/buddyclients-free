@@ -35,7 +35,7 @@ function bc_registration_button_text() {
         echo '<script>
             var signUpButton = document.querySelector("a.button.small.signup");
             if (signUpButton) {
-                signUpButton.textContent = "' . $register_button_text . '";
+                signUpButton.textContent = "' . esc_html( $register_button_text ) . '";
             }
         </script>';
     }

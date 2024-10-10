@@ -77,7 +77,7 @@ class Alert {
      */
     public function build() {
         if ( $this->content && ! self::at_link( $this->content ) ) {
-            echo '<div class="alert-container"><div class="custom-alert-bar">' . $this->content . '</div></div>';
+            echo '<div class="alert-container"><div class="custom-alert-bar">' . esc_html( $this->content ) . '</div></div>';
         }
     }
     

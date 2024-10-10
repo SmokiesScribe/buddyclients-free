@@ -354,6 +354,9 @@ class FormField {
             case 'display':
                 $field = $this->display_field();
                 break;
+            case 'nonce':
+                $field = $this->nonce_field();
+                break;
             case 'submit':
                 $field = $this->submit_field();
                 break;

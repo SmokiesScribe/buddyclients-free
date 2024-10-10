@@ -106,7 +106,7 @@ function bc_redirect_to_preview( $taxonomy_term_id ) {
         wp_redirect( get_permalink( $post_id ) );
         exit;
     } else {
-        wp_die( __( 'Unable to create preview. Please try again.', 'buddyclients' ) );
+        wp_die( esc_html( __( 'Unable to create preview. Please try again.', 'buddyclients' ) ) );
     }
 }
 

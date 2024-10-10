@@ -80,7 +80,13 @@ class CancelRequestForm {
         $cancellation_window = bc_get_setting( 'booking', 'cancellation_window' );
         
         // Get booked time
-        $booked_time = strtotime( BookedService::get_created_at( $this->booked_service_id ) );
+        $created_at = BookedService::get_created_at( $this->booked_service_id );
+        
+        if ( ! $created_at ) {
+            return '';
+        }
+        
+        $booked_time = strtotime( $created_at );
         
         // Get current timestamp
         $current_timestamp = time();

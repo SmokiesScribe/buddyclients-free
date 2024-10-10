@@ -118,7 +118,10 @@ class AdminTable {
         $paged = bc_get_param( 'paged' );
         $this->current_page = $paged ? absint( $paged ) : 1;
         
-        echo $this->build_table();
+        // Build and output table
+        $table = $this->build_table();
+        $allowed_html = $this->allowed_html();
+        echo wp_kses( $table, $allowed_html );
     }
     
     /**
@@ -133,10 +136,10 @@ class AdminTable {
         $this->headings         = $args['headings'];
         $this->column_data      = $args['columns'];
         $this->items            = $args['items'];
-        $this->title            = isset( $args['title'] ) ? '<h1>' . esc_html( $args['title'] ) . '</h1>' : '';
-        $this->description      = isset( $args['description'] ) ? '<p>' . $args['description'] . '</p>' : '';
+        $this->title            = $args['title'] ?? '';
+        $this->description      = $args['description'] ?? '';
         $this->filters          = $args['filters'] ?? null;
-        $this->table_header     = isset( $args['header'] ) ? '<h2>' . esc_html( $args['header'] ) . '</h2>' : '';
+        $this->table_header     = $args['header'] ?? '';
         $this->items_per_page   = $args['items_per_page'] ?? 10;
         
         // Ensure items are always an array
@@ -146,6 +149,23 @@ class AdminTable {
         
         // Ensure items are objects
         $this->items_are_objects();
+    }
+
+    /**
+     * Defines the allowed html for tables.
+     * 
+     * @since 1.0.16
+     */
+    private function allowed_html() {        
+        $form_tags = bc_allowed_html_form();
+        $additional_tags = [
+            'a' => [ 'href' => [], 'onclick' => [], 'class' => [] ],
+            'script' => [],
+            'i' => [ 'class' => [], 'style' => [] ],
+            'span' => [ 'id' => [], 'class' => [] ],
+            'button'   => ['onclick' => [], 'type' => [], 'class' => [], 'style' => []],
+        ];        
+        return array_merge( $form_tags, $additional_tags );
     }
     
     /**
@@ -267,8 +287,6 @@ class AdminTable {
         $output .= '</div>';
         $output .= '</div>';
         
-        $output .= '<style>.margin-3 {margin: 0 3px !important}</style>';
-        
         return $output;
     }
 
@@ -278,64 +296,68 @@ class AdminTable {
      * @since 0.1.0
      */
     private function build_table() {
-        // Start output buffering
-        ob_start();
-        ?>
-        <div class="wrap">
-            <!-- Display Title -->
-            <?php echo $this->title; ?>
-            
-            <!-- Display Description -->
-            <?php echo $this->description; ?>
-            
-            <!-- Filters -->
-            <?php echo $this->filter_forms(); ?>
-            
-            <!-- H2 Table Header -->
-            <?php echo $this->table_header; ?>
-            
-            <!-- Table -->
-            <table class="wp-list-table widefat fixed striped">
-                <thead>
-                    <tr>
-                        <?php foreach ( $this->headings as $heading ) : ?>
-                            <th scope="col"><?php echo esc_html( $heading ); ?></th>
-                        <?php endforeach; ?>
-                    </tr>
-                </thead>
-                <tbody id="the-list">
-                    <?php 
-                    // Filter items for current page
-                    $items_for_current_page = $this->filter_items_for_current_page( $this->items );
-                    foreach ( $items_for_current_page as $item ) : ?>
-                        <tr>
-                            <?php foreach ( $this->build_columns( $item ) as $key => $value ) : ?>
-                                <td class="column-<?php echo esc_attr( $key ); ?>"><?php echo $value; ?></td>
-                            <?php endforeach; ?>
-                        </tr>
-                    <?php endforeach; ?>
-                </tbody>
-            </table>
-    
-            <?php
-    
-            // Calculate total number of pages
-            $total_pages = $this->calculate_total_pages( count( $this->filtered_items ) );
-            // Output pagination HTML only if there are more than one page
-            if ( $total_pages > 1 ) {
-                // Pagination HTML
-                $pagination_html = $this->build_pagination_html( $total_pages );
-                // Output pagination HTML
-                echo $pagination_html;
-            }
-            ?>
-    
-        </div>
-        <?php
-        // Get the content from output buffer and return
-        return ob_get_clean();
-    }
+        // Initialize content variable
+        $content = '';
 
+        // Build HTML content
+        $content .= '<div class="wrap">';
+        
+        // Display Title
+        $content .= '<h1>' . esc_html( $this->title ) . '</h1>';
+        
+        // Display Description
+        $content .= '<p>' . esc_html( $this->description ) . '</p>';
+        
+        // Filters
+        $content .= wp_kses( $this->filter_forms(), bc_allowed_html_form() );
+        
+        // H2 Table Header
+        $content .= '<h2>' . esc_html( $this->table_header ) . '</h2>';
+        
+        // Table
+        $content .= '<table class="wp-list-table widefat fixed striped">';
+        $content .= '<thead><tr>';
+        
+        // Table Headings
+        foreach ( $this->headings as $heading ) {
+            $content .= '<th scope="col">' . esc_html( $heading ) . '</th>';
+        }
+        
+        $content .= '</tr></thead>';
+        $content .= '<tbody id="the-list">';
+        
+        // Filter items for the current page
+        $items_for_current_page = $this->filter_items_for_current_page( $this->items );
+        foreach ( $items_for_current_page as $item ) {
+            $content .= '<tr>';
+            
+            foreach ( $this->build_columns( $item ) as $key => $value ) {
+                $content .= '<td class="column-' . esc_attr( $key ) . '">';
+                if ( ! empty( $value ) ) {
+                    $content .= wp_kses( $value, $this->allowed_html() );
+                }
+                $content .= '</td>';
+            }
+            
+            $content .= '</tr>';
+        }
+        
+        $content .= '</tbody></table>';
+        
+        // Calculate total number of pages
+        $total_pages = $this->calculate_total_pages( count( $this->filtered_items ) );
+        
+        // Output pagination HTML only if there is more than one page
+        if ( $total_pages > 1 ) {
+            $content .= $this->build_pagination_html( $total_pages );
+        }
+        
+        // Close wrap div
+        $content .= '</div>';
+        
+        // Return the collected HTML content
+        return $content;
+    }
     
     /**
      * Builds column values.
@@ -409,7 +431,7 @@ class AdminTable {
             $name = $key . '_filter';
             
             // Filter label
-            echo '<label for="' . $name . '">';
+            echo '<label for="' . esc_attr( $name ) . '">';
             echo esc_html__( 'Filter by', 'buddyclients') . ' ' . esc_html( $data['label'] ) . ': ';
             echo '</label>';
             

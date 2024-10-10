@@ -108,7 +108,18 @@ class RepairButton {
             $form .= '</button>';
             $form .= '</form>';
             
-            echo $form;
+            // Define allowed tags for wp_kses
+            $allowed_tags = [
+                'form' => ['method' => [], 'action' => []],
+                'input' => ['type' => [], 'name' => [], 'value' => [], 'id' => []],
+                'button' => ['type' => [], 'name' => [], 'class' => []],
+                'br' => [],
+                'label' => ['for' => []],
+                'nonce' => [],
+            ];
+
+            // Sanitize the form output using wp_kses
+            echo wp_kses( $form, $allowed_tags );
         }
     }
     

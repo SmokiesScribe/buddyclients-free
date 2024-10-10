@@ -67,24 +67,39 @@ class AdminDashboard {
      * @since 1.0.2
      */
     private function build() {
-        ob_start();
+        // Initialize
+        $content = '';
         
         // Open wrap
-        echo '<div class="wrap">';
-        echo '<h1>' . __( 'Dashboard', 'buddyclients' ) . '</h1>';
+        $content .= '<div class="wrap">';
+        $content .= '<h1>' . __( 'Dashboard', 'buddyclients' ) . '</h1>';
         
         // Build items
-        $this->filter_form();
-        $this->overview_table();
-        $this->revenue_chart();
-        echo $this->key_metric( __( 'Average Booking Value', 'buddyclients' ), 'average_value' );
-        $this->charts_row();
+        $content .= $this->filter_form();
+        $content .= $this->overview_table();
+        $content .= $this->revenue_chart();
+        $content .= $this->key_metric( __( 'Average Booking Value', 'buddyclients' ), 'average_value' );
+        $content .= $this->charts_row();
         
         // Close wrap
-        echo '</div>';
+        $content .= '</div>';
+
+        // Defined allowed html tags
+        $allowed_html = bc_allowed_html_form();
+
+        // Define tags for chart html
+        $chart_html = [
+            'div' => ['class' => true],
+            'h3' => [],
+            'canvas' => ['id' => true, 'class' => true],
+            'script' => [],
+        ];
         
-        // Echo content
-        echo ob_get_clean();
+        // Merge allowed html arrays
+        $allowed_html = array_merge( $allowed_html, $chart_html );
+        
+        // Escape and output content
+        echo wp_kses( $content, $allowed_html );
     }
     
     /**
@@ -330,39 +345,44 @@ class AdminDashboard {
      * @since 1.0.2
      */
     private function filter_form() {
+        // Initialize
+        $content = '';
+
         // Start building the filter form
-        echo '<form method="POST" style="margin-bottom: 20px;">';
+        $content .= '<form method="POST" style="margin-bottom: 20px;">';
         
         // Build the filter name
         $name = 'date_range_filter';
         
         // Filter label
-        echo '<label for="' . $name . '">';
-        echo esc_html__( 'Date Range ', 'buddyclients');
-        echo '</label>';
+        $content .= '<label for="' . $name . '">';
+        $content .= esc_html__( 'Date Range ', 'buddyclients');
+        $content .= '</label>';
         
         // Build the dropdown
-        echo '<select name="' .  esc_attr( $name ) . '" id="' . esc_attr( $name ) . '" style="margin-right: 5px;">';
+        $content .= '<select name="' .  esc_attr( $name ) . '" id="' . esc_attr( $name ) . '" style="margin-right: 5px;">';
         
         // Loop through the options
         foreach ( $this->filter_options() as $option_key => $option_label ) {
             $date_range = bc_get_param( $name );
-            echo '<option value="' . esc_attr( $option_key ) . '"' . ( ( $date_range == $option_key ) ? ' selected' : '' ) . '>' . esc_html( $option_label ) . '</option>';
+            $content .= '<option value="' . esc_attr( $option_key ) . '"' . ( ( $date_range == $option_key ) ? ' selected' : '' ) . '>' . esc_html( $option_label ) . '</option>';
         }
     
         // Close the dropdown
-        echo '</select>';
+        $content .= '</select>';
         
         // Submission verification field
-        echo '<input type="hidden" name="bc_admin_filter_key" value="bc_overview">';
+        $content .= '<input type="hidden" name="bc_admin_filter_key" value="bc_overview">';
         
         // Submit button
-        echo '<button type="submit" class="button action" name="bc_overview_filter_submit">';
-        echo esc_html__( 'Filter', 'buddyclients' );
-        echo '</button>';
+        $content .= '<button type="submit" class="button action" name="bc_overview_filter_submit">';
+        $content .= esc_html__( 'Filter', 'buddyclients' );
+        $content .= '</button>';
         
         // Close the form
-        echo '</form>';
+        $content .= '</form>';
+
+        return $content;
     }
 
     /**
@@ -387,6 +407,9 @@ class AdminDashboard {
      * @since 1.0.2
      */
     private function overview_table() {
+        // Initialize
+        $content = '';
+        
         // Define column headers for the overview table
         $headers = [
             __( 'Status', 'buddyclients' ),
@@ -395,32 +418,36 @@ class AdminDashboard {
             __( 'Net', 'buddyclients' )
         ];
         
-        ?>
-        <!-- Overview Table -->
-        <table class="wp-list-table widefat striped booking-dashboard-table">
-            <thead>
-                <tr>
-                    <?php foreach ( $headers as $title ) : ?>
-                        <th scope="col"><?php echo esc_html( $title ); ?></th>
-                    <?php endforeach; ?>
-                </tr>
-            </thead>
-            <tbody>
-                <?php
-                foreach ( $this->booking_data as $data ) {
-                    ?>
-                    <tr>
-                        <td class="booking-dashboard-column-title"><?php echo $data['status'] ?></td>
-                        <td><span class="bc-dashboard-item"><?php echo esc_html( $data['count'] ); ?></span></td>
-                        <td><span class="bc-dashboard-item"><?php echo esc_html( '$' . number_format( $data['total'], 2 ) ); ?></span></td>
-                        <td><span class="bc-dashboard-item"><?php echo esc_html( '$' . number_format( $data['net'], 2 ) ); ?></span></td>
-                    </tr>
-                    <?php
-                }
-                ?>
-            </tbody>
-        </table>
-        <?php
+        // Start building the content
+        $content .= '<!-- Overview Table -->';
+        $content .= '<table class="wp-list-table widefat striped booking-dashboard-table">';
+        $content .= '<thead>';
+        $content .= '<tr>';
+        
+        // Add column headers
+        foreach ( $headers as $title ) {
+            $content .= '<th scope="col">' . esc_html( $title ) . '</th>';
+        }
+        
+        $content .= '</tr>';
+        $content .= '</thead>';
+        $content .= '<tbody>';
+        
+        // Add rows of booking data
+        foreach ( $this->booking_data as $data ) {
+            $content .= '<tr>';
+            $content .= '<td class="booking-dashboard-column-title">' . esc_html( $data['status'] ) . '</td>';
+            $content .= '<td><span class="bc-dashboard-item">' . esc_html( $data['count'] ) . '</span></td>';
+            $content .= '<td><span class="bc-dashboard-item">' . esc_html( '$' . number_format( $data['total'], 2 ) ) . '</span></td>';
+            $content .= '<td><span class="bc-dashboard-item">' . esc_html( '$' . number_format( $data['net'], 2 ) ) . '</span></td>';
+            $content .= '</tr>';
+        }
+        
+        $content .= '</tbody>';
+        $content .= '</table>';
+
+        // Return the collected content
+        return $content;
     }
     
     /**
@@ -484,7 +511,7 @@ class AdminDashboard {
         
         // Create and display the chart
         $chart = new AdminChart( $args );
-        $chart->display_chart();
+        return $chart->render_chart();
     }
     
     /**
@@ -577,7 +604,7 @@ class AdminDashboard {
         
         // Create and display the chart
         $chart = new AdminChart( $args );
-        $chart->display_chart();
+        return $chart->render_chart();
     }
     
     /**
@@ -646,19 +673,30 @@ class AdminDashboard {
      * @since 1.0.2
      */
     private function charts_row() {
-        ob_start();
-        ?>
-        <div class="charts-row">
-            <div class="chart-container pie">
-                <?php $this->booking_success_pie_chart(); ?>
-                <?php echo $this->key_metric( __( 'Conversion Rate', 'buddyclients' ), 'conversion_rate' ); ?>
-            </div>
-            <div class="chart-container">
-                <?php $this->abandonment_chart(); ?>
-            </div>
-        </div>
-        <?php
-        echo ob_get_clean();
+        // Initialize content
+        $content = '';
+
+        // Start building the content
+        $content .= '<div class="charts-row">';
+        $content .= '<div class="chart-container pie">';
+
+        // Add the booking success pie chart and key metric
+        $content .= $this->booking_success_pie_chart();
+        $content .= ob_get_clean(); // Capture and append the pie chart output
+        $content .= $this->key_metric( __( 'Conversion Rate', 'buddyclients' ), 'conversion_rate' );
+        
+        $content .= '</div>'; // Close pie chart container
+
+        // Add the abandonment chart
+        $content .= '<div class="chart-container">';
+        $content .= $this->abandonment_chart();
+        $content .= ob_get_clean(); // Capture and append the abandonment chart output
+        $content .= '</div>'; // Close chart container
+
+        $content .= '</div>'; // Close charts row
+
+        // Return the collected content
+        return $content;
     }
     
     /**
@@ -704,7 +742,7 @@ class AdminDashboard {
         ];
         
         $chart = new AdminChart($args);
-        $chart->display_chart();
+        return $chart->render_chart();
     }
     
     /**

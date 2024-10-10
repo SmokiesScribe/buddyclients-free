@@ -202,7 +202,7 @@ class DatabaseManager {
     private function get_table_structure() {
         global $wpdb;
         $current_structure = [];
-        $columns = $wpdb->get_results( $wpdb->prepare( "DESCRIBE %i", $this->table_name ) );
+        $columns = $wpdb->get_results( "DESCRIBE " . esc_sql( $this->table_name ) );
         foreach ($columns as $column) {
             $current_structure[$column->Field] = $column->Type;
         }
@@ -295,8 +295,12 @@ class DatabaseManager {
     
         // Insert the record with provided data
         $wpdb->insert($this->table_name, $data);
+        
+        // Invalidate cache after insert
+        $this->invalidate_cache();
+        
         return $wpdb->insert_id;
-    }
+    }    
     
     /**
      * Update an existing record.
@@ -307,8 +311,15 @@ class DatabaseManager {
      */
     public function update_record($record_id, $data) {
         global $wpdb;
-        return $wpdb->update($this->table_name, $data, array('ID' => $record_id));
-    }
+        $updated = $wpdb->update($this->table_name, $data, array('ID' => $record_id));
+        
+        // Invalidate cache if update was successful
+        if ($updated !== false) {
+            $this->invalidate_cache();
+        }
+        
+        return $updated;
+    }    
 
     /**
      * Get all records from the custom table.
@@ -317,27 +328,37 @@ class DatabaseManager {
      */
     public function get_all_records($order_key = null, $order = null) {
         global $wpdb;
-
+    
         // Default to newest first
         $order_key = $order_key ?? 'created_at';
         $order = $order ?? 'DESC';
-
+    
         // Define valid order keys and orders
         $valid_order_keys = ['created_at', 'another_column'];
         $valid_orders = ['ASC', 'DESC'];
-
+    
         // Ensure order key is valid
         if (!in_array($order_key, $valid_order_keys)) {
             $order_key = 'created_at'; // default if invalid
         }
-
+    
         // Ensure order direction is valid
         if (!in_array(strtoupper($order), $valid_orders)) {
             $order = 'DESC'; // default if invalid
         }
-
+    
+        // Create a unique cache key based on order key and order
+        $cache_key = 'bc_all_records_' . $this->table_key . '_' . $order_key . '_' . $order;
+    
+        // Try to get data from cache
+        $cached_records = wp_cache_get($cache_key);
+    
+        if ($cached_records !== false) {
+            return $cached_records; // Return cached data if available
+        }
+    
         // Prepare and process the query
-        return $wpdb->get_results(
+        $records = $wpdb->get_results(
             $wpdb->prepare(
                 "SELECT * FROM %i ORDER BY %s %s",
                 $this->table_name,  // table name (identifier)
@@ -345,8 +366,12 @@ class DatabaseManager {
                 $order              // order direction (string)
             )
         );
+    
+        // Set cache for the results
+        wp_cache_set($cache_key, $records);
+    
+        return $records;
     }
-
     
     /**
      * Get a single record from the custom table by its ID.
@@ -501,5 +526,18 @@ class DatabaseManager {
         return $columns;
     }
 
+    /**
+     * Invalidates the cache.
+     * 
+     * @since 1.0.16
+     */
+    private function invalidate_cache() {
+        $cache_keys = [
+            'bc_all_records_' . $this->table_key . '_*', // Using wildcard to delete all related cache keys
+        ];
+        foreach ($cache_keys as $key) {
+            wp_cache_delete($key);
+        }
+    }
 }
 ?>

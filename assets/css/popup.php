@@ -1,10 +1,10 @@
 <style>
 /* Popup link */
 .bc-popup-link {
-    color: <?php echo bc_color('accent') ?>;
+    color: <?php echo esc_attr( bc_color('accent') ) ?>;
 }
 .bc-popup-link:hover {
-    color: <?php echo bc_color('tertiary') ?>;
+    color: <?php echo esc_attr( bc_color('tertiary') ) ?>;
 }
 
 /* Popup visibility */

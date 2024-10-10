@@ -163,55 +163,60 @@ class Metaboxes {
      * }
      */
     public function metabox_callback( $post, $metabox ) {
+        // Initialize
+        $content = '';
+
         // Get data passed to callback
         $data = $metabox['args']['data'];
 
         // Generate a nonce field for this meta box
-        wp_nonce_field( 'save_' . $this->post_type . '_meta', $this->post_type . '_meta_nonce' );
+        $content .= wp_nonce_field( 'save_' . $this->post_type . '_meta', $this->post_type . '_meta_nonce' );
         
         // Echo metabox category description
-        echo isset( $data['description'] ) ? $data['description'] : '';
+        $content .= isset( $data['description'] ) ? wp_kses_post( $data['description'] ) : '';
         
         // Check for Freelancer Mode
         $freelancer_check = self::freelancer_check( $data );
         if ( $freelancer_check ) {
-            echo $freelancer_check;
-            echo '</fieldset>';
-            return;
+            $content .= wp_kses_post( $freelancer_check . '</fieldset>' );
+            return $content;
         }
-        
-        // Add upgrade link if necessary
-        // Check for required components
         
         // Loop through metabox tables
         foreach ( $data['tables'] as $title => $table_data ) {
             
             // Generate table
-            echo '<table class="widefat bp-postbox-table">';
-            echo '<thead>';
-            echo '<tr>';
-            echo '<th colspan="2">';
-            echo $title;
-            echo '</th>';
-            echo '</tr>';
-            echo '</thead>';
-            echo '<tbody>';
+            $content .= '<table class="widefat bp-postbox-table">';
+            $content .= '<thead>';
+            $content .= '<tr>';
+            $content .= '<th colspan="2">';
+            $content .= esc_html( $title );
+            $content .= '</th>';
+            $content .= '</tr>';
+            $content .= '</thead>';
+            $content .= '<tbody>';
             
             // Check for Freelancer Mode
             $freelancer_check = self::freelancer_check( $table_data );
             if ( $freelancer_check ) {
-                echo '<tr><td>';
-                echo $freelancer_check;
-                echo '</td></tr>';
+                $content .= '<tr><td>';
+                $content .= wp_kses_post( $freelancer_check );
+                $content .= '</td></tr>';
             } else {
                 // Generate meta fields
-                echo $this->meta_group( $post, $table_data );
+                $meta_group = $this->meta_group( $post, $table_data ) ?? '';
+                //echo wp_kses_post( $meta_group );
+                $content .= $meta_group;
             }
             
             // Close table
-            echo '</tbody>';
-            echo '</table>';
+            $content .= '</tbody>';
+            $content .= '</table>';
         }
+        
+        // Escape and output content
+        $allowed_html = bc_allowed_html_form();
+        echo wp_kses( $content, $allowed_html );
     }
     
     /**
@@ -241,10 +246,11 @@ class Metaboxes {
      *                     @see metabox_callback()
      */
     public function meta_group($post, $data) {
-        ob_start();
+        // Initialize
+        $content = '';
         
         // Open fieldset
-        echo '<fieldset>';
+        $content .= '<fieldset>';
         
         // Loop through fields
         foreach ( $data['meta'] as $field_id => $field_data ) {
@@ -270,45 +276,48 @@ class Metaboxes {
             ];
             
             // Open row
-            echo '<tr>';
-            echo '<th>';
-            echo esc_html( $field_data['label'] ); // Translate label
-            echo '</th>';
-            echo '<td>';
+            $content .= '<tr>';
+            $content .= '<th>';
+            $content .= esc_html( $field_data['label'] ); // Translate label
+            $content .= '</th>';
+            $content .= '<td>';
             
             // Generate field by type
             switch ( $field_data['type'] ) {
                 case 'text':
                 case 'date':
                 case 'number':
-                    echo $this->input_field( $field_args );
+                    $field = $this->input_field( $field_args );
                     break;
                 case 'dropdown':
-                    echo $this->dropdown_field( $field_args );
+                    $field = $this->dropdown_field( $field_args );
                     break;
                 case 'checkbox':
-                    echo $this->checkbox_field( $field_args );
+                    $field = $this->checkbox_field( $field_args );
                     break;
                 case 'display_date':
-                    echo $this->display_date( $field_args );
+                    $field = $this->display_date( $field_args );
                     break;
                 case 'button':
-                    echo $this->button( $field_id, $field_data );
+                    $field = $this->button( $field_id, $field_data );
                     break;
                 default:
-                    echo $this->input_field( $field_args );
+                $field = $this->input_field( $field_args );
                     break;
             }
+
+            // Output field
+            $content .= $field;
     
             // Close row
-            echo '</td>';
-            echo '</tr>';
+            $content .= '</td>';
+            $content .= '</tr>';
         }
     
         // Close fieldset
-        echo '</fieldset>';
+        $content .= '</fieldset>';
         
-        $content = ob_get_clean();
+        // Return content
         return $content;
     }
 

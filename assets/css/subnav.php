@@ -21,6 +21,6 @@
     .bc_subnav a:hover,
     .bc_subnav a.active {
         background-color: #fff;
-        color: <?php echo bc_color('tertiary') ?>;
+        color: <?php echo esc_attr( bc_color('tertiary') ) ?>;
     }
 </style>

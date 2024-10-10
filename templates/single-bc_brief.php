@@ -22,7 +22,7 @@ if ( ! class_exists( 'BuddyClients\Components\Brief\SingleBrief' ) ) {
 $content .= '</div>';
 
 // Output content
-echo $content;
+echo wp_kses_post( $content );
 
 // Get footer
 get_footer();

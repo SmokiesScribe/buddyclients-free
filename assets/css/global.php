@@ -1,4 +1,8 @@
 <style>
+/* Subnav */
+.bc-subnav {
+    margin-right: 20px;
+}
 /* Copy Paste Field */
 .bb-icon-copy {
     font-size: 22px;
@@ -20,8 +24,8 @@
     max-width: 150px;
     padding: 5px;
     background-color: #fafbfd;
-    color: <?php echo bc_color('tertiary') ?>;
-    border-color: <?php echo bc_color('tertiary') ?>;
+    color: <?php echo esc_attr( bc_color('tertiary') ) ?>;
+    border-color: <?php echo esc_attr( bc_color('tertiary') ) ?>;
     font-size: 12px;
 }
 
@@ -44,7 +48,7 @@
 
 /* On-Screen Notification Edge Color */
 .bb-onscreen-notification-enable .bb-onscreen-notification .notification-list .read-item.recent-item:before {
-    background: <?php echo bc_color('accent') ?>;
+    background: <?php echo esc_attr( bc_color('accent') ) ?>;
 }
 
 /* Forms */
@@ -67,7 +71,7 @@
 }
 
 .bc-form legend {
-    color: <?php echo bc_color('primary') ?>;
+    color: <?php echo esc_attr( bc_color('primary') ) ?>;
     font-size: 18px;
 }
 
@@ -120,7 +124,7 @@
 
 .bc-form-user-name {
     font-weight: bold;
-    color: <?php echo bc_color('primary') ?>;
+    color: <?php echo esc_attr( bc_color('primary') ) ?>;
 }
 
 /* File upload */
@@ -143,12 +147,12 @@
     border: solid 1px #e7e9ec;
 }
 .wp-block-quote:before {
-    background-color: <?php echo bc_color('accent') ?> !important;
+    background-color: <?php echo esc_attr( bc_color('accent') ) ?> !important;
 }
 
 /* ALERT BAR */
 .custom-alert-bar {
-    background-color: <?php echo bc_color('primary') ?>;
+    background-color: <?php echo esc_attr( bc_color('primary') ) ?>;
     color: #ffffff;
     text-align: center;
     padding: 20px;

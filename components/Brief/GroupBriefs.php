@@ -64,7 +64,10 @@ class GroupBriefs {
      * @since 0.1.0
      */
     public function build() {
-        echo '<div class="brief-type-terms-container">';
+        // Initialize
+        $content = '';
+
+        $content .= '<div class="brief-type-terms-container">';
         
         // Check if posts were found
         if ( $this->briefs && ! empty ( $this->briefs ) ) {
@@ -82,20 +85,22 @@ class GroupBriefs {
                 );
                 
                 // Output the term card
-                echo '<a class="brief-type-term-link" href="' . get_permalink( $brief->ID ) . '">';
-                echo '<div class="brief-type-term">';
-                echo '<h3 style="margin-bottom: 10px;">' . $brief->brief_type_names . __( ' Brief', 'buddyclients' ) . '</h3>';
-                echo '<icon class="' . $icon_class . '" style="font-size: 24px; color: ' . bc_color('accent') . ';"></icon>';
-                echo '<p>' . $click_to_message . '.</p>';
-                echo '</div>';
-                echo '</a>';
+                $content .= '<a class="brief-type-term-link" href="' . get_permalink( $brief->ID ) . '">';
+                $content .= '<div class="brief-type-term">';
+                $content .= '<h3 style="margin-bottom: 10px;">' . $brief->brief_type_names . __( ' Brief', 'buddyclients' ) . '</h3>';
+                $content .= '<icon class="' . $icon_class . '" style="font-size: 24px; color: ' . bc_color('accent') . ';"></icon>';
+                $content .= '<p>' . $click_to_message . '.</p>';
+                $content .= '</div>';
+                $content .= '</a>';
             }
         
         } else {
-            echo __( 'No briefs available.', 'buddyclients' );
+            $content .= __( 'No briefs available.', 'buddyclients' );
         }
         
-        echo '</div>'; // Close terms container
+        $content .= '</div>'; // Close terms container
+
+        echo wp_kses_post( $content );
     }
     
     /**

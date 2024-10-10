@@ -97,12 +97,14 @@ function bc_show_role_xprofile() {
     $field_id = bc_roles_field_id();
     
     // Check user settings
-    if ($self_select_role === 'yes') {
+    if ( $self_select_role === 'yes' ) {
         // Show edit role
-        echo '<style>.editfield.field_' . $field_id . ' { display: block; } </style>';
+        $output = '<style>.editfield.field_' . $field_id . ' { display: block; } </style>';
+        echo wp_kses( $output, ['style' => []] );
     } else {
         // Hide edit role
-        echo '<style>.editfield.field_' . $field_id . ' { display: none !important; } </style>';
+        $output = '<style>.editfield.field_' . $field_id . ' { display: none !important; } </style>';
+        echo wp_kses( $output, ['style' => []] );
     }
 }
 add_action('bp_before_profile_edit_content', 'bc_show_role_xprofile');

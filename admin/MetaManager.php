@@ -500,7 +500,7 @@ class MetaManager {
                 'tables' => self::adjustment_options(),
             ],
             'New Option' => [
-                'description' => __( '<a id="bc_adjustment_create_option" class="button-secondary">Add Option</a>', 'buddyclients' ),
+                'description' => '<a id="bc_adjustment_create_option" class="button-secondary">' . __( 'Add Option', 'buddyclients' ) . '</a>',
                 'tables' => [],
             ],
         ];

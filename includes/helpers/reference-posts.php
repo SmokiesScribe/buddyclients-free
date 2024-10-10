@@ -1,5 +1,5 @@
 <?php
-use BuddyClients\Config\ReferencePosts as ReferencePosts;
+use BuddyClients\Config\ReferencePosts;
 /**
  * Retrieves the ID of a reference post by key.
  * 

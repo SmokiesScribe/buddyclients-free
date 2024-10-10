@@ -104,7 +104,7 @@ wp_reset_postdata();
 $content .= '</div>';
 
 // Output the content
-echo $content;
+echo wp_kses_post( $content );
 
 // Get footer
 get_footer();

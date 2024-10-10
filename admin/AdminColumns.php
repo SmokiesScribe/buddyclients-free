@@ -333,7 +333,7 @@ class AdminColumns {
                 break;
         }
             
-        echo $output;
+        echo wp_kses_post( $output );
     }
     
     /**

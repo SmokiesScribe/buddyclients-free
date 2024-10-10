@@ -1,5 +1,5 @@
 <?php
-use BuddyClients\Admin\Settings as Settings;
+use BuddyClients\Admin\Settings;
 /**
  * Retrieves the value of plugin settings.
  * 

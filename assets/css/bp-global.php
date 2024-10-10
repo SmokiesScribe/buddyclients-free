@@ -31,7 +31,7 @@ if ( bc_buddyboss_theme() || is_admin() ) {
 
 /* Style checked state of checkboxes */
 .bc-form input[type="checkbox"]:checked {
-    background-color: <?php echo bc_color('accent') ?>; /* Change background color when checked */
+    background-color: <?php echo esc_attr( bc_color('accent') ) ?>; /* Change background color when checked */
 }
 
 /* Style the checkmark inside the checkbox */
@@ -77,7 +77,7 @@ if ( bc_buddyboss_theme() || is_admin() ) {
 }
 
 .bc-form input[type="submit"] {
-    background-color: <?php echo bc_color('primary') ?>;
+    background-color: <?php echo esc_attr( bc_color('primary') ) ?>;
     color: #fff;
     font-size: 16px;
     padding: 12px;
@@ -85,7 +85,7 @@ if ( bc_buddyboss_theme() || is_admin() ) {
 }
 
 .bc-form input[type="submit"]:hover {
-    background-color: <?php echo bc_color('tertiary') ?>;
+    background-color: <?php echo esc_attr( bc_color('tertiary') ) ?>;
     cursor: pointer;
 }
 
@@ -112,14 +112,14 @@ if ( bc_buddyboss_theme() || is_admin() ) {
 /* Upload button */
 .dz-button {
     padding: 10px 20px;
-    background-color: <?php echo bc_color('tertiary') ?>;
+    background-color: <?php echo esc_attr( bc_color('tertiary') ) ?>;
     color: #fff;
     border: none;
     border-radius: 5px;
 }
 
 .dz-button:hover {
-    background-color: <?php echo bc_color('accent') ?>;
+    background-color: <?php echo esc_attr( bc_color('accent') ) ?>;
     cursor: pointer;
 }
 
@@ -130,7 +130,7 @@ if ( bc_buddyboss_theme() || is_admin() ) {
 
 /* Buttons */
 .bc-button {
-    background-color: <?php echo bc_color('primary') ?>;
+    background-color: <?php echo esc_attr( bc_color('primary') ) ?>;
     padding: 15px;
     border-radius: 5px;
     color: #fff;
@@ -140,7 +140,7 @@ if ( bc_buddyboss_theme() || is_admin() ) {
 }
 
 .bc-button:hover {
-    background-color: <?php echo bc_color('tertiary') ?>;
+    background-color: <?php echo esc_attr( bc_color('tertiary') ) ?>;
     cursor: pointer;
 }
 

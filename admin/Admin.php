@@ -96,7 +96,7 @@ class Admin {
      * @since 1.0.2
      */
     public function chart_script() {
-        wp_enqueue_script( 'chart-js', 'https://cdn.jsdelivr.net/npm/chart.js', [], null, true );
+        wp_enqueue_script( 'chart-js', 'https://cdn.jsdelivr.net/npm/chart.js', [], '4.4.4', true );
     }
     
     /**

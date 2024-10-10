@@ -83,11 +83,11 @@ class UserFilesForm {
             $this->file_names = implode( '<br>', $file_names );
             
             // Output file names and final deltion form
-            echo $this->file_names;
-            echo $this->final_deletion_form( $file_ids );
+            echo wp_kses( $this->file_names, array( 'br' => array() ) );
+            $this->final_deletion_form( $file_ids );
         } else {
             // Output initial form
-            echo $this->user_files_form();
+            $this->user_files_form();
         }
     }
     
@@ -111,7 +111,7 @@ class UserFilesForm {
                 'avatar'                => null
             ];
             
-            return ( new Form( $form_args ) )->build();
+            return ( new Form( $form_args ) )->echo();
         }
     }
     
@@ -160,7 +160,7 @@ class UserFilesForm {
             'avatar'                => null
         ];
         
-        return ( new Form( $form_args ) )->build();
+        return ( new Form( $form_args ) )->echo();
     }
     
     /**

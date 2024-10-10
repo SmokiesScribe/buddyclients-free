@@ -159,8 +159,15 @@ class AdminNotice {
         // Define the dismissable class
         $dismissable_class = $this->dismissable ? ' is-dismissible' : '';
 
-        // Echo the notice
-        echo '<div class="notice notice-' . $class . $dismissable_class . '"><p>' . $this->message . ' ' . $repair_link . '</p></div>';
+        // Build the notice
+        $notice = '<div class="notice notice-' . $class . $dismissable_class . '"><p>' . $this->message . ' ' . $repair_link . '</p></div>';
+
+        // Escape and output notice
+        echo wp_kses( $notice, [
+            'div' => ['class' => true],
+            'p' => [],
+            'a' => ['href' => true, 'class' => true],
+        ]);
     }
 
     /**

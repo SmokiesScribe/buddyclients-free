@@ -338,7 +338,7 @@ class Options {
                     
                     $args = array(
                         'post_type' => $post_type,
-                        'posts_per_page' => -1,
+                        'posts_per_page' => 1, // Only check for existence
                         'meta_query' => array(
                             array(
                                 'key' => $meta_key,

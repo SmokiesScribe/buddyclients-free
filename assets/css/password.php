@@ -54,7 +54,7 @@
     font-size: 16px;
 }
 .bc-generate-password-link:hover {
-    color: <?php echo bc_color( 'tertiary' ) ?>;
+    color: <?php echo esc_attr( bc_color( 'tertiary' ) ) ?>;
 }
 
 /* Copied to clipboard */

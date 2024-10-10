@@ -89,7 +89,7 @@ class Popup {
         $popup .= '</div>';
         $popup .= '</div>';
         
-        echo $popup;
+        echo wp_kses_post( $popup );
         
         // Reset visibility
         $this->visible = false;

@@ -1,5 +1,5 @@
 <?php
-use BuddyClients\Components\Email\EmailTriggers as EmailTriggers;
+use BuddyClients\Components\Email\EmailTriggers;
 /**
  * Initializes email triggers.
  * 

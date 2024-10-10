@@ -119,7 +119,14 @@ class FinalDeletionSubmission {
      */
     private function alert( $message ) {
         $esc_message = esc_js( $message );
-        echo "<script>alert( '$esc_message' );</script>";
+        echo wp_kses(
+            "<script type='text/javascript'>alert( '" . $esc_message . "' );</script>",
+            array(
+                'script' => array(
+                    'type' => array()
+                )
+            )
+        );
     }
 }
     

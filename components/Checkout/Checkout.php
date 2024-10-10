@@ -541,7 +541,8 @@ class Checkout {
         if ( class_exists( StripeForm::class ) ) {
             return (new StripeForm)->build();
         } else {
-            echo '<p>' . __( 'Payments are not enabled on this website. ', 'buddyclients' ) . bc_contact_message() . '</p>';
+            $message = '<p>' . __( 'Payments are not enabled on this website. ', 'buddyclients' ) . bc_contact_message() . '</p>';
+            echo wp_kses_post( $message );
         }
     }
 }

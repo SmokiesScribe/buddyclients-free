@@ -26,7 +26,7 @@
 /* Button */
 .bc-confirmation-button {
     color: #fff;
-    background-color: <?php echo bc_color( 'primary' ) ?>;
+    background-color: <?php echo esc_attr( bc_color( 'primary' ) ) ?>;
     padding: 15px 20px;
     border-radius: 5px;
     font-size: 15px;
@@ -38,7 +38,7 @@
 
 .bc-confirmation-button:hover {
     color: #fff;
-    background-color: <?php echo bc_color( 'tertiary' ) ?>;
+    background-color: <?php echo esc_attr( bc_color( 'tertiary' ) ) ?>;
     cursor: pointer;
 }
 

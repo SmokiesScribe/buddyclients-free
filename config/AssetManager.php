@@ -9,13 +9,6 @@ namespace BuddyClients\Config;
  * @since 0.1.0
  */
 class AssetManager {
-
-	/**
-	 * The array of script localization data.
-	 * 
-	 * @var array
-	 */
-	protected $localization_info;
 	
 	/**
 	 * The directory path of scripts or styles.
@@ -63,9 +56,6 @@ class AssetManager {
 		
 		// Get source file name for handle
         $this->source = pathinfo( basename( $source_file ), PATHINFO_FILENAME );
-
-		// Get script localization data
-		$this->localization_info = $this->localization_info();
 	}
 	
 	/**
@@ -164,26 +154,16 @@ class AssetManager {
 	 * 
 	 * @since 1.0.15
 	 */
-	private function localization_info() {
+	private static function localization_info() {
 		$localization_info = [
-			'email-entered' => [
-				'nonce' => wp_create_nonce( $this->build_handle( 'email-entered') ),
-			],
-			'help-popup'	=> [
-				'nonce' => wp_create_nonce( $this->build_handle( 'help-popup') ),
-			],
-			'create-account'	=> [
-				'nonce' => wp_create_nonce( $this->build_handle( 'create-account') ),
-			],
-			'line-items-table'	=> [
-				'nonce' => wp_create_nonce( $this->build_handle( 'line-items-table') ),
-			],
-			'service-fields'	=> [
-				'nonce' => wp_create_nonce( $this->build_handle( 'service-fields') ),
-			],
-			'create-project-fields'	=> [
-				'nonce' => wp_create_nonce( $this->build_handle( 'create-project-fields') ),
-			],
+			'email-entered' 		=> [],
+			'help-popup'			=> [],
+			'create-account'		=> [],
+			'line-items-table'		=> [],
+			'service-fields'		=> [],
+			'create-project-fields'	=> [],
+			'search'				=> [],
+			'create-page'			=> [],
 		];
 
 	 	/**
@@ -209,11 +189,32 @@ class AssetManager {
 		// Enqueue script
 		wp_enqueue_script( $handle, $file_url, array(), BC_PLUGIN_VERSION, 'all' );
 
+		// Localize the script
+		$this->localize_script( $file_name, $handle );
+	}
+
+	/**
+	 * Localizes a javascript file.
+	 * 
+	 * @since 1.0.16
+	 */
+	public function localize_script( $file_name, $handle ) {
+		// Fetch localization info
+		$localization_info = self::localization_info();
+
 		// Check if localization info exists for the file
-		$file_localization_info = $this->localization_info[$file_name] ?? null;
-		if ( is_array( $file_localization_info ) ) {
+		if ( isset( $localization_info[$file_name] ) ) {
+			// Initialize array
+			$file_localization_info = $localization_info[$file_name] ?? [];
+
+			// Build nonce
+			$file_localization_info['nonce'] = wp_create_nonce( $this->build_nonce_action( $file_name ) );
+			$file_localization_info['nonceAction'] = $this->build_nonce_action( $file_name );
+			$file_localization_info['fileName'] = $file_name;
+
 			// Localize and pass data
-	        wp_localize_script( $handle, 'bcData', $file_localization_info );
+			$data_name = $this->build_data_name( $file_name );
+	        wp_localize_script( $handle, $data_name, $file_localization_info );
 		}
 	}
 	
@@ -243,4 +244,39 @@ class AssetManager {
 	    return 'bc-' . strtolower( $this->source ) . '-' . $file_name;
 	}
 
+	/**
+	 * Builds a nonce action name.
+	 * 
+	 * @since 1.0.16
+	 * 
+	 * @param   string  $file_name  The file name without extension.
+	 */
+	private function build_nonce_action( $file_name ) {
+		$action = strtolower( $file_name );
+		$action = str_replace( '-', '_', $file_name );
+		$action = 'bc_' . $action;
+		return $action;
+	}
+
+	/**
+	 * Converts snake case to camel case.
+	 * 
+	 * @since 1.0.16
+	 */
+	private function build_data_name( $string ) {
+		// Split the string by underscores
+		$parts = explode( '-', $string );
+		
+		// Capitalize the first letter of each part except the first one
+		$parts = array_map( 'ucfirst', $parts );
+		
+		// Make the first letter lowercase to follow camelCase
+		$parts[0] = strtolower( $parts[0] );
+		
+		// Join the parts back together
+		$data_name = implode( '', $parts );
+
+		// Add suffix
+		return $data_name . 'Data';
+	}
 }

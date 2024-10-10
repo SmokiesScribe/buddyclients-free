@@ -6,11 +6,15 @@
 function createNewPage(args) {
     // Show loading indicator
     bcLoadingIndicator( true, 'Creating page...' );
+
+    console.log(args);
+    console.log(createPageData);
     
     jQuery.post(ajaxurl, {
         action: 'bc_admin_create_new_page',
         args: args,
-        nonce: args.nonce
+        nonce: createPageData.nonce,
+        nonceAction: createPageData.nonceAction,
     })
     .done(function(response) {
         // Parse the JSON response
@@ -28,6 +32,7 @@ function createNewPage(args) {
         } else {
             // Handle the case where the server indicates failure
             alert('Failed to create page: ' + responseData.error_message);
+            bcLoadingIndicator( false );
         }
     })
     
@@ -35,5 +40,6 @@ function createNewPage(args) {
         // Handle failure response
         console.error(xhr.responseText);
         alert('Error creating page: ' + error);
+        bcLoadingIndicator( false );
     });
 }

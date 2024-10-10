@@ -49,6 +49,17 @@ class Form {
         $this->args = $args;
         $this->key = $args['key'];
     }
+    
+    /**
+     * Echoes the form.
+     * 
+     * @since 1.0.16
+     */
+    public function echo() {
+        $form = $this->build();
+        $allowed_html = bc_allowed_html_form();
+        echo wp_kses( $form, $allowed_html );
+    }
 
     /**
      * Builds the form.

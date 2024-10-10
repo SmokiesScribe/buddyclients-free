@@ -79,11 +79,8 @@ class Settings {
         // Get settings data
         if ( is_callable( $callback ) ) {
             $data = call_user_func( $callback );
-        } else {
-            echo $callback;
+            return $data;
         }
-        
-        return $data;
 	}
 	
 	/**

@@ -8,9 +8,12 @@ use BuddyClients\Admin\PluginPage;
  */
 function bc_create_plugin_page() {
 
+    // Get the nonce from the AJAX request
+    $nonce = isset( $_POST['nonce'] ) ? trim( sanitize_text_field( wp_unslash( $_POST['nonce'] ) ) ) : null;
+    $nonce_action = isset( $_POST['nonceAction'] ) ? trim( sanitize_text_field( wp_unslash( $_POST['nonceAction'] ) ) ) : null;
+
     // Verify nonce
-    $nonce = isset( $_POST['nonce'] ) ? sanitize_text_field( wp_unslash( $_POST['nonce'] ) ) : null;
-    if ( ! wp_verify_nonce( $nonce, 'bc_create_new_page_nonce' ) ) {
+    if ( ! wp_verify_nonce( $nonce, $nonce_action ) ) {
         return;
     }
 

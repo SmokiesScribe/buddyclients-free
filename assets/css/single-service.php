@@ -13,15 +13,15 @@
         margin: 30px 0;
     }
     .all-services-btn {
-        color: <?php echo bc_color('primary') ?>;
-        border: solid 1.5px <?php echo bc_color('primary') ?>;
+        color: <?php echo esc_attr( bc_color('primary') ) ?>;
+        border: solid 1.5px <?php echo esc_attr( bc_color('primary') ) ?>;
         padding: 10px;
         border-radius: 5px;
         text-decoration: none;
     }
     .all-services-btn:hover {
-        color: <?php echo bc_color('tertiary') ?>;
-        border-color: <?php echo bc_color('tertiary') ?>;
+        color: <?php echo esc_attr( bc_color('tertiary') ) ?>;
+        border-color: <?php echo esc_attr( bc_color('tertiary') ) ?>;
     }
     .testimonial-author {
         margin: 20px 0 30px;

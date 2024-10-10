@@ -39,8 +39,10 @@ class AdminTableItem extends AdminTable {
         if ( is_array( $value ) ) {
             return implode( ', ', $value );
         } else {
-            $value = str_replace( '_', ' ', $value );
-            return ucwords( $value );
+            if ( ! empty( $value ) ) {
+                $value = str_replace( '_', ' ', $value );
+                return ucwords( $value );
+            }
         }
     }
     
@@ -373,10 +375,10 @@ class AdminTableItem extends AdminTable {
         $field_id = $property . '-copy-' . $item_id;
         ?>
         <div>
-            <p><span id="<?php echo $field_id ?>">
-            <?php echo $value ?>
+            <p><span id="<?php echo esc_attr( $field_id ) ?>">
+            <?php echo esc_html( $value ) ?>
             </span></p>
-            <button onclick="copyToClipboard('<?php echo $field_id ?>')" type="button" class="button button-secondary">Copy Memo</button>
+            <button onclick="copyToClipboard('<?php echo esc_attr( $field_id ) ?>')" type="button" class="button button-secondary">Copy Memo</button>
             <div class="bc-copy-success" style="margin: 10px; font-weight: 500"></div>
         </div>
         <?php

@@ -9,12 +9,15 @@ use BuddyClients\Includes\Popup;
  */
 function bc_get_popup_content() {
 
+    // Log the nonce being sent in the AJAX request
+    $nonce = isset( $_POST['nonce'] ) ? trim( sanitize_text_field( wp_unslash( $_POST['nonce'] ) ) ) : null;
+    $nonce_action = isset( $_POST['nonceAction'] ) ? trim( sanitize_text_field( wp_unslash( $_POST['nonceAction'] ) ) ) : null;
+
     // Verify nonce
-    $nonce = isset( $_POST['nonce'] ) ? sanitize_text_field( wp_unslash( $_POST['nonce'] ) ) : null;
-    if ( ! wp_verify_nonce( $nonce, 'bc_help_popup' ) ) {
+    if ( ! wp_verify_nonce( $nonce, $nonce_action ) ) {
         return;
     }
-    
+
     // Get post ID from ajax
     $post_id = isset( $_POST['postId'] ) ? intval( wp_unslash( $_POST['postId'] ) ) : null;
     $url = isset( $_POST['url'] ) ? esc_url_raw( wp_unslash( $_POST['url'] ) ) : null;
@@ -24,10 +27,23 @@ function bc_get_popup_content() {
     $content = Popup::format_content( $post_id, $url, $raw_content );
     
     // Return formatted content
-    echo $content;
+    echo wp_kses_post( $content );
     
     // Terminate ajax request
     wp_die();
 }
 add_action('wp_ajax_bc_get_popup_content', 'bc_get_popup_content'); // For logged-in users
 add_action('wp_ajax_nopriv_bc_get_popup_content', 'bc_get_popup_content'); // For logged-out users
+
+/**
+ * Outputs a popup link.
+ * 
+ * @since 0.1.0
+ * 
+      * @param  int     $post_id        The ID of the post from which to retrieve the content.
+      * @param  string  $link_text      Optional. The text to display. Defaults to ? icon.
+      * @param  string  $url            Optional. The full url of the page to display.
+ */
+function bc_help_link( $post_id = null, $link_text = null, $url = null, $raw_content = null ) {
+    return Popup::link( $post_id, $link_text, $url, $raw_content );
+}

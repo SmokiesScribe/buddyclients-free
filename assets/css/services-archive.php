@@ -45,7 +45,7 @@
     font-size: 24px;
 }
 .service-type-label {
-    background-color: <?php echo bc_color('primary') ?>;
+    background-color: <?php echo esc_attr( bc_color('primary') ) ?>;
     color: #ffffff;
     padding: 2px 10px;
     border-radius: 15px;
@@ -78,7 +78,7 @@
     text-align: center;
 }
 .rate-read-more-button:hover {
-    color: <?php echo bc_color('tertiary') ?>;
+    color: <?php echo esc_attr( bc_color('tertiary') ) ?>;
 }
 
 .rate-excerpt {
@@ -120,7 +120,7 @@
     background-color: #fff;
     font-weight: bold;
     border: solid 1px #e7e9ec;
-    color: <?php echo bc_color('primary') ?>;
+    color: <?php echo esc_attr( bc_color('primary') ) ?>;
 }
 
 .blue-pen-rates-table .blue-pen-rates-section td {

@@ -9,9 +9,12 @@ use BuddyClients\Includes\Project;
  */
 function bc_get_project() {
 
+    // Get the nonce from the AJAX request
+    $nonce = isset( $_POST['nonce'] ) ? trim( sanitize_text_field( wp_unslash( $_POST['nonce'] ) ) ) : null;
+    $nonce_action = isset( $_POST['nonceAction'] ) ? trim( sanitize_text_field( wp_unslash( $_POST['nonceAction'] ) ) ) : null;
+
     // Verify nonce
-    $nonce = isset( $_POST['nonce'] ) ? sanitize_text_field( wp_unslash( $_POST['nonce'] ) ) : null;
-    if ( ! wp_verify_nonce( $nonce, 'bc_create_project_fields' ) ) {
+    if ( ! wp_verify_nonce( $nonce, $nonce_action ) ) {
         return;
     }
     

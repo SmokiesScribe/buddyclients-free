@@ -85,7 +85,7 @@
     $service_content .= '</div>';
     $service_content .= '</div>';
     
-    echo $service_content;
+    echo wp_kses_post( $service_content );
     
     // Get footer
     get_footer();

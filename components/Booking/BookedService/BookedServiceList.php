@@ -47,7 +47,8 @@ class BookedServiceList {
         $this->project_id = $project_id ?? null;
         
         // Output table
-        echo $this->table();
+        $table = $this->table();
+        echo wp_kses_post( $table );
     }
     
     /**
@@ -246,7 +247,7 @@ class BookedServiceList {
         $group = ob_get_clean();
     
         return [
-            __('Date', 'buddyclients')            => gmdate('F j, Y', strtotime($item->created_at)),
+            __('Date', 'buddyclients')            => $item->created_at ? gmdate('F j, Y', strtotime($item->created_at)) : '',
             __('Service', 'buddyclients')         => $item->name,
             __('Client', 'buddyclients')          => bp_core_get_userlink($item->client_id),
             __('Project', 'buddyclients')         => $group,

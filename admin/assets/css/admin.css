@@ -1,4 +1,7 @@
 /** Admin CSS **/
+/* Admin table */
+.margin-3 {margin: 0 3px !important}
+
 /* Grouped Meta Boxes */
 .bc-meta-field {
     width: 100%
