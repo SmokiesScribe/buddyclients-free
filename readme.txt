@@ -50,7 +50,11 @@ Banner URL: /assets/media/banner-772x250/banner.png
 
 == Changelog ==
 
-= 1.0.5 - Unreleased =
+= 1.0.6 - October 10, 2024 =
+* Fixed: Updated text domain to buddyclients-free.
+* Corresponding Premium Version: 1.0.16
+
+= 1.0.5 - October 10, 2024 =
 * Improvement: Implemented plugin-wide fixes for security and performance in accordance with Wordpress repo guidelines.
 * Corresponding Premium Version: 1.0.16
 
