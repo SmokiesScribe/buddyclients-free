@@ -25,11 +25,12 @@ To run BuddyClients, we recommend your host supports:
 
 == Installation ==
 
-1. Make sure you have either 'BuddyPress' or 'BuddyBoss Platform' installed.
-2. Then visit 'Plugins > Add New'
-3. Click 'Upload Plugin'
-4. Upload the file 'buddyclients.zip'
-5. Activate 'BuddyClients' from your Plugins page.
+1. Ensure that you have either BuddyPress or BuddyBoss Platform installed on your WordPress site.
+2. Navigate to Plugins > Add New in your WordPress admin dashboard.
+3. In the search bar, type BuddyClients Free and press Enter.
+4. Locate the BuddyClients Free plugin in the search results and click the Install Now button.
+5. Once the installation is complete, click Activate to enable the BuddyClients Free plugin on your site.
+6. After activation, go to the BuddyClients settings to configure the plugin as needed.
 
 == Screenshots ==
 
