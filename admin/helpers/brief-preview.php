@@ -11,7 +11,7 @@
  */
 function bc_add_preview_column( $columns ) {
     // Add preview column
-    $columns['preview_brief'] = __( 'Preview', 'buddyclients' );
+    $columns['preview_brief'] = __( 'Preview', 'buddyclients-free' );
     
     // Unset slug column
     unset( $columns['slug'] );
@@ -39,7 +39,7 @@ function bc_render_preview_button( $content, $column_name, $term_id ) {
             'taxonomy_term_id' => $term_id,
         ), home_url() );
 
-        $content = '<a href="' . esc_url( $preview_url ) . '" class="button" target="_blank">' . __( 'Preview', 'buddyclients' ) . '</a>';
+        $content = '<a href="' . esc_url( $preview_url ) . '" class="button" target="_blank">' . __( 'Preview', 'buddyclients-free' ) . '</a>';
     }
     return $content;
 }
@@ -75,7 +75,7 @@ function bc_create_preview_draft( $taxonomy_term_id ) {
     $post_id = wp_insert_post( array(
         'post_title' => sprintf(
             /* translators: %s: the name of the brief type (e.g. Editing) */
-            __( 'Preview %s Brief', 'buddyclients' ),
+            __( 'Preview %s Brief', 'buddyclients-free' ),
             ucfirst( $term_name )
         ),
         'post_type'   => 'bc_brief',
@@ -106,7 +106,7 @@ function bc_redirect_to_preview( $taxonomy_term_id ) {
         wp_redirect( get_permalink( $post_id ) );
         exit;
     } else {
-        wp_die( esc_html( __( 'Unable to create preview. Please try again.', 'buddyclients' ) ) );
+        wp_die( esc_html( __( 'Unable to create preview. Please try again.', 'buddyclients-free' ) ) );
     }
 }
 

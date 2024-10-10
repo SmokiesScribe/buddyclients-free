@@ -80,23 +80,23 @@ class Activator {
         return [
             // Rate types
             'bc_rate_type' => [
-                __( 'Per Word', 'buddyclients' ) => [
+                __( 'Per Word', 'buddyclients-free' ) => [
                     'post_content'  => null,
                     'post_meta'     => [
-                        'singular'          => __( 'Word', 'buddyclients' ),
-                        'plural'            => __( 'Words', 'buddyclients' ),
-                        'form_description'  => __( 'What is the full word count?', 'buddyclients' ),
-                        'attach'            => __( 'project', 'buddyclients' ),
+                        'singular'          => __( 'Word', 'buddyclients-free' ),
+                        'plural'            => __( 'Words', 'buddyclients-free' ),
+                        'form_description'  => __( 'What is the full word count?', 'buddyclients-free' ),
+                        'attach'            => __( 'project', 'buddyclients-free' ),
                         'minimum'           => 0
                     ]
                 ],
-                __( 'Hourly', 'buddyclients' ) => [
+                __( 'Hourly', 'buddyclients-free' ) => [
                     'post_content'  => null,
                     'post_meta'     => [
-                        'singular'          => __( 'Hour', 'buddyclients' ),
-                        'plural'            => __( 'Hours', 'buddyclients' ),
-                        'form_description'  => __( 'How many hours would you like to book?', 'buddyclients' ),
-                        'attach'            => __( 'service', 'buddyclients' ),
+                        'singular'          => __( 'Hour', 'buddyclients-free' ),
+                        'plural'            => __( 'Hours', 'buddyclients-free' ),
+                        'form_description'  => __( 'How many hours would you like to book?', 'buddyclients-free' ),
+                        'attach'            => __( 'service', 'buddyclients-free' ),
                         'minimum'           => 1
                     ]
                 ],
@@ -104,12 +104,12 @@ class Activator {
         
             // Upload types
             'bc_file_upload' => [
-                __( 'File', 'buddyclients' ) => [
+                __( 'File', 'buddyclients-free' ) => [
                     'post_content'  => null,
                     'post_meta'     => [
-                        'singular'          => __( 'File', 'buddyclients' ),
-                        'plural'            => __( 'Files', 'buddyclients' ),
-                        'form_description'  => __( 'Upload your file.', 'buddyclients' ),
+                        'singular'          => __( 'File', 'buddyclients-free' ),
+                        'plural'            => __( 'Files', 'buddyclients-free' ),
+                        'form_description'  => __( 'Upload your file.', 'buddyclients-free' ),
                         'file_types'        => ['.pdf', '.jpg', '.jpeg', '.png', '.doc', '.docx'],
                         'multiple_files'    => false,
                         'required'          => false
@@ -140,7 +140,7 @@ class Activator {
                     // Skip creating the post if it already exists                    
                     $error_message = sprintf(
                         /* translators: %s: post title */
-                        __( 'Post with title "%s" already exists. Skipping creation.', 'buddyclients' ),
+                        __( 'Post with title "%s" already exists. Skipping creation.', 'buddyclients-free' ),
                         $post_title
                     );
                     error_log( $error_message );
@@ -165,7 +165,7 @@ class Activator {
                 if ( is_wp_error( $post_id ) ) {
                     $error_message = sprintf(
                         /* translators: %s: post title */
-                        __( 'Error creating post: %s', 'buddyclients' ),
+                        __( 'Error creating post: %s', 'buddyclients-free' ),
                         $post_id->get_error_message()
                     );
                     error_log( $error_message );

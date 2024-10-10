@@ -93,8 +93,8 @@ class ExtensionManager {
             'type'              => 'profile',
             'content_callback'  => [new BookedServiceList, 'build'],
             'slug'              => 'services',
-            'name'              => __( 'Services', 'buddyclients' ),
-            'title'             => __( 'My Services', 'buddyclients' ),
+            'name'              => __( 'Services', 'buddyclients-free' ),
+            'title'             => __( 'My Services', 'buddyclients-free' ),
             'private'           => true
         ];
     }
@@ -109,8 +109,8 @@ class ExtensionManager {
             'type'              => 'profile',
             'content_callback'  => [new AffiliateProfile, 'build'],
             'slug'              => 'affiliate',
-            'name'              => __( 'Affiliate Program', 'buddyclients' ),
-            'title'             => __( 'Affiliate Program', 'buddyclients' ),
+            'name'              => __( 'Affiliate Program', 'buddyclients-free' ),
+            'title'             => __( 'Affiliate Program', 'buddyclients-free' ),
             'private'           => true
         ];
     }
@@ -125,8 +125,8 @@ class ExtensionManager {
             'type'              => 'profile',
             'content_callback'  => [new AvailabilityProfile, 'build'],
             'slug'              => 'availability',
-            'name'              => __( 'Availability', 'buddyclients' ),
-            'title'             => __( 'Availability', 'buddyclients' ),
+            'name'              => __( 'Availability', 'buddyclients-free' ),
+            'title'             => __( 'Availability', 'buddyclients-free' ),
             'private'           => true,
             'member_type'       => 'team'
         ];
@@ -142,8 +142,8 @@ class ExtensionManager {
             'type'              => 'profile',
             'content_callback'  => [new LegalForm( 'team' ), 'echo_form'],
             'slug'              => 'team',
-            'name'              => __( 'Team Agreement', 'buddyclients' ),
-            'title'             => __( 'Team Agreement', 'buddyclients' ),
+            'name'              => __( 'Team Agreement', 'buddyclients-free' ),
+            'title'             => __( 'Team Agreement', 'buddyclients-free' ),
             'private'           => true,
             'member_type'       => 'team'
         ];
@@ -159,8 +159,8 @@ class ExtensionManager {
             'type'              => 'profile',
             'content_callback'  => [new SalesProfile, 'build'],
             'slug'              => 'bc-sales',
-            'name'              => __( 'Sales', 'buddyclients' ),
-            'title'             => __( 'Sales Commission', 'buddyclients' ),
+            'name'              => __( 'Sales', 'buddyclients-free' ),
+            'title'             => __( 'Sales Commission', 'buddyclients-free' ),
             'private'           => true,
             'member_type'       => 'sales'
         ];
@@ -176,8 +176,8 @@ class ExtensionManager {
             'type'              => 'settings',
             'content_callback'  => [new UserFilesForm, 'build'],
             'slug'              => 'bc-files',
-            'name'              => __( 'Files', 'buddyclients' ),
-            'title'             => __( 'Manage Files', 'buddyclients' ),
+            'name'              => __( 'Files', 'buddyclients-free' ),
+            'title'             => __( 'Manage Files', 'buddyclients-free' ),
             'private'           => true
         ];
     }

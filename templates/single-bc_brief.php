@@ -12,7 +12,7 @@ $content = '<div class="bc-single-post">';
 
 // Class does not exist
 if ( ! class_exists( 'BuddyClients\Components\Brief\SingleBrief' ) ) {
-    $content .= '<p>' . __( 'Briefs are not enabled.', 'buddyclients' ) . '</p>';
+    $content .= '<p>' . __( 'Briefs are not enabled.', 'buddyclients-free' ) . '</p>';
 } else {
     // Generate content
     $content .= ( new BuddyClients\Components\Brief\SingleBrief )->display();

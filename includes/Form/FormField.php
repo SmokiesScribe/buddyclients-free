@@ -429,7 +429,7 @@ class FormField {
             'teeny' => true, // Use the "teeny" mode, which is a simplified version of the editor
             'quicktags' => false,
             'tinymce' => array(
-                'toolbar1' => __( 'bold italic underline | undo redo', 'buddyclients' ), // Customize the buttons in the first row
+                'toolbar1' => __( 'bold italic underline | undo redo', 'buddyclients-free' ), // Customize the buttons in the first row
                 'toolbar2' => '', // Customize the buttons in the second row (empty for none)
             ),
         );
@@ -556,7 +556,7 @@ class FormField {
         $field .=       '<p id="file-upload-note"></p>';
         $field .=       '<div class="dropzone document-dropzone dz-clickable" id="media-uploader">';
         $field .=           '<div class="dz-default dz-message">';
-        $field .=           '<button class="dz-button bc-file-upload-button" type="button"><strong>' . __( 'Select File', 'buddyclients' ) . '</strong></button>';
+        $field .=           '<button class="dz-button bc-file-upload-button" type="button"><strong>' . __( 'Select File', 'buddyclients-free' ) . '</strong></button>';
         $field .=       '</div>';
         $field .=   '</div>';
         $field .=   '<input type="file" class="' . $this->field_classes . '" style="opacity: 0;" ' . $this->field_atts_string . '>';
@@ -628,9 +628,9 @@ class FormField {
      */
     private function signature_field() {
         $field = '<div class="form-group form-group style="' . $this->style .'">';
-        $field .= '<legend>' . __( 'Sign Here', 'buddyclients' ) . '</legend>';
+        $field .= '<legend>' . __( 'Sign Here', 'buddyclients-free' ) . '</legend>';
         $field .= '<canvas id="signatureCanvas" width="600" height="200" style="border-radius: 5px; border: 1px solid #D4D6D8;" data-signature="signature-data"></canvas><br>';
-        $field .= '<button type="button" id="signature-clear-button">' . __( 'Clear Signature', 'buddyclients' ) . '</button>';
+        $field .= '<button type="button" id="signature-clear-button">' . __( 'Clear Signature', 'buddyclients-free' ) . '</button>';
         
         $field .= '<input type="hidden" id="signature-data" name="signature-data" value="">';
         $field .= '</div>';

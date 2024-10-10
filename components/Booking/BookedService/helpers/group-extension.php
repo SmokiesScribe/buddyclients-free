@@ -11,12 +11,12 @@ function bc_services_add_group_extension() {
 			function __construct() {
 				$args = array(
 					'slug'              => 'services',
-					'name'              =>  __( 'Project Services', 'buddyclients' ),
+					'name'              =>  __( 'Project Services', 'buddyclients-free' ),
 					'nav_item_position' => 200,
 					'enable_nav_item'   => true,
 					'screens' => array(
 						'edit' => array(
-							'name'      => __( 'Project Services', 'buddyclients' ),
+							'name'      => __( 'Project Services', 'buddyclients-free' ),
 						),
 						'create'        => array( 'position' => 0, ),
 					),
@@ -28,7 +28,7 @@ function bc_services_add_group_extension() {
 				$group_id = bp_get_group_id();
 
 				$group_extension_status = groups_get_groupmeta( $group_id, 'group_extension_setting' );
-				$brief_title = '<h3 class="project-brief-title">' . __( 'Project Services', 'buddyclients' ) . '</h3>' . esc_attr( $group_extension_status );
+				$brief_title = '<h3 class="project-brief-title">' . __( 'Project Services', 'buddyclients-free' ) . '</h3>' . esc_attr( $group_extension_status );
 				echo wp_kses_post( $brief_title );
 				
 				// List project briefs

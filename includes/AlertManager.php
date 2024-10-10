@@ -67,14 +67,14 @@ class AlertManager {
             $content = sprintf(
                 '<a href="%s">%s</a>',
                 esc_url( $link ),
-                __( 'Add your availability.', 'buddyclients' )
+                __( 'Add your availability.', 'buddyclients-free' )
             );
         
         // Check if the availability is expired
         } else if ( Availability::expired( $availability ) ) {
             $content = sprintf(
                 /* translators: %s: url to update availability */
-                __( 'Your availability has expired. <a href="%s">Update your availability.</a>', 'buddyclients' ),
+                __( 'Your availability has expired. <a href="%s">Update your availability.</a>', 'buddyclients-free' ),
                 esc_url( $link ),
             );
         }
@@ -137,7 +137,7 @@ class AlertManager {
         if ( $legal->status === 'transition' && $user_data['status'] !== 'current' ) {
             $content = sprintf(
                 /* translators: %1$s: url to complete agreement; %2$s: deadline for the agreement */
-                __( 'Complete your <a href="%1$s">new team member agreement</a> by %2$s.', 'buddyclients' ),
+                __( 'Complete your <a href="%1$s">new team member agreement</a> by %2$s.', 'buddyclients-free' ),
                 esc_url( $link ),
                 esc_html( $legal->deadline )
             );            
@@ -146,7 +146,7 @@ class AlertManager {
         } else if ( $user_data['status'] !== 'current' ) {
             $content = sprintf(
                 /* translators: %1$s: url to complete agreement */
-                __( 'Complete your <a href="%s">team member agreement</a>.', 'buddyclients' ),
+                __( 'Complete your <a href="%s">team member agreement</a>.', 'buddyclients-free' ),
                 esc_url( $link )
             );
         }

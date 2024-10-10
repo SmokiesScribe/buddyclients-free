@@ -232,14 +232,14 @@ class Service {
         // Check for team member role
         if ( ! bc_freelancer_mode() ) {
             if ( ! $this->team_member_role || $this->team_member_role === '' ) {
-                $error[] = __( 'Team Member Role is required.', 'buddyclients' );
+                $error[] = __( 'Team Member Role is required.', 'buddyclients-free' );
                 $valid = false;
             }
         }
         
         // Check for service type
         if ( ! $this->service_type || $this->service_type === '' ) {
-            $error[] = __( 'Service Type is required.', 'buddyclients' );
+            $error[] = __( 'Service Type is required.', 'buddyclients-free' );
             $valid = false;
         }
         

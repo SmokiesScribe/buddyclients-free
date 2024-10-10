@@ -33,19 +33,19 @@ function bc_component_exists( $component ) {
  */
 function bc_components_map() {
     return [
-        'Booking'           => __( 'Booking', 'buddyclients' ),
-        'Checkout'          => __( 'Checkout', 'buddyclients' ),
-        'Service'           => __( 'Service', 'buddyclients' ),
-        'Email'             => __( 'Email', 'buddyclients' ),
-        'Brief'             => __( 'Brief', 'buddyclients' ),
-        'Stripe'            => __( 'Stripe', 'buddyclients' ),
-        'Affiliate'         => __( 'Affiliate', 'buddyclients' ),
-        'Availability'      => __( 'Availability', 'buddyclients' ),
-        'Contact'           => __( 'Contact', 'buddyclients' ),
-        'Legal'             => __( 'Legal', 'buddyclients' ),
-        'Quote'             => __( 'Quote', 'buddyclients' ),
-        'Sales'             => __( 'Sales', 'buddyclients' ),
-        'Testimonial'       => __( 'Testimonial', 'buddyclients' ),
+        'Booking'           => __( 'Booking', 'buddyclients-free' ),
+        'Checkout'          => __( 'Checkout', 'buddyclients-free' ),
+        'Service'           => __( 'Service', 'buddyclients-free' ),
+        'Email'             => __( 'Email', 'buddyclients-free' ),
+        'Brief'             => __( 'Brief', 'buddyclients-free' ),
+        'Stripe'            => __( 'Stripe', 'buddyclients-free' ),
+        'Affiliate'         => __( 'Affiliate', 'buddyclients-free' ),
+        'Availability'      => __( 'Availability', 'buddyclients-free' ),
+        'Contact'           => __( 'Contact', 'buddyclients-free' ),
+        'Legal'             => __( 'Legal', 'buddyclients-free' ),
+        'Quote'             => __( 'Quote', 'buddyclients-free' ),
+        'Sales'             => __( 'Sales', 'buddyclients-free' ),
+        'Testimonial'       => __( 'Testimonial', 'buddyclients-free' ),
     ];
 }
 

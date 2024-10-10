@@ -35,7 +35,7 @@ require_once(plugin_dir_path(__FILE__) . 'BuddyClientsFree-class.php');
  * @return BuddyClients|null The one true BuddyClients Instance.
  */
 function buddyclients_free() {
-    if ( function_exists( 'buddypress' ) && ! function_exists( 'buddyclients' ) && class_exists( 'BuddyClientsFree' ) ) {
+    if ( function_exists( 'buddypress' ) && ! function_exists( 'buddyclients-free' ) && class_exists( 'BuddyClientsFree' ) ) {
 	    return BuddyClientsFree::instance();
     }
 }
@@ -60,14 +60,14 @@ function bc_installed_notice() {
     }
 
     // Disable BuddyClients Free message.
-    if ( function_exists( 'buddyclients' ) ) {
+    if ( function_exists( 'buddyclients-free' ) ) {
         $plugins_url = is_network_admin() ? network_admin_url( 'plugins.php' ) : admin_url( 'plugins.php' );
         ?>
 
         <div id="message" class="error notice">
-            <p><strong><?php esc_html_e( 'BuddyClients Error', 'buddyclients' ); ?></strong></p>
-            <p><?php esc_html_e( 'Multiple versions of the BuddyClients Platform are installed.', 'buddyclients' ); ?></p>
-            <p><?php printf( __( 'Please <a href="%s">deactivate BuddyClients Free</a> to continue.', 'buddyclients' ), $plugins_url ); ?></p>
+            <p><strong><?php esc_html_e( 'BuddyClients Error', 'buddyclients-free' ); ?></strong></p>
+            <p><?php esc_html_e( 'Multiple versions of the BuddyClients Platform are installed.', 'buddyclients-free' ); ?></p>
+            <p><?php printf( __( 'Please <a href="%s">deactivate BuddyClients Free</a> to continue.', 'buddyclients-free' ), $plugins_url ); ?></p>
         </div>
 
         <?php
@@ -77,7 +77,7 @@ function bc_installed_notice() {
 /**
  * Only one version of BuddyClients can be installed at a time.
  */
-if ( function_exists( 'buddyclients' ) ) {
+if ( function_exists( 'buddyclients-free' ) ) {
 	add_action( 'admin_notices', 'bc_installed_notice' );
 	return;
 }
@@ -96,14 +96,14 @@ function bc_missing_bp_notice_free() {
 	// Disable BuddyPress message.
 	if ( ! function_exists( 'buddypress' ) ) {
 		$bp_plugins_url = is_network_admin() ? network_admin_url( 'plugins.php' ) : admin_url( 'plugins.php' );
-		$link_plugins   = sprintf( "<a href='%s'>%s</a>", $bp_plugins_url, __( 'deactivate', 'buddyclients' ) );
+		$link_plugins   = sprintf( "<a href='%s'>%s</a>", $bp_plugins_url, __( 'deactivate', 'buddyclients-free' ) );
 		$bp_install     = admin_url( '/plugin-install.php?s=buddypress&tab=search&type=term' );
 		?>
 
 		<div id="message" class="error notice">
-			<p><strong><?php esc_html_e( 'BuddyPress is missing.', 'buddyclients' ); ?></strong></p>
-			<p><?php printf( esc_html__( 'The BuddyClients Platform can\'t work without BuddyPress.', 'buddyclients' ), $link_plugins ); ?></p>
-			<p><?php printf( __( 'Install <a href="%s">BuddyPress</a> or <a href="%s" target="_blank">BuddyBoss</a>.', 'buddyclients' ), $bp_install, 'https://www.buddyboss.com/website-platform/' ); ?></p>
+			<p><strong><?php esc_html_e( 'BuddyPress is missing.', 'buddyclients-free' ); ?></strong></p>
+			<p><?php printf( esc_html__( 'The BuddyClients Platform can\'t work without BuddyPress.', 'buddyclients-free' ), $link_plugins ); ?></p>
+			<p><?php printf( __( 'Install <a href="%s">BuddyPress</a> or <a href="%s" target="_blank">BuddyBoss</a>.', 'buddyclients-free' ), $bp_install, 'https://www.buddyboss.com/website-platform/' ); ?></p>
 		</div>
 
 		<?php
@@ -131,14 +131,14 @@ function bc_groups_disabled_notice_free() {
 	    $enable_link = admin_url( 'admin.php?page=bp-components' );
 	    
 		$bp_plugins_url = is_network_admin() ? network_admin_url( 'plugins.php' ) : admin_url( 'plugins.php' );
-		$link_plugins   = sprintf( "<a href='%s'>%s</a>", $bp_plugins_url, __( 'deactivate', 'buddyclients' ) );
+		$link_plugins   = sprintf( "<a href='%s'>%s</a>", $bp_plugins_url, __( 'deactivate', 'buddyclients-free' ) );
 		$bp_install     = admin_url( '/plugin-install.php?s=buddypress&tab=search&type=term' );
 		?>
 
 		<div id="message" class="error notice">
-			<p><strong><?php esc_html_e( 'Social groups are disabled.', 'buddyclients' ); ?></strong></p>
-			<p><?php printf( esc_html__( 'Groups must be enabled for the BuddyClients Platform to function properly.', 'buddyclients' ), $link_plugins ); ?></p>
-			<p><?php printf( __( '<a href="%s">Enable social groups.</a>', 'buddyclients' ), $enable_link ); ?></p>
+			<p><strong><?php esc_html_e( 'Social groups are disabled.', 'buddyclients-free' ); ?></strong></p>
+			<p><?php printf( esc_html__( 'Groups must be enabled for the BuddyClients Platform to function properly.', 'buddyclients-free' ), $link_plugins ); ?></p>
+			<p><?php printf( __( '<a href="%s">Enable social groups.</a>', 'buddyclients-free' ), $enable_link ); ?></p>
 		</div>
 
 		<?php

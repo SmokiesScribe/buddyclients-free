@@ -72,13 +72,13 @@ class AdminDashboard {
         
         // Open wrap
         $content .= '<div class="wrap">';
-        $content .= '<h1>' . __( 'Dashboard', 'buddyclients' ) . '</h1>';
+        $content .= '<h1>' . __( 'Dashboard', 'buddyclients-free' ) . '</h1>';
         
         // Build items
         $content .= $this->filter_form();
         $content .= $this->overview_table();
         $content .= $this->revenue_chart();
-        $content .= $this->key_metric( __( 'Average Booking Value', 'buddyclients' ), 'average_value' );
+        $content .= $this->key_metric( __( 'Average Booking Value', 'buddyclients-free' ), 'average_value' );
         $content .= $this->charts_row();
         
         // Close wrap
@@ -155,14 +155,14 @@ class AdminDashboard {
         return [
             'completed' => [
                 'ID'        => 'completed',
-                'status'    => __( 'Completed', 'buddyclients' ),
+                'status'    => __( 'Completed', 'buddyclients-free' ),
                 'count'     => $this->filter_objects( $booking_intents, 'status', 'succeeded' ),
                 'total'     => $this->sum_property( $booking_intents, 'total_fee', 'status', 'succeeded' ),
                 'net'       => $this->sum_property( $booking_intents, 'net_fee', 'status', 'succeeded' ),
             ],
             'abandoned' => [
                 'ID'        => 'abandoned',
-                'status'    => __( 'Abandoned', 'buddyclients' ),
+                'status'    => __( 'Abandoned', 'buddyclients-free' ),
                 'count'     => $this->filter_objects( $booking_intents, 'status', 'incomplete' ),
                 'total'     => $this->sum_property( $booking_intents, 'total_fee', 'status', 'incomplete' ),
                 'net'       => $this->sum_property( $booking_intents, 'net_fee', 'status', 'incomplete' ),
@@ -376,7 +376,7 @@ class AdminDashboard {
         
         // Submit button
         $content .= '<button type="submit" class="button action" name="bc_overview_filter_submit">';
-        $content .= esc_html__( 'Filter', 'buddyclients' );
+        $content .= esc_html__( 'Filter', 'buddyclients-free' );
         $content .= '</button>';
         
         // Close the form
@@ -392,12 +392,12 @@ class AdminDashboard {
      */
     private function filter_options() {
         return [
-            'year_to_date'      => __( 'Year to Date', 'buddyclients' ),
-            'month_to_date'     => __( 'Month to Date', 'buddyclients' ),
-            'last_30_days'      => __( 'Last 30 Days', 'buddyclients' ),
-            'last_365_days'     => __( 'Last 365 Days', 'buddyclients' ),
-            'today_only'        => __( 'Today Only', 'buddyclients' ),
-            'yesterday_only'    => __( 'Yesterday Only', 'buddyclients' ),
+            'year_to_date'      => __( 'Year to Date', 'buddyclients-free' ),
+            'month_to_date'     => __( 'Month to Date', 'buddyclients-free' ),
+            'last_30_days'      => __( 'Last 30 Days', 'buddyclients-free' ),
+            'last_365_days'     => __( 'Last 365 Days', 'buddyclients-free' ),
+            'today_only'        => __( 'Today Only', 'buddyclients-free' ),
+            'yesterday_only'    => __( 'Yesterday Only', 'buddyclients-free' ),
         ];
     }
     
@@ -412,10 +412,10 @@ class AdminDashboard {
         
         // Define column headers for the overview table
         $headers = [
-            __( 'Status', 'buddyclients' ),
-            __( 'Count', 'buddyclients' ),
-            __( 'Total', 'buddyclients' ),
-            __( 'Net', 'buddyclients' )
+            __( 'Status', 'buddyclients-free' ),
+            __( 'Count', 'buddyclients-free' ),
+            __( 'Total', 'buddyclients-free' ),
+            __( 'Net', 'buddyclients-free' )
         ];
         
         // Start building the content
@@ -683,7 +683,7 @@ class AdminDashboard {
         // Add the booking success pie chart and key metric
         $content .= $this->booking_success_pie_chart();
         $content .= ob_get_clean(); // Capture and append the pie chart output
-        $content .= $this->key_metric( __( 'Conversion Rate', 'buddyclients' ), 'conversion_rate' );
+        $content .= $this->key_metric( __( 'Conversion Rate', 'buddyclients-free' ), 'conversion_rate' );
         
         $content .= '</div>'; // Close pie chart container
 

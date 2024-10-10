@@ -33,7 +33,7 @@ function bc_free_nav_tabs( $tabs ) {
     unset( $tabs['license'] );
 
     // Add upgrade tab
-    $tabs['free_upgrade'] = [__( 'Upgrade', 'buddyclients' ) => ['page'  => 'bc-free-upgrade']];
+    $tabs['free_upgrade'] = [__( 'Upgrade', 'buddyclients-free' ) => ['page'  => 'bc-free-upgrade']];
 
     return $tabs;
 }
@@ -52,7 +52,7 @@ function bc_free_upgrade_content() {
     echo '<div class="bcf-upgrade-info">';
     
     // Upgrade heading
-    echo __( '<h1>Upgrade BuddyClients to accept payments, manage projects, and <strong>grow your business</strong>.</h1>', 'buddyclients' );
+    echo __( '<h1>Upgrade BuddyClients to accept payments, manage projects, and <strong>grow your business</strong>.</h1>', 'buddyclients-free' );
     
     // Open options container
     echo '<div class="bcf-upgrade-options">';
@@ -60,30 +60,30 @@ function bc_free_upgrade_content() {
     // Define options
     $options = [
         'essential' => [
-            'name'          => 'BuddyClients ' . __( 'Essential', 'buddyclients' ),
-            'description'   => __( 'Sell services and manage clients\' projects in one place.', 'buddyclients' ),
+            'name'          => 'BuddyClients ' . __( 'Essential', 'buddyclients-free' ),
+            'description'   => __( 'Sell services and manage clients\' projects in one place.', 'buddyclients-free' ),
             'features'      => [
-                __( 'Everything in Free', 'buddyclients' ),
-                __( 'Flexible pricing structures', 'buddyclients' ),
-                __( 'Adjust prices dynamically', 'buddyclients' ),
-                __( 'Filter team by preferences', 'buddyclients' ),
-                __( 'Manage team payments', 'buddyclients' ),
+                __( 'Everything in Free', 'buddyclients-free' ),
+                __( 'Flexible pricing structures', 'buddyclients-free' ),
+                __( 'Adjust prices dynamically', 'buddyclients-free' ),
+                __( 'Filter team by preferences', 'buddyclients-free' ),
+                __( 'Manage team payments', 'buddyclients-free' ),
             ],
         ],
         'business' => [
-            'name'          => 'BuddyClients ' . __( 'Business', 'buddyclients' ),
-            'description'   => __( 'Grow your service-based business with premium tools.', 'buddyclients' ),
+            'name'          => 'BuddyClients ' . __( 'Business', 'buddyclients-free' ),
+            'description'   => __( 'Grow your service-based business with premium tools.', 'buddyclients-free' ),
             'features'      => [
-                __( 'Everything in Essential', 'buddyclients' ),
-                __( 'Affiliate program', 'buddyclients' ),
-                __( 'Client testimonials', 'buddyclients' ),
-                __( 'Custom quotes', 'buddyclients' ),
-                __( 'Live search help docs', 'buddyclients' ),
-                __( 'Contact form', 'buddyclients' ),
-                __( 'Legal agreements', 'buddyclients' ),
-                __( 'Team availability', 'buddyclients' ),
-                __( 'Sales team commission', 'buddyclients' ),
-                __( 'Manual and assisted bookings', 'buddyclients' ),
+                __( 'Everything in Essential', 'buddyclients-free' ),
+                __( 'Affiliate program', 'buddyclients-free' ),
+                __( 'Client testimonials', 'buddyclients-free' ),
+                __( 'Custom quotes', 'buddyclients-free' ),
+                __( 'Live search help docs', 'buddyclients-free' ),
+                __( 'Contact form', 'buddyclients-free' ),
+                __( 'Legal agreements', 'buddyclients-free' ),
+                __( 'Team availability', 'buddyclients-free' ),
+                __( 'Sales team commission', 'buddyclients-free' ),
+                __( 'Manual and assisted bookings', 'buddyclients-free' ),
             ],
         ]
     ];
@@ -104,7 +104,7 @@ function bc_free_upgrade_content() {
         echo '</ul>';
         echo '</div>';
 
-        echo '<a href="' . bc_upgrade_url() . '" class="buy-now" target="_blank">' . __( 'Learn More', 'buddyclients' ) . '</a>';
+        echo '<a href="' . bc_upgrade_url() . '" class="buy-now" target="_blank">' . __( 'Learn More', 'buddyclients-free' ) . '</a>';
         echo '</div>';
         
     }

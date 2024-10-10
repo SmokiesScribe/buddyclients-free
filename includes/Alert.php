@@ -30,7 +30,7 @@ class Alert {
             
             // Define var
             $this->content = $content;
-            $this->priority = $priority;
+            self::$priority = $priority;
             
             // Check the priority
             if ( ! $this->greater_priority( $priority ) ) {

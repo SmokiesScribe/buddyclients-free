@@ -101,10 +101,10 @@ class MetaManager {
                     'Type' => [ 
                         'meta' => [
                             'service_type' => [
-                                'label' => __( 'Service Type', 'buddyclients' ),
+                                'label' => __( 'Service Type', 'buddyclients-free' ),
                                 'description' => sprintf(
                                     /* translators: %s: the url to add service types */
-                                    __( 'Select the category for this service. <a href="%s">Add service types.</a>', 'buddyclients' ),
+                                    __( 'Select the category for this service. <a href="%s">Add service types.</a>', 'buddyclients-free' ),
                                     admin_url('/edit.php?post_type=bc_service_type')
                                 ),
                                 'type' => 'dropdown',
@@ -120,10 +120,10 @@ class MetaManager {
                     'Team Member' => [
                         'meta' => [
                             'team_member_role' => [
-                                'label' => __( 'Team Member Role', 'buddyclients' ),
+                                'label' => __( 'Team Member Role', 'buddyclients-free' ),
                                 'description' => sprintf(
                                     /* translators: %s: the url to add roles */
-                                    __( 'Select which team member role applies to this service. <a href="%s">Add roles.</a>', 'buddyclients' ),
+                                    __( 'Select which team member role applies to this service. <a href="%s">Add roles.</a>', 'buddyclients-free' ),
                                     admin_url('/edit.php?post_type=bc_role')
                                 ),
                                 'type' => 'dropdown',
@@ -131,8 +131,8 @@ class MetaManager {
                                 'required' => true,
                             ],
                             'assigned_team_member' => [
-                                'label' => __( 'Assigned Team Member', 'buddyclients' ),
-                                'description' => __( 'Select a team member to ALWAYS be assigned this service. Selecting a team member here disables the Choose a Team Member option on the booking form and overrides all team member filtering.', 'buddyclients' ),
+                                'label' => __( 'Assigned Team Member', 'buddyclients-free' ),
+                                'description' => __( 'Select a team member to ALWAYS be assigned this service. Selecting a team member here disables the Choose a Team Member option on the booking form and overrides all team member filtering.', 'buddyclients-free' ),
                                 'required' => false,
                                 'freelancer' => 'disable',
                                 'type' => 'dropdown',
@@ -147,16 +147,16 @@ class MetaManager {
                     'Client' => [
                         'meta' => [
                             'rate_value' => [
-                                'label' => __( 'Rate Value', 'buddyclients' ),
-                                'description' => __( 'Enter the fee for this service.', 'buddyclients' ),
+                                'label' => __( 'Rate Value', 'buddyclients-free' ),
+                                'description' => __( 'Enter the fee for this service.', 'buddyclients-free' ),
                                 'type' => 'number',
                                 'required' => false,
                             ],
                             'rate_type' => [
-                                'label' => __( 'Rate Type', 'buddyclients' ),
+                                'label' => __( 'Rate Type', 'buddyclients-free' ),
                                 'description' => sprintf(
                                     /* translators: %s: the url to add rate types */
-                                    __( 'Select the type of fee entered above. <a href="%s">Add rate types.</a>', 'buddyclients' ),
+                                    __( 'Select the type of fee entered above. <a href="%s">Add rate types.</a>', 'buddyclients-free' ),
                                     admin_url('/edit.php?post_type=bc_rate_type')
                                 ),
                                 'type' => 'dropdown',
@@ -168,8 +168,8 @@ class MetaManager {
                         'freelancer' => 'disable',
                         'meta' => [
                             'team_member_percentage' => [
-                                'label' => __( 'Team Member Percentage', 'buddyclients' ),
-                                'description' => __( 'What percentage of the client fee do team members receive for this service? Ex: 50', 'buddyclients' ),
+                                'label' => __( 'Team Member Percentage', 'buddyclients-free' ),
+                                'description' => __( 'What percentage of the client fee do team members receive for this service? Ex: 50', 'buddyclients-free' ),
                                 'type' => 'number',
                                 'required_component' => 'stripe',
                                 'freelancer' => 'disable',
@@ -179,8 +179,8 @@ class MetaManager {
                     'Adjustments' => [
                         'meta' => [
                             'adjustments' => [
-                                'label' => __( 'Adjustments', 'buddyclients' ),
-                                'description' => __( 'Select any rate adjustments that apply to this service.', 'buddyclients' ),
+                                'label' => __( 'Adjustments', 'buddyclients-free' ),
+                                'description' => __( 'Select any rate adjustments that apply to this service.', 'buddyclients-free' ),
                                 'type' => 'checkbox',
                                 'required' => false,
                                 'options' => 'bc_adjustment',
@@ -194,10 +194,10 @@ class MetaManager {
                     'Brief' => [
                         'meta' => [
                             'brief_type' => [
-                                'label' => __( 'Brief Type', 'buddyclients' ),
+                                'label' => __( 'Brief Type', 'buddyclients-free' ),
                                 'description' => sprintf(
                                     /* translators: %s: the url to add brief types */
-                                    __( 'Select the brief type(s) to create for this service. <a href="%s">Add brief types.</a>', 'buddyclients' ),
+                                    __( 'Select the brief type(s) to create for this service. <a href="%s">Add brief types.</a>', 'buddyclients-free' ),
                                     admin_url('/edit-tags.php?taxonomy=brief_type&&post_type=bc_brief')
                                 ),
                                 'required' => false,
@@ -210,8 +210,8 @@ class MetaManager {
                     'Dependencies' => [
                         'meta' => [
                             'dependency' => [
-                                'label' => __( 'Required Services', 'buddyclients' ),
-                                'description' => __( 'Which service(s) must be booked or selected before this one is available?', 'buddyclients' ),
+                                'label' => __( 'Required Services', 'buddyclients-free' ),
+                                'description' => __( 'Which service(s) must be booked or selected before this one is available?', 'buddyclients-free' ),
                                 'required' => false,
                                 'type' => 'checkbox',
                                 'options' => 'bc_service',
@@ -221,8 +221,8 @@ class MetaManager {
                     'File Uploads' => [
                         'meta' => [
                             'file_uploads' => [
-                                'label' => __( 'File Uploads', 'buddyclients' ),
-                                'description' => __( 'Select any file upload types that apply to this service.', 'buddyclients' ),
+                                'label' => __( 'File Uploads', 'buddyclients-free' ),
+                                'description' => __( 'Select any file upload types that apply to this service.', 'buddyclients-free' ),
                                 'type' => 'checkbox',
                                 'required' => false,
                                 'options' => 'bc_file_upload',
@@ -236,18 +236,18 @@ class MetaManager {
                     'Display' => [
                         'meta' => [
                             'order' => [
-                                'label' => __( 'Order', 'buddyclients' ),
-                                'description' => __( 'Higher numbers are shown first.', 'buddyclients' ),
+                                'label' => __( 'Order', 'buddyclients-free' ),
+                                'description' => __( 'Higher numbers are shown first.', 'buddyclients-free' ),
                                 'type' => 'number',
                                 'required' => false,
                             ],
                             'hide' => [
-                                'label' => __( 'Hide', 'buddyclients' ),
+                                'label' => __( 'Hide', 'buddyclients-free' ),
                                 'description' => '',
                                 'required' => false,
                                 'type' => 'checkbox',
                                 'options' => [
-                                    true => __( 'Hide from booking form. (The service will still appear in shortcodes and archives.)', 'buddyclients' ),
+                                    true => __( 'Hide from booking form. (The service will still appear in shortcodes and archives.)', 'buddyclients-free' ),
                                 ],
                             ],
                         ],
@@ -268,27 +268,27 @@ class MetaManager {
                     'Display' => [
                         'meta' => [
                             'form_field_type' => [
-                                'label' => __( 'Form Field Type', 'buddyclients' ),
-                                'description' => __( 'Type of field to display these services on booking form. Choose checkboxes to allow users to select multiple options.', 'buddyclients' ),
+                                'label' => __( 'Form Field Type', 'buddyclients-free' ),
+                                'description' => __( 'Type of field to display these services on booking form. Choose checkboxes to allow users to select multiple options.', 'buddyclients-free' ),
                                 'type' => 'dropdown',
                                 'default' => 'dropdown',
                                 'options' => [
-                                    'dropdown' => __( 'Dropdown', 'buddyclients' ),
-                                    'checkbox' => __( 'Checkboxes', 'buddyclients' )
+                                    'dropdown' => __( 'Dropdown', 'buddyclients-free' ),
+                                    'checkbox' => __( 'Checkboxes', 'buddyclients-free' )
                                 ],
                             ],
                             'order' => [
-                                'label' => __( 'Order', 'buddyclients' ),
-                                'description' => __( 'Higher numbers are shown first.', 'buddyclients' ),
+                                'label' => __( 'Order', 'buddyclients-free' ),
+                                'description' => __( 'Higher numbers are shown first.', 'buddyclients-free' ),
                                 'type' => 'number',
                                 'placeholder' => '0',
                             ],
                             'hide' => [
-                                'label' => __( 'Hide', 'buddyclients' ),
+                                'label' => __( 'Hide', 'buddyclients-free' ),
                                 'description' => '',
                                 'type' => 'checkbox',
                                 'options' => [
-                                    true => __( 'Hide all services of this category from the booking form. (They will still appear in shortcodes and archives.)', 'buddyclients' ),
+                                    true => __( 'Hide all services of this category from the booking form. (They will still appear in shortcodes and archives.)', 'buddyclients-free' ),
                                 ],
                             ],
                         ],
@@ -296,8 +296,8 @@ class MetaManager {
                     'Help Doc' => [
                         'meta' => [
                             'help_post_id' => [
-                                'label' => __( 'Help Post', 'buddyclients' ),
-                                'description' => __( 'Help doc to show on booking form.', 'buddyclients' ),
+                                'label' => __( 'Help Post', 'buddyclients-free' ),
+                                'description' => __( 'Help doc to show on booking form.', 'buddyclients-free' ),
                                 'type' => 'dropdown',
                                 'options' => 'help_docs',
                             ],
@@ -320,15 +320,15 @@ class MetaManager {
                     'Field' => [
                         'meta' => [
                             'xprofile_field' => [
-                                'label' => __( 'Xprofile Field', 'buddyclients' ),
+                                'label' => __( 'Xprofile Field', 'buddyclients-free' ),
                                 'description' => sprintf(
                                     /* translators: %s: the url to add xprofile fields */
-                                    __( 'Choose from checkbox and dropdown Xprofile fields. <a href="%s">Create a new field.</a>', 'buddyclients' ),
+                                    __( 'Choose from checkbox and dropdown Xprofile fields. <a href="%s">Create a new field.</a>', 'buddyclients-free' ),
                                     admin_url('/admin.php?page=bp-profile-setup')
                                 ),
                                 'type' => 'dropdown',
                                 'options' => bc_options( 'xprofile', ['existing' => ['bc_filter' => 'xprofile_field']] ),
-                                'placeholder' => __( 'Select a Field', 'buddyclients' ),
+                                'placeholder' => __( 'Select a Field', 'buddyclients-free' ),
                             ],
                         ],
                     ],
@@ -339,16 +339,16 @@ class MetaManager {
                     'Labels' => [
                         'meta' => [
                             'form_label' => [
-                                'label' => __( 'Form Label', 'buddyclients' ),
-                                'description' => __( 'The label to display on the booking form.', 'buddyclients' ),
+                                'label' => __( 'Form Label', 'buddyclients-free' ),
+                                'description' => __( 'The label to display on the booking form.', 'buddyclients-free' ),
                                 'type' => 'text',
-                                'placeholder' => __( 'e.g. Preferences', 'buddyclients' ),
+                                'placeholder' => __( 'e.g. Preferences', 'buddyclients-free' ),
                             ],
                             'form_description' => [
-                                'label' => __( 'Description', 'buddyclients' ),
-                                'description' => __( 'The description to display on the booking form.', 'buddyclients' ),
+                                'label' => __( 'Description', 'buddyclients-free' ),
+                                'description' => __( 'The description to display on the booking form.', 'buddyclients-free' ),
                                 'type' => 'text',
-                                'placeholder' => __( 'e.g. Select applicable preferences.', 'buddyclients' ),
+                                'placeholder' => __( 'e.g. Select applicable preferences.', 'buddyclients-free' ),
                             ],
                         ],
                     ],
@@ -359,30 +359,30 @@ class MetaManager {
                     'Field' => [
                         'meta' => [
                             'match_type' => [
-                                'label' => __( 'Match Type', 'buddyclients' ),
+                                'label' => __( 'Match Type', 'buddyclients-free' ),
                                 'description' => __( '<strong>Exact:</strong> Only team members whose response matches exactly will be available.
                                 <br><strong>Exclude:</strong> Only team members whose profile response does not include the client\'s response will be available.
                                 <br><strong>Include Any:</strong> Only team members whose response includes any of the selected options will be available.
-                                <br><strong>Include All:</strong> Only team members whose response includes all of the selected options will be available.', 'buddyclients' ),
+                                <br><strong>Include All:</strong> Only team members whose response includes all of the selected options will be available.', 'buddyclients-free' ),
                                 'type' => 'dropdown',
                                 'default' => 'exact',
-                                'placeholder' => __( 'Select a Match Type', 'buddyclients' ),
+                                'placeholder' => __( 'Select a Match Type', 'buddyclients-free' ),
                                 'options' => [
-                                    'exact' => __( 'Exact Match', 'buddyclients' ),
-                                    'include_any' => __( 'Include Any', 'buddyclients' ),
-                                    'include_all' => __( 'Include All', 'buddyclients' ),
-                                    'exclude' => __( 'Exclude', 'buddyclients' )
+                                    'exact' => __( 'Exact Match', 'buddyclients-free' ),
+                                    'include_any' => __( 'Include Any', 'buddyclients-free' ),
+                                    'include_all' => __( 'Include All', 'buddyclients-free' ),
+                                    'exclude' => __( 'Exclude', 'buddyclients-free' )
                                 ],
                             ],
                             'multiple_options' => [
-                                'label' => __( 'Multiple Options', 'buddyclients' ),
-                                'description' => __( 'Can clients select multiple options for this field?', 'buddyclients' ),
+                                'label' => __( 'Multiple Options', 'buddyclients-free' ),
+                                'description' => __( 'Can clients select multiple options for this field?', 'buddyclients-free' ),
                                 'type' => 'dropdown',
-                                'placeholder' => __( 'Select One', 'buddyclients' ),
+                                'placeholder' => __( 'Select One', 'buddyclients-free' ),
                                 'default' => 'no',
                                 'options' => [
-                                    'no' => __( 'No (dropdown field)', 'buddyclients' ),
-                                    'yes' => __( 'Yes (checkbox field)', 'buddyclients' ),
+                                    'no' => __( 'No (dropdown field)', 'buddyclients-free' ),
+                                    'yes' => __( 'Yes (checkbox field)', 'buddyclients-free' ),
                                 ],
                             ],
                         ],
@@ -390,8 +390,8 @@ class MetaManager {
                     'Help Doc' => [
                         'meta' => [
                             'help_post_id' => [
-                                'label' => __( 'Help Post', 'buddyclients' ),
-                                'description' => __( 'Help doc to show on booking form.', 'buddyclients' ),
+                                'label' => __( 'Help Post', 'buddyclients-free' ),
+                                'description' => __( 'Help doc to show on booking form.', 'buddyclients-free' ),
                                 'type' => 'dropdown',
                                 'options' => 'help_docs',
                             ],
@@ -415,26 +415,26 @@ class MetaManager {
                     'Labels' => [
                         'meta' => [
                             'singular' => [
-                                'label' => __( 'Singular', 'buddyclients' ),
+                                'label' => __( 'Singular', 'buddyclients-free' ),
                                 'description' => '',
                                 'type' => 'text',
-                                'placeholder' => __( 'e.g. Editor', 'buddyclients' ),
+                                'placeholder' => __( 'e.g. Editor', 'buddyclients-free' ),
                             ],
                             'plural' => [
-                                'label' => __( 'Plural', 'buddyclients' ),
+                                'label' => __( 'Plural', 'buddyclients-free' ),
                                 'description' => '',
                                 'type' => 'text',
-                                'placeholder' => __( 'e.g. Editors', 'buddyclients' ),
+                                'placeholder' => __( 'e.g. Editors', 'buddyclients-free' ),
                             ],
                         ],
                     ],
                     'Description' => [
                         'meta' => [
                             'form_description' => [
-                                'label' => __( 'Description', 'buddyclients' ),
-                                'description' => __( 'Optional.', 'buddyclients' ),
+                                'label' => __( 'Description', 'buddyclients-free' ),
+                                'description' => __( 'Optional.', 'buddyclients-free' ),
                                 'type' => 'text',
-                                'placeholder' => __( 'e.g. Does awesome things for clients.', 'buddyclients' ),
+                                'placeholder' => __( 'e.g. Does awesome things for clients.', 'buddyclients-free' ),
                             ],
                         ],
                     ],
@@ -455,12 +455,12 @@ class MetaManager {
                     'Type' => [
                         'meta' => [
                             'form_field_type' => [
-                                'label' => __( 'Form Field Type', 'buddyclients' ),
-                                'description' => __( 'Type of field on booking form.', 'buddyclients' ),
+                                'label' => __( 'Form Field Type', 'buddyclients-free' ),
+                                'description' => __( 'Type of field on booking form.', 'buddyclients-free' ),
                                 'type' => 'dropdown',
                                 'options' => [
-                                    'dropdown' => __( 'Dropdown', 'buddyclients' ),
-                                    'checkbox' => __( 'Checkboxes', 'buddyclients' ),
+                                    'dropdown' => __( 'Dropdown', 'buddyclients-free' ),
+                                    'checkbox' => __( 'Checkboxes', 'buddyclients-free' ),
                                 ],
                             ],
                         ],
@@ -472,13 +472,13 @@ class MetaManager {
                     'Labels' => [
                         'meta' => [
                             'label' => [
-                                'label' => __( 'Label', 'buddyclients' ),
-                                'description' => __( 'Field label to display on booking form.', 'buddyclients' ),
+                                'label' => __( 'Label', 'buddyclients-free' ),
+                                'description' => __( 'Field label to display on booking form.', 'buddyclients-free' ),
                                 'type' => 'text',
                             ],
                             'field_description' => [
-                                'label' => __( 'Description', 'buddyclients' ),
-                                'description' => __( 'Field description to display on booking form.', 'buddyclients' ),
+                                'label' => __( 'Description', 'buddyclients-free' ),
+                                'description' => __( 'Field description to display on booking form.', 'buddyclients-free' ),
                                 'type' => 'text',
                             ],
                         ],
@@ -486,8 +486,8 @@ class MetaManager {
                     'Help Doc' => [
                         'meta' => [
                             'help_post_id' => [
-                                'label' => __( 'Help Post', 'buddyclients' ),
-                                'description' => __( 'Help doc to show on booking form.', 'buddyclients' ),
+                                'label' => __( 'Help Post', 'buddyclients-free' ),
+                                'description' => __( 'Help doc to show on booking form.', 'buddyclients-free' ),
                                 'type' => 'dropdown',
                                 'options' => 'help_docs',
                             ],
@@ -496,11 +496,11 @@ class MetaManager {
                 ],
             ],
             'Options' => [
-                'description' => __( 'Each option will adjust the service fee based on the user response.', 'buddyclients' ),
+                'description' => __( 'Each option will adjust the service fee based on the user response.', 'buddyclients-free' ),
                 'tables' => self::adjustment_options(),
             ],
             'New Option' => [
-                'description' => '<a id="bc_adjustment_create_option" class="button-secondary">' . __( 'Add Option', 'buddyclients' ) . '</a>',
+                'description' => '<a id="bc_adjustment_create_option" class="button-secondary">' . __( 'Add Option', 'buddyclients-free' ) . '</a>',
                 'tables' => [],
             ],
         ];
@@ -539,18 +539,18 @@ class MetaManager {
             $meta_fields['Option ' . $i] = [
                 'meta' => [
                     'option_' . $i . '_label' => [
-                        'label' => __( 'Label', 'buddyclients' ),
+                        'label' => __( 'Label', 'buddyclients-free' ),
                         'description' => '',
                         'type' => 'text',
                     ],
                     'option_' . $i . '_operator' => [
-                        'label' => __( 'Operator', 'buddyclients' ),
+                        'label' => __( 'Operator', 'buddyclients-free' ),
                         'description' => '',
                         'type' => 'dropdown',
                         'options' => 'operator',
                     ],
                     'option_' . $i . '_value' => [
-                        'label' => __( 'Value', 'buddyclients' ),
+                        'label' => __( 'Value', 'buddyclients-free' ),
                         'description' => '',
                         'type' => 'text',
                     ],
@@ -572,26 +572,26 @@ class MetaManager {
                     'Labels' => [
                         'meta' => [
                             'singular' => [
-                                'label' => __( 'Singular', 'buddyclients' ),
+                                'label' => __( 'Singular', 'buddyclients-free' ),
                                 'description' => '',
                                 'type' => 'text',
-                                'placeholder' => __( 'e.g. Word, Hour, Page', 'buddyclients' ),
+                                'placeholder' => __( 'e.g. Word, Hour, Page', 'buddyclients-free' ),
                             ],
                             'plural' => [
-                                'label' => __( 'Plural', 'buddyclients' ),
+                                'label' => __( 'Plural', 'buddyclients-free' ),
                                 'description' => '',
                                 'type' => 'text',
-                                'placeholder' => __( 'e.g. Words, Hours, Pages', 'buddyclients' ),
+                                'placeholder' => __( 'e.g. Words, Hours, Pages', 'buddyclients-free' ),
                             ],
                         ],
                     ],
                     'Description' => [
                         'meta' => [
                             'form_description' => [
-                                'label' => __( 'Description', 'buddyclients' ),
-                                'description' => __( 'Instructions for users on booking form.', 'buddyclients' ),
+                                'label' => __( 'Description', 'buddyclients-free' ),
+                                'description' => __( 'Instructions for users on booking form.', 'buddyclients-free' ),
                                 'type' => 'text',
-                                'placeholder' => __( 'e.g. Please add your full word count.', 'buddyclients' ),
+                                'placeholder' => __( 'e.g. Please add your full word count.', 'buddyclients-free' ),
                             ],
                         ],
                     ],
@@ -602,18 +602,18 @@ class MetaManager {
                     'Calculations' => [
                         'meta' => [
                             'attach' => [
-                                'label' => __( 'Attach Count To', 'buddyclients' ),
-                                'description' => __( 'Each time a client books services, will this number be different for each service or the same for the entire project?', 'buddyclients' ),
+                                'label' => __( 'Attach Count To', 'buddyclients-free' ),
+                                'description' => __( 'Each time a client books services, will this number be different for each service or the same for the entire project?', 'buddyclients-free' ),
                                 'type' => 'dropdown',
                                 'options' => [
-                                    'project' => __( 'Project', 'buddyclients' ),
-                                    'service' => __( 'Service', 'buddyclients' ),
+                                    'project' => __( 'Project', 'buddyclients-free' ),
+                                    'service' => __( 'Service', 'buddyclients-free' ),
                                 ],
                                 'default' => 'project'
                             ],
                             'minimum' => [
-                                'label' => __( 'Minimum', 'buddyclients' ),
-                                'description' => __( 'The minimum number of units allowed.', 'buddyclients' ),
+                                'label' => __( 'Minimum', 'buddyclients-free' ),
+                                'description' => __( 'The minimum number of units allowed.', 'buddyclients-free' ),
                                 'type' => 'number',
                                 'placeholder' => 0
                             ],

@@ -224,8 +224,8 @@ private function toggle_button( $show_form, $is_admin, $updated_date ) {
     
     // Define labels
     $labels = [
-        'edit'      => __( 'Edit', 'buddyclients' ),
-        'view'      => __( 'View', 'buddyclients' ),
+        'edit'      => __( 'Edit', 'buddyclients-free' ),
+        'view'      => __( 'View', 'buddyclients-free' ),
     ];
 
     // Generate the button HTML

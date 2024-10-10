@@ -189,23 +189,23 @@ class Taxonomy {
         $this->labels = [
             'name'               => $this->plural_name,
             'singular_name'      => $this->singular_name,
-            'add_new'            => __( 'Add New', 'buddyclients' ),
+            'add_new'            => __( 'Add New', 'buddyclients-free' ),
             /* translators: %s: singular name of the item */
-            'add_new_item'       => sprintf( __( 'Add New %s', 'buddyclients' ), $this->singular_name ),
+            'add_new_item'       => sprintf( __( 'Add New %s', 'buddyclients-free' ), $this->singular_name ),
             /* translators: %s: singular name of the item */
-            'edit_item'          => sprintf( __( 'Edit %s', 'buddyclients' ), $this->singular_name ),
+            'edit_item'          => sprintf( __( 'Edit %s', 'buddyclients-free' ), $this->singular_name ),
             /* translators: %s: singular name of the item */
-            'new_item'           => sprintf( __( 'New %s', 'buddyclients' ), $this->singular_name ),
+            'new_item'           => sprintf( __( 'New %s', 'buddyclients-free' ), $this->singular_name ),
             /* translators: %s: menu name */
             'all_items'          => $this->menu_name,
             /* translators: %s: singular name of the item */
-            'view_item'          => sprintf( __( 'View %s', 'buddyclients' ), $this->singular_name ),
+            'view_item'          => sprintf( __( 'View %s', 'buddyclients-free' ), $this->singular_name ),
             /* translators: %s: plural name of the item */
-            'search_items'       => sprintf( __( 'Search %s', 'buddyclients' ), $this->plural_name ),
+            'search_items'       => sprintf( __( 'Search %s', 'buddyclients-free' ), $this->plural_name ),
             /* translators: %s: plural name of the item */
-            'not_found'          => sprintf( __( 'No %s found', 'buddyclients' ), strtolower( $this->plural_name ) ),
+            'not_found'          => sprintf( __( 'No %s found', 'buddyclients-free' ), strtolower( $this->plural_name ) ),
             /* translators: %s: plural name of the item */
-            'not_found_in_trash' => sprintf( __( 'No %s found in trash', 'buddyclients' ), strtolower( $this->plural_name ) ),
+            'not_found_in_trash' => sprintf( __( 'No %s found in trash', 'buddyclients-free' ), strtolower( $this->plural_name ) ),
             'parent_item_colon'  => '',
             /* translators: %s: menu name */
             'menu_name'          => $this->menu_name

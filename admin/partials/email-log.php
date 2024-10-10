@@ -16,11 +16,11 @@ function bc_email_log_content() {
     
     // Define headers
     $headers = [
-        __( 'Sent At', 'buddyclients' ),
-        __( 'To', 'buddyclients' ),
-        __( 'Email', 'buddyclients' ),
-        __( 'Subject', 'buddyclients' ),
-        __( 'Content', 'buddyclients' )
+        __( 'Sent At', 'buddyclients-free' ),
+        __( 'To', 'buddyclients-free' ),
+        __( 'Email', 'buddyclients-free' ),
+        __( 'Subject', 'buddyclients-free' ),
+        __( 'Content', 'buddyclients-free' )
     ];
     
     // Define columns
@@ -37,7 +37,7 @@ function bc_email_log_content() {
         'headings'      => $headers,
         'columns'       => $columns,
         'items'         => $emails,
-        'title'         => __( 'Email Log', 'buddyclients' ),
+        'title'         => __( 'Email Log', 'buddyclients-free' ),
     ];
     
     new AdminTable( $args );
@@ -63,8 +63,8 @@ function bc_email_log_admin_notice() {
         // Format setting value
         $email_setting = is_numeric( $email_setting )
             /* translators: %d: the numnber of days emails are retained */
-            ? sprintf( __( 'for %d days', 'buddyclients' ), $email_setting ) 
-            : __( 'forever', 'buddyclients' );
+            ? sprintf( __( 'for %d days', 'buddyclients-free' ), $email_setting ) 
+            : __( 'forever', 'buddyclients-free' );
             
         // Build note
         $message = sprintf(
@@ -77,7 +77,7 @@ function bc_email_log_admin_notice() {
         $notice_args = [
             'repair_link'       => ['/admin.php?page=bc-email-settings'],
             'dismissable'       => true,
-            'repair_link_text'  => [__( 'Change setting.', 'buddyclients' )],
+            'repair_link_text'  => [__( 'Change setting.', 'buddyclients-free' )],
             'message'           => $message,
             'color'             => 'blue'
         ];

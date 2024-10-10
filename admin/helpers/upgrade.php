@@ -86,7 +86,7 @@ function bc_upgrade_link( $boxed = null ) {
     
     // Build link
     $link = sprintf(
-        '<p class="bc-upgrade-link">%s ' . __( 'Upgrade to <a href="%s" target="_blank">BuddyClients Essential or BuddyClients Business</a>.', 'buddyclients' ),
+        '<p class="bc-upgrade-link">%s ' . __( 'Upgrade to <a href="%s" target="_blank">BuddyClients Essential or BuddyClients Business</a>.', 'buddyclients-free' ),
         $icon,
         esc_url( $url )
     );
@@ -109,10 +109,10 @@ function bc_account_link() {
     $icon = '<i class="' . $icon_class . '"></i> ';
     $url = bc_account_url();
     return sprintf(
-        '<p class="bc-upgrade-link">%s ' . __( 'Manage <a href="%s" target="_blank">%s</a>.', 'buddyclients' ) . '</p>',
+        '<p class="bc-upgrade-link">%s ' . __( 'Manage <a href="%s" target="_blank">%s</a>.', 'buddyclients-free' ) . '</p>',
         $icon,
         esc_url( $url ),
-        __( 'your BuddyClients subscription', 'buddyclients' )
+        __( 'your BuddyClients subscription', 'buddyclients-free' )
     );
 }
 
@@ -146,7 +146,7 @@ function bc_enable_component_link( $component, $boxed = null ) {
     
     // Build link
     $link = sprintf(
-        '<p class="bc-upgrade-link">%s ' . __( 'The %s component is disabled. <a href="%s">Enable the component</a>.', 'buddyclients' ) . '</p>',
+        '<p class="bc-upgrade-link">%s ' . __( 'The %s component is disabled. <a href="%s">Enable the component</a>.', 'buddyclients-free' ) . '</p>',
         $icon,
         bc_component_name( $component ),
         esc_url( $url )
@@ -188,7 +188,7 @@ function bc_freelancer_mode_link( $enable = null, $boxed = null ) {
     $close_container = $boxed ? '</div>' : '';
     
     // Build link
-    $link = '<p class="bc-upgrade-link">' . $icon . __( 'Freelancer Mode is enabled. <a href="%s">Disable Freelancer Mode</a>.', 'buddyclients' ) . '</p>';
+    $link = '<p class="bc-upgrade-link">' . $icon . __( 'Freelancer Mode is enabled. <a href="%s">Disable Freelancer Mode</a>.', 'buddyclients-free' ) . '</p>';
     
     // Build output
     $output = $open_container . $link . $close_container;

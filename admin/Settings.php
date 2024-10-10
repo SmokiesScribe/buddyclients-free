@@ -785,7 +785,7 @@ class Settings {
         } else {
             return [
                 'current_legal' => [
-                    'title' => __( 'Current Legal Agreements', 'buddyclients' ),
+                    'title' => __( 'Current Legal Agreements', 'buddyclients-free' ),
                     'description' => sprintf(
                         /* translators: %1$s: URL to add content to legal agreements; %2$s: link text */
                         __('Select the current version of each legal agreement type. If transitioning to a new version, select the previous version and add a deadline for accepting the new agreement.<br><a href="%1$s">%2$s</a>', 'buddyclients'),
@@ -795,35 +795,35 @@ class Settings {
                     'fields' => self::current_legal_fields(),
                 ],
                 'deadline' => [
-                    'title' => __( 'Deadline', 'buddyclients' ),
-                    'description' => __( 'How long do users have to accept new versions of agreements?', 'buddyclients' ),
+                    'title' => __( 'Deadline', 'buddyclients-free' ),
+                    'description' => __( 'How long do users have to accept new versions of agreements?', 'buddyclients-free' ),
                     'fields' => [
                         'legal_deadline' => [
-                            'label' => __( 'Deadline', 'buddyclients' ),
+                            'label' => __( 'Deadline', 'buddyclients-free' ),
                             'type' => 'dropdown',
                             'options' => [
-                                '7' => __( '7 Days', 'buddyclients' ),
-                                '14' => __( '14 Days', 'buddyclients' ),
-                                '30' => __( '30 Days', 'buddyclients' ),
-                                '60' => __( '60 Days', 'buddyclients' ),
-                                '' => __( 'Forever', 'buddyclients' ),
+                                '7' => __( '7 Days', 'buddyclients-free' ),
+                                '14' => __( '14 Days', 'buddyclients-free' ),
+                                '30' => __( '30 Days', 'buddyclients-free' ),
+                                '60' => __( '60 Days', 'buddyclients-free' ),
+                                '' => __( 'Forever', 'buddyclients-free' ),
                             ],
                             'description' => '',
                         ],
                     ]
                 ],
                 'require_team_agreement' => [
-                    'title' => __( 'Booking Requirements', 'buddyclients' ),
+                    'title' => __( 'Booking Requirements', 'buddyclients-free' ),
                     'description' => '',
                     'fields' => [
                         'require_agreement' => [
-                            'label' => __( 'Require Active Team Member Agreement', 'buddyclients' ),
+                            'label' => __( 'Require Active Team Member Agreement', 'buddyclients-free' ),
                             'type' => 'dropdown',
                             'options' => [
-                                'yes' => __( 'Yes', 'buddyclients' ),
-                                'no' => __( 'No', 'buddyclients' ),
+                                'yes' => __( 'Yes', 'buddyclients-free' ),
+                                'no' => __( 'No', 'buddyclients-free' ),
                             ],
-                            'description' => __( 'Should team members without active agreements be disallowed from accepting new projects?', 'buddyclients' ),
+                            'description' => __( 'Should team members without active agreements be disallowed from accepting new projects?', 'buddyclients-free' ),
                         ],
                     ]
                 ]
@@ -851,50 +851,50 @@ class Settings {
         } else {
             return [
                 'enable' => [
-                    'title' => __( 'Enable Email Notifications', 'buddyclients' ),
-                    'description' => __( 'Specify which email notifications to enable.', 'buddyclients' ),
+                    'title' => __( 'Enable Email Notifications', 'buddyclients-free' ),
+                    'description' => __( 'Specify which email notifications to enable.', 'buddyclients-free' ),
                     'fields' => [
                         'send_notifications' => [
-                            'label' => __( 'Enable Email Notifications', 'buddyclients' ),
+                            'label' => __( 'Enable Email Notifications', 'buddyclients-free' ),
                             'type' => 'checkboxes',
                             'options' => self::email_options(),
                             'default' => self::email_options( true ),
-                            'description' => __( 'Select the events you would like to trigger email notifications for users.<br><span style="color: red">*</span> Disabling starred emails may impact plugin functionality.', 'buddyclients' ),
+                            'description' => __( 'Select the events you would like to trigger email notifications for users.<br><span style="color: red">*</span> Disabling starred emails may impact plugin functionality.', 'buddyclients-free' ),
                         ],
                     ],
                 ],
                 'send' => [
-                    'title' => __( 'Email Sender', 'buddyclients' ),
-                    'description' => __( 'Specify the sent-from name and email.', 'buddyclients' ),
+                    'title' => __( 'Email Sender', 'buddyclients-free' ),
+                    'description' => __( 'Specify the sent-from name and email.', 'buddyclients-free' ),
                     'fields' => [
                         'from_email' => [
-                            'label' => __( 'From Email', 'buddyclients' ),
+                            'label' => __( 'From Email', 'buddyclients-free' ),
                             'type' => 'email',
                             'default' => get_option('admin_email'),
-                            'description' => __( 'Notifications will be sent to users from this email address.', 'buddyclients' ),
+                            'description' => __( 'Notifications will be sent to users from this email address.', 'buddyclients-free' ),
                         ],
                         'from_name' => [
-                            'label' => __( 'From Name', 'buddyclients' ),
+                            'label' => __( 'From Name', 'buddyclients-free' ),
                             'type' => 'text',
                             'default' => get_option('blogname'),
-                            'description' => __( 'What name should appear on email notifications?', 'buddyclients' ),
+                            'description' => __( 'What name should appear on email notifications?', 'buddyclients-free' ),
                         ],
                     ],
                 ],
                 'admin' => [
-                    'title' => __( 'Admin Email Notifications', 'buddyclients' ),
-                    'description' => __( 'Handle how you receive admin notifications.', 'buddyclients' ),
+                    'title' => __( 'Admin Email Notifications', 'buddyclients-free' ),
+                    'description' => __( 'Handle how you receive admin notifications.', 'buddyclients-free' ),
                     'fields' => [
                         'notification_email' => [
-                            'label' => __( 'Notification Email', 'buddyclients' ),
+                            'label' => __( 'Notification Email', 'buddyclients-free' ),
                             'type' => 'email',
                             'default' => get_option('admin_email'),
-                            'description' => __( 'Where would you like to receive admin email notifications?', 'buddyclients' ),
+                            'description' => __( 'Where would you like to receive admin email notifications?', 'buddyclients-free' ),
                         ],
                     ],
                 ],
                 'log' => [
-                    'title' => __( 'Email Log', 'buddyclients' ),
+                    'title' => __( 'Email Log', 'buddyclients-free' ),
                     'description' => sprintf(
                         /* translators: %s: URL to view the email log */
                         __('Email log settings. <a href="%s">View the email log.</a>', 'buddyclients'),
@@ -902,17 +902,17 @@ class Settings {
                     ),
                     'fields' => [
                         'email_log_time' => [
-                            'label' => __( 'Email Log Time', 'buddyclients' ),
+                            'label' => __( 'Email Log Time', 'buddyclients-free' ),
                             'type' => 'dropdown',
                             'default' => '182',
                             'options' => [
-                                '30'  => __( '30 Days', 'buddyclients' ),
-                                '90'  => __( '90 Days', 'buddyclients' ),
-                                '182' => __( '6 Months', 'buddyclients' ),
-                                '365' => __( '1 Year', 'buddyclients' ),
-                                'always' => __( 'Forever', 'buddyclients' )
+                                '30'  => __( '30 Days', 'buddyclients-free' ),
+                                '90'  => __( '90 Days', 'buddyclients-free' ),
+                                '182' => __( '6 Months', 'buddyclients-free' ),
+                                '365' => __( '1 Year', 'buddyclients-free' ),
+                                'always' => __( 'Forever', 'buddyclients-free' )
                             ],
-                            'description' => __( 'Email log records older than the selected timeframe will be deleted.', 'buddyclients' ),
+                            'description' => __( 'Email log records older than the selected timeframe will be deleted.', 'buddyclients-free' ),
                         ],
                     ],
                 ]
@@ -937,18 +937,18 @@ class Settings {
         } else {
             return [
                 'meta' => [
-                    'title' => __( 'Meta Ads Integration', 'buddyclients' ),
-                    'description' => __( 'Set up the API integration to send conversion events to Meta (Facebook).', 'buddyclients' ),
+                    'title' => __( 'Meta Ads Integration', 'buddyclients-free' ),
+                    'description' => __( 'Set up the API integration to send conversion events to Meta (Facebook).', 'buddyclients-free' ),
                     'fields' => [
                         'meta_access_token' => [
-                            'label' => __( 'Access Token', 'buddyclients' ),
+                            'label' => __( 'Access Token', 'buddyclients-free' ),
                             'type' => 'text',
-                            'description' => __( 'Enter your access token.', 'buddyclients' ),
+                            'description' => __( 'Enter your access token.', 'buddyclients-free' ),
                         ],
                         'meta_pixel_id' => [
-                            'label' => __( 'Pixel ID', 'buddyclients' ),
+                            'label' => __( 'Pixel ID', 'buddyclients-free' ),
                             'type' => 'text',
-                            'description' => __( 'Enter your pixel ID.', 'buddyclients' ),
+                            'description' => __( 'Enter your pixel ID.', 'buddyclients-free' ),
                         ],
                     ],
                 ],
@@ -974,11 +974,11 @@ class Settings {
             $license_message = function_exists( 'bc_license_message' ) ? bc_license_message() : '';
             return [
                 'license_key' => [
-                    'title' => __( 'License Activation', 'buddyclients' ),
-                    'description' => __( 'Activate your BuddyClients license.', 'buddyclients' ),
+                    'title' => __( 'License Activation', 'buddyclients-free' ),
+                    'description' => __( 'Activate your BuddyClients license.', 'buddyclients-free' ),
                     'fields' => [
                         'license_key' => [
-                            'label' => __( 'License Key', 'buddyclients' ),
+                            'label' => __( 'License Key', 'buddyclients-free' ),
                             'type' => 'text',
                             'description' => $license_message,
                         ],
@@ -1057,7 +1057,7 @@ class Settings {
      */
     private static function page_options() {
         // Initialize
-        $options = [ '' => __( 'Select a Page', 'buddyclients' ) ];
+        $options = [ '' => __( 'Select a Page', 'buddyclients-free' ) ];
         
         // Retrieve all pages
         $all_pages = get_pages(); // wp function
@@ -1076,7 +1076,7 @@ class Settings {
      * @since 0.1.0
      */
     private static function freelancer_options() {
-        $default = [ '' => __( 'OFF', 'buddyclients' ) ];
+        $default = [ '' => __( 'OFF', 'buddyclients-free' ) ];
         $options = bc_options( 'users' );
         return $default + $options;
     }
@@ -1130,34 +1130,34 @@ class Settings {
         foreach ($selected_fields as $selected_field) {
         
             $fields['match_types_' . $selected_field] = [
-                'label' => __( 'Match Type', 'buddyclients' ),
+                'label' => __( 'Match Type', 'buddyclients-free' ),
                 'type' => 'dropdown',
                 'options' => [
-                    'exact' => __( 'Exact Match', 'buddyclients' ),
+                    'exact' => __( 'Exact Match', 'buddyclients-free' ),
                 ],
-                'description' => __( 'Select from dropdown and checkbox fields that are available to team members.', 'buddyclients' ),
+                'description' => __( 'Select from dropdown and checkbox fields that are available to team members.', 'buddyclients-free' ),
             ];
             
             $fields['multiple_options_' . $selected_field] = [
-                'label' => __( 'Multiple Options', 'buddyclients' ),
+                'label' => __( 'Multiple Options', 'buddyclients-free' ),
                 'type' => 'dropdown',
                 'options' => [
-                    'no' => __( 'No', 'buddyclients' ),
+                    'no' => __( 'No', 'buddyclients-free' ),
                 ],
-                'description' => __( 'Can clients select multiple options for this field?', 'buddyclients' ),
+                'description' => __( 'Can clients select multiple options for this field?', 'buddyclients-free' ),
             ];
                 
             // Check field type
             if ($all_xprofile_fields[$selected_field]['type'] = 'checkbox') {
                 $fields['match_types_' . $selected_field]['options'] = [
-                    'exact' => __( 'Exact Match', 'buddyclients' ),
-                    'include_any' => __( 'Include Any', 'buddyclients' ),
-                    'include_all' => __( 'Include All', 'buddyclients' ),
-                    'exclude' => __( 'Exclude', 'buddyclients' ),
+                    'exact' => __( 'Exact Match', 'buddyclients-free' ),
+                    'include_any' => __( 'Include Any', 'buddyclients-free' ),
+                    'include_all' => __( 'Include All', 'buddyclients-free' ),
+                    'exclude' => __( 'Exclude', 'buddyclients-free' ),
                 ];
                 $fields['multiple_options_' . $selected_field]['options'] = [
-                    'yes' => __( 'Yes', 'buddyclients' ),
-                    'no' => __( 'No', 'buddyclients' ),
+                    'yes' => __( 'Yes', 'buddyclients-free' ),
+                    'no' => __( 'No', 'buddyclients-free' ),
                 ];
             }
         }
@@ -1226,9 +1226,9 @@ class Settings {
         
         // Define legal agreement types
         $types = array(
-            'team' => __( 'Team Member Agreement', 'buddyclients' ),
-            'client' => __( 'Service Agreement', 'buddyclients' ),
-            'affiliate' => __( 'Affiliate Agreement', 'buddyclients' ),
+            'team' => __( 'Team Member Agreement', 'buddyclients-free' ),
+            'client' => __( 'Service Agreement', 'buddyclients-free' ),
+            'affiliate' => __( 'Affiliate Agreement', 'buddyclients-free' ),
         );
         
         /**

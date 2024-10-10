@@ -75,38 +75,38 @@ class BookedServiceList {
     private function headers() {
         
         $admin_headers = [
-            __( 'Date', 'buddyclients' ),
-            __( 'Service', 'buddyclients' ),
-            __( 'Client', 'buddyclients' ),
-            __( 'Project', 'buddyclients' ),
-            __( 'Team Member', 'buddyclients' ),
-            __( 'Status', 'buddyclients' ),
-            __( 'Files', 'buddyclients' ),
-            __( 'Client Fee', 'buddyclients' ),
-            __( 'Team Fee', 'buddyclients' ),
-            __( 'Cancel', 'buddyclients' )
+            __( 'Date', 'buddyclients-free' ),
+            __( 'Service', 'buddyclients-free' ),
+            __( 'Client', 'buddyclients-free' ),
+            __( 'Project', 'buddyclients-free' ),
+            __( 'Team Member', 'buddyclients-free' ),
+            __( 'Status', 'buddyclients-free' ),
+            __( 'Files', 'buddyclients-free' ),
+            __( 'Client Fee', 'buddyclients-free' ),
+            __( 'Team Fee', 'buddyclients-free' ),
+            __( 'Cancel', 'buddyclients-free' )
         ];
         
         $client_headers = [
-            __( 'Date', 'buddyclients' ),
-            __( 'Service', 'buddyclients' ),
-            __( 'Project', 'buddyclients' ),
-            __( 'Team Member', 'buddyclients' ),
-            __( 'Status', 'buddyclients' ),
-            __( 'Files', 'buddyclients' ),
-            __( 'Client Fee', 'buddyclients' ),
-            __( 'Cancel', 'buddyclients' )
+            __( 'Date', 'buddyclients-free' ),
+            __( 'Service', 'buddyclients-free' ),
+            __( 'Project', 'buddyclients-free' ),
+            __( 'Team Member', 'buddyclients-free' ),
+            __( 'Status', 'buddyclients-free' ),
+            __( 'Files', 'buddyclients-free' ),
+            __( 'Client Fee', 'buddyclients-free' ),
+            __( 'Cancel', 'buddyclients-free' )
         ];
         
         $team_headers = [
-            __( 'Date', 'buddyclients' ),
-            __( 'Service', 'buddyclients' ),
-            __( 'Client', 'buddyclients' ),
-            __( 'Project', 'buddyclients' ),
-            __( 'Status', 'buddyclients' ),
-            __( 'Files', 'buddyclients' ),
-            __( 'Team Fee', 'buddyclients' ),
-            __( 'Update Status', 'buddyclients' )
+            __( 'Date', 'buddyclients-free' ),
+            __( 'Service', 'buddyclients-free' ),
+            __( 'Client', 'buddyclients-free' ),
+            __( 'Project', 'buddyclients-free' ),
+            __( 'Status', 'buddyclients-free' ),
+            __( 'Files', 'buddyclients-free' ),
+            __( 'Team Fee', 'buddyclients-free' ),
+            __( 'Update Status', 'buddyclients-free' )
         ];
         
         switch ( $this->user_is ) {

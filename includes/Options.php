@@ -238,7 +238,7 @@ class Options {
         
         // Add flat option to rate type
         if ($post_type === 'bc_rate_type') {
-            $options['flat'] = __( 'Flat', 'buddyclients' );
+            $options['flat'] = __( 'Flat', 'buddyclients-free' );
         }
         
         // Get posts
@@ -260,7 +260,7 @@ class Options {
                 $exp_timestamp = strtotime($expiration);
                 $curr_timestamp = time();
                 if ($curr_timestamp > $exp_timestamp) {
-                    $expired = __( ' - Expired', 'buddyclients' );
+                    $expired = __( ' - Expired', 'buddyclients-free' );
                 }
             }
             

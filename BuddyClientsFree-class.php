@@ -45,7 +45,7 @@ if ( ! class_exists( 'BuddyClientsFree' ) ) {
     	 * @since 0.1.0
     	 */
     	public function __clone() {
-    		_doing_it_wrong( __FUNCTION__, esc_html__( 'Cheatin&#8217; huh?', 'buddyclients' ), '0.1.0' );
+    		_doing_it_wrong( __FUNCTION__, esc_html__( 'Cheatin&#8217; huh?', 'buddyclients-free' ), '0.1.0' );
     	}
     	/**
     	 * Prevents unserializing instances of this class.
@@ -53,7 +53,7 @@ if ( ! class_exists( 'BuddyClientsFree' ) ) {
     	 * @since 0.1.0
     	 */
     	public function __wakeup() {
-    		_doing_it_wrong( __FUNCTION__, esc_html__( 'Cheatin&#8217; huh?', 'buddyclients' ), '0.1.0' );
+    		_doing_it_wrong( __FUNCTION__, esc_html__( 'Cheatin&#8217; huh?', 'buddyclients-free' ), '0.1.0' );
     	}
     
     	/**
