@@ -178,6 +178,30 @@ class ParamManager {
     }
 
     /**
+     * Strips all query parameters from the URL.
+     * 
+     * @since 1.0.17
+     * 
+     * @return  string  The updated URL without query parameters.
+     */
+    public function strip_params() {
+        // Parse the existing URL
+        $parsed_url = wp_parse_url( $this->url );
+
+        // Rebuild the URL without query parameters
+        $this->url = ( isset( $parsed_url['scheme'] ) ? $parsed_url['scheme'] . '://' : '' )
+                . ( isset( $parsed_url['host'] ) ? $parsed_url['host'] : '' )
+                . ( isset( $parsed_url['path'] ) ? $parsed_url['path'] : '' );
+
+        // Add the hash fragment if it existed in the original URL
+        if ( isset( $parsed_url['fragment'] ) ) {
+            $this->url .= '#' . $parsed_url['fragment'];
+        }
+        
+        return $this->url;
+    }
+
+    /**
      * Retrieves the value of a url param.
      * 
      * @since 1.0.4
@@ -185,21 +209,33 @@ class ParamManager {
      * @param string $param  The param key.
      */
     public function get( $param ) {
-
-        // Verify nonce
-        if ( isset( $_GET[$this->nonce_name] ) ) {
-            $nonce = sanitize_text_field( wp_unslash( $_GET[$this->nonce_name] ) );
+        // Parse the URL to extract query parameters
+        $parsed_url = wp_parse_url( $this->url );
+        $query_params = [];
+    
+        // If there's a query string, parse it into an associative array
+        if ( isset( $parsed_url['query'] ) ) {
+            parse_str( $parsed_url['query'], $query_params );
+        }
+    
+        // Verify nonce from $query_params instead of $_GET
+        if ( isset( $query_params[$this->nonce_name] ) ) {
+            $nonce = sanitize_text_field( wp_unslash( $query_params[$this->nonce_name] ) );
             if ( ! wp_verify_nonce( $nonce, $this->nonce_action ) ) {
                 // Exit if nonce fails
                 return;
             }
         }
-
-        // Get value of url param
-        if ( isset( $_GET[$param] ) ) {
-            return sanitize_text_field( wp_unslash ($_GET[$param] ) ) ?? null;
+    
+        // Get value of url param from $query_params
+        if ( isset( $query_params[$param] ) ) {
+            // Decode the parameter value and then sanitize it
+            return sanitize_text_field( wp_unslash( $query_params[$param] ) ) ?? null;
         }
-    }
+
+        // Param not found
+        return null;
+    }    
 
     /**
      * Retrieves all url parameters.
@@ -219,8 +255,24 @@ class ParamManager {
             }
         }
 
+        // Parse the URL to extract the query string
+        $parsed_url = wp_parse_url( $this->url );
+
+        // Initialize an empty array for the query parameters
+        $query_params = [];
+
+        if ( isset( $parsed_url['query'] ) ) {
+            // Parse the query string into an associative array
+            parse_str( $parsed_url['query'], $query_params );
+    
+            // Decode each parameter
+            foreach ($query_params as $key => $value) {
+                $query_params[$key] = urldecode($value);
+            }
+        }
+
         // Return all url params        
-        return $_GET;
+        return $query_params;
     }
 
     /**

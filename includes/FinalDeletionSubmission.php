@@ -30,19 +30,19 @@ class FinalDeletionSubmission {
      * @param array $post_data The POST data.
      */
     private function delete_files( $post_data ) {
-        
-        $file_ids = unserialize( $post_data['file_ids'] );
-        $verification = $post_data['verify_delete'];
+        $comma_sep_file_ids = isset( $post_data['file_ids'] ) ? sanitize_text_field( $post_data['file_ids'] ) : null;
+        $file_ids = $comma_sep_file_ids ? array_map( 'sanitize_text_field', explode( ',', $comma_sep_file_ids ) ) : null;
+        $verification = isset( $post_data['verify_delete'] ) ? $post_data['verify_delete'] : false;        
         
         // No files selected
         if ( empty( $file_ids ) ) {
-            $this->alert( __( 'No files are selected.', 'buddyclients-free' ) );
+            $this->alert( __( 'No files are selected.', 'buddyclients' ) );
             return;
         }
         
         // Check the verification
         if ( $verification !== 'DELETE' ) {
-            $this->alert( __( 'Confirmation does not match. Files not deleted.', 'buddyclients-free' ) );
+            $this->alert( __( 'Confirmation does not match. Files not deleted.', 'buddyclients' ) );
             return;
         }
         
@@ -94,7 +94,7 @@ class FinalDeletionSubmission {
         if ( ! empty( $successful_deletions ) ) {
             $alert_message .= sprintf(
                 /* translators: %d: number of successful deletions */
-                _n( '%d file successfully deleted.', '%d files successfully deleted.', count( $successful_deletions ), 'buddyclients-free' ),
+                _n( '%d file successfully deleted.', '%d files successfully deleted.', count( $successful_deletions ), 'buddyclients' ),
                 count( $successful_deletions )
             );
         }
@@ -102,7 +102,7 @@ class FinalDeletionSubmission {
         if ( ! empty( $failed_deletions ) ) {
             $alert_message .= sprintf(
                 /* translators: %d: number of failed deletions */
-                _n( '%d file was not deleted. Please try again.', '%d files were not deleted. Please try again.', count( $failed_deletions ), 'buddyclients-free' ),
+                _n( '%d file was not deleted. Please try again.', '%d files were not deleted. Please try again.', count( $failed_deletions ), 'buddyclients' ),
                 count( $failed_deletions )
             );
         }
@@ -121,11 +121,7 @@ class FinalDeletionSubmission {
         $esc_message = esc_js( $message );
         echo wp_kses(
             "<script type='text/javascript'>alert( '" . $esc_message . "' );</script>",
-            array(
-                'script' => array(
-                    'type' => array()
-                )
-            )
+            ['script' => ['type' => []]]
         );
     }
 }

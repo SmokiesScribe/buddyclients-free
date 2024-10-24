@@ -28,7 +28,7 @@ class CommissionList {
      * @since 0.1.0
      * 
      * @param   string  $type   The type of payments to retrieve.
-     *                          Accepts 'team', 'affiliate', 'sales'.
+     *                          Accepts 'affiliate' or 'sales'.
      */
     public function __construct( $type ) {
         $this->type = $type;
@@ -42,8 +42,9 @@ class CommissionList {
      * @param   int     $user_id    The ID of the user.
      */
     public function build( $user_id ) {
-        // Get items
-        $payments = Payment::get_payments_by_type( $this->type );
+
+        // Retrieve items
+        $payments = $this->get_payments( $user_id, $this->type );
         
         // Paginate
         $pagination = new Pagination( $payments );
@@ -52,6 +53,21 @@ class CommissionList {
         // Build table
         return $this->table( $items, $pagination );
     }
+
+    /**
+     * Retrieves payments by type and user ID.
+     * 
+     * @since 1.0.17
+     * 
+     * @param   int     $user_id     The ID of the user.
+     * @param   string  $type        The type of commission ('affiliate' or 'sales').
+     */
+    private function get_payments( $user_id, $type ) {
+        $payments = Payment::get_payments_by_type( $type );
+        return array_filter($payments, function($payment) use ($user_id) {
+            return $payment->payee_id == $user_id;
+        });
+    }    
     
     /**
      * Defines the table headers.
@@ -60,11 +76,11 @@ class CommissionList {
      */
     private static function header_list() {
         return [
-            __( 'Date', 'buddyclients-free' ),
-            __( 'Service', 'buddyclients-free' ),
-            __( 'Client', 'buddyclients-free' ),
-            __( 'Commission', 'buddyclients-free' ),
-            __( 'Payment Status', 'buddyclients-free' )
+            __( 'Date', 'buddyclients' ),
+            __( 'Service', 'buddyclients' ),
+            __( 'Client', 'buddyclients' ),
+            __( 'Commission', 'buddyclients' ),
+            __( 'Payment Status', 'buddyclients' )
         ];
     }
     
@@ -101,7 +117,7 @@ class CommissionList {
         
         // Make sure payments exist
         if ( ! $payments ) {
-            return '<p>' . __( 'No commission available.', 'buddyclients-free' ) . '</p>';
+            return '<p>' . __( 'No commission available.', 'buddyclients' ) . '</p>';
         }
         
         // Open table

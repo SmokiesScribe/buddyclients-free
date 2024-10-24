@@ -2,6 +2,7 @@
 namespace BuddyClients\Includes;
 
 use BuddyClients\Includes\ProfileExtension;
+use BuddyClients\Includes\GroupExtension;
 
 use BuddyClients\Components\Booking\BookedService\BookedServiceList;
 use BuddyClients\Components\Affiliate\AffiliateProfile;
@@ -24,34 +25,106 @@ class ExtensionManager {
      * @since 1.0.4
      */
     public function __construct() {
-        self::extensions();
+        self::profile_extensions();
     }
     
     /**
-     * Registers extensions.
+     * Registers profile extensions.
      * 
      * @since 1.0.4
      */
-    private static function extensions() {
+    private static function profile_extensions() {
 
-        // Services
-        self::build_extension( 'services', BookedServiceList::class );
-        
-        // Affiliate
-        self::build_extension( 'affiliate', [AffiliateProfile::class, Legal::class] );
-        
-        // Availability
-        self::build_extension( 'availability', [AvailabilityProfile::class] );
-        
-        // Team Agreement
-        self::build_extension( 'team_agreement', [LegalForm::class] );
-        
-        // Sales Commission
-        self::build_extension( 'sales', [SalesProfile::class] );
-        
-        // Files
-        self::build_extension( 'files', [UserFilesForm::class] );
-        
+        $extensions = [
+            'services'          => BookedServiceList::class,
+            'affiliate'         => [AffiliateProfile::class, Legal::class],
+            'availability'      => AvailabilityProfile::class,
+            'team_agreement'    => LegalForm::class,
+            'sales'             => SalesProfile::class,
+            'files'             => UserFilesForm::class
+        ];
+
+        foreach ( $extensions as $slug => $required_class ) {
+            self::build_extension( $slug, $required_class );
+        }
+    }
+
+    /**
+     * Defines all group extensions args.
+     * 
+     * @since 1.0.17
+     */
+    public static function group_extensions() {
+        $extensions = [
+            'services'  => [
+                'required_class'    => BookedServiceList::class,
+                'content_callback'  => [new BookedServiceList, 'build'],
+                'slug'              => 'services',
+                'name'              => __( 'Project Services', 'buddyclients' ),
+                'title'             => __( 'Project Services', 'buddyclients' ),
+                'private'           => true,
+                'nav_item_position' => 200,
+                'enable_nav_item'   => true,
+                'enable_nav_item'   => true,
+                'screens' => [
+                    'edit' => ['name'      => __( 'Project Services', 'buddyclients' )],
+                    'create'        => ['position' => 0],
+                ],
+            ],
+            'test'  => [
+                'content_callback'  => [self::class, 'testing'],
+                'slug'              => 'test',
+                'name'              => __( 'Test', 'buddyclients' ),
+                'title'             => __( 'Test', 'buddyclients' ),
+                'private'           => true,
+                'nav_item_position' => 200,
+                'enable_nav_item'   => true,
+                'enable_nav_item'   => true,
+                'screens' => [
+                    'edit' => ['name'      => __( 'Test', 'buddyclients' )],
+                    'create'        => ['position' => 0],
+                ],
+            ]
+        ];
+
+        $extensions = self::filter_group_extensions( $extensions );
+
+        foreach ( $extensions as $slug => $args ) {
+            $ext_class = $slug . 'GroupExtension';
+            self::register_group_ext( $ext_class );
+        }
+    }
+
+    public static function testing() {
+        echo 'Hello!';
+    }
+
+    /**
+     * Filters the group extension args.
+     * 
+     * Ensures required classes exist.
+     * 
+     * @since 1.0.17
+     * 
+     * @param   array   $extensions     The array of group extension args.
+     */
+    private static function filter_group_extensions( $extensions ) {
+        // Loop through extensions
+        foreach ( $extensions as $slug => $args ) {
+            // Check if a class is required
+            if ( isset( $args['required_class'] ) ) {
+                // Check if the class does not exist
+                if ( ! class_exists( $args['required_class'] ) ) {
+                    // Remove the args from the array
+                    unset( $extensions[$slug] );
+                    continue;
+                } else {
+                    unset( $args['required_class'] );
+                }
+            }
+        }
+
+        return $extensions;
     }
     
     /**
@@ -60,23 +133,30 @@ class ExtensionManager {
      * @since 1.0.4
      * 
      * @param   string  $slug   The slug of the extension.
+     * @param   string  $type   Optional. The extension type.
+     *                          Defaults to 'profile'.
      * @return  ?array  The array of args for the extension.
      *                  Null if the slug is not set.
      */
-    private static function extension_args( $slug ) {
+    private static function extension_args( $slug, $type = 'profile' ) {
         $callbacks = [
-            'services'          => [self::class, 'services_args'],
-            'affiliate'         => [self::class, 'affiliate_args'],
-            'availability'      => [self::class, 'availability_args'],
-            'team_agreement'    => [self::class, 'team_agreement_args'],
-            'sales'             => [self::class, 'sales_args'],
-            'files'             => [self::class, 'files_args'],
+                'profile'   => [
+                    'services'          => [self::class, 'services_args'],
+                    'affiliate'         => [self::class, 'affiliate_args'],
+                    'availability'      => [self::class, 'availability_args'],
+                    'team_agreement'    => [self::class, 'team_agreement_args'],
+                    'sales'             => [self::class, 'sales_args'],
+                    'files'             => [self::class, 'files_args'],
+                ],
+                'group' => [
+                    'services'          => [self::class, 'services_group_args'],
+                ]
         ];
         
         // Check if the callback exists for the given slug
-        if ( isset( $callbacks[$slug] ) && is_callable( $callbacks[$slug] ) ) {
+        if ( isset( $callbacks[$type][$slug] ) && is_callable( $callbacks[$type][$slug] ) ) {
             // Call the callback and return its result
-            return call_user_func( $callbacks[$slug] );
+            return call_user_func( $callbacks[$type][$slug] );
         }
         
         // Return null if no valid callback is found
@@ -93,8 +173,8 @@ class ExtensionManager {
             'type'              => 'profile',
             'content_callback'  => [new BookedServiceList, 'build'],
             'slug'              => 'services',
-            'name'              => __( 'Services', 'buddyclients-free' ),
-            'title'             => __( 'My Services', 'buddyclients-free' ),
+            'name'              => __( 'Services', 'buddyclients' ),
+            'title'             => __( 'My Services', 'buddyclients' ),
             'private'           => true
         ];
     }
@@ -109,8 +189,8 @@ class ExtensionManager {
             'type'              => 'profile',
             'content_callback'  => [new AffiliateProfile, 'build'],
             'slug'              => 'affiliate',
-            'name'              => __( 'Affiliate Program', 'buddyclients-free' ),
-            'title'             => __( 'Affiliate Program', 'buddyclients-free' ),
+            'name'              => __( 'Affiliate Program', 'buddyclients' ),
+            'title'             => __( 'Affiliate Program', 'buddyclients' ),
             'private'           => true
         ];
     }
@@ -125,8 +205,8 @@ class ExtensionManager {
             'type'              => 'profile',
             'content_callback'  => [new AvailabilityProfile, 'build'],
             'slug'              => 'availability',
-            'name'              => __( 'Availability', 'buddyclients-free' ),
-            'title'             => __( 'Availability', 'buddyclients-free' ),
+            'name'              => __( 'Availability', 'buddyclients' ),
+            'title'             => __( 'Availability', 'buddyclients' ),
             'private'           => true,
             'member_type'       => 'team'
         ];
@@ -142,8 +222,8 @@ class ExtensionManager {
             'type'              => 'profile',
             'content_callback'  => [new LegalForm( 'team' ), 'echo_form'],
             'slug'              => 'team',
-            'name'              => __( 'Team Agreement', 'buddyclients-free' ),
-            'title'             => __( 'Team Agreement', 'buddyclients-free' ),
+            'name'              => __( 'Team Agreement', 'buddyclients' ),
+            'title'             => __( 'Team Agreement', 'buddyclients' ),
             'private'           => true,
             'member_type'       => 'team'
         ];
@@ -159,8 +239,8 @@ class ExtensionManager {
             'type'              => 'profile',
             'content_callback'  => [new SalesProfile, 'build'],
             'slug'              => 'bc-sales',
-            'name'              => __( 'Sales', 'buddyclients-free' ),
-            'title'             => __( 'Sales Commission', 'buddyclients-free' ),
+            'name'              => __( 'Sales', 'buddyclients' ),
+            'title'             => __( 'Sales Commission', 'buddyclients' ),
             'private'           => true,
             'member_type'       => 'sales'
         ];
@@ -176,9 +256,32 @@ class ExtensionManager {
             'type'              => 'settings',
             'content_callback'  => [new UserFilesForm, 'build'],
             'slug'              => 'bc-files',
-            'name'              => __( 'Files', 'buddyclients-free' ),
-            'title'             => __( 'Manage Files', 'buddyclients-free' ),
+            'name'              => __( 'Files', 'buddyclients' ),
+            'title'             => __( 'Manage Files', 'buddyclients' ),
             'private'           => true
+        ];
+    }
+
+    /**
+     * Defines the services group extension args.
+     * 
+     * @since 1.0.4
+     */
+    private static function services_group_args() {
+        return [
+            'type'              => 'group',
+            'content_callback'  => [new BookedServiceList, 'build'],
+            'slug'              => 'services',
+            'name'              => __( 'Project Services', 'buddyclients' ),
+            'title'             => __( 'Project Services', 'buddyclients' ),
+            'private'           => true,
+            'nav_item_position' => 200,
+            'enable_nav_item'   => true,
+            'enable_nav_item'   => true,
+            'screens' => [
+                'edit' => ['name'      => __( 'Project Services', 'buddyclients' )],
+                'create'        => ['position' => 0],
+            ],
         ];
     }
     
@@ -225,6 +328,26 @@ class ExtensionManager {
             self::register_extension( $args );
         }
     }
+
+    /**
+     * Builds and registers a group extension.
+     * 
+     * @since 1.0.4
+     * 
+     * @param   string  $slug               The slug for the extension.
+     * @param   array   $required_classes   Optional. An array of required classes.
+     */
+    private static function build_group_extension( $slug, $required_classes = [] ) {
+        $group_extensions = self::group_extensions();
+
+        // Make sure classes exist
+        if ( self::classes_exist( $required_classes ) ) {
+            // Retrieve args
+            $args = self::extension_args( $slug, 'group' );
+            // Register extension
+            self::register_group_extension( $args );
+        }
+    }
     
     /**
      * Registers a profile extension.
@@ -261,6 +384,27 @@ class ExtensionManager {
             new ProfileExtension( $ext_args );
         }
     }
-    
-    
+
+    /**
+     * Registers a group extension.
+     * 
+     * @since 1.0.17
+     * 
+     * @param array $args {
+     *     An array of arguments to build the nav or subnav.
+     * 
+     *     @type    callable    $content_callback   The callback method to display the content.
+     *     @type    string      $slug               The nav or subnav slug.
+     *     @type    string      $name               The nav or subnav tab name.
+     *     @type    string      $title              Optional. The title to display. Defaults to name.
+     *     @type    int         $position           Optional. The nav or subnav position. Defaults to 30.
+     *     @type    bool        $private            Optional. Whether to display the tab only for the profile owner. Defaults to false.
+     * }
+     */
+    private static function register_group_extension( $args ) {
+        if ( $args ) {
+            //new GroupExtension( $args );
+            add_action('init', [self::class, 'register_group_ext']);
+        }
+    }
 }

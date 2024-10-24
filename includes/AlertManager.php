@@ -67,14 +67,14 @@ class AlertManager {
             $content = sprintf(
                 '<a href="%s">%s</a>',
                 esc_url( $link ),
-                __( 'Add your availability.', 'buddyclients-free' )
+                __( 'Add your availability.', 'buddyclients' )
             );
         
         // Check if the availability is expired
         } else if ( Availability::expired( $availability ) ) {
             $content = sprintf(
                 /* translators: %s: url to update availability */
-                __( 'Your availability has expired. <a href="%s">Update your availability.</a>', 'buddyclients-free' ),
+                __( 'Your availability has expired. <a href="%s">Update your availability.</a>', 'buddyclients' ),
                 esc_url( $link ),
             );
         }
@@ -122,31 +122,25 @@ class AlertManager {
         $content = null;
         
         // Get legal data
-        $legal = new Legal( $type );
-        $user_data = $legal->get_user_data();
-        
-        // No agreement available
-        if ( $legal->status === 'none' ) {
-            return;
-        }
+        $user_id = get_current_user_id();
+        $status = bc_user_agreement_status( $user_id, $type );
         
         // Get profile link
         $link = bc_profile_ext_link( $type );
         
-        // Transitioning and not current
-        if ( $legal->status === 'transition' && $user_data['status'] !== 'current' ) {
+        // Transitioning
+        if ( $status === 'active' ) {
             $content = sprintf(
-                /* translators: %1$s: url to complete agreement; %2$s: deadline for the agreement */
-                __( 'Complete your <a href="%1$s">new team member agreement</a> by %2$s.', 'buddyclients-free' ),
-                esc_url( $link ),
-                esc_html( $legal->deadline )
+                /* translators: %s: url to complete agreement */
+                __( 'Complete your <a href="%s">new team member agreement</a>.', 'buddyclients' ),
+                esc_url( $link )
             );            
             
         // Stable and not current
-        } else if ( $user_data['status'] !== 'current' ) {
+        } else if ( $status !== 'current' ) {
             $content = sprintf(
-                /* translators: %1$s: url to complete agreement */
-                __( 'Complete your <a href="%s">team member agreement</a>.', 'buddyclients-free' ),
+                /* translators: %s: url to complete agreement */
+                __( 'Complete your <a href="%s">team member agreement</a>.', 'buddyclients' ),
                 esc_url( $link )
             );
         }

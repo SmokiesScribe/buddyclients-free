@@ -59,24 +59,20 @@ class UserFilesForm {
      * @since 0.1.0
      */
     public function build() {
+
+        // Check if we're cancelling
+        $canceled = $this->cancel_delete();
+
+        if ( $canceled ) {
+           // Output initial form
+           $this->user_files_form();
+            return;
+        }
         
         // Check if the deletion form was submitted
-        if ( isset( $_SESSION['bc_user_files'] ) && is_array( $_SESSION['bc_user_files'] ) ) {
-            $post_data = array_map( 'sanitize_text_field', $_SESSION['bc_user_files'] );
-
-            // Initialize
-            $file_ids = [];
-            $file_names = [];
-            
-            // Loop through post data
-            foreach ( $post_data as $key => $value ) {
-                
-                // Integers are file ids
-                if ( is_int( $key ) ) {
-                    $file_ids[] = $key;
-                    $file_names[] = File::get_file_name( $key );
-                }
-            }
+        if ( isset( $_SESSION['bc_delete_file_ids'] ) ) {
+            $file_ids = $this->get_session_array( 'bc_delete_file_ids' );
+            $file_names = $this->get_session_array( 'bc_delete_file_names' );
             
             // Assign variables
             $this->delete_file_ids = $file_ids;
@@ -89,6 +85,52 @@ class UserFilesForm {
             // Output initial form
             $this->user_files_form();
         }
+    }
+
+    /**
+     * Retrieves an array from session data.
+     * 
+     * @since 1.0.17
+     * 
+     * @param   string  $key    The session key.
+     * 
+     * @return  array   A sanitized array.
+     */
+    private function get_session_array( $key ) {
+        return isset( $_SESSION[$key] ) ? array_map( 'sanitize_file_name', $_SESSION[$key] ) : [];
+    }
+
+    /**
+     * Removes session data if we're cancelling deletion.
+     * 
+     * @since 1.0.17
+     */
+    private function cancel_delete() {
+        // Retrieve cancel request ID
+        $cancel_request = bc_get_param( 'bc-files-cancel-request' );
+
+        // No cancel request
+        if ( ! $cancel_request ) {
+            return false;
+        }
+
+        // Check for completed cancel request
+        if ( isset( $_SESSION['bc_cancel_request_complete'] ) ) {
+            $cancel_request_complete = sanitize_text_field( wp_unslash( $_SESSION['bc_cancel_request_complete'] ) );
+            if ( $cancel_request_complete === $cancel_request ) {
+                return false;
+            }
+        }
+
+        // Active cancel request - unset session data
+        unset( $_SESSION['bc_delete_file_ids']);
+        unset( $_SESSION['bc_delete_file_names']);
+        
+        // Add completed flag
+        $_SESSION['bc_cancel_request_complete'] = $cancel_request;
+
+        // Return true to revert to initial form
+        return true;
     }
     
     /**
@@ -106,13 +148,29 @@ class UserFilesForm {
                 'key'                   => 'final-deletion-files',
                 'fields_callback'       => [$this, 'final_deletion_form_fields'],
                 'submission_class'      => __NAMESPACE__ . '\FinalDeletionSubmission',
-                'description'           => __( 'Type DELETE to confirm deletion of the files above.', 'buddyclients-free' ),
-                'submit_text'           => __( 'Permanently Delete Files', 'buddyclients-free' ),
+                'description'           => __( 'Type DELETE to confirm deletion of the files above.', 'buddyclients' ),
+                'submit_text'           => __( 'Permanently Delete Files', 'buddyclients' ),
                 'avatar'                => null
             ];
             
-            return ( new Form( $form_args ) )->echo();
+            $form = new Form( $form_args );
+            $form->echo();
+            echo wp_kses_post( $this->cancel_link() );
+            return;
         }
+    }
+
+    /**
+     * Generates a cancel button.
+     * 
+     * @since 1.0.17
+     */
+    private function cancel_link() {
+        $link = bc_add_params( [ 'bc-files-cancel-request' => wp_rand() ] );
+        $content = '<div class="bc-files-cancel-container">';
+        $content .= '<a href="' . $link . '" class="bc-files-cancel">Cancel</a>';
+        $content .= '</div>';
+        return $content;
     }
     
     /**
@@ -129,15 +187,15 @@ class UserFilesForm {
         $args[] = [
             'key' => 'file_ids',
             'type' => 'hidden',
-            'value' => serialize( $this->delete_file_ids )
+            'value' => implode( ',', $this->delete_file_ids )
         ];
         
         // DELETE confirmation
         $args[] = [
             'key' => 'verify_delete',
             'type' => 'input',
-            'label' => __( 'Type DELETE to confirm deletion of the files above.', 'buddyclients-free' ),
-            'description' => __( 'This action is permanent and cannot be undone.', 'buddyclients-free' ),
+            'label' => __( 'Type DELETE to confirm deletion of the files above.', 'buddyclients' ),
+            'description' => __( 'This action is permanent and cannot be undone.', 'buddyclients' ),
             'required'  => true
         ];
         
@@ -151,16 +209,23 @@ class UserFilesForm {
      */
     private function user_files_form() {
         
+        // Make sure the user has files
+        if ( empty( $this->user_files ) ) {
+            esc_html_e( 'No files available.', 'buddyclients' );
+            return;
+        }
+        
         // Define form args
         $form_args = [
             'key'                   => 'manage-user-files',
             'fields_callback'       => [$this, 'user_files_form_fields'],
-            'submission_class'      => null,
-            'submit_text'           => __( 'Delete Files', 'buddyclients-free' ),
+            'submission_class'      => __NAMESPACE__ . '\UserFilesSubmission',
+            'submit_text'           => __( 'Delete Files', 'buddyclients' ),
             'avatar'                => null
         ];
         
-        return ( new Form( $form_args ) )->echo();
+        $form = new Form( $form_args );
+        return $form->echo();
     }
     
     /**
@@ -196,8 +261,8 @@ class UserFilesForm {
         return [[
             'key' => 'user_files',
             'type' => 'checkbox',
-            'label' => __( 'Your Files', 'buddyclients-free' ),
-            'description' => __( 'Select files to delete. Files connected to in-progress services are not available for deletion.', 'buddyclients-free' ),
+            'label' => __( 'Your Files', 'buddyclients' ),
+            'description' => __( 'Select files to delete. Files connected to in-progress services are not available for deletion.', 'buddyclients' ),
             'options' => $options, // Pass the generated options array
         ]];
     }

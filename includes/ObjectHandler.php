@@ -1,14 +1,14 @@
 <?php
 namespace BuddyClients\Includes;
 
+use BuddyClients\Includes\DatabaseManager;
+
 /**
  * Manages objects in the database.
  * 
  * Retrieves, updates, and deletes objects stored in the database.
  * 
  * @since 0.1.0
- * 
- * @see DatabaseManager
  */
 class ObjectHandler {
     
@@ -36,9 +36,11 @@ class ObjectHandler {
     /**
      * Constructor method.
      * 
+     * Formats the class name and initializes DatabaseManager.
+     * 
      * @since 0.1.0
      * 
-     * @param   string  $class_name The class name without the namespace.
+     * @param   string  $class_name     The fully qualified class name.
      */
     public function __construct( $full_class_name ) {
         
@@ -88,32 +90,11 @@ class ObjectHandler {
     public function get_object( $ID ) {
         // Get record by ID
         $record = $this->database->get_record_by_id( strval($ID) ) ;
-        
-        // Check if the record exists
-        if ($record) {
-            // Retrieve serialized object
-            $serialized_object = $record->{$this->class_name};
-            
-            // Check if the serialized object is empty
-            if ( ! empty( $serialized_object ) ) {
-                // Unserialize the object
-                $unserialized_object = unserialize( $serialized_object );
-                
-                // Check if unserialization was successful
-                if ( $unserialized_object !== false ) {
-                    return $unserialized_object;
-                } else {
-                    // Failed unserialization
-                    return false;
-                }
-            } else {
-                // Empty serialized object
-                return false;
-            }
-        } else {
-            // Missing record
-            return false;
-        }
+
+        // Extract object
+        $object = $this->extract_objects( $record );
+
+        return $object[0] ?? false;
     }
     
     /**
@@ -130,23 +111,68 @@ class ObjectHandler {
         
         // Get all records
         $records = $this->database->get_all_records();
+
+        // Get objects
+        $objects = $this->extract_objects( $records );
+
+        return $objects;
+    }
+
+    /**
+     * Retrieves objects from an array of records.
+     * 
+     * @since 1.0.17
+     * 
+     * @param   array   $records    An array of records.
+     * @return  array   An array of objects.
+     */
+    private function extract_objects( $records ) {
+        // Initialize
+        $objects = [];
+        $first_record = true;
+
+        // Cast to array
+        $records = is_array( $records ) ? $records : [$records];
         
-        // Check if the record exists
-        if ($records) {
+        // Make sure it's an array
+        if ( ! empty( $records ) ) {
+
+            // Define lowercase class name
+            $class_lower = strtolower( $this->class_name );
             
             // Loop through the records
             foreach ( $records as $record ) {
+
+                // Check first record
+                if ( $first_record ) {
+
+                    // Update flag
+                    $first_record = false;
+
+                    // Standard cap class name
+                    if ( isset( $record->{$this->class_name} ) ) {
+                        $column_name = $this->class_name;
+
+                    // Lowercase class name
+                    } else if ( isset( $record->{$class_lower} ) ) {
+                        $column_name = $class_lower;
+
+                    // Skip if no object
+                    } else {
+                        continue;
+                    }
+                }
                 
                 // Retrieve serialized object
-                $serialized_object = $record->{$this->class_name};
+                $serialized_object = $record->{$column_name};
                 
                 // Check if the serialized object is empty
-                if (!empty($serialized_object)) {
+                if ( ! empty( $serialized_object )) {
                     // Unserialize the object
-                    $unserialized_object = unserialize($serialized_object);
+                    $unserialized_object = unserialize( $serialized_object );
                     
                     // Check if unserialization was successful
-                    if ($unserialized_object !== false) {
+                    if ( $unserialized_object !== false ) {
                         
                         // Add to array
                         $objects[] = $unserialized_object;
@@ -218,27 +244,10 @@ class ObjectHandler {
         
         // Check if records were found
         if ( $records ) {
-            
-            // Loop through the records
-            foreach ( $records as $record ) {
-                
-                // Retrieve serialized object
-                $serialized_object = $record->{$this->class_name};
-                
-                // Check if the serialized object is empty
-                if (!empty($serialized_object)) {
-                    
-                    // Unserialize the object
-                    $unserialized_object = unserialize($serialized_object);
-                    
-                    // Check if unserialization was successful
-                    if ($unserialized_object !== false) {
-                        
-                        // Add to array
-                        $objects[] = $unserialized_object;
-                    }
-                }
-            }
+
+            // Get objects from records
+            $objects = $this->extract_objects( $records );
+
         // No records found
         } else {
             // Filter all objects
@@ -433,7 +442,5 @@ class ObjectHandler {
         foreach ( $objects as $object ) {
             $this->delete_object( $object->ID );
         }
-    }
-
-    
+    }   
 }

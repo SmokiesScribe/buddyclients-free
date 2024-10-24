@@ -30,12 +30,15 @@ class Alert {
             
             // Define var
             $this->content = $content;
-            self::$priority = $priority;
+            
             
             // Check the priority
             if ( ! $this->greater_priority( $priority ) ) {
                 return;
             }
+            
+            // Set priority
+            self::$priority = $priority;
             
             // Define hooks
             $this->define_hooks();
@@ -77,7 +80,7 @@ class Alert {
      */
     public function build() {
         if ( $this->content && ! self::at_link( $this->content ) ) {
-            echo '<div class="alert-container"><div class="custom-alert-bar">' . esc_html( $this->content ) . '</div></div>';
+            echo '<div class="alert-container"><div class="custom-alert-bar">' . wp_kses_post( $this->content ) . '</div></div>';
         }
     }
     

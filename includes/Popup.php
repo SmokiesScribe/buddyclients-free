@@ -259,7 +259,7 @@ class Popup {
         $data = '';
         $data .= $post_id ? 'data-post-id="' . $post_id . '"' : '';
         $data .= $url ? 'data-url="' . $url . '"' : '';
-        $data .= $raw_content ? 'data-raw-content="' . esc_attr($raw_content) . '"' : '';
+        $data .= $raw_content ? 'data-raw-content="' . esc_attr( $raw_content ) . '"' : '';
         
         // Build help button with text or icon
         return ' <a class="bc-popup-link" ' . $data . ' href="">' . $link_text . '</a>';

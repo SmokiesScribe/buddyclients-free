@@ -238,7 +238,7 @@ class Options {
         
         // Add flat option to rate type
         if ($post_type === 'bc_rate_type') {
-            $options['flat'] = __( 'Flat', 'buddyclients-free' );
+            $options['flat'] = __( 'Flat', 'buddyclients' );
         }
         
         // Get posts
@@ -260,7 +260,7 @@ class Options {
                 $exp_timestamp = strtotime($expiration);
                 $curr_timestamp = time();
                 if ($curr_timestamp > $exp_timestamp) {
-                    $expired = __( ' - Expired', 'buddyclients-free' );
+                    $expired = __( ' - Expired', 'buddyclients' );
                 }
             }
             
@@ -319,7 +319,7 @@ class Options {
             $team_types = get_option('bc_general_settings')['team_types'] ?? null;
             
             // Make sure field is for team
-            if ($team_types && is_array($team_types)) {
+            if ( $team_types && is_array( $team_types ) ) {
                 if ( ! array_intersect( $field_data['member_types'], $team_types ) ) {
                     continue;
                 }

@@ -132,6 +132,7 @@ class File {
      *     @type ?int       $user_id        Optional. The ID of the file owner.
      *     @type ?int       $project_id     Optional. The ID of the associated project.
      *     @type ?string    $field_id       Optional. The ID of the upload field.
+     *     @type ?string    $dir            Optional. The Directory key.
      * }
      */
     public function upload_file( $file_info, $args = [] ) {
@@ -154,11 +155,11 @@ class File {
         $this->temporary    = $args['temporary'] ?? false;
         
         // Build new file path
-        $new_dir = (new Directory( $args['user_id'] ?? '' ))->full_path();
-        $target_file = $this->build_file_path( $new_dir, $file_info['name'] );
+        $dir_key = $args['dir'] ?? $args['user_id'] ?? '';
+        $new_dir = (new Directory( $dir_key ) )->full_path();
 
         // Set the upload directory
-        add_filter('upload_dir', function() use ($new_dir) {
+        add_filter('upload_dir', function() use ( $new_dir ) {
             return [
                 'path'   => $new_dir,
                 'url'    => $new_dir,
@@ -172,6 +173,10 @@ class File {
         // Use WordPress's wp_handle_upload function
         $uploaded_file = wp_handle_upload($file_info, ['test_form' => false]);
 
+        // Reset the upload_dir filter after the upload
+        remove_filter('upload_dir', function() use ( $new_dir ) {});
+
+        // Check for upload error
         if (isset($uploaded_file['error'])) {
             error_log('Upload error: ' . $uploaded_file['error']);
             return false; // or handle the error as needed
@@ -179,6 +184,9 @@ class File {
 
         // Return file path
         $this->file_path = $uploaded_file['file']; // Get the file path from the uploaded file array
+
+        // Format file name
+        $this->file_name = self::format( $uploaded_file['file'] );
 
         // Add object to database
         $this->ID = $this->add_to_database();
@@ -203,47 +211,14 @@ class File {
         
         // Return the first item
         return $parts[0];
-    }
-    
-    /**
-     * Uploads a signature image to the server.
-     * 
-     * @since 0.1.0
-     * 
-     * @param   array   $decoded_signature  Signature image data.
-     * @param   string  $file_name          The file name.
-     * @param   int     $user_id            The ID of the user to whom the signature belongs.
-     */
-    public function upload_signature( $decoded_signature, $file_name, $user_id ) {
-        // Extract args
-        $this->user_id = $user_id; // Update to use the passed user_id directly
-        
-        // Build new file path
-        $new_dir = (new Directory( 'signatures' ))->full_path();
-        $target_file = $this->build_file_path( $new_dir, $file_name );
-    
-        // Initialize the WordPress filesystem
-        WP_Filesystem(); // Initializes the global filesystem variable
-    
-        // Move file to target using WP_Filesystem
-        if ( $GLOBALS['wp_filesystem']->put_contents( $target_file, $decoded_signature ) ) {
-            // Return file path
-            $this->file_path = $target_file;
-            
-            // Add object to database
-            $this->ID = $this->add_to_database();
-        }
-        
-        // Return File ID
-        return $this->ID;
-    }    
+    } 
     
     /**
      * Adds object to database.
      * 
      * @since 0.1.0
      */
-    private function add_to_database() {
+    public function add_to_database() {
         if ( $this->file_path ) {
             return self::$object_handler->new_object( $this );
         }
@@ -257,7 +232,7 @@ class File {
      * @param   string  $dir_path   The full directory path.
      * @param   string  $file_name  The file name.
      */
-    private function build_file_path( $dir_path, $file_name ) {
+    public function build_file_path( $dir_path, $file_name ) {
 
         // Sanitize and format file name
         $this->file_name = self::format( $file_name );
@@ -444,7 +419,10 @@ class File {
         // Check if file exists before attempting to delete
         if ( file_exists( $file->file_path ) ) {
             // Attempt to delete the file using wp_delete_file
-            $deleted = wp_delete_file( $file->file_path );
+            wp_delete_file( $file->file_path );
+
+            // Check if file was successfully deleted
+            $deleted = ! file_exists( $file->file_path );
     
             if ( $deleted ) {
                 // Update database only if file deletion was successful
