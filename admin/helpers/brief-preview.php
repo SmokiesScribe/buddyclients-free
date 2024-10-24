@@ -117,7 +117,7 @@ function bc_redirect_to_preview( $taxonomy_term_id ) {
  */
 function bc_delete_brief_preview_drafts() {
     $post_type = bc_get_param( 'post_type' );
-    if ( ! is_admin() || empty( $post_type ) || $post_typeg !== 'bc_brief' ) {
+    if ( ! is_admin() || empty( $post_type ) || $post_type !== 'bc_brief' ) {
         return;
     }
 
