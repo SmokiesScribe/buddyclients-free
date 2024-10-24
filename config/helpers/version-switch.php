@@ -2,7 +2,7 @@
 /**
  * Handles switch between BuddyClients and BuddyClients Free.
  *
- * @since 1.0.3
+ * @since 1.0.14
  */
 function bc_handle_version_switch() {
     // Check the current version

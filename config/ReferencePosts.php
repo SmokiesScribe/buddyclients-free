@@ -29,8 +29,8 @@ class ReferencePosts {
      */
     private function register_post_type() {
         $args = [
-            'singular_name'         => __( 'Reference', 'buddyclients-free' ),
-            'plural_name'           => __( 'References', 'buddyclients-free' ),
+            'singular_name'         => __( 'Reference', 'buddyclients' ),
+            'plural_name'           => __( 'References', 'buddyclients' ),
             'show_in_menu'          => false,
             'public'                => false,
             'has_archive'           => false,
@@ -78,8 +78,8 @@ class ReferencePosts {
     private static function post_content() {
         return [
             'team_select' => [
-                'title'     => __( 'Team Availability', 'buddyclients-free' ),
-                'content'   => __( '<p>The dropdown includes team members whose expertise are a fit for your project.</p><p>The displayed availability indicates the date the team member can begin work if you book your services today. If no availability is displayed, the team member has not specified a date but is still accepting new projects.</p>', 'buddyclients-free' ),
+                'title'     => __( 'Team Availability', 'buddyclients' ),
+                'content'   => __( '<p>The dropdown includes team members whose expertise are a fit for your project.</p><p>The displayed availability indicates the date the team member can begin work if you book your services today. If no availability is displayed, the team member has not specified a date but is still accepting new projects.</p>', 'buddyclients' ),
             ]
         ];
     }

@@ -6,12 +6,12 @@
  */
 function bc_allowed_html_form() {
     return [
-        'form'     => ['method' => [], 'action' => [], 'class' => [], 'id' => [], 'style' => []],
-        'input'    => ['type' => [], 'name' => [], 'value' => [], 'class' => [], 'id' => [], 'required' => [], 'placeholder' => [], 'style' => [], 'maxlength' => [], 'minlength' => [], 'pattern' => []],
+        'form'     => ['method' => [], 'action' => [], 'class' => [], 'id' => [], 'style' => [], 'enctype' => []],
+        'input'    => ['type' => [], 'name' => [], 'value' => [], 'class' => [], 'id' => [], 'required' => [], 'placeholder' => [], 'style' => [], 'maxlength' => [], 'minlength' => [], 'pattern' => [], 'size' => [], 'readonly' => [], 'checked' => []],
         'label'    => ['for' => [], 'class' => []],
-        'button'   => ['type' => [], 'class' => [], 'style' => []],
-        'div'      => ['class' => [], 'id' => [], 'style' => []],
-        'p'        => ['class' => [], 'style' => []],
+        'button'   => ['type' => [], 'id' => [], 'class' => [], 'style' => []],
+        'div'      => ['class' => true, 'id' => [], 'style' => []],
+        'p'        => ['class' => [], 'style' => [], 'id' => []],
         'br'       => [],
         'span'     => ['class' => [], 'id' => [], 'style' => []],
         'h1'       => ['class' => []],
@@ -36,7 +36,8 @@ function bc_allowed_html_form() {
         'th'       => ['colspan' => []],
         'tbody'    => [],
         'td'       => [],
-        'a'        => ['href' => [], 'class' => []],
+        'a'        => ['href' => [], 'class' => [], 'download' => [], 'data-post-id' => [], 'data-url' => [], 'data-raw-content' => [], 'onclick' => []],
+        'i'        => ['class' => [], 'id' => [], 'style' => []]
     ];
 }
 
@@ -52,3 +53,18 @@ function bc_update_safe_styles() {
     } );
 }
 add_action( 'init', 'bc_update_safe_styles' );
+
+/**
+ * Defines allowed html for forms with signature script.
+ * 
+ * @since 1.0.16
+ */
+function bc_allowed_html_signature() {
+    $form_html = bc_allowed_html_form();
+    $signature_html = [
+        'span'     => ['class' => [], 'id' => [], 'style' => [], 'onclick' => []],
+        'canvas'   => ['id' => [], 'width' => [], 'height' => [], 'style' => [], 'data-signature' => []],
+        'img'   => ['style' => [], 'class' => [], 'decoding' => [], 'src' => []]
+    ];
+    return array_merge( $form_html, $signature_html );
+}
