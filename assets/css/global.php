@@ -1,4 +1,39 @@
 <style>
+/* General style classes */
+.opacity-0 {
+    opacity: 0;
+}
+
+/* Profile extensions */
+.bc-files-cancel-container {
+    max-width: 650px;
+    margin: auto; 
+}
+.bc-files-cancel {
+    color: red;
+    margin: 
+}
+
+/* General icons */
+.bc-icon {
+    font-size: 20px;
+}
+.bc-icon.bc-icon-color-blue {
+    color: blue;
+}
+.bc-icon.bc-icon-color-black {
+    color: black;
+}
+.bc-icon.bc-icon-color-green {
+    color: green;
+}
+.bc-icon.bc-icon-color-red {
+    color: red;
+}
+.bc-icon.bc-icon-color-gray {
+    color: gray;
+}
+
 /* Subnav */
 .bc-subnav {
     margin-right: 20px;

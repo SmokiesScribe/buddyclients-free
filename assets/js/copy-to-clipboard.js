@@ -39,6 +39,8 @@ function copyToClipboard(elementId) {
     
     // Get the success message container
     var successDiv = parent.querySelector('.bc-copy-success');
+
+    console.log(successDiv);
     
     // Set the success message
     successDiv.textContent = 'Copied to clipboard!';

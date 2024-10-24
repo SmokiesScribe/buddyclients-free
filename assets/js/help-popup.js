@@ -35,7 +35,9 @@ document.addEventListener('DOMContentLoaded', function () {
                     postId: postId,
                     url: url,
                     rawContent: rawContent,
-                    nonce: bcData.nonce
+                    nonce: helpPopupData.nonce,
+                    nonceAction: helpPopupData.nonceAction,
+                    fileName: helpPopupData.fileName,
                 },
                 success: function(data){
                     jQuery('#bc-popup-content').html(data);
@@ -69,7 +71,7 @@ document.addEventListener('DOMContentLoaded', function () {
             });
     
             // Call AJAX request function with postId
-            helpContentAjaxRequest(postId);
+            //helpContentAjaxRequest(postId);
         });
     });
     
