@@ -14,16 +14,16 @@ function bc_dashboard_content() {
     
     // Define headers
     $headers = [
-        __( 'Date', 'buddyclients-free' ),
-        __( 'Status', 'buddyclients-free' ),
-        __( 'Services', 'buddyclients-free' ),
-        __( 'Client', 'buddyclients-free' ),
-        __( 'Client Email', 'buddyclients-free' ),
-        __( 'Project', 'buddyclients-free' ),
-        __( 'Total Fee', 'buddyclients-free' ),
-        __( 'Files', 'buddyclients-free' ),
-        __( 'Agreement', 'buddyclients-free' ),
-        __( 'Delete', 'buddyclients-free' )
+        __( 'Date', 'buddyclients' ),
+        __( 'Status', 'buddyclients' ),
+        __( 'Services', 'buddyclients' ),
+        __( 'Client', 'buddyclients' ),
+        __( 'Client Email', 'buddyclients' ),
+        __( 'Project', 'buddyclients' ),
+        __( 'Total Fee', 'buddyclients' ),
+        __( 'Files', 'buddyclients' ),
+        __( 'Agreement', 'buddyclients' ),
+        __( 'Delete', 'buddyclients' )
     ];
     
     // Define columns
@@ -45,14 +45,14 @@ function bc_dashboard_content() {
         'headings'  => $headers,
         'columns'   => $columns,
         'items'     => $booking_intents,
-        'title'     => __( 'Bookings', 'buddyclients-free' ),
+        'title'     => __( 'Bookings', 'buddyclients' ),
         'filters'   => [
             'status'    => [
-                'label'     => __( 'Status', 'buddyclients-free' ),
+                'label'     => __( 'Status', 'buddyclients' ),
                 'property'  =>  'status',
                 'options'   => [
-                    'succeeded'   => __( 'Succeeded', 'buddyclients-free' ),
-                    'incomplete'  => __( 'Incomplete', 'buddyclients-free' ),
+                    'succeeded'   => __( 'Succeeded', 'buddyclients' ),
+                    'incomplete'  => __( 'Incomplete', 'buddyclients' ),
                 ],
                 'default'   => 'succeeded'
             ]
