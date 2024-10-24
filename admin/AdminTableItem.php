@@ -148,7 +148,7 @@ class AdminTableItem extends AdminTable {
             
         // Generate download link
         if ( $pdf_link ) {
-            $download_link = '<a href="' . esc_url( $pdf_link ) . '" download><i class="fa-solid fa-download"></i> ' . __( 'Download PDF', 'buddyclients-free' ) . '</a>';
+            $download_link = '<a href="' . esc_url( $pdf_link ) . '" download><i class="fa-solid fa-download"></i> ' . __( 'Download PDF', 'buddyclients' ) . '</a>';
             return $download_link;
         }
     }
@@ -159,7 +159,7 @@ class AdminTableItem extends AdminTable {
      * @since 0.4.0
      */
     protected static function terms_pdf( $property, $value ) {
-        self::agreement_download( $property, $value, __( 'Agreement', 'buddyclients-free' ) );
+        self::agreement_download( $property, $value, __( 'Agreement', 'buddyclients' ) );
     }
     
     /**
@@ -171,10 +171,11 @@ class AdminTableItem extends AdminTable {
      *                                  Accepts 'team', 'affiliate', and 'faculty'.
      */
     protected static function agreement_download( $property, $value, $type ) {
-        if ( function_exists( 'bc_legal_user_data' ) ) {
-            $user_data = bc_legal_user_data( $type, $value );
-            if ( $user_data && isset( $user_data['pdf'] ) ) {
-                return PDF::download_link( $user_data['pdf'], $type );
+        if ( function_exists( 'bc_latest_user_agreement' ) ) {
+            $user_id = $value;
+            $agreement = bc_latest_user_agreement( $user_id, $type );
+            if ( $agreement && isset( $agreement->pdf ) ) {
+                return PDF::download_link( $agreement->pdf, $type );
             }
         }
     }
@@ -191,9 +192,9 @@ class AdminTableItem extends AdminTable {
         
         // Define agreement types
         $types = [
-            'team'     => __( 'Team', 'buddyclients-free' ),
-            'faculty'  => __( 'Faculty', 'buddyclients-free' ),
-            'affiliate'=> __( 'Affiliate', 'buddyclients-free' )
+            'team'     => __( 'Team', 'buddyclients' ),
+            'faculty'  => __( 'Faculty', 'buddyclients' ),
+            'affiliate'=> __( 'Affiliate', 'buddyclients' )
         ];
         
         // Loop through types
@@ -211,6 +212,45 @@ class AdminTableItem extends AdminTable {
         // Implode the array to a string
         $agreements_string = implode( '<br>', $agreements );
         return $agreements_string;
+    }
+
+    /**
+     * Generates a download link from a PDF ID.
+     * 
+     * @since 1.0.17
+     */
+    protected static function pdf_download( $property, $value ) {
+        $pdf_id = $value;
+        if ( ! empty( $pdf_id ) ) {
+            return PDF::download_link( $pdf_id );
+        }
+    }
+
+    /**
+     * Retrieves the status of a user agreement.
+     * 
+     * @since 1.0.17
+     */
+    protected static function agreement_status( $property, $value ) {
+        $agreement_id = $value;
+        if ( function_exists( 'bc_agreement_status' ) ) {
+            $status = bc_agreement_status( $agreement_id );
+            if ( $status ) {
+                $status = ucwords( $status );
+            } else {
+                $status = 'Not Current';
+            }
+
+            $icons = [
+                'Current'       => 'check',
+                'Active'        => 'ready',
+                'Not Current'   => 'x'
+            ];
+
+            $icon = isset( $icons[$status] ) ? bc_admin_icon( $icons[$status] ) . ' ' : '';
+
+            return $icon . $status;
+        }
     }
     
     /**
@@ -231,7 +271,7 @@ class AdminTableItem extends AdminTable {
         // Make sure the user has sessions
         if ( $value && is_array( $value ) && ! empty( $value ) ) {
             $url = admin_url( '/admin.php?page=bc-sessions&faculty_ids_filter=' . $item_id );
-            return '<a href="' . esc_url( $url ) . '">' . __( 'Sessions', 'buddyclients-free' ) . '</a>';
+            return '<a href="' . esc_url( $url ) . '">' . __( 'Sessions', 'buddyclients' ) . '</a>';
         }
     }
     
@@ -333,21 +373,15 @@ class AdminTableItem extends AdminTable {
      * @since 0.2.4
      */
     protected static function delete( $property, $value ) {
+        // Build delete url
         $delete_url = admin_url( 'admin.php?page=bc-dashboard&action=delete_booking&booking_id=' . $value );
-        $delete_button = '<a href="#" onclick="return confirmDelete();" style="font-size: 16px"><i class="fa-solid fa-trash"></i></a>';
-    
-        // JavaScript function for confirmation
-        $delete_button .= '
-            <script>
-            function confirmDelete() {
-                if (confirm("' . esc_js( __( 'Are you sure you want to delete this booking? This action cannot be undone.', 'buddyclients-free' ) ) . '")) {
-                    window.location.href = "' . esc_url( $delete_url ) . '";
-                    return false;
-                }
-                return false;
-            }
-            </script>';
-    
+
+        // Define confirmation message
+        $message = __( 'Are you sure you want to delete this booking? This action cannot be undone.', 'buddyclients' );
+
+        // Output button
+        $delete_button = '<a href="#" onclick="return confirmAction(\'' . esc_url( $delete_url ) . '\', \'' . esc_js( $message ) . '\');" style="font-size: 16px"><i class="fa-solid fa-trash"></i></a>';
+
         return $delete_button;
     }
     
@@ -456,13 +490,13 @@ class AdminTableItem extends AdminTable {
         $status = '';
         switch ( $value ) {
             case 'paid':
-                $status = __( 'Paid', 'buddyclients-free' );
+                $status = __( 'Paid', 'buddyclients' );
                 break;
             case 'pending':
-                $status = __( 'Pending', 'buddyclients-free' );
+                $status = __( 'Pending', 'buddyclients' );
                 break;
             case 'failed':
-                $status = __( 'Failed', 'buddyclients-free' );
+                $status = __( 'Failed', 'buddyclients' );
                 break;
         }
         return $status;
@@ -474,7 +508,7 @@ class AdminTableItem extends AdminTable {
      * @since 0.1.0
      */
     protected static function link( $property, $value ) {
-        return '<a href="' . esc_url( $value ) . '">' . __( 'View', 'buddyclients-free' ) . '</a>';
+        return '<a href="' . esc_url( $value ) . '">' . __( 'View', 'buddyclients' ) . '</a>';
     }
     
     /**

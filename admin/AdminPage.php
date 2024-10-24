@@ -117,7 +117,7 @@ class AdminPage {
         return [
             'key' => $key,
             'settings' => false,
-            'title' => $args['menu_name'] ?? $args['plural_name'],
+            'title' => $args['menu_name'] ?? $args['plural_name'] ?? '',
             'parent_slug' => 'bc-dashboard',
             'bc_menu_order' => $args['bc_menu_order'] ?? null,
             'group' => $args['group'] ?? null,
@@ -214,7 +214,7 @@ class AdminPage {
      */
     private static function build_slug( $key, $args ) {
         $suffix = isset( $args['settings'] ) && $args['settings'] ? '-settings' : '';
-        $key = str_replace( '_', '-', $args['key'] ?? $key );
+        $key = str_replace( '_', '-', ( $args['key'] ?? $key ?? '' ) );
         return 'bc-' . $key . $suffix;
     }
 
@@ -226,9 +226,9 @@ class AdminPage {
      * @param   string  $key    The key for the submenu page.
      * @param   array   $args   The arguments for the submenu page.
      */
-    public function add_submenu( $key, $args ) {
+    public function add_submenu( $key, $args ) {        
         add_submenu_page(
-            $args['parent_slug'] ?? '',
+            $args['parent_slug'] ?? 'bc-hidden-menu', // default to hidden menu item
             $args['title'] ?? '', // page title
             $args['title'] ?? '', // menu title
             $args['cap'] ?? 'manage_options',

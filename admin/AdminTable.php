@@ -159,7 +159,6 @@ class AdminTable {
     private function allowed_html() {        
         $form_tags = bc_allowed_html_form();
         $additional_tags = [
-            'a' => [ 'href' => [], 'onclick' => [], 'class' => [] ],
             'script' => [],
             'i' => [ 'class' => [], 'style' => [] ],
             'span' => [ 'id' => [], 'class' => [] ],
@@ -250,7 +249,7 @@ class AdminTable {
         $output = '<div class="tablenav">';
         $output .= '<div class="tablenav-pages">';
         /* translators: %d: the number of items being displayed */
-        $output .= '<span class="displaying-num">' . sprintf( esc_html__( '%d items', 'buddyclients-free' ), count( $this->filtered_items ) ) . '</span>';
+        $output .= '<span class="displaying-num">' . sprintf( esc_html__( '%d items', 'buddyclients' ), count( $this->filtered_items ) ) . '</span>';
         $output .= '<span class="pagination-links">';
         
         // First page link
@@ -264,11 +263,11 @@ class AdminTable {
         $output .= '</span>';
         
         // Current page number of total
-        $output .= '<span class="tablenav-pages-navspan screen-reader-text">' . esc_html__( 'Current Page', 'buddyclients-free' ) . '</span>';
+        $output .= '<span class="tablenav-pages-navspan screen-reader-text">' . esc_html__( 'Current Page', 'buddyclients' ) . '</span>';
         $output .= '<span id="table-paging" class="paging-input">';
         $output .= '<span class="tablenav-paging-text">' . sprintf(
             /* translators: %1$d: the number of the current page being displayed; %2$d: the total number of pages */
-            esc_html__( '%1$d of %2$d', 'buddyclients-free' ),
+            esc_html__( '%1$d of %2$d', 'buddyclients' ),
             $this->current_page,
             $total_pages )
             . '</span>';
@@ -309,7 +308,7 @@ class AdminTable {
         $content .= '<p>' . esc_html( $this->description ) . '</p>';
         
         // Filters
-        $content .= wp_kses( $this->filter_forms(), bc_allowed_html_form() );
+        $content .= $this->filter_forms();
         
         // H2 Table Header
         $content .= '<h2>' . esc_html( $this->table_header ) . '</h2>';
@@ -334,7 +333,7 @@ class AdminTable {
             foreach ( $this->build_columns( $item ) as $key => $value ) {
                 $content .= '<td class="column-' . esc_attr( $key ) . '">';
                 if ( ! empty( $value ) ) {
-                    $content .= wp_kses( $value, $this->allowed_html() );
+                    $content .= $value;
                 }
                 $content .= '</td>';
             }
@@ -429,6 +428,9 @@ class AdminTable {
             
             // Build the filter name
             $name = $key . '_filter';
+
+            // Get the current filter value
+            $curr_value = bc_get_param( $name );
             
             // Filter label
             echo '<label for="' . esc_attr( $name ) . '">';
@@ -440,8 +442,7 @@ class AdminTable {
             
             // Loop through the options
             foreach ( $data['options'] as $option_key => $option_label ) {
-                $name = bc_get_param( $name );
-                echo '<option value="' . esc_attr( $option_key ) . '"' . ( $name == $option_key ? ' selected' : '' ) . '>' . esc_html( $option_label ) . '</option>';
+                echo '<option value="' . esc_attr( $option_key ) . '"' . ( $curr_value == $option_key ? ' selected' : '' ) . '>' . esc_html( $option_label ) . '</option>';
             }
         
             // Close the dropdown
@@ -450,7 +451,7 @@ class AdminTable {
         
         // Check flag
         if ( ! $visible_filters ) {
-            return;
+            return '';
         }
         
         // Submission verification field
@@ -458,7 +459,7 @@ class AdminTable {
         
         // Submit button
         echo '<button type="submit" class="button action" name="' . esc_attr( $this->key ) . '_filter_submit">';
-        echo esc_html__( 'Filter', 'buddyclients-free' );
+        echo esc_html__( 'Filter', 'buddyclients' );
         echo '</button>';
         
         // Close the form

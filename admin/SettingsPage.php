@@ -70,17 +70,17 @@ class SettingsPage {
      * @since 0.1.0
      */
     public function __construct( $args ) {
+
+        // Extract data
+        $this->key = $args['key'] ?? '';
+        $this->title = $args['title'] ?? 'Settings';
+        $this->name = $this->build_settings_name();
         
         // Get settings callback
         $callback = Settings::get_callback( $args['key'] );
         if ( is_callable( $callback ) ) {
             $this->data = call_user_func( $callback );
         }
-        
-        // Extract data
-        $this->key = $args['key'];
-        $this->title = $args['title'] ?? 'Settings';
-        $this->name = $this->build_settings_name();
         
         // Define hooks
         $this->define_hooks();
@@ -109,11 +109,43 @@ class SettingsPage {
      * Registers settings.
      * 
      * @since 0.1.0
+     * @since 1.0.17 Use sanitization callback.
      */
     public function register_settings() {
-        register_setting( $this->name . '_group', $this->name );
-        add_settings_section( $this->name . '_section', '', [$this, 'section_callback'], $this->name );
-        
+        register_setting( $this->name . '_group', $this->name, [
+            'sanitize_callback' => [ $this, 'sanitize_settings' ]
+        ]);
+    
+        add_settings_section( $this->name . '_section', '', [ $this, 'section_callback' ], $this->name );
+    } 
+    
+    /**
+     * Sanitize settings.
+     *
+     * Ensures that empty checkboxes are saved as an empty array.
+     * 
+     * @since 1.0.17
+     *
+     * @param array $input The raw settings input.
+     * @return array Sanitized settings.
+     */
+    public function sanitize_settings( $input ) {
+
+        // Loop through settings fields and ensure checkboxes are set to an empty array if no value is submitted
+        foreach ( $this->data as $section_key => $section_data ) {
+
+            foreach ( $section_data['fields'] as $field_id => $field_data ) {
+
+                if ( $field_data['type'] === 'checkboxes' ) {
+
+                    if ( ! isset( $input[ $field_id ] ) ) {
+                        $input[ $field_id ] = [];
+                    }
+                }
+            }
+        }
+
+        return $input;
     }
     
     /**

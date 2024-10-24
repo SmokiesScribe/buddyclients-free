@@ -75,7 +75,7 @@ class AdminPageManager {
             'stripe' => [
                 'key' => 'stripe',
                 'settings' => true,
-                'title' => __('Stripe', 'buddyclients'),
+                'title' => 'Stripe',
                 'parent_slug' => null,
                 'required_class' => 'BuddyClients\Components\Stripe\StripeKeys',
                 'required_component' => 'Stripe'
@@ -154,7 +154,6 @@ class AdminPageManager {
                 'title' => __('Email Log', 'buddyclients'),
                 'settings' => false,
                 'parent_slug' => null,
-                'callback' => 'bc_email_log_content',
                 'callable' => 'bc_email_log_content',
                 'required_class' => 'BuddyClients\Components\Email\EmailTemplateManager'
             ],
@@ -162,23 +161,21 @@ class AdminPageManager {
                 'key' => 'bookings-dashboard',
                 'title' => __('Bookings Dashboard', 'buddyclients'),
                 'settings' => false,
-                'parent_slug' => false,
-                'callback' => 'bc_bookings_dashboard',
+                'parent_slug' => null,
                 'callable' => 'bc_bookings_dashboard'
             ],
             'payments' => [
                 'key' => 'payments',
                 'title' => __('Payments', 'buddyclients'),
                 'settings' => false,
-                'parent_slug' => false,
-                'callback' => 'bc_payments_list',
+                'parent_slug' => null,
                 'callable' => 'bc_payments_list'
             ],
             'users' => [
                 'key' => 'users',
                 'title' => __('Users', 'buddyclients'),
                 'settings' => false,
-                'parent_slug' => false,
+                'parent_slug' => null,
                 'callback' => 'bc_user_list',
                 'callable' => 'bc_user_list'
             ],
@@ -186,17 +183,22 @@ class AdminPageManager {
                 'key' => 'booked-services',
                 'title' => __('Booked Services', 'buddyclients'),
                 'settings' => false,
-                'parent_slug' => false,
-                'callback' => 'bc_booked_services_table',
+                'parent_slug' => null,
                 'callable' => 'bc_booked_services_table'
+            ],
+            'user_agreements' => [
+                'key' => 'user-agreements',
+                'title' => __('Legal', 'buddyclients'),
+                'settings' => false,
+                'parent_slug' => 'bc-dashboard',
+                'callable' => 'bc_user_agreements_table',
+                'bc_menu_order' => 8,
             ],
             'upgrade' => [
                 'key' => 'upgrade',
                 'title' => __('Upgrade BuddyClients', 'buddyclients'),
                 'settings' => false,
-                'parent_slug' => false,
-                'callback' => 'bc_upgrade_link',
-                'callback_args' => [true],
+                'parent_slug' => null,
                 'callable' => ['bc_upgrade_link', [true]]
             ],
         ];

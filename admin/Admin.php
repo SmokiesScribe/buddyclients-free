@@ -3,6 +3,7 @@ namespace BuddyClients\Admin;
 
 use BuddyClients\Config\AssetManager;
 
+
 /**
  * Admin-specific functionality of the plugin.
  *
@@ -126,6 +127,8 @@ class Admin {
         if ( ! function_exists( 'add_menu_page' ) ) {
             return;
         }
+
+        // Add primary menu
         add_menu_page(
             'BuddyClients',
             'BuddyClients',
@@ -135,7 +138,6 @@ class Admin {
             'dashicons-buddyclients',
             5
         );
-        
         add_submenu_page(
             'bc-dashboard',
             'Dashboard',
@@ -145,6 +147,18 @@ class Admin {
             'bc_dashboard_content',
             0
         );
+
+        // Add hidden menu
+        add_menu_page(
+            'Hidden Menu',
+            'Hidden Menu',
+            'manage_options',
+            'bc-hidden-menu',
+            '' // no callback needed
+        );
+
+        // Remove the hidden menu item so it doesn't appear in the admin menu
+        remove_menu_page('bc-hidden-menu');
     }
     
     /**

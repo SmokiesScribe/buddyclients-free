@@ -86,8 +86,8 @@ class PostTypeManager {
     public static function post_types() {
         $post_types = [
             'bc_service' => [
-                'singular_name'         => __( 'Service', 'buddyclients-free' ),
-                'plural_name'           => __( 'Services', 'buddyclients-free' ),
+                'singular_name'         => __( 'Service', 'buddyclients' ),
+                'plural_name'           => __( 'Services', 'buddyclients' ),
                 'show_in_menu'          => false,
                 'public'                => true,
                 'has_archive'           => true,
@@ -100,8 +100,8 @@ class PostTypeManager {
                 'bc_menu_order'         => 2
             ],
             'bc_adjustment' => [
-                'singular_name'         => __( 'Rate Adjustment', 'buddyclients-free' ),
-                'plural_name'           => __( 'Rate Adjustments', 'buddyclients-free' ),
+                'singular_name'         => __( 'Rate Adjustment', 'buddyclients' ),
+                'plural_name'           => __( 'Rate Adjustments', 'buddyclients' ),
                 'show_in_menu'          => false,
                 'has_archive'           => false,
                 'public'                => true,
@@ -112,8 +112,8 @@ class PostTypeManager {
                 'show_in_rest'          => false,
             ],
             'bc_rate_type' => [
-                'singular_name'         => __( 'Rate Type', 'buddyclients-free' ),
-                'plural_name'           => __( 'Rate Types', 'buddyclients-free' ),
+                'singular_name'         => __( 'Rate Type', 'buddyclients' ),
+                'plural_name'           => __( 'Rate Types', 'buddyclients' ),
                 'show_in_menu'          => false,
                 'has_archive'           => false,
                 'public'                => true,
@@ -124,8 +124,8 @@ class PostTypeManager {
                 'show_in_rest'          => false,
             ],
             'bc_service_type' => [
-                'singular_name'         => __( 'Service Type', 'buddyclients-free' ),
-                'plural_name'           => __( 'Service Types', 'buddyclients-free' ),
+                'singular_name'         => __( 'Service Type', 'buddyclients' ),
+                'plural_name'           => __( 'Service Types', 'buddyclients' ),
                 'show_in_menu'          => false,
                 'has_archive'           => false,
                 'public'                => true,
@@ -136,8 +136,8 @@ class PostTypeManager {
                 'show_in_rest'          => false,
             ],
             'bc_role' => [
-                'singular_name'         => __( 'Team Member Role', 'buddyclients-free' ),
-                'plural_name'           => __( 'Team Member Roles', 'buddyclients-free' ),
+                'singular_name'         => __( 'Team Member Role', 'buddyclients' ),
+                'plural_name'           => __( 'Team Member Roles', 'buddyclients' ),
                 'show_in_menu'          => false,
                 'has_archive'           => false,
                 'public'                => true,
@@ -148,9 +148,9 @@ class PostTypeManager {
                 'show_in_rest'          => false,
             ],
             'bc_email' => [
-                'singular_name'         => __( 'Email Template', 'buddyclients-free' ),
-                'plural_name'           => __( 'Email Templates', 'buddyclients-free' ),
-                'menu_name'             => __( 'Emails', 'buddyclients-free' ),
+                'singular_name'         => __( 'Email Template', 'buddyclients' ),
+                'plural_name'           => __( 'Email Templates', 'buddyclients' ),
+                'menu_name'             => __( 'Emails', 'buddyclients' ),
                 'show_in_menu'          => false,
                 'public'                => true,
                 'has_archive'           => false,
@@ -162,8 +162,8 @@ class PostTypeManager {
                 'bc_menu_order'         => 3
             ],
             'bc_brief' => [
-                'singular_name'         => __( 'Brief', 'buddyclients-free' ),
-                'plural_name'           => __( 'Briefs', 'buddyclients-free' ),
+                'singular_name'         => __( 'Brief', 'buddyclients' ),
+                'plural_name'           => __( 'Briefs', 'buddyclients' ),
                 'show_in_menu'          => false,
                 'public'                => true,
                 'has_archive'           => false,
@@ -177,8 +177,8 @@ class PostTypeManager {
                 'bc_menu_order'         => 4
             ],
             'bc_brief_field' => [
-                'singular_name'         => __( 'Brief Field', 'buddyclients-free' ),
-                'plural_name'           => __( 'Brief Fields', 'buddyclients-free' ),
+                'singular_name'         => __( 'Brief Field', 'buddyclients' ),
+                'plural_name'           => __( 'Brief Fields', 'buddyclients' ),
                 'show_in_menu'          => false,
                 'public'                => false,
                 'has_archive'           => false,
@@ -190,8 +190,8 @@ class PostTypeManager {
                 'required_component'    => 'Brief'
             ],
             'bc_legal' => [
-                'singular_name'         => __( 'Legal Agreement', 'buddyclients-free' ),
-                'plural_name'           => __( 'Legal Agreements', 'buddyclients-free' ),
+                'singular_name'         => __( 'Legal Agreement', 'buddyclients' ),
+                'plural_name'           => __( 'Legal Agreements', 'buddyclients' ),
                 'show_in_menu'          => false,
                 'public'                => false,
                 'has_archive'           => false,
@@ -202,9 +202,22 @@ class PostTypeManager {
                 'supports'              => array('editor'),
                 'required_component'    => 'Legal',
             ],
+            'bc_legal_mod' => [
+                'singular_name'         => __( 'Legal Modification', 'buddyclients' ),
+                'plural_name'           => __( 'Legal Modification', 'buddyclients' ),
+                'show_in_menu'          => false,
+                'public'                => false,
+                'has_archive'           => false,
+                'exclude_from_search'   => true,
+                'publicly_queryable'    => true,
+                'show_in_nav_menus'     => false,
+                'show_in_rest'          => true,
+                'supports'              => array('title', 'editor'),
+                'required_component'    => 'Legal',
+            ],
             'bc_quote' => [
-                'singular_name'         => __( 'Custom Quote', 'buddyclients-free' ),
-                'plural_name'           => __( 'Custom Quotes', 'buddyclients-free' ),
+                'singular_name'         => __( 'Custom Quote', 'buddyclients' ),
+                'plural_name'           => __( 'Custom Quotes', 'buddyclients' ),
                 'show_in_menu'          => false,
                 'public'                => true,
                 'has_archive'           => false,
@@ -218,8 +231,8 @@ class PostTypeManager {
             ],
             'bc_testimonial' => [
                 'required_component'    => 'Testimonial',
-                'singular_name'         => __( 'Testimonial', 'buddyclients-free' ),
-                'plural_name'           => __( 'Testimonials', 'buddyclients-free' ),
+                'singular_name'         => __( 'Testimonial', 'buddyclients' ),
+                'plural_name'           => __( 'Testimonials', 'buddyclients' ),
                 'show_in_menu'          => false,
                 'public'                => true,
                 'has_archive'           => true,
@@ -232,8 +245,8 @@ class PostTypeManager {
                 'bc_menu_order'         => 5
             ],
             'bc_filter' => [
-                'singular_name'         => __( 'Filter Field', 'buddyclients-free' ),
-                'plural_name'           => __( 'Filter Fields', 'buddyclients-free' ),
+                'singular_name'         => __( 'Filter Field', 'buddyclients' ),
+                'plural_name'           => __( 'Filter Fields', 'buddyclients' ),
                 'show_in_menu'          => false,
                 'public'                => true,
                 'has_archive'           => false,
@@ -245,8 +258,8 @@ class PostTypeManager {
                 'required_component'    => 'Booking',
             ],
             'bc_file_upload' => [
-                'singular_name'         => __( 'File Upload Type', 'buddyclients-free' ),
-                'plural_name'           => __( 'File Upload Types', 'buddyclients-free' ),
+                'singular_name'         => __( 'File Upload Type', 'buddyclients' ),
+                'plural_name'           => __( 'File Upload Types', 'buddyclients' ),
                 'show_in_menu'          => false,
                 'public'                => true,
                 'has_archive'           => false,

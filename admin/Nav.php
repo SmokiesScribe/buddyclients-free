@@ -1,6 +1,8 @@
 <?php
 namespace BuddyClients\Admin;
 
+use BuddyClients\Includes\ParamManager;
+
 /**
  * Generates the admin nav tabs.
  * 
@@ -23,62 +25,66 @@ class Nav {
         
         $tabs = [
             'dashboard' => [
-                __( 'All Bookings', 'buddyclients-free' )        => ['page'  => 'bc-dashboard'],
+                __( 'All Bookings', 'buddyclients' )        => ['page'  => 'bc-dashboard'],
                 ''                                          => ['page'  => 'bc-booked-services'],
-                __( 'Overview', 'buddyclients-free' )            => ['page'  => 'bc-bookings-dashboard'],
-                __( 'Payments', 'buddyclients-free' )            => ['page'  => 'bc-payments'],
-                __( 'Users', 'buddyclients-free' )               => ['page'  => 'bc-users'],
+                __( 'Overview', 'buddyclients' )            => ['page'  => 'bc-bookings-dashboard'],
+                __( 'Payments', 'buddyclients' )            => ['page'  => 'bc-payments'],
+                __( 'Users', 'buddyclients' )               => ['page'  => 'bc-users'],
             ],
+            'legal' => [
+                __( 'User Agreements', 'buddyclients' )    => ['page'  => 'bc-user-agreements'],
+                __( 'Legal Modifications', 'buddyclients' )=> ['post_type'  => 'bc_legal_mod'],
+                __( 'Settings', 'buddyclients' )     => ['page'  => 'bc-legal-settings', 'post_type'  => 'bc_legal'],
+            ], 
             'settings' => [
-                __( 'Settings', 'buddyclients-free' )            => ['page'  => 'bc-general-settings'],
-                __( 'Components', 'buddyclients-free' )          => ['page'  => 'bc-components-settings'],
-                __( 'Pages', 'buddyclients-free' )               => ['page'  => 'bc-pages-settings'],
-                __( 'Styles', 'buddyclients-free' )              => ['page'  => 'bc-style-settings'],
-                __( 'Bookings', 'buddyclients-free' )            => ['page'  => 'bc-booking-settings'],
+                __( 'General', 'buddyclients' )            => ['page'  => 'bc-general-settings'],
+                __( 'Components', 'buddyclients' )          => ['page'  => 'bc-components-settings'],
+                __( 'Pages', 'buddyclients' )               => ['page'  => 'bc-pages-settings'],
+                __( 'Styles', 'buddyclients' )              => ['page'  => 'bc-style-settings'],
+                __( 'Bookings', 'buddyclients' )            => ['page'  => 'bc-booking-settings'],
                 'Stripe'                                    => ['page'  => 'bc-stripe-settings'],
-                __( 'Sales', 'buddyclients-free' )               => ['page'  => 'bc-sales-settings'],
-                __( 'Emails', 'buddyclients-free' )              => ['page'  => 'bc-email-settings'],
-                __( 'Legal', 'buddyclients-free' )               => ['page'  => 'bc-legal-settings', 'post_type'  => 'bc_legal'],
-                ''                                          => ['post_type'  => 'bc_legal_mod'],
-                __( 'Affiliate', 'buddyclients-free' )           => ['page'  => 'bc-affiliate-settings'],
-                __( 'Help Posts', 'buddyclients-free' )          => ['page'  => 'bc-help-settings'],
-                //__( 'Integrations', 'buddyclients-free' )        => ['page'  => 'bc-integrations-settings'],
+                __( 'Sales', 'buddyclients' )               => ['page'  => 'bc-sales-settings'],
+                __( 'Emails', 'buddyclients' )              => ['page'  => 'bc-email-settings'],
+                __( 'Legal', 'buddyclients' )               => ['page'  => 'bc-legal-settings', 'post_type'  => 'bc_legal'],
+                __( 'Affiliate', 'buddyclients' )           => ['page'  => 'bc-affiliate-settings'],
+                __( 'Help Posts', 'buddyclients' )          => ['page'  => 'bc-help-settings'],
+                //__( 'Integrations', 'buddyclients' )        => ['page'  => 'bc-integrations-settings'],
             ],
             'services' => [
-                __( 'Services', 'buddyclients-free' )            => ['post_type'  => 'bc_service'],
-                __( 'Service Types', 'buddyclients-free' )       => ['post_type'  => 'bc_service_type'],
-                __( 'Rate Types', 'buddyclients-free' )          => ['post_type'  => 'bc_rate_type'],
-                __( 'Team Roles', 'buddyclients-free' )          => ['post_type'  => 'bc_role'],
-                __( 'Adjustment Fields', 'buddyclients-free' )   => ['post_type'  => 'bc_adjustment'],
-                __( 'Filter Fields', 'buddyclients-free' )       => ['post_type'  => 'bc_filter'],
-                __( 'File Upload Types', 'buddyclients-free' )   => ['post_type'  => 'bc_file_upload'],
+                __( 'Services', 'buddyclients' )            => ['post_type'  => 'bc_service'],
+                __( 'Service Types', 'buddyclients' )       => ['post_type'  => 'bc_service_type'],
+                __( 'Rate Types', 'buddyclients' )          => ['post_type'  => 'bc_rate_type'],
+                __( 'Team Roles', 'buddyclients' )          => ['post_type'  => 'bc_role'],
+                __( 'Adjustment Fields', 'buddyclients' )   => ['post_type'  => 'bc_adjustment'],
+                __( 'Filter Fields', 'buddyclients' )       => ['post_type'  => 'bc_filter'],
+                __( 'File Upload Types', 'buddyclients' )   => ['post_type'  => 'bc_file_upload'],
             ],
             'payments' => [
-                __( 'Team Payments', 'buddyclients-free' )       => ['page'  => 'bc-team-payments'],
-                __( 'Affiliate Payments', 'buddyclients-free' )  => ['page'  => 'bc-affiliate-payments'],
-                __( 'Sales Payments', 'buddyclients-free' )      => ['page'  => 'bc-sales-payments'],
+                __( 'Team Payments', 'buddyclients' )       => ['page'  => 'bc-team-payments'],
+                __( 'Affiliate Payments', 'buddyclients' )  => ['page'  => 'bc-affiliate-payments'],
+                __( 'Sales Payments', 'buddyclients' )      => ['page'  => 'bc-sales-payments'],
             ],
             'briefs' => [
-                __( 'Briefs', 'buddyclients-free' )              => ['post_type'  => 'bc_brief'],
-                __( 'Brief Types', 'buddyclients-free' )         => ['taxonomy'   => 'brief_type', 'post_type'  => 'bc_brief'],
-                __( 'Brief Fields', 'buddyclients-free' )        => ['post_type'  => 'bc_brief_field'],
+                __( 'Briefs', 'buddyclients' )              => ['post_type'  => 'bc_brief'],
+                __( 'Brief Types', 'buddyclients' )         => ['taxonomy'   => 'brief_type', 'post_type'  => 'bc_brief'],
+                __( 'Brief Fields', 'buddyclients' )        => ['post_type'  => 'bc_brief_field'],
             ],
             'emails' => [
-                __( 'Email Templates', 'buddyclients-free' )    => ['post_type'  => 'bc_email'],
-                __( 'Email Log', 'buddyclients-free' )          => ['page'  => 'bc-email-log'],
+                __( 'Email Templates', 'buddyclients' )    => ['post_type'  => 'bc_email'],
+                __( 'Email Log', 'buddyclients' )          => ['page'  => 'bc-email-log'],
             ],
             'users' => [
-                __( 'Team', 'buddyclients-free' )                => ['page'  => 'bc-team'],
-                __( 'Affiliates', 'buddyclients-free' )          => ['page'  => 'bc-affiliates'],
+                __( 'Team', 'buddyclients' )                => ['page'  => 'bc-team'],
+                __( 'Affiliates', 'buddyclients' )          => ['page'  => 'bc-affiliates'],
             ],
             'testimonials' => [
-                __( 'Testimonials', 'buddyclients-free' )       => ['post_type'  => 'bc_testimonial'],
+                __( 'Testimonials', 'buddyclients' )       => ['post_type'  => 'bc_testimonial'],
             ],  
             'custom_quotes' => [
-                __( 'Custom Quotes', 'buddyclients-free' )      => ['post_type'  => 'bc_quote'],
-            ], 
+                __( 'Custom Quotes', 'buddyclients' )      => ['post_type'  => 'bc_quote'],
+            ],
             'license' => [
-                __( 'License Key', 'buddyclients-free' )        => ['page'  => 'bc-license-settings'],
+                __( 'License Key', 'buddyclients' )        => ['page'  => 'bc-license-settings'],
             ]
         ];
 
@@ -288,7 +294,7 @@ class Nav {
      private static function matching_tab( $link = null ) {
         
         // Get link or current url params 
-        $params = self::get_params( $link );
+        $params = self::get_params( $link );     
         
         // Get tabs data
         $tabs_array = self::tabs();
@@ -352,8 +358,12 @@ class Nav {
      * @param   ?string $link   Defaults to current url.
      */
     private static function get_params( $link = null ) {
+        
         // Get all url params for provided link or curr url
         $array = bc_get_all_params( $link );
+
+        //echo 'Returned from bc_get_all_params;';
+        //bc_print($array);
     
         // Extract parameters
         return [
@@ -413,6 +423,10 @@ class Nav {
             foreach ( $submenu_items as $key => &$submenu_item )  { // Use reference to modify original array
                 // Get the submenu item url
                 $submenu_url = $submenu_item[2];
+
+                if ( ! $submenu_url ) {
+                    continue;
+                }
                 
                 // Get submenu item data
                 $submenu_tab = self::matching_tab( $submenu_url );

@@ -46,43 +46,43 @@ class AdminColumns {
     private static function columns_data( $post_type ) {
         $columns = [
             'bc_brief' => [
-                'project_id'                =>  __( 'Project', 'buddyclients-free' ),
-                'updated_date'              =>  __( 'Submitted', 'buddyclients-free' ),
+                'project_id'                =>  __( 'Project', 'buddyclients' ),
+                'updated_date'              =>  __( 'Submitted', 'buddyclients' ),
             ],
             'bc_brief_field' => [
-                'brief_types'               =>  __( 'Brief Types', 'buddyclients-free' ),
-                'field_type'                =>  __( 'Field Type', 'buddyclients-free' ),
+                'brief_types'               =>  __( 'Brief Types', 'buddyclients' ),
+                'field_type'                =>  __( 'Field Type', 'buddyclients' ),
             ],
             'bc_service' => [
-                'valid'                     =>  __( 'Valid', 'buddyclients-free' ),
-                'visible'                   =>  __( 'Visibility', 'buddyclients-free' ),
-                'rate_value'                =>  __( 'Client Rate', 'buddyclients-free' ),
-                'team_member_percentage'    =>  __( 'Team Member %', 'buddyclients-free' ),
+                'valid'                     =>  __( 'Valid', 'buddyclients' ),
+                'visible'                   =>  __( 'Visibility', 'buddyclients' ),
+                'rate_value'                =>  __( 'Client Rate', 'buddyclients' ),
+                'team_member_percentage'    =>  __( 'Team Member %', 'buddyclients' ),
             ],
             'bc_adjustment' => [
-                'form_field_type'           =>  __( 'Field Type', 'buddyclients-free' ),
+                'form_field_type'           =>  __( 'Field Type', 'buddyclients' ),
             ],
             'bc_service_type' => [
-                'visible'                   =>  __( 'Visibility', 'buddyclients-free' ),
-                'form_field_type'           =>  __( 'Field Type', 'buddyclients-free' ),
+                'visible'                   =>  __( 'Visibility', 'buddyclients' ),
+                'form_field_type'           =>  __( 'Field Type', 'buddyclients' ),
             ],
             'bc_filter' => [
-                'xprofile_field'            =>  __( 'Field', 'buddyclients-free' ),
-                'xprofile_field_type'       =>  __( 'Field Type', 'buddyclients-free' ),
+                'xprofile_field'            =>  __( 'Field', 'buddyclients' ),
+                'xprofile_field_type'       =>  __( 'Field Type', 'buddyclients' ),
             ],
             'bc_quote' => [
-                'client_id'                 =>  __( 'Client', 'buddyclients-free' ),
-                'valid'                     =>  __( 'Valid', 'buddyclients-free' ),
-                'visible'                   =>  __( 'Visibility', 'buddyclients-free' ),
-                'rate_value'                =>  __( 'Client Rate', 'buddyclients-free' ),
-                'team_member_percentage'    =>  __( 'Team Member %', 'buddyclients-free' ),
+                'client_id'                 =>  __( 'Client', 'buddyclients' ),
+                'valid'                     =>  __( 'Valid', 'buddyclients' ),
+                'visible'                   =>  __( 'Visibility', 'buddyclients' ),
+                'rate_value'                =>  __( 'Client Rate', 'buddyclients' ),
+                'team_member_percentage'    =>  __( 'Team Member %', 'buddyclients' ),
             ],
             'bc_legal_mod' => [
-                'user_id'                   =>  __( 'User', 'buddyclients-free' ),
-                'legal_type'                =>  __( 'Legal Type', 'buddyclients-free' ),
+                'user_id'                   =>  __( 'User', 'buddyclients' ),
+                'legal_type'                =>  __( 'Legal Type', 'buddyclients' ),
             ],
             'bc_file_upload' => [
-                'file_types'                =>  __( 'File Types', 'buddyclients-free' )
+                'file_types'                =>  __( 'File Types', 'buddyclients' )
             ],
         ];
         
@@ -108,17 +108,17 @@ class AdminColumns {
     public function sortable_columns() {
         $sortable_columns = [
             'bc_brief_field' => [
-                'brief_types'               =>  __( 'Brief Types', 'buddyclients-free' ),
+                'brief_types'               =>  __( 'Brief Types', 'buddyclients' ),
             ],
             'bc_service' => [
-                'valid'                     =>  __( 'Valid', 'buddyclients-free' ),
+                'valid'                     =>  __( 'Valid', 'buddyclients' ),
             ],
             'bc_service_type' => [
-                'visible'                   =>  __( 'Visibility', 'buddyclients-free' ),
+                'visible'                   =>  __( 'Visibility', 'buddyclients' ),
             ],
             'bc_quote' => [
-                'client_id'                 =>  __( 'Client', 'buddyclients-free' ),
-                'valid'                     =>  __( 'Valid', 'buddyclients-free' ),
+                'client_id'                 =>  __( 'Client', 'buddyclients' ),
+                'valid'                     =>  __( 'Valid', 'buddyclients' ),
             ]
         ];
         
@@ -534,7 +534,7 @@ class AdminColumns {
      * @param mixed $value The value of the meta field.
      */
     private function submitted_column( $value ) {
-        return $value ? bc_admin_icon('check') . '<br>' . __( 'Last Update: ', 'buddyclients-free' ) . gmdate('F j, Y', strtotime($value)) : bc_admin_icon('x');
+        return $value ? bc_admin_icon('check') . '<br>' . __( 'Last Update: ', 'buddyclients' ) . gmdate('F j, Y', strtotime($value)) : bc_admin_icon('x');
     }
     
     /**
@@ -557,16 +557,16 @@ class AdminColumns {
      */
     private function rate_value_column( $value, $rate_type ) {
         if (!$value || $value == 0) {
-            return __( 'Free', 'buddyclients-free' );
+            return __( 'Free', 'buddyclients' );
         } else {
             if ($rate_type === 'flat') {
-                $type_name = __( ' flat', 'buddyclients-free' );
+                $type_name = __( ' flat', 'buddyclients' );
             } else {
                 $singular = get_post_meta($rate_type, 'singular', true);
-                $type_name = $singular ? __( ' per ', 'buddyclients-free' ) . strtolower($singular) : '';
+                $type_name = $singular ? __( ' per ', 'buddyclients' ) . strtolower($singular) : '';
             }
             if ($value && $rate_type) {
-                return __( '$', 'buddyclients-free' ) . $value . ' ' . $type_name;
+                return __( '$', 'buddyclients' ) . $value . ' ' . $type_name;
             }
         }
     }
@@ -580,7 +580,7 @@ class AdminColumns {
      */
     private function percentage_column( $value ) {
         if ( ! bc_freelancer_mode() ) {
-            return $value !== '' ? $value . __( '%', 'buddyclients-free' ) : $value;
+            return $value !== '' ? $value . __( '%', 'buddyclients' ) : $value;
         }
     }
     

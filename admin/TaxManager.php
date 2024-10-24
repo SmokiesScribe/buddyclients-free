@@ -46,8 +46,8 @@ class TaxManager {
         $taxonomies = [
             'brief_type' => [
                 'post_type'             => 'bc_brief',
-                'singular_name'         => __( 'Brief Type', 'buddyclients-free' ),
-                'plural_name'           => __( 'Brief Types', 'buddyclients-free' ),
+                'singular_name'         => __( 'Brief Type', 'buddyclients' ),
+                'plural_name'           => __( 'Brief Types', 'buddyclients' ),
                 'show_in_menu'          => null,
                 'hierarchical'          => true,
                 'public'                => true,
