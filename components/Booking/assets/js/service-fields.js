@@ -343,7 +343,8 @@
                         action: 'bc_team_filter_match',
                         team_id: teamID,
                         filter_values: filterValues,
-                        nonce: bcData.nonce
+                        nonce: serviceFieldsData.nonce,
+                        nonceAction: serviceFieldsData.nonceAction,
                     },
                     success: function(response) {
                         var match = JSON.parse(response);
@@ -376,4 +377,3 @@
         }
     
 })();
-

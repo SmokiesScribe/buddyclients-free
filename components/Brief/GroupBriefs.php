@@ -77,17 +77,17 @@ class GroupBriefs {
                 $icon_class = $this->icon( $brief->updated_date ? 'complete' : 'todo' );
                 
                 // Build click to message
-                $click_action = $brief->updated_date ? __( 'view', 'buddyclients-free' ) : __( 'complete', 'buddyclients-free' );
+                $click_action = $brief->updated_date ? __( 'view', 'buddyclients' ) : __( 'complete', 'buddyclients' );
                 $click_to_message = sprintf(
                     /* translators: %s: the click action (e.g. view) */
-                    __( 'Click to %s.', 'buddyclients-free' ),
+                    __( 'Click to %s.', 'buddyclients' ),
                     $click_action
                 );
                 
                 // Output the term card
                 $content .= '<a class="brief-type-term-link" href="' . get_permalink( $brief->ID ) . '">';
                 $content .= '<div class="brief-type-term">';
-                $content .= '<h3 style="margin-bottom: 10px;">' . $brief->brief_type_names . __( ' Brief', 'buddyclients-free' ) . '</h3>';
+                $content .= '<h3 style="margin-bottom: 10px;">' . $brief->brief_type_names . __( ' Brief', 'buddyclients' ) . '</h3>';
                 $content .= '<icon class="' . $icon_class . '" style="font-size: 24px; color: ' . bc_color('accent') . ';"></icon>';
                 $content .= '<p>' . $click_to_message . '.</p>';
                 $content .= '</div>';
@@ -95,7 +95,7 @@ class GroupBriefs {
             }
         
         } else {
-            $content .= __( 'No briefs available.', 'buddyclients-free' );
+            $content .= __( 'No briefs available.', 'buddyclients' );
         }
         
         $content .= '</div>'; // Close terms container

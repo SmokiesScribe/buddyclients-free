@@ -104,6 +104,10 @@ class SingleBrief {
             
             // Get brief types for each field
             $field_brief_types = get_post_meta( $field->ID, 'brief_types', true );
+
+            if ( ! is_array( $field_brief_types ) ) {
+                continue;
+            }
             
             // Check if the provided brief type is in the array
             if ( in_array( $brief_type, $field_brief_types ) ) {
@@ -224,8 +228,8 @@ private function toggle_button( $show_form, $is_admin, $updated_date ) {
     
     // Define labels
     $labels = [
-        'edit'      => __( 'Edit', 'buddyclients-free' ),
-        'view'      => __( 'View', 'buddyclients-free' ),
+        'edit'      => __( 'Edit', 'buddyclients' ),
+        'view'      => __( 'View', 'buddyclients' ),
     ];
 
     // Generate the button HTML

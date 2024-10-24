@@ -1,11 +1,7 @@
 <?php
 namespace BuddyClients\Components\Brief;
 
-use BuddyClients\Includes\{
-    Form\Form,
-    Form\FormField,
-    PostQuery
-};
+use BuddyClients\Includes\Form\Form;
 
 
 /**
@@ -35,7 +31,8 @@ class BriefForm extends SingleBrief {
             'fields_callback'       => [$this, 'form_fields'],
             'submission_class'      => __NAMESPACE__ . '\BriefSubmission',
         ];
-        return (new Form( $args ) )->build();
+        $form = new Form( $args );
+        return $form->build();
     }
     
     /**
@@ -46,7 +43,7 @@ class BriefForm extends SingleBrief {
     public function form_fields() {
         
         // Initialize
-        $args = array(); // Initialize as an empty array
+        $args = [];
         
         // Add hidden project field
         $args[] = [
@@ -55,20 +52,31 @@ class BriefForm extends SingleBrief {
             'value'         => $this->brief_id,
         ];
         
-        // Build fields
+        // Loop through fields from SingleBrief
         foreach ( $this->fields as $field_id => $field_data ) {
             
-            $help_link = $field_data['help_post_id'] ? bc_help_link( $field_data['help_post_id'] ) : '';
-                
+            // Build help link
+            $help_link = ( isset( $field_data['help_post_id'] ) && ! empty( $field_data['help_post_id'] ) ) ? bc_help_link( $field_data['help_post_id'] ) : '';
+
+            // Format options
+            $options = isset( $field_data['options'] ) && ! empty( $field_data['options'] ) ? $this->format_options( $field_data['options'], $field_data['type'], $field_id ) : [];
+
+            // Retrieve submitted value
+            $value = get_post_meta( $this->brief_id, $field_id, true );
+            if ( is_array( $value ) ) {
+                $value = $value[0];
+            }
+            
+            // Build args
             $args[] = [
                 'key'           => $field_id,
-                'type'          => $field_data['type'],
-                'label'         => $field_data['label'],
-                'description'   => $field_data['description'] . $help_link,
-                'options'       => $this->format_options( $field_data['options'], $field_data['type'], $field_id ),
-                'file_types'    => $field_data['file_types'],
-                'multiple_files'=> $field_data['multiple_files'],
-                'value'         => esc_html( get_post_meta( $this->brief_id, $field_id, true) )
+                'type'          => $field_data['type'] ?? null,
+                'label'         => $field_data['label'] ?? '',
+                'description'   => ( $field_data['description'] ?? '' ) . $help_link,
+                'options'       => $options,
+                'file_types'    => $field_data['file_types'] ?? [],
+                'multiple_files'=> $field_data['multiple_files'] ?? 'no',
+                'value'         => $value
             ];
         }
         
@@ -96,7 +104,7 @@ class BriefForm extends SingleBrief {
         // Initialize
         $options_data = [];
         if ( $field_type === 'dropdown' ) {
-            $options_data[] = ['label' => __( 'Select One', 'buddyclients-free' ), 'value' => ''];
+            $options_data[] = ['label' => __( 'Select One', 'buddyclients' ), 'value' => ''];
         }
         
         // Get options array

@@ -96,7 +96,8 @@
                 data: {
                     action: 'bc_get_project',
                     project_id: projectId,
-                    nonce: bcData.nonce
+                    nonce: creatProjectFieldsData.nonce,
+                    nonceAction: creatProjectFieldsData.nonceAction,
                 },
                 success: function(response) {
                     // Parse the JSON response

@@ -32,7 +32,7 @@ class BriefSubmission extends SingleBrief {
 
      */
     public function __construct( $post, $files = null ) {
-        
+
         // Construct SingleBrief
         parent::__construct( $post['brief_id'] );
         
@@ -70,16 +70,11 @@ class BriefSubmission extends SingleBrief {
      */
     private function redirect() {
         
-        // Get current url
-        $curr_url = bc_curr_url();
-        
         // Completed param
-        $target_url = str_replace( 'brief-view=form', 'brief-view=completed', $curr_url );
+        $target_url = bc_add_params( ['brief-view' => 'completed'] );
         
         // Redirect
-        header('Location: ' . site_url( $target_url ) );
-        
-        // Exit to prevent further execution
+        wp_redirect( $target_url );
         exit;
     }
     

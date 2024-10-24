@@ -159,33 +159,6 @@ class PaymentGroup {
     }
     
     /**
-     * Defines memo.
-     * 
-     * @since 0.1.0
-     */
-    private function build_memo( $booked_service_id  = null) {
-        
-        // Build memo array
-        $memo_array = [];
-        
-        // Client
-        $memo_array[] = bp_core_get_user_displayname( $this->booking_intent->client_id );
-        
-        // Add service name if applicable
-        if ( $booked_service_id ) {
-            $booked_service = BookedService::get_booked_service( $booked_service_id );
-            $memo_array[] = $booked_service->name;
-        }
-        
-        // Project
-        $memo_array[] = bp_get_group_name( groups_get_group( $this->booking_intent->project_id ) );
-        
-        // Implode to string
-        return implode(' | ', $memo_array);
-        
-    }
-    
-    /**
      * Creates a new Payment.
      * 
      * @since 0.1.0
@@ -203,7 +176,6 @@ class PaymentGroup {
         $args = [
             'booking_intent_id'     => $this->booking_intent->ID,
             'service_names'         => $this->booking_intent->service_names,
-            'memo'                  => $this->build_memo( $booked_service_id ),
             'project_id'            => $this->booking_intent->project_id,
             'client_id'             => $this->booking_intent->client_id,
             'type'                  => $type,

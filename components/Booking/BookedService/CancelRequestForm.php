@@ -50,24 +50,26 @@ class CancelRequestForm {
         
         // Check if cancellation has already been requested
         if ( $this->status === 'cancellation_requested' ) {
-            return __( 'Cancellation requested.', 'buddyclients-free' );
+            return __( 'Cancellation requested.', 'buddyclients' );
         }
         
         // Check if cancellation is allowed
         if ( ! $this->cancellation_allowed() ) {
-            return;
+            return '-';
         }
         
         // Otherwise build form
         $args = [
             'key'               => 'cancel_service',
             'fields_callback'   => [$this, 'form_fields'],
-            'submit_text'       => __( 'Request Cancellation', 'buddyclients-free' ),
+            'submit_text'       => __( 'Request Cancellation', 'buddyclients' ),
             'submission_class'  => __NAMESPACE__ . '\CancelRequestSubmission',
             'form_classes'      => 'bc-table-form'
         ];
-        
-        return ( new Form( $args ) )->build();
+
+        $form = new Form( $args );
+        $content = $form->build();
+        return $content;
     }
     
     /**
@@ -108,7 +110,7 @@ class CancelRequestForm {
              'cancellation_reason' => [
                 'key'           => 'cancellation_reason',
                 'type'          => 'text',
-                'placeholder'   => __( 'Cancellation reason...', 'buddyclients-free' ),
+                'placeholder'   => __( 'Cancellation reason...', 'buddyclients' ),
                 'required'      => true
             ],
             'booked_service_id' => [

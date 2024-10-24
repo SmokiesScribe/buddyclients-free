@@ -20,8 +20,6 @@ class BookingFormSubmission {
      * @since 0.1.0
      */
     public function __construct(array $post_data, ?array $files_data) {
-        session_start();
-        
         // Handle the submission
         $this->handle_form_submission($post_data, $files_data);
     }

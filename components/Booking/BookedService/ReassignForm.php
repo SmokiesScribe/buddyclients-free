@@ -26,7 +26,7 @@ class ReassignForm {
             'key'               => 'reassign',
             'fields_callback'   => [$this, 'form_fields'],
             'submission_class'  => __NAMESPACE__ . '\ReassignFormSubmission',
-            'submit_text'       => __( 'Reassign', 'buddyclients-free' ),
+            'submit_text'       => __( 'Reassign', 'buddyclients' ),
             'submit_classes'    => 'button action',
             'form_classes'      => 'bc-table-form',
             'values'            => $values

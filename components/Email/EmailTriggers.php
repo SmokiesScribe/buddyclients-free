@@ -249,7 +249,11 @@ class EmailTriggers {
      * @param   int     $testimonial_id         The ID of the testimonial post.
      * @param   string  $client_name            The name of the testimonial author.
      */
-    public static function new_testimonial_email( $testimonial_id, $client_name ) {
+    public static function new_testimonial_email( $testimonial_id ) {
+
+        // Get the testimonial author
+        $client_id = get_post_field( 'post_author', $testimonial_id );
+        $client_name = bp_core_get_user_displayname( $client_id );
         
         // Email the admin
         $args = [

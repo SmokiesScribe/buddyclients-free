@@ -48,7 +48,7 @@ class EmailTemplateManager {
             'abandoned_booking' => [
                 'label' => __('Abandoned Booking', 'buddyclients'),
                 'subject' => __('Need some help?', 'buddyclients'),
-                'content' => __('<p>Looks like you didn’t finish booking your services with {{site_name}}. If you have questions, please respond to this email.</p>', 'buddyclients'),
+                'content' => '<p>' . __( 'Looks like you didn’t finish booking your services with {{site_name}}. If you have questions, please respond to this email.', 'buddyclients' ) . '</p>',
             ],
             'payment' => [
                 'label' => __('Payment Status Updated', 'buddyclients'),
@@ -78,7 +78,7 @@ class EmailTemplateManager {
             'availability_reminder' => [
                 'label' => __('Update Availability Reminder', 'buddyclients'),
                 'subject' => __('Update Your Availability', 'buddyclients'),
-                'content' => __('<p>Your availability date is expiring. <a href="{{availability_link}}">Log in to {{site_name}}</a> to add the date you are next available.</p>', 'buddyclients'),
+                'content' => '<p>' . __('Your availability date is expiring. <a href="{{availability_link}}">Log in to {{site_name}}</a> to add the date you are next available.', 'buddyclients') . '</p>',
             ],
             'cancellation_request_admin' => [
                 'label' => __('Cancellation Request Admin Notification', 'buddyclients'),
@@ -95,7 +95,7 @@ class EmailTemplateManager {
             'sales_sub' => [
                 'label' => __('Sales Team Booking', 'buddyclients'),
                 'subject' => __('Ready for Checkout', 'buddyclients'),
-                'content' => __('<p>Your services from {{site_name}} are ready! <a href="{{sales_checkout_link}}">Click here to finalize your booking.</a></p>', 'buddyclients'),
+                'content' => '<p>' . __('Your services from {{site_name}} are ready! <a href="{{sales_checkout_link}}">Click here to finalize your booking.</a>', 'buddyclients') . '</p>',
                 'required' => true
             ],
         ];

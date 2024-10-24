@@ -121,17 +121,8 @@ function updateServiceValues() {
     const form = document.getElementById('bc-booking-form');
     if (!form) return;
 
-    const submitButton = document.getElementById('booking-submit');
-    if (!submitButton) return;
-
-    // Cache the original value of the submit button
-    if (!submitButton.dataset.originalValue) {
-        submitButton.dataset.originalValue = submitButton.value;
-    }
-
-    // Disable the submit button and change its text
-    submitButton.disabled = true;
-    submitButton.value = 'Updating...'; // Change the text of the submit button
+    // Disable submit button
+    bookingFormUpdating( false );
 
     var selectedServices = []; // Initialize an array to store selected service IDs
 
@@ -168,9 +159,7 @@ function updateServiceValues() {
         updateLineItemsTable();
 
         // Re-enable the submit button and reset its text
-        submitButton.disabled = false;
-        submitButton.value = submitButton.dataset.originalValue;
-
+        bookingFormUpdating( true );
         return;
     }
 
@@ -241,6 +230,9 @@ function updateServiceValues() {
                 }
 
                 // Create AJAX request and add it to the promises array
+                console.time('AJAX Request');
+
+                // Create AJAX request
                 let request = jQuery.ajax({
                     type: 'POST',
                     url: ajaxurl,
@@ -251,19 +243,26 @@ function updateServiceValues() {
                         adjustments: selectedAdjustments,
                         team_id: teamID,
                         team_member_role: roleID,
-                        nonce: bcData.nonce
+                        nonce: lineItemsTableData.nonce,
+                        nonceAction: lineItemsTableData.nonceAction,
+                    },
+                    beforeSend: function() {
+                        console.log('Sending AJAX request for service ID:', option.value);
                     },
                     success: function(response) {
+                        console.timeEnd('AJAX Request'); // Log time taken for the AJAX request
                         var lineItem = JSON.parse(response);
+                        console.log('Response:', lineItem);
                         
                         if (lineItem) {
                             lineItems.push(lineItem);
                             updateLineItemsTable(lineItems);
                         } else {
-                            console.error('Received invalid rateData:', lineItems);
+                            console.error('Received invalid lineData:', lineItems);
                         }
-                    }
+                    },
                 });
+                
 
                 ajaxRequests.push(request);
             }
@@ -271,9 +270,55 @@ function updateServiceValues() {
 
         // After all AJAX requests complete
         jQuery.when.apply(jQuery, ajaxRequests).done(function() {
-            submitButton.disabled = false;
-            submitButton.value = submitButton.dataset.originalValue; // Restore the original value
+            bookingFormUpdating( true );  
         });
+    }
+}
+
+/**
+ * Updates text of submit button and visibility of details container content.
+ * 
+ * @since 1.0.17
+ * 
+ * @param   bool    complete    Optional. Whether the update is complete.
+ *                              Defaults to false.
+ */
+function bookingFormUpdating( complete = false ) {
+    const form = document.getElementById('bc-booking-form');
+    if ( ! form ) return;
+
+    const submitButton = document.getElementById('booking-submit');
+    if ( ! submitButton ) return;
+
+    // Define variables
+    var submitDisabled = ! complete;
+
+    // Cache the original value of the submit button
+    if ( ! submitButton.dataset.originalValue ) {
+        submitButton.dataset.originalValue = submitButton.value;
+    }
+
+    // Disable the submit button and change its text
+    submitButton.disabled = submitDisabled;
+    submitButton.value = complete ? submitButton.dataset.originalValue : 'Updating...';
+
+    // Get details containers
+    const detailsContainers = document.getElementsByClassName('checkout-details-container');
+
+    // Loop through containers and modify content visibility
+    for (let i = 0; i < detailsContainers.length; i++) {
+        const childElements = detailsContainers[i].children; // Get all child elements
+    
+        // Show loading indicator and hide existing content except for loading indicators
+        for (let j = 0; j < childElements.length; j++) {
+            if (childElements[j].classList.contains('checkout-loading-indicator')) {
+                // Show the loading indicator
+                childElements[j].style.display = complete ? 'none' : 'block';
+            } else {
+                // Hide other child elements
+                childElements[j].style.display = complete ? 'block' : 'none';
+            }
+        }
     }
 }
 

@@ -64,7 +64,8 @@ class ServiceHandler {
         // Validate all Quotes
         add_action( 'update_option_bc_components_settings', [$this, 'validate_all_quotes'] );
         add_action( 'update_option_bc_booking_settings', [$this, 'validate_all_quotes'] );
-        add_action( 'bc_version_switch', [$this, 'validate_all_quotes'] ); 
+        add_action( 'bc_version_switch', [$this, 'validate_all_quotes'] );        
+
     }
     
     /**

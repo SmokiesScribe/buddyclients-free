@@ -13,6 +13,10 @@
     z-index: 300;
 }
 
+.checkout-loading-indicator {
+    display: none;
+}
+
 .checkout-table {
     border-collapse: collapse;
     width: 100%;

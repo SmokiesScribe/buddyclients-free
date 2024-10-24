@@ -24,7 +24,7 @@ function bc_create_line_item() {
         'team_member_role'  => isset($_POST['team_member_role']) ? intval(wp_unslash($_POST['team_member_role'])) : null
     ];
     
-    $line_items = new LineItems($args);
+    $line_items = new LineItems( $args );
     
     // Return encoded line item object
     echo wp_json_encode( $line_items );

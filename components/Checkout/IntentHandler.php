@@ -82,25 +82,80 @@ class IntentHandler {
      * @since 1.0.15
      */
     private function fetch_intent_info() {
-        $booking_id = bc_get_param( 'booking_id' );
-        $registration_id = bc_get_param( 'registration_id' );
-        $sponsor_id = bc_get_param( 'sponsor_id' );
+        // Fetch all ids
+        $url_ids = $this->fetch_url_intent_ids();
+        $session_ids = $this->fetch_session_intent_ids();
 
+        // Check url params then session
+        $booking_id = $url_ids['booking_id'] ?? $session_ids['booking_id'] ?? null;
+        $registration_id = $url_ids['registration_id'] ?? $session_ids['registration_id'] ?? null;
+        $sponsor_id = $url_ids['sponsor_id'] ?? $session_ids['sponsor_id'] ?? null;
+
+        // Booking
         if ( $booking_id ) {
             $this->intent_id = $booking_id;
             $this->intent_type = 'booking';
             $this->intent_class = BookingIntent::class;
-
+        
+        // Registration
         } else if ( $registration_id ) {
             $this->intent_id = $registration_id;
             $this->intent_type = 'registration';
             $this->intent_class = RegistrationIntent::class;
-
+        
+        // Sponsor
         } else if ( $sponsor_id ) {
             $this->intent_id = $sponsor_id;
             $this->intent_type = 'sponsor';
             $this->intent_class = SponsorIntent::class;
         }
+    }
+
+    /**
+     * Fetches the intent id from the url param.
+     * 
+     * @since 1.0.15
+     */
+    private function fetch_url_intent_ids() {
+        return [
+            'booking_id'        => bc_get_param( 'booking_id' ),
+            'registration_id'   => bc_get_param( 'registration_id' ),
+            'sponsor_id'        => bc_get_param( 'sponsor_id' )
+        ];
+    }
+
+    /**
+     * Fetches the intent id from the session data.
+     * 
+     * @since 1.0.15
+     */
+    private function fetch_session_intent_ids() {
+        return [
+            'booking_id'      => isset( $_SESSION['booking_id'] ) ? absint( wp_unslash( $_SESSION['booking_id'] ) ) : null,
+            'registration_id' => isset( $_SESSION['registration_id'] ) ? absint( wp_unslash( $_SESSION['registration_id'] ) ) : null,
+            'sponsor_id'      => isset( $_SESSION['sponsor_id'] ) ? absint( wp_unslash( $_SESSION['sponsor_id'] ) ) : null
+        ];
+    }
+
+    /**
+     * Fetches an intent by ID and type.
+     * 
+     * @since 1.0.17
+     */
+    public static function get_intent( $intent_id, $intent_type ) {
+        $intent = null;
+        switch ( $intent_type ) {
+            case 'booking':
+                $intent = BookingIntent::get_booking_intent( $intent_id );
+                break;
+            case 'registration':
+                $intent = RegistrationIntent::get_registration_intent( $intent_id );
+                break;
+            case 'sponsor':
+                $intent = SponsorIntent::get_sponsor_intent( $intent_id );
+                break;
+        }
+        return $intent;
     }
 
 }

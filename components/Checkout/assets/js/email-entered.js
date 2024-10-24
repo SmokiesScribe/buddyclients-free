@@ -28,7 +28,8 @@ document.addEventListener("DOMContentLoaded", function() {
                     email: enteredEmail,
                     booking_intent_id: bookingIntentIdInput.value,
                     registration_intent_id: registrationIntentIdInput.value,
-                    nonce: bcData.nonce
+                    nonce: emailEnteredData.nonce,
+                    nonceAction: emailEnteredData.nonceAction
                 },
                 success: function(response) {
                     // Check if the response was successful

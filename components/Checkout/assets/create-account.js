@@ -39,7 +39,8 @@ export function handleCreateAccount(e, ajaxurl, submitButton) {
         booking_intent_id: document.querySelector('input[name="booking-intent-id"]').value,
         registration_intent_id: document.querySelector('input[name="registration-intent-id"]').value,
         sponsor_intent_id: document.querySelector('input[name="sponsor-intent-id"]').value,
-        nonce: bcData.nonce
+        nonce: createAccountData.nonce,
+        nonceAction: createAccountData.nonceAction,
       },
       success: function (response) {
 

@@ -179,6 +179,9 @@ class Payment {
         
         // Format amount
         $this->amount = number_format( (float) $this->amount, 2, '.', '' );
+
+        // Build memo
+        $this->memo = $this->build_memo();
         
         // Create new object in database
         $this->ID = self::$object_handler->new_object( $this );
@@ -188,6 +191,27 @@ class Payment {
         
         // Return the Payment object
         return $this;
+    }
+
+    /**
+     * Builds the memo.
+     * 
+     * @since 1.0.17
+     */
+    public function build_memo() {
+        $items = [
+            $this->service_names, // service names
+            bp_core_get_user_displayname( $this->client_id ), // client id
+            bc_group_name( $this->project_id ) // project name
+        ];
+
+        // Remove empty values
+        $filtered_items = array_filter( $items, function( $item ) {
+            return ! empty( trim( $item ) );
+        });
+        
+        // Implode to string
+        return implode( ' | ', $filtered_items );
     }
     
     /**

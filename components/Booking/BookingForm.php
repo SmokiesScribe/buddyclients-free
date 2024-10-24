@@ -114,7 +114,7 @@ class BookingForm {
          *
          * @param string  $submit_text The submit text.
          */
-         $this->submit_text = apply_filters( 'bc_booking_submit_text', __( 'Go to Checkout', 'buddyclients-free' ) );
+         $this->submit_text = apply_filters( 'bc_booking_submit_text', __( 'Go to Checkout', 'buddyclients' ) );
         
         // Get user projects
         $this->projects = $this->client_id ? (new Client($this->client_id))->projects : false;
@@ -158,7 +158,7 @@ class BookingForm {
         if ( bc_is_admin() || bc_is_team() ) {
             return false;
         }
-        $message = __( 'Please contact us to book services.', 'buddyclients-free' );
+        $message = __( 'Please contact us to book services.', 'buddyclients' );
         $self_bookings = bc_get_setting( 'sales', 'self_bookings' );
         return $self_bookings === 'no' ? $message : false;
     }
@@ -169,7 +169,7 @@ class BookingForm {
      * @since 0.4.0
      */
     private function no_services() {
-        $message = __( 'No services are currently available.', 'buddyclients-free' );
+        $message = __( 'No services are currently available.', 'buddyclients' );
         return $message;
     }
     
@@ -179,7 +179,7 @@ class BookingForm {
      * @since 0.1.0
      */
     private function is_closed() {
-        $message = __( 'We are not currently accepting new bookings.', 'buddyclients-free' );
+        $message = __( 'We are not currently accepting new bookings.', 'buddyclients' );
         $open = bc_get_setting('booking', 'accept_bookings');
         return $open !== 'open' ? $message : false;
     }
@@ -415,7 +415,7 @@ class BookingForm {
         
         // Initialize options array with a default option to create a new project
         $project_options[0] = [
-            'label' => __( 'Create a New Project', 'buddyclients-free' ),
+            'label' => __( 'Create a New Project', 'buddyclients' ),
             'value' => 0,
         ];
         
@@ -457,7 +457,7 @@ class BookingForm {
         return [
             'key'               => 'project_title',
             'type'              => 'text',
-            'label'             => __( 'Project Title', 'buddyclients-free' ),
+            'label'             => __( 'Project Title', 'buddyclients' ),
             'field_classes'     => 'create-project',
             'style'             => 'display: none;'
         ];
@@ -525,7 +525,7 @@ class BookingForm {
                 $options[] = [
                     'label' => sprintf(
                         /* translators: %s: the name of the service */
-                        __( 'Select Your %s Service', 'buddyclients-free' ),
+                        __( 'Select Your %s Service', 'buddyclients' ),
                         $service_type->title
                     ),
                     'value' => '',
@@ -663,7 +663,7 @@ class BookingForm {
                     $options[] = [
                         'label' => sprintf(
                             /* translators: %s: the name of the rate adjustment */
-                            __( 'Select %s', 'buddyclients-free' ),
+                            __( 'Select %s', 'buddyclients' ),
                             $adjustment->label
                         ),
                         'value' => '',
@@ -793,7 +793,7 @@ class BookingForm {
                     '' => [
                         'label' => sprintf(
                             /* translators: %s: the singular name of the team member role (e.g. Editor) */
-                            __( 'Select Your %s', 'buddyclients-free' ),
+                            __( 'Select Your %s', 'buddyclients' ),
                             $role->singular
                         ),
                         'value' => '',
@@ -832,7 +832,7 @@ class BookingForm {
                         || ($role->singular === $user_roles)) {
                             
                         $availability = function_exists( 'bc_get_availability' ) ? bc_get_availability( $team_member->ID ) : '';
-                        $availability_message = $availability ? __( ' - Available ', 'buddyclients-free' ) . $availability : '';
+                        $availability_message = $availability ? __( ' - Available ', 'buddyclients' ) . $availability : '';
                             
                         $team_options[$role->ID . '-' . $team_member->ID] = [
                             'label'     => $team_member->display_name . $availability_message,
@@ -851,7 +851,7 @@ class BookingForm {
                     'label'         => $role->plural,
                     'description'   => sprintf(
                         /* translators: %s: the singular name of the team member role (e.g. editor) */
-                        __( 'Select your %s.', 'buddyclients-free' ),
+                        __( 'Select your %s.', 'buddyclients' ),
                         strtolower( $role->singular )
                     ) . bc_team_select_help(),
                     'options'       => $team_options,
@@ -877,7 +877,7 @@ class BookingForm {
         
         // Initialize
         $service_agreement_id = '';
-        $option_label = __( 'I confirm that the information above is correct.', 'buddyclients-free' );
+        $option_label = __( 'I confirm that the information above is correct.', 'buddyclients' );
         
         // Check for service agreement
         $service_agreement_id = bc_get_setting('legal', 'client_legal_version');
@@ -885,8 +885,8 @@ class BookingForm {
         if ( $service_agreement_id ) {
             $option_label = sprintf(
                 /* translators: %s: the terms being agreed to (e.g. service terms) */
-                __( 'I agree to the %s.', 'buddyclients-free' ),
-                bc_help_link( $service_agreement_id, __( 'service terms', 'buddyclients-free' ) )
+                __( 'I agree to the %s.', 'buddyclients' ),
+                bc_help_link( $service_agreement_id, __( 'service terms', 'buddyclients' ) )
             );
         }
             

@@ -199,7 +199,7 @@ class Confirmation {
      */
     private function profile_link() {
         $profile_url = bp_loggedin_user_domain();
-        return '<a href="' . $profile_url . '">' . __( 'View your profile.', 'buddyclients-free' ) . '</a>';
+        return '<a href="' . $profile_url . '">' . __( 'View your profile.', 'buddyclients' ) . '</a>';
     }
     
     /**
@@ -219,13 +219,13 @@ class Confirmation {
      */
     private function registration_success_message() {
         // Free or successful payment
-        $content = $this->free ? '<p>' . __( 'Your registration has been confirmed.', 'buddyclients-free' ) . '</p>' : '<p>' . __( 'Your payment has been processed, and your registration has been confirmed.', 'buddyclients-free' ) . '</p>';
+        $content = $this->free ? '<p>' . __( 'Your registration has been confirmed.', 'buddyclients' ) . '</p>' : '<p>' . __( 'Your payment has been processed, and your registration has been confirmed.', 'buddyclients' ) . '</p>';
         
         // Build button
         $link = trailingslashit( bp_loggedin_user_domain() ) . 'event';
-        $link_text = __( 'View Your Event Info', 'buddyclients-free' );
+        $link_text = __( 'View Your Event Info', 'buddyclients' );
         
-        return $this->output_message( 'success', __( 'Success!', 'buddyclients-free' ), $content, $link, $link_text );
+        return $this->output_message( 'success', __( 'Success!', 'buddyclients' ), $content, $link, $link_text );
     }
     
     /**
