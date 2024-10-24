@@ -3,7 +3,7 @@ Contributors: Victoria Griffin
 Requires at least: 4.9.1
 Tested up to: 6.6.2
 Requires PHP: 7.2
-Stable tag: 1.0.6
+Stable tag: 1.0.7
 License: GPL-2.0-or-later
 License URI: https://www.gnu.org/licenses/gpl-2.0.html
 
@@ -51,6 +51,20 @@ The banner image used for the plugin page:
 Banner URL: /assets/media/banner-772x250/banner.png
 
 == Changelog ==
+
+= 1.0.6 - October 24, 2024 =
+* Improvement: Consistent method to generate testimonial content.
+* Improvement: Modified create account text on login page.
+* Improvement: Improved method for processing user file deletions.
+* Improvement: Added loading indicator on booking form.
+* Improvement: Automatically update table structures when necessary.
+* Improvement: Added database caching.
+* Fixed: Addressed bugs created by new security measures.
+* Fixed: Correctly handles empty checkboxes in settings fields.
+* Fixed: Added hidden menu to fix null titles in admin area.
+* Fixed: Adjusted commission list filtering.
+* Fixed: Fixed file deletion form.
+* Corresponding Premium Version: 1.0.17
 
 = 1.0.6 - October 10, 2024 =
 * Fixed: Updated text domain to buddyclients-free.
