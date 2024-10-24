@@ -39,7 +39,7 @@ function bc_contact_message( $site_name = false, $lowercase = false ) {
     
     $name = $site_name ? get_bloginfo( 'name' ) : __('us', 'buddyclients');
     /* translators: %s: the site name */
-    $text = $lowercase ? sprintf( __( 'contact %s', 'buddyclients-free' ), $name ) : sprintf( __( 'Contact %s', 'buddyclients-free' ), $name ) . '.';
+    $text = $lowercase ? sprintf( __( 'contact %s', 'buddyclients' ), $name ) : sprintf( __( 'Contact %s', 'buddyclients' ), $name ) . '.';
     $message = '<a href="' . esc_url( $link ) . '">' . $text . '</a>';
     
     return $message;

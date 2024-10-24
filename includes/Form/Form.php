@@ -59,6 +59,7 @@ class Form {
         $form = $this->build();
         $allowed_html = bc_allowed_html_form();
         echo wp_kses( $form, $allowed_html );
+        return;
     }
 
     /**
@@ -66,7 +67,7 @@ class Form {
      * 
      * @since 0.1.0
      */
-    public function build() {
+    public function build() {        
         
         // Initialize form container and form tag
         $form = '<div id="bc-' . $this->key . '-form-container" class="bc-form-container">';
@@ -80,10 +81,14 @@ class Form {
         
         // Call form fields method
         if ( is_callable( $this->args['fields_callback'] ) ) {
-            //$form .= call_user_func( $this->args['fields_callback'], $this->args['values'] ?? null );
             
             // Retrieve args from callback
-            $args = call_user_func( $this->args['fields_callback'], $this->args['values'] ?? null );
+            $values = $this->args['values'] ?? '';
+            if ( isset( $this->args['fields_callback'] ) && ! empty( $this->args['fields_callback'] ) ) {
+                if ( is_callable( $this->args['fields_callback'] ) ) {
+                    $args = call_user_func( $this->args['fields_callback'], $values ); // THIS LINE CAUSING ERROR
+                }
+            }
             
             // Create fields
             foreach ( $args as $single_args ) {
@@ -154,7 +159,10 @@ class Form {
      * @since 0.1.0
      */
     private function add_form_field( $args ) {
-        return ( new FormField( $args ) )->build();
+        if ( ! empty( $args ) ) {
+            $form_field = new FormField( $args );
+            return $form_field->build();
+        }
     }
     
     /**

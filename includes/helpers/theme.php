@@ -1,5 +1,20 @@
 <?php
 /**
+ * Check for BuddyBoss theme.
+ * 
+ * @since 0.1.0
+ * 
+ * @return bool
+ */
+function bc_buddyboss_theme() {
+    if (function_exists('buddyboss_theme_register_required_plugins')) {
+        return true;
+    } else {
+        return false;
+    }
+}
+
+/**
  * Registers custom archive template files.
  * 
  * @since 0.1.0

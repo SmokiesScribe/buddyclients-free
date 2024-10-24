@@ -32,15 +32,30 @@ function bc_registration_button_text() {
         update_option( 'users_can_register', true );
         
         // Change register button text
-        echo '<script>
-            var signUpButton = document.querySelector("a.button.small.signup");
-            if (signUpButton) {
-                signUpButton.textContent = "' . esc_html( $register_button_text ) . '";
-            }
+        $allowed_html = array(
+            'script' => array(), // Allow the <script> tag with no attributes
+        );
+        
+        $script_content = '<script>
+            document.addEventListener("DOMContentLoaded", function() {
+                var signUpButton = document.querySelector("a.button.small.signup");
+                if (signUpButton) {
+                    signUpButton.textContent = "' . esc_js( $register_button_text ) . '";
+                }
+
+                // Login page text
+                var createAccountLink = document.querySelector(".login-heading a");
+                if (createAccountLink) {
+                    createAccountLink.textContent = "' . esc_js( $register_button_text ) . '";
+                }
+            });
         </script>';
+        
+        echo wp_kses( $script_content, $allowed_html );        
     }
 }
-add_action('wp_footer', 'bc_registration_button_text');
+add_action('wp_footer', 'bc_registration_button_text'); // main button
+add_action('login_enqueue_scripts', 'bc_registration_button_text'); // login page
 
 /**
  * Change registration button link.

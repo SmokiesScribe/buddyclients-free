@@ -128,9 +128,6 @@ class FormField {
         
         // Build field atts string
         $this->field_atts_string = $this->attributes_string( $args );
-        
-        // Builds the form field
-        $this->build();
     }
     
     /**
@@ -149,6 +146,7 @@ class FormField {
         $this->id               = $args['id'] ?? $this->key;
         $this->value            = $args['value'] ?? null;
         $this->placeholder      = $args['placeholder'] ?? null;
+        $this->required         = $args['required'] ?? null;
     }
     
     /**
@@ -228,7 +226,7 @@ class FormField {
         if ( ! $option && $this->type === 'checkbox' ) {
             
             // Append '[]' to key
-            return $args['key'] . '[]';
+            return $this->key . '[]';
             
         // Otherwise return key
         } else {
@@ -429,7 +427,7 @@ class FormField {
             'teeny' => true, // Use the "teeny" mode, which is a simplified version of the editor
             'quicktags' => false,
             'tinymce' => array(
-                'toolbar1' => __( 'bold italic underline | undo redo', 'buddyclients-free' ), // Customize the buttons in the first row
+                'toolbar1' => __( 'bold italic underline | undo redo', 'buddyclients' ), // Customize the buttons in the first row
                 'toolbar2' => '', // Customize the buttons in the second row (empty for none)
             ),
         );
@@ -519,6 +517,7 @@ class FormField {
                 'disabled' => $option_data['disabled'] ?? '',
                 'data_atts' => $option_data['data_atts'] ?? '',
                 'checked'   => in_array( $option_data['value'], $preselected_values ),
+                'required'  => $this->required
             ];
     
             // Check if the current option's value is in the preselected values
@@ -556,10 +555,10 @@ class FormField {
         $field .=       '<p id="file-upload-note"></p>';
         $field .=       '<div class="dropzone document-dropzone dz-clickable" id="media-uploader">';
         $field .=           '<div class="dz-default dz-message">';
-        $field .=           '<button class="dz-button bc-file-upload-button" type="button"><strong>' . __( 'Select File', 'buddyclients-free' ) . '</strong></button>';
+        $field .=           '<button class="dz-button bc-file-upload-button" type="button"><strong>' . __( 'Select File', 'buddyclients' ) . '</strong></button>';
         $field .=       '</div>';
         $field .=   '</div>';
-        $field .=   '<input type="file" class="' . $this->field_classes . '" style="opacity: 0;" ' . $this->field_atts_string . '>';
+        $field .=   '<input type="file" class="opacity-0' . $this->field_classes . '" ' . $this->field_atts_string . '>';
         $field .=   '<p id="selected-file-name">' . $uploaded_files_list . '</p>';
         $field .=   '</div>';
         $field .= '</div>';
@@ -577,7 +576,7 @@ class FormField {
      */
     private function submit_field() {
         
-        $field = '<div class="form-group form-group style="' . $this->style .'">';
+        $field = '<div class="form-group form-group" style="' . $this->style . '">';
         $field .= '<input type="submit" class="' . $this->field_classes . '" name="' . $this->key . '[]" id="' . $this->key . '" ' . $this->field_atts_string . '>';
         $field .= '</div>';
         
@@ -601,7 +600,7 @@ class FormField {
      */
     private function nonce_field() {
         $prefix = 'buddyclients_';
-        $action_name = 'submission';
+        $action_name = $this->key;
         $field_name = $prefix . $action_name . '_nonce';
         $nonce_field = wp_nonce_field( $action_name, $field_name );
         return $nonce_field;
@@ -613,7 +612,7 @@ class FormField {
      * @since 0.1.0
      */
     private function display_field() {
-        $field = '<div class="form-group form-group style="' . $this->style .'">';
+        $field = '<div class="form-group form-group" style="' . $this->style .'">';
         $field .= '<legend>' . $this->label .'</legend>';
         $field .= $this->value;
         $field .= '</div>';
@@ -628,9 +627,9 @@ class FormField {
      */
     private function signature_field() {
         $field = '<div class="form-group form-group style="' . $this->style .'">';
-        $field .= '<legend>' . __( 'Sign Here', 'buddyclients-free' ) . '</legend>';
+        $field .= '<legend>' . __( 'Sign Here', 'buddyclients' ) . '</legend>';
         $field .= '<canvas id="signatureCanvas" width="600" height="200" style="border-radius: 5px; border: 1px solid #D4D6D8;" data-signature="signature-data"></canvas><br>';
-        $field .= '<button type="button" id="signature-clear-button">' . __( 'Clear Signature', 'buddyclients-free' ) . '</button>';
+        $field .= '<button type="button" id="signature-clear-button">' . __( 'Clear Signature', 'buddyclients' ) . '</button>';
         
         $field .= '<input type="hidden" id="signature-data" name="signature-data" value="">';
         $field .= '</div>';

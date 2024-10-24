@@ -1,5 +1,17 @@
 <?php
 /**
+ * Retrieves colors from settings.
+ * 
+ * @since 0.1.0
+ * 
+ * @param   string  $type   The color type to retrieve.
+ *                          Accepts 'primary', 'accent', and 'tertiary'.
+ */
+function bc_color( $type ) {
+    return bc_get_setting('style', $type . '_color');
+}
+
+/**
  * Pretty prints an array.
  * 
  * @since 0.1.0
@@ -24,8 +36,9 @@ function bc_curr_url() {
     $current_url = '';
     // Get current URI
     if ( isset( $_SERVER['REQUEST_URI'] ) ) {
+
         // Unsplash and sanitize the request URI
-        $request_uri = sanitize_text_field( wp_unslash( $_SERVER['REQUEST_URI'] ) );
+        $request_uri = urldecode( esc_url_raw( wp_unslash( $_SERVER['REQUEST_URI'] ) ) );
         
         // Build the current URL
         $current_url = site_url( $request_uri );
@@ -100,4 +113,26 @@ function bc_format_status( $value, $add_class = null ) {
     }
     
     return $formatted_value;
+}
+
+/**
+ * Checks whether a time has passed.
+ * 
+ * @since 1.0.17
+ * 
+ * @param   string|int  $target_time    The time to check.
+ * 
+ * @return  bool        True if the time has passed, false if not.
+ */
+function bc_time_has_passed( $target_time ) {
+    // Cast to unix timestamp if necessary
+    if ( is_string( $target_time ) ) {
+        $target_time = strtotime( $target_time );
+    }
+        
+    // Get current timestamp
+    $current_timestamp = time();
+
+    // Check if time has passed
+    return $current_timestamp > $target_time;
 }

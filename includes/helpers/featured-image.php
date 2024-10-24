@@ -20,7 +20,7 @@ function bc_set_featured_image( $post_id, $file ) {
     
     // Check if the file exists
     if ( ! file_exists( $file->file_path ) ) {
-        return new WP_Error('file_not_found', __( 'File does not exist at the provided path.', 'buddyclients-free' ) );
+        return new WP_Error('file_not_found', __( 'File does not exist at the provided path.', 'buddyclients' ) );
     }
 
     // Prepare attachment data

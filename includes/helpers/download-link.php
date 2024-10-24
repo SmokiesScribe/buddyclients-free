@@ -19,7 +19,9 @@ use BuddyClients\Includes\{
      *                                      Defaults to false.
      */
     function bc_download_links( $file_ids, $show_file_name = false ) {
-        return FileHandler::download_links( $file_ids, $show_file_name );
+        if ( ! empty( $file_ids ) ) {
+            return FileHandler::download_links( $file_ids, $show_file_name );
+        }
     }
     
     /**
@@ -32,12 +34,15 @@ use BuddyClients\Includes\{
      *                                      Defaults to false.
      */
     function bc_file_names( $file_ids, $comma_separated = false ) {
+        if ( empty( $file_ids ) ) {
+            return '';
+        }
         
         // Initialize
         $file_names = [];
         
         // Loop through file ids
-        foreach ( $file_ids as $file_id ) {
+        foreach ( (array) $file_ids as $file_id ) {
             $icon = $comma_separated ? '' : bc_icon( 'paperclip' ) . ' ';
             $file_names[] = $icon . File::get_file_name( $file_id );
         }
