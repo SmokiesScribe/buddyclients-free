@@ -36,7 +36,7 @@ function bc_admin_filter_submission() {
         $new_url = $param_manager->add_params( $url_params );
     
         // Redirect to the new URL
-        header('Location: ' . $new_url);
+        wp_redirect( $new_url );
         exit;
     }
 }

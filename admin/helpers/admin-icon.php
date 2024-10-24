@@ -7,7 +7,10 @@
  * @param string $icon Icon key.
  * @return string HTML-formatted icon.
  */
-function bc_admin_icon($icon) {
+function bc_admin_icon( $icon ) {
+    // Initialize
+    $output = '';
+
     // Check if bp is active
     $theme = bc_buddyboss_theme();
     
@@ -57,7 +60,27 @@ function bc_admin_icon($icon) {
             'color' => 'blue',
         ],
     );
-    
-    $output = '<i class="' . $icons[$icon][$class] . '" style="font-size: 20px; color: ' . $icons[$icon]['color'] . '"></i>';
+
+    // Check if icon exists
+    if ( isset( $icons[$icon] ) ) {
+        // Initialize array
+        $classes = ['bc-icon'];
+
+        // Add icon class
+        $classes[] = $icons[$icon][$class] ?? null;
+
+        // Add color class
+        $icon_color = $icons[$icon]['color'] ?? null;
+        if ( $icon_color ) {
+            $classes[] = 'bc-icon-color-' . $icon_color;
+        }
+
+        // Implode classes
+        $class_string = implode( ' ', $classes );
+
+        // Build icon html
+        $output = '<i class="' . $class_string . '"></i>';
+    }
+
     return $output;
 }
