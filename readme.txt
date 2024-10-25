@@ -52,13 +52,14 @@ Banner URL: /assets/media/banner-772x250/banner.png
 
 == Changelog ==
 
-= 1.0.6 - October 24, 2024 =
+= 1.0.6 - October 25, 2024 =
 * Improvement: Consistent method to generate testimonial content.
 * Improvement: Modified create account text on login page.
 * Improvement: Improved method for processing user file deletions.
 * Improvement: Added loading indicator on booking form.
 * Improvement: Automatically update table structures when necessary.
 * Improvement: Added database caching.
+* Improvement: Updated language files.
 * Fixed: Addressed bugs created by new security measures.
 * Fixed: Correctly handles empty checkboxes in settings fields.
 * Fixed: Added hidden menu to fix null titles in admin area.

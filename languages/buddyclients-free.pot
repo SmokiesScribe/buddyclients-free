@@ -1,0 +1,205 @@
+#, fuzzy
+msgid ""
+msgstr ""
+"Project-Id-Version: BuddyClients Free\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2024-10-25 12:02+0000\n"
+"PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
+"Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
+"Language-Team: \n"
+"Language: \n"
+"Plural-Forms: nplurals=INTEGER; plural=EXPRESSION;\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"X-Generator: Loco https://localise.biz/\n"
+"X-Loco-Version: 2.6.11; wp-6.6.2\n"
+"X-Domain: buddyclients-free"
+
+#: buddyclients-free.php:141
+#, php-format
+msgid "<a href=\"%s\">Enable social groups.</a>"
+msgstr ""
+
+#: admin/helpers/free.php:55
+msgid ""
+"<h1>Upgrade BuddyClients to accept payments, manage projects, and <strong>"
+"grow your business</strong>.</h1>"
+msgstr ""
+
+#: admin/helpers/free.php:68
+msgid "Adjust prices dynamically"
+msgstr ""
+
+#: admin/helpers/free.php:78
+msgid "Affiliate program"
+msgstr ""
+
+#: buddyclients-free.php:68
+msgid "BuddyClients Error"
+msgstr ""
+
+#. Name of the plugin
+msgid "BuddyClients Free"
+msgstr ""
+
+#. Description of the plugin
+msgid ""
+"BuddyClients is a flexible and comprehensive platform for any service-based "
+"business. Compatible with BuddyPress and BuddyBoss."
+msgstr ""
+
+#: buddyclients-free.php:104
+msgid "BuddyPress is missing."
+msgstr ""
+
+#: admin/helpers/free.php:74
+msgid "Business"
+msgstr ""
+
+#: BuddyClientsFree-class.php:48 BuddyClientsFree-class.php:56
+msgid "Cheatin&#8217; huh?"
+msgstr ""
+
+#: admin/helpers/free.php:79
+msgid "Client testimonials"
+msgstr ""
+
+#: admin/helpers/free.php:82
+msgid "Contact form"
+msgstr ""
+
+#: admin/helpers/free.php:80
+msgid "Custom quotes"
+msgstr ""
+
+#: buddyclients-free.php:99 buddyclients-free.php:134
+msgid "deactivate"
+msgstr ""
+
+#: admin/helpers/free.php:63
+msgid "Essential"
+msgstr ""
+
+#: admin/helpers/free.php:77
+msgid "Everything in Essential"
+msgstr ""
+
+#: admin/helpers/free.php:66
+msgid "Everything in Free"
+msgstr ""
+
+#: admin/helpers/free.php:69
+msgid "Filter team by preferences"
+msgstr ""
+
+#: admin/helpers/free.php:67
+msgid "Flexible pricing structures"
+msgstr ""
+
+#: admin/helpers/upgrade.php:191
+#, php-format
+msgid "Freelancer Mode is enabled. <a href=\"%s\">Disable Freelancer Mode</a>."
+msgstr ""
+
+#: buddyclients-free.php:140
+msgid ""
+"Groups must be enabled for the BuddyClients Platform to function properly."
+msgstr ""
+
+#: admin/helpers/free.php:75
+msgid "Grow your service-based business with premium tools."
+msgstr ""
+
+#. URI of the plugin
+msgid "https://buddyclients.com"
+msgstr ""
+
+#. Author URI of the plugin
+msgid "https://victoriagriffin.com/"
+msgstr ""
+
+#: buddyclients-free.php:106
+#, php-format
+msgid ""
+"Install <a href=\"%s\">BuddyPress</a> or <a href=\"%s\" target=\"_blank\">"
+"BuddyBoss</a>."
+msgstr ""
+
+#: admin/helpers/free.php:107
+msgid "Learn More"
+msgstr ""
+
+#: admin/helpers/free.php:83
+msgid "Legal agreements"
+msgstr ""
+
+#: admin/helpers/free.php:81
+msgid "Live search help docs"
+msgstr ""
+
+#: admin/helpers/upgrade.php:112
+#, php-format
+msgid "Manage <a href=\"%s\" target=\"_blank\">%s</a>."
+msgstr ""
+
+#: admin/helpers/free.php:70
+msgid "Manage team payments"
+msgstr ""
+
+#: admin/helpers/free.php:86
+msgid "Manual and assisted bookings"
+msgstr ""
+
+#: buddyclients-free.php:69
+msgid "Multiple versions of the BuddyClients Platform are installed."
+msgstr ""
+
+#: buddyclients-free.php:70
+#, php-format
+msgid "Please <a href=\"%s\">deactivate BuddyClients Free</a> to continue."
+msgstr ""
+
+#: admin/helpers/free.php:85
+msgid "Sales team commission"
+msgstr ""
+
+#: admin/helpers/free.php:64
+msgid "Sell services and manage clients' projects in one place."
+msgstr ""
+
+#: buddyclients-free.php:139
+msgid "Social groups are disabled."
+msgstr ""
+
+#: admin/helpers/free.php:84
+msgid "Team availability"
+msgstr ""
+
+#: admin/helpers/upgrade.php:149
+#, php-format
+msgid "The %s component is disabled. <a href=\"%s\">Enable the component</a>."
+msgstr ""
+
+#: buddyclients-free.php:105
+msgid "The BuddyClients Platform can't work without BuddyPress."
+msgstr ""
+
+#: admin/helpers/free.php:36
+msgid "Upgrade"
+msgstr ""
+
+#: admin/helpers/upgrade.php:89
+#, php-format
+msgid ""
+"Upgrade to <a href=\"%s\" target=\"_blank\">BuddyClients Essential or "
+"BuddyClients Business</a>."
+msgstr ""
+
+#. Author of the plugin
+msgid "Victoria Griffin"
+msgstr ""
+
+#: admin/helpers/upgrade.php:115
+msgid "your BuddyClients subscription"
+msgstr ""

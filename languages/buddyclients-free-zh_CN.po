@@ -1,0 +1,216 @@
+# Copyright (C) 2024 Victoria Griffin
+# This file is distributed under the GPLv2 or later (license.txt).
+msgid ""
+msgstr ""
+"Project-Id-Version: BuddyClients 1.0.0\n"
+"Report-Msgid-Bugs-To: https://wordpress.org/support/plugin/buddyclients\n"
+"Last-Translator: Victoria\n"
+"Language-Team: Chinese (China)\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"POT-Creation-Date: 2024-09-10T16:08:57+00:00\n"
+"PO-Revision-Date: 2024-10-25 12:23+0000\n"
+"X-Generator: Loco https://localise.biz/\n"
+"X-Domain: buddyclients\n"
+"Language: zh_CN\n"
+"Plural-Forms: nplurals=1; plural=0;\n"
+"X-Loco-Version: 2.6.11; wp-6.6.1"
+
+#: buddyclients-free.php:141
+#, php-format
+msgid "<a href=\"%s\">Enable social groups.</a>"
+msgstr "<a href=\"%s\">启用社交群组。"
+
+#: admin/helpers/free.php:55
+msgid ""
+"<h1>Upgrade BuddyClients to accept payments, manage projects, and <strong>"
+"grow your business</strong>.</h1>"
+msgstr "<h1>升级 BuddyClients 以接受付款、管理项目并<strong>发展您的业务</strong>.</h1>。"
+
+#: admin/helpers/free.php:68
+msgid "Adjust prices dynamically"
+msgstr "动态调整价格"
+
+#: admin/helpers/free.php:78
+#| msgid "Affiliate Program"
+msgid "Affiliate program"
+msgstr "联属会员计划"
+
+#: buddyclients-free.php:68
+msgid "BuddyClients Error"
+msgstr "好友客户错误"
+
+#. Name of the plugin
+#| msgid "BuddyClients Premium"
+msgid "BuddyClients Free"
+msgstr "BuddyClients 免费"
+
+#. Description of the plugin
+msgid ""
+"BuddyClients is a flexible and comprehensive platform for any service-based "
+"business. Compatible with BuddyPress and BuddyBoss."
+msgstr "BuddyClients 是一个灵活而全面的平台，适用于任何基于服务的业务。与 BuddyPress 和 BuddyBoss 兼容。"
+
+#: buddyclients-free.php:104
+msgid "BuddyPress is missing."
+msgstr "缺少 BuddyPress。"
+
+#: admin/helpers/free.php:74
+msgid "Business"
+msgstr "商业"
+
+#: BuddyClientsFree-class.php:48 BuddyClientsFree-class.php:56
+msgid "Cheatin&#8217; huh?"
+msgstr "作弊？"
+
+#: admin/helpers/free.php:79
+msgid "Client testimonials"
+msgstr "客户评价"
+
+#: admin/helpers/free.php:82
+msgid "Contact form"
+msgstr "联系表格"
+
+#: admin/helpers/free.php:80
+#| msgid "Custom Quotes"
+msgid "Custom quotes"
+msgstr "自定义报价"
+
+#: buddyclients-free.php:99 buddyclients-free.php:134
+msgid "deactivate"
+msgstr "停用"
+
+#: admin/helpers/free.php:63
+msgid "Essential"
+msgstr "必要"
+
+#: admin/helpers/free.php:77
+msgid "Everything in Essential"
+msgstr "必不可少的一切"
+
+#: admin/helpers/free.php:66
+msgid "Everything in Free"
+msgstr "一切免费"
+
+#: admin/helpers/free.php:69
+msgid "Filter team by preferences"
+msgstr "根据喜好筛选团队"
+
+#: admin/helpers/free.php:67
+msgid "Flexible pricing structures"
+msgstr "灵活的定价结构"
+
+#: admin/helpers/upgrade.php:191
+#, php-format
+msgid "Freelancer Mode is enabled. <a href=\"%s\">Disable Freelancer Mode</a>."
+msgstr "自由职业者模式已启用。<a href=\"%s\">禁用自由职业者模式</a>。"
+
+#: buddyclients-free.php:140
+msgid ""
+"Groups must be enabled for the BuddyClients Platform to function properly."
+msgstr "必须启用群组，BuddyClients 平台才能正常运行。"
+
+#: admin/helpers/free.php:75
+msgid "Grow your service-based business with premium tools."
+msgstr "使用高级工具发展您的服务型业务。"
+
+#. URI of the plugin
+msgid "https://buddyclients.com"
+msgstr "https://buddyclients.com"
+
+#. Author URI of the plugin
+msgid "https://victoriagriffin.com/"
+msgstr "https://victoriagriffin.com/"
+
+#: buddyclients-free.php:106
+#, php-format
+msgid ""
+"Install <a href=\"%s\">BuddyPress</a> or <a href=\"%s\" target=\"_blank\">"
+"BuddyBoss</a>."
+msgstr ""
+"安装 <a href=\"%s\">BuddyPress</a> 或 <a href=\"%s\" target=\"_blank\">"
+"BuddyBoss</a> 。"
+
+#: admin/helpers/free.php:107
+#| msgid "Learn more."
+msgid "Learn More"
+msgstr "了解更多"
+
+#: admin/helpers/free.php:83
+#| msgid "Legal Agreements"
+msgid "Legal agreements"
+msgstr "法律协议"
+
+#: admin/helpers/free.php:81
+msgid "Live search help docs"
+msgstr "实时搜索帮助文档"
+
+#: admin/helpers/upgrade.php:112
+#, php-format
+msgid "Manage <a href=\"%s\" target=\"_blank\">%s</a>."
+msgstr "管理 <a href=\"%s\" target=\"_blank\">%s</a>。"
+
+#: admin/helpers/free.php:70
+msgid "Manage team payments"
+msgstr "管理团队付款"
+
+#: admin/helpers/free.php:86
+msgid "Manual and assisted bookings"
+msgstr "人工和辅助预订"
+
+#: buddyclients-free.php:69
+msgid "Multiple versions of the BuddyClients Platform are installed."
+msgstr "已安装多个版本的 BuddyClients 平台。"
+
+#: buddyclients-free.php:70
+#, php-format
+msgid "Please <a href=\"%s\">deactivate BuddyClients Free</a> to continue."
+msgstr "请<a href=\"%s\">停用 BuddyClients Free</a> 以继续。"
+
+#: admin/helpers/free.php:85
+#| msgid "Sales Team Commission"
+msgid "Sales team commission"
+msgstr "销售团队佣金"
+
+#: admin/helpers/free.php:64
+msgid "Sell services and manage clients' projects in one place."
+msgstr "在一个地方销售服务和管理客户项目。"
+
+#: buddyclients-free.php:139
+msgid "Social groups are disabled."
+msgstr "社会群体是残疾人。"
+
+#: admin/helpers/free.php:84
+#| msgid "Team Availability"
+msgid "Team availability"
+msgstr "团队可用性"
+
+#: admin/helpers/upgrade.php:149
+#, php-format
+msgid "The %s component is disabled. <a href=\"%s\">Enable the component</a>."
+msgstr "%s 组件已禁用。<a href=\"%s\">启用该组件</a>。"
+
+#: buddyclients-free.php:105
+msgid "The BuddyClients Platform can't work without BuddyPress."
+msgstr "没有 BuddyPress，BuddyClients 平台就无法运行。"
+
+#: admin/helpers/free.php:36
+msgid "Upgrade"
+msgstr "升级"
+
+#: admin/helpers/upgrade.php:89
+#, php-format
+msgid ""
+"Upgrade to <a href=\"%s\" target=\"_blank\">BuddyClients Essential or "
+"BuddyClients Business</a>."
+msgstr ""
+"升级至<a href=\"%s\" target=\"_blank\">BuddyClients基本版或BuddyClients商务版</a>。"
+
+#. Author of the plugin
+msgid "Victoria Griffin"
+msgstr "维多利亚-格里芬"
+
+#: admin/helpers/upgrade.php:115
+msgid "your BuddyClients subscription"
+msgstr "您的 BuddyClients 订阅"
