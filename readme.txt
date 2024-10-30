@@ -3,7 +3,7 @@ Contributors: Victoria Griffin
 Requires at least: 4.9.1
 Tested up to: 6.6.2
 Requires PHP: 7.2
-Stable tag: 1.0.8
+Stable tag: 1.0.9
 License: GPL-2.0-or-later
 License URI: https://www.gnu.org/licenses/gpl-2.0.html
 
@@ -51,6 +51,11 @@ The banner image used for the plugin page:
 Banner URL: /assets/media/banner-772x250/banner.png
 
 == Changelog ==
+
+= 1.0.9 - Unreleased =
+* Improvement: Filter constant email variables.
+* Improvement: New function to echo color hex.
+* Corresponding Premium Version: 1.0.19
 
 = 1.0.8 - October 27, 2024 =
 * Improvement: Trimmed TCPDF library.

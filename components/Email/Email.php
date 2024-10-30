@@ -323,12 +323,7 @@ class Email {
         $booking_page_id = bc_get_setting( 'pages', 'booking_page' );
         
         // Define constant variables
-        $constants = array(
-            'site_name' => get_option('blogname'),
-            'booking_form_link' => $booking_page_id ? get_permalink( $booking_page_id ) : site_url(),
-            'admin_bookings_link' => admin_url('/admin.php?page=bc-dashboard'),
-            'admin_testimonials_link' => admin_url('/edit.php?post_type=testimonial'),
-        );
+        $constants = $this->constant_variables();
         
         // Define the regular expression pattern to match keys within double brackets
         $pattern = '/{{(.*?)}}/';
@@ -358,6 +353,32 @@ class Email {
         return html_entity_decode($replaced_content);
     }
 
+    /**
+     * Defines the array of constant variables.
+     * 
+     * @since 1.0.19
+     */
+    private function constant_variables() {
+        // Define constant variables
+        $constants = array(
+            'site_name'                 => get_option('blogname'),
+            'booking_form_link'         => $booking_page_id ? get_permalink( $booking_page_id ) : site_url(),
+            'admin_bookings_link'       => admin_url('/admin.php?page=bc-dashboard'),
+            'admin_testimonials_link'   => admin_url('/edit.php?post_type=testimonial'),
+            'site_url'                  => site_url()
+        );
+
+        /**
+         * Filters the array of constant variables.
+         * 
+         * @since 1.0.19
+         * 
+         * @param   array   $constants      An associative array of variable keys and values.
+         */
+        $constants = apply_filters( 'bc_email_constants' $constants );
+
+        return $constants;
+    }
     
     /**
      * Checks if the email notification is enabled.

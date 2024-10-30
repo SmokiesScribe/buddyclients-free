@@ -12,6 +12,18 @@ function bc_color( $type ) {
 }
 
 /**
+ * Echoes colors from settings.
+ * 
+ * @since 1.0.19
+ * 
+ * @param   string  $type   The color type to retrieve.
+ *                          Accepts 'primary', 'accent', and 'tertiary'.
+ */
+function e_bc_color( $type ) {
+    echo esc_attr( bc_color( $type ) );
+}
+
+/**
  * Pretty prints an array.
  * 
  * @since 0.1.0
