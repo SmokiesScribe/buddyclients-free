@@ -30,7 +30,9 @@ class BookedServiceList {
      * @since 0.1.0
      */
     public function __construct() {
-        $this->project_id = bp_get_current_group_id();
+        if ( function_exists( 'bp_get_current_group_id' ) ) {
+            $this->project_id = bp_get_current_group_id();
+        }
     }
     
     /**
