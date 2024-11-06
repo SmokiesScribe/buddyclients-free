@@ -103,7 +103,7 @@ function bc_missing_bp_notice_free() {
 		<div id="message" class="error notice">
 			<p><strong><?php esc_html_e( 'BuddyPress is missing.', 'buddyclients-free' ); ?></strong></p>
 			<p><?php printf( esc_html__( 'The BuddyClients Platform can\'t work without BuddyPress.', 'buddyclients-free' ), $link_plugins ); ?></p>
-			<p><?php printf( __( 'Install <a href="%s">BuddyPress</a> or <a href="%s" target="_blank">BuddyBoss</a>.', 'buddyclients-free' ), $bp_install, 'https://www.buddyboss.com/website-platform/' ); ?></p>
+			<p><?php printf( wp_kses_post( __( 'Install <a href="%s">BuddyPress</a> or <a href="%s" target="_blank">BuddyBoss</a>.', 'buddyclients-free' ), $bp_install, 'https://www.buddyboss.com/website-platform/' ) ); ?></p>
 		</div>
 
 		<?php
@@ -138,7 +138,7 @@ function bc_groups_disabled_notice_free() {
 		<div id="message" class="error notice">
 			<p><strong><?php esc_html_e( 'Social groups are disabled.', 'buddyclients-free' ); ?></strong></p>
 			<p><?php printf( esc_html__( 'Groups must be enabled for the BuddyClients Platform to function properly.', 'buddyclients-free' ), $link_plugins ); ?></p>
-			<p><?php printf( __( '<a href="%s">Enable social groups.</a>', 'buddyclients-free' ), $enable_link ); ?></p>
+			<p><?php printf( wp_kses_post( __( '<a href="%s">Enable social groups.</a>', 'buddyclients-free' ), $enable_link ) ); ?></p>
 		</div>
 
 		<?php
