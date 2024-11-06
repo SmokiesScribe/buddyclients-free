@@ -67,7 +67,7 @@ function bc_installed_notice() {
         <div id="message" class="error notice">
             <p><strong><?php esc_html_e( 'BuddyClients Error', 'buddyclients-free' ); ?></strong></p>
             <p><?php esc_html_e( 'Multiple versions of the BuddyClients Platform are installed.', 'buddyclients-free' ); ?></p>
-            <p><?php printf( __( 'Please <a href="%s">deactivate BuddyClients Free</a> to continue.', 'buddyclients-free' ), $plugins_url ); ?></p>
+            <p><?php printf( wp_kses_post( __( 'Please <a href="%s">deactivate BuddyClients Free</a> to continue.', 'buddyclients-free' ) ), $plugins_url ); ?></p>
         </div>
 
         <?php
@@ -138,7 +138,7 @@ function bc_groups_disabled_notice_free() {
 		<div id="message" class="error notice">
 			<p><strong><?php esc_html_e( 'Social groups are disabled.', 'buddyclients-free' ); ?></strong></p>
 			<p><?php printf( esc_html__( 'Groups must be enabled for the BuddyClients Platform to function properly.', 'buddyclients-free' ), $link_plugins ); ?></p>
-			<p><?php printf( wp_kses_post( __( '<a href="%s">Enable social groups.</a>', 'buddyclients-free' ), $enable_link ) ); ?></p>
+			<p><?php printf( wp_kses_post( __( '<a href="%s">Enable social groups.</a>', 'buddyclients-free' ) ), esc_url( $enable_link ) ); ?></p>
 		</div>
 
 		<?php
