@@ -122,20 +122,34 @@ class PageManager {
 	    
 	    // Get required pages
 	    $required_pages = self::required_pages();
+
+        // Initialize array
+        $missing_pages = [];
 	    
 	    // Loop through required pages
 	    foreach ( $required_pages as $page_key => $page_data ) {
+            // Check if the page is missing
     	    if ( ! PluginPage::get_page( $page_key ) ) {
-    	        
-    	        $notice_args = [
-    	            'repair_link'       => '/admin.php?page=bc-pages-settings',
-    	            'message'           => 'The ' . $page_data['label'] . ' is missing.',
-    	            'color'             => 'orange'
-    	        ];
-    	        
-    	        bc_admin_notice( $notice_args );
+                // Add to array
+                $missing_pages[] = $page_data['label'];
     	    }
 	    }
+
+        // Check if any pages are missing
+        if ( ! empty( $missing_pages ) ) {
+            // Implode page labels to string
+            $missing_pages_string = implode( ', ', $missing_pages );
+
+            // Define args
+            $notice_args = [
+                'repair_link'       => '/admin.php?page=bc-pages-settings',
+                'message'           => 'The following BuddyClients pages are missing: ' . $missing_pages_string . '.',
+                'color'             => 'orange'
+            ];
+
+            // Output notice            
+            bc_admin_notice( $notice_args );
+        }
 	}
 	
 	/**
