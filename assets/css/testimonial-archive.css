@@ -1,4 +1,3 @@
-<style>
 /* Testimonial Cards */
 .custom-testimonial-link {
     padding: 0 !important;
@@ -47,7 +46,7 @@
     text-align: center;
 }
 .testimonial-read-more-button:hover {
-    color: <?php echo esc_attr( bc_color('tertiary') ) ?>;
+    color: var(--buddyclients-tertiary-color);
 }
 .testimonial-card {
     border-radius: 15px;
@@ -78,4 +77,3 @@
 .testimonial-card:hover {
     box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
 }
-</style>

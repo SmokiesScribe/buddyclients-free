@@ -1,10 +1,9 @@
-<style>
 /* Popup link */
 .bc-popup-link {
-    color: <?php echo esc_attr( bc_color('accent') ) ?>;
+    color: var(--buddyclients-accent-color);
 }
 .bc-popup-link:hover {
-    color: <?php echo esc_attr( bc_color('tertiary') ) ?>;
+    color: var(--buddyclients-tertiary-color);
 }
 
 /* Popup visibility */
@@ -78,4 +77,3 @@
         color: gray;
     }
 }
-</style>
