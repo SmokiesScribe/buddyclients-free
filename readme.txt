@@ -1,5 +1,5 @@
 === BuddyClients Free ===
-Contributors: Victoria Griffin
+Contributors: victoriagrif7
 Requires at least: 4.9.1
 Tested up to: 6.6.2
 Requires PHP: 7.2
