@@ -56,6 +56,54 @@ class AssetManager {
 		
 		// Get source file name for handle
         $this->source = pathinfo( basename( $source_file ), PATHINFO_FILENAME );
+
+		// Load CSS variables if necessary
+		add_action( 'wp_enqueue_scripts', [$this, 'load_variables'] );
+	}
+
+	/**
+	 * Loads CSS variables.
+	 * 
+	 * @since 1.0.20
+	 */
+	public function load_variables() {
+		if ( ! wp_style_is( 'buddyclients-css-variables', 'enqueued' ) ) {
+
+			// Enqueue variables file
+			wp_enqueue_style( 'buddyclients-css-variables', BC_PLUGIN_URL . 'assets/css/variables.css' );
+
+			// Initialize variables with colors
+			$css_variables = [
+				'primary-color'		=> bc_color( 'primary' ),
+				'accent-color'		=> bc_color( 'accent' ),
+				'tertiary-color'	=> bc_color( 'tertiary' ),
+			];
+
+			/**
+			 * Filters custom CSS variables.
+			 *
+			 * @since 1.0.20
+			 *
+			 * @param array  $css_variables The associative array of css names and variables.
+			 */
+			$css_variables = apply_filters( 'buddyclients_css_variables', $css_variables );
+
+			// Build custom css
+			$custom_css = ":root {";
+
+			// Make sure variables exist
+			if ( ! empty( $css_variables ) ) {
+				foreach ( $css_variables as $name => $value ) {
+					$custom_css .= "--buddyclients-{$name}: {$value};";
+				}
+
+				// Close
+				$custom_css .= "}";
+			}		
+
+			// Add variables as inline style
+			wp_add_inline_style( 'buddyclients-css-variables', $custom_css );
+		}
 	}
 	
 	/**
@@ -131,6 +179,11 @@ class AssetManager {
 	 * @param   string  $extension  The file extension.
 	 */
 	 private function enqueue_script( $file, $file_name, $extension ) {
+
+		// Verify file
+		if ( ! $this->verify_file( $file, $file_name, $extension ) ) {
+			return;
+		}
 	    
 	    // Build script handle
         $handle = $this->build_handle( $file_name );
@@ -147,6 +200,28 @@ class AssetManager {
             // Enqueue style
             wp_enqueue_style($handle, $file_url, array(), BC_PLUGIN_VERSION, 'all');
         }
+	}
+
+	/**
+	 * Verifies that the file should be enqueued.
+	 * 
+	 * @since 1.0.20
+	 * 
+	 * @param   array   $file       File to enqueue.
+	 * @param   string  $file_name  The file name without extension.
+	 * @param   string  $extension  The file extension.
+	 */
+	private function verify_file( $file, $file_name, $extension ) {
+
+		// Check whether to load BuddyPress-specific styles
+		if ( $file_name === 'bp-global' ) {
+			if ( bc_buddyboss_theme() || is_admin() ) {
+				return false;
+			}
+		}
+
+		// All checks passed
+		return true;
 	}
 
 	/**

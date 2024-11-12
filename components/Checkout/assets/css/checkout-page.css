@@ -1,4 +1,3 @@
-<style>
 /* Enable sticky */
 #page{
   overflow-x: clip;
@@ -32,10 +31,6 @@
     border: none; /* Set the border to a light gray color */
     padding: 15px 8px;
     text-align: left;
-}
-
-.checkout-table th {
-    background-color: ; /* Add a background color to table headers */
 }
 
 .checkout-table tfoot th,
@@ -74,4 +69,3 @@
     padding: 25px;
     margin: 20px 0;
 }
-</style>

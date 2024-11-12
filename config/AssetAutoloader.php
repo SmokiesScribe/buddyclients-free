@@ -1,6 +1,8 @@
 <?php
 namespace BuddyClients\Config;
 
+use BuddyClients\Config\AssetManager;
+
 /**
  * Autoloads class assets.
  * 

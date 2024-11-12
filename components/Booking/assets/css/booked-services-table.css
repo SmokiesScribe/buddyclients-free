@@ -1,4 +1,3 @@
-<style>
 .bc-booked-services-table {
     width: 100%;
     border-collapse: collapse;
@@ -16,5 +15,3 @@
 .bc-booked-services-table td a {
     word-break: break-word; /* Allows URLs or long text inside links to wrap properly */
 }
-
-</style>
