@@ -214,8 +214,12 @@ class AssetManager {
 	 */
 	private function enqueue_js( $handle, $file_url, $file_name ) {
 		if ( ! wp_script_is( $handle, 'enqueued' ) ) {
+
+			// Register script
+			wp_register_script( $handle, $file_url, array(), BC_PLUGIN_VERSION, true );
+
 			// Enqueue script
-			wp_enqueue_script( $handle, $file_url, array(), BC_PLUGIN_VERSION, 'all' );
+			wp_enqueue_script( $handle );
 
 			// Localize the script
 			$this->localize_script( $file_name, $handle );
@@ -232,9 +236,13 @@ class AssetManager {
 	 * @param	string	$file_name	The file name without extension.
 	 */
 	private function enqueue_css( $handle, $file_url, $file_name ) {
-		if ( ! wp_style_is( $handle, 'enqueued' ) ) {
-			wp_enqueue_style( $handle, $file_url, array(), BC_PLUGIN_VERSION, 'all' );
-		}
+		if ( ! wp_style_is( $handle, 'enqueued' ) ) {			
+			// Register the style
+			wp_register_style( $handle, $file_url, array(), BC_PLUGIN_VERSION, 'all' );
+			
+			// Enqueue the style
+			wp_enqueue_style( $handle );
+		}		
 	}
 
 	/**
