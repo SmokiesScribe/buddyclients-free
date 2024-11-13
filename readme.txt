@@ -56,6 +56,7 @@ Banner URL: /assets/media/banner-772x250/banner.png
 * Improvement: Combined missing page notices.
 * Improvement: Load CSS variables separately.
 * Improvement: Define icon urls in css.
+* Improvement: Updated enqueue process.
 * Corresponding Premium Version: 1.0.20
 
 = 1.0.9 - October 30, 2024 =

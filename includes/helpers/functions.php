@@ -148,3 +148,28 @@ function bc_time_has_passed( $target_time ) {
     // Check if time has passed
     return $current_timestamp > $target_time;
 }
+
+/**
+ * Outputs a javascript alert.
+ * 
+ * @since 1.0.20
+ * 
+ * @param   string  $message     The alert text.
+ */
+function buddyclients_js_alert( $message ) {
+    if ( empty( $message ) ) {
+        return;
+    }
+
+    // Enqueue global script if necessary
+    if ( ! wp_script_is( 'buddyclients-buddyclients-class-global', 'enqueued' ) ) {
+        wp_enqueue_script( 'buddyclients-buddyclients-class-global', BC_PLUGIN_URL . 'assets/js/global.js', array(), null, true );
+    }
+
+    // Sanitize the message for JavaScript
+    $esc_message = esc_js( $message );
+    $inline_script = "alert('" . $esc_message . "');";
+
+    // Output the script
+    wp_add_inline_script( 'buddyclients-buddyclients-class-global', $inline_script );
+}

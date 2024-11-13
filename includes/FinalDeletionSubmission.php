@@ -114,15 +114,12 @@ class FinalDeletionSubmission {
      * Generates an alert.
      * 
      * @since 1.0.0
+     * @since 1.0.10 Use dedicated function.
      * 
      * @param string $message The alert message.
      */
     private function alert( $message ) {
-        $esc_message = esc_js( $message );
-        echo wp_kses(
-            "<script type='text/javascript'>alert( '" . $esc_message . "' );</script>",
-            ['script' => ['type' => []]]
-        );
+        buddyclients_js_alert( $message );
     }
 }
     

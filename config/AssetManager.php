@@ -159,27 +159,27 @@ class AssetManager {
         $file_name = pathinfo( $file, PATHINFO_FILENAME );
         
         // Handle files by type
-        switch ($extension) {
+        switch ( $extension ) {
             case 'css':
             case 'js':
-                $this->enqueue_script( $file, $file_name, $extension );
+                $this->enqueue( $file, $file_name, $extension );
                 break;
             case 'php':
                 $this->require_file( $file, $file_name, $extension );
                 break;
             }
 	}
-	
+
 	/**
-	 * Enqueues CSS and JS files.
+	 * Enqueues Javascript and CSS files.
 	 * 
-	 * @since 0.1.0
+	 * @since 1.0.20
 	 * 
 	 * @param   array   $file       File to enqueue.
 	 * @param   string  $file_name  The file name without extension.
 	 * @param   string  $extension  The file extension.
 	 */
-	 private function enqueue_script( $file, $file_name, $extension ) {
+	private function enqueue( $file, $file_name, $extension ) {
 
 		// Verify file
 		if ( ! $this->verify_file( $file, $file_name, $extension ) ) {
@@ -191,16 +191,50 @@ class AssetManager {
         
         // Build full url
         $file_url = $this->dir_url . '/' . $file;
-        
-        if ($extension === 'js') {
-            // Enqueue script
-			$this->enqueue_js( $handle, $file_url, $file_name );
-            wp_enqueue_script($handle, $file_url, array(), BC_PLUGIN_VERSION, 'all');
 
-        } else if ($extension === 'css') {
-            // Enqueue style
-            wp_enqueue_style($handle, $file_url, array(), BC_PLUGIN_VERSION, 'all');
-        }
+		// Enqueue the file
+		switch ( $extension ) {
+			case 'js':
+				$this->enqueue_js( $handle, $file_url, $file_name );
+				break;
+			case 'css':
+				$this->enqueue_css( $handle, $file_url, $file_name );
+				break;
+			}
+	}
+
+	/**
+	 * Enqueues and localizes Javascript file.
+	 * 
+	 * @since 1.0.15
+	 * 
+	 * @param   string  $handle     The script handle.
+	 * @param   string  $file_url   The full file url.
+	 * @param	string	$file_name	The file name without extension.
+	 */
+	private function enqueue_js( $handle, $file_url, $file_name ) {
+		if ( ! wp_script_is( $handle, 'enqueued' ) ) {
+			// Enqueue script
+			wp_enqueue_script( $handle, $file_url, array(), BC_PLUGIN_VERSION, 'all' );
+
+			// Localize the script
+			$this->localize_script( $file_name, $handle );
+		}
+	}
+
+	/**
+	 * Enqueues a CSS file.
+	 * 
+	 * @since 1.0.20
+	 * 
+	 * @param   string  $handle     The script handle.
+	 * @param   string  $file_url   The full file url.
+	 * @param	string	$file_name	The file name without extension.
+	 */
+	private function enqueue_css( $handle, $file_url, $file_name ) {
+		if ( ! wp_style_is( $handle, 'enqueued' ) ) {
+			wp_enqueue_style( $handle, $file_url, array(), BC_PLUGIN_VERSION, 'all' );
+		}
 	}
 
 	/**
@@ -253,23 +287,6 @@ class AssetManager {
 	}
 
 	/**
-	 * Enqueues and localizes Javascript file.
-	 * 
-	 * @since 1.0.15
-	 * 
-	 * @param   string  $handle     The script handle.
-	 * @param   string  $file_url   The full file url.
-	 * @param	string	$file_name	The file name without extension.
-	 */
-	private function enqueue_js( $handle, $file_url, $file_name ) {
-		// Enqueue script
-		wp_enqueue_script( $handle, $file_url, array(), BC_PLUGIN_VERSION, 'all' );
-
-		// Localize the script
-		$this->localize_script( $file_name, $handle );
-	}
-
-	/**
 	 * Localizes a javascript file.
 	 * 
 	 * @since 1.0.16
@@ -317,7 +334,7 @@ class AssetManager {
 	 * @param   string  $file_name  The file name without extension.
 	 */
 	private function build_handle( $file_name ) {
-	    return 'bc-' . strtolower( $this->source ) . '-' . $file_name;
+	    return 'buddyclients-' . strtolower( $this->source ) . '-' . $file_name;
 	}
 
 	/**
