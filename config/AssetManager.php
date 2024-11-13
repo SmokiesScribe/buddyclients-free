@@ -107,7 +107,7 @@ class AssetManager {
 	}
 	
 	/**
-	 * Rerieves files to load.
+	 * Retrieves files to load.
 	 * 
 	 * @since 0.1.0
 	 */
