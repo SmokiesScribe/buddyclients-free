@@ -18,7 +18,7 @@
     background-color: #fff;
     border-radius: 15px;
     padding: 20px;
-    border: solid 1px #e7e9ec;
+    border: var(--buddyclients-default-border);
     align-items: center;
     text-align: center;
     flex-grow: 1; /* Allow items to grow equally */
@@ -118,13 +118,13 @@
 .blue-pen-rates-section {
     background-color: #fff;
     font-weight: bold;
-    border: solid 1px #e7e9ec;
+    border: var(--buddyclients-default-border);
     color: var(--buddyclients-primary-color);
 }
 
 .blue-pen-rates-table .blue-pen-rates-section td {
     background-color: #fafbfd;
-    border-bottom: solid 1px #e7e9ec;
+    border-bottom: var(--buddyclients-default-border);
     border-radius: 10px 10px 0 0;
     text-align: center;
 }
@@ -134,7 +134,7 @@
 }
 
 .blue-pen-rates-table .rate-type-header {
-    border-bottom: solid 1px #e7e9ec;
+    border-bottom: var(--buddyclients-default-border);
 }
 
 /* Style for DataTables search input */

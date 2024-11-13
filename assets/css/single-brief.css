@@ -17,7 +17,7 @@
 .single-brief-field {
     margin: auto;
     background-color: #ffffff;
-    border: solid 1px #e7e9ec;
+    border: var(--buddyclients-default-border);
     margin-bottom: 20px;
     padding: 30px;
     border-radius: 15px;
@@ -31,8 +31,8 @@
     border-radius: 10px;
 }
 .brief-form-section-header {
-    border-bottom: solid 1px #e7e9ec;
-    border-top: solid 1px #e7e9ec;
+    border-bottom: var(--buddyclients-default-border);
+    border-top: var(--buddyclients-default-border);
     padding: 15px 0;
     margin: 25px 0;
 }

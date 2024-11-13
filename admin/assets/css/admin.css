@@ -55,7 +55,7 @@
     border-radius: 10px;
     padding: 20px 40px;
     width: 50%;
-    border: solid 1px #e7e9ec;
+    border: var(--buddyclients-default-border);
 }
 .bc-freelancer-mode-message p {
     font-size: 16px;
@@ -68,7 +68,7 @@
     border-radius: 10px;
     padding: 20px 40px;
     width: 50%;
-    border: solid 1px #e7e9ec;
+    border: var(--buddyclients-default-border);
 }
 .bc-upgrade-link {
     font-size: 16px;

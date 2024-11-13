@@ -72,11 +72,12 @@ class AssetManager {
 			// Enqueue variables file
 			wp_enqueue_style( 'buddyclients-css-variables', BC_PLUGIN_URL . 'assets/css/variables.css' );
 
-			// Initialize variables with colors
+			// Initialize core variables
 			$css_variables = [
 				'primary-color'		=> bc_color( 'primary' ),
 				'accent-color'		=> bc_color( 'accent' ),
 				'tertiary-color'	=> bc_color( 'tertiary' ),
+				'default-border'	=> 'solid 1px #e7e9ec',
 			];
 
 			/**

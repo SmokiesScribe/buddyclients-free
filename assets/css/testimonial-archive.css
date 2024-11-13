@@ -50,7 +50,7 @@
 }
 .testimonial-card {
     border-radius: 15px;
-    border: solid 1px #e7e9ec;
+    border: var(--buddyclients-default-border);
     background-color: #ffffff;
     padding: 25px;
     margin-bottom: 20px;
