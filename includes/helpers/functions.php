@@ -142,8 +142,10 @@ function bc_time_has_passed( $target_time ) {
  * @since 1.0.20
  * 
  * @param   string  $message     The alert text.
+* @param   bool    $admin     Optional. Whether to also apply the script to the admin area.
+ *                             Defaults to false (i.e., front end).
  */
-function buddyclients_js_alert( $message ) {
+function buddyclients_js_alert( $message, $admin = false ) {
     if ( empty( $message ) ) {
         return;
     }
@@ -153,7 +155,7 @@ function buddyclients_js_alert( $message ) {
     $inline_script = "alert('" . $esc_message . "');";
 
     // Output the script
-    buddyclients_inline_script( $inline_script );
+    buddyclients_inline_script( $inline_script, $admin );
 }
 
 /**
@@ -199,7 +201,7 @@ function buddyclients_inline_style( $css, $admin = false ) {
  * 
  * @param   string  $script    The JavaScript to add.
  * @param   bool    $admin     Optional. Whether to also apply the script to the admin area.
- *                            Defaults to false (i.e., front end).
+ *                             Defaults to false (i.e., front end).
  */
 function buddyclients_inline_script( $script, $admin = false ) {
     // Define global js handle

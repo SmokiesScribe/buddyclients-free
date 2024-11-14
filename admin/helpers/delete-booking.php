@@ -41,15 +41,8 @@ function bc_delete_booking_success() {
 
     // Check if booking was successfully deleted
     if ( $deleted === 'true' ) {
-
         $message = "Booking deleted!";
-        $alert = '<script type="text/javascript">';
-        $alert .= 'alert("' . esc_js( $message ) . '");';
-        $alert .= '</script>';
-
-        $allowed_html = ['script' => []];
-
-        echo wp_kses( $alert, $allowed_html );
+        buddyclients_js_alert( $message, $admin = true );
     }
 }
 add_action( 'admin_init', 'bc_delete_booking_success' );
