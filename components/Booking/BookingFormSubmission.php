@@ -51,10 +51,24 @@ class BookingFormSubmission {
          */
          do_action( 'bc_booking_form_submission', $booking_intent );
         
-        // Redirect to the checkout page
-        $checkout_page = bc_get_setting('pages', 'checkout_page');
-        $redirect_url = get_permalink($checkout_page);
-        header("Location: $redirect_url");
+        // Retrieve the checkout page url
+        $checkout_url = bc_get_page_link( 'checkout_page' );
+
+        // Output popup if no checkout page set
+        if ( $checkout_url === '#' ) {
+            $message = __( '<p>Checkout is unavailable at this time.</p>', 'buddyclients-free' );
+
+            $message .= sprintf(
+                /* translators: %s: the contact us link */
+                __( '<p>Please %s for assistance</p>', 'buddyclients-free' ),
+                bc_contact_message( false, true ) );
+            
+            buddyclients_output_popup( $message );
+            return;
+        }
+
+        // Redirect to checkout page
+        wp_redirect( $checkout_url );
         exit();
     }
 }

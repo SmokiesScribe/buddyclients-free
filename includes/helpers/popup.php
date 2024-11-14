@@ -47,3 +47,17 @@ add_action('wp_ajax_nopriv_bc_get_popup_content', 'bc_get_popup_content'); // Fo
 function bc_help_link( $post_id = null, $link_text = null, $url = null, $raw_content = null ) {
     return Popup::link( $post_id, $link_text, $url, $raw_content );
 }
+
+/**
+ * Manually outputs a popup.
+ * 
+ * @since 1.0.20
+ * 
+ * @param   $content    string  The content of the popup.
+ */
+function buddyclients_output_popup( $content ) {
+    if ( ! empty ( $content ) ) {
+        $popup = new Popup;
+        $popup->output( $content );
+    }
+}

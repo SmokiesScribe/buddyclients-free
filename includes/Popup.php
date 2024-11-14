@@ -69,6 +69,17 @@ class Popup {
     private function define_hooks() {
         add_action('wp_footer', [$this, 'build']);
     }
+
+    /**
+     * Manually outputs a popup.
+     * 
+     * @since 1.0.20
+     */
+    public function output( $content ) {
+        $this->content = $content;
+        $this->visible = true;
+        $this->build();
+    }
     
     /**
      * Outputs popup.

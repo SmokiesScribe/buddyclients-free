@@ -335,9 +335,12 @@ class ObjectHandler {
         
         // Extract the properties of the object
         $object_data = (array) $object;
-        
-        // Retrieve table columns
-        $columns = $this->database->table_columns();
+
+        // Get the existing record
+        $record = $this->database->get_record_by_id( $object->ID );
+
+        // Extract record columns
+        $columns = $record ? get_object_vars( $record ) : [];
         
         // Initialize data with object stored in class name column
         $data = [];
