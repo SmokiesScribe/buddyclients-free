@@ -24,19 +24,6 @@ function e_bc_color( $type ) {
 }
 
 /**
- * Pretty prints an array.
- * 
- * @since 0.1.0
- * 
- * @ignore
- */
-function bc_print( $value ) {
-    echo '<pre>';
-    print_r( $value );
-    echo '</pre>';
-}
-
-/**
  * Retrieves the current url.
  * 
  * @since 1.0.4
@@ -161,15 +148,72 @@ function buddyclients_js_alert( $message ) {
         return;
     }
 
-    // Enqueue global script if necessary
-    if ( ! wp_script_is( 'buddyclients-buddyclients-class-global', 'enqueued' ) ) {
-        wp_enqueue_script( 'buddyclients-buddyclients-class-global', BC_PLUGIN_URL . 'assets/js/global.js', array(), null, true );
-    }
-
     // Sanitize the message for JavaScript
     $esc_message = esc_js( $message );
     $inline_script = "alert('" . $esc_message . "');";
 
     // Output the script
-    wp_add_inline_script( 'buddyclients-buddyclients-class-global', $inline_script );
+    buddyclients_inline_script( $inline_script );
+}
+
+/**
+ * Adds inline styles.
+ * 
+ * @since 1.0.20
+ * 
+ * @param   string  $css    The CSS to add.
+ */
+function buddyclients_inline_style( $css ) {
+    // Define handle
+    $handle = 'buddyclients-inline-style';
+    
+    // Ensure the style is enqueued on wp_enqueue_scripts hook
+    add_action( 'wp_enqueue_scripts', function() use ( $handle ) {
+        // Register the style if it's not already registered
+        if ( ! wp_style_is( $handle, 'registered' ) ) {
+            wp_register_style( $handle, false );
+        }
+        
+        // Enqueue the style if it's not already enqueued
+        if ( ! wp_style_is( $handle, 'enqueued' ) ) {
+            wp_enqueue_style( $handle );
+        }
+    }, 10, 0 );
+
+    // Add inline styles on wp_enqueue_scripts hook
+    add_action( 'wp_enqueue_scripts', function() use ( $handle, $css ) {
+        wp_add_inline_style( $handle, $css );
+    }, 20, 0 );
+}
+
+/**
+ * Adds inline scripts.
+ * 
+ * Enqueues global script if necessary.
+ * 
+ * @since 1.0.20
+ * 
+ * @param   string  $script    The JavaScript to add.
+ */
+function buddyclients_inline_script( $script ) {
+    // Define global js handle
+    $handle = 'buddyclients-buddyclients-class-global';
+
+    // Enqueue global script on wp_enqueue_scripts hook
+    add_action( 'wp_enqueue_scripts', function() use ( $handle ) {
+        // Register the script if it's not registered already
+        if ( ! wp_script_is( $handle, 'registered' ) ) {
+            wp_register_script( $handle, BC_PLUGIN_URL . 'assets/js/global.js', array(), null, true );
+        }
+        
+        // Enqueue the script if it's not already enqueued
+        if ( ! wp_script_is( $handle, 'enqueued' ) ) {
+            wp_enqueue_script( $handle );
+        }
+    }, 10, 0 );
+
+    // Add inline script on wp_enqueue_scripts hook
+    add_action( 'wp_enqueue_scripts', function() use ( $handle, $script ) {
+        wp_add_inline_script( $handle, $script );
+    }, 20, 0 );
 }

@@ -89,7 +89,7 @@ bc_xprofile_manager();
  * 
  * @since 0.1.0
  */
-function bc_show_role_xprofile() {
+function bc_show_role_xprofile_dep() {
     // Get self select setting
     $self_select_role = bc_get_setting('general', 'self_select_role');
     
@@ -107,7 +107,37 @@ function bc_show_role_xprofile() {
         echo wp_kses( $output, ['style' => []] );
     }
 }
-add_action('bp_before_profile_edit_content', 'bc_show_role_xprofile');
+//add_action('bp_before_profile_edit_content', 'bc_show_role_xprofile_dep');
+
+/**
+ * Allows team to self-select roles.
+ * 
+ * Hides or shows edit option based on setting.
+ * 
+ * @since 0.1.0
+ * 
+ * @param   array   $css_variables  The associative array of css names and variables.
+ */
+function bc_show_role_xprofile() {
+    // Get self select setting
+    $self_select_role = bc_get_setting( 'general', 'self_select_role' );
+    
+    // Get or create xprofile field id
+    $field_id = bc_roles_field_id();
+
+    // Define role field class
+    $class = '.editfield.field_' . $field_id;
+
+    // Check if hiding
+    if ( $self_select_role !== 'yes' ) {
+        // Build inline css
+        $inline_css = "{$class} { display: none !important; }";
+
+        // Add inline css
+        buddyclients_inline_style( $inline_css );
+    }
+}
+add_action( 'wp_enqueue_scripts', 'bc_show_role_xprofile' );
 
 /**
  * Disallows manual updates to the roles field.
