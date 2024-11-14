@@ -31,13 +31,8 @@ function bc_registration_button_text() {
         // Allow registration
         update_option( 'users_can_register', true );
         
-        // Change register button text
-        $allowed_html = array(
-            'script' => array(), // Allow the <script> tag with no attributes
-        );
-        
-        $script_content = '<script>
-            document.addEventListener("DOMContentLoaded", function() {
+        $script =
+            'document.addEventListener("DOMContentLoaded", function() {
                 var signUpButton = document.querySelector("a.button.small.signup");
                 if (signUpButton) {
                     signUpButton.textContent = "' . esc_js( $register_button_text ) . '";
@@ -48,14 +43,13 @@ function bc_registration_button_text() {
                 if (createAccountLink) {
                     createAccountLink.textContent = "' . esc_js( $register_button_text ) . '";
                 }
-            });
-        </script>';
+            });';
         
-        echo wp_kses( $script_content, $allowed_html );        
+        // Output inline script
+        buddyclients_inline_script( $script );
     }
 }
-add_action('wp_footer', 'bc_registration_button_text'); // main button
-add_action('login_enqueue_scripts', 'bc_registration_button_text'); // login page
+add_action('init', 'bc_registration_button_text'); // main button
 
 /**
  * Change registration button link.
