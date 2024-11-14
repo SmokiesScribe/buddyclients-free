@@ -246,13 +246,9 @@ function updateServiceValues() {
                         nonce: lineItemsTableData.nonce,
                         nonceAction: lineItemsTableData.nonceAction,
                     },
-                    beforeSend: function() {
-                        console.log('Sending AJAX request for service ID:', option.value);
-                    },
                     success: function(response) {
                         console.timeEnd('AJAX Request'); // Log time taken for the AJAX request
                         var lineItem = JSON.parse(response);
-                        console.log('Response:', lineItem);
                         
                         if (lineItem) {
                             lineItems.push(lineItem);
