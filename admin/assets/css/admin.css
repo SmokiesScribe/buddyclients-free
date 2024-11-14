@@ -184,3 +184,13 @@ ul.wp-submenu.wp-submenu-wrap li a[href="bc-separator"] {
     margin-top: 10px !important;
     border-top: 1px solid #555555; /* Grey border as separator */
 }
+
+/* Results Message - eg update payments results */
+.bc-admin-results-message {
+    padding: 5px 10px;
+    background-color: gray;
+    color: white;
+    border-radius: 5px;
+    margin: 0 10px;
+    display: inline-block;
+}
