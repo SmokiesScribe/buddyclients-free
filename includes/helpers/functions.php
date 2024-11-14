@@ -202,8 +202,10 @@ function buddyclients_inline_style( $css, $admin = false ) {
  * @param   string  $script    The JavaScript to add.
  * @param   bool    $admin     Optional. Whether to also apply the script to the admin area.
  *                             Defaults to false (i.e., front end).
+ * @param   bool    $direct    Optional. Whether to call the inline script function immediately,
+ *                             as opposed to using a hook. Defaults to false.
  */
-function buddyclients_inline_script( $script, $admin = false ) {
+function buddyclients_inline_script( $script, $admin = false, $direct = false ) {
     // Define global js handle
     $handle = 'buddyclients-buddyclients-class-global';
 
@@ -223,8 +225,13 @@ function buddyclients_inline_script( $script, $admin = false ) {
         }
     }, 10, 0 );
 
-    // Add inline script on the appropriate hook
-    add_action( $hook, function() use ( $handle, $script ) {
+    if ( $direct ) {
+        // Call directly
         wp_add_inline_script( $handle, $script );
-    }, 20, 0 );
+    } else {
+        // Add inline script on the appropriate hook
+        add_action( $hook, function() use ( $handle, $script ) {
+            wp_add_inline_script( $handle, $script );
+        }, 20, 0 );
+    }
 }

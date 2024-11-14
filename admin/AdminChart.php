@@ -74,75 +74,88 @@ class AdminChart {
     public function render_chart() {
         ob_start();
         ?>
+
         <div class="bc-chart <?php echo esc_html( $this->chart_type ); ?>">
         <h3><?php echo esc_html( $this->title ); ?></h3>
         <canvas id="<?php echo esc_attr( $this->canvas_id ); ?>" class="bc-canvas"></canvas>
         </div>
+
+        <?php
+
+        $script = $this->chart_script();
+        buddyclients_inline_script( $script, $admin = true, $direct = true );
         
-        <script>
-            document.addEventListener('DOMContentLoaded', function() {
-                const ctx = document.getElementById('<?php echo esc_attr( $this->canvas_id ); ?>').getContext('2d');
-                
-                if (!ctx) {
-                    console.error('Canvas context not found!');
-                    return;
-                }
-                
-                const chart = new Chart(ctx, {
-                    type: <?php echo wp_json_encode($this->chart_type); ?>,
-                    data: {
-                        labels: <?php echo wp_json_encode($this->data['labels']); ?>,
-                        datasets: <?php echo wp_json_encode($this->data['datasets']); ?>
-                    },
-                    options: {
-                        responsive: true,
-                        showTooltips: true,
-                        scales: {
-                            x: {
-                                title: {
-                                    display: true,
-                                    text: <?php echo wp_json_encode($this->labels['x_label'] ?? ''); ?>,
-                                    color: '#000',
-                                    font: {
-                                        weight: 'bold' // Bold x-axis label
-                                    }
-                                }
-                            },
-                            y: {
-                                title: {
-                                    display: true,
-                                    text: <?php echo wp_json_encode($this->labels['y_label'] ?? ''); ?>,
-                                    color: '#000',
-                                    font: {
-                                        weight: 'bold' // Bold y-axis label
-                                    }
+        return ob_get_clean();
+    }
+
+    /**
+     * Defines the chart JavaScript.
+     */
+    public function chart_script() {
+        ob_start();
+        ?>
+        document.addEventListener('DOMContentLoaded', function() {
+            const ctx = document.getElementById('<?php echo esc_attr( $this->canvas_id ); ?>').getContext('2d');
+            
+            if (!ctx) {
+                console.error('Canvas context not found!');
+                return;
+            }
+            
+            const chart = new Chart(ctx, {
+                type: <?php echo wp_json_encode($this->chart_type); ?>,
+                data: {
+                    labels: <?php echo wp_json_encode($this->data['labels']); ?>,
+                    datasets: <?php echo wp_json_encode($this->data['datasets']); ?>
+                },
+                options: {
+                    responsive: true,
+                    showTooltips: true,
+                    scales: {
+                        x: {
+                            title: {
+                                display: true,
+                                text: <?php echo wp_json_encode($this->labels['x_label'] ?? ''); ?>,
+                                color: '#000',
+                                font: {
+                                    weight: 'bold' // Bold x-axis label
                                 }
                             }
                         },
-                        plugins: {
-                            tooltip: {
-                                callbacks: {
-                                    label: function(context) {
-                                        let label = context.dataset.label || '';
-                                        if (label) {
-                                            label += ': ';
-                                        }
-                                        if (context.raw !== null) {
-                                            if (<?php echo wp_json_encode($this->tooltip_format); ?> === 'currency') {
-                                                label += '$' + context.raw.toFixed(2); // Currency format
-                                            } else {
-                                                label += context.raw.toFixed(0); // Whole number format
-                                            }
-                                        }
-                                        return label;
+                        y: {
+                            title: {
+                                display: true,
+                                text: <?php echo wp_json_encode($this->labels['y_label'] ?? ''); ?>,
+                                color: '#000',
+                                font: {
+                                    weight: 'bold' // Bold y-axis label
+                                }
+                            }
+                        }
+                    },
+                    plugins: {
+                        tooltip: {
+                            callbacks: {
+                                label: function(context) {
+                                    let label = context.dataset.label || '';
+                                    if (label) {
+                                        label += ': ';
                                     }
+                                    if (context.raw !== null) {
+                                        if (<?php echo wp_json_encode($this->tooltip_format); ?> === 'currency') {
+                                            label += '$' + context.raw.toFixed(2); // Currency format
+                                        } else {
+                                            label += context.raw.toFixed(0); // Whole number format
+                                        }
+                                    }
+                                    return label;
                                 }
                             }
                         }
                     }
-                });
+                }
             });
-        </script>
+        });
         <?php
         return ob_get_clean();
     }
