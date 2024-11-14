@@ -193,6 +193,7 @@ class AdminPageManager {
                 'parent_slug' => 'bc-dashboard',
                 'callable' => 'bc_user_agreements_table',
                 'bc_menu_order' => 8,
+                'required_component' => 'Legal'
             ],
             'upgrade' => [
                 'key' => 'upgrade',

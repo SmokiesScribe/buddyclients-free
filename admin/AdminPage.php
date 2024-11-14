@@ -91,10 +91,9 @@ class AdminPage {
                 $args = $this->post_type_data( $key, $args );
                 // Overwrite callback with redirect function
                 $this->callback = function() use ( $key ) {
-                    // Echo a script to redirect the user
-                    echo '<script type="text/javascript">
-                            window.location.href = "' . esc_url( admin_url( 'edit.php?post_type=' . $key ) ) . '";
-                          </script>';
+                    $link = esc_url( admin_url( 'edit.php?post_type=' . $key ) );
+                    $script = "window.location.href = '{$link}';";
+                    buddyclients_inline_script( $script, $admin = true, $direct = true );
                 };
             }
         }
