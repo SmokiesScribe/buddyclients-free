@@ -88,33 +88,6 @@ bc_xprofile_manager();
  * Hides or shows edit option based on setting.
  * 
  * @since 0.1.0
- */
-function bc_show_role_xprofile_dep() {
-    // Get self select setting
-    $self_select_role = bc_get_setting('general', 'self_select_role');
-    
-    // Get or create xprofile field id
-    $field_id = bc_roles_field_id();
-    
-    // Check user settings
-    if ( $self_select_role === 'yes' ) {
-        // Show edit role
-        $output = '<style>.editfield.field_' . $field_id . ' { display: block; } </style>';
-        echo wp_kses( $output, ['style' => []] );
-    } else {
-        // Hide edit role
-        $output = '<style>.editfield.field_' . $field_id . ' { display: none !important; } </style>';
-        echo wp_kses( $output, ['style' => []] );
-    }
-}
-//add_action('bp_before_profile_edit_content', 'bc_show_role_xprofile_dep');
-
-/**
- * Allows team to self-select roles.
- * 
- * Hides or shows edit option based on setting.
- * 
- * @since 0.1.0
  * 
  * @param   array   $css_variables  The associative array of css names and variables.
  */
@@ -130,6 +103,7 @@ function bc_show_role_xprofile() {
 
     // Check if hiding
     if ( $self_select_role !== 'yes' ) {
+        
         // Build inline css
         $inline_css = "{$class} { display: none !important; }";
 
@@ -137,7 +111,7 @@ function bc_show_role_xprofile() {
         buddyclients_inline_style( $inline_css );
     }
 }
-add_action( 'wp_enqueue_scripts', 'bc_show_role_xprofile' );
+add_action( 'init', 'bc_show_role_xprofile' );
 
 /**
  * Disallows manual updates to the roles field.
@@ -169,18 +143,13 @@ function bc_no_roles_updates() {
             return;
         }
     }
-
-    // Output custom CSS directly in the head section
-    add_action( 'admin_head', function() {
-        ?>
-        <style>
-            #publishing-action .button-primary {
+    
+    // Define css
+    $css = '#publishing-action .button-primary {
                 pointer-events: none;
-                opacity: 0.5; /* Optionally reduce opacity to visually indicate that the button is disabled */
-            }
-        </style>
-        <?php
-    });
+                opacity: 0.5;
+            }';
+            buddyclients_inline_style( $css, $admin = true );
     
     // Add an admin notice
     $args = [

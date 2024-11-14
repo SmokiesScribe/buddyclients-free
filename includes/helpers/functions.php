@@ -157,20 +157,28 @@ function buddyclients_js_alert( $message ) {
 }
 
 /**
- * Adds inline styles.
+ * Adds inline styles to the front end.
  * 
  * @since 1.0.20
  * 
  * @param   string  $css    The CSS to add.
+ * @param   bool    $admin  Optional. Whether to also apply the styles to the admin area.
+ *                          Defaults to false.
+ * 
+ * Note: This function should be called on a hook that runs before `wp_enqueue_scripts`, 
+ * such as `init`, to ensure the styles are properly enqueued and applied.
  */
-function buddyclients_inline_style( $css ) {
+function buddyclients_inline_style( $css, $admin = false ) {
     // Define handle
     $handle = 'buddyclients-inline-style';
+
+    // Use the appropriate hook based on the $admin flag
+    $hook = $admin ? 'admin_enqueue_scripts' : 'wp_enqueue_scripts';
     
-    // Ensure the style is enqueued on wp_enqueue_scripts hook
-    add_action( 'wp_enqueue_scripts', function() use ( $handle ) {
+    // Delay the style registration until the appropriate action is fired
+    add_action( $hook, function() use ( $handle, $css ) {
         // Register the style if it's not already registered
-        if ( ! wp_style_is( $handle, 'registered' ) ) {
+        if ( ! wp_style_is( $handle, 'registered' ) ) {            
             wp_register_style( $handle, false );
         }
         
@@ -178,42 +186,43 @@ function buddyclients_inline_style( $css ) {
         if ( ! wp_style_is( $handle, 'enqueued' ) ) {
             wp_enqueue_style( $handle );
         }
-    }, 10, 0 );
-
-    // Add inline styles on wp_enqueue_scripts hook
-    add_action( 'wp_enqueue_scripts', function() use ( $handle, $css ) {
+        
+        // Add the inline styles
         wp_add_inline_style( $handle, $css );
-    }, 20, 0 );
+    }, 10, 0 );
 }
 
 /**
- * Adds inline scripts.
- * 
- * Enqueues global script if necessary.
+ * Adds inline scripts to the front end or admin area.
  * 
  * @since 1.0.20
  * 
  * @param   string  $script    The JavaScript to add.
+ * @param   bool    $admin     Optional. Whether to also apply the script to the admin area.
+ *                            Defaults to false (i.e., front end).
  */
-function buddyclients_inline_script( $script ) {
+function buddyclients_inline_script( $script, $admin = false ) {
     // Define global js handle
     $handle = 'buddyclients-buddyclients-class-global';
 
-    // Enqueue global script on wp_enqueue_scripts hook
-    add_action( 'wp_enqueue_scripts', function() use ( $handle ) {
+    // Determine the correct hook based on the $admin flag
+    $hook = $admin ? 'admin_enqueue_scripts' : 'wp_enqueue_scripts';
+
+    // Enqueue global script on the appropriate hook
+    add_action( $hook, function() use ( $handle ) {
         // Register the script if it's not registered already
         if ( ! wp_script_is( $handle, 'registered' ) ) {
             wp_register_script( $handle, BC_PLUGIN_URL . 'assets/js/global.js', array(), null, true );
         }
-        
+
         // Enqueue the script if it's not already enqueued
         if ( ! wp_script_is( $handle, 'enqueued' ) ) {
             wp_enqueue_script( $handle );
         }
     }, 10, 0 );
 
-    // Add inline script on wp_enqueue_scripts hook
-    add_action( 'wp_enqueue_scripts', function() use ( $handle, $script ) {
+    // Add inline script on the appropriate hook
+    add_action( $hook, function() use ( $handle, $script ) {
         wp_add_inline_script( $handle, $script );
     }, 20, 0 );
 }
