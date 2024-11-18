@@ -9,8 +9,5 @@ phpdoc.dist.xml
 /vendor/
 /scoped-vendor/
 
-# PHP Scoper config
-scoper.inc.php
-
 # Composer executable
 composer.phar
