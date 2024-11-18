@@ -1,6 +1,16 @@
-# Ignore hidden files from Mac OS
+# Hidden files from Mac OS
 .DS_Store
 
-# Ignore phpDocumentor's local config and artifacts
+# phpDocumentor's local config and artifacts
 .phpdoc/*
 phpdoc.dist.xml
+
+# Vendor dirs
+/vendor/
+/scoped-vendor/
+
+# PHP Scoper config
+scoper.inc.php
+
+# Composer executable
+composer.phar
