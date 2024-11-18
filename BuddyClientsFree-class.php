@@ -231,16 +231,34 @@ if ( ! class_exists( 'BuddyClientsFree' ) ) {
         public function enqueue_scripts() {
             // Loading script
             $this->enqueue_asset( 'assets/js', 'loading.js' );
-            
-            // Font Awesome
-            wp_enqueue_style( 'font-awesome-stylesheet', 'https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css', array(), '6.5.1' );
-            
+			
+			// Load Font Awesome
+			$this->enqueue_font_awesome();
+
             // All CSS
             $this->enqueue_assets('assets/css');
             
             // AlL JS
             $this->enqueue_assets('assets/js');
         }
+
+		/**
+		 * Registers and enqueues the Font Awesome stylesheet.
+		 * 
+		 * @since 1.0.20
+		 */
+		private function enqueue_font_awesome() {
+			// Register the FontAwesome stylesheet
+			wp_register_style(
+				'font-awesome-stylesheet', 
+				plugins_url('scoped-vendor/fortawesome/font-awesome/css/all.min.css', __FILE__), 
+				array(), 
+				'6.5.1'
+			);
+
+			// Enqueue the registered stylesheet
+			wp_enqueue_style('font-awesome-stylesheet');
+		}
         
         /**
          * Requires helper functions.

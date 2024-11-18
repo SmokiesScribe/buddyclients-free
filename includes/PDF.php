@@ -1,12 +1,10 @@
 <?php
 namespace BuddyClients\Includes;
 
-use BuddyClients\Includes\{
-    FileHandler     as FileHandler,
-    ObjectHandler   as ObjectHandler
-};
+use BuddyClients\Includes\FileHandler;
+use BuddyClients\Includes\ObjectHandler;
 
-use TCPDF;
+use GriffinVendor\TCPDF;
 
 /**
  * Handles the generation and retrieval of PDFs.
@@ -102,7 +100,7 @@ class PDF {
         $this->ID = $ID ?? null;
         
         // Load the TCPDF library
-        require_once ABSPATH . 'wp-content/plugins/buddyclients/vendor/tcpdf/tcpdf.php';
+        require_once BC_VENDOR_DIR . '/tecnickcom/tcpdf/tcpdf.php';
         
         // Initialize object handler
         self::init_object_handler();

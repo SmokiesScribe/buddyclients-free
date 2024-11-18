@@ -46,7 +46,7 @@ function bc_create_pdf( $args ) {
  * @since 0.2.6
  */
 function bc_tcpdf_library() {
-    require_once ABSPATH . 'wp-content/plugins/buddyclients/vendor/tcpdf/tcpdf.php';
+    require_once BC_VENDOR_DIR . '/tcpdf/tcpdf.php';
 }
 
 /**
