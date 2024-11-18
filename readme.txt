@@ -60,6 +60,7 @@ Banner URL: /assets/media/banner-772x250/banner.png
 * Improvement: Trigger admin loading indicator with html attributes.
 * Improvement: Added functions to handle inline scripts and styles.
 * Improvement: Handle case where no checkout page is set.
+* Improvement: Use scoped vendor libraries.
 * Corresponding Premium Version: 1.0.20
 
 = 1.0.9 - October 30, 2024 =
