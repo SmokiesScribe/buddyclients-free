@@ -15,6 +15,7 @@ BuddyClients is a flexible and comprehensive platform for any service-based busi
 - [User Guides](https://buddyclients.com/help/)
 - [Roadmap](https://buddyclients.com/roadmap/)
 - [Source Code on GitHub](https://github.com/SmokiesScribe/buddyclients-free)
+- [Terms of Service](https://buddyclients.com/buddyclients-free-terms/)
 
 == Requirements ==
 
