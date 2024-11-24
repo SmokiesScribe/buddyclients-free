@@ -6,7 +6,7 @@ use BuddyClients\Admin\AdminTable;
  * 
  * @since 0.2.6
  */
-function bc_user_list() {
+function buddyc_user_list() {
     
     // Initialize array
     $users_array = [];
@@ -19,9 +19,9 @@ function bc_user_list() {
     // Loop through users
     foreach ($users['users'] as $user) {
         // Determine type and skip iteration if user type is unknown
-        if ( bc_is_team( $user->ID ) ) {
+        if ( buddyc_is_team( $user->ID ) ) {
             $type = 'team';
-        } else if ( bc_is_client( $user->ID ) ) {
+        } else if ( buddyc_is_client( $user->ID ) ) {
             $type = 'client';
         } else if ( function_exists( 'be_is_faculty' ) && be_is_faculty( $user->ID ) ) {
             $type = 'faculty';

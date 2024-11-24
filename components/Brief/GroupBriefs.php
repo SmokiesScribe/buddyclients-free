@@ -47,7 +47,7 @@ class GroupBriefs {
         $briefs = [];
         
         // Get posts
-        $brief_posts = new PostQuery( 'bc_brief', ['project_id' => $this->group_id] );
+        $brief_posts = new PostQuery( 'buddyc_brief', ['project_id' => $this->group_id] );
         
         // Check if posts were found
         if ( $brief_posts->posts ) {
@@ -88,7 +88,7 @@ class GroupBriefs {
                 $content .= '<a class="brief-type-term-link" href="' . get_permalink( $brief->ID ) . '">';
                 $content .= '<div class="brief-type-term">';
                 $content .= '<h3 style="margin-bottom: 10px;">' . $brief->brief_type_names . __( ' Brief', 'buddyclients' ) . '</h3>';
-                $content .= '<icon class="' . $icon_class . '" style="font-size: 24px; color: ' . bc_color('accent') . ';"></icon>';
+                $content .= '<icon class="' . $icon_class . '" style="font-size: 24px; color: ' . buddyc_color('accent') . ';"></icon>';
                 $content .= '<p>' . $click_to_message . '.</p>';
                 $content .= '</div>';
                 $content .= '</a>';
@@ -120,7 +120,7 @@ class GroupBriefs {
             ]
         ];
         
-        $bb = bc_buddyboss_theme() ? 'bb' : 'fa';
+        $bb = buddyc_buddyboss_theme() ? 'bb' : 'fa';
         
         return $classes[$icon][$bb];
     }

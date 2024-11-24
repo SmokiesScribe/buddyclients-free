@@ -18,7 +18,7 @@ class RepairButtonManager {
     private static function repair_buttons() {
         return [
             'email_templates' => [
-                'post_type' => 'bc_email',
+                'post_type' => 'buddyc_email',
                 'callback'  => ['BuddyClients\Components\Email\EmailTemplateManager', 'create']
             ]
         ];

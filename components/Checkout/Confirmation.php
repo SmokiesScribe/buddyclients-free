@@ -86,8 +86,8 @@ class Confirmation {
         $this->get_status();
         
         // Get links
-        $this->checkout_page_link = bc_get_page_link( 'checkout_page' );
-        $this->contact_page_link = bc_get_page_link( 'contact' );
+        $this->checkout_page_link = buddyc_get_page_link( 'checkout_page' );
+        $this->contact_page_link = buddyc_get_page_link( 'contact' );
     }
     
     /**
@@ -98,15 +98,15 @@ class Confirmation {
     private function define_form_link() {
         // Registration form
         if ( $this->is_registration ) {
-            return bc_get_page_link( 'registration' );
+            return buddyc_get_page_link( 'registration' );
             
         // Sponsorship form
         } else if ( $this->is_sponsor ) {
-            return bc_get_page_link( 'sponsor_form' );
+            return buddyc_get_page_link( 'sponsor_form' );
             
         // Booking form
         } else {
-            return bc_get_page_link( 'booking_page' );
+            return buddyc_get_page_link( 'booking_page' );
         }
     }
     
@@ -120,7 +120,7 @@ class Confirmation {
         $this->status = 'failed';
 
         // Fetch redirect status param
-        $redirect_status = bc_get_param( 'redirect_status' );
+        $redirect_status = buddyc_get_param( 'redirect_status' );
         
         // Check if redirect_status is 'succeeded'
         if ( $redirect_status === 'succeeded' ) {
@@ -129,7 +129,7 @@ class Confirmation {
             $this->status = 'succeeded';
             
             // Check if free
-            $free = bc_get_param( 'free' );
+            $free = buddyc_get_param( 'free' );
             $this->free = $free === 'true';
         }
     }
@@ -252,7 +252,7 @@ class Confirmation {
         $content .= '<p>' . __('We will review your information and be in touch with any questions.', 'buddyclients') . '</p>';
         
         // Build button
-        $link = bc_profile_link(['slug' => 'event?subnav=sponsor']);
+        $link = buddyc_profile_link(['slug' => 'event?subnav=sponsor']);
         $link_text = __('View Your Sponsorships', 'buddyclients');
         
         return $this->output_message('success', __('Success!', 'buddyclients'), $content, $link, $link_text);
@@ -326,7 +326,7 @@ class Confirmation {
         // No project available - link to groups
         } else if (is_user_logged_in()) {
             // Build button
-            $link = bc_profile_link(['slug' => 'groups']);
+            $link = buddyc_profile_link(['slug' => 'groups']);
             $link_text = __('View Your Projects', 'buddyclients');
             
         // Not logged in

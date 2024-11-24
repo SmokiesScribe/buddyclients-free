@@ -51,7 +51,7 @@ class FreeCheckout {
      * @since 0.1.0
      */
     private function redirect() {
-        $confirmation_page = get_permalink( bc_get_setting( 'pages', 'confirmation_page' ) );
+        $confirmation_page = get_permalink( buddyc_get_setting( 'pages', 'confirmation_page' ) );
         $confirmation_page = $confirmation_page . '?redirect_status=succeeded&free=true';
         wp_redirect( $confirmation_page );
         exit;

@@ -116,7 +116,7 @@ class FilterField {
     public function args() {
         
         // Build help link
-        $help_link = $this->help_post_id ? bc_help_link( $this->help_post_id ) : '';
+        $help_link = $this->help_post_id ? buddyc_help_link( $this->help_post_id ) : '';
         
         // Build arguments for the project select field
         return [

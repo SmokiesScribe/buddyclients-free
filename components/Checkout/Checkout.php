@@ -73,7 +73,7 @@ class Checkout {
         @session_start();
         
         // Skip payment setting
-        $this->skip_payment = bc_get_setting( 'booking', 'skip_payment' ) === 'yes';
+        $this->skip_payment = buddyc_get_setting( 'booking', 'skip_payment' ) === 'yes';
 
         // Init IntentHandler
         $intent_handler = new IntentHandler;
@@ -209,7 +209,7 @@ class Checkout {
         if ( ! $this->booking_intent->previously_paid ) {
     
             // Check if emails are enabled
-            if ( function_exists( 'bc_email_enabled' ) && bc_email_enabled( 'sales_sub' ) ) {
+            if ( function_exists( 'buddyc_email_enabled' ) && buddyc_email_enabled( 'sales_sub' ) ) {
                 $content .= '<p>' . sprintf(
                     /* translators: %1$s: the name of the client; %2$s: the email address of the client */
                     __( '%1$s has been notified at %2$s.', 'buddyclients' ),
@@ -230,7 +230,7 @@ class Checkout {
             // Copy paste link
             $checkout_link = $this->booking_intent->checkout_link;
             $content .= '<p>' . __( 'The client can check out at the following link.', 'buddyclients' ) . '</p>';
-            $content .= bc_copy_to_clipboard( $checkout_link, 'bc_checkout_link' );
+            $content .= buddyc_copy_to_clipboard( $checkout_link, 'buddyc_checkout_link' );
         }
     
         return $content;
@@ -242,7 +242,7 @@ class Checkout {
      * @since 0.1.0
      */
     private function back_to_form() {
-        $form_page = bc_get_setting( 'pages', 'booking_page' );
+        $form_page = buddyc_get_setting( 'pages', 'booking_page' );
         return '<a href="' . esc_url( get_permalink( $form_page ) ) . '">' . __( 'Book services here.', 'buddyclients' ) . '</a>';
     }
     
@@ -402,8 +402,8 @@ class Checkout {
         $policies = [];
         
         // Get pages from settings
-        $privacy_policy = bc_get_setting( 'pages', __( 'privacy_policy', 'buddyclients' ) );
-        $site_terms = bc_get_setting( 'pages', __( 'terms_of_service', 'buddyclients' ) );
+        $privacy_policy = buddyc_get_setting( 'pages', __( 'privacy_policy', 'buddyclients' ) );
+        $site_terms = buddyc_get_setting( 'pages', __( 'terms_of_service', 'buddyclients' ) );
         
         // Generate policy links
         if ($privacy_policy) {
@@ -456,9 +456,9 @@ class Checkout {
         $args = [];
         
         // Define terms link
-        $service_terms = bc_get_setting( 'legal', 'client_legal_version' );
-        $event_terms = bc_get_setting( 'legal', 'event_legal_version' );
-        $sponsor_terms = bc_get_setting( 'legal', 'sponsor_legal_version' );
+        $service_terms = buddyc_get_setting( 'legal', 'client_legal_version' );
+        $event_terms = buddyc_get_setting( 'legal', 'event_legal_version' );
+        $sponsor_terms = buddyc_get_setting( 'legal', 'sponsor_legal_version' );
         
         if ( $this->is_sponsor ) {
             $terms = $sponsor_terms;
@@ -529,7 +529,7 @@ class Checkout {
      */
     public function enqueue_free_checkout_script() {
         // Enqueue script
-        wp_enqueue_script_module('bc-free-checkout-script', plugin_dir_url(__FILE__) . 'assets/free-checkout.js', array(), BC_PLUGIN_VERSION, true);
+        wp_enqueue_script_module('bc-free-checkout-script', plugin_dir_url(__FILE__) . 'assets/free-checkout.js', array(), BUDDYC_PLUGIN_VERSION, true);
     }
     
     /**
@@ -541,7 +541,7 @@ class Checkout {
         if ( class_exists( StripeForm::class ) ) {
             return (new StripeForm)->build();
         } else {
-            $message = '<p>' . __( 'Payments are not enabled on this website. ', 'buddyclients' ) . bc_contact_message() . '</p>';
+            $message = '<p>' . __( 'Payments are not enabled on this website. ', 'buddyclients' ) . buddyc_contact_message() . '</p>';
             echo wp_kses_post( $message );
         }
     }

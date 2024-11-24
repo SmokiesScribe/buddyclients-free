@@ -40,7 +40,7 @@ class ReferencePosts {
             'show_in_nav_menus'     => false,
             'show_in_rest'          => false,
         ];
-        new PostType( 'bc_reference', $args );
+        new PostType( 'buddyc_reference', $args );
     }
     
     /**
@@ -52,7 +52,7 @@ class ReferencePosts {
      */
     public static function get_reference_post_id( $key ) {
         // Get array from settings
-        $post_ids = get_option( 'bc_reference_posts' );
+        $post_ids = get_option( 'buddyc_reference_posts' );
         
         // Get post ID by key
         $post_id = $post_ids[$key] ?? null;
@@ -67,7 +67,7 @@ class ReferencePosts {
      * @since 0.4.0
      */
     public static function get_all_reference_post_ids() {
-        return get_option( 'bc_reference_posts' );
+        return get_option( 'buddyc_reference_posts' );
     }
     
     /**
@@ -134,7 +134,7 @@ class ReferencePosts {
             'post_content'  => $args['content'],
             'post_title'    => $args['title'],
             'post_status'   => 'publish',
-            'post_type'     => 'bc_reference'
+            'post_type'     => 'buddyc_reference'
         ];
         
         // Create post and get new ID
@@ -146,7 +146,7 @@ class ReferencePosts {
             $post_ids[$key] = $post_id;
             
             // Update setting
-            update_option( 'bc_reference_posts', $post_ids );
+            update_option( 'buddyc_reference_posts', $post_ids );
         }
     }
 }

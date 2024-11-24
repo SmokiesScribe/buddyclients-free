@@ -47,7 +47,7 @@ class Settings {
          *
          * @param array  $callbacks An array of callables keyed by settings group.
          */
-         $callbacks = apply_filters( 'bc_settings_groups', $callbacks );
+         $callbacks = apply_filters( 'buddyc_settings_groups', $callbacks );
          
          return $callbacks;
     }
@@ -136,7 +136,7 @@ class Settings {
         } else {
                     
             // Get the current setting
-            $curr_settings = get_option('bc_' . $settings_group . '_settings');
+            $curr_settings = get_option('buddyc_' . $settings_group . '_settings');
             
             // Fallback to defaults
             $field_value = $curr_settings[$settings_field] ?? self::get_defaults( $settings_group, $settings_field ) ?? '';
@@ -152,7 +152,7 @@ class Settings {
      * @since 0.1.0
      */
     public static function update_value( $settings_key, $field_key, $value ) {
-        $settings_name = 'bc_' . $settings_key . '_settings';
+        $settings_name = 'buddyc_' . $settings_key . '_settings';
         $settings = get_option($settings_name);
         $settings[$field_key] = $value;
         update_option($settings_name, $settings);
@@ -186,19 +186,19 @@ class Settings {
                         'client_types' => [
                             'label' => __('Client Types', 'buddyclients'),
                             'type' => 'checkboxes',
-                            'options' => bc_member_types(),
+                            'options' => buddyc_member_types(),
                             'description' => __('Select the types for clients.', 'buddyclients'),
                         ],
                         'default_client_type' => [
                             'label' => __('Default Client Type', 'buddyclients'),
                             'type' => 'dropdown',
-                            'options' => bc_member_types(),
+                            'options' => buddyc_member_types(),
                             'description' => __('Select the default member type for new clients.', 'buddyclients'),
                         ],
                         'team_types' => [
                             'label' => __('Team Types', 'buddyclients'),
                             'type' => 'checkboxes',
-                            'options' => bc_member_types(),
+                            'options' => buddyc_member_types(),
                             'description' => __('Select the types for team members.', 'buddyclients'),
                         ],
                     ],
@@ -306,7 +306,7 @@ class Settings {
         // Loop through post types
         foreach ( $components as $component ) {
             // Add to array
-            $options[$component] = bc_component_name( $component );
+            $options[$component] = buddyc_component_name( $component );
         }
         return $options;
     }
@@ -607,7 +607,7 @@ class Settings {
         // Check whether we want defaults
         if ( $defaults ) {
             return [
-                'sales_types'                   => bc_get_setting( 'general', 'team_types' ),
+                'sales_types'                   => buddyc_get_setting( 'general', 'team_types' ),
                 'sales_team'                    => 'yes',
                 'sales_commission_percentage'   => 0,
                 'self_bookings'                 => 'yes',
@@ -648,7 +648,7 @@ class Settings {
                         'sales_types' => [
                             'label' => __('Sales Types', 'buddyclients'),
                             'type' => 'checkboxes',
-                            'options' => bc_member_types( 'team' ),
+                            'options' => buddyc_member_types( 'team' ),
                             'description' => __('In addition to the site admin, which team members can book services on behalf of clients?', 'buddyclients'),
                         ],
                         'sales_commission_percentage' => [
@@ -789,7 +789,7 @@ class Settings {
                     'description' => sprintf(
                         /* translators: %1$s: URL to add content to legal agreements; %2$s: link text */
                         __('Select the current version of each legal agreement type. If transitioning to a new version, select the previous version and add a deadline for accepting the new agreement.<br><a href="%1$s">%2$s</a>', 'buddyclients'),
-                        esc_url(admin_url('edit.php?post_type=bc_legal_mod')),
+                        esc_url(admin_url('edit.php?post_type=buddyc_legal_mod')),
                         __('Add content to legal agreements for individual users.', 'buddyclients')
                     ),
                     'fields' => self::current_legal_fields(),
@@ -971,7 +971,7 @@ class Settings {
             
         // Otherwise return settings data
         } else {
-            $license_message = function_exists( 'bc_license_message' ) ? bc_license_message() : '';
+            $license_message = function_exists( 'buddyc_license_message' ) ? buddyc_license_message() : '';
             return [
                 'license_key' => [
                     'title' => __( 'License Activation', 'buddyclients' ),
@@ -1077,7 +1077,7 @@ class Settings {
      */
     private static function freelancer_options() {
         $default = [ '' => __( 'OFF', 'buddyclients' ) ];
-        $options = bc_options( 'users' );
+        $options = buddyc_options( 'users' );
         return $default + $options;
     }
     
@@ -1118,7 +1118,7 @@ class Settings {
     private static function match_type_fields() {
         
         // Get selected xprofile filter fields
-        $settings = get_option('bc_booking_settings', array());
+        $settings = get_option('buddyc_booking_settings', array());
         $selected_fields = isset($settings['xprofile_fields']) ? $settings['xprofile_fields'] : array();
         
         // Get all xprofile field data
@@ -1181,7 +1181,7 @@ class Settings {
         foreach ($post_types as $post_type) {
             // Skip buddyclients post types
             if (strpos($post_type, 'buddyclients') !== false ||
-            strpos($post_type, 'bc_') !== false ||
+            strpos($post_type, 'buddyc_') !== false ||
             
                 // Skip native WP post types
                 $post_type === 'revision' ||
@@ -1238,7 +1238,7 @@ class Settings {
          *
          * @param array  $types An associative array of legal types.
          */
-         $types = apply_filters( 'bc_legal_types', $types );
+         $types = apply_filters( 'buddyc_legal_types', $types );
          
          return $types;
     }

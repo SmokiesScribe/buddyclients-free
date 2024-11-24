@@ -56,7 +56,7 @@ class BriefSubmission extends SingleBrief {
              * 
              * @param   object  The BriefSubmission object.
              */
-            do_action( 'bc_brief_updated', $this );
+            do_action( 'buddyc_brief_updated', $this );
         }
         
         // Redirect to completed view
@@ -71,7 +71,7 @@ class BriefSubmission extends SingleBrief {
     private function redirect() {
         
         // Completed param
-        $target_url = bc_add_params( ['brief-view' => 'completed'] );
+        $target_url = buddyc_add_params( ['brief-view' => 'completed'] );
         
         // Redirect
         wp_redirect( $target_url );

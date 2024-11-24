@@ -76,21 +76,21 @@ if ( ! class_exists( 'BuddyClientsFree' ) ) {
     	private function constants() {
     	    
     	    // Plugin name
-    		if ( ! defined( 'BC_PLUGIN_NAME' ) ) {
-    			define( 'BC_PLUGIN_NAME', 'BuddyClients Free' );
+    		if ( ! defined( 'BUDDYC_PLUGIN_NAME' ) ) {
+    			define( 'BUDDYC_PLUGIN_NAME', 'BuddyClients Free' );
     		}
     		// Path and URL.
-    		if ( ! defined( 'BC_PLUGIN_DIR' ) ) {
-    			define( 'BC_PLUGIN_DIR', plugin_dir_path(__FILE__) );
+    		if ( ! defined( 'BUDDYC_PLUGIN_DIR' ) ) {
+    			define( 'BUDDYC_PLUGIN_DIR', plugin_dir_path(__FILE__) );
     		}
     
-    		if ( ! defined( 'BC_PLUGIN_URL' ) ) {
-    			define( 'BC_PLUGIN_URL', plugin_dir_url(__FILE__) );
+    		if ( ! defined( 'BUDDYC_PLUGIN_URL' ) ) {
+    			define( 'BUDDYC_PLUGIN_URL', plugin_dir_url(__FILE__) );
     		}
     		
     		// BuddyClients website
-            if ( ! defined( 'BC_URL' ) ) {
-    			define( 'BC_URL', 'https://buddyclients.com' );
+            if ( ! defined( 'BUDDYC_URL' ) ) {
+    			define( 'BUDDYC_URL', 'https://buddyclients.com' );
     		}
 		}
     
@@ -100,11 +100,11 @@ if ( ! class_exists( 'BuddyClientsFree' ) ) {
     	 * @since 0.1.0
     	 */
     	private function setup_globals() {
-    		$this->file       = constant( 'BC_PLUGIN_FILE' );
-    		$this->basename   = basename( constant( 'BC_PLUGIN_DIR' ) );
-    		$this->plugin_dir = trailingslashit( constant( 'BC_PLUGIN_DIR' ) );
-    		$this->plugin_url = constant( 'BC_PLUGIN_URL' );
-    		$this->vendor_dir = BC_PLUGIN_DIR . '/vendor';
+    		$this->file       = constant( 'BUDDYC_PLUGIN_FILE' );
+    		$this->basename   = basename( constant( 'BUDDYC_PLUGIN_DIR' ) );
+    		$this->plugin_dir = trailingslashit( constant( 'BUDDYC_PLUGIN_DIR' ) );
+    		$this->plugin_url = constant( 'BUDDYC_PLUGIN_URL' );
+    		$this->vendor_dir = BUDDYC_PLUGIN_DIR . '/vendor';
     		$this->bb_theme   = function_exists('buddyboss_theme_register_required_plugins') ? true : false;
     	}
     	
@@ -308,7 +308,7 @@ if ( ! class_exists( 'BuddyClientsFree' ) ) {
          * @param   string  $file_name  The file name of the single asset to load.
          */
         private function enqueue_asset( $dir, $file_name ) {
-            $asset_manager = new BuddyClients\Config\AssetManager( BC_PLUGIN_FILE, $dir, $file_name );
+            $asset_manager = new BuddyClients\Config\AssetManager( BUDDYC_PLUGIN_FILE, $dir, $file_name );
             $asset_manager->run();
         }
     }

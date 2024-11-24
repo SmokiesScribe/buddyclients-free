@@ -259,11 +259,11 @@ class BookingIntent {
         $affiliate_id = null;
         
         // Check for affilaite ID in user meta
-        $affiliate_id = get_user_meta( $this->client_id, 'bc_affiliate', true );
+        $affiliate_id = get_user_meta( $this->client_id, 'buddyc_affiliate', true );
         
         // Check for affiliate ID in session
-        if ( ! $affiliate_id && isset( $_SESSION['bc_affiliate'] ) ) {
-            $affiliate_id = isset( $_SESSION['bc_affiliate'] ) ? sanitize_text_field( wp_unslash( $_SESSION['bc_affiliate'] ) ) : null;
+        if ( ! $affiliate_id && isset( $_SESSION['buddyc_affiliate'] ) ) {
+            $affiliate_id = isset( $_SESSION['buddyc_affiliate'] ) ? sanitize_text_field( wp_unslash( $_SESSION['buddyc_affiliate'] ) ) : null;
         }
         
         return $affiliate_id;
@@ -277,7 +277,7 @@ class BookingIntent {
     private function set_var() {
         $this->client_id            = $this->post['user-id'];
         $this->client_email         = $this->post['user-email'] ?? null;
-        $this->project_id           = $this->post['bc_projects'] ?? null;
+        $this->project_id           = $this->post['buddyc_projects'] ?? null;
         $this->total_fee            = $this->post['total-fee'];
         $this->line_items           = serialize(json_decode(stripslashes( $this->post['hidden-line-items'] )));
         $this->service_names        = $this->service_names();
@@ -296,7 +296,7 @@ class BookingIntent {
          * @param   int $user_id            The ID of the user.
          * @param   int $booking_intent_id  The ID of the BookingIntent.
          */
-        do_action('bc_user_checkout', $this->client_id, $this->ID);
+        do_action('buddyc_user_checkout', $this->client_id, $this->ID);
         
         return $this;
     }
@@ -328,7 +328,7 @@ class BookingIntent {
             ];
             
             // Create PDF
-            return bc_create_pdf( $args );
+            return buddyc_create_pdf( $args );
         }
     }
     
@@ -340,7 +340,7 @@ class BookingIntent {
     private function build_checkout_link() {
         
         // Get checkout page id
-        $checkout_page = bc_get_setting('pages', 'checkout_page');
+        $checkout_page = buddyc_get_setting('pages', 'checkout_page');
         $checkout_url = get_permalink($checkout_page);
         
         // Build checkout link
@@ -373,10 +373,10 @@ class BookingIntent {
         $timeout_timestamp = strtotime( "+10 minutes", current_time( 'timestamp' ) );
     
         // Schedule event to check abandoned bookings after timeout
-        wp_schedule_single_event( $timeout_timestamp, 'bc_check_abandoned_booking', array( $this->ID ) );
+        wp_schedule_single_event( $timeout_timestamp, 'buddyc_check_abandoned_booking', array( $this->ID ) );
         
         // Define the callback directly
-        add_action('bc_check_abandoned_booking', function( $booking_intent_id ) {
+        add_action('buddyc_check_abandoned_booking', function( $booking_intent_id ) {
             // Check if the status is succeeded
             if ( $this->status !== 'succeeded' ) {
                 new AbandonedBooking( $booking_intent_id );
@@ -511,7 +511,7 @@ class BookingIntent {
              * 
              * @param object $booking_intent The BookingIntent object.
              */
-            do_action('bc_booking_intent_succeeded', $booking_intent);
+            do_action('buddyc_booking_intent_succeeded', $booking_intent);
         }
     }
     

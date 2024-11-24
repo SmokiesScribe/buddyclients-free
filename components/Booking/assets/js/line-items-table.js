@@ -49,7 +49,7 @@ jQuery(document).ready(function($) {
     
     const projectInput = $('#project_title');
     const projectDisplay = $('#bc-checkout-project');
-    const projectSelect = $('#bc_projects');
+    const projectSelect = $('#buddyc_projects');
 
     function updateProjectName() {
         const projectName = projectInput.val();
@@ -237,7 +237,7 @@ function updateServiceValues() {
                     type: 'POST',
                     url: ajaxurl,
                     data: {
-                        action: 'bc_create_line_item',
+                        action: 'buddyc_create_line_item',
                         service_id: option.value,
                         fee_num: feeNum,
                         adjustments: selectedAdjustments,
@@ -323,7 +323,7 @@ jQuery(document).ready(function($) {
     if (!document.getElementById('bc-booking-form')) return;
     
     // Get project select
-    const projectSelect = document.getElementById('bc_projects');
+    const projectSelect = document.getElementById('buddyc_projects');
     
     // Use event delegation to handle change events on dynamically added fields
     jQuery('#bc-booking-form').on('change', 'input, select', function() {

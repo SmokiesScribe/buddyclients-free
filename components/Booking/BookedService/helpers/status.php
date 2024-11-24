@@ -9,13 +9,13 @@ use BuddyClients\Components\Booking\BookedService\Payment;
  * @param   string  $cancellation_window    The cancellation window setting at the time of scheduling.
  * @param   string  $time_scheduled         The time the function was scheduled.
  */
-function bc_payment_eligible( $payment_id, $cancellation_window, $time_scheduled ) {
+function buddyc_payment_eligible( $payment_id, $cancellation_window, $time_scheduled ) {
     
     // Get the Payment
     $payment = Payment::get_payment( $payment_id );
     
     // Get the current cancellation window setting
-    $curr_cancellation_window = bc_get_setting( 'booking', 'cancellation_window' );
+    $curr_cancellation_window = buddyc_get_setting( 'booking', 'cancellation_window' );
     
     // Check if the cancellation window has changed
     if ( $curr_cancellation_window !== $cancellation_window ) {
@@ -26,7 +26,7 @@ function bc_payment_eligible( $payment_id, $cancellation_window, $time_scheduled
         // Check if the new window has passed
         if ( $new_scheduled_date > time() ) {
             // Schedule for the date in the future
-            wp_schedule_single_event( $new_scheduled_date, 'bc_payment_eligible', array( $payment_id, $curr_cancellation_window, $time_scheduled ) );
+            wp_schedule_single_event( $new_scheduled_date, 'buddyc_payment_eligible', array( $payment_id, $curr_cancellation_window, $time_scheduled ) );
             return;
         }
     }
@@ -37,4 +37,4 @@ function bc_payment_eligible( $payment_id, $cancellation_window, $time_scheduled
         Payment::update_status( $payment_id, 'eligible' );
     }
 }
-add_action('bc_payment_eligible', 'bc_payment_eligible', 10, 3);
+add_action('buddyc_payment_eligible', 'buddyc_payment_eligible', 10, 3);

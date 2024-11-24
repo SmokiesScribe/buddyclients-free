@@ -425,7 +425,7 @@ class FileHandler {
             } else {
                 
                 // Define icon
-                $icon = bc_icon( 'download' );
+                $icon = buddyc_icon( 'download' );
                 
                 // Build download link
                 $text = $show_file_name ? __( 'Download File: ', 'buddyclients' ) . $file->file_name : __( 'Download File', 'buddyclients' );

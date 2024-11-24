@@ -141,13 +141,13 @@ class Options {
     private function users( $args ) {
         switch ( $args['user_type'] ?? null ) {
             case 'team':
-                $users = bc_all_team();
+                $users = buddyc_all_team();
                 break;
             case 'client':
-                $users = bc_all_clients();
+                $users = buddyc_all_clients();
                 break;
             case 'affiliate':
-                $users = bc_all_affiliates();
+                $users = buddyc_all_affiliates();
                 break;
             default:
                 $users = bp_core_get_users( ['per_page' => false, 'type' => 'alphabetical'] );
@@ -237,7 +237,7 @@ class Options {
         $post_type = $args['post_type'] ?? null;
         
         // Add flat option to rate type
-        if ($post_type === 'bc_rate_type') {
+        if ($post_type === 'buddyc_rate_type') {
             $options['flat'] = __( 'Flat', 'buddyclients' );
         }
         
@@ -310,13 +310,13 @@ class Options {
         $existing = $args['existing'] ?? null;
         
         // Get all exprofile fields
-        $fields = bc_all_xprofile();
+        $fields = buddyc_all_xprofile();
             
         // Loop through fields
         foreach ( $fields as $field_id => $field_data ) {
             
             // Get team types
-            $team_types = get_option('bc_general_settings')['team_types'] ?? null;
+            $team_types = get_option('buddyc_general_settings')['team_types'] ?? null;
             
             // Make sure field is for team
             if ( $team_types && is_array( $team_types ) ) {
@@ -326,7 +326,7 @@ class Options {
             }
             
             // Get the roles field id
-            $roles_field = bc_roles_field_id();
+            $roles_field = buddyc_roles_field_id();
             
             // Check if the field is already assigned to a post
             if ( $existing ) {

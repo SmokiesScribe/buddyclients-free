@@ -9,7 +9,7 @@
  * 
  * @return  array   The modified array of columns data.
  */
-function bc_add_preview_column( $columns ) {
+function buddyc_add_preview_column( $columns ) {
     // Add preview column
     $columns['preview_brief'] = __( 'Preview', 'buddyclients' );
     
@@ -19,7 +19,7 @@ function bc_add_preview_column( $columns ) {
     // Return modified columns
     return $columns;
 }
-add_filter( 'manage_edit-brief_type_columns', 'bc_add_preview_column' );
+add_filter( 'manage_edit-brief_type_columns', 'buddyc_add_preview_column' );
 
 /**
  * Populates the new column with preview buttons.
@@ -32,7 +32,7 @@ add_filter( 'manage_edit-brief_type_columns', 'bc_add_preview_column' );
  * 
  * @return  string  The modified content of the column.
  */
-function bc_render_preview_button( $content, $column_name, $term_id ) {
+function buddyc_render_preview_button( $content, $column_name, $term_id ) {
     if ( $column_name === 'preview_brief' ) {
         $preview_url = add_query_arg( array(
             'preview_brief'   => 1,
@@ -43,22 +43,22 @@ function bc_render_preview_button( $content, $column_name, $term_id ) {
     }
     return $content;
 }
-add_action( 'manage_brief_type_custom_column', 'bc_render_preview_button', 10, 3 );
+add_action( 'manage_brief_type_custom_column', 'buddyc_render_preview_button', 10, 3 );
 
 /**
  * Handles the preview request by redirecting to the preview.
  * 
  * @since 1.0.3
  */
-function bc_handle_preview_request() {
-    $preview_brief = bc_get_param( 'preview_brief' );
-    $taxonomy_term_id = bc_get_param( 'taxonomy_term_id' );
+function buddyc_handle_preview_request() {
+    $preview_brief = buddyc_get_param( 'preview_brief' );
+    $taxonomy_term_id = buddyc_get_param( 'taxonomy_term_id' );
     if ( $preview_brief && $taxonomy_term_id ) {        
-        bc_redirect_to_preview( intval( $taxonomy_term_id ) );
+        buddyc_redirect_to_preview( intval( $taxonomy_term_id ) );
         exit;
     }
 }
-add_action( 'init', 'bc_handle_preview_request' );
+add_action( 'init', 'buddyc_handle_preview_request' );
 
 /**
  * Creates a draft post for preview based on the taxonomy term ID.
@@ -69,7 +69,7 @@ add_action( 'init', 'bc_handle_preview_request' );
  * 
  * @return  int|false The post ID of the draft, or false on failure.
  */
-function bc_create_preview_draft( $taxonomy_term_id ) {
+function buddyc_create_preview_draft( $taxonomy_term_id ) {
     $term_name = get_term( $taxonomy_term_id )->name;
 
     $post_id = wp_insert_post( array(
@@ -78,7 +78,7 @@ function bc_create_preview_draft( $taxonomy_term_id ) {
             __( 'Preview %s Brief', 'buddyclients' ),
             ucfirst( $term_name )
         ),
-        'post_type'   => 'bc_brief',
+        'post_type'   => 'buddyc_brief',
         'post_status' => 'draft',
     ) );
 
@@ -99,8 +99,8 @@ function bc_create_preview_draft( $taxonomy_term_id ) {
  * 
  * @param   int     $taxonomy_term_id  The taxonomy term ID.
  */
-function bc_redirect_to_preview( $taxonomy_term_id ) {
-    $post_id = bc_create_preview_draft( $taxonomy_term_id );
+function buddyc_redirect_to_preview( $taxonomy_term_id ) {
+    $post_id = buddyc_create_preview_draft( $taxonomy_term_id );
 
     if ( $post_id ) {
         wp_redirect( get_permalink( $post_id ) );
@@ -115,14 +115,14 @@ function bc_redirect_to_preview( $taxonomy_term_id ) {
  * 
  * @since 1.0.3
  */
-function bc_delete_brief_preview_drafts() {
-    $post_type = bc_get_param( 'post_type' );
-    if ( ! is_admin() || empty( $post_type ) || $post_type !== 'bc_brief' ) {
+function buddyc_delete_brief_preview_drafts() {
+    $post_type = buddyc_get_param( 'post_type' );
+    if ( ! is_admin() || empty( $post_type ) || $post_type !== 'buddyc_brief' ) {
         return;
     }
 
     $args = array(
-        'post_type'   => 'bc_brief',
+        'post_type'   => 'buddyc_brief',
         'post_status' => 'draft',
         'meta_key'    => 'is_preview_draft',
         'meta_value'  => true
@@ -136,16 +136,16 @@ function bc_delete_brief_preview_drafts() {
 }
 
 /**
- * Runs draft deletion before the main query is executed on the bc_brief archive page.
+ * Runs draft deletion before the main query is executed on the buddyc_brief archive page.
  * 
  * @since 1.0.3
  * 
  * @param WP_Query $query The WP_Query instance (passed by reference).
  */
-function bc_check_and_run_draft_deletion( $query ) {
-    // Check if we are in the admin area and if the query is for the `bc_brief` archive
-    if ( is_admin() && $query->is_main_query() && $query->get( 'post_type' ) === 'bc_brief' ) {
-        bc_delete_brief_preview_drafts();
+function buddyc_check_and_run_draft_deletion( $query ) {
+    // Check if we are in the admin area and if the query is for the `buddyc_brief` archive
+    if ( is_admin() && $query->is_main_query() && $query->get( 'post_type' ) === 'buddyc_brief' ) {
+        buddyc_delete_brief_preview_drafts();
     }
 }
-add_action( 'pre_get_posts', 'bc_check_and_run_draft_deletion' );
+add_action( 'pre_get_posts', 'buddyc_check_and_run_draft_deletion' );

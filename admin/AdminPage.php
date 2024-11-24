@@ -84,9 +84,9 @@ class AdminPage {
         
         // Handle post type
         // Make sure the component is enabled
-        if ( ! $this->required_component || bc_component_enabled( $this->required_component ) ) {
+        if ( ! $this->required_component || buddyc_component_enabled( $this->required_component ) ) {
             // Make sure it's a post type
-            if ( isset( $args['singular_name'] ) && isset( $args['bc_menu_order'] ) && $args['bc_menu_order'] ) {
+            if ( isset( $args['singular_name'] ) && isset( $args['buddyc_menu_order'] ) && $args['buddyc_menu_order'] ) {
                 // Extract the data
                 $args = $this->post_type_data( $key, $args );
                 // Overwrite callback with redirect function
@@ -118,7 +118,7 @@ class AdminPage {
             'settings' => false,
             'title' => $args['menu_name'] ?? $args['plural_name'] ?? '',
             'parent_slug' => 'bc-dashboard',
-            'bc_menu_order' => $args['bc_menu_order'] ?? null,
+            'buddyc_menu_order' => $args['buddyc_menu_order'] ?? null,
             'group' => $args['group'] ?? null,
             'menu_slug' => 'edit.php?post_type=' . $key
         ];
@@ -142,11 +142,11 @@ class AdminPage {
         $this->required_component = $component;
         
         // Check if the component exists
-        if ( ! bc_component_exists( $component ) ) {
+        if ( ! buddyc_component_exists( $component ) ) {
             $this->callback = [self::class, 'upgrade_link'];
             
         // Check if the component is disabled
-        } else if ( ! bc_component_enabled( $component ) ) {
+        } else if ( ! buddyc_component_enabled( $component ) ) {
             $this->callback = [$this, 'enable_link'];
         }
     }
@@ -157,7 +157,7 @@ class AdminPage {
      * @since 0.1.0
      */
     public static function upgrade_link() {
-        echo wp_kses_post( bc_upgrade_link( true ) );
+        echo wp_kses_post( buddyc_upgrade_link( true ) );
     }
     
     /**
@@ -166,7 +166,7 @@ class AdminPage {
      * @since 0.1.0
      */
     public function enable_link() {
-        echo wp_kses_post( bc_enable_component_link( $this->required_component, true ) );
+        echo wp_kses_post( buddyc_enable_component_link( $this->required_component, true ) );
     }
     
     /**

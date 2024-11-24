@@ -38,7 +38,7 @@ class Freelancer {
     public function __construct() {
         
         // Check Freelancer Mode setting
-        $freelancer_id = bc_get_setting( 'booking', 'freelancer_id' );
+        $freelancer_id = buddyc_get_setting( 'booking', 'freelancer_id' );
         
         // Is enabled
         $this->enabled = ( $freelancer_id && $freelancer_id !== '' ) ? true : false;

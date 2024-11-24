@@ -47,7 +47,7 @@ class BookedServiceList {
         
         // Output table
         $table = $this->table();
-        $allowed_html = bc_allowed_html_form();
+        $allowed_html = buddyc_allowed_html_form();
         echo wp_kses( $table, $allowed_html );
     }
     
@@ -57,11 +57,11 @@ class BookedServiceList {
      * @since 0.1.0
      */
     private function user_is() {  
-        if ( bc_is_team() ) {
+        if ( buddyc_is_team() ) {
             return 'team';
-        } else if ( bc_is_client() ) {
+        } else if ( buddyc_is_client() ) {
             return 'client';
-        } else if ( bc_is_admin() ) {
+        } else if ( buddyc_is_admin() ) {
             return 'admin';
         }
     }
@@ -255,7 +255,7 @@ class BookedServiceList {
             'complete'                  => 'check'
         ];
 
-        $icon = isset( $icons[$status] ) ? bc_admin_icon( $icons[$status] ) : '';
+        $icon = isset( $icons[$status] ) ? buddyc_admin_icon( $icons[$status] ) : '';
         return $icon . ' ';
     }
 
@@ -282,10 +282,10 @@ class BookedServiceList {
             __('Date', 'buddyclients')            => $item->created_at ? gmdate('F j, Y', strtotime($item->created_at)) : '',
             __('Service', 'buddyclients')         => $item->name,
             __('Client', 'buddyclients')          => bp_core_get_userlink($item->client_id),
-            __('Project', 'buddyclients')         => bc_group_link( $item->project_id ),
+            __('Project', 'buddyclients')         => buddyc_group_link( $item->project_id ),
             __('Team Member', 'buddyclients')     => bp_core_get_userlink($item->team_id),
             __('Status', 'buddyclients')          => $this->build_status($item->status),
-            __('Files', 'buddyclients')           => bc_download_links($item->file_ids, true),
+            __('Files', 'buddyclients')           => buddyc_download_links($item->file_ids, true),
             __('Client Fee', 'buddyclients')      => '$' . $item->client_fee,
             __('Team Fee', 'buddyclients')        => '$' . $item->team_fee,
             __('Cancel', 'buddyclients')          => (new CancelRequestForm($item->ID))->build(),

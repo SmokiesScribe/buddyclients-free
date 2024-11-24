@@ -56,7 +56,7 @@ class BriefForm extends SingleBrief {
         foreach ( $this->fields as $field_id => $field_data ) {
             
             // Build help link
-            $help_link = ( isset( $field_data['help_post_id'] ) && ! empty( $field_data['help_post_id'] ) ) ? bc_help_link( $field_data['help_post_id'] ) : '';
+            $help_link = ( isset( $field_data['help_post_id'] ) && ! empty( $field_data['help_post_id'] ) ) ? buddyc_help_link( $field_data['help_post_id'] ) : '';
 
             // Format options
             $options = isset( $field_data['options'] ) && ! empty( $field_data['options'] ) ? $this->format_options( $field_data['options'], $field_data['type'], $field_id ) : [];

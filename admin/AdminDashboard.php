@@ -98,7 +98,7 @@ class AdminDashboard {
      */
     private function allowed_html() {
         // Defined allowed html tags
-        $allowed_html = bc_allowed_html_form();
+        $allowed_html = buddyc_allowed_html_form();
 
         // Define tags for chart html
         $chart_html = [
@@ -118,7 +118,7 @@ class AdminDashboard {
      * @since 1.0.2
      */
     private function define_date_range() {
-        return bc_get_param( 'date_range_filter' ) ?? 'year_to_date';
+        return buddyc_get_param( 'date_range_filter' ) ?? 'year_to_date';
     }
     
     /**
@@ -374,7 +374,7 @@ class AdminDashboard {
         
         // Loop through the options
         foreach ( $this->filter_options() as $option_key => $option_label ) {
-            $date_range = bc_get_param( $name );
+            $date_range = buddyc_get_param( $name );
             $content .= '<option value="' . esc_attr( $option_key ) . '"' . ( ( $date_range == $option_key ) ? ' selected' : '' ) . '>' . esc_html( $option_label ) . '</option>';
         }
     
@@ -382,10 +382,10 @@ class AdminDashboard {
         $content .= '</select>';
         
         // Submission verification field
-        $content .= '<input type="hidden" name="bc_admin_filter_key" value="bc_overview">';
+        $content .= '<input type="hidden" name="buddyc_admin_filter_key" value="buddyc_overview">';
         
         // Submit button
-        $content .= '<button type="submit" class="button action" name="bc_overview_filter_submit">';
+        $content .= '<button type="submit" class="button action" name="buddyc_overview_filter_submit">';
         $content .= esc_html__( 'Filter', 'buddyclients' );
         $content .= '</button>';
         

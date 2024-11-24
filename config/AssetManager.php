@@ -70,13 +70,13 @@ class AssetManager {
 		if ( ! wp_style_is( 'buddyclients-css-variables', 'enqueued' ) ) {
 
 			// Enqueue variables file
-			wp_enqueue_style( 'buddyclients-css-variables', BC_PLUGIN_URL . 'assets/css/variables.css' );
+			wp_enqueue_style( 'buddyclients-css-variables', BUDDYC_PLUGIN_URL . 'assets/css/variables.css' );
 
 			// Initialize core variables
 			$css_variables = [
-				'primary-color'		=> bc_color( 'primary' ),
-				'accent-color'		=> bc_color( 'accent' ),
-				'tertiary-color'	=> bc_color( 'tertiary' ),
+				'primary-color'		=> buddyc_color( 'primary' ),
+				'accent-color'		=> buddyc_color( 'accent' ),
+				'tertiary-color'	=> buddyc_color( 'tertiary' ),
 				'default-border'	=> 'solid 1px #e7e9ec',
 			];
 
@@ -216,7 +216,7 @@ class AssetManager {
 		if ( ! wp_script_is( $handle, 'enqueued' ) ) {
 
 			// Register script
-			wp_register_script( $handle, $file_url, array(), BC_PLUGIN_VERSION, true );
+			wp_register_script( $handle, $file_url, array(), BUDDYC_PLUGIN_VERSION, true );
 
 			// Enqueue script
 			wp_enqueue_script( $handle );
@@ -238,7 +238,7 @@ class AssetManager {
 	private function enqueue_css( $handle, $file_url, $file_name ) {
 		if ( ! wp_style_is( $handle, 'enqueued' ) ) {			
 			// Register the style
-			wp_register_style( $handle, $file_url, array(), BC_PLUGIN_VERSION, 'all' );
+			wp_register_style( $handle, $file_url, array(), BUDDYC_PLUGIN_VERSION, 'all' );
 			
 			// Enqueue the style
 			wp_enqueue_style( $handle );
@@ -258,7 +258,7 @@ class AssetManager {
 
 		// Check whether to load BuddyPress-specific styles
 		if ( $file_name === 'bp-global' ) {
-			if ( bc_buddyboss_theme() || is_admin() ) {
+			if ( buddyc_buddyboss_theme() || is_admin() ) {
 				return false;
 			}
 		}
@@ -289,7 +289,7 @@ class AssetManager {
 		 * 
 		 * @since 1.0.15
 		 */
-		$localization_info = apply_filters( 'bc_script_localization', $localization_info );		
+		$localization_info = apply_filters( 'buddyc_script_localization', $localization_info );		
 
 		return $localization_info;
 	}
@@ -355,7 +355,7 @@ class AssetManager {
 	private function build_nonce_action( $file_name ) {
 		$action = strtolower( $file_name );
 		$action = str_replace( '-', '_', $file_name );
-		$action = 'bc_' . $action;
+		$action = 'buddyc_' . $action;
 		return $action;
 	}
 

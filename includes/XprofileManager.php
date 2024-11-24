@@ -39,8 +39,8 @@ class XprofileManager {
     private function define_hooks() {
         add_action('save_post_bp-member-type', [$this, 'create_core']); // Profile types changed
         add_action('xprofile_fields_deleted_field', [$this, 'create_core']); // Profile field deleted
-        add_action('save_post_bc_role', [$this, 'create_core']); // Role post saved
-        add_action('bc_activated', [$this, 'create_core']);
+        add_action('save_post_buddyc_role', [$this, 'create_core']); // Role post saved
+        add_action('buddyc_activated', [$this, 'create_core']);
         
         //add_action('init', [$this, 'create_core']);
     }
@@ -52,7 +52,7 @@ class XprofileManager {
      */
     public function create_core() {
         // Trigger roles field creation
-        bc_roles_field_id();
+        buddyc_roles_field_id();
     }
 	
     /**

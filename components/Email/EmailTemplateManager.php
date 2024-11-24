@@ -107,7 +107,7 @@ class EmailTemplateManager {
          *
          * @param array  $pages    An array of email template data.
          */
-         $templates = apply_filters( 'bc_email_templates', $templates );
+         $templates = apply_filters( 'buddyc_email_templates', $templates );
          
         return $templates;
         
@@ -127,7 +127,7 @@ class EmailTemplateManager {
         $templates = self::templates();
     
         // Get existing setting
-        $assigned_emails = get_option('bc_email_templates', array());
+        $assigned_emails = get_option('buddyc_email_templates', array());
     
         // Create email posts
         foreach ($templates as $key => $data) {
@@ -149,7 +149,7 @@ class EmailTemplateManager {
                 'post_title'    => $data['subject'],
                 'post_content'  => $data['content'],
                 'post_status'   => 'publish',
-                'post_type'     => 'bc_email'
+                'post_type'     => 'buddyc_email'
             );
     
             $post_id = wp_insert_post($args);
@@ -162,7 +162,7 @@ class EmailTemplateManager {
         $updated_emails = array_merge($assigned_emails, $emails);
     
         // Save merged array in settings
-        update_option('bc_email_templates', $updated_emails);
+        update_option('buddyc_email_templates', $updated_emails);
     }
     
 }

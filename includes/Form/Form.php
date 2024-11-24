@@ -57,7 +57,7 @@ class Form {
      */
     public function echo() {
         $form = $this->build();
-        $allowed_html = bc_allowed_html_form();
+        $allowed_html = buddyc_allowed_html_form();
         echo wp_kses( $form, $allowed_html );
         return;
     }

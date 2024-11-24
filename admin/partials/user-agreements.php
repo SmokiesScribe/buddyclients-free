@@ -7,7 +7,7 @@ use BuddyClients\Admin\AdminTable;
  * 
  * @since 0.1.0
  */
-function bc_user_agreements_table() {
+function buddyc_user_agreements_table() {
     
     // Get Booked Services
     $agreements = UserAgreement::get_all_agreements();

@@ -8,7 +8,7 @@
  * 
  * @param   string  $path   Optional. Path to append to the url.
  */
-function bc_site_url( $path = null ) {
+function buddyc_site_url( $path = null ) {
     $url = 'https://buddyclients.com';
     
     return $path ? $url . $path : $url;
@@ -21,19 +21,19 @@ function bc_site_url( $path = null ) {
  * 
  * @ignore
  */
-function bc_upgrade_url() {
-    return bc_site_url('/pricing');
+function buddyc_upgrade_url() {
+    return buddyc_site_url('/pricing');
 }
 
 /**
- * Generates a URL to the BuddyClients account pagbc_account_linke.
+ * Generates a URL to the BuddyClients account pagbuddyc_account_linke.
  * 
  * @since 0.1.0
  * 
  * @ignore
  */
-function bc_account_url() {
-    return bc_site_url('/license');
+function buddyc_account_url() {
+    return buddyc_site_url('/license');
 }
 
 /**
@@ -43,7 +43,7 @@ function bc_account_url() {
  * 
  * @ignore
  */
-function bc_enable_component_url() {
+function buddyc_enable_component_url() {
     return admin_url( '/admin.php?page=bc-components-settings' );
 }
 
@@ -54,7 +54,7 @@ function bc_enable_component_url() {
  * 
  * @ignore
  */
-function bc_freelancer_mode_url() {
+function buddyc_freelancer_mode_url() {
     return admin_url('/admin.php?page=bc-booking-settings');
 }
 
@@ -68,10 +68,10 @@ function bc_freelancer_mode_url() {
  * @param   ?bool    $boxed      Optional. Whether to style the message in a container.
  *                               Defaults to null.
  */
-function bc_upgrade_link( $boxed = null ) {
+function buddyc_upgrade_link( $boxed = null ) {
     
     // Define icon
-    if ( bc_buddyboss_theme() ) {
+    if ( buddyc_buddyboss_theme() ) {
         $icon = '<i class="bb-icon-rocket bb-icon-l"></i> ';
     } else {
         $icon = '<i class="fa-solid fa-rocket"></i> ';
@@ -82,7 +82,7 @@ function bc_upgrade_link( $boxed = null ) {
     $close_container = $boxed ? '</div>' : '';
     
     // Get url
-    $url = bc_upgrade_url();
+    $url = buddyc_upgrade_url();
     
     // Build link
     $link = sprintf(
@@ -104,10 +104,10 @@ function bc_upgrade_link( $boxed = null ) {
  * 
  * @ignore
  */
-function bc_account_link() {
-    $icon_class = bc_buddyboss_theme() ? 'bb-icon-cog bb-icon-l' : 'fa-solid fa-gear';
+function buddyc_account_link() {
+    $icon_class = buddyc_buddyboss_theme() ? 'bb-icon-cog bb-icon-l' : 'fa-solid fa-gear';
     $icon = '<i class="' . $icon_class . '"></i> ';
-    $url = bc_account_url();
+    $url = buddyc_account_url();
     return sprintf(
         '<p class="bc-upgrade-link">%s ' . __( 'Manage <a href="%s" target="_blank">%s</a>.', 'buddyclients-free' ) . '</p>',
         $icon,
@@ -127,18 +127,18 @@ function bc_account_link() {
  * @param   ?bool    $boxed      Optional. Whether to style the message in a container.
  *                               Defaults to null.
  */
-function bc_enable_component_link( $component, $boxed = null ) {
+function buddyc_enable_component_link( $component, $boxed = null ) {
     
     // Build url
-    $url = bc_enable_component_url();
+    $url = buddyc_enable_component_url();
     
     // Define icon class
-    $icon_class = bc_buddyboss_theme() ? 'bb-icon-toggle-off bb-icon-l' : 'fa-solid fa-toggle-off';
+    $icon_class = buddyc_buddyboss_theme() ? 'bb-icon-toggle-off bb-icon-l' : 'fa-solid fa-toggle-off';
     
     // Build icon
     $icon = '<i class="' . $icon_class . '"></i> ';
     
-    $icon = bc_icon( 'toggle_off' );
+    $icon = buddyc_icon( 'toggle_off' );
     
     // Build container if boxed
     $open_container = $boxed ? '<div class="bc-upgrade-link-container">' : '';
@@ -148,7 +148,7 @@ function bc_enable_component_link( $component, $boxed = null ) {
     $link = sprintf(
         '<p class="bc-upgrade-link">%s ' . __( 'The %s component is disabled. <a href="%s">Enable the component</a>.', 'buddyclients-free' ) . '</p>',
         $icon,
-        bc_component_name( $component ),
+        buddyc_component_name( $component ),
         esc_url( $url )
     );
     
@@ -170,18 +170,18 @@ function bc_enable_component_link( $component, $boxed = null ) {
  * @param   ?bool    $boxed      Optional. Whether to style the message in a container.
  *                               Defaults to null.
  */
-function bc_freelancer_mode_link( $enable = null, $boxed = null ) {
+function buddyc_freelancer_mode_link( $enable = null, $boxed = null ) {
     
     // Build url
-    $url = bc_freelancer_mode_url();
+    $url = buddyc_freelancer_mode_url();
     
     // Define icon class
-    $icon_class = bc_buddyboss_theme() ? 'bb-icon-toggle-off bb-icon-l' : 'fa-solid fa-toggle-off';
+    $icon_class = buddyc_buddyboss_theme() ? 'bb-icon-toggle-off bb-icon-l' : 'fa-solid fa-toggle-off';
     
     // Build icon
     $icon = '<i class="' . $icon_class . '"></i> ';
     
-    $icon = bc_icon( 'toggle_off' );
+    $icon = buddyc_icon( 'toggle_off' );
     
     // Build container if boxed
     $open_container = $boxed ? '<div class="bc-upgrade-link-container">' : '';

@@ -1,12 +1,12 @@
 /* CSS for horizontal display of subnavigation links */
-.bc_subnav {
+.buddyc_subnav {
     display: flex;
     list-style-type: none;
     padding: 0;
     margin-bottom: 20px;
 }
 
-.bc_subnav a {
+.buddyc_subnav a {
     display: inline-block;
     padding: 6px 16px;
     text-decoration: none;
@@ -17,8 +17,8 @@
     background-color: #fafbfd;
 }
 
-.bc_subnav a:hover,
-.bc_subnav a.active {
+.buddyc_subnav a:hover,
+.buddyc_subnav a.active {
     background-color: #fff;
     color: var(--buddyclients-tertiary-color);
 }

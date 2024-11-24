@@ -132,7 +132,7 @@ class Brief {
         $args = array(
             'post_title' => $this->project_name . ' ' . $term->name . ' ' . __( 'Brief', 'buddyclients' ),
             'post_status'   => 'publish',
-            'post_type'     => 'bc_brief',
+            'post_type'     => 'buddyc_brief',
         );
 
         // Insert the post into the database
@@ -160,7 +160,7 @@ class Brief {
         
         // Check if the brief already exists for the project
         $existing_brief = get_posts(array(
-            'post_type' => 'bc_brief',
+            'post_type' => 'buddyc_brief',
             'posts_per_page' => 1,
             'tax_query' => array(
                 array(

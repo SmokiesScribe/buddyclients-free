@@ -70,9 +70,9 @@ class UserFilesForm {
         }
         
         // Check if the deletion form was submitted
-        if ( isset( $_SESSION['bc_delete_file_ids'] ) ) {
-            $file_ids = $this->get_session_array( 'bc_delete_file_ids' );
-            $file_names = $this->get_session_array( 'bc_delete_file_names' );
+        if ( isset( $_SESSION['buddyc_delete_file_ids'] ) ) {
+            $file_ids = $this->get_session_array( 'buddyc_delete_file_ids' );
+            $file_names = $this->get_session_array( 'buddyc_delete_file_names' );
             
             // Assign variables
             $this->delete_file_ids = $file_ids;
@@ -107,7 +107,7 @@ class UserFilesForm {
      */
     private function cancel_delete() {
         // Retrieve cancel request ID
-        $cancel_request = bc_get_param( 'bc-files-cancel-request' );
+        $cancel_request = buddyc_get_param( 'bc-files-cancel-request' );
 
         // No cancel request
         if ( ! $cancel_request ) {
@@ -115,19 +115,19 @@ class UserFilesForm {
         }
 
         // Check for completed cancel request
-        if ( isset( $_SESSION['bc_cancel_request_complete'] ) ) {
-            $cancel_request_complete = sanitize_text_field( wp_unslash( $_SESSION['bc_cancel_request_complete'] ) );
+        if ( isset( $_SESSION['buddyc_cancel_request_complete'] ) ) {
+            $cancel_request_complete = sanitize_text_field( wp_unslash( $_SESSION['buddyc_cancel_request_complete'] ) );
             if ( $cancel_request_complete === $cancel_request ) {
                 return false;
             }
         }
 
         // Active cancel request - unset session data
-        unset( $_SESSION['bc_delete_file_ids']);
-        unset( $_SESSION['bc_delete_file_names']);
+        unset( $_SESSION['buddyc_delete_file_ids']);
+        unset( $_SESSION['buddyc_delete_file_names']);
         
         // Add completed flag
-        $_SESSION['bc_cancel_request_complete'] = $cancel_request;
+        $_SESSION['buddyc_cancel_request_complete'] = $cancel_request;
 
         // Return true to revert to initial form
         return true;
@@ -166,7 +166,7 @@ class UserFilesForm {
      * @since 1.0.17
      */
     private function cancel_link() {
-        $link = bc_add_params( [ 'bc-files-cancel-request' => wp_rand() ] );
+        $link = buddyc_add_params( [ 'bc-files-cancel-request' => wp_rand() ] );
         $content = '<div class="bc-files-cancel-container">';
         $content .= '<a href="' . $link . '" class="bc-files-cancel">Cancel</a>';
         $content .= '</div>';
@@ -250,7 +250,7 @@ class UserFilesForm {
                 $in_use = File::in_use( $file->ID );
 
                 $options[$file->ID] = [
-                    'label' => bc_download_links( [$file->ID], true ),
+                    'label' => buddyc_download_links( [$file->ID], true ),
                     'value' => $file->ID,
                     'disabled'   => $in_use
                 ];

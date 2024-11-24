@@ -90,7 +90,7 @@ class SuccessfulBooking {
          * 
          * @param object $successful_booking    The SuccessfulBooking object.
          */
-        do_action( 'bc_successful_booking', $this );
+        do_action( 'buddyc_successful_booking', $this );
     }
     
     /**

@@ -42,23 +42,23 @@ class Shortcodes {
     
         // Check if the class exists before instantiating
         if (class_exists(BookingForm::class)) {
-            $shortcodes['bc_booking_form'] = [new BookingForm, 'build_form'];
+            $shortcodes['buddyc_booking_form'] = [new BookingForm, 'build_form'];
         }
     
         if (class_exists(Checkout::class)) {
-            $shortcodes['bc_checkout'] = [new Checkout, 'build'];
+            $shortcodes['buddyc_checkout'] = [new Checkout, 'build'];
         }
     
         if (class_exists(TestimonialForm::class)) {
-            $shortcodes['bc_testimonial_form'] = [new TestimonialForm, 'build'];
+            $shortcodes['buddyc_testimonial_form'] = [new TestimonialForm, 'build'];
         }
         
         if (class_exists(ContactForm::class)) {
-            $shortcodes['bc_contact_form'] = [new ContactForm, 'build'];
+            $shortcodes['buddyc_contact_form'] = [new ContactForm, 'build'];
         }
         
         if (class_exists(Confirmation::class)) {
-            $shortcodes['bc_confirmation'] = [new Confirmation, 'build'];
+            $shortcodes['buddyc_confirmation'] = [new Confirmation, 'build'];
         }
         
         /**
@@ -68,7 +68,7 @@ class Shortcodes {
          *
          * @param array  $shortcodes    An associative array of shortcodes and callbacks.
          */
-         $shortcodes = apply_filters( 'bc_shortcodes', $shortcodes );
+         $shortcodes = apply_filters( 'buddyc_shortcodes', $shortcodes );
     
         return $shortcodes;
     }

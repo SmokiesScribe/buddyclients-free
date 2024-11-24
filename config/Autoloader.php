@@ -95,7 +95,7 @@ class Autoloader {
         $formatted_class = implode('/', $parts);
         
         // Define path
-        $path = BC_PLUGIN_DIR . str_replace('/', DIRECTORY_SEPARATOR, $formatted_class) . '.php';
+        $path = BUDDYC_PLUGIN_DIR . str_replace('/', DIRECTORY_SEPARATOR, $formatted_class) . '.php';
 
         // Replace duplicate slashes
         $path = str_replace( DIRECTORY_SEPARATOR . DIRECTORY_SEPARATOR, DIRECTORY_SEPARATOR, $path );

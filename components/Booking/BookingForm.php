@@ -114,13 +114,13 @@ class BookingForm {
          *
          * @param string  $submit_text The submit text.
          */
-         $this->submit_text = apply_filters( 'bc_booking_submit_text', __( 'Go to Checkout', 'buddyclients' ) );
+         $this->submit_text = apply_filters( 'buddyc_booking_submit_text', __( 'Go to Checkout', 'buddyclients' ) );
         
         // Get user projects
         $this->projects = $this->client_id ? (new Client($this->client_id))->projects : false;
         
         // @todo Check if projects are enabled
-        // $this->projects_enabled = bc_get_setting( 'booking', 'enable_projects' ) === 'yes';
+        // $this->projects_enabled = buddyc_get_setting( 'booking', 'enable_projects' ) === 'yes';
         
     }
     
@@ -132,7 +132,7 @@ class BookingForm {
     private function define_client() {
         
         // Check for url param
-        $sales_client_id = bc_get_param( 'sales_client_id' );
+        $sales_client_id = buddyc_get_param( 'sales_client_id' );
         if ( $sales_client_id ) {
             $this->client_id = $sales_client_id;
             
@@ -155,11 +155,11 @@ class BookingForm {
      * @since 0.1.0
      */
     private function not_allowed() {
-        if ( bc_is_admin() || bc_is_team() ) {
+        if ( buddyc_is_admin() || buddyc_is_team() ) {
             return false;
         }
         $message = __( 'Please contact us to book services.', 'buddyclients' );
-        $self_bookings = bc_get_setting( 'sales', 'self_bookings' );
+        $self_bookings = buddyc_get_setting( 'sales', 'self_bookings' );
         return $self_bookings === 'no' ? $message : false;
     }
     
@@ -180,7 +180,7 @@ class BookingForm {
      */
     private function is_closed() {
         $message = __( 'We are not currently accepting new bookings.', 'buddyclients' );
-        $open = bc_get_setting('booking', 'accept_bookings');
+        $open = buddyc_get_setting('booking', 'accept_bookings');
         return $open !== 'open' ? $message : false;
     }
     
@@ -204,7 +204,7 @@ class BookingForm {
         }
         
         // Check if services exist.
-        if ( ! bc_services_exist() ) {
+        if ( ! buddyc_services_exist() ) {
             return $this->no_services();
         }
         
@@ -230,7 +230,7 @@ class BookingForm {
          * 
          * @param   string  $content    The content to filter.
          */
-         $content = apply_filters( 'bc_before_booking_form', $content );
+         $content = apply_filters( 'buddyc_before_booking_form', $content );
          
         // Display form
         $content .= (new Form( $form_args ) )->build();
@@ -242,7 +242,7 @@ class BookingForm {
          * 
          * @param   string  $content    The content to filter.
          */
-         $content = apply_filters( 'bc_after_booking_form', $content );
+         $content = apply_filters( 'buddyc_after_booking_form', $content );
          
         // Close form container
         $content .= '</div>';
@@ -282,7 +282,7 @@ class BookingForm {
          *
          * @param array  $project_callbacks An associative array of callbacks.
          */
-         $project_callbacks = apply_filters( 'bc_booking_project_fields', $project_callbacks );
+         $project_callbacks = apply_filters( 'buddyc_booking_project_fields', $project_callbacks );
         
         // Services callbacks
         $services_callbacks = [
@@ -300,7 +300,7 @@ class BookingForm {
          *
          * @param array  $services_callbacks An associative array of callbacks.
          */
-         $services_callbacks = apply_filters( 'bc_booking_services_fields', $services_callbacks );
+         $services_callbacks = apply_filters( 'buddyc_booking_services_fields', $services_callbacks );
         
         // Terms callbacks
         $terms_callbacks = [
@@ -360,7 +360,7 @@ class BookingForm {
          * 
          * @param object $booked_service    The BookedService object.
          */
-        do_action('bc_booking_after_services', $this);
+        do_action('buddyc_booking_after_services', $this);
     } 
 
     /**
@@ -375,10 +375,10 @@ class BookingForm {
          $args = [];
 
          // Define values
-         $sales_id = bc_get_param( 'sales_id' );
-         $prev_paid = bc_get_param( 'prev_paid' );
+         $sales_id = buddyc_get_param( 'sales_id' );
+         $prev_paid = buddyc_get_param( 'prev_paid' );
 
-         $sales_client_email = bc_get_param( 'sales_client_email' );         
+         $sales_client_email = buddyc_get_param( 'sales_client_email' );         
          $user_email = ! empty( $sales_client_email ) ? sanitize_email( $sales_client_email ) : bp_core_get_user_email( $this->client_id );
          
          // Define fields
@@ -389,7 +389,7 @@ class BookingForm {
              'user-email'               => $user_email,
              'hidden-line-items'        => '',
              'total-fee'                => '',
-             'minimum-fee'              => bc_get_setting('booking', 'minimum_fee'),
+             'minimum-fee'              => buddyc_get_setting('booking', 'minimum_fee'),
              'project-team-members'     => '',
              'project-booked-services'  => '',
          ];
@@ -438,7 +438,7 @@ class BookingForm {
         
         // Build arguments for the project select field
         return [
-            'key' => 'bc_projects',
+            'key' => 'buddyc_projects',
             'type' => 'dropdown',
             'label' => 'Select Your Project',
             'description' => 'Or create a new project.',
@@ -474,7 +474,7 @@ class BookingForm {
         $args = [];
         
         // Get filter field posts
-        $filter_fields = new PostQuery( 'bc_filter' );
+        $filter_fields = new PostQuery( 'buddyc_filter' );
         
         // Exit if no filter fields
         if ( $filter_fields->posts ) {
@@ -498,7 +498,7 @@ class BookingForm {
         $args = [];
         
         // Get all service types
-        $service_types = (new PostQuery( 'bc_service_type' ));
+        $service_types = (new PostQuery( 'buddyc_service_type' ));
         
         // Exit if no service types exist
         if ( ! $service_types->posts ) {
@@ -512,7 +512,7 @@ class BookingForm {
             $service_type = new ServiceType( $type->ID );
             
             // Get services by type
-            $services = new PostQuery('bc_service', ['service_type' => $service_type->ID]);
+            $services = new PostQuery('buddyc_service', ['service_type' => $service_type->ID]);
             
             // Exit if no services have the type
             if ( ! $services->posts ) {
@@ -544,7 +544,7 @@ class BookingForm {
                 }
                 
                 // Check for freelancer mode
-                $freelancer = bc_freelancer_id();
+                $freelancer = buddyc_freelancer_id();
                 
                 // Add to the options array
                 $options['service-' . $service->ID] = [
@@ -566,7 +566,7 @@ class BookingForm {
             if (!empty($options)) {
                 
                 // Build help link
-                $help_link = $service_type->help_post_id ? bc_help_link( $service_type->help_post_id ) : '';
+                $help_link = $service_type->help_post_id ? buddyc_help_link( $service_type->help_post_id ) : '';
                 
                 // Build service label
                 $service_label = $service_type->form_field_type === 'checkbox' ? 'services' : 'service';
@@ -598,7 +598,7 @@ class BookingForm {
         $args = [];
         
         // Get rate types
-        $rate_types = (new PostQuery( 'bc_rate_type' ))->posts;
+        $rate_types = (new PostQuery( 'buddyc_rate_type' ))->posts;
     
         if ($rate_types) {
             // Loop through rate types
@@ -643,7 +643,7 @@ class BookingForm {
         $args = [];
         
         // Get adjustments
-        $adjustments = (new PostQuery( 'bc_adjustment' ))->posts;
+        $adjustments = (new PostQuery( 'buddyc_adjustment' ))->posts;
     
         if ( $adjustments ) {
             // Loop through adjustments
@@ -687,7 +687,7 @@ class BookingForm {
                 }
                 
                 // Build help link
-                $help_link = $adjustment->help_post_id ? ' ' . bc_help_link( $adjustment->help_post_id ) : '';
+                $help_link = $adjustment->help_post_id ? ' ' . buddyc_help_link( $adjustment->help_post_id ) : '';
                     
                 // Build field
                 $args[] = [
@@ -718,7 +718,7 @@ class BookingForm {
         $args = [];
         
         // Get upload types
-        $file_uploads = (new PostQuery( 'bc_file_upload' ))->posts;
+        $file_uploads = (new PostQuery( 'buddyc_file_upload' ))->posts;
     
         if ($file_uploads) {
             // Loop through adjustments
@@ -728,7 +728,7 @@ class BookingForm {
                 $upload = new FileUpload( $upload_post->ID );
                 
                 // Build help link
-                $help_link = $upload->help_post_id ? ' ' . bc_help_link( $upload->help_post_id ) : '';
+                $help_link = $upload->help_post_id ? ' ' . buddyc_help_link( $upload->help_post_id ) : '';
         
                 // Build field
                 $args[] = [
@@ -773,13 +773,13 @@ class BookingForm {
         $args = [];
         
         // Get roles
-        $roles = (new PostQuery( 'bc_role' ))->posts;
+        $roles = (new PostQuery( 'buddyc_role' ))->posts;
         
         // Get xprofile field
-        $xprofile_id = bc_roles_field_id();
+        $xprofile_id = buddyc_roles_field_id();
         
         // Get all team
-        $team_members = bc_all_team();
+        $team_members = buddyc_all_team();
     
         if ( $roles ) {
             // Loop through roles
@@ -806,10 +806,10 @@ class BookingForm {
                     $user_roles = xprofile_get_field_data($xprofile_id, $team_member->ID);
                     
                     // Check team member agreement
-                    if ( class_exists( Legal::class ) && bc_get_setting( 'legal', 'require_agreement' ) == 'yes' ) {
+                    if ( class_exists( Legal::class ) && buddyc_get_setting( 'legal', 'require_agreement' ) == 'yes' ) {
                         
                         // Get require agreement setting
-                        $require_agreement = bc_get_setting( 'legal', 'require_agreement' );
+                        $require_agreement = buddyc_get_setting( 'legal', 'require_agreement' );
                         
                         // Only check if the setting is to require active agreement
                         if ( $require_agreement === 'yes' ) {
@@ -831,7 +831,7 @@ class BookingForm {
                     if ((is_array($user_roles) && in_array($role->singular, $user_roles))
                         || ($role->singular === $user_roles)) {
                             
-                        $availability = function_exists( 'bc_get_availability' ) ? bc_get_availability( $team_member->ID ) : '';
+                        $availability = function_exists( 'buddyc_get_availability' ) ? buddyc_get_availability( $team_member->ID ) : '';
                         $availability_message = $availability ? __( ' - Available ', 'buddyclients' ) . $availability : '';
                             
                         $team_options[$role->ID . '-' . $team_member->ID] = [
@@ -853,7 +853,7 @@ class BookingForm {
                         /* translators: %s: the singular name of the team member role (e.g. editor) */
                         __( 'Select your %s.', 'buddyclients' ),
                         strtolower( $role->singular )
-                    ) . bc_team_select_help(),
+                    ) . buddyc_team_select_help(),
                     'options'       => $team_options,
                     'data_atts'     => [
                         'role-id' => $role->ID,
@@ -871,7 +871,7 @@ class BookingForm {
      */
     private function terms_checkbox() {
         
-        if ( bc_get_param( 'sales_id' ) ) {
+        if ( buddyc_get_param( 'sales_id' ) ) {
             return;
         }
         
@@ -880,13 +880,13 @@ class BookingForm {
         $option_label = __( 'I confirm that the information above is correct.', 'buddyclients' );
         
         // Check for service agreement
-        $service_agreement_id = bc_get_setting('legal', 'client_legal_version');
+        $service_agreement_id = buddyc_get_setting('legal', 'client_legal_version');
         
         if ( $service_agreement_id ) {
             $option_label = sprintf(
                 /* translators: %s: the terms being agreed to (e.g. service terms) */
                 __( 'I agree to the %s.', 'buddyclients' ),
-                bc_help_link( $service_agreement_id, __( 'service terms', 'buddyclients' ) )
+                buddyc_help_link( $service_agreement_id, __( 'service terms', 'buddyclients' ) )
             );
         }
             

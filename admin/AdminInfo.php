@@ -35,7 +35,7 @@ class AdminInfo {
         $this->required_component = self::required_component( $this->key );
         
         // Make sure admin info notices are enabled
-        if ( bc_get_setting( 'general', 'admin_info' ) === 'disable' ) {
+        if ( buddyc_get_setting( 'general', 'admin_info' ) === 'disable' ) {
             return;
         }
 
@@ -75,7 +75,7 @@ class AdminInfo {
             ];
             
             // Generate notice
-            bc_admin_notice( $notice_args );
+            buddyc_admin_notice( $notice_args );
         }
     }
 
@@ -116,7 +116,7 @@ class AdminInfo {
                 /* translators: %1$s: URL to email templates */
                 __('Update these settings to define which emails are sent and the appropriate email addresses.<p>Customize your <a href="%1$s">email templates</a>.</p>', 
                 'buddyclients'),
-                esc_url(admin_url('/admin.php?page=edit.php?post_type=bc_email'))
+                esc_url(admin_url('/admin.php?page=edit.php?post_type=buddyc_email'))
             ),
             'legal'                 => sprintf(
                 /* translators: %s: link to user list */
@@ -179,7 +179,7 @@ class AdminInfo {
      */
     private function component_disabled() {
         if ( $this->required_component ) {
-            return ! bc_component_enabled( $this->required_component );
+            return ! buddyc_component_enabled( $this->required_component );
         } else {
             return false;
         }

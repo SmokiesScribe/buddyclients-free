@@ -56,8 +56,8 @@ class UserFilesSubmission {
         }
 
         // Add to session data
-        $_SESSION['bc_delete_file_ids'] = $file_ids;
-        $_SESSION['bc_delete_file_names'] = $file_names;
+        $_SESSION['buddyc_delete_file_ids'] = $file_ids;
+        $_SESSION['buddyc_delete_file_names'] = $file_names;
     }
     
     /**

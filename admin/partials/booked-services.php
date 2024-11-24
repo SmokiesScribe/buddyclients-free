@@ -7,7 +7,7 @@ use BuddyClients\Admin\AdminTable;
  * 
  * @since 0.1.0
  */
-function bc_booked_services_table() {
+function buddyc_booked_services_table() {
     
     // Get Booked Services
     $booked_services = BookedService::get_all_services();

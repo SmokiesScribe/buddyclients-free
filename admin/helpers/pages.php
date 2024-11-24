@@ -6,7 +6,7 @@ use BuddyClients\Admin\PluginPage;
  * 
  * @since 0.1.0
  */
-function bc_create_plugin_page() {
+function buddyc_create_plugin_page() {
 
     // Get the nonce from the AJAX request
     $nonce = isset( $_POST['nonce'] ) ? trim( sanitize_text_field( wp_unslash( $_POST['nonce'] ) ) ) : null;
@@ -59,4 +59,4 @@ function bc_create_plugin_page() {
     // Exit to avoid further execution
     wp_die();
 }
-add_action('wp_ajax_bc_admin_create_new_page', 'bc_create_plugin_page');
+add_action('wp_ajax_buddyc_admin_create_new_page', 'buddyc_create_plugin_page');

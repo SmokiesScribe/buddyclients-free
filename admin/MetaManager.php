@@ -62,7 +62,7 @@ class MetaManager {
          *
          * @param array  $callables   An array of callables defining meta fields.
          */
-         $callables = apply_filters( 'bc_meta_methods', $callables );
+         $callables = apply_filters( 'buddyc_meta_methods', $callables );
          
          // Return modified methods array
          return $callables;
@@ -94,7 +94,7 @@ class MetaManager {
      * 
      * @since 0.1.0
      */
-    static private function bc_service() {
+    static private function buddyc_service() {
         return [
             'Type' => [
                 'tables' => [
@@ -105,10 +105,10 @@ class MetaManager {
                                 'description' => sprintf(
                                     /* translators: %s: the url to add service types */
                                     __( 'Select the category for this service. <a href="%s">Add service types.</a>', 'buddyclients' ),
-                                    admin_url('/edit.php?post_type=bc_service_type')
+                                    admin_url('/edit.php?post_type=buddyc_service_type')
                                 ),
                                 'type' => 'dropdown',
-                                'options' => 'bc_service_type',
+                                'options' => 'buddyc_service_type',
                             ],
                         ],
                     ],
@@ -124,10 +124,10 @@ class MetaManager {
                                 'description' => sprintf(
                                     /* translators: %s: the url to add roles */
                                     __( 'Select which team member role applies to this service. <a href="%s">Add roles.</a>', 'buddyclients' ),
-                                    admin_url('/edit.php?post_type=bc_role')
+                                    admin_url('/edit.php?post_type=buddyc_role')
                                 ),
                                 'type' => 'dropdown',
-                                'options' => 'bc_role',
+                                'options' => 'buddyc_role',
                                 'required' => true,
                             ],
                             'assigned_team_member' => [
@@ -157,10 +157,10 @@ class MetaManager {
                                 'description' => sprintf(
                                     /* translators: %s: the url to add rate types */
                                     __( 'Select the type of fee entered above. <a href="%s">Add rate types.</a>', 'buddyclients' ),
-                                    admin_url('/edit.php?post_type=bc_rate_type')
+                                    admin_url('/edit.php?post_type=buddyc_rate_type')
                                 ),
                                 'type' => 'dropdown',
-                                'options' => 'bc_rate_type',
+                                'options' => 'buddyc_rate_type',
                             ],
                         ],
                     ],
@@ -183,7 +183,7 @@ class MetaManager {
                                 'description' => __( 'Select any rate adjustments that apply to this service.', 'buddyclients' ),
                                 'type' => 'checkbox',
                                 'required' => false,
-                                'options' => 'bc_adjustment',
+                                'options' => 'buddyc_adjustment',
                             ],
                         ],
                     ],
@@ -198,7 +198,7 @@ class MetaManager {
                                 'description' => sprintf(
                                     /* translators: %s: the url to add brief types */
                                     __( 'Select the brief type(s) to create for this service. <a href="%s">Add brief types.</a>', 'buddyclients' ),
-                                    admin_url('/edit-tags.php?taxonomy=brief_type&&post_type=bc_brief')
+                                    admin_url('/edit-tags.php?taxonomy=brief_type&&post_type=buddyc_brief')
                                 ),
                                 'required' => false,
                                 'required_component' => 'briefs',
@@ -214,7 +214,7 @@ class MetaManager {
                                 'description' => __( 'Which service(s) must be booked or selected before this one is available?', 'buddyclients' ),
                                 'required' => false,
                                 'type' => 'checkbox',
-                                'options' => 'bc_service',
+                                'options' => 'buddyc_service',
                             ],
                         ],
                     ],
@@ -225,7 +225,7 @@ class MetaManager {
                                 'description' => __( 'Select any file upload types that apply to this service.', 'buddyclients' ),
                                 'type' => 'checkbox',
                                 'required' => false,
-                                'options' => 'bc_file_upload',
+                                'options' => 'buddyc_file_upload',
                             ],
                         ],
                     ],
@@ -261,7 +261,7 @@ class MetaManager {
      * 
      * @since 0.1.0
      */
-    static private function bc_service_type() {
+    static private function buddyc_service_type() {
         return [
             'Service Type' => [
                 'tables' => [
@@ -313,7 +313,7 @@ class MetaManager {
      * 
      * @since 0.1.0
      */
-    static private function bc_filter() {
+    static private function buddyc_filter() {
         return [
             'Xprofile Field' => [
                 'tables' => [
@@ -327,7 +327,7 @@ class MetaManager {
                                     admin_url('/admin.php?page=bp-profile-setup')
                                 ),
                                 'type' => 'dropdown',
-                                'options' => bc_options( 'xprofile', ['existing' => ['bc_filter' => 'xprofile_field']] ),
+                                'options' => buddyc_options( 'xprofile', ['existing' => ['buddyc_filter' => 'xprofile_field']] ),
                                 'placeholder' => __( 'Select a Field', 'buddyclients' ),
                             ],
                         ],
@@ -408,7 +408,7 @@ class MetaManager {
      * 
      * @since 0.1.0
      */
-    static private function bc_role() {
+    static private function buddyc_role() {
         return [
             'Display' => [
                 'tables' => [
@@ -448,7 +448,7 @@ class MetaManager {
      * 
      * @since 0.1.0
      */
-    static private function bc_adjustment() {
+    static private function buddyc_adjustment() {
         return [
             'Type' => [
                 'tables' => [
@@ -500,7 +500,7 @@ class MetaManager {
                 'tables' => self::adjustment_options(),
             ],
             'New Option' => [
-                'description' => '<a id="bc_adjustment_create_option" class="button-secondary">' . __( 'Add Option', 'buddyclients' ) . '</a>',
+                'description' => '<a id="buddyc_adjustment_create_option" class="button-secondary">' . __( 'Add Option', 'buddyclients' ) . '</a>',
                 'tables' => [],
             ],
         ];
@@ -517,7 +517,7 @@ class MetaManager {
         $meta_fields = [];
 
         // Handle params
-        $param_manager = bc_param_manager();
+        $param_manager = buddyc_param_manager();
         $post_id = $param_manager->get( 'post' );
         
         // Default to 10 while saving
@@ -565,7 +565,7 @@ class MetaManager {
      * 
      * @since 0.1.0
      */
-    static private function bc_rate_type() {
+    static private function buddyc_rate_type() {
         return [
             'Unit' => [
                 'tables' => [
@@ -630,7 +630,7 @@ class MetaManager {
      * 
      * @since 0.1.0
      */
-    static private function bc_file_upload() {
+    static private function buddyc_file_upload() {
         return [
             'Unit' => [
                 'tables' => [
@@ -730,7 +730,7 @@ class MetaManager {
      * 
      * @since 0.1.0
      */
-    static private function bc_brief() {
+    static private function buddyc_brief() {
         return [
             'Project' => [
                 'tables' => [
@@ -766,7 +766,7 @@ class MetaManager {
      * 
      * @since 0.1.0
      */
-    static private function bc_brief_field() {
+    static private function buddyc_brief_field() {
         return [
             'Details' => [
                 'tables' => [
@@ -871,7 +871,7 @@ class MetaManager {
      * 
      * @since 0.1.0
      */
-    static private function bc_quote() {
+    static private function buddyc_quote() {
         return [
             'Project' => [
                 'tables' => [
@@ -903,10 +903,10 @@ class MetaManager {
                                 'description' => sprintf(
                                     /* translators: %s: URL to add roles */
                                     __('Select which team member role applies to this quote. <a href="%s">Add roles.</a>', 'buddyclients'),
-                                    esc_url(admin_url('/edit.php?post_type=bc_role'))
+                                    esc_url(admin_url('/edit.php?post_type=buddyc_role'))
                                 ),
                                 'type' => 'dropdown',
-                                'options' => 'bc_role',
+                                'options' => 'buddyc_role',
                                 'required' => true,
                             ],
                             'assigned_team_member' => [
@@ -936,10 +936,10 @@ class MetaManager {
                                 'description' => sprintf(
                                     /* translators: %s: URL to add rate types */
                                     __('Select the type of fee entered above. <a href="%s">Add rate types.</a>', 'buddyclients'),
-                                    esc_url(admin_url('/edit.php?post_type=bc_rate_type'))
+                                    esc_url(admin_url('/edit.php?post_type=buddyc_rate_type'))
                                 ),
                                 'type' => 'dropdown',
-                                'options' => 'bc_rate_type',
+                                'options' => 'buddyc_rate_type',
                             ],
                         ],
                     ],
@@ -962,7 +962,7 @@ class MetaManager {
                                 'description' => __('Select any rate adjustments that apply to this service.', 'buddyclients'),
                                 'type' => 'checkbox',
                                 'required' => false,
-                                'options' => 'bc_adjustment'
+                                'options' => 'buddyc_adjustment'
                             ],
                         ],
                     ],
@@ -977,7 +977,7 @@ class MetaManager {
                                 'description' => sprintf(
                                     /* translators: %s: URL to add brief types */
                                     __('Select the brief type(s) to create for this service. <a href="%s">Add brief types.</a>', 'buddyclients'),
-                                    esc_url(admin_url('/edit-tags.php?taxonomy=brief_type&post_type=bc_brief'))
+                                    esc_url(admin_url('/edit-tags.php?taxonomy=brief_type&post_type=buddyc_brief'))
                                 ),
                                 'required' => false,
                                 'required_component' => 'briefs',
@@ -993,7 +993,7 @@ class MetaManager {
                                 'description' => __('Select any file upload types that apply to this service.', 'buddyclients'),
                                 'type' => 'checkbox',
                                 'required' => false,
-                                'options' => 'bc_file_upload'
+                                'options' => 'buddyc_file_upload'
                             ],
                         ],
                     ],
@@ -1007,7 +1007,7 @@ class MetaManager {
      * 
      * @since 0.4.0
      */
-    static private function bc_legal_mod() {
+    static private function buddyc_legal_mod() {
         return [
             'Info' => [
                 'tables' => [
@@ -1023,7 +1023,7 @@ class MetaManager {
                                 'label' => __('Legal Type', 'buddyclients'),
                                 'description' => __('Select the type of legal agreement this content is for.', 'buddyclients'),
                                 'type' => 'dropdown',
-                                'options' => function_exists('bc_legal_types') ? bc_legal_types() : [],
+                                'options' => function_exists('buddyc_legal_types') ? buddyc_legal_types() : [],
                             ],
                         ],
                     ],
@@ -1037,7 +1037,7 @@ class MetaManager {
      * 
      * @since 0.4.0
      */
-    static private function bc_testimonial() {
+    static private function buddyc_testimonial() {
         return [
             'Author' => [
                 'tables' => [

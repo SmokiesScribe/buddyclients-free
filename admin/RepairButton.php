@@ -82,7 +82,7 @@ class RepairButton {
      */
     public function form() {
         global $pagenow;
-        $post_type = bc_get_param( 'post_type' );
+        $post_type = buddyc_get_param( 'post_type' );
     
         // Check if it's the admin page for the post type
         if ( $pagenow == 'edit.php' && $post_type == $this->post_type ) {

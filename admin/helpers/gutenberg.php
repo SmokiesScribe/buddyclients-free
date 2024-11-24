@@ -6,7 +6,7 @@
  * 
  * @return bool
  */
-function bc_gutenberg_editor() {
+function buddyc_gutenberg_editor() {
     global $current_screen;
     $current_screen = get_current_screen();
     if ($current_screen) {

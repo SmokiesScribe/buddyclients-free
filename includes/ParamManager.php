@@ -20,14 +20,14 @@ class ParamManager {
      * 
      * @var string
      */
-    private $nonce_action = 'bc_action';
+    private $nonce_action = 'buddyc_action';
 
     /**
      * The nonce name.
      * 
      * @var string
      */
-    private $nonce_name = '_bc_nonce';
+    private $nonce_name = '_buddyc_nonce';
     
     /**
      * Constructor method.
@@ -47,7 +47,7 @@ class ParamManager {
      * @since 1.0.3
      */
     private function current_url() {
-        return bc_curr_url();                
+        return buddyc_curr_url();                
     }
 
     /**

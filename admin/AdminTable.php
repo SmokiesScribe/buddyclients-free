@@ -115,7 +115,7 @@ class AdminTable {
         $this->extract_args( $args );
         
         // Calculate current page based on URL parameter or default to 1
-        $paged = bc_get_param( 'paged' );
+        $paged = buddyc_get_param( 'paged' );
         $this->current_page = $paged ? absint( $paged ) : 1;
         
         // Build and output table
@@ -157,7 +157,7 @@ class AdminTable {
      * @since 1.0.16
      */
     private function allowed_html() {        
-        $form_tags = bc_allowed_html_form();
+        $form_tags = buddyc_allowed_html_form();
         $additional_tags = [
             'script' => [],
             'i' => [ 'class' => [], 'style' => [] ],
@@ -413,7 +413,7 @@ class AdminTable {
         echo '<form method="POST" style="margin-bottom: 20px;">';
 
         // Nonce field
-        wp_nonce_field( 'bc_filter_nonce_action', 'bc_filter_nonce' );
+        wp_nonce_field( 'buddyc_filter_nonce_action', 'buddyc_filter_nonce' );
         
         // Loop through the filters
         foreach ( $this->filters as $key => $data ) {
@@ -430,7 +430,7 @@ class AdminTable {
             $name = $key . '_filter';
 
             // Get the current filter value
-            $curr_value = bc_get_param( $name );
+            $curr_value = buddyc_get_param( $name );
             
             // Filter label
             echo '<label for="' . esc_attr( $name ) . '">';
@@ -455,7 +455,7 @@ class AdminTable {
         }
         
         // Submission verification field
-        echo '<input type="hidden" name="bc_admin_filter_key" value="' . esc_attr( $this->key ) . '">';
+        echo '<input type="hidden" name="buddyc_admin_filter_key" value="' . esc_attr( $this->key ) . '">';
         
         // Submit button
         echo '<button type="submit" class="button action" name="' . esc_attr( $this->key ) . '_filter_submit">';
@@ -496,7 +496,7 @@ class AdminTable {
             $item_value = $property ? $item->$property : $item[$array_key];
             
             // Get current filter value
-            $filter_value = bc_get_param( $key . '_filter' );
+            $filter_value = buddyc_get_param( $key . '_filter' );
             
             // No filters value
             if ( ! $filter_value ) {

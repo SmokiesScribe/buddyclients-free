@@ -9,12 +9,12 @@
  * @param   bool    $lowercase  Whether to format as lowercase.
  *                              Defaults to formatting as full sentence.
  */
-function bc_contact_message( $site_name = false, $lowercase = false ) {
+function buddyc_contact_message( $site_name = false, $lowercase = false ) {
     // Initialize
     $link = null;
     
     // Check for contact page
-    $contact_page_link = bc_get_page_link( 'contact' );
+    $contact_page_link = buddyc_get_page_link( 'contact' );
     
     // Contact page exists
     if ( $contact_page_link !== '#' ) {
@@ -24,7 +24,7 @@ function bc_contact_message( $site_name = false, $lowercase = false ) {
     } else {
         
         // Check for public email
-        $public_email = bc_get_setting( 'email', 'from_email' );
+        $public_email = buddyc_get_setting( 'email', 'from_email' );
         
         // Public email exists
         if ( $public_email ) {

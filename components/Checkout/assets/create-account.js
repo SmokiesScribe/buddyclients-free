@@ -32,7 +32,7 @@ export function handleCreateAccount(e, ajaxurl, submitButton) {
       url: ajaxurl,
       method: "POST",
       data: {
-        action: "bc_checkout_create_account",
+        action: "buddyc_checkout_create_account",
         username: document.querySelector('input[name="create-account-name"]').value,
         email: document.querySelector('input[name="create-account-email"]').value,
         password: document.querySelector('input[name="create-account-password"]').value,

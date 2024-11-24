@@ -7,8 +7,8 @@ use BuddyClients\Components\Service\Adjustment;
  * 
  * @return  bool    True if services exist, false if not.
  */
-function bc_services_exist() {
-    $services = bc_post_query( 'bc_service', ['valid' => 'valid']);
+function buddyc_services_exist() {
+    $services = buddyc_post_query( 'buddyc_service', ['valid' => 'valid']);
     if ( $services && ! empty( $services ) ) {
         return true;
     } else {
@@ -21,7 +21,7 @@ function bc_services_exist() {
  * 
  * @since 0.1.0
  */
-function bc_adjustment_options( $post_id ) {
+function buddyc_adjustment_options( $post_id ) {
     $adjustment = new Adjustment( $post_id );
     return $adjustment->get_options();
 }
@@ -31,7 +31,7 @@ function bc_adjustment_options( $post_id ) {
  * 
  * @since 0.1.0
  */
-function bc_adjustment_options_count( $post_id ) {
+function buddyc_adjustment_options_count( $post_id ) {
     $adjustment = new Adjustment( $post_id );
     return $adjustment->get_options_count();
 }

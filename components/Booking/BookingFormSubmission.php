@@ -49,10 +49,10 @@ class BookingFormSubmission {
          * 
          * @param   object  $booking_intent     The created BookingIntent.
          */
-         do_action( 'bc_booking_form_submission', $booking_intent );
+         do_action( 'buddyc_booking_form_submission', $booking_intent );
         
         // Retrieve the checkout page url
-        $checkout_url = bc_get_page_link( 'checkout_page' );
+        $checkout_url = buddyc_get_page_link( 'checkout_page' );
 
         // Output popup if no checkout page set
         if ( $checkout_url === '#' ) {
@@ -61,7 +61,7 @@ class BookingFormSubmission {
             $message .= sprintf(
                 /* translators: %s: the contact us link */
                 __( '<p>Please %s for assistance</p>', 'buddyclients-free' ),
-                bc_contact_message( false, true ) );
+                buddyc_contact_message( false, true ) );
             
             buddyclients_output_popup( $message );
             return;

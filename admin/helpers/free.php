@@ -4,7 +4,7 @@
  * 
  * @since 1.0.0
  */
-function bc_free_admin_pages( $pages ) {
+function buddyc_free_admin_pages( $pages ) {
     // Remove license page
     unset( $pages['license'] );
 
@@ -14,21 +14,21 @@ function bc_free_admin_pages( $pages ) {
         'settings' => false,
         'title' => __('Upgrade', 'buddyclients'),
         'parent_slug' => 'bc-dashboard',
-        'bc_menu_order' => 30,
+        'buddyc_menu_order' => 30,
         'group' => 'settings',
-        'callable' => 'bc_free_upgrade_content'
+        'callable' => 'buddyc_free_upgrade_content'
     ];
 
     return $pages;
 }
-add_action( 'bc_admin_pages', 'bc_free_admin_pages', 1, 10 );
+add_action( 'buddyc_admin_pages', 'buddyc_free_admin_pages', 1, 10 );
 
 /**
  * Mofifies the admin nav tabs for the free version.
  * 
  * @since 1.0.0
  */
-function bc_free_nav_tabs( $tabs ) {
+function buddyc_free_nav_tabs( $tabs ) {
     // Remove license page
     unset( $tabs['license'] );
 
@@ -37,7 +37,7 @@ function bc_free_nav_tabs( $tabs ) {
 
     return $tabs;
 }
-add_action( 'bc_nav_tabs', 'bc_free_nav_tabs', 1, 10 );
+add_action( 'buddyc_nav_tabs', 'buddyc_free_nav_tabs', 1, 10 );
 
 /**
  * Outputs the ugprade admin page content.
@@ -45,7 +45,7 @@ add_action( 'bc_nav_tabs', 'bc_free_nav_tabs', 1, 10 );
  * @since 1.0.0
  * @ignore
  */
-function bc_free_upgrade_content() {
+function buddyc_free_upgrade_content() {
     ob_start();
     
     // Open container
@@ -104,7 +104,7 @@ function bc_free_upgrade_content() {
         echo '</ul>';
         echo '</div>';
 
-        echo '<a href="' . bc_upgrade_url() . '" class="buy-now" target="_blank">' . __( 'Learn More', 'buddyclients-free' ) . '</a>';
+        echo '<a href="' . buddyc_upgrade_url() . '" class="buy-now" target="_blank">' . __( 'Learn More', 'buddyclients-free' ) . '</a>';
         echo '</div>';
         
     }

@@ -2,7 +2,7 @@
 use BuddyClients\Components\Testimonial\Testimonial;
 /**
  * Template Name: Custom BC Template Archive
- * Description: A custom template for the bc_template post type archive.
+ * Description: A custom template for the buddyc_template post type archive.
  */
 
 // Get header

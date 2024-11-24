@@ -5,14 +5,14 @@ use BuddyClients\Components\Booking\BookingIntent;
  * 
  * @since 0.2.4
  */
-function bc_handle_delete_booking() {
-    $action = bc_get_param( 'action' );
+function buddyc_handle_delete_booking() {
+    $action = buddyc_get_param( 'action' );
 
     // Check if action is delete booking
     if ( $action === 'delete_booking' ) {
         
         // Ensure booking_id is set
-        $booking_id = bc_get_param( 'booking_id' );
+        $booking_id = buddyc_get_param( 'booking_id' );
 
         if ( is_numeric( $booking_id ) && $booking_id > 0 ) {
             // Cast to integer
@@ -29,15 +29,15 @@ function bc_handle_delete_booking() {
         }
     }
 }
-add_action( 'admin_init', 'bc_handle_delete_booking' );
+add_action( 'admin_init', 'buddyc_handle_delete_booking' );
 
 /**
  * Outputs success message on booking deletion.
  * 
  * @since 1.0.17
  */
-function bc_delete_booking_success() {
-    $deleted = bc_get_param( 'booking_deleted' );
+function buddyc_delete_booking_success() {
+    $deleted = buddyc_get_param( 'booking_deleted' );
 
     // Check if booking was successfully deleted
     if ( $deleted === 'true' ) {
@@ -45,4 +45,4 @@ function bc_delete_booking_success() {
         buddyclients_js_alert( $message, $admin = true );
     }
 }
-add_action( 'admin_init', 'bc_delete_booking_success' );
+add_action( 'admin_init', 'buddyc_delete_booking_success' );

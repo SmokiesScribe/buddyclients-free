@@ -7,7 +7,7 @@ use BuddyClients\Includes\PDF;
  * 
  * @param   int     $ID     Optional. The ID of the PDF.
  */
-function bc_pdf( $ID = null ) {
+function buddyc_pdf( $ID = null ) {
     return new PDF( $ID );
 }
 
@@ -29,9 +29,9 @@ function bc_pdf( $ID = null ) {
  * 
  * @return  int     The ID of the newly created PDF.
  */
-function bc_create_pdf( $args ) {
+function buddyc_create_pdf( $args ) {
     // New PDF instance
-    $pdf = bc_pdf();
+    $pdf = buddyc_pdf();
     
     // Create PDF
     $pdf = $pdf->create_pdf( $args );
@@ -45,8 +45,8 @@ function bc_create_pdf( $args ) {
  * 
  * @since 0.2.6
  */
-function bc_tcpdf_library() {
-    require_once BC_VENDOR_DIR . '/tcpdf/tcpdf.php';
+function buddyc_tcpdf_library() {
+    require_once BUDDYC_VENDOR_DIR . '/tcpdf/tcpdf.php';
 }
 
 /**
@@ -56,7 +56,7 @@ function bc_tcpdf_library() {
  * 
  * @param   int     $pdf_id     The ID of the PDF file.
  */
-function bc_pdf_download_link ( $pdf_id ) {
+function buddyc_pdf_download_link ( $pdf_id ) {
     return PDF::download_link( $pdf_id );
 }
 
@@ -80,7 +80,7 @@ function generate_service_agreement_pdf( $booking_intent ) {
     }
     
     // Require TCPDF library
-    bc_tcpdf_library(); // Assuming this function includes TCPDF library
+    buddyc_tcpdf_library(); // Assuming this function includes TCPDF library
     
     // Get legal agreement title
     $title = get_the_title( $post_id );
@@ -125,7 +125,7 @@ function generate_service_agreement_pdf( $booking_intent ) {
     }
     
     // Convert HTML to formatted text with headings
-    bc_include_pdf_content( $pdf, $content );
+    buddyc_include_pdf_content( $pdf, $content );
     
     // Add space
     $pdf->Ln(20);
@@ -172,7 +172,7 @@ function generate_legal_pdf_from_user_data( $data, $type ) {
     }
     
     // Require TCPDF library
-    bc_tcpdf_library(); // Assuming this function includes TCPDF library
+    buddyc_tcpdf_library(); // Assuming this function includes TCPDF library
     
     // Get legal agreement title
     $title = get_the_title( $data['version'] );
@@ -220,7 +220,7 @@ function generate_legal_pdf_from_user_data( $data, $type ) {
     $content = $data['content'];
     
     // Convert HTML to formatted text with headings
-    bc_include_pdf_content( $pdf, $content );
+    buddyc_include_pdf_content( $pdf, $content );
     
     // Add signature image (if exists in data)
     if (isset($data['signature_file_path']) && !empty($data['signature_file_path'])) {
@@ -253,9 +253,9 @@ function generate_legal_pdf_from_user_data( $data, $type ) {
  * @param string $content HTML content to convert.
  * @return void
  */
-function bc_include_pdf_content($pdf, $content) {
+function buddyc_include_pdf_content($pdf, $content) {
     // Split $content into an array of paragraphs
-    $paragraphs = bc_split_paragraphs($content);
+    $paragraphs = buddyc_split_paragraphs($content);
 
     // Now $paragraphs is an array where each element is a paragraph of text
     $firstParagraph = true;
@@ -295,7 +295,7 @@ function bc_include_pdf_content($pdf, $content) {
  * 
  * @since 0.2.6
  */
-function bc_split_paragraphs($content) {
+function buddyc_split_paragraphs($content) {
     // Create a DOMDocument object
     $dom = new DOMDocument();
 
@@ -310,7 +310,7 @@ function bc_split_paragraphs($content) {
     // Get all elements inside the body
     $body = $dom->getElementsByTagName('body')->item(0);
     foreach ($body->childNodes as $node) {
-        bc_process_node($node, $paragraphs);
+        buddyc_process_node($node, $paragraphs);
     }
 
     // Remove empty paragraphs and normalize whitespace
@@ -325,7 +325,7 @@ function bc_split_paragraphs($content) {
  * 
  * @since 0.2.6
  */
-function bc_process_node($node, &$paragraphs) {
+function buddyc_process_node($node, &$paragraphs) {
     // Handle text nodes
     if ($node->nodeType === XML_TEXT_NODE && trim($node->nodeValue) !== '') {
         $paragraphs[] = '<p>' . trim($node->nodeValue) . '</p>';
@@ -338,7 +338,7 @@ function bc_process_node($node, &$paragraphs) {
         } elseif ($node->childNodes) {
             // Recursively process child nodes
             foreach ($node->childNodes as $childNode) {
-                bc_process_node($childNode, $paragraphs);
+                buddyc_process_node($childNode, $paragraphs);
             }
         }
     }

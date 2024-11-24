@@ -145,7 +145,7 @@ class DatabaseManager {
          *
          * @param   array   $tables    The array of database table data.
          */
-         $tables = apply_filters( 'bc_tables', $tables );
+         $tables = apply_filters( 'buddyc_tables', $tables );
 
          return $tables;
     }
@@ -163,7 +163,7 @@ class DatabaseManager {
         
         // Build table name
         $this->table_key = $this->clean_table_key( $table_key );
-        $this->table_name = $wpdb->prefix . 'bc_' . $this->table_key;
+        $this->table_name = $wpdb->prefix . 'buddyc_' . $this->table_key;
 
         // Retrieve expected table structure
         $this->table_structure = $this->get_expected_structure();
@@ -878,7 +878,7 @@ class DatabaseManager {
         $params = array_filter( $params );
 
         // Build prefix and suffix
-        $prefix = 'bc_' . $action . '_';
+        $prefix = 'buddyc_' . $action . '_';
         $suffix = ! empty( $params ) ? '_' . implode( '_', $params ) : '';
 
         // Build and return key

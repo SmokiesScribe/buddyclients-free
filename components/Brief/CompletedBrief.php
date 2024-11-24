@@ -84,7 +84,7 @@ class CompletedBrief extends SingleBrief {
         if ($data['type'] === 'upload') {
             
             // Handle upload field
-            $brief_content .= bc_download_links( $field_value, true );
+            $brief_content .= buddyc_download_links( $field_value, true );
         
         // Not upload field    
         } else {

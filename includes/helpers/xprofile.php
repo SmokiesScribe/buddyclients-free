@@ -8,7 +8,7 @@ use BuddyClients\Components\Booking\FilterField;
  * 
  * @since 0.2.9
  */
-function bc_all_xprofile() {
+function buddyc_all_xprofile() {
     return XprofileManager::all_xprofile();
 }
 
@@ -19,10 +19,10 @@ function bc_all_xprofile() {
  * 
  * @param int $post_id The ID of the post being saved.
  */
-function bc_update_filter_field( $post_id ) {
+function buddyc_update_filter_field( $post_id ) {
     new FilterField( $post_id );
 }
-add_action('save_post_bc_filter', 'bc_update_filter_field', 10, 1);
+add_action('save_post_buddyc_filter', 'buddyc_update_filter_field', 10, 1);
 
 /**
  * Retrieves Roles field ID.
@@ -31,13 +31,13 @@ add_action('save_post_bc_filter', 'bc_update_filter_field', 10, 1);
  * 
  * @since 0.1.0
  */
-function bc_roles_field_id() {
+function buddyc_roles_field_id() {
 
     // Define field args
     $args = [
         'field_type'    => 'checkbox',
         'field_name'    => 'Team Member Roles',
-        'field_options' => bc_roles_options( 'bc_role' ),
+        'field_options' => buddyc_roles_options( 'buddyc_role' ),
         'member_types'  => 'team'
     ];
     
@@ -53,7 +53,7 @@ function bc_roles_field_id() {
  * 
  * @string  $post_type  The roles post type.
  */
-function bc_roles_options( $post_type ) {
+function buddyc_roles_options( $post_type ) {
     $options = array();
     
     // Get posts
@@ -77,10 +77,10 @@ function bc_roles_options( $post_type ) {
  * 
  * @since 0.1.0
  */
-function bc_xprofile_manager() {
+function buddyc_xprofile_manager() {
     new XprofileManager;
 }
-bc_xprofile_manager();
+buddyc_xprofile_manager();
 
 /**
  * Allows team to self-select roles.
@@ -91,12 +91,12 @@ bc_xprofile_manager();
  * 
  * @param   array   $css_variables  The associative array of css names and variables.
  */
-function bc_show_role_xprofile() {
+function buddyc_show_role_xprofile() {
     // Get self select setting
-    $self_select_role = bc_get_setting( 'general', 'self_select_role' );
+    $self_select_role = buddyc_get_setting( 'general', 'self_select_role' );
     
     // Get or create xprofile field id
-    $field_id = bc_roles_field_id();
+    $field_id = buddyc_roles_field_id();
 
     // Define role field class
     $class = '.editfield.field_' . $field_id;
@@ -111,23 +111,23 @@ function bc_show_role_xprofile() {
         buddyclients_inline_style( $inline_css );
     }
 }
-add_action( 'init', 'bc_show_role_xprofile' );
+add_action( 'init', 'buddyc_show_role_xprofile' );
 
 /**
  * Disallows manual updates to the roles field.
  * 
  * @since 0.1.0
  */
-function bc_no_roles_updates() {
+function buddyc_no_roles_updates() {
 
-    $roles_field_id = bc_roles_field_id();
+    $roles_field_id = buddyc_roles_field_id();
 
     if ( ! $roles_field_id ) {
         return;
     }
 
     // Init param manager
-    $param_manager = bc_param_manager();
+    $param_manager = buddyc_param_manager();
     
     // Define url params to check
     $params = [
@@ -154,11 +154,11 @@ function bc_no_roles_updates() {
     // Add an admin notice
     $args = [
         'message'           => 'This field is managed by BuddyClients.',
-        'repair_link'       => '/edit.php?post_type=bc_role',
+        'repair_link'       => '/edit.php?post_type=buddyc_role',
         'repair_link_text'   => 'Edit team member roles.',
         'color'             => 'blue',
         'dismissable'       => true
     ];
-    bc_admin_notice( $args );
+    buddyc_admin_notice( $args );
 }
-add_action('admin_init', 'bc_no_roles_updates');
+add_action('admin_init', 'buddyc_no_roles_updates');

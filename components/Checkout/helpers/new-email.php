@@ -7,7 +7,7 @@ use BuddyEvents\Includes\Registration\RegistrationIntent;
  * @since 0.1.0
  * @updated 0.4.0
  */
-function bc_update_booking_intent_email() {
+function buddyc_update_booking_intent_email() {
     
     // Log the nonce being sent in the AJAX request
     $nonce = isset( $_POST['nonce'] ) ? trim( sanitize_text_field( wp_unslash( $_POST['nonce'] ) ) ) : null;
@@ -40,5 +40,5 @@ function bc_update_booking_intent_email() {
     
     wp_die(); // Terminate
 }
-add_action('wp_ajax_bc_update_booking_intent_email', 'bc_update_booking_intent_email'); // For logged-in users
-add_action('wp_ajax_nopriv_bc_update_booking_intent_email', 'bc_update_booking_intent_email'); // For logged-out users
+add_action('wp_ajax_buddyc_update_booking_intent_email', 'buddyc_update_booking_intent_email'); // For logged-in users
+add_action('wp_ajax_nopriv_buddyc_update_booking_intent_email', 'buddyc_update_booking_intent_email'); // For logged-out users

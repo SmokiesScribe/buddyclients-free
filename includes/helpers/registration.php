@@ -4,11 +4,11 @@
  * 
  * @since 0.1.0
  */
-function bc_registration_button_text() {
+function buddyc_registration_button_text() {
     
     // Check settings
-    $enable_registration = bc_get_setting( 'general', 'enable_registration' );
-    $register_button_text = bc_get_setting( 'general', 'register_button_text' );
+    $enable_registration = buddyc_get_setting( 'general', 'enable_registration' );
+    $register_button_text = buddyc_get_setting( 'general', 'register_button_text' );
     
     /**
      * Filters the register button text.
@@ -17,7 +17,7 @@ function bc_registration_button_text() {
      * 
      * @param   string  $register_button_text   The text for the register button.
      */
-    $register_button_text = apply_filters( 'bc_register_button_text', $register_button_text );
+    $register_button_text = apply_filters( 'buddyc_register_button_text', $register_button_text );
     
     // User registration enabled
     if ( $enable_registration == 'enable' ) {
@@ -49,7 +49,7 @@ function bc_registration_button_text() {
         buddyclients_inline_script( $script );
     }
 }
-add_action('init', 'bc_registration_button_text'); // main button
+add_action('init', 'buddyc_registration_button_text'); // main button
 
 /**
  * Change registration button link.
@@ -58,16 +58,16 @@ add_action('init', 'bc_registration_button_text'); // main button
  * 
  * @param   string  $url    The url to modify.
  */
-function bc_change_register_url( $url ) {
+function buddyc_change_register_url( $url ) {
     
     // Get setting
-    $enable_registration = bc_get_setting( 'general', 'enable_registration' );
+    $enable_registration = buddyc_get_setting( 'general', 'enable_registration' );
 
     // User registration enabled
     if ($enable_registration != 'enable') {
         
         // Get booking page
-        $booking_page = bc_get_setting( 'pages', 'booking_page' );
+        $booking_page = buddyc_get_setting( 'pages', 'booking_page' );
         
         // No booking page
         if ( $booking_page ) {
@@ -86,9 +86,9 @@ function bc_change_register_url( $url ) {
          * 
          * @param   string  $url   The url for the register button.
          */
-        $url = apply_filters( 'bc_register_button_url', $url );
+        $url = apply_filters( 'buddyc_register_button_url', $url );
     }
     
     return $url;
 }
-add_filter('register_url', 'bc_change_register_url', 20 );
+add_filter('register_url', 'buddyc_change_register_url', 20 );

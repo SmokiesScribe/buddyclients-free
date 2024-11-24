@@ -1,7 +1,7 @@
 <?php
 /**
  * Template Name: Single BC Service
- * Description: A custom template for a single bc_service post.
+ * Description: A custom template for a single buddyc_service post.
  */
 
     // Get header
@@ -49,7 +49,7 @@
     
     // Display button if not hidden from form
     if (!$hide_from_booking_form) {
-        $booking_page_id = bc_get_setting('pages', 'booking_page');
+        $booking_page_id = buddyc_get_setting('pages', 'booking_page');
         if ($booking_page_id) {
             $booking_page_url = get_the_permalink($booking_page_id);
             $booking_form_btn = '<a href="' . esc_url($booking_page_url) . '"><button class="booking-form-btn">' . esc_html__('Book Now', 'buddyclients') . '</button></a>';
@@ -57,7 +57,7 @@
     }
     
     // Get dependencies links
-    $dependency_link = bc_single_service_dependencies($post_id);
+    $dependency_link = buddyc_single_service_dependencies($post_id);
     
     // Build single service content
     $service_content .= '<div class="bc-service-post-content">';
@@ -95,7 +95,7 @@
      * 
      * @since 0.1.0
      */
-    function bc_single_service_dependencies($service_id) {
+    function buddyc_single_service_dependencies($service_id) {
         // Get dependencies
         $dependencies = get_post_meta($service_id, 'dependency', true);
         

@@ -17,12 +17,12 @@
 defined( 'ABSPATH' ) || exit;
 
 // Define constants
-if ( ! defined( 'BC_PLUGIN_VERSION' ) ) {
-	define( 'BC_PLUGIN_VERSION', '1.0.10' );
+if ( ! defined( 'BUDDYC_PLUGIN_VERSION' ) ) {
+	define( 'BUDDYC_PLUGIN_VERSION', '1.0.10' );
 }
 
-if ( ! defined( 'BC_PLUGIN_FILE' ) ) {
-	define( 'BC_PLUGIN_FILE', __FILE__ );
+if ( ! defined( 'BUDDYC_PLUGIN_FILE' ) ) {
+	define( 'BUDDYC_PLUGIN_FILE', __FILE__ );
 }
 
 require_once(plugin_dir_path(__FILE__) . 'BuddyClientsFree-class.php');
@@ -54,7 +54,7 @@ add_action( 'plugins_loaded', 'buddyclients_free' );
  *
  * @since 0.1.0
  */
-function bc_installed_notice() {
+function buddyc_installed_notice() {
     if ( ! current_user_can( 'activate_plugins' ) ) {
         return;
     }
@@ -78,7 +78,7 @@ function bc_installed_notice() {
  * Only one version of BuddyClients can be installed at a time.
  */
 if ( function_exists( 'buddyclients-free' ) ) {
-	add_action( 'admin_notices', 'bc_installed_notice' );
+	add_action( 'admin_notices', 'buddyc_installed_notice' );
 	return;
 }
 
@@ -87,7 +87,7 @@ if ( function_exists( 'buddyclients-free' ) ) {
  *
  * @since 0.1.0
  */
-function bc_missing_bp_notice_free() {
+function buddyc_missing_bp_notice_free() {
 
 	if ( ! current_user_can( 'activate_plugins' ) ) {
 		return;
@@ -113,14 +113,14 @@ function bc_missing_bp_notice_free() {
 /**
  * You can't have BuddyClients without BuddyPress!
  */
-add_action( 'admin_notices', 'bc_missing_bp_notice_free' );
+add_action( 'admin_notices', 'buddyc_missing_bp_notice_free' );
 
 /**
  * Displays an admin notice when groups are not enabled.
  *
  * @since 0.4.3
  */
-function bc_groups_disabled_notice_free() {
+function buddyc_groups_disabled_notice_free() {
 
 	if ( ! current_user_can( 'activate_plugins' ) ) {
 		return;
@@ -144,4 +144,4 @@ function bc_groups_disabled_notice_free() {
 		<?php
 	}
 }
-add_action( 'admin_notices', 'bc_groups_disabled_notice_free' );
+add_action( 'admin_notices', 'buddyc_groups_disabled_notice_free' );

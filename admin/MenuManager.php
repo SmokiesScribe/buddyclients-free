@@ -108,8 +108,8 @@ class MenuManager {
         // Comparison function for sorting by 'menu_order'
         uasort( $array, function( $a, $b ) {
             // Provide a default value if 'menu_order' does not exist
-            $a_order = $a['bc_menu_order'] ?? null;
-            $b_order = $b['bc_menu_order'] ?? null;
+            $a_order = $a['buddyc_menu_order'] ?? null;
+            $b_order = $b['buddyc_menu_order'] ?? null;
             
             return $a_order <=> $b_order;
         });

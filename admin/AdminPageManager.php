@@ -55,7 +55,7 @@ class AdminPageManager {
                 'settings' => true,
                 'title' => __('Settings', 'buddyclients'),
                 'parent_slug' => 'bc-dashboard',
-                'bc_menu_order' => 26,
+                'buddyc_menu_order' => 26,
                 'group' => 'settings'
             ],
             'settings_separator' => [
@@ -63,7 +63,7 @@ class AdminPageManager {
                 'settings' => false,
                 'title' => '',
                 'parent_slug' => 'bc-dashboard',
-                'bc_menu_order' => 25,
+                'buddyc_menu_order' => 25,
                 'group' => 'settings'
             ],
             'components' => [
@@ -144,7 +144,7 @@ class AdminPageManager {
                 'settings' => true,
                 'title' => __('License Keys', 'buddyclients'),
                 'parent_slug' => 'bc-dashboard',
-                'bc_menu_order' => 30,
+                'buddyc_menu_order' => 30,
                 'group' => 'settings'
             ],
             
@@ -154,7 +154,7 @@ class AdminPageManager {
                 'title' => __('Email Log', 'buddyclients'),
                 'settings' => false,
                 'parent_slug' => null,
-                'callable' => 'bc_email_log_content',
+                'callable' => 'buddyc_email_log_content',
                 'required_class' => 'BuddyClients\Components\Email\EmailTemplateManager'
             ],
             'bookings_dashboard' => [
@@ -162,37 +162,37 @@ class AdminPageManager {
                 'title' => __('Bookings Dashboard', 'buddyclients'),
                 'settings' => false,
                 'parent_slug' => null,
-                'callable' => 'bc_bookings_dashboard'
+                'callable' => 'buddyc_bookings_dashboard'
             ],
             'payments' => [
                 'key' => 'payments',
                 'title' => __('Payments', 'buddyclients'),
                 'settings' => false,
                 'parent_slug' => null,
-                'callable' => 'bc_payments_list'
+                'callable' => 'buddyc_payments_list'
             ],
             'users' => [
                 'key' => 'users',
                 'title' => __('Users', 'buddyclients'),
                 'settings' => false,
                 'parent_slug' => null,
-                'callback' => 'bc_user_list',
-                'callable' => 'bc_user_list'
+                'callback' => 'buddyc_user_list',
+                'callable' => 'buddyc_user_list'
             ],
             'booked_services' => [
                 'key' => 'booked-services',
                 'title' => __('Booked Services', 'buddyclients'),
                 'settings' => false,
                 'parent_slug' => null,
-                'callable' => 'bc_booked_services_table'
+                'callable' => 'buddyc_booked_services_table'
             ],
             'user_agreements' => [
                 'key' => 'user-agreements',
                 'title' => __('Legal', 'buddyclients'),
                 'settings' => false,
                 'parent_slug' => 'bc-dashboard',
-                'callable' => 'bc_user_agreements_table',
-                'bc_menu_order' => 8,
+                'callable' => 'buddyc_user_agreements_table',
+                'buddyc_menu_order' => 8,
                 'required_component' => 'Legal'
             ],
             'upgrade' => [
@@ -200,7 +200,7 @@ class AdminPageManager {
                 'title' => __('Upgrade BuddyClients', 'buddyclients'),
                 'settings' => false,
                 'parent_slug' => null,
-                'callable' => ['bc_upgrade_link', [true]]
+                'callable' => ['buddyc_upgrade_link', [true]]
             ],
         ];
 
@@ -212,7 +212,7 @@ class AdminPageManager {
          * @param array $pages An array of admin pages info.
          * @return array Modified array of admin pages info.
          */
-        $pages = apply_filters('bc_admin_pages', $pages);
+        $pages = apply_filters('buddyc_admin_pages', $pages);
 
         return $pages;
     }

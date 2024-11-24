@@ -24,7 +24,7 @@ document.addEventListener("DOMContentLoaded", function() {
                 url: ajaxurl,
                 method: 'POST',
                 data: {
-                    action: 'bc_update_booking_intent_email',
+                    action: 'buddyc_update_booking_intent_email',
                     email: enteredEmail,
                     booking_intent_id: bookingIntentIdInput.value,
                     registration_intent_id: registrationIntentIdInput.value,

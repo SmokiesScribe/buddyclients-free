@@ -7,7 +7,7 @@ use BuddyClients\Components\Booking\BookingIntent as BookingIntent;
  * 
  * @param   int     $booking_intent_id  The ID of the BookingIntent to retrieve.
  */
-function bc_get_booking_intent( $booking_intent_id ) {
+function buddyc_get_booking_intent( $booking_intent_id ) {
     return BookingIntent::get_booking_intent( $booking_intent_id );
 }
 
@@ -20,6 +20,6 @@ function bc_get_booking_intent( $booking_intent_id ) {
  * @param   string  $property   The property to update.
  * @param   mixed   $value      The new value for the property.
  */
-function bc_update_booking_intent( $ID, $property, $value ) {
+function buddyc_update_booking_intent( $ID, $property, $value ) {
     return BookingIntent::update_booking_intent( $ID, $property, $value );
 }

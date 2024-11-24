@@ -127,7 +127,7 @@ class AdminTableItem extends AdminTable {
         $pdf_link = null;
         
         // Get booking intent
-        $booking_intent = bc_get_booking_intent( $booking_id );
+        $booking_intent = buddyc_get_booking_intent( $booking_id );
         
         // Check for existing PDF link
         if ( $booking_intent->terms_pdf_link ) {
@@ -142,7 +142,7 @@ class AdminTableItem extends AdminTable {
                 $pdf_link = generate_service_agreement_pdf( $booking_intent );
                 
                 // Update booking intent
-                bc_update_booking_intent( $booking_intent->ID, 'terms_pdf_link', $pdf_link );
+                buddyc_update_booking_intent( $booking_intent->ID, 'terms_pdf_link', $pdf_link );
             }
         }
             
@@ -171,9 +171,9 @@ class AdminTableItem extends AdminTable {
      *                                  Accepts 'team', 'affiliate', and 'faculty'.
      */
     protected static function agreement_download( $property, $value, $type ) {
-        if ( function_exists( 'bc_latest_user_agreement' ) ) {
+        if ( function_exists( 'buddyc_latest_user_agreement' ) ) {
             $user_id = $value;
-            $agreement = bc_latest_user_agreement( $user_id, $type );
+            $agreement = buddyc_latest_user_agreement( $user_id, $type );
             if ( $agreement && isset( $agreement->pdf ) ) {
                 return PDF::download_link( $agreement->pdf, $type );
             }
@@ -233,8 +233,8 @@ class AdminTableItem extends AdminTable {
      */
     protected static function agreement_status( $property, $value ) {
         $agreement_id = $value;
-        if ( function_exists( 'bc_agreement_status' ) ) {
-            $status = bc_agreement_status( $agreement_id );
+        if ( function_exists( 'buddyc_agreement_status' ) ) {
+            $status = buddyc_agreement_status( $agreement_id );
             if ( $status ) {
                 $status = ucwords( $status );
             } else {
@@ -247,7 +247,7 @@ class AdminTableItem extends AdminTable {
                 'Not Current'   => 'x'
             ];
 
-            $icon = isset( $icons[$status] ) ? bc_admin_icon( $icons[$status] ) . ' ' : '';
+            $icon = isset( $icons[$status] ) ? buddyc_admin_icon( $icons[$status] ) . ' ' : '';
 
             return $icon . $status;
         }
@@ -259,7 +259,7 @@ class AdminTableItem extends AdminTable {
      * @since 0.1.0
      */
     protected static function files( $property, $value ) {
-        return bc_download_links( $value, true );
+        return buddyc_download_links( $value, true );
     }
     
     /**
@@ -283,12 +283,12 @@ class AdminTableItem extends AdminTable {
     protected static function faculty_form_item( $property, $value, $item_id, $key ) {
         // Tax form check
         if ( $key === 'tax_form' ) {
-            return ( isset( $value[$key] ) && $value[$key] ) ? bc_admin_icon( 'check' ) : bc_admin_icon( 'x' );
+            return ( isset( $value[$key] ) && $value[$key] ) ? buddyc_admin_icon( 'check' ) : buddyc_admin_icon( 'x' );
             
         // Receipt downloads
         } else if ( $key === 'expense_receipts') {
             if ( isset( $value[$key] ) ) {
-                return bc_download_links( $value[$key], true );
+                return buddyc_download_links( $value[$key], true );
             }
         }
         
@@ -346,7 +346,7 @@ class AdminTableItem extends AdminTable {
         ];
         
         // Return icon if match or value if no matching array key
-        return isset($icons[$value]) ? bc_admin_icon($icons[$value]) . ' ' . self::uc_format( $value ) : self::uc_format( $value );
+        return isset($icons[$value]) ? buddyc_admin_icon($icons[$value]) . ' ' . self::uc_format( $value ) : self::uc_format( $value );
     }
     
     /**
@@ -364,7 +364,7 @@ class AdminTableItem extends AdminTable {
      * @since 0.1.0
      */
     protected static function check( $property, $value ) {
-        return $value ? bc_admin_icon( 'check' ) : ' ';
+        return $value ? buddyc_admin_icon( 'check' ) : ' ';
     }
     
     /**

@@ -230,7 +230,7 @@ class Service {
         $visible = true;
         
         // Check for team member role
-        if ( ! bc_freelancer_mode() ) {
+        if ( ! buddyc_freelancer_mode() ) {
             if ( ! $this->team_member_role || $this->team_member_role === '' ) {
                 $error[] = __( 'Team Member Role is required.', 'buddyclients' );
                 $valid = false;
@@ -246,19 +246,19 @@ class Service {
         // Check for paid service without stripe
         if ( $this->rate_value > 0 ) {
             // Allow skip payment
-            if ( bc_get_setting( 'booking', 'skip_payment' ) !== 'yes' ) {
+            if ( buddyc_get_setting( 'booking', 'skip_payment' ) !== 'yes' ) {
                 // Check for Stripe component
-                if ( ! bc_component_exists( 'Stripe' ) ) {
+                if ( ! buddyc_component_exists( 'Stripe' ) ) {
                     $error[] = sprintf(
                         '<a href="%s" target="_blank">%s</a>',
-                        bc_upgrade_url(),
+                        buddyc_upgrade_url(),
                         __('Upgrade BuddyClients', 'buddyclients') . ' ' . __('to offer paid services.', 'buddyclients')
                     );
                     $valid = false;
-                } else if ( ! bc_component_enabled( 'Stripe' ) ) {
+                } else if ( ! buddyc_component_enabled( 'Stripe' ) ) {
                     $error[] = sprintf(
                         '<a href="%s">%s</a>',
-                        bc_enable_component_url(),
+                        buddyc_enable_component_url(),
                         __('Enable the Stripe component', 'buddyclients') . ' ' . __('to offer paid services.', 'buddyclients')
                     );
                     $valid = false;
@@ -268,7 +268,7 @@ class Service {
         
         // Generate error string
         $error_string = implode('<br>', $error);
-        $error_message = bc_admin_icon('error') . ' ' . $error_string;
+        $error_message = buddyc_admin_icon('error') . ' ' . $error_string;
         
         // Check if service or service type is hidden
         if ( $this->hide || ( new ServiceType( $this->service_type ) )->hide ) {

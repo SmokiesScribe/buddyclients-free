@@ -6,7 +6,7 @@
  * 
  * @return bool
  */
-function bc_buddyboss_theme() {
+function buddyc_buddyboss_theme() {
     if (function_exists('buddyboss_theme_register_required_plugins')) {
         return true;
     } else {
@@ -19,11 +19,11 @@ function bc_buddyboss_theme() {
  * 
  * @since 0.1.0
  */
-function bc_archive_template( $template ) {
+function buddyc_archive_template( $template ) {
     
     $post_types = [
-        'bc_service',
-        'bc_testimonial'
+        'buddyc_service',
+        'buddyc_testimonial'
     ];
     
     // Check if it's an archive for one of the post types
@@ -38,7 +38,7 @@ function bc_archive_template( $template ) {
             $post_type = $queried_object->name;
         
             // Specify the path to your custom template file within the plugin directory
-            $custom_template = BC_PLUGIN_DIR . 'templates/archive-' . $post_type . '.php';
+            $custom_template = BUDDYC_PLUGIN_DIR . 'templates/archive-' . $post_type . '.php';
     
             // Check if the custom template file exists
             if (file_exists($custom_template)) {
@@ -50,20 +50,20 @@ function bc_archive_template( $template ) {
     // For other cases, return the original template
     return $template;
 }
-add_filter('template_include', 'bc_archive_template');
+add_filter('template_include', 'buddyc_archive_template');
 
 /**
  * Registers custom single post template files.
  * 
  * @since 0.1.0
  */
-function bc_single_post_template( $template ) {
+function buddyc_single_post_template( $template ) {
     
     // Define an array of post types for which you want to create custom single post templates
     $post_types = array(
-        'bc_service',
-        'bc_testimonial',
-        'bc_brief'
+        'buddyc_service',
+        'buddyc_testimonial',
+        'buddyc_brief'
     );
     
     // Check if it's a single post of one of the specified post types
@@ -78,7 +78,7 @@ function bc_single_post_template( $template ) {
             $post_type = $queried_object->post_type;
         
             // Specify the path to your custom template file within the plugin directory
-            $custom_template = BC_PLUGIN_DIR . 'templates/single-' . $post_type . '.php';
+            $custom_template = BUDDYC_PLUGIN_DIR . 'templates/single-' . $post_type . '.php';
     
             // Check if the custom template file exists
             if ( file_exists( $custom_template ) ) {
@@ -90,5 +90,5 @@ function bc_single_post_template( $template ) {
     // For other cases, return the original template
     return $template;
 }
-add_filter( 'template_include', 'bc_single_post_template' );
+add_filter( 'template_include', 'buddyc_single_post_template' );
 

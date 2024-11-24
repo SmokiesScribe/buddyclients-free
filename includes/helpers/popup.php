@@ -7,7 +7,7 @@ use BuddyClients\Includes\Popup;
  * 
  * @since 0.1.0
  */
-function bc_get_popup_content() {
+function buddyc_get_popup_content() {
 
     // Log the nonce being sent in the AJAX request
     $nonce = isset( $_POST['nonce'] ) ? trim( sanitize_text_field( wp_unslash( $_POST['nonce'] ) ) ) : null;
@@ -32,8 +32,8 @@ function bc_get_popup_content() {
     // Terminate ajax request
     wp_die();
 }
-add_action('wp_ajax_bc_get_popup_content', 'bc_get_popup_content'); // For logged-in users
-add_action('wp_ajax_nopriv_bc_get_popup_content', 'bc_get_popup_content'); // For logged-out users
+add_action('wp_ajax_buddyc_get_popup_content', 'buddyc_get_popup_content'); // For logged-in users
+add_action('wp_ajax_nopriv_buddyc_get_popup_content', 'buddyc_get_popup_content'); // For logged-out users
 
 /**
  * Outputs a popup link.
@@ -44,7 +44,7 @@ add_action('wp_ajax_nopriv_bc_get_popup_content', 'bc_get_popup_content'); // Fo
       * @param  string  $link_text      Optional. The text to display. Defaults to ? icon.
       * @param  string  $url            Optional. The full url of the page to display.
  */
-function bc_help_link( $post_id = null, $link_text = null, $url = null, $raw_content = null ) {
+function buddyc_help_link( $post_id = null, $link_text = null, $url = null, $raw_content = null ) {
     return Popup::link( $post_id, $link_text, $url, $raw_content );
 }
 

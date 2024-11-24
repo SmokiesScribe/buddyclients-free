@@ -8,7 +8,7 @@
  * @return str | bool $member_type or false
  * 
  */
-function bc_is_team( $user_id = null ) {
+function buddyc_is_team( $user_id = null ) {
     
     // Exit if function does not exist
     if ( ! function_exists( 'bp_get_member_type') ) {
@@ -26,7 +26,7 @@ function bc_is_team( $user_id = null ) {
     }
     
     // Get setting
-    $team_types = bc_get_setting('general', 'team_types');
+    $team_types = buddyc_get_setting('general', 'team_types');
     
     if ( ! $team_types || empty( $team_types ) ) {
         return false;
@@ -56,7 +56,7 @@ function bc_is_team( $user_id = null ) {
  * @return str | bool $member_type or false
  * 
  */
-function bc_is_client($user_id = null) {
+function buddyc_is_client($user_id = null) {
     if ( ! function_exists( 'bp_get_member_type') ) {
         return;
     }
@@ -72,7 +72,7 @@ function bc_is_client($user_id = null) {
     }
     
     // Get setting
-    $client_types = bc_get_setting('general', 'client_types');
+    $client_types = buddyc_get_setting('general', 'client_types');
     
     if ( ! $client_types || empty( $client_types ) ) {
         return false;
@@ -98,7 +98,7 @@ function bc_is_client($user_id = null) {
  * @return bool
  * 
  */
-function bc_is_admin($user_id = null) {
+function buddyc_is_admin($user_id = null) {
     
     // Default to current user
     if (!$user_id) {
@@ -129,7 +129,7 @@ function bc_is_admin($user_id = null) {
  * 
  * @since 0.1.0
  */
-function bc_admin_id() {
+function buddyc_admin_id() {
     
     // Get all users
     $users = get_users();
@@ -151,9 +151,9 @@ function bc_admin_id() {
  * 
  * @since 0.1.0
  */
-function bc_all_team() {
+function buddyc_all_team() {
     // Get team member types
-    $team_types = bc_get_setting( 'general', 'team_types' );
+    $team_types = buddyc_get_setting( 'general', 'team_types' );
     
     // Get all users
     $all_team_members = bp_core_get_users(array(
@@ -169,9 +169,9 @@ function bc_all_team() {
  * 
  * @since 0.1.0
  */
-function bc_all_clients() {
+function buddyc_all_clients() {
     // Get client types
-    $client_types = bc_get_setting( 'general', 'client_types' );
+    $client_types = buddyc_get_setting( 'general', 'client_types' );
     
     // Get all users
     $all_clients = bp_core_get_users(array(
@@ -190,17 +190,17 @@ function bc_all_clients() {
  *                          Accepts 'client', 'team', 'sales'.
  * @return  array   Associative array of member type names and labels.
  */
-function bc_member_types( $type = null ) {
+function buddyc_member_types( $type = null ) {
     
     switch ( $type ) {
         case 'client':
-            $member_types = bc_get_setting('general', 'client_types');
+            $member_types = buddyc_get_setting('general', 'client_types');
             break;
         case 'team':
-            $member_types = bc_get_setting('general', 'team_types');
+            $member_types = buddyc_get_setting('general', 'team_types');
             break;
         case 'sales':
-            $member_types = bc_get_setting('sales', 'sales_types');
+            $member_types = buddyc_get_setting('sales', 'sales_types');
             break;
         default:
             $member_types = bp_get_member_types();

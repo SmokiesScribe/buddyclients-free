@@ -50,7 +50,7 @@ class ReassignForm {
             'user_type' => 'team'
         ];
         
-        $options = bc_options( 'users', $options_args );
+        $options = buddyc_options( 'users', $options_args );
         
         // Team dropdown
          $args = [

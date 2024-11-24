@@ -38,7 +38,7 @@ class Activator {
              * 
              * @since 0.1.0
              */
-            do_action('bc_activated');
+            do_action('buddyc_activated');
         }
     }
     
@@ -79,7 +79,7 @@ class Activator {
         
         return [
             // Rate types
-            'bc_rate_type' => [
+            'buddyc_rate_type' => [
                 __( 'Per Word', 'buddyclients' ) => [
                     'post_content'  => null,
                     'post_meta'     => [
@@ -103,7 +103,7 @@ class Activator {
             ],
         
             // Upload types
-            'bc_file_upload' => [
+            'buddyc_file_upload' => [
                 __( 'File', 'buddyclients' ) => [
                     'post_content'  => null,
                     'post_meta'     => [

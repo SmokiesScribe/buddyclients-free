@@ -118,9 +118,9 @@ class IntentHandler {
      */
     private function fetch_url_intent_ids() {
         return [
-            'booking_id'        => bc_get_param( 'booking_id' ),
-            'registration_id'   => bc_get_param( 'registration_id' ),
-            'sponsor_id'        => bc_get_param( 'sponsor_id' )
+            'booking_id'        => buddyc_get_param( 'booking_id' ),
+            'registration_id'   => buddyc_get_param( 'registration_id' ),
+            'sponsor_id'        => buddyc_get_param( 'sponsor_id' )
         ];
     }
 

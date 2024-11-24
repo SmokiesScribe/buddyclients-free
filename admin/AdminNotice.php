@@ -214,7 +214,7 @@ class AdminNotice {
         if ( ! $this->repair_link ) {
             return false;
         }
-        $current_url = bc_curr_url();
+        $current_url = buddyc_curr_url();
         foreach ( $this->repair_link as $repair_link ) {
             if ( basename( $current_url ) === basename( $repair_link ) ) {
                 return true;

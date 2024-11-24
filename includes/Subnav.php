@@ -43,7 +43,7 @@ class Subnav {
         $output = '';
         
         // Open container
-        $output .= '<div class="bc_subnav">';
+        $output .= '<div class="buddyc_subnav">';
         
         // Loop through items
         foreach ( $items as $key => $data ) {
@@ -99,7 +99,7 @@ class Subnav {
         $active = false;
         
         // Check if the param is set
-        $param_manager = bc_param_manager();
+        $param_manager = buddyc_param_manager();
         $subnav = $param_manager->get( 'subnav' );
         $active = $subnav == $key ? true : false;
         return $active;

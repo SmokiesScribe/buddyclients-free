@@ -167,7 +167,7 @@ class CommissionList {
             'Service' => $item->service_name ?? $item->service_names,
             'Client' => bp_core_get_user_displayname( $item->client_id ),
             'Commission' => '$' . $item->amount,
-            'Payment Status' => bc_format_status( $item->status, true ),
+            'Payment Status' => buddyc_format_status( $item->status, true ),
         ];
         
         // Loop through columns

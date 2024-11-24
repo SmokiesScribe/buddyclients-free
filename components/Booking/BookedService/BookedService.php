@@ -172,7 +172,7 @@ class BookedService {
          * 
          * @param object $booked_service    The BookedService object.
          */
-        do_action('bc_new_booked_service', $this);
+        do_action('buddyc_new_booked_service', $this);
     }
     
     /**
@@ -369,7 +369,7 @@ class BookedService {
              * @param string $old_status        The old status.
              * @param string $new_status        The new status.
              */
-            do_action('bc_service_status_updated', $booked_service, $old_status, $new_status);
+            do_action('buddyc_service_status_updated', $booked_service, $old_status, $new_status);
         }
     }
     

@@ -8,7 +8,7 @@ use BuddyClients\Includes\FileHandler;
  * @param   int     $post_id    The ID of the post.
  * @param   File    $file       The File object.
  */
-function bc_set_featured_image( $post_id, $file ) {
+function buddyc_set_featured_image( $post_id, $file ) {
     if ( ! is_object( $file ) || ! $file->file_path ) {
         return;
     }

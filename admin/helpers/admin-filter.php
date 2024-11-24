@@ -5,14 +5,14 @@ use BuddyClients\Includes\ParamManager;
  * 
  * @since 0.1.0
  */
-function bc_admin_filter_submission() {
+function buddyc_admin_filter_submission() {
 
     // Check for filter form submission
-    if ( isset( $_POST['bc_admin_filter_key'] ) && isset( $_POST['bc_filter_nonce'] ) ) {
+    if ( isset( $_POST['buddyc_admin_filter_key'] ) && isset( $_POST['buddyc_filter_nonce'] ) ) {
 
         // Verify the nonce
-        $nonce = sanitize_text_field( wp_unslash( $_POST['bc_filter_nonce'] ) );
-        if ( ! wp_verify_nonce( $nonce, 'bc_filter_nonce_action' ) ) {
+        $nonce = sanitize_text_field( wp_unslash( $_POST['buddyc_filter_nonce'] ) );
+        if ( ! wp_verify_nonce( $nonce, 'buddyc_filter_nonce_action' ) ) {
             return;
         }
         
@@ -22,7 +22,7 @@ function bc_admin_filter_submission() {
         // Loop through post data
         foreach ( $_POST as $key => $value ) {
             // Skip submit button and verification field
-            if ( strpos( $key, '_filter_submit' ) !== false || $key === 'bc_admin_filter_key' ) {
+            if ( strpos( $key, '_filter_submit' ) !== false || $key === 'buddyc_admin_filter_key' ) {
                 continue;
             }
             // Add to params
@@ -40,4 +40,4 @@ function bc_admin_filter_submission() {
         exit;
     }
 }
-add_action('admin_init', 'bc_admin_filter_submission');
+add_action('admin_init', 'buddyc_admin_filter_submission');

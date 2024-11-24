@@ -7,12 +7,12 @@
  * @param string $icon Icon key.
  * @return string HTML-formatted icon.
  */
-function bc_admin_icon( $icon ) {
+function buddyc_admin_icon( $icon ) {
     // Initialize
     $output = '';
 
     // Check if bp is active
-    $theme = bc_buddyboss_theme();
+    $theme = buddyc_buddyboss_theme();
     
     // Define icon class
     $class = $theme ? 'bb_class' : 'fa_class';

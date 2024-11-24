@@ -7,7 +7,7 @@ use BuddyClients\Admin\AdminTable;
  * 
  * @since 0.1.0
  */
-function bc_payments_list() {
+function buddyc_payments_list() {
     
     // Get all payments
     $payments = Payment::get_all_payments();

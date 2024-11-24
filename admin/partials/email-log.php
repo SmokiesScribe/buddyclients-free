@@ -8,7 +8,7 @@ use BuddyClients\Admin\AdminTable;
  * 
  * @since 0.1.0
  */
-function bc_email_log_content() {
+function buddyc_email_log_content() {
     
     // Initialize object handler
     $object_handler = new ObjectHandler( Email::class );
@@ -50,7 +50,7 @@ function bc_email_log_content() {
  * 
  * @since 1.0.3
  */
-function bc_email_log_admin_notice() {
+function buddyc_email_log_admin_notice() {
     
     // Get the current screen
     $screen = get_current_screen();
@@ -58,7 +58,7 @@ function bc_email_log_admin_notice() {
     if ( $screen && $screen->id === 'admin_page_bc-email-log' ) {
         
         // Get current setting
-        $email_setting = bc_get_setting( 'email', 'email_log_time');
+        $email_setting = buddyc_get_setting( 'email', 'email_log_time');
         
         // Format setting value
         $email_setting = is_numeric( $email_setting )
@@ -83,7 +83,7 @@ function bc_email_log_admin_notice() {
         ];
         
         // Generate notice
-        bc_admin_notice( $notice_args );
+        buddyc_admin_notice( $notice_args );
     }
 }
-add_action('admin_enqueue_scripts', 'bc_email_log_admin_notice'); // Fire after screen is available but before admin_notices
+add_action('admin_enqueue_scripts', 'buddyc_email_log_admin_notice'); // Fire after screen is available but before admin_notices

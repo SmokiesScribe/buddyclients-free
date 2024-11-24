@@ -340,7 +340,7 @@
                     type: 'POST',
                     url: ajaxurl,
                     data: {
-                        action: 'bc_team_filter_match',
+                        action: 'buddyc_team_filter_match',
                         team_id: teamID,
                         filter_values: filterValues,
                         nonce: serviceFieldsData.nonce,

@@ -9,7 +9,7 @@ use BuddyClients\Config\ComponentsHandler as ComponentsHandler;
  *
  * @param   string  $component  The component to check.
  */
-function bc_component_enabled( $component ) {
+function buddyc_component_enabled( $component ) {
     return ComponentsHandler::in_components( $component );
 }
 
@@ -22,7 +22,7 @@ function bc_component_enabled( $component ) {
  *
  * @param   string  $component  The component to check.
  */
-function bc_component_exists( $component ) {
+function buddyc_component_exists( $component ) {
     return ComponentsHandler::component_exists( $component );
 }
 
@@ -31,7 +31,7 @@ function bc_component_exists( $component ) {
  * 
  * @since 1.0.0
  */
-function bc_components_map() {
+function buddyc_components_map() {
     return [
         'Booking'           => __( 'Booking', 'buddyclients' ),
         'Checkout'          => __( 'Checkout', 'buddyclients' ),
@@ -56,7 +56,7 @@ function bc_components_map() {
  * 
  * @param   string  $component  The component.
  */
-function bc_component_name( $component ) {
-    $map = bc_components_map();
+function buddyc_component_name( $component ) {
+    $map = buddyc_components_map();
     return $map[$component] ?? $component;
 }

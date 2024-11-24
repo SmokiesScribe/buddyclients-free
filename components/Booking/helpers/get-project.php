@@ -7,7 +7,7 @@ use BuddyClients\Includes\Project;
  * 
  * @pararm  int $project_id The ID of the project to retrieve.
  */
-function bc_get_project() {
+function buddyc_get_project() {
 
     // Get the nonce from the AJAX request
     $nonce = isset( $_POST['nonce'] ) ? trim( sanitize_text_field( wp_unslash( $_POST['nonce'] ) ) ) : null;
@@ -29,5 +29,5 @@ function bc_get_project() {
 
     wp_die(); // Terminate
 }
-add_action('wp_ajax_bc_get_project', 'bc_get_project'); // For logged-in users
-add_action('wp_ajax_nopriv_bc_get_project', 'bc_get_project'); // For logged-out users
+add_action('wp_ajax_buddyc_get_project', 'buddyc_get_project'); // For logged-in users
+add_action('wp_ajax_nopriv_buddyc_get_project', 'buddyc_get_project'); // For logged-out users

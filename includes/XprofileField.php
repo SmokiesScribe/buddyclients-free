@@ -198,7 +198,7 @@ class XprofileField {
      * @since 0.1.0
      */
     public function get_field_id_by_key() {
-        return get_option( 'bc_xprofile_field_' . $this->field_key );
+        return get_option( 'buddyc_xprofile_field_' . $this->field_key );
     }
     
     /**
@@ -233,7 +233,7 @@ class XprofileField {
             $this->field = xprofile_get_field( $this->field_id );
             
             // Update setting
-            update_option( 'bc_xprofile_field_' . $this->field_key, $this->field_id );
+            update_option( 'buddyc_xprofile_field_' . $this->field_key, $this->field_id );
         }
     }
     
@@ -333,7 +333,7 @@ class XprofileField {
         if ( $this->args['member_types'] ) {
         
             // Get user types
-            $member_types = bc_get_setting( 'general', $this->args['member_types'] . '_types' );
+            $member_types = buddyc_get_setting( 'general', $this->args['member_types'] . '_types' );
 
             // Replace existing associations
             $append = false;

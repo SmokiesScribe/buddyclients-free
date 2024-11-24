@@ -75,7 +75,7 @@ class FormSubmission {
         }
 
         // Make sure it's a plugin submission
-        if ( ! isset( $_POST['bc_submission'] ) ) {
+        if ( ! isset( $_POST['buddyc_submission'] ) ) {
             return;
         }
         

@@ -103,7 +103,7 @@ class Adjustment extends ServiceComponent {
     public function __construct( $post_id ) {
         
         // Make sure it's an adjustment post
-        if ( get_post_type( $post_id ) !== 'bc_adjustment' ) {
+        if ( get_post_type( $post_id ) !== 'buddyc_adjustment' ) {
             return;
         }
         

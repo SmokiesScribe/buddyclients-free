@@ -15,6 +15,6 @@
  *                                      Defaults to blue.
  * }
  */
-function bc_admin_notice( $args ) {
+function buddyc_admin_notice( $args ) {
     new BuddyClients\Admin\AdminNotice( $args );
 }

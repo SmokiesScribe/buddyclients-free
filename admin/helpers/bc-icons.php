@@ -7,10 +7,10 @@
  * @param   string  $icon   Icon key.
  * @return  string  HTML-formatted icon.
  */
-function bc_icon( $icon ) {
+function buddyc_icon( $icon ) {
     
     // Check for BuddyBoss theme
-    $theme = bc_buddyboss_theme();
+    $theme = buddyc_buddyboss_theme();
     
     // Define icon class
     $class = $theme ? 'bb_class' : 'fa_class';
@@ -78,7 +78,7 @@ function bc_icon( $icon ) {
     // Check if the key exists
     if ( isset( $icons[$icon][$class] ) ) {
         $font_size = $theme ? '20' : '16';
-        $color = $icons[$icon]['color'] ?? bc_color( 'secondary' );
+        $color = $icons[$icon]['color'] ?? buddyc_color( 'secondary' );
         $output = '<i class="' . $icons[$icon][$class] . '" style="font-size: ' . $font_size . 'px; color: ' . $color . '"></i>';
         return $output;
     }

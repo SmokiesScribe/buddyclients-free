@@ -7,8 +7,8 @@
  * @param   string  $type   The color type to retrieve.
  *                          Accepts 'primary', 'accent', and 'tertiary'.
  */
-function bc_color( $type ) {
-    return bc_get_setting('style', $type . '_color');
+function buddyc_color( $type ) {
+    return buddyc_get_setting('style', $type . '_color');
 }
 
 /**
@@ -19,8 +19,8 @@ function bc_color( $type ) {
  * @param   string  $type   The color type to retrieve.
  *                          Accepts 'primary', 'accent', and 'tertiary'.
  */
-function e_bc_color( $type ) {
-    echo esc_attr( bc_color( $type ) );
+function e_buddyc_color( $type ) {
+    echo esc_attr( buddyc_color( $type ) );
 }
 
 /**
@@ -30,7 +30,7 @@ function e_bc_color( $type ) {
  * 
  * @return  string  The current url, or an empty string on failure.
  */
-function bc_curr_url() {
+function buddyc_curr_url() {
     // Initialize empty string
     $current_url = '';
     // Get current URI
@@ -56,7 +56,7 @@ function bc_curr_url() {
  * @return string $content Truncated content.
  * 
  */
-function bc_truncate_content($content, $word_count) {
+function buddyc_truncate_content($content, $word_count) {
     $content = wp_strip_all_tags($content); // Remove HTML tags
     $content = preg_replace('/\s+/', ' ', $content); // Remove extra whitespace
     $words = explode(' ', $content);
@@ -79,7 +79,7 @@ function bc_truncate_content($content, $word_count) {
  * @return string $content Truncated content.
  * 
  */
-function bc_truncate_content_by_char($content, $char_count) {
+function buddyc_truncate_content_by_char($content, $char_count) {
     $content = wp_strip_all_tags($content); // Remove HTML tags
     $content = preg_replace('/\s+/', ' ', $content); // Remove extra whitespace
     if (strlen($content) > $char_count) {
@@ -97,7 +97,7 @@ function bc_truncate_content_by_char($content, $char_count) {
  * 
  * @param   string  $value  The value to format.
  */
-function bc_format_status( $value, $add_class = null ) {
+function buddyc_format_status( $value, $add_class = null ) {
     
     // Replace underscores and hyphens
     $formatted_value = str_replace( '_', ' ', $value );
@@ -123,7 +123,7 @@ function bc_format_status( $value, $add_class = null ) {
  * 
  * @return  bool        True if the time has passed, false if not.
  */
-function bc_time_has_passed( $target_time ) {
+function buddyc_time_has_passed( $target_time ) {
     // Cast to unix timestamp if necessary
     if ( is_string( $target_time ) ) {
         $target_time = strtotime( $target_time );
@@ -216,7 +216,7 @@ function buddyclients_inline_script( $script, $admin = false, $direct = false ) 
     add_action( $hook, function() use ( $handle ) {
         // Register the script if it's not registered already
         if ( ! wp_script_is( $handle, 'registered' ) ) {
-            wp_register_script( $handle, BC_PLUGIN_URL . 'assets/js/global.js', array(), null, true );
+            wp_register_script( $handle, BUDDYC_PLUGIN_URL . 'assets/js/global.js', array(), null, true );
         }
 
         // Enqueue the script if it's not already enqueued

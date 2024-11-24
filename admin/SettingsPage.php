@@ -93,7 +93,7 @@ class SettingsPage {
      */
     private function build_settings_name() {
         $key = str_replace('-', '_', $this->key );
-        return 'bc_' . $key . '_settings';
+        return 'buddyc_' . $key . '_settings';
     }
     
     /**
@@ -179,7 +179,7 @@ class SettingsPage {
          *
          * @param string $settings_key  The key of the settings group.
          */
-        do_action('bc_before_settings', $this->key);
+        do_action('buddyc_before_settings', $this->key);
         
         // Make sure we have an array of settings data
         if (is_array($this->data)) {
@@ -232,7 +232,7 @@ class SettingsPage {
             $settings_key = $this->key;
             
             // Get current field value
-            $value = bc_get_setting( $settings_key, $field_id );
+            $value = buddyc_get_setting( $settings_key, $field_id );
             
             // Define output by field type
             switch ( $type ) {
@@ -294,7 +294,7 @@ class SettingsPage {
         foreach ($data as $section_key => $section_data) {
             foreach ($section_data['fields'] as $field_id => $field_data) {
                 if ($field_id === $field_key) {
-                    $curr_settings = get_option('bc_' . $settings_key . '_settings');
+                    $curr_settings = get_option('buddyc_' . $settings_key . '_settings');
                     $field_value = $curr_settings[$field_id] ?? $field_data['default'] ?? '';
                     return $field_value;
                 }
@@ -506,7 +506,7 @@ class SettingsPage {
         $icon = '';
 
         // Check for validate url param
-        $param_manager = bc_param_manager();
+        $param_manager = buddyc_param_manager();
         $validate_param = $param_manager->get( 'validate' );
 
         // Make sure we're validating
@@ -516,12 +516,12 @@ class SettingsPage {
 
         // Validate full stripe mode
         if ( $type === 'mode' ) {
-            $icon = bc_stripe_mode_valid_icon();
+            $icon = buddyc_stripe_mode_valid_icon();
         }
 
         // Validate field
         if ( $type === 'field' && is_array( $field_data ) && isset( $field_data['stripe_key'] ) ) {
-            $icon = bc_stripe_valid_icon( $field_data['stripe_key'] );
+            $icon = buddyc_stripe_valid_icon( $field_data['stripe_key'] );
         }
         return $icon;
     }
@@ -629,7 +629,7 @@ class SettingsPage {
         }
         
         // Continue editing button
-        $draft_id = bc_get_setting('legal', $field_id . '_draft');
+        $draft_id = buddyc_get_setting('legal', $field_id . '_draft');
         if ( $draft_id ) {
             $edit_button = '<a href="' . get_edit_post_link($draft_id) . '">
                 <button type="button" class="button button-secondary" style="margin-right: 5px">' . 
@@ -639,7 +639,7 @@ class SettingsPage {
             </a>';
         } else {
             // Generate a nonce
-            $create_nonce = wp_create_nonce( 'bc_create_new_page_nonce' );
+            $create_nonce = wp_create_nonce( 'buddyc_create_new_page_nonce' );
             
             // Build create page button
             $create_button = '<button onclick="createNewPage({
@@ -647,7 +647,7 @@ class SettingsPage {
                 settings_key: \'' . esc_js('legal') . '\',
                 post_title: \'' . esc_js($field_data['label']) . '\',
                 post_content: \'\',
-                post_type: \'' . esc_js('bc_legal') . '\',
+                post_type: \'' . esc_js('buddyc_legal') . '\',
                 post_status: \'' . esc_js('draft') . '\',
                 nonce: \'' . esc_js($create_nonce) . '\'
             });" type="button" class="button button-secondary" style="margin-right: 5px">' . 
@@ -658,11 +658,11 @@ class SettingsPage {
         
         // Get previous version and deadline
         $version_trans_message = '';
-        $prev_version = bc_get_setting('legal', $field_id . '_prev');
+        $prev_version = buddyc_get_setting('legal', $field_id . '_prev');
         if ( $prev_version ) {
             $curr_time = current_time('mysql');
             $publish_date = get_post_field('post_date', $value);
-            $deadline_setting = bc_get_setting('legal', 'legal_deadline');
+            $deadline_setting = buddyc_get_setting('legal', 'legal_deadline');
             if ($deadline_setting !== '') {
                 $deadline = gmdate('Y-m-d H:i:s', strtotime($publish_date . ' +' . $deadline_setting . ' days'));
                 // Get the current date and time
@@ -745,7 +745,7 @@ class SettingsPage {
         <div class="buddyclients-admin-field">
             <label for="<?php echo esc_attr($this->name . '[' . $field_id . ']'); ?>"><?php echo esc_html($field_data['label']); ?></label>
             <div class="buddyclients-admin-field-input-wrap">
-                <?php echo wp_kses_post( bc_copy_to_clipboard($field_data['content'], $field_id) ); ?>
+                <?php echo wp_kses_post( buddyc_copy_to_clipboard($field_data['content'], $field_id) ); ?>
                 <p class="description"><?php echo wp_kses_post( $field_data['description'] ); ?></p>
             </div>
         </div>

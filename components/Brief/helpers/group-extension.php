@@ -46,7 +46,7 @@ add_action('bp_init', 'brief_add_group_extension');
  * 
  * @since 0.1.0
  */
-function bc_project_briefs( $group_id ) {
+function buddyc_project_briefs( $group_id ) {
     // Initialize
     $content = '';
     
@@ -57,7 +57,7 @@ function bc_project_briefs( $group_id ) {
     
     // Get brief posts for the group
     $args = array(
-        'post_type' => 'bc_brief',
+        'post_type' => 'buddyc_brief',
         'posts_per_page' => -1,
         'meta_query' => array(
             array(
@@ -82,7 +82,7 @@ function bc_project_briefs( $group_id ) {
             $brief_type = ucfirst(implode(', ', wp_get_post_terms($post_id, 'brief_type', array('fields' => 'names'))));
             
             $icon = $updated_date ? 'complete' : 'todo';
-            $icon_class = bc_brief_icon($icon);
+            $icon_class = buddyc_brief_icon($icon);
             $click_to = $updated_date ? 'view' : 'complete';
             
             // Output the term card
@@ -93,7 +93,7 @@ function bc_project_briefs( $group_id ) {
                 __('%s Brief', 'buddyclients'),
                 $brief_type )
                 . '</h3>';
-                $content .= '<icon class="' . esc_attr( $icon_class ) . '" style="font-size: 24px; color: ' . bc_color('accent') . ';"></icon>';
+                $content .= '<icon class="' . esc_attr( $icon_class ) . '" style="font-size: 24px; color: ' . buddyc_color('accent') . ';"></icon>';
                 $content .= '<p>Click to ' . esc_html( $click_to ) . '.</p>';
                 $content .= '</div>';
                 $content .= '</a>';
@@ -116,7 +116,7 @@ function bc_project_briefs( $group_id ) {
  * 
  * @since 0.1.0
  */
-function bc_brief_icon($icon) {
+function buddyc_brief_icon($icon) {
     $classes = [
         'complete' => [
             'bb' => 'bb-icon-checkbox bb-icon-l',
@@ -128,7 +128,7 @@ function bc_brief_icon($icon) {
         ]
     ];
     
-    $bb = bc_buddyboss_theme() ? 'bb' : 'fa';
+    $bb = buddyc_buddyboss_theme() ? 'bb' : 'fa';
     
     return $classes[$icon][$bb];
 }

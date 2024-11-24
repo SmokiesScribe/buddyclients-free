@@ -52,7 +52,7 @@ class Pagination {
      * }
      */
     public function __construct( $items, $args = null) {
-        $param_manager = bc_param_manager();
+        $param_manager = buddyc_param_manager();
         $this->per_page = $param_manager->get( 'per_page' ) ?? 10;
         $this->current_page = $param_manager->get( 'page' ) ?? 1;
         

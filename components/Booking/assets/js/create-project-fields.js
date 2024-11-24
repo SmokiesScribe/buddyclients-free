@@ -9,7 +9,7 @@
         var form = document.getElementById('bc-booking-form');
         if ( ! form ) return;
         
-        const projectSelect = document.getElementById('bc_projects');
+        const projectSelect = document.getElementById('buddyc_projects');
         const fieldsToToggle = document.querySelectorAll('.create-project');
         const projectName = document.getElementById('project_title');
     
@@ -60,7 +60,7 @@
         if ( ! form ) return;
         
         const titleElement = document.getElementById('project_title');
-        const projectSelect = document.getElementById('bc_projects');
+        const projectSelect = document.getElementById('buddyc_projects');
         var bookedServicesInput = document.getElementById('project-booked-services');
     
         // Function to update fields based on the selected option
@@ -94,7 +94,7 @@
                 type: 'POST',
                 url: ajaxurl,
                 data: {
-                    action: 'bc_get_project',
+                    action: 'buddyc_get_project',
                     project_id: projectId,
                     nonce: createProjectFieldsData.nonce,
                     nonceAction: createProjectFieldsData.nonceAction,

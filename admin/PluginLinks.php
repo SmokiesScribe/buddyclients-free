@@ -24,7 +24,7 @@ class PluginLinks {
      */
     public function __construct( $links ) {
         $this->links = $links;
-        add_filter( 'plugin_action_links_' . plugin_basename( BC_PLUGIN_FILE ), [$this, 'filter_action_links'] );
+        add_filter( 'plugin_action_links_' . plugin_basename( BUDDYC_PLUGIN_FILE ), [$this, 'filter_action_links'] );
     }
     
     /**

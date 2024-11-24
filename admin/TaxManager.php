@@ -45,7 +45,7 @@ class TaxManager {
     private static function taxonomies() {
         $taxonomies = [
             'brief_type' => [
-                'post_type'             => 'bc_brief',
+                'post_type'             => 'buddyc_brief',
                 'singular_name'         => __( 'Brief Type', 'buddyclients' ),
                 'plural_name'           => __( 'Brief Types', 'buddyclients' ),
                 'show_in_menu'          => null,
@@ -72,7 +72,7 @@ class TaxManager {
          *     @type bool   $show_in_rest Whether the post type is available in the REST API.
          * }
          */
-        $taxonomies = apply_filters( 'bc_taxonomies', $taxonomies );
+        $taxonomies = apply_filters( 'buddyc_taxonomies', $taxonomies );
         
         return $taxonomies;
     }

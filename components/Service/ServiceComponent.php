@@ -119,7 +119,7 @@ abstract class ServiceComponent {
         $service_ids = [];
         
         // Get service posts with matching rate type
-        $services = new PostQuery( 'bc_service', ['adjustments' => strval($this->ID)], 'LIKE' );
+        $services = new PostQuery( 'buddyc_service', ['adjustments' => strval($this->ID)], 'LIKE' );
         
         // Loop through posts and add to ids array
         foreach ($services->posts as $service) {

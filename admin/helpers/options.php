@@ -10,7 +10,7 @@ use BuddyClients\Includes\Options as Options;
  *                              Accepts 'simple' and 'detail'. Defaults to 'simple'.
  * @param   array   $args       Optional. An array of args to pass to the callback.
  */
-function bc_options( $key, $args = null ) {
+function buddyc_options( $key, $args = null ) {
     $options = new Options( $key, $args );
     return $options->options;
 }
@@ -24,16 +24,16 @@ function bc_options( $key, $args = null ) {
      * 
      * @param string $type The key of the user type.
      */
-    function bc_user_options( $type ) {
+    function buddyc_user_options( $type ) {
         switch ( $type ) {
             case 'team':
-                $users = bc_all_team();
+                $users = buddyc_all_team();
                 break;
             case 'client':
-                $users = bc_all_clients();
+                $users = buddyc_all_clients();
                 break;
             case 'affiliate':
-                $users = bc_all_affiliates();
+                $users = buddyc_all_affiliates();
                 break;
             case 'faculty':
                 $users = be_all_faculty();
@@ -96,7 +96,7 @@ function bc_options( $key, $args = null ) {
      * 
      * @deprecated Use Options class.
      */
-    function bc_project_options() {
+    function buddyc_project_options() {
         
         // Initialize
         $options = [];
@@ -127,11 +127,11 @@ function bc_options( $key, $args = null ) {
      * 
      * @param string|array $post_type The slug of the post type or array of slugs.
      */
-    function bc_posts_options( $post_type ) {
+    function buddyc_posts_options( $post_type ) {
         $options = array();
         
         // Add flat option to rate type
-        if ($post_type === 'bc_rate_type') {
+        if ($post_type === 'buddyc_rate_type') {
             $options['flat'] = 'Flat';
         }
         
@@ -173,7 +173,7 @@ function bc_options( $key, $args = null ) {
      * 
      * @param string $taxonomy The slug of the taxonomy type.
      */
-    function bc_tax_options( $taxonomy ) {
+    function buddyc_tax_options( $taxonomy ) {
         $terms = get_terms( array(
             'taxonomy' => $taxonomy,
             'hide_empty' => false,
@@ -198,18 +198,18 @@ function bc_options( $key, $args = null ) {
      * 
      * @param   array   $existing   Optional. Array of key value pairs representing the post type and meta key to check.
      */
-    function bc_xprofile_options( $existing = null ) {
+    function buddyc_xprofile_options( $existing = null ) {
         // Initialize array
         $options = array();
         
         // Get all exprofile fields
-        $fields = bc_all_xprofile();
+        $fields = buddyc_all_xprofile();
             
         // Loop through fields
         foreach ( $fields as $field_id => $field_data ) {
             
             // Get team types
-            $team_types = get_option('bc_general_settings')['team_types'] ?? null;
+            $team_types = get_option('buddyc_general_settings')['team_types'] ?? null;
             
             // Make sure field is for team
             if ($team_types && is_array($team_types)) {
@@ -219,7 +219,7 @@ function bc_options( $key, $args = null ) {
             }
             
             // Get the roles field id
-            $roles_field = bc_roles_field_id();
+            $roles_field = buddyc_roles_field_id();
             
             // Check if the field is already assigned to a post
             if ( $existing ) {

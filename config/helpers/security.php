@@ -4,7 +4,7 @@
  * 
  * @since 1.0.16
  */
-function bc_allowed_html_form() {
+function buddyc_allowed_html_form() {
     return [
         'form'     => ['method' => [], 'action' => [], 'class' => [], 'id' => [], 'style' => [], 'enctype' => []],
         'input'    => ['type' => [], 'name' => [], 'value' => [], 'class' => [], 'id' => [], 'required' => [], 'placeholder' => [], 'style' => [], 'maxlength' => [], 'minlength' => [], 'pattern' => [], 'size' => [], 'readonly' => [], 'checked' => []],
@@ -46,21 +46,21 @@ function bc_allowed_html_form() {
  * 
  * @since 1.0.16
  */
-function bc_update_safe_styles() {
+function buddyc_update_safe_styles() {
     add_filter( 'safe_style_css', function( $styles ) {
         $styles[] = 'display';
         return $styles;
     } );
 }
-add_action( 'init', 'bc_update_safe_styles' );
+add_action( 'init', 'buddyc_update_safe_styles' );
 
 /**
  * Defines allowed html for forms with signature script.
  * 
  * @since 1.0.16
  */
-function bc_allowed_html_signature() {
-    $form_html = bc_allowed_html_form();
+function buddyc_allowed_html_signature() {
+    $form_html = buddyc_allowed_html_form();
     $signature_html = [
         'span'     => ['class' => [], 'id' => [], 'style' => [], 'onclick' => []],
         'canvas'   => ['id' => [], 'width' => [], 'height' => [], 'style' => [], 'data-signature' => []],

@@ -115,13 +115,13 @@ class ProfileExtension {
         // Check member type
         switch ( $member_type ) {
             case 'team':
-                $match = bc_is_team( $profile_user );
+                $match = buddyc_is_team( $profile_user );
                 break;
             case 'client':
-                $match = bc_is_client( $profile_user );
+                $match = buddyc_is_client( $profile_user );
                 break;
             case 'sales':
-                $match = bc_is_sales( $profile_user );
+                $match = buddyc_is_sales( $profile_user );
                 break;
         }
         

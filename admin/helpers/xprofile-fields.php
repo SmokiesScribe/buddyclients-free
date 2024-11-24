@@ -4,17 +4,17 @@
  * 
  * @since 0.1.0
  */
-function bc_xprofile_filter_options() {
+function buddyc_xprofile_filter_options() {
     // Initialize array
     $options = array();
     
     // Get all exprofile fields
-    $fields = bc_all_xprofile();
+    $fields = buddyc_all_xprofile();
         
     foreach ($fields as $field_id => $field_data) {
         
         // Get team types
-        $settings = get_option('bc_general_settings', array());
+        $settings = get_option('buddyc_general_settings', array());
         $team_types = isset($settings['team_types']) ? $settings['team_types'] : array();
         
         // Make sure field is for team
@@ -23,8 +23,8 @@ function bc_xprofile_filter_options() {
         }
         
         // Get or create xprofile field id
-        if (function_exists('bc_team_member_role_xprofile_field')) {
-   //         $role_field_id = bc_team_member_role_xprofile_field();
+        if (function_exists('buddyc_team_member_role_xprofile_field')) {
+   //         $role_field_id = buddyc_team_member_role_xprofile_field();
         } else {
             $role_field_id = '';
         }
@@ -44,7 +44,7 @@ function bc_xprofile_filter_options() {
  * 
  * @since 0.1.0
  */
-function bc_xprofile_match_type_fields() {
-    $filter_fields = bc_get_setting( 'booking', 'xprofile_fields' );
+function buddyc_xprofile_match_type_fields() {
+    $filter_fields = buddyc_get_setting( 'booking', 'xprofile_fields' );
     var_dump($filter_fields);
 }

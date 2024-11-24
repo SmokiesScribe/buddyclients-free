@@ -56,7 +56,7 @@ class PostType {
         
         // Make sure the required component exists
         if ( isset( $args['required_component'] ) ) {
-            if ( ! bc_component_enabled( $args['required_component'] ) ) {
+            if ( ! buddyc_component_enabled( $args['required_component'] ) ) {
                 return;
             }
         }

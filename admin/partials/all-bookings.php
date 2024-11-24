@@ -7,7 +7,7 @@ use BuddyClients\Admin\AdminTable;
  * 
  * @since 0.1.0
  */
-function bc_dashboard_content() {
+function buddyc_dashboard_content() {
     
     // Get all booking intents
     $booking_intents = BookingIntent::get_all_booking_intents();

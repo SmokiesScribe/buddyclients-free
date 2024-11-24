@@ -1,7 +1,7 @@
 <?php
 /**
  * Template Name: Custom BC Service Archive
- * Description: A custom template for the bc_service post type archive.
+ * Description: A custom template for the buddyc_service post type archive.
  */
 
 // Get header
@@ -11,7 +11,7 @@ get_header();
 $content = '';
 
 $args = array(
-    'post_type'      => 'bc_service_type',
+    'post_type'      => 'buddyc_service_type',
     'posts_per_page' => -1,
     'meta_query' => array(
         'relation' => 'OR',
@@ -56,7 +56,7 @@ foreach ($types as $type) {
     }
 
     $service_args = array(
-        'post_type'      => 'bc_service',
+        'post_type'      => 'buddyc_service',
         'posts_per_page' => -1, // Retrieve all posts
     );
 
@@ -102,7 +102,7 @@ foreach ($types as $type) {
             }
 
             // Truncate the content to a specified number of words (e.g., 25 words)
-            $post_info = bc_truncate_content($service->post_content, 25);
+            $post_info = buddyc_truncate_content($service->post_content, 25);
 
             // Add the rate card
             $content .= '

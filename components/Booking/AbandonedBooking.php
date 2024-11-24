@@ -34,7 +34,7 @@ class AbandonedBooking {
              * 
              * @param   object  $booking_intent   The BookingIntent object.
              */
-            do_action( 'bc_abandoned_booking', $this->booking_intent );
+            do_action( 'buddyc_abandoned_booking', $this->booking_intent );
         }
     }
     

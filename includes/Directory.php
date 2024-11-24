@@ -65,7 +65,7 @@ class Directory {
         $upload_dir = wp_upload_dir()['basedir'];
         
         // Define plugin directory within upload directory
-        $upload_dir = trailingslashit($upload_dir) . 'bc_files/' ;
+        $upload_dir = trailingslashit($upload_dir) . 'buddyc_files/' ;
         
         return $upload_dir;
     }
@@ -156,7 +156,7 @@ class Directory {
     private function check_site_url() {
         
         // Get the previous site URL
-        $prev_url = get_option('bc_htaccess_url', '');
+        $prev_url = get_option('buddyc_htaccess_url', '');
         
         // Get the current site URL
         $site_url = site_url();
@@ -214,7 +214,7 @@ class Directory {
             $this->create_file( $file_dir, '/.htaccess', $htaccess_content );
             
             // Set the current site URL as the option value for future checks
-            update_option('bc_htaccess_url', site_url());
+            update_option('buddyc_htaccess_url', site_url());
         }
         return $this;
     }

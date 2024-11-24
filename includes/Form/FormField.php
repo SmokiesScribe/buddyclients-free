@@ -544,7 +544,7 @@ class FormField {
      */
     private function upload_field() {
         
-        $uploaded_files_list = $this->value ? bc_file_names( $this->value ) : '';
+        $uploaded_files_list = $this->value ? buddyc_file_names( $this->value ) : '';
         
         $field = '<div class="bc-file-upload-container bc-form-group-container" style="' . $this->style .'">';
         
@@ -589,7 +589,7 @@ class FormField {
      * @since 0.1.0
      */
     private function verification_field() {
-        $field = '<input type="hidden" name="bc_submission" value="' . $this->key . '">';
+        $field = '<input type="hidden" name="buddyc_submission" value="' . $this->key . '">';
         return $field;
     }
 

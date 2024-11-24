@@ -7,7 +7,7 @@ use BuddyClients\Config\ReferencePosts;
  * 
  * @param   string  $key    The key of the post ID to retrieve.
  */
-function bc_get_reference_post_id( $key ) {
+function buddyc_get_reference_post_id( $key ) {
     return ReferencePosts::get_reference_post_id( $key );
 }
 
@@ -24,6 +24,6 @@ function bc_get_reference_post_id( $key ) {
  *     @string  $title      The title of the post.
  * }
  */
-function bc_add_reference_post( $key, $args ) {
+function buddyc_add_reference_post( $key, $args ) {
     return ReferencePosts::add_post( $key, $args );
 }

@@ -49,7 +49,7 @@ class AlertManager {
      * @since 1.0.4
      */
     public function availability_alert() {
-        if ( ! bc_component_enabled( 'Availability' ) || ! bc_is_team() ) {
+        if ( ! buddyc_component_enabled( 'Availability' ) || ! buddyc_is_team() ) {
             return;
         }
         
@@ -60,7 +60,7 @@ class AlertManager {
         $availability = Availability::get_availability( get_current_user_id() );
         
         // Get profile link
-        $link = bc_profile_ext_link( 'availability' );
+        $link = buddyc_profile_ext_link( 'availability' );
         
         // Check if the user has no availability set
         if ( ! $availability ) {
@@ -89,7 +89,7 @@ class AlertManager {
      * @since 1.0.4
      */
     private function team_legal_alert() {
-        if ( bc_is_team() ) {
+        if ( buddyc_is_team() ) {
             self::legal_alert( 'team' );
         }
     }
@@ -100,7 +100,7 @@ class AlertManager {
      * @since 1.0.4
      */
      public function affiliate_alert() {
-        if ( bc_component_enabled( 'Affiliate' ) && bc_was_affiliate() ) {
+        if ( buddyc_component_enabled( 'Affiliate' ) && buddyc_was_affiliate() ) {
             self::legal_alert( 'affiliate' );
         }
      }
@@ -123,10 +123,10 @@ class AlertManager {
         
         // Get legal data
         $user_id = get_current_user_id();
-        $status = bc_user_agreement_status( $user_id, $type );
+        $status = buddyc_user_agreement_status( $user_id, $type );
         
         // Get profile link
-        $link = bc_profile_ext_link( $type );
+        $link = buddyc_profile_ext_link( $type );
         
         // Transitioning
         if ( $status === 'active' ) {

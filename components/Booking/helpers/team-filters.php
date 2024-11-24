@@ -7,7 +7,7 @@ use BuddyClients\Includes\Projectg;
  * 
  * @return  bool    Whether the filters match.
  */
-function bc_team_filter_match() {
+function buddyc_team_filter_match() {
     
     // Initialize
     $match = true;
@@ -77,5 +77,5 @@ function bc_team_filter_match() {
 
     wp_die(); // Terminate
 }
-add_action('wp_ajax_bc_team_filter_match', 'bc_team_filter_match'); // For logged-in users
-add_action('wp_ajax_nopriv_bc_team_filter_match', 'bc_team_filter_match'); // For logged-out users
+add_action('wp_ajax_buddyc_team_filter_match', 'buddyc_team_filter_match'); // For logged-in users
+add_action('wp_ajax_nopriv_buddyc_team_filter_match', 'buddyc_team_filter_match'); // For logged-out users

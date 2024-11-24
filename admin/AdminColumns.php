@@ -45,43 +45,43 @@ class AdminColumns {
      */
     private static function columns_data( $post_type ) {
         $columns = [
-            'bc_brief' => [
+            'buddyc_brief' => [
                 'project_id'                =>  __( 'Project', 'buddyclients' ),
                 'updated_date'              =>  __( 'Submitted', 'buddyclients' ),
             ],
-            'bc_brief_field' => [
+            'buddyc_brief_field' => [
                 'brief_types'               =>  __( 'Brief Types', 'buddyclients' ),
                 'field_type'                =>  __( 'Field Type', 'buddyclients' ),
             ],
-            'bc_service' => [
+            'buddyc_service' => [
                 'valid'                     =>  __( 'Valid', 'buddyclients' ),
                 'visible'                   =>  __( 'Visibility', 'buddyclients' ),
                 'rate_value'                =>  __( 'Client Rate', 'buddyclients' ),
                 'team_member_percentage'    =>  __( 'Team Member %', 'buddyclients' ),
             ],
-            'bc_adjustment' => [
+            'buddyc_adjustment' => [
                 'form_field_type'           =>  __( 'Field Type', 'buddyclients' ),
             ],
-            'bc_service_type' => [
+            'buddyc_service_type' => [
                 'visible'                   =>  __( 'Visibility', 'buddyclients' ),
                 'form_field_type'           =>  __( 'Field Type', 'buddyclients' ),
             ],
-            'bc_filter' => [
+            'buddyc_filter' => [
                 'xprofile_field'            =>  __( 'Field', 'buddyclients' ),
                 'xprofile_field_type'       =>  __( 'Field Type', 'buddyclients' ),
             ],
-            'bc_quote' => [
+            'buddyc_quote' => [
                 'client_id'                 =>  __( 'Client', 'buddyclients' ),
                 'valid'                     =>  __( 'Valid', 'buddyclients' ),
                 'visible'                   =>  __( 'Visibility', 'buddyclients' ),
                 'rate_value'                =>  __( 'Client Rate', 'buddyclients' ),
                 'team_member_percentage'    =>  __( 'Team Member %', 'buddyclients' ),
             ],
-            'bc_legal_mod' => [
+            'buddyc_legal_mod' => [
                 'user_id'                   =>  __( 'User', 'buddyclients' ),
                 'legal_type'                =>  __( 'Legal Type', 'buddyclients' ),
             ],
-            'bc_file_upload' => [
+            'buddyc_file_upload' => [
                 'file_types'                =>  __( 'File Types', 'buddyclients' )
             ],
         ];
@@ -93,7 +93,7 @@ class AdminColumns {
          *
          * @param array  $columns An array of admin columns info.
          */
-         $columns = apply_filters( 'bc_admin_columns', $columns );
+         $columns = apply_filters( 'buddyc_admin_columns', $columns );
         
         return $columns[$post_type] ?? [];
     }
@@ -107,16 +107,16 @@ class AdminColumns {
      */
     public function sortable_columns() {
         $sortable_columns = [
-            'bc_brief_field' => [
+            'buddyc_brief_field' => [
                 'brief_types'               =>  __( 'Brief Types', 'buddyclients' ),
             ],
-            'bc_service' => [
+            'buddyc_service' => [
                 'valid'                     =>  __( 'Valid', 'buddyclients' ),
             ],
-            'bc_service_type' => [
+            'buddyc_service_type' => [
                 'visible'                   =>  __( 'Visibility', 'buddyclients' ),
             ],
-            'bc_quote' => [
+            'buddyc_quote' => [
                 'client_id'                 =>  __( 'Client', 'buddyclients' ),
                 'valid'                     =>  __( 'Valid', 'buddyclients' ),
             ]
@@ -129,7 +129,7 @@ class AdminColumns {
          *
          * @param array  $columns An array of sortable admin columns.
          */
-         $sortable_columns = apply_filters( 'bc_sortable_admin_columns', $sortable_columns );
+         $sortable_columns = apply_filters( 'buddyc_sortable_admin_columns', $sortable_columns );
          
         return $sortable_columns[$this->post_type] ?? [];
     }
@@ -219,7 +219,7 @@ class AdminColumns {
         foreach ( $columns as $column_key => $column_title ) {
             
             // Check for Freelancer Mode
-            if ( bc_freelancer_mode() ) {
+            if ( buddyc_freelancer_mode() ) {
                 if ( in_array( $column_key, $this->freelancer_exclusions() ) ) {
                     continue;
                 }
@@ -534,7 +534,7 @@ class AdminColumns {
      * @param mixed $value The value of the meta field.
      */
     private function submitted_column( $value ) {
-        return $value ? bc_admin_icon('check') . '<br>' . __( 'Last Update: ', 'buddyclients' ) . gmdate('F j, Y', strtotime($value)) : bc_admin_icon('x');
+        return $value ? buddyc_admin_icon('check') . '<br>' . __( 'Last Update: ', 'buddyclients' ) . gmdate('F j, Y', strtotime($value)) : buddyc_admin_icon('x');
     }
     
     /**
@@ -545,7 +545,7 @@ class AdminColumns {
      * @param mixed $value The value of the meta field.
      */
     private function valid_column( $value ) {
-        return $value === 'valid' ? bc_admin_icon('check') : $value;
+        return $value === 'valid' ? buddyc_admin_icon('check') : $value;
     }
     
     /**
@@ -579,7 +579,7 @@ class AdminColumns {
      * @param mixed $value The value of the meta field.
      */
     private function percentage_column( $value ) {
-        if ( ! bc_freelancer_mode() ) {
+        if ( ! buddyc_freelancer_mode() ) {
             return $value !== '' ? $value . __( '%', 'buddyclients' ) : $value;
         }
     }
@@ -620,6 +620,6 @@ class AdminColumns {
      * @param mixed $value The value of the meta field.
      */
     private function visibility_column( $value ) {
-        return $value === 'visible' ? bc_admin_icon('eye') : bc_admin_icon('eye-slash');
+        return $value === 'visible' ? buddyc_admin_icon('eye') : buddyc_admin_icon('eye-slash');
     }
 }

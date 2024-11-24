@@ -103,7 +103,7 @@ class Project {
         $this->filter_data = self::get_project_meta( $group_id, 'filter_data', true );
         
         // Get team members
-        $this->lock_team = ( bc_get_setting( 'booking', 'lock_team' ) === 'lock' );
+        $this->lock_team = ( buddyc_get_setting( 'booking', 'lock_team' ) === 'lock' );
         $this->team_data = self::get_project_meta( $group_id, 'team_data', true );
         
         // Get booked services

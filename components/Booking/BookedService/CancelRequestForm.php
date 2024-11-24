@@ -79,7 +79,7 @@ class CancelRequestForm {
      */
     private function cancellation_allowed() {
         // Get cancellation window setting
-        $cancellation_window = bc_get_setting( 'booking', 'cancellation_window' );
+        $cancellation_window = buddyc_get_setting( 'booking', 'cancellation_window' );
         
         // Get booked time
         $created_at = BookedService::get_created_at( $this->booked_service_id );

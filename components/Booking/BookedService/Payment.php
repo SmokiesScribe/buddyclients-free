@@ -202,7 +202,7 @@ class Payment {
         $items = [
             $this->service_names, // service names
             bp_core_get_user_displayname( $this->client_id ), // client id
-            bc_group_name( $this->project_id ) // project name
+            buddyc_group_name( $this->project_id ) // project name
         ];
 
         // Remove empty values
@@ -221,7 +221,7 @@ class Payment {
      */
     private function schedule_eligible() {
         // Get cancellation window
-        $cancellation_window = bc_get_setting('booking', 'cancellation_window' );
+        $cancellation_window = buddyc_get_setting('booking', 'cancellation_window' );
         
         // Eligible if no cancellation window set
         if ( $cancellation_window == 0 ) {
@@ -236,7 +236,7 @@ class Payment {
         $payment_id = $this->ID;
         
         // Schedule the update_status function
-        wp_schedule_single_event( $scheduled_date, 'bc_payment_eligible', array( $payment_id, $cancellation_window, current_time('timestamp') ) );
+        wp_schedule_single_event( $scheduled_date, 'buddyc_payment_eligible', array( $payment_id, $cancellation_window, current_time('timestamp') ) );
     }
     
     /**
@@ -322,7 +322,7 @@ class Payment {
                  * 
                  * @param int $ID    The Payment ID.
                  */
-                do_action('bc_payment_paid', $ID);
+                do_action('buddyc_payment_paid', $ID);
                 
             } else {
                 // Clear paid date

@@ -6,6 +6,6 @@ use BuddyClients\Admin\AdminDashboard;
  * 
  * @since 0.1.0
  */
-function bc_bookings_dashboard() {    
+function buddyc_bookings_dashboard() {    
     new AdminDashboard();
 };

@@ -99,7 +99,7 @@ class Alert {
         }
         
         // Get current url
-        $current_url = bc_curr_url();
+        $current_url = buddyc_curr_url();
 
          // Loop through the links
          foreach ( $links as $link ) {

@@ -97,7 +97,7 @@ class SingleBrief {
         $fields = [];
         
         // Get all brief fields
-        $brief_fields = ( new PostQuery( 'bc_brief_field' ) )->posts;
+        $brief_fields = ( new PostQuery( 'buddyc_brief_field' ) )->posts;
         
         // Loop through fields
         foreach ( $brief_fields as $field ) {
@@ -138,7 +138,7 @@ class SingleBrief {
         $content = '';
         
         // Check brief view
-        $brief_view = bc_get_param( 'brief-view' );
+        $brief_view = buddyc_get_param( 'brief-view' );
         
         // Get brief type
         $brief_type_name = implode(', ', wp_get_post_terms($this->brief_id, 'brief_type', array('fields' => 'names')));
@@ -149,7 +149,7 @@ class SingleBrief {
         
         // Check user status
         $current_user_id = get_current_user_id();
-        $is_admin = groups_is_user_admin( $current_user_id, $project_id ) || bc_is_admin();
+        $is_admin = groups_is_user_admin( $current_user_id, $project_id ) || buddyc_is_admin();
         $is_member = groups_is_user_member( $current_user_id, $project_id );
         
         // Get project details
@@ -205,7 +205,7 @@ private function toggle_button( $show_form, $is_admin, $updated_date ) {
     $updated_url = null;
     
     // Initialize param manager
-    $param_manager = bc_param_manager();
+    $param_manager = buddyc_param_manager();
 
     // Is admin viewing completed brief
     if ( ! $show_form && $is_admin ) {

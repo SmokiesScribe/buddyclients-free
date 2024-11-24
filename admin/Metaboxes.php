@@ -215,7 +215,7 @@ class Metaboxes {
         }
         
         // Escape and output content
-        $allowed_html = bc_allowed_html_form();
+        $allowed_html = buddyc_allowed_html_form();
         echo wp_kses( $content, $allowed_html );
     }
     
@@ -229,8 +229,8 @@ class Metaboxes {
      */
     private static function freelancer_check( $data ) {
         if ( isset( $data['freelancer'] ) && $data['freelancer'] === 'disable' ) {
-            if ( bc_freelancer_mode() ) {
-                return bc_freelancer_mode_link();
+            if ( buddyc_freelancer_mode() ) {
+                return buddyc_freelancer_mode_link();
             }
         }
         return false;
@@ -333,11 +333,11 @@ class Metaboxes {
         
         // Check for post type
         if ( post_type_exists( $option_key ) ) {
-            $options = bc_options( 'posts', ['post_type' => $option_key] );
+            $options = buddyc_options( 'posts', ['post_type' => $option_key] );
             
         // Check for taxonomy
         } else if ( taxonomy_exists( $option_key ) ) {
-            $options = bc_options( 'taxonomy', ['taxonomy' => $option_key] );
+            $options = buddyc_options( 'taxonomy', ['taxonomy' => $option_key] );
         }
         
         switch ( $option_key ) {
@@ -347,12 +347,12 @@ class Metaboxes {
             case 'client':
             case 'affiliate':
             case 'users':
-                $options = bc_options( 'users', ['user_type' => $option_key] );
+                $options = buddyc_options( 'users', ['user_type' => $option_key] );
                 break;
                 
             // Projects
             case 'projects':
-                $options = bc_options( 'projects' );
+                $options = buddyc_options( 'projects' );
                 break;
             
             // Payment    
@@ -375,7 +375,7 @@ class Metaboxes {
             
             // Help docs    
             case 'help_docs':
-                $options = bc_options( 'posts', ['post_type' => bc_help_post_types()] );
+                $options = buddyc_options( 'posts', ['post_type' => buddyc_help_post_types()] );
                 break;
         }
     

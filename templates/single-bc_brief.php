@@ -1,7 +1,7 @@
 <?php
 /**
  * Template Name: Single BC Brief
- * Description: A custom template for a single bc_brief post.
+ * Description: A custom template for a single buddyc_brief post.
  */
 
 // Get header
@@ -22,7 +22,7 @@ if ( ! class_exists( 'BuddyClients\Components\Brief\SingleBrief' ) ) {
 $content .= '</div>';
 
 // Output content
-echo wp_kses( $content, bc_allowed_html_form() );
+echo wp_kses( $content, buddyc_allowed_html_form() );
 
 // Get footer
 get_footer();

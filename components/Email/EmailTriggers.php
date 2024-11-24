@@ -35,18 +35,18 @@ class EmailTriggers {
     private static function define_hooks() {
         
         $hooks = [
-            'bc_successful_booking'        => [self::class, 'successful_booking_emails'],
-            'bc_cancel_request'            => [self::class, 'cancel_request_email'],
-            'bc_service_status_updated'    => [self::class, 'service_status_email'],
-            'bc_brief_updated'             => [self::class, 'brief_updated_email'],
-            'bc_new_quote'                 => [self::class, 'new_quote_email'],
-            'bc_new_booked_service'        => [self::class, 'new_assignment_email'],
-            'bc_abandoned_booking'         => [self::class, 'abandoned_booking_email'],
-            'bc_payment_paid'              => [self::class, 'payment_paid_email'],
-            'bc_new_testimonial'           => [self::class, 'new_testimonial_email'],
-            'bc_new_affiliate'             => [self::class, 'new_affiliate_email'],
+            'buddyc_successful_booking'        => [self::class, 'successful_booking_emails'],
+            'buddyc_cancel_request'            => [self::class, 'cancel_request_email'],
+            'buddyc_service_status_updated'    => [self::class, 'service_status_email'],
+            'buddyc_brief_updated'             => [self::class, 'brief_updated_email'],
+            'buddyc_new_quote'                 => [self::class, 'new_quote_email'],
+            'buddyc_new_booked_service'        => [self::class, 'new_assignment_email'],
+            'buddyc_abandoned_booking'         => [self::class, 'abandoned_booking_email'],
+            'buddyc_payment_paid'              => [self::class, 'payment_paid_email'],
+            'buddyc_new_testimonial'           => [self::class, 'new_testimonial_email'],
+            'buddyc_new_affiliate'             => [self::class, 'new_affiliate_email'],
             'availability_reminder'        => [self::class, 'availability_reminder_email'],
-            'bc_booking_form_submission'   => [self::class, 'assisted_booking_email'],
+            'buddyc_booking_form_submission'   => [self::class, 'assisted_booking_email'],
         ];
         
         /**
@@ -56,7 +56,7 @@ class EmailTriggers {
          *
          * @param array  $callbacks    An array of email hooks and callbacks.
          */
-         $hooks = apply_filters( 'bc_email_hooks', $hooks );
+         $hooks = apply_filters( 'buddyc_email_hooks', $hooks );
         
         // Loop through hooks and call callable
         foreach ( $hooks as $hook => $callable ) {
@@ -272,8 +272,8 @@ class EmailTriggers {
      */
     public static function new_affiliate_email( $affiliate_id ) {
         $args = [
-            'to_email'          => bc_affiliate_email( $affiliate_id ),
-            'affiliate_link'    => bc_affiliate_link( $affiliate_id ),
+            'to_email'          => buddyc_affiliate_email( $affiliate_id ),
+            'affiliate_link'    => buddyc_affiliate_link( $affiliate_id ),
         ];
         new Email( 'new_affiliate', $args );
     }
@@ -287,8 +287,8 @@ class EmailTriggers {
      */
     public static function new_cancel_request( $cancel_request ) {
         $args = [
-            'to_email'          => bc_affiliate_email( $affiliate_id ),
-            'affiliate_link'    => bc_affiliate_link( $affiliate_id ),
+            'to_email'          => buddyc_affiliate_email( $affiliate_id ),
+            'affiliate_link'    => buddyc_affiliate_link( $affiliate_id ),
         ];
         new Email( 'new_affiliate', $args );
     }
@@ -309,7 +309,7 @@ class EmailTriggers {
         
         $args = [
             'to_user_id'        => $user_id,
-            'availability_link' => bc_profile_ext_link( 'availability' ),
+            'availability_link' => buddyc_profile_ext_link( 'availability' ),
         ];
         new Email( 'new_affiliate', $args );
     }

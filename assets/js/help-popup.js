@@ -31,7 +31,7 @@ document.addEventListener('DOMContentLoaded', function () {
                 url: ajaxurl,
                 method: 'POST',
                 data: {
-                    action: 'bc_get_popup_content',
+                    action: 'buddyc_get_popup_content',
                     postId: postId,
                     url: url,
                     rawContent: rawContent,

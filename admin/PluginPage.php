@@ -91,7 +91,7 @@ class PluginPage extends PageManager {
      */
     public static function get_page( $key ) {
         // Get the page ID from the setting
-        $curr_setting = bc_get_setting( 'pages', $key );
+        $curr_setting = buddyc_get_setting( 'pages', $key );
         
         // Check whether the post is published
         if ( get_post_status( $curr_setting ) !== 'publish' ) {
@@ -156,7 +156,7 @@ class PluginPage extends PageManager {
             
             // Update settings
             $field_key = $this->post_status === 'publish' ? $this->page_key : $this->page_key . '_draft';
-            bc_update_setting( $this->settings_key, $field_key, $this->post_id );
+            buddyc_update_setting( $this->settings_key, $field_key, $this->post_id );
             
             // Assign vars
             if ( $this->post_status === 'draft' ) {
@@ -165,7 +165,7 @@ class PluginPage extends PageManager {
             $this->permalink = get_the_permalink( $this->post_id );
             
             // Add setting key to post meta
-            update_post_meta( $this->post_id, 'bc_page_key', $this->page_key );
+            update_post_meta( $this->post_id, 'buddyc_page_key', $this->page_key );
             
         }
         return $this;

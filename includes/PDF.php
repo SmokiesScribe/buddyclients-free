@@ -100,7 +100,7 @@ class PDF {
         $this->ID = $ID ?? null;
         
         // Load the TCPDF library
-        require_once BC_VENDOR_DIR . '/tecnickcom/tcpdf/tcpdf.php';
+        require_once BUDDYC_VENDOR_DIR . '/tecnickcom/tcpdf/tcpdf.php';
         
         // Initialize object handler
         self::init_object_handler();
@@ -236,7 +236,7 @@ class PDF {
      */
     function format_content( $pdf, $content ) {
         // Split content into an array of paragraphs
-        $paragraphs = bc_split_paragraphs( $content );
+        $paragraphs = buddyc_split_paragraphs( $content );
         
         // Make sure it's an array
         $paragraphs = is_array( $paragraphs ) ? $paragraphs : [$paragraphs];

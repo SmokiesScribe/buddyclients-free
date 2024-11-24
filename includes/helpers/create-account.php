@@ -17,7 +17,7 @@ use BuddyEvents\Includes\Registration\SponsorIntent;
      * 
      * @since 0.1.0
      */
-    function bc_checkout_create_account() {
+    function buddyc_checkout_create_account() {
         // Ensure the request is from an authenticated user if required
         if ( ! defined( 'DOING_AJAX' ) || ! DOING_AJAX ) {
             wp_send_json_error(__('Invalid request', 'buddyclients'));
@@ -44,14 +44,14 @@ use BuddyEvents\Includes\Registration\SponsorIntent;
             $sponsor_intent_id = isset( $_POST['sponsor_intent_id'] ) ? sanitize_text_field( wp_unslash( $_POST['sponsor_intent_id'] ) ) : null;            
             
             // Validate password strength
-            $password_error = bc_validate_password_strength( $user_password );
+            $password_error = buddyc_validate_password_strength( $user_password );
             if ( $password_error ) {
                 wp_send_json_error($password_error);
                 wp_die();
             }
             
             // Build login name
-            $user_login = bc_generate_login_name($user_name);
+            $user_login = buddyc_generate_login_name($user_name);
         
             // Create account
             $new_user_id = wp_create_user($user_login, $user_password, $user_email);
@@ -68,7 +68,7 @@ use BuddyEvents\Includes\Registration\SponsorIntent;
                 // Update Booking info
                 if ( $booking_intent_id && $booking_intent_id !== '' ) {
                     // Update client type
-                    $client_type = bc_get_setting( 'general', 'default_client_type' );
+                    $client_type = buddyc_get_setting( 'general', 'default_client_type' );
                     bp_set_member_type( $new_user_id, $client_type, true ); // append to existing
                     
                     // Update BookingIntent
@@ -78,7 +78,7 @@ use BuddyEvents\Includes\Registration\SponsorIntent;
                 
                 // Attendee type
                 if ( $registration_intent_id && $registration_intent_id !== '' && class_exists( RegistrationIntent::class ) ) {
-                    $attendee_type = bc_get_setting( 'event', 'attendee_type' );
+                    $attendee_type = buddyc_get_setting( 'event', 'attendee_type' );
                     bp_set_member_type( $new_user_id, $attendee_type, true ); // append to existing
                     
                     // Update RegistrationIntent
@@ -100,7 +100,7 @@ use BuddyEvents\Includes\Registration\SponsorIntent;
                  * 
                  * @param int $user_id The ID of the newly created user.
                  */
-                do_action( 'bc_created_user', $new_user_id, $booking_intent_id );
+                do_action( 'buddyc_created_user', $new_user_id, $booking_intent_id );
                 
                 // Return new user ID on success
                 wp_send_json_success(['user_id' => $new_user_id]);
@@ -116,8 +116,8 @@ use BuddyEvents\Includes\Registration\SponsorIntent;
         }
     }
     // Hook to ajax
-    add_action('wp_ajax_bc_checkout_create_account', 'bc_checkout_create_account');
-    add_action('wp_ajax_nopriv_bc_checkout_create_account', 'bc_checkout_create_account');
+    add_action('wp_ajax_buddyc_checkout_create_account', 'buddyc_checkout_create_account');
+    add_action('wp_ajax_nopriv_buddyc_checkout_create_account', 'buddyc_checkout_create_account');
     
     /**
      * Validates password strength.
@@ -129,7 +129,7 @@ use BuddyEvents\Includes\Registration\SponsorIntent;
      * @param string $password The password to validate.
      * @return string|null Returns error message if validation fails, otherwise null.
      */
-    function bc_validate_password_strength( $password ) {
+    function buddyc_validate_password_strength( $password ) {
         // Define basic strength criteria
         $min_length = 8; // Minimum length
         $has_uppercase = preg_match('/[A-Z]/', $password); // At least one uppercase letter
@@ -166,7 +166,7 @@ use BuddyEvents\Includes\Registration\SponsorIntent;
      * 
      * @since 0.1.0
      */
-    function bc_generate_login_name($first_name) {
+    function buddyc_generate_login_name($first_name) {
         // Convert first name to lowercase and remove special characters
         $login_name = strtolower(preg_replace('/[^a-zA-Z0-9]/', '', $first_name));
         

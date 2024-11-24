@@ -63,7 +63,7 @@
 }
 
 /* Description Checkbox */
-.bc_description_checkbox + label {
+.buddyc_description_checkbox + label {
     color: gray;
     font-size: 15px;
 }

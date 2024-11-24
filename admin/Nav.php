@@ -33,8 +33,8 @@ class Nav {
             ],
             'legal' => [
                 __( 'User Agreements', 'buddyclients' )    => ['page'  => 'bc-user-agreements'],
-                __( 'Legal Modifications', 'buddyclients' )=> ['post_type'  => 'bc_legal_mod'],
-                __( 'Settings', 'buddyclients' )     => ['page'  => 'bc-legal-settings', 'post_type'  => 'bc_legal'],
+                __( 'Legal Modifications', 'buddyclients' )=> ['post_type'  => 'buddyc_legal_mod'],
+                __( 'Settings', 'buddyclients' )     => ['page'  => 'bc-legal-settings', 'post_type'  => 'buddyc_legal'],
             ], 
             'settings' => [
                 __( 'General', 'buddyclients' )            => ['page'  => 'bc-general-settings'],
@@ -45,19 +45,19 @@ class Nav {
                 'Stripe'                                    => ['page'  => 'bc-stripe-settings'],
                 __( 'Sales', 'buddyclients' )               => ['page'  => 'bc-sales-settings'],
                 __( 'Emails', 'buddyclients' )              => ['page'  => 'bc-email-settings'],
-                __( 'Legal', 'buddyclients' )               => ['page'  => 'bc-legal-settings', 'post_type'  => 'bc_legal'],
+                __( 'Legal', 'buddyclients' )               => ['page'  => 'bc-legal-settings', 'post_type'  => 'buddyc_legal'],
                 __( 'Affiliate', 'buddyclients' )           => ['page'  => 'bc-affiliate-settings'],
                 __( 'Help Posts', 'buddyclients' )          => ['page'  => 'bc-help-settings'],
                 //__( 'Integrations', 'buddyclients' )        => ['page'  => 'bc-integrations-settings'],
             ],
             'services' => [
-                __( 'Services', 'buddyclients' )            => ['post_type'  => 'bc_service'],
-                __( 'Service Types', 'buddyclients' )       => ['post_type'  => 'bc_service_type'],
-                __( 'Rate Types', 'buddyclients' )          => ['post_type'  => 'bc_rate_type'],
-                __( 'Team Roles', 'buddyclients' )          => ['post_type'  => 'bc_role'],
-                __( 'Adjustment Fields', 'buddyclients' )   => ['post_type'  => 'bc_adjustment'],
-                __( 'Filter Fields', 'buddyclients' )       => ['post_type'  => 'bc_filter'],
-                __( 'File Upload Types', 'buddyclients' )   => ['post_type'  => 'bc_file_upload'],
+                __( 'Services', 'buddyclients' )            => ['post_type'  => 'buddyc_service'],
+                __( 'Service Types', 'buddyclients' )       => ['post_type'  => 'buddyc_service_type'],
+                __( 'Rate Types', 'buddyclients' )          => ['post_type'  => 'buddyc_rate_type'],
+                __( 'Team Roles', 'buddyclients' )          => ['post_type'  => 'buddyc_role'],
+                __( 'Adjustment Fields', 'buddyclients' )   => ['post_type'  => 'buddyc_adjustment'],
+                __( 'Filter Fields', 'buddyclients' )       => ['post_type'  => 'buddyc_filter'],
+                __( 'File Upload Types', 'buddyclients' )   => ['post_type'  => 'buddyc_file_upload'],
             ],
             'payments' => [
                 __( 'Team Payments', 'buddyclients' )       => ['page'  => 'bc-team-payments'],
@@ -65,12 +65,12 @@ class Nav {
                 __( 'Sales Payments', 'buddyclients' )      => ['page'  => 'bc-sales-payments'],
             ],
             'briefs' => [
-                __( 'Briefs', 'buddyclients' )              => ['post_type'  => 'bc_brief'],
-                __( 'Brief Types', 'buddyclients' )         => ['taxonomy'   => 'brief_type', 'post_type'  => 'bc_brief'],
-                __( 'Brief Fields', 'buddyclients' )        => ['post_type'  => 'bc_brief_field'],
+                __( 'Briefs', 'buddyclients' )              => ['post_type'  => 'buddyc_brief'],
+                __( 'Brief Types', 'buddyclients' )         => ['taxonomy'   => 'brief_type', 'post_type'  => 'buddyc_brief'],
+                __( 'Brief Fields', 'buddyclients' )        => ['post_type'  => 'buddyc_brief_field'],
             ],
             'emails' => [
-                __( 'Email Templates', 'buddyclients' )    => ['post_type'  => 'bc_email'],
+                __( 'Email Templates', 'buddyclients' )    => ['post_type'  => 'buddyc_email'],
                 __( 'Email Log', 'buddyclients' )          => ['page'  => 'bc-email-log'],
             ],
             'users' => [
@@ -78,10 +78,10 @@ class Nav {
                 __( 'Affiliates', 'buddyclients' )          => ['page'  => 'bc-affiliates'],
             ],
             'testimonials' => [
-                __( 'Testimonials', 'buddyclients' )       => ['post_type'  => 'bc_testimonial'],
+                __( 'Testimonials', 'buddyclients' )       => ['post_type'  => 'buddyc_testimonial'],
             ],  
             'custom_quotes' => [
-                __( 'Custom Quotes', 'buddyclients' )      => ['post_type'  => 'bc_quote'],
+                __( 'Custom Quotes', 'buddyclients' )      => ['post_type'  => 'buddyc_quote'],
             ],
             'license' => [
                 __( 'License Key', 'buddyclients' )        => ['page'  => 'bc-license-settings'],
@@ -96,7 +96,7 @@ class Nav {
          *
          * @param array  $callbacks An array of callables keyed by settings group.
          */
-         $tabs = apply_filters( 'bc_nav_tabs', $tabs );
+         $tabs = apply_filters( 'buddyc_nav_tabs', $tabs );
          
          return $tabs;
     }
@@ -118,8 +118,8 @@ class Nav {
     private static function define_hooks() {
         add_action('admin_notices', [self::class, 'display_nav_tabs'] );
         add_action('admin_init', [self::class, 'active_tab'] );
-        add_action('bc_admin', [self::class, 'open_menu'], 10, 1 );
-        add_action('bc_admin', [self::class, 'active_submenu'], 10, 1 );
+        add_action('buddyc_admin', [self::class, 'open_menu'], 10, 1 );
+        add_action('buddyc_admin', [self::class, 'active_submenu'], 10, 1 );
     }
     
     /**
@@ -132,7 +132,7 @@ class Nav {
      */
     public static function display_nav_tabs() {
         // Exit if we're in the Gutenberg editor
-        if (bc_gutenberg_editor()) {
+        if (buddyc_gutenberg_editor()) {
             return;
         }
         
@@ -146,7 +146,7 @@ class Nav {
         $tabs = '';
 
         // Handle params
-        $group = bc_get_param( 'group' );
+        $group = buddyc_get_param( 'group' );
         
         // Determine if an active tab was found and if the group exists
         if ( ($active_tab && isset($tabs_array[$active_tab['group']])) || $group ) {
@@ -223,7 +223,7 @@ class Nav {
              *     @type array $group_data The nav tab group data.
              * }
              */
-            do_action('bc_admin', $active_tab);
+            do_action('buddyc_admin', $active_tab);
         }
     }
     
@@ -360,10 +360,10 @@ class Nav {
     private static function get_params( $link = null ) {
         
         // Get all url params for provided link or curr url
-        $array = bc_get_all_params( $link );
+        $array = buddyc_get_all_params( $link );
 
-        //echo 'Returned from bc_get_all_params;';
-        //bc_print($array);
+        //echo 'Returned from buddyc_get_all_params;';
+        //buddyc_print($array);
     
         // Extract parameters
         return [

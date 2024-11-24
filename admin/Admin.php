@@ -134,7 +134,7 @@ class Admin {
             'BuddyClients',
             'manage_options',
             'bc-dashboard',
-            'bc_dashboard_content',
+            'buddyc_dashboard_content',
             'dashicons-buddyclients',
             5
         );
@@ -144,7 +144,7 @@ class Admin {
             'Dashboard',
             'manage_options',
             'bc-dashboard',
-            'bc_dashboard_content',
+            'buddyc_dashboard_content',
             0
         );
 
@@ -220,7 +220,7 @@ class Admin {
      * @param   string  $file_name  The file name of the single asset to load.
      */
     private function enqueue_asset( $dir, $file_name ) {
-        $asset_manager = new AssetManager( BC_PLUGIN_FILE, $dir, $file_name );
+        $asset_manager = new AssetManager( BUDDYC_PLUGIN_FILE, $dir, $file_name );
         $asset_manager->run();
     }
 }

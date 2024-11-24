@@ -63,7 +63,7 @@ class CancelRequestSubmission {
          * 
          * @param   CancelRequest   The CancelRequest object.
          */
-        do_action( 'bc_cancel_request', $this );
+        do_action( 'buddyc_cancel_request', $this );
     }
 }
     

@@ -54,17 +54,17 @@ class ServiceHandler {
         add_action( 'updated_post_meta', [$this, 'update_meta_flags'], 10, 4 );
         
         // Validate all Services
-        add_action( 'update_option_bc_components_settings', [$this, 'validate_all_services'] );
-        add_action( 'update_option_bc_booking_settings', [$this, 'validate_all_services'] );
-        add_action( 'bc_version_switch', [$this, 'validate_all_services'] );        
+        add_action( 'update_option_buddyc_components_settings', [$this, 'validate_all_services'] );
+        add_action( 'update_option_buddyc_booking_settings', [$this, 'validate_all_services'] );
+        add_action( 'buddyc_version_switch', [$this, 'validate_all_services'] );        
         
         // Validate single Quote
         add_action( 'updated_post_meta', [$this, 'update_meta_flags'], 10, 4 );
         
         // Validate all Quotes
-        add_action( 'update_option_bc_components_settings', [$this, 'validate_all_quotes'] );
-        add_action( 'update_option_bc_booking_settings', [$this, 'validate_all_quotes'] );
-        add_action( 'bc_version_switch', [$this, 'validate_all_quotes'] );        
+        add_action( 'update_option_buddyc_components_settings', [$this, 'validate_all_quotes'] );
+        add_action( 'update_option_buddyc_booking_settings', [$this, 'validate_all_quotes'] );
+        add_action( 'buddyc_version_switch', [$this, 'validate_all_quotes'] );        
 
     }
     
@@ -83,7 +83,7 @@ class ServiceHandler {
         // Check post type
         $post_type = get_post_type( $post_id );
         
-        if ( $post_type !== 'bc_service' && $post_type !== 'bc_quote' ) {
+        if ( $post_type !== 'buddyc_service' && $post_type !== 'buddyc_quote' ) {
             return;
         }
         
@@ -122,12 +122,12 @@ class ServiceHandler {
      */
     public function validate_service( $post_id ) {
         // Service
-        if ( get_post_type( $post_id ) === 'bc_service' ) {
+        if ( get_post_type( $post_id ) === 'buddyc_service' ) {
             $service = new Service( $post_id );
             $service->validate();
             
         // Quote
-        } else if ( get_post_type( $post_id ) === 'bc_quote' ) {
+        } else if ( get_post_type( $post_id ) === 'buddyc_quote' ) {
             $quote = new Quote( $post_id );
             $quote->validate();
         }
@@ -140,7 +140,7 @@ class ServiceHandler {
      */
     public function validate_all_services() {
         // Get all service posts
-        $query = new PostQuery( 'bc_service' );
+        $query = new PostQuery( 'buddyc_service' );
         $posts = $query->posts;
         
         // Loop through service IDs and validate
@@ -157,7 +157,7 @@ class ServiceHandler {
      */
     public function validate_quote( $post_id ) {
         if ( class_exists( Quote::class ) ) {
-            if ( get_post_type( $post_id ) === 'bc_quote' ) {
+            if ( get_post_type( $post_id ) === 'buddyc_quote' ) {
                 $service = new Quote( $post_id );
                 $service->validate();
             }
@@ -173,7 +173,7 @@ class ServiceHandler {
         if ( class_exists( Quote::class ) ) {
         
             // Get all quote posts
-            $query = new PostQuery( 'bc_quote' );
+            $query = new PostQuery( 'buddyc_quote' );
             $posts = $query->posts;
             
             // Loop through service IDs and validate

@@ -11,7 +11,7 @@ function createNewPage(args) {
     console.log(createPageData);
     
     jQuery.post(ajaxurl, {
-        action: 'bc_admin_create_new_page',
+        action: 'buddyc_admin_create_new_page',
         args: args,
         nonce: createPageData.nonce,
         nonceAction: createPageData.nonceAction,

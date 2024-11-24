@@ -92,8 +92,8 @@ class Client {
         $this->ID = $user_id;
         
         // Get customer ID
-        if ( function_exists( 'bc_stripe_keys' ) ) {
-            $this->stripe_keys = bc_stripe_keys();
+        if ( function_exists( 'buddyc_stripe_keys' ) ) {
+            $this->stripe_keys = buddyc_stripe_keys();
             $this->get_customer_id();
         }
         

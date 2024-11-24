@@ -27,38 +27,38 @@ class PageManager {
            'core' => [
                 'booking_page' => [
                     'label' => 'Booking Page',
-                    'description' => 'The page where the booking form is located. Include shortcode: [bc_booking_form]',
+                    'description' => 'The page where the booking form is located. Include shortcode: [buddyc_booking_form]',
                     'post_title' => 'Book Services',
-                    'post_content' => '[bc_booking_form]',
+                    'post_content' => '[buddyc_booking_form]',
                     'required_component' => 'Booking'
                 ],
                 'checkout_page' => [
                     'label' => 'Checkout Page',
-                    'description' => 'Where users will pay for services. Include shortcode: [bc_checkout]',
+                    'description' => 'Where users will pay for services. Include shortcode: [buddyc_checkout]',
                     'post_title' => 'Checkout',
-                    'post_content' => '[bc_checkout]',
+                    'post_content' => '[buddyc_checkout]',
                     'required_component' => 'Booking'
                 ],
                 'confirmation_page' => [
                     'label' => 'Confirmation Page',
-                    'description' => 'Where users are redirected after paying. Include shortcode: [bc_confirmation]',
+                    'description' => 'Where users are redirected after paying. Include shortcode: [buddyc_confirmation]',
                     'post_title' => 'Confirmation',
-                    'post_content' => '[bc_confirmation]',
+                    'post_content' => '[buddyc_confirmation]',
                     'required_component' => 'Booking'
                 ],
                 'contact_form' => [
                     'label' => 'Contact Form',
-                    'description' => 'Public contact form. Include shortcode: [bc_contact_form]',
+                    'description' => 'Public contact form. Include shortcode: [buddyc_contact_form]',
                     'post_title' => 'Contact',
-                    'post_content' => '[bc_contact_form]',
+                    'post_content' => '[buddyc_contact_form]',
                     'required_component' => 'Help',
                     'never_require' => true
                 ],
                 'testimonials_form' => [
                     'label' => 'Testimonials Form',
-                    'description' => 'Where users can submit testimonials. Include shortcode: [bc_testimonial_form]',
+                    'description' => 'Where users can submit testimonials. Include shortcode: [buddyc_testimonial_form]',
                     'post_title' => 'Submit Testimonial',
-                    'post_content' => '[bc_testimonial_form]',
+                    'post_content' => '[buddyc_testimonial_form]',
                     'required_component' => 'Testimonial'
                 ],
             ],
@@ -85,7 +85,7 @@ class PageManager {
          *
          * @param array  $pages    An array of plugin page data.
          */
-         $pages = apply_filters( 'bc_plugin_pages', $pages );
+         $pages = apply_filters( 'buddyc_plugin_pages', $pages );
          
         return $pages;
 	}
@@ -106,7 +106,7 @@ class PageManager {
 	    // Loop through core pages
 	    foreach ( $all_pages['core'] as $key => $page_data ) {
 	        // Check whether the component is enabled
-	        if ( ! isset( $page_data['required_component'] ) || bc_component_enabled( $page_data['required_component'] ) ) {
+	        if ( ! isset( $page_data['required_component'] ) || buddyc_component_enabled( $page_data['required_component'] ) ) {
 	            $required_pages[$key] = $page_data;
 	        }
 	    }
@@ -148,7 +148,7 @@ class PageManager {
             ];
 
             // Output notice            
-            bc_admin_notice( $notice_args );
+            buddyc_admin_notice( $notice_args );
         }
 	}
 	

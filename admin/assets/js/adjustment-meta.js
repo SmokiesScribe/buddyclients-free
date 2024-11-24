@@ -1,5 +1,5 @@
 document.addEventListener('DOMContentLoaded', function() {
-    const addButton = document.getElementById('bc_adjustment_create_option');
+    const addButton = document.getElementById('buddyc_adjustment_create_option');
     if ( ! addButton) {
         return;
     }
@@ -9,7 +9,7 @@ document.addEventListener('DOMContentLoaded', function() {
 let optionCount = 6; // Starting count for new options
 
 function addNewOptionTable() {
-    const container = document.querySelector('#bc_adjustment-Options_metabox .inside');
+    const container = document.querySelector('#buddyc_adjustment-Options_metabox .inside');
 
     if (!container) {
         console.error('Container div not found');

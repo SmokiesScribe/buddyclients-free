@@ -9,7 +9,7 @@ use BuddyClients\Includes\ParamManager;
  * @param   string  $url    Optional. The url to modify.
  *                          Defaults to the current url.
  */
-function bc_param_manager( $url = null ) {
+function buddyc_param_manager( $url = null ) {
     return new ParamManager( $url );
 }
 
@@ -22,8 +22,8 @@ function bc_param_manager( $url = null ) {
  * @param   string  $url    Optional. The url to modify.
  *                          Defaults to the current url.
  */
-function bc_get_param( $param, $url = null ) {
-    $param_manager = bc_param_manager( $url );
+function buddyc_get_param( $param, $url = null ) {
+    $param_manager = buddyc_param_manager( $url );
     return $param_manager->get( $param );
 }
 
@@ -36,8 +36,8 @@ function bc_get_param( $param, $url = null ) {
  *                          Defaults to the current url.
  * @return  array   An associative array of all url parameters.
  */
-function bc_get_all_params( $url = null ) {
-    $param_manager = bc_param_manager( $url );
+function buddyc_get_all_params( $url = null ) {
+    $param_manager = buddyc_param_manager( $url );
     return $param_manager->get_all_params();
 }
 
@@ -52,8 +52,8 @@ function bc_get_all_params( $url = null ) {
  * 
  * @return  string  The new url.
  */
-function bc_add_params( $params, $url = null ) {
-    $param_manager = bc_param_manager( $url );
+function buddyc_add_params( $params, $url = null ) {
+    $param_manager = buddyc_param_manager( $url );
     return $param_manager->add_params( $params, $url );
 }
 
@@ -68,8 +68,8 @@ function bc_add_params( $params, $url = null ) {
  * 
  * @return  string  The new url.
  */
-function bc_remove_param( $param, $url = null ) {
-    $param_manager = bc_param_manager( $url );
+function buddyc_remove_param( $param, $url = null ) {
+    $param_manager = buddyc_param_manager( $url );
     return $param_manager->remove_param( $params, $url );
 }
 
@@ -83,7 +83,7 @@ function bc_remove_param( $param, $url = null ) {
  * 
  * @return  string  The new url.
  */
-function bc_strip_params( $url = null ) {
-    $param_manager = bc_param_manager( $url );
+function buddyc_strip_params( $url = null ) {
+    $param_manager = buddyc_param_manager( $url );
     return $param_manager->strip_params();
 }

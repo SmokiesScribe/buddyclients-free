@@ -2,7 +2,7 @@
 use BuddyClients\Components\Testimonial\Testimonial;
 /**
  * Template Name: Single BC Testimonial
- * Description: A custom template for a single bc_testimonial post.
+ * Description: A custom template for a single buddyc_testimonial post.
  */
 
     // Get header

@@ -230,8 +230,8 @@ class Email {
     private function headers( $args ) {
         
         // Get settings
-        $from_email = bc_get_setting( 'email', 'from_email' );
-        $from_name = bc_get_setting( 'email', 'from_name' );
+        $from_email = buddyc_get_setting( 'email', 'from_email' );
+        $from_name = buddyc_get_setting( 'email', 'from_name' );
         
         // Define headers
         $headers = array(
@@ -258,7 +258,7 @@ class Email {
      * @since 0.1.0
      */
     private function get_content( $args ) {
-        $templates_array = get_option('bc_email_templates', array());
+        $templates_array = get_option('buddyc_email_templates', array());
         $template_id = isset($templates_array[$this->key]) ? $templates_array[$this->key] : false;
         
         if ( $template_id ) {
@@ -320,7 +320,7 @@ class Email {
         $content = get_post_field( $post_field, $template_id );
         
         // Get settings
-        $booking_page_id = bc_get_setting( 'pages', 'booking_page' );
+        $booking_page_id = buddyc_get_setting( 'pages', 'booking_page' );
         
         // Define constant variables
         $constants = $this->constant_variables();
@@ -375,7 +375,7 @@ class Email {
          * 
          * @param   array   $constants      An associative array of variable keys and values.
          */
-        $constants = apply_filters( 'bc_email_constants' $constants );
+        $constants = apply_filters( 'buddyc_email_constants' $constants );
 
         return $constants;
     }
@@ -388,7 +388,7 @@ class Email {
     private function is_enabled() {
         
         // Get all enabled emails
-        $enabled_emails = bc_get_setting( 'email', 'send_notifications' ) ?? [];
+        $enabled_emails = buddyc_get_setting( 'email', 'send_notifications' ) ?? [];
         
         // Check if the email key is enabled
         if ( in_array( $this->key, $enabled_emails ) ) {
@@ -408,7 +408,7 @@ class Email {
         self::init_object_handler();
         
         // Get email log expiration setting
-        $days = bc_get_setting( 'email', 'email_log_time' );
+        $days = buddyc_get_setting( 'email', 'email_log_time' );
         
         // Exit if set to always
         if ( $days === 'always' ) {

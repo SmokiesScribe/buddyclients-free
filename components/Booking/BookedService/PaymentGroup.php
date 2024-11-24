@@ -99,13 +99,13 @@ class PaymentGroup {
             }
             
             // Update client user meta
-            update_user_meta( $client_id, 'bc_affiliate', $affiliate_id );
+            update_user_meta( $client_id, 'buddyc_affiliate', $affiliate_id );
             
             // Get client fee
             $client_fee = $this->booking_intent->total_fee;
             
             // Get affiliate percentage
-            $affiliate_percentage = bc_get_setting( 'affiliate', 'affiliate_percentage' );
+            $affiliate_percentage = buddyc_get_setting( 'affiliate', 'affiliate_percentage' );
             
             if ( $affiliate_percentage == 0 || $client_fee == 0  ) {
                 return;
@@ -137,13 +137,13 @@ class PaymentGroup {
             $client_fee = $this->booking_intent->total_fee;
             
             // Make sure sales mode is enabled
-            $sales_mode = bc_get_setting( 'booking', 'sales_team_mode' );
+            $sales_mode = buddyc_get_setting( 'booking', 'sales_team_mode' );
             if ( $sales_mode !== 'yes' ) {
                 return;
             }
             
             // Get commission percentage
-            $sales_percentage = bc_get_setting( 'sales', 'sales_commission_percentage' );
+            $sales_percentage = buddyc_get_setting( 'sales', 'sales_commission_percentage' );
             
             // Calculate commission
             $commission_fee = ( $sales_percentage / 100 ) * $client_fee;

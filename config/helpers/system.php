@@ -6,17 +6,17 @@ use BuddyClients\Config\Cleanup;
  * 
  * @since 0.3.0
  */
-function bc_check_htaccess() {
+function buddyc_check_htaccess() {
     new Directory('');
 }
-add_action('init', 'bc_check_htaccess');
+add_action('init', 'buddyc_check_htaccess');
 
 /**
  * Initializes Cleanup manager.
  * 
  * @since 0.1.0
  */
-function bc_init_cleanup() {
+function buddyc_init_cleanup() {
     Cleanup::instance();
 }
-add_action('init', 'bc_init_cleanup');
+add_action('init', 'buddyc_init_cleanup');
