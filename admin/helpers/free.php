@@ -49,13 +49,13 @@ function buddyc_free_upgrade_content() {
     ob_start();
     
     // Open container
-    echo '<div class="bcf-upgrade-info">';
+    echo '<div class="buddyc-upgrade-info">';
     
     // Upgrade heading
     echo __( '<h1>Upgrade BuddyClients to accept payments, manage projects, and <strong>grow your business</strong>.</h1>', 'buddyclients-free' );
     
     // Open options container
-    echo '<div class="bcf-upgrade-options">';
+    echo '<div class="buddyc-upgrade-options">';
     
     // Define options
     $options = [
@@ -91,7 +91,7 @@ function buddyc_free_upgrade_content() {
     // BuddyClients Options
     foreach ( $options as $key => $data ) {
     
-        echo '<div class="bcf-upgrade-option">';
+        echo '<div class="buddyc-upgrade-option">';
         echo '<div>';
         echo '<h3>BuddyClients ' . $data['name'] . '</h3>';
         echo '<p>' . $data['description'] . '</p>';

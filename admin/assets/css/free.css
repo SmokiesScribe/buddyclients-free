@@ -1,30 +1,30 @@
-.bcf-upgrade-info h1, .bcf-upgrade-info h2 {
+.buddyc-upgrade-info h1, .buddyc-upgrade-info h2 {
     color: #037AAD;
 }
-.bcf-upgrade-info table {
+.buddyc-upgrade-info table {
     width: 100%;
     border-collapse: collapse;
     margin: 20px 0;
 }
-.bcf-upgrade-info th, .bcf-upgrade-info td {
+.buddyc-upgrade-info th, .buddyc-upgrade-info td {
     border: 1px solid #ddd;
     padding: 10px;
     text-align: left;
 }
-.bcf-upgrade-info th {
+.buddyc-upgrade-info th {
     background-color: #f1f1f1;
 }
-.bcf-upgrade-info h2 {
+.buddyc-upgrade-info h2 {
     margin-top: 40px;    
 }
-.bcf-upgrade-info h3 {
+.buddyc-upgrade-info h3 {
     font-size: 18px;
 }
-.bcf-upgrade-info p {
+.buddyc-upgrade-info p {
     margin: 20px 0;
     font-style: italic;
 }
-.bcf-upgrade-info .buy-now {
+.buddyc-upgrade-info .buy-now {
     display: inline-block;
     background-color: #037AAD;
     color: white;
@@ -37,22 +37,22 @@
     margin: 20px 0;
     text-align: center;
 }
-.bcf-upgrade-info .buy-now:hover {
+.buddyc-upgrade-info .buy-now:hover {
     background-color: #005177;
 }
-.bcf-upgrade-info h1 {
+.buddyc-upgrade-info h1 {
     margin: 50px 0;
     font-size: 34px;
     max-width: 650px;
     line-height: 50px;
     font-weight: 300;
 }
-.bcf-upgrade-options {
+.buddyc-upgrade-options {
     display: flex;
     flex-wrap: wrap;
     gap: 20px;
 }
-.bcf-upgrade-info .bcf-upgrade-option {
+.buddyc-upgrade-info .buddyc-upgrade-option {
     flex: 0 1 auto;
     border-radius: 15px;
     border: solid 1px #e7e9ec;
@@ -65,18 +65,18 @@
     justify-content: space-between;
     position: relative;
 }
-.bcf-upgrade-info .bcf-upgrade-option:hover {
+.buddyc-upgrade-info .buddyc-upgrade-option:hover {
     box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
 }
-.bcf-upgrade-info ul {
+.buddyc-upgrade-info ul {
     text-align: left;
     margin-top: 15px;
     list-style: none;
 }
-.bcf-upgrade-info li {
+.buddyc-upgrade-info li {
     margin-bottom: 8px;
 }
-.bcf-upgrade-info .feature-check {
+.buddyc-upgrade-info .feature-check {
     margin-right: 10px;
     color: #037AAD;
 }
