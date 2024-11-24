@@ -6,7 +6,7 @@
  * @param {boolean} show - Whether to show or hide the indicator.
  * @param {string} [message] - Optional message to display in the indicator.
  */
-function bcAdminLoadingIndicator( show, message ) {
+function buddycAdminLoadingIndicator( show, message ) {
     // Check if the indicator already exists
     var loadingIndicator = document.getElementById('buddyc-loading-indicator-container');
     
@@ -67,8 +67,8 @@ document.addEventListener('DOMContentLoaded', function() {
         button.addEventListener('click', function() {
             // Get message from html data
             const message = button.dataset.loaderMessage;
-            // Call the bcLoadingIndicator function
-            bcAdminLoadingIndicator( true, message );
+            // Call the buddycLoadingIndicator function
+            buddycAdminLoadingIndicator( true, message );
         });
     });
 });

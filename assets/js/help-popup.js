@@ -24,7 +24,7 @@ document.addEventListener('DOMContentLoaded', function () {
             var rawContent = link.getAttribute('data-raw-content');
             
             // Show loading indicator
-            bcLoadingIndicator( true );
+            buddycLoadingIndicator( true );
             
             // AJAX request for post content
             var xhr = jQuery.ajax({
@@ -43,9 +43,9 @@ document.addEventListener('DOMContentLoaded', function () {
                     jQuery('#buddyc-popup-content').html(data);
                     
                     // Hide loading indicator
-                    bcLoadingIndicator( false );
+                    buddycLoadingIndicator( false );
                     setTimeout(function() {
-                        bcLoadingIndicator( false );
+                        buddycLoadingIndicator( false );
                     }, 300); // Match the transition duration  
                     
                     // Show the popup
@@ -63,9 +63,9 @@ document.addEventListener('DOMContentLoaded', function () {
                     jQuery('#buddyc-popup-content').html('<p>Sorry, there was an error loading the content. Please try again later.</p>');
                     
                     // Hide loading indicator
-                    bcLoadingIndicator( false );
+                    buddycLoadingIndicator( false );
                     setTimeout(function() {
-                        bcLoadingIndicator( false );
+                        buddycLoadingIndicator( false );
                     }, 300); // Match the transition duration
                 }
             });

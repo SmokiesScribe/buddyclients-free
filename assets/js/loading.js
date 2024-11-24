@@ -4,7 +4,7 @@
  * @param {boolean} show - Whether to show or hide the indicator.
  * @param {string} [message] - Optional message to display in the indicator.
  */
-function bcLoadingIndicator( show, message ) {
+function buddycLoadingIndicator( show, message ) {
     // Check if the indicator already exists
     var loadingIndicator = document.getElementById('buddyc-loading-indicator-container');
     
