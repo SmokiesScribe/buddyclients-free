@@ -142,7 +142,7 @@ class PageManager {
 
             // Define args
             $notice_args = [
-                'repair_link'       => '/admin.php?page=bc-pages-settings',
+                'repair_link'       => '/admin.php?page=buddyc-pages-settings',
                 'message'           => 'The following BuddyClients pages are missing: ' . $missing_pages_string . '.',
                 'color'             => 'orange'
             ];

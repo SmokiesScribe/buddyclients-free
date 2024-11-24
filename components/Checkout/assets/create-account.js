@@ -13,7 +13,7 @@ export function handleCreateAccount(e, ajaxurl, submitButton) {
   e.preventDefault();
 
   // Start account creation process first
-  const createAccountForm = document.getElementById("bc-create-account-form");
+  const createAccountForm = document.getElementById("buddyc-create-account-form");
 
   // Disable the submit button to prevent multiple submissions
   submitButton.disabled = true;

@@ -27,7 +27,7 @@ function copyToClipboard(elementId) {
     document.body.removeChild(tempInput);
     
     // Get all success containers
-    var allSuccessDivs = document.querySelectorAll('.bc-copy-success');
+    var allSuccessDivs = document.querySelectorAll('.buddyc-copy-success');
     
     // Clear all success divs
     allSuccessDivs.forEach(function(div) {
@@ -38,7 +38,7 @@ function copyToClipboard(elementId) {
     var parent = linkElement.closest('div');
     
     // Get the success message container
-    var successDiv = parent.querySelector('.bc-copy-success');
+    var successDiv = parent.querySelector('.buddyc-copy-success');
 
     console.log(successDiv);
     

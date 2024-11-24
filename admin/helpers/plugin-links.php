@@ -8,7 +8,7 @@ function buddyc_plugin_page_links() {
     
     // Build array
     $links = [
-        '<a href="admin.php?page=bc-general-settings">' . __( 'Settings', 'buddyclients' ) . '</a>',
+        '<a href="admin.php?page=buddyc-general-settings">' . __( 'Settings', 'buddyclients' ) . '</a>',
         '<a href="' . trailingslashit( BUDDYC_URL ) . 'help" target="_blank">' . __( 'User Guides', 'buddyclients' ) . '</a>',
         '<a href="' . trailingslashit( BUDDYC_URL ) . 'license" target="_blank">' . __( 'Account', 'buddyclients' ) . '</a>',
     ];

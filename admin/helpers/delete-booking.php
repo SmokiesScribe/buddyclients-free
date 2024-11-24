@@ -22,7 +22,7 @@ function buddyc_handle_delete_booking() {
             BookingIntent::delete_booking_intent( $booking_id );
     
             // Redirect back to the admin page after deletion
-            wp_redirect( admin_url( 'admin.php?page=bc-dashboard&booking_deleted=true' ) );
+            wp_redirect( admin_url( 'admin.php?page=buddyc-dashboard&booking_deleted=true' ) );
             exit;
         } else {
             wp_die( 'Booking ID not specified.' );

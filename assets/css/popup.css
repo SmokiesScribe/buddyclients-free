@@ -1,24 +1,24 @@
 /* Popup link */
-.bc-popup-link {
+.buddyc-popup-link {
     color: var(--buddyclients-accent-color);
 }
-.bc-popup-link:hover {
+.buddyc-popup-link:hover {
     color: var(--buddyclients-tertiary-color);
 }
 
 /* Popup visibility */
-.bc-popup-hidden {
+.buddyc-popup-hidden {
     visibility: hidden; /* Set initial visibility to hidden */
     opacity: 0; /* Set initial opacity to 0 */
 }
 
-.bc-popup-visible {
+.buddyc-popup-visible {
     visibility: visible;
     opacity: 1;
 }
 
 /* Popup */
-.bc-popup {
+.buddyc-popup {
     transition: visibility 0s, opacity 0.5s ease; /* Add smooth transition */
     position: fixed;
     top: 50%;
@@ -38,14 +38,14 @@
 }
 
 /* Content container */
-.bc-popup-content {
+.buddyc-popup-content {
     margin-top: auto; /* Push content to the bottom */
     margin-bottom: auto; /* Push content to the top */
 }
 
 
 /* Close button */
-#bc-close-btn {
+#buddyc-close-btn {
     position: absolute;
     top: 10px;
     right: 20px;
@@ -54,7 +54,7 @@
     color: gray;
     text-decoration: none;
 }
-#bc-close-btn:hover {
+#buddyc-close-btn:hover {
     color: #afb0ae;
 }
 
@@ -64,7 +64,7 @@
         width: 95%; /* Take up the entire width of the screen */
         max-width: none; /* Remove max-width restriction */
     }
-    #bc-close-btn {
+    #buddyc-close-btn {
         font-size: 20px;
         display: block;
         position: fixed;
@@ -73,7 +73,7 @@
         transform: translateX(-50%);
         z-index: 1001; /* Ensure it's above the container content */
     }
-    #bc-close-btn:hover {
+    #buddyc-close-btn:hover {
         color: gray;
     }
 }

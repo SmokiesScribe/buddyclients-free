@@ -4,7 +4,7 @@
  * @since 0.1.0
  */
 function updateLineItemsTable(updatedLineItems) {
-    if (!document.getElementById('bc-booking-form')) return;
+    if (!document.getElementById('buddyc-booking-form')) return;
     
     var lineItemsTableBody = jQuery('.checkout-table tbody');
     lineItemsTableBody.empty();
@@ -45,10 +45,10 @@ function updateLineItemsTable(updatedLineItems) {
  * @since 0.1.0
  */
 jQuery(document).ready(function($) {
-    if (!document.getElementById('bc-booking-form')) return;
+    if (!document.getElementById('buddyc-booking-form')) return;
     
     const projectInput = $('#project_title');
-    const projectDisplay = $('#bc-checkout-project');
+    const projectDisplay = $('#buddyc-checkout-project');
     const projectSelect = $('#buddyc_projects');
 
     function updateProjectName() {
@@ -82,7 +82,7 @@ jQuery(document).ready(function($) {
  * @since 0.1.0
  */
 function calculateTotalFee(serviceFees) {
-    if (!document.getElementById('bc-booking-form')) return;
+    if (!document.getElementById('buddyc-booking-form')) return;
 
     // Calculate the total fee by summing up the service fees in the array
     var totalFee = serviceFees.reduce(function(sum, fee) {
@@ -98,7 +98,7 @@ function calculateTotalFee(serviceFees) {
     }, 0);
     
     // Set value of tabel total
-    const totalDisplays = document.querySelectorAll('.bc-checkout-total-fee');
+    const totalDisplays = document.querySelectorAll('.buddyc-checkout-total-fee');
     totalDisplays.forEach(totalDisplay => {
         totalDisplay.textContent = '$' + totalFee.toFixed(2);
     });
@@ -118,7 +118,7 @@ function calculateTotalFee(serviceFees) {
  * @updated 0.2.3
  */
 function updateServiceValues() {
-    const form = document.getElementById('bc-booking-form');
+    const form = document.getElementById('buddyc-booking-form');
     if (!form) return;
 
     // Disable submit button
@@ -280,7 +280,7 @@ function updateServiceValues() {
  *                              Defaults to false.
  */
 function bookingFormUpdating( complete = false ) {
-    const form = document.getElementById('bc-booking-form');
+    const form = document.getElementById('buddyc-booking-form');
     if ( ! form ) return;
 
     const submitButton = document.getElementById('booking-submit');
@@ -320,13 +320,13 @@ function bookingFormUpdating( complete = false ) {
 
 
 jQuery(document).ready(function($) {
-    if (!document.getElementById('bc-booking-form')) return;
+    if (!document.getElementById('buddyc-booking-form')) return;
     
     // Get project select
     const projectSelect = document.getElementById('buddyc_projects');
     
     // Use event delegation to handle change events on dynamically added fields
-    jQuery('#bc-booking-form').on('change', 'input, select', function() {
+    jQuery('#buddyc-booking-form').on('change', 'input, select', function() {
         // Exclude the projectSelect element from handling
         if (this !== projectSelect) {
             updateServiceValues();

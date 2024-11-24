@@ -569,7 +569,7 @@ class AdminTable {
      */
     protected function build_slug() {
         $key = str_replace('_','-',$this->key);
-        return 'bc-' . $key;
+        return 'buddyc-' . $key;
     }
     
     /**

@@ -8,7 +8,7 @@ import { handleCreateAccount } from './create-account.js';
 document.addEventListener("DOMContentLoaded", function () {
 
     // Get the form and button elements
-    const freeCheckoutForm = document.getElementById('bc-free-checkout-form');
+    const freeCheckoutForm = document.getElementById('buddyc-free-checkout-form');
     const submitButton = document.getElementById('free-checkout-submit');
     
     // Ensure the form exists before proceeding

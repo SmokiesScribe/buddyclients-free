@@ -15,7 +15,7 @@ $content = '';
 $testimonials = Testimonial::get_all_testimonials();
 
 // Start building the content
-$content .= '<div class="testimonial-cards bc-archive-container">';
+$content .= '<div class="testimonial-cards buddyc-archive-container">';
 
 // Build title
 $content .= '<div class="archive-title-container">';

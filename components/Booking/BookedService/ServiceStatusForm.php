@@ -61,7 +61,7 @@ class ServiceStatusForm {
             'submission_class'  => __NAMESPACE__ . '\ServiceStatusSubmission',
             'submit_text'       => __( 'Update Status', 'buddyclients' ),
             'submit_classes'    => 'button action button-secondary',
-            'form_classes'      => 'bc-table-form',
+            'form_classes'      => 'buddyc-table-form',
             'values'            => $values
         ];
         

@@ -117,7 +117,7 @@ class AdminPage {
             'key' => $key,
             'settings' => false,
             'title' => $args['menu_name'] ?? $args['plural_name'] ?? '',
-            'parent_slug' => 'bc-dashboard',
+            'parent_slug' => 'buddyc-dashboard',
             'buddyc_menu_order' => $args['buddyc_menu_order'] ?? null,
             'group' => $args['group'] ?? null,
             'menu_slug' => 'edit.php?post_type=' . $key
@@ -214,7 +214,7 @@ class AdminPage {
     private static function build_slug( $key, $args ) {
         $suffix = isset( $args['settings'] ) && $args['settings'] ? '-settings' : '';
         $key = str_replace( '_', '-', ( $args['key'] ?? $key ?? '' ) );
-        return 'bc-' . $key . $suffix;
+        return 'buddyc-' . $key . $suffix;
     }
 
     /**
@@ -227,7 +227,7 @@ class AdminPage {
      */
     public function add_submenu( $key, $args ) {        
         add_submenu_page(
-            $args['parent_slug'] ?? 'bc-hidden-menu', // default to hidden menu item
+            $args['parent_slug'] ?? 'buddyc-hidden-menu', // default to hidden menu item
             $args['title'] ?? '', // page title
             $args['title'] ?? '', // menu title
             $args['cap'] ?? 'manage_options',

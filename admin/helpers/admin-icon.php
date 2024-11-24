@@ -64,7 +64,7 @@ function buddyc_admin_icon( $icon ) {
     // Check if icon exists
     if ( isset( $icons[$icon] ) ) {
         // Initialize array
-        $classes = ['bc-icon'];
+        $classes = ['buddyc-icon'];
 
         // Add icon class
         $classes[] = $icons[$icon][$class] ?? null;
@@ -72,7 +72,7 @@ function buddyc_admin_icon( $icon ) {
         // Add color class
         $icon_color = $icons[$icon]['color'] ?? null;
         if ( $icon_color ) {
-            $classes[] = 'bc-icon-color-' . $icon_color;
+            $classes[] = 'buddyc-icon-color-' . $icon_color;
         }
 
         // Implode classes

@@ -89,13 +89,13 @@ class Popup {
     public function build() {
         
         // Define display class
-        $display_class = $this->visible ? 'bc-popup-visible' : 'bc-popup-hidden';
+        $display_class = $this->visible ? 'buddyc-popup-visible' : 'buddyc-popup-hidden';
     
         // Build popup
         $popup = '';
-        $popup .= '<div class="bc-popup ' . $display_class . '" id="bc-popup">';
-        $popup .= '<a id="bc-close-btn" href=""><i class="fa-solid fa-x"></i></a>';
-        $popup .= '<div id="bc-popup-content">';
+        $popup .= '<div class="buddyc-popup ' . $display_class . '" id="buddyc-popup">';
+        $popup .= '<a id="buddyc-close-btn" href=""><i class="fa-solid fa-x"></i></a>';
+        $popup .= '<div id="buddyc-popup-content">';
         $popup .= $this->content;
         $popup .= '</div>';
         $popup .= '</div>';
@@ -264,7 +264,7 @@ class Popup {
         }
         
         // Default to icon
-        $link_text = $link_text && $link_text !== '' ? $link_text : '<i class="fas fa-question-circle bc-help-icon"></i>';
+        $link_text = $link_text && $link_text !== '' ? $link_text : '<i class="fas fa-question-circle buddyc-help-icon"></i>';
         
         // Define data
         $data = '';
@@ -273,7 +273,7 @@ class Popup {
         $data .= $raw_content ? 'data-raw-content="' . esc_attr( $raw_content ) . '"' : '';
         
         // Build help button with text or icon
-        return ' <a class="bc-popup-link" ' . $data . ' href="">' . $link_text . '</a>';
+        return ' <a class="buddyc-popup-link" ' . $data . ' href="">' . $link_text . '</a>';
      }
      
     /**

@@ -384,7 +384,7 @@ class FormField {
      */
     private function input_field() {
         
-        $field = '<div class="form-group form-group field_type_textbox bc-form-group-container" style="' . $this->style .'">';
+        $field = '<div class="form-group form-group field_type_textbox buddyc-form-group-container" style="' . $this->style .'">';
         $field .=   '<legend>' . $this->label . '</legend>';
         $field .=   '<p class="description">' . $this->description . '</p>';
         $field .=   '<input type="' . $this->type . '" ' . $this->field_atts_string . '>';
@@ -400,7 +400,7 @@ class FormField {
      */
     private function textarea_field() {
         
-        $field = '<div class="form-group form-group field_type_textarea bc-form-group-container" style="' . $this->style .'">';
+        $field = '<div class="form-group form-group field_type_textarea buddyc-form-group-container" style="' . $this->style .'">';
         $field .=   '<legend>' . $this->label . '</legend>';
         $field .=   '<p class="description">' . $this->description . '</p>';
         $field .=   '<textarea ' . $this->field_atts_string . '>' . $this->value . '</textarea>';
@@ -416,7 +416,7 @@ class FormField {
      */
     private function tinymce_field() {
         
-        $field = '<div class="form-group form-group field_type_tinymce bc-form-group-container" style="' . $this->style .'">';
+        $field = '<div class="form-group form-group field_type_tinymce buddyc-form-group-container" style="' . $this->style .'">';
         $field .=   '<legend>' . $this->label . '</legend>';
         $field .=   '<p class="description">' . $this->description . '</p>';
         
@@ -461,7 +461,7 @@ class FormField {
      */
     private function dropdown_field() {
         // Start building field
-        $field = '<div class="form-group form-group field_type_selectbox bc-form-group-container" style="' . $this->style .'">';
+        $field = '<div class="form-group form-group field_type_selectbox buddyc-form-group-container" style="' . $this->style .'">';
         $field .=   '<legend>' . $this->label . '</legend>';
         $field .=   '<p class="description">' . $this->description . '</p>';
         $field .=   '<select ' . $this->field_atts_string . '>';
@@ -501,7 +501,7 @@ class FormField {
         $preselected_values = $values ?? array();
     
         // Start building field
-        $field = '<div class="form-group field_type_checkbox bc-form-group-container" style="' . esc_attr( $this->style ) .'">';
+        $field = '<div class="form-group field_type_checkbox buddyc-form-group-container" style="' . esc_attr( $this->style ) .'">';
         $field .= '<fieldset>';
         $field .= '<legend>' . esc_html( $this->label ) . '</legend>';
         $field .= '<p class="description">' . $this->description . '</p>';
@@ -546,16 +546,16 @@ class FormField {
         
         $uploaded_files_list = $this->value ? buddyc_file_names( $this->value ) : '';
         
-        $field = '<div class="bc-file-upload-container bc-form-group-container" style="' . $this->style .'">';
+        $field = '<div class="buddyc-file-upload-container buddyc-form-group-container" style="' . $this->style .'">';
         
-        $field .= '<div class="form-group bc-file-upload">';
+        $field .= '<div class="form-group buddyc-file-upload">';
         $field .=   '<div class="media-uploader-wrapper">';
         $field .=       '<legend for="manuscript-upload">' . $this->label . '</legend>';
         $field .=       '<p class="description">' . $this->description . '</p>';
         $field .=       '<p id="file-upload-note"></p>';
         $field .=       '<div class="dropzone document-dropzone dz-clickable" id="media-uploader">';
         $field .=           '<div class="dz-default dz-message">';
-        $field .=           '<button class="dz-button bc-file-upload-button" type="button"><strong>' . __( 'Select File', 'buddyclients' ) . '</strong></button>';
+        $field .=           '<button class="dz-button buddyc-file-upload-button" type="button"><strong>' . __( 'Select File', 'buddyclients' ) . '</strong></button>';
         $field .=       '</div>';
         $field .=   '</div>';
         $field .=   '<input type="file" class="opacity-0' . $this->field_classes . '" ' . $this->field_atts_string . '>';

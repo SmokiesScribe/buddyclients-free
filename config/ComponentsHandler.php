@@ -120,7 +120,7 @@ class ComponentsHandler {
             $necessary_component = $dependent_components[$component];
             if ( ! in_array( $necessary_component, $enabled_components ) ) {
                 $notice_args = [
-                    'repair_link'   => 'admin.php?page=bc-components-settings',
+                    'repair_link'   => 'admin.php?page=buddyc-components-settings',
                     'message'       => 'The ' . $component . ' component requires the ' . $necessary_component . ' component to be enabled.',
                     'color'         => 'orange'
                 ];

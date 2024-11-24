@@ -20,7 +20,7 @@
         }
         
        // Listen for changes
-        jQuery('.bc-form input:not(.confirmation-checkbox)').on('change', function() {
+        jQuery('.buddyc-form input:not(.confirmation-checkbox)').on('change', function() {
             uncheckConfirmationCheckbox();
         });
     });

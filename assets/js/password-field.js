@@ -4,7 +4,7 @@
  * @since 0.4.3
  */
 function togglePasswordVisibility() {
-  const passwordFields = document.querySelectorAll('.bc-password-field');
+  const passwordFields = document.querySelectorAll('.buddyc-password-field');
 
   if ( ! passwordFields ) {
     return;
@@ -64,10 +64,10 @@ function addGeneratePasswordAndStrengthIndicator(wrapper, field) {
   const generateLink = document.createElement('a');
   generateLink.textContent = 'Generate Password';
   generateLink.href = '#';
-  generateLink.className = 'bc-generate-password-link';
+  generateLink.className = 'buddyc-generate-password-link';
 
   const strengthIndicator = document.createElement('span');
-  strengthIndicator.className = 'bc-password-strength-indicator';
+  strengthIndicator.className = 'buddyc-password-strength-indicator';
 
   const container = document.createElement('div');
   container.className = 'password-options-container';
@@ -128,18 +128,18 @@ function copyPasswordToClipboard(text, messageContainer) {
   navigator.clipboard.writeText(text)
     .then(() => {
       messageContainer.textContent = 'Password copied to clipboard!';
-      messageContainer.classList.add('bc-clipboard-success');
+      messageContainer.classList.add('buddyc-clipboard-success');
       setTimeout(() => {
         messageContainer.textContent = '';
-        messageContainer.classList.remove('bc-clipboard-success');
+        messageContainer.classList.remove('buddyc-clipboard-success');
       }, 3000);
     })
     .catch(() => {
       messageContainer.textContent = 'Failed to copy password to clipboard.';
-      messageContainer.classList.add('bc-clipboard-error');
+      messageContainer.classList.add('buddyc-clipboard-error');
       setTimeout(() => {
         messageContainer.textContent = '';
-        messageContainer.classList.remove('bc-clipboard-error');
+        messageContainer.classList.remove('buddyc-clipboard-error');
       }, 3000);
     });
 }

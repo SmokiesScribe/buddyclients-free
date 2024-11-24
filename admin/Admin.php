@@ -133,17 +133,17 @@ class Admin {
             'BuddyClients',
             'BuddyClients',
             'manage_options',
-            'bc-dashboard',
+            'buddyc-dashboard',
             'buddyc_dashboard_content',
             'dashicons-buddyclients',
             5
         );
         add_submenu_page(
-            'bc-dashboard',
+            'buddyc-dashboard',
             'Dashboard',
             'Dashboard',
             'manage_options',
-            'bc-dashboard',
+            'buddyc-dashboard',
             'buddyc_dashboard_content',
             0
         );
@@ -153,12 +153,12 @@ class Admin {
             'Hidden Menu',
             'Hidden Menu',
             'manage_options',
-            'bc-hidden-menu',
+            'buddyc-hidden-menu',
             '' // no callback needed
         );
 
         // Remove the hidden menu item so it doesn't appear in the admin menu
-        remove_menu_page('bc-hidden-menu');
+        remove_menu_page('buddyc-hidden-menu');
     }
     
     /**

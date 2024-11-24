@@ -270,7 +270,7 @@ class AdminTableItem extends AdminTable {
     protected static function faculty_sessions_link( $property, $value, $item_id ) {
         // Make sure the user has sessions
         if ( $value && is_array( $value ) && ! empty( $value ) ) {
-            $url = admin_url( '/admin.php?page=bc-sessions&faculty_ids_filter=' . $item_id );
+            $url = admin_url( '/admin.php?page=buddyc-sessions&faculty_ids_filter=' . $item_id );
             return '<a href="' . esc_url( $url ) . '">' . __( 'Sessions', 'buddyclients' ) . '</a>';
         }
     }
@@ -374,7 +374,7 @@ class AdminTableItem extends AdminTable {
      */
     protected static function delete( $property, $value ) {
         // Build delete url
-        $delete_url = admin_url( 'admin.php?page=bc-dashboard&action=delete_booking&booking_id=' . $value );
+        $delete_url = admin_url( 'admin.php?page=buddyc-dashboard&action=delete_booking&booking_id=' . $value );
 
         // Define confirmation message
         $message = __( 'Are you sure you want to delete this booking? This action cannot be undone.', 'buddyclients' );
@@ -413,7 +413,7 @@ class AdminTableItem extends AdminTable {
             <?php echo esc_html( $value ) ?>
             </span></p>
             <button onclick="copyToClipboard('<?php echo esc_attr( $field_id ) ?>')" type="button" class="button button-secondary">Copy Memo</button>
-            <div class="bc-copy-success" style="margin: 10px; font-weight: 500"></div>
+            <div class="buddyc-copy-success" style="margin: 10px; font-weight: 500"></div>
         </div>
         <?php
 

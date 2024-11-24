@@ -4,36 +4,36 @@
 }
 
 /* Profile extensions */
-.bc-files-cancel-container {
+.buddyc-files-cancel-container {
     max-width: 650px;
     margin: auto; 
 }
-.bc-files-cancel {
+.buddyc-files-cancel {
     color: red;
 }
 
 /* General icons */
-.bc-icon {
+.buddyc-icon {
     font-size: 20px;
 }
-.bc-icon.bc-icon-color-blue {
+.buddyc-icon.buddyc-icon-color-blue {
     color: blue;
 }
-.bc-icon.bc-icon-color-black {
+.buddyc-icon.buddyc-icon-color-black {
     color: black;
 }
-.bc-icon.bc-icon-color-green {
+.buddyc-icon.buddyc-icon-color-green {
     color: green;
 }
-.bc-icon.bc-icon-color-red {
+.buddyc-icon.buddyc-icon-color-red {
     color: red;
 }
-.bc-icon.bc-icon-color-gray {
+.buddyc-icon.buddyc-icon-color-gray {
     color: gray;
 }
 
 /* Subnav */
-.bc-subnav {
+.buddyc-subnav {
     margin-right: 20px;
 }
 /* Copy Paste Field */
@@ -49,7 +49,7 @@
     margin-top: 30px;
 }
 /* Single post */
-.bc-single-post {
+.buddyc-single-post {
     margin-top: 10px;
 }
 /* Signature field */
@@ -85,13 +85,13 @@
 }
 
 /* Forms */
-.bc-form .description {
+.buddyc-form .description {
     color: #8F9091;
     font-size: 14px;
     margin-bottom: 10px;
 }
 
-.bc-form-container {
+.buddyc-form-container {
     display: flex;
     justify-content: center;
     align-items: center;
@@ -99,16 +99,16 @@
     margin: auto;
 }
 
-.bc-form {
+.buddyc-form {
     width: 100%;
 }
 
-.bc-form legend {
+.buddyc-form legend {
     color: var(--buddyclients-primary-color);
     font-size: 18px;
 }
 
-.bc-form fieldset {
+.buddyc-form fieldset {
     border: none;
     padding: 0;
     width: 100%;
@@ -121,28 +121,28 @@
 }
 
 /* Hide default checkbox */
-.bc-form input[type="checkbox"] {
+.buddyc-form input[type="checkbox"] {
     opacity: 0;
     display: none;
 }
 
-.bc-form .form-group {
+.buddyc-form .form-group {
     padding: 15px 0;
 }
 
-.bc-form textarea,
-.bc-form .form-group input,
-.bc-form .form-group select {
+.buddyc-form textarea,
+.buddyc-form .form-group input,
+.buddyc-form .form-group select {
     width: 100%;
 }
 
-.bc-form.bc-table-form .form-group {
+.buddyc-form.buddyc-table-form .form-group {
     padding: 3px;
 }
 
 
 /* User profile */
-.bc-form-user-profile {
+.buddyc-form-user-profile {
     display: flex;
     align-items: center;
     border-bottom: var(--buddyclients-default-border);
@@ -150,12 +150,12 @@
     max-width: 500px;
 }
 
-.bc-form-user-avatar {
+.buddyc-form-user-avatar {
     margin-right: 10px;
     margin-left: 20px;
 }
 
-.bc-form-user-name {
+.buddyc-form-user-name {
     font-weight: bold;
     color: var(--buddyclients-primary-color);
 }

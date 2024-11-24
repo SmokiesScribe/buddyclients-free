@@ -107,7 +107,7 @@ class UserFilesForm {
      */
     private function cancel_delete() {
         // Retrieve cancel request ID
-        $cancel_request = buddyc_get_param( 'bc-files-cancel-request' );
+        $cancel_request = buddyc_get_param( 'buddyc-files-cancel-request' );
 
         // No cancel request
         if ( ! $cancel_request ) {
@@ -166,9 +166,9 @@ class UserFilesForm {
      * @since 1.0.17
      */
     private function cancel_link() {
-        $link = buddyc_add_params( [ 'bc-files-cancel-request' => wp_rand() ] );
-        $content = '<div class="bc-files-cancel-container">';
-        $content .= '<a href="' . $link . '" class="bc-files-cancel">Cancel</a>';
+        $link = buddyc_add_params( [ 'buddyc-files-cancel-request' => wp_rand() ] );
+        $content = '<div class="buddyc-files-cancel-container">';
+        $content .= '<a href="' . $link . '" class="buddyc-files-cancel">Cancel</a>';
         $content .= '</div>';
         return $content;
     }

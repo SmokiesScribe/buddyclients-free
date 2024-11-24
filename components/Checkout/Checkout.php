@@ -169,9 +169,9 @@ class Checkout {
             $stripe_keys = new StripeKeys;
             $mode = $stripe_keys->mode;
             if ( $mode === 'test' ) {
-                $content = '<div><p class="bc-test-mode-tag">' . __( 'Test Mode', 'buddyclients' ) . '</p></div>';
+                $content = '<div><p class="buddyc-test-mode-tag">' . __( 'Test Mode', 'buddyclients' ) . '</p></div>';
                 if ( ! $tag_only ) {
-                    $content .= '<p class="bc-test-instructions">' . __( 'Use card number 4242 4242 4242 4242 to simulate a successful payment.', 'buddyclients' ) . '</p>';
+                    $content .= '<p class="buddyc-test-instructions">' . __( 'Use card number 4242 4242 4242 4242 to simulate a successful payment.', 'buddyclients' ) . '</p>';
                 }
                 return $content;
             }
@@ -327,7 +327,7 @@ class Checkout {
             ];
             
             $content = (new Form( $args ) )->build();
-            $content .= '<div id="bc-create-account-success"></div>';
+            $content .= '<div id="buddyc-create-account-success"></div>';
             return $content;
         }
     }
@@ -350,41 +350,41 @@ class Checkout {
                     $this->policies()
                 ),
                 'placeholder'   => 'Your name',
-                'field_classes' => 'bc-create-account-field margin-free',
+                'field_classes' => 'buddyc-create-account-field margin-free',
                 'required'      => true
             ],
             'email' => [
                 'key'           => 'create-account-email',
                 'type'          => 'email',
                 'placeholder'   => __( 'Your email', 'buddyclients' ),
-                'field_classes' => 'bc-create-account-field margin-free',
+                'field_classes' => 'buddyc-create-account-field margin-free',
                 'required'      => true
             ],
             'password' => [
                 'key'           => 'create-account-password',
                 'type'          => 'password',
                 'placeholder'   => __( 'Create password', 'buddyclients' ),
-                'field_classes' => 'bc-create-account-field margin-free',
+                'field_classes' => 'buddyc-create-account-field margin-free',
                 'required'      => true,
-                'field_classes' => 'bc-password-field'
+                'field_classes' => 'buddyc-password-field'
             ],
             'registration-intent-id' => [
                 'key'           => 'registration-intent-id',
                 'type'          => 'hidden',
                 'value'         => $this->is_registration ? $this->booking_intent->ID : '',
-                'field_classes' => 'bc-create-account-field'
+                'field_classes' => 'buddyc-create-account-field'
             ],
             'sponsor-intent-id' => [
                 'key'           => 'sponsor-intent-id',
                 'type'          => 'hidden',
                 'value'         => $this->is_sponsor ? $this->booking_intent->ID : '',
-                'field_classes' => 'bc-create-account-field'
+                'field_classes' => 'buddyc-create-account-field'
             ],
             'booking-intent-id' => [
                 'key'           => 'booking-intent-id',
                 'type'          => 'hidden',
                 'value'         => ! $this->is_registration ? $this->booking_intent->ID : '',
-                'field_classes' => 'bc-create-account-field'
+                'field_classes' => 'buddyc-create-account-field'
             ]
         ];
         
@@ -529,7 +529,7 @@ class Checkout {
      */
     public function enqueue_free_checkout_script() {
         // Enqueue script
-        wp_enqueue_script_module('bc-free-checkout-script', plugin_dir_url(__FILE__) . 'assets/free-checkout.js', array(), BUDDYC_PLUGIN_VERSION, true);
+        wp_enqueue_script_module('buddyc-free-checkout-script', plugin_dir_url(__FILE__) . 'assets/free-checkout.js', array(), BUDDYC_PLUGIN_VERSION, true);
     }
     
     /**

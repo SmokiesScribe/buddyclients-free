@@ -64,7 +64,7 @@ class CancelRequestForm {
             'fields_callback'   => [$this, 'form_fields'],
             'submit_text'       => __( 'Request Cancellation', 'buddyclients' ),
             'submission_class'  => __NAMESPACE__ . '\CancelRequestSubmission',
-            'form_classes'      => 'bc-table-form'
+            'form_classes'      => 'buddyc-table-form'
         ];
 
         $form = new Form( $args );

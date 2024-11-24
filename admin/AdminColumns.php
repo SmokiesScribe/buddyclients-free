@@ -431,7 +431,7 @@ class AdminColumns {
                 $string = implode( ', ', $names );
                 
                 // Build link
-                $link = admin_url( 'admin.php?page=bc-sponsor-bookings&business_id_filter=' . $post_id );
+                $link = admin_url( 'admin.php?page=buddyc-sponsor-bookings&business_id_filter=' . $post_id );
                 
                 return '<a href="' . $link . '">' . $string . '</a>';
             }

@@ -165,7 +165,7 @@ class BookedServiceList {
         $pagination = new Pagination( $booked_services );
     
         // Start table
-        $content .= '<table class="bc-booked-services-table">';
+        $content .= '<table class="buddyc-booked-services-table">';
         $content .= $this->render_table_header();
     
         // Render table rows

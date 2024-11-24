@@ -8,24 +8,24 @@
  */
 function bcAdminLoadingIndicator( show, message ) {
     // Check if the indicator already exists
-    var loadingIndicator = document.getElementById('bc-loading-indicator-container');
+    var loadingIndicator = document.getElementById('buddyc-loading-indicator-container');
     
     if ( show ) {
         if ( ! loadingIndicator ) {
 
             // Create the loading indicator element if it does not exist
             loadingIndicator = document.createElement('div');
-            loadingIndicator.id = 'bc-admin-loading';
+            loadingIndicator.id = 'buddyc-admin-loading';
             loadingIndicator.style.opacity = '1';
             loadingIndicator.style.display = 'block';
             loadingIndicator.style.visibility = 'visible';
             
             // Build spinner
-            loadingIndicator.innerHTML = '<i class="fa-solid fa-circle-notch" id="bc-admin-spinner"></i>';
+            loadingIndicator.innerHTML = '<i class="fa-solid fa-circle-notch" id="buddyc-admin-spinner"></i>';
 
             // Add message
             if ( message ) {
-                loadingIndicator.innerHTML += '<div id="bc-admin-loading-message">' + message + '</div>';
+                loadingIndicator.innerHTML += '<div id="buddyc-admin-loading-message">' + message + '</div>';
             }
 
             // Insert the loading indicator into the body
@@ -51,7 +51,7 @@ function bcAdminLoadingIndicator( show, message ) {
 
 /**
  * Triggers admin loading indicator on clicks to elements
- * with the class 'bc-admin-loader-click'.
+ * with the class 'buddyc-admin-loader-click'.
  * 
  * Accesses the attribute 'data-loader-message' to generate
  * the text below the loading indicator.
@@ -59,8 +59,8 @@ function bcAdminLoadingIndicator( show, message ) {
  * @since 1.0.20
  */
 document.addEventListener('DOMContentLoaded', function() {
-    // Select all buttons with the class 'bc-loader-on-click'
-    const buttons = document.querySelectorAll('.bc-admin-loader-click');
+    // Select all buttons with the class 'buddyc-loader-on-click'
+    const buttons = document.querySelectorAll('.buddyc-admin-loader-click');
 
     // Attach a click event listener to each button
     buttons.forEach(button => {

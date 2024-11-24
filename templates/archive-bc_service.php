@@ -40,7 +40,7 @@ if (empty($types) || is_wp_error($types)) {
 $types[] = '';
 
 // Start building the content
-$content .= '<div class="rate-cards bc-archive-container">';
+$content .= '<div class="rate-cards buddyc-archive-container">';
 
 // Build title
 $content .= '<div class="archive-title-container">';

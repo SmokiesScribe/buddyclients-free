@@ -6,7 +6,7 @@
  */
 (function() {
     document.addEventListener('DOMContentLoaded', function () {
-        var form = document.getElementById('bc-booking-form');
+        var form = document.getElementById('buddyc-booking-form');
         if ( ! form ) return;
         
         const projectSelect = document.getElementById('buddyc_projects');
@@ -27,7 +27,7 @@
             // Loop through create project fields
             fieldsToToggle.forEach(field => {
                 // Get field container   
-                const fieldDiv = field.closest('.bc-form-group-container');
+                const fieldDiv = field.closest('.buddyc-form-group-container');
                 
                 // Set visibility
                 fieldDiv.style.display = display;
@@ -56,7 +56,7 @@
  */
 (function() {
     document.addEventListener("DOMContentLoaded", function() {
-        var form = document.getElementById('bc-booking-form');
+        var form = document.getElementById('buddyc-booking-form');
         if ( ! form ) return;
         
         const titleElement = document.getElementById('project_title');

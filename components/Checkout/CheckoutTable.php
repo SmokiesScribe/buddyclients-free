@@ -52,7 +52,7 @@ class CheckoutTable {
         $output .= '<div class="checkout-details-container">';
 
         // Loading indicator
-        $output .= '<div class="checkout-loading-indicator" id="bc-loading-indicator"></div>';
+        $output .= '<div class="checkout-loading-indicator" id="buddyc-loading-indicator"></div>';
     
         // Add the table to the container
         $output .= '<table class="checkout-table">';
@@ -79,15 +79,15 @@ class CheckoutTable {
         }
 
         // Close the table and add the total fee row
-        $output .= '<h4 id="bc-checkout-project">' . $this->project_name . '</h4>';
+        $output .= '<h4 id="buddyc-checkout-project">' . $this->project_name . '</h4>';
         
-        $output .= '<p id="bc-checkout-total" class="bc-checkout-total bc-checkout-total-fee">$' . number_format($this->total_fee, 2) . '</p>';
+        $output .= '<p id="buddyc-checkout-total" class="buddyc-checkout-total buddyc-checkout-total-fee">$' . number_format($this->total_fee, 2) . '</p>';
         
         $output .= '</tbody>';
         $output .= '<tfoot>';
         $output .= '<tr>';
         $output .= '<th>' . __( 'Total:', 'buddyclients' ) . '</th>';
-        $output .= '<td><span class="bc-checkout-total-fee">$' . number_format($this->total_fee, 2) . '</span></td>';
+        $output .= '<td><span class="buddyc-checkout-total-fee">$' . number_format($this->total_fee, 2) . '</span></td>';
         $output .= '</tr>';
         $output .= '</tfoot>';
         $output .= '</table>';

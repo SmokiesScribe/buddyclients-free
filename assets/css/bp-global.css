@@ -1,11 +1,11 @@
 /* Form */
-.bc-form {
+.buddyc-form {
     margin: auto;
     max-width: 800px;
 }
 
 /* Style checkboxes */
-.bc-form input[type="checkbox"] {
+.buddyc-form input[type="checkbox"] {
     -webkit-appearance: none; /* Remove default checkbox appearance */
     -moz-appearance: none;
     appearance: none;
@@ -22,12 +22,12 @@
 }
 
 /* Style checked state of checkboxes */
-.bc-form input[type="checkbox"]:checked {
+.buddyc-form input[type="checkbox"]:checked {
     background-color: var(--buddyclients-accent-color); /* Change background color when checked */
 }
 
 /* Style the checkmark inside the checkbox */
-.bc-form input[type="checkbox"]::before {
+.buddyc-form input[type="checkbox"]::before {
     content: "\2713"; /* Unicode checkmark character */
     font-size: 16px; /* Adjust size as needed */
     color: #fff; /* Checkmark color */
@@ -43,32 +43,32 @@
 }
 
 /* Show checkmark when checkbox is checked */
-.bc-form input[type="checkbox"]:checked::before {
+.buddyc-form input[type="checkbox"]:checked::before {
     visibility: visible; /* Show checkmark */
 }
 
 /* Style the checkbox label */
-.bc-form label {
+.buddyc-form label {
     font-size: 16px; /* Adjust size as needed */
     line-height: 16px; /* Align label vertically with checkbox */
     vertical-align: middle; /* Align label vertically */
 }
 
 /* Adjust checkbox wrap spacing */
-.bc-form .bp-checkbox-wrap {
+.buddyc-form .bp-checkbox-wrap {
     margin-bottom: 5px; /* Add some space between each checkbox */
 }
 
 /* Style inputs */
-.bc-form select,
-.bc-form input,
-.bc-input {
+.buddyc-form select,
+.buddyc-form input,
+.buddyc-input {
     padding: 10px;
     border-radius: 5px;
     border: solid 1px #d7d9dd;
 }
 
-.bc-form input[type="submit"] {
+.buddyc-form input[type="submit"] {
     background-color: var(--buddyclients-primary-color);
     color: #fff;
     font-size: 16px;
@@ -76,7 +76,7 @@
     border-radius: 8px;
 }
 
-.bc-form input[type="submit"]:hover {
+.buddyc-form input[type="submit"]:hover {
     background-color: var(--buddyclients-tertiary-color);
     cursor: pointer;
 }
@@ -121,7 +121,7 @@
 }
 
 /* Buttons */
-.bc-button {
+.buddyc-button {
     background-color: var(--buddyclients-primary-color);
     padding: 15px;
     border-radius: 5px;
@@ -131,7 +131,7 @@
     margin: 10px 0;
 }
 
-.bc-button:hover {
+.buddyc-button:hover {
     background-color: var(--buddyclients-tertiary-color);
     cursor: pointer;
 }

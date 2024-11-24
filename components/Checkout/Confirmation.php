@@ -353,7 +353,7 @@ class Confirmation {
         $content .= '<p>' . __('Your payment failed.', 'buddyclients') . '</p>';
         
         $content .= $this->checkout_page_link !== '#' 
-            ? '<a href="' . esc_url($this->checkout_page_link) . '"><button class="confirmation-page-button bc-button">' . __('Return to Checkout', 'buddyclients') . '</button></a>' 
+            ? '<a href="' . esc_url($this->checkout_page_link) . '"><button class="confirmation-page-button buddyc-button">' . __('Return to Checkout', 'buddyclients') . '</button></a>' 
             : '';
         
         $content .= $this->contact_page_link !== '#' 
@@ -376,11 +376,11 @@ class Confirmation {
      * @param   string      $link_text  Optional. The text for the button.
      */
     private function output_message( $type, $header , $content, $link = null, $link_text = null ) {
-        $message = '<div class="bc-confirmation-container payment-' . $type . '-message">';
+        $message = '<div class="buddyc-confirmation-container payment-' . $type . '-message">';
         $message .= '    <h1>' . $header . '</h1>';
-        $message .= '<div class="bc-confirmation-content">' . $content . '</div>';
+        $message .= '<div class="buddyc-confirmation-content">' . $content . '</div>';
         if ( $link && $link_text ) {
-            $message .= '<div><a class="bc-confirmation-button" href="' . $link . '">' . $link_text . '</a></div>';
+            $message .= '<div><a class="buddyc-confirmation-button" href="' . $link . '">' . $link_text . '</a></div>';
         }
         $message .= '</div>';
         return $message;

@@ -9,7 +9,7 @@ use BuddyClients\Components\Testimonial\Testimonial;
     get_header();
     
     // Initialize
-    $content = '<div class="bc-single-testimonial">';
+    $content = '<div class="buddyc-single-testimonial">';
 
     // Build testimonial
     $post_id = get_the_id();

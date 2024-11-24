@@ -7,7 +7,7 @@
     document.addEventListener('DOMContentLoaded', function () {
         
         // Get booking form
-        bookingForm = document.getElementById('bc-booking-form');
+        bookingForm = document.getElementById('buddyc-booking-form');
         
         if ( ! bookingForm ) {
             return;

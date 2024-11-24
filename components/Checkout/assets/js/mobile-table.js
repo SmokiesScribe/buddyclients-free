@@ -11,7 +11,7 @@ document.addEventListener("DOMContentLoaded", function() {
     const tableContainer = document.querySelector('.checkout-details-container');
     
     function updateTableVisibility() {
-        const createAccountForm = document.getElementById('bc-create-account-form');
+        const createAccountForm = document.getElementById('buddyc-create-account-form');
         
         // Toggle active class to trigger CSS transition
         tableContainer.classList.toggle('active');

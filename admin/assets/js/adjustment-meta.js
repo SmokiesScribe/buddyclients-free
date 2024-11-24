@@ -31,27 +31,27 @@ function addNewOptionTable() {
             <tr>
                 <th>Label</th>
                 <td>
-                    <input type="text" class="bc-meta-field" name="option_${optionCount}_label" placeholder="" value="" size="10">
-                    <div class="bc-meta-description"></div>
+                    <input type="text" class="buddyc-meta-field" name="option_${optionCount}_label" placeholder="" value="" size="10">
+                    <div class="buddyc-meta-description"></div>
                 </td>
             </tr>
             <tr>
                 <th>Operator</th>
                 <td>
-                    <select class="bc-meta-input bc-meta-field" id="option_${optionCount}_operator" name="option_${optionCount}_operator">
+                    <select class="buddyc-meta-input buddyc-meta-field" id="option_${optionCount}_operator" name="option_${optionCount}_operator">
                         <option value=""></option>
                         <option value="x">x (multiply)</option>
                         <option value="+">+ (add)</option>
                         <option value="-">- (subtract)</option>
                     </select>
-                    <div class="bc-meta-description"></div>
+                    <div class="buddyc-meta-description"></div>
                 </td>
             </tr>
             <tr>
                 <th>Value</th>
                 <td>
-                    <input type="number" class="bc-meta-field" name="option_${optionCount}_value" placeholder="" value="" size="10">
-                    <div class="bc-meta-description"></div>
+                    <input type="number" class="buddyc-meta-field" name="option_${optionCount}_value" placeholder="" value="" size="10">
+                    <div class="buddyc-meta-description"></div>
                 </td>
             </tr>
         </tbody>

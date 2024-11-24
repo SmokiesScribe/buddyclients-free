@@ -6,10 +6,10 @@
 document.addEventListener('DOMContentLoaded', function () {
     
     // Get all help links
-    var helpLinks = document.querySelectorAll('.bc-popup-link');
+    var helpLinks = document.querySelectorAll('.buddyc-popup-link');
     
     // Get popup html
-    var helpPopup = document.getElementById('bc-popup');
+    var helpPopup = document.getElementById('buddyc-popup');
     
     // Loop through help links
     helpLinks.forEach(function(link) {
@@ -40,7 +40,7 @@ document.addEventListener('DOMContentLoaded', function () {
                     fileName: helpPopupData.fileName,
                 },
                 success: function(data){
-                    jQuery('#bc-popup-content').html(data);
+                    jQuery('#buddyc-popup-content').html(data);
                     
                     // Hide loading indicator
                     bcLoadingIndicator( false );
@@ -60,7 +60,7 @@ document.addEventListener('DOMContentLoaded', function () {
                     helpPopup.style.opacity = 1;
                     
                     // Show an error message to the user
-                    jQuery('#bc-popup-content').html('<p>Sorry, there was an error loading the content. Please try again later.</p>');
+                    jQuery('#buddyc-popup-content').html('<p>Sorry, there was an error loading the content. Please try again later.</p>');
                     
                     // Hide loading indicator
                     bcLoadingIndicator( false );
@@ -77,7 +77,7 @@ document.addEventListener('DOMContentLoaded', function () {
     
     // Close popup on outside click
     document.addEventListener('click', function(event) {
-        var closeButton = document.getElementById('bc-close-btn');
+        var closeButton = document.getElementById('buddyc-close-btn');
         
         // Exit if close button does not exist
         if (! closeButton ) {

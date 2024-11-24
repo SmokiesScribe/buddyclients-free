@@ -52,7 +52,7 @@ class Subnav {
             // Check if the item is active
             $class = $this->is_active( $key ) ? 'active' : '';
             // Build subnav item
-            $output .= '<a class="bc-subnav ' . $class . '" href="' . htmlspecialchars( $link ) . '">' . $data['label'] . '</a>';
+            $output .= '<a class="buddyc-subnav ' . $class . '" href="' . htmlspecialchars( $link ) . '">' . $data['label'] . '</a>';
         }
             
         // Close container

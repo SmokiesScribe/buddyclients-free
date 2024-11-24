@@ -54,7 +54,7 @@ class AdminPageManager {
                 'key' => 'general',
                 'settings' => true,
                 'title' => __('Settings', 'buddyclients'),
-                'parent_slug' => 'bc-dashboard',
+                'parent_slug' => 'buddyc-dashboard',
                 'buddyc_menu_order' => 26,
                 'group' => 'settings'
             ],
@@ -62,7 +62,7 @@ class AdminPageManager {
                 'key' => 'separator',
                 'settings' => false,
                 'title' => '',
-                'parent_slug' => 'bc-dashboard',
+                'parent_slug' => 'buddyc-dashboard',
                 'buddyc_menu_order' => 25,
                 'group' => 'settings'
             ],
@@ -143,7 +143,7 @@ class AdminPageManager {
                 'key' => 'license',
                 'settings' => true,
                 'title' => __('License Keys', 'buddyclients'),
-                'parent_slug' => 'bc-dashboard',
+                'parent_slug' => 'buddyc-dashboard',
                 'buddyc_menu_order' => 30,
                 'group' => 'settings'
             ],
@@ -190,7 +190,7 @@ class AdminPageManager {
                 'key' => 'user-agreements',
                 'title' => __('Legal', 'buddyclients'),
                 'settings' => false,
-                'parent_slug' => 'bc-dashboard',
+                'parent_slug' => 'buddyc-dashboard',
                 'callable' => 'buddyc_user_agreements_table',
                 'buddyc_menu_order' => 8,
                 'required_component' => 'Legal'

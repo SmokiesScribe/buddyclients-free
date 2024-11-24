@@ -8,7 +8,7 @@
 get_header();
 
 // Initialize
-$content = '<div class="bc-single-post">';
+$content = '<div class="buddyc-single-post">';
 
 // Class does not exist
 if ( ! class_exists( 'BuddyClients\Components\Brief\SingleBrief' ) ) {

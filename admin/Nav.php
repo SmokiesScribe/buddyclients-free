@@ -25,30 +25,30 @@ class Nav {
         
         $tabs = [
             'dashboard' => [
-                __( 'All Bookings', 'buddyclients' )        => ['page'  => 'bc-dashboard'],
-                ''                                          => ['page'  => 'bc-booked-services'],
-                __( 'Overview', 'buddyclients' )            => ['page'  => 'bc-bookings-dashboard'],
-                __( 'Payments', 'buddyclients' )            => ['page'  => 'bc-payments'],
-                __( 'Users', 'buddyclients' )               => ['page'  => 'bc-users'],
+                __( 'All Bookings', 'buddyclients' )        => ['page'  => 'buddyc-dashboard'],
+                ''                                          => ['page'  => 'buddyc-booked-services'],
+                __( 'Overview', 'buddyclients' )            => ['page'  => 'buddyc-bookings-dashboard'],
+                __( 'Payments', 'buddyclients' )            => ['page'  => 'buddyc-payments'],
+                __( 'Users', 'buddyclients' )               => ['page'  => 'buddyc-users'],
             ],
             'legal' => [
-                __( 'User Agreements', 'buddyclients' )    => ['page'  => 'bc-user-agreements'],
+                __( 'User Agreements', 'buddyclients' )    => ['page'  => 'buddyc-user-agreements'],
                 __( 'Legal Modifications', 'buddyclients' )=> ['post_type'  => 'buddyc_legal_mod'],
-                __( 'Settings', 'buddyclients' )     => ['page'  => 'bc-legal-settings', 'post_type'  => 'buddyc_legal'],
+                __( 'Settings', 'buddyclients' )     => ['page'  => 'buddyc-legal-settings', 'post_type'  => 'buddyc_legal'],
             ], 
             'settings' => [
-                __( 'General', 'buddyclients' )            => ['page'  => 'bc-general-settings'],
-                __( 'Components', 'buddyclients' )          => ['page'  => 'bc-components-settings'],
-                __( 'Pages', 'buddyclients' )               => ['page'  => 'bc-pages-settings'],
-                __( 'Styles', 'buddyclients' )              => ['page'  => 'bc-style-settings'],
-                __( 'Bookings', 'buddyclients' )            => ['page'  => 'bc-booking-settings'],
-                'Stripe'                                    => ['page'  => 'bc-stripe-settings'],
-                __( 'Sales', 'buddyclients' )               => ['page'  => 'bc-sales-settings'],
-                __( 'Emails', 'buddyclients' )              => ['page'  => 'bc-email-settings'],
-                __( 'Legal', 'buddyclients' )               => ['page'  => 'bc-legal-settings', 'post_type'  => 'buddyc_legal'],
-                __( 'Affiliate', 'buddyclients' )           => ['page'  => 'bc-affiliate-settings'],
-                __( 'Help Posts', 'buddyclients' )          => ['page'  => 'bc-help-settings'],
-                //__( 'Integrations', 'buddyclients' )        => ['page'  => 'bc-integrations-settings'],
+                __( 'General', 'buddyclients' )            => ['page'  => 'buddyc-general-settings'],
+                __( 'Components', 'buddyclients' )          => ['page'  => 'buddyc-components-settings'],
+                __( 'Pages', 'buddyclients' )               => ['page'  => 'buddyc-pages-settings'],
+                __( 'Styles', 'buddyclients' )              => ['page'  => 'buddyc-style-settings'],
+                __( 'Bookings', 'buddyclients' )            => ['page'  => 'buddyc-booking-settings'],
+                'Stripe'                                    => ['page'  => 'buddyc-stripe-settings'],
+                __( 'Sales', 'buddyclients' )               => ['page'  => 'buddyc-sales-settings'],
+                __( 'Emails', 'buddyclients' )              => ['page'  => 'buddyc-email-settings'],
+                __( 'Legal', 'buddyclients' )               => ['page'  => 'buddyc-legal-settings', 'post_type'  => 'buddyc_legal'],
+                __( 'Affiliate', 'buddyclients' )           => ['page'  => 'buddyc-affiliate-settings'],
+                __( 'Help Posts', 'buddyclients' )          => ['page'  => 'buddyc-help-settings'],
+                //__( 'Integrations', 'buddyclients' )        => ['page'  => 'buddyc-integrations-settings'],
             ],
             'services' => [
                 __( 'Services', 'buddyclients' )            => ['post_type'  => 'buddyc_service'],
@@ -60,9 +60,9 @@ class Nav {
                 __( 'File Upload Types', 'buddyclients' )   => ['post_type'  => 'buddyc_file_upload'],
             ],
             'payments' => [
-                __( 'Team Payments', 'buddyclients' )       => ['page'  => 'bc-team-payments'],
-                __( 'Affiliate Payments', 'buddyclients' )  => ['page'  => 'bc-affiliate-payments'],
-                __( 'Sales Payments', 'buddyclients' )      => ['page'  => 'bc-sales-payments'],
+                __( 'Team Payments', 'buddyclients' )       => ['page'  => 'buddyc-team-payments'],
+                __( 'Affiliate Payments', 'buddyclients' )  => ['page'  => 'buddyc-affiliate-payments'],
+                __( 'Sales Payments', 'buddyclients' )      => ['page'  => 'buddyc-sales-payments'],
             ],
             'briefs' => [
                 __( 'Briefs', 'buddyclients' )              => ['post_type'  => 'buddyc_brief'],
@@ -71,11 +71,11 @@ class Nav {
             ],
             'emails' => [
                 __( 'Email Templates', 'buddyclients' )    => ['post_type'  => 'buddyc_email'],
-                __( 'Email Log', 'buddyclients' )          => ['page'  => 'bc-email-log'],
+                __( 'Email Log', 'buddyclients' )          => ['page'  => 'buddyc-email-log'],
             ],
             'users' => [
-                __( 'Team', 'buddyclients' )                => ['page'  => 'bc-team'],
-                __( 'Affiliates', 'buddyclients' )          => ['page'  => 'bc-affiliates'],
+                __( 'Team', 'buddyclients' )                => ['page'  => 'buddyc-team'],
+                __( 'Affiliates', 'buddyclients' )          => ['page'  => 'buddyc-affiliates'],
             ],
             'testimonials' => [
                 __( 'Testimonials', 'buddyclients' )       => ['post_type'  => 'buddyc_testimonial'],
@@ -84,7 +84,7 @@ class Nav {
                 __( 'Custom Quotes', 'buddyclients' )      => ['post_type'  => 'buddyc_quote'],
             ],
             'license' => [
-                __( 'License Key', 'buddyclients' )        => ['page'  => 'bc-license-settings'],
+                __( 'License Key', 'buddyclients' )        => ['page'  => 'buddyc-license-settings'],
             ]
         ];
 
@@ -242,7 +242,7 @@ class Nav {
     private static function tab_link( $tab_data, $active_group ) {
         
         // Define placeholder link
-        $placeholder = admin_url('admin.php?page=bc-upgrade&group=' . urlencode($active_group));
+        $placeholder = admin_url('admin.php?page=buddyc-upgrade&group=' . urlencode($active_group));
         foreach ( $tab_data as $key => $value ) {
             $placeholder .= '&' . urlencode($key) . '=' . urlencode($value);
         }
@@ -399,7 +399,7 @@ class Nav {
     
         foreach ($menu as $key => $menu_item) {
             // Check if the menu item corresponds to 'buddyclients-settings'
-            if ($menu_item[2] === 'bc-dashboard') {
+            if ($menu_item[2] === 'buddyc-dashboard') {
                 // Add necessary classes to the top-level menu item
                 $menu[$key][4] .= ' wp-has-current-submenu wp-menu-open';
             }
@@ -414,10 +414,10 @@ class Nav {
     public static function active_submenu( $active_tab ) {
         global $submenu;
         
-        // Check if the 'bc-dashboard' menu item has submenus
-        if ( isset( $submenu['bc-dashboard'] ) ) {
+        // Check if the 'buddyc-dashboard' menu item has submenus
+        if ( isset( $submenu['buddyc-dashboard'] ) ) {
             // Get the submenu items
-            $submenu_items = &$submenu['bc-dashboard']; // Use reference to modify original array
+            $submenu_items = &$submenu['buddyc-dashboard']; // Use reference to modify original array
             
             // Loop through each submenu item
             foreach ( $submenu_items as $key => &$submenu_item )  { // Use reference to modify original array

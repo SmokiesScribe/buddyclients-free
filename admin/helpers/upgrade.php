@@ -44,7 +44,7 @@ function buddyc_account_url() {
  * @ignore
  */
 function buddyc_enable_component_url() {
-    return admin_url( '/admin.php?page=bc-components-settings' );
+    return admin_url( '/admin.php?page=buddyc-components-settings' );
 }
 
 /**
@@ -55,7 +55,7 @@ function buddyc_enable_component_url() {
  * @ignore
  */
 function buddyc_freelancer_mode_url() {
-    return admin_url('/admin.php?page=bc-booking-settings');
+    return admin_url('/admin.php?page=buddyc-booking-settings');
 }
 
 /**
@@ -78,7 +78,7 @@ function buddyc_upgrade_link( $boxed = null ) {
     }
     
     // Build container if boxed
-    $open_container = $boxed ? '<div class="bc-upgrade-link-container">' : '';
+    $open_container = $boxed ? '<div class="buddyc-upgrade-link-container">' : '';
     $close_container = $boxed ? '</div>' : '';
     
     // Get url
@@ -86,7 +86,7 @@ function buddyc_upgrade_link( $boxed = null ) {
     
     // Build link
     $link = sprintf(
-        '<p class="bc-upgrade-link">%s ' . __( 'Upgrade to <a href="%s" target="_blank">BuddyClients Essential or BuddyClients Business</a>.', 'buddyclients-free' ),
+        '<p class="buddyc-upgrade-link">%s ' . __( 'Upgrade to <a href="%s" target="_blank">BuddyClients Essential or BuddyClients Business</a>.', 'buddyclients-free' ),
         $icon,
         esc_url( $url )
     );
@@ -109,7 +109,7 @@ function buddyc_account_link() {
     $icon = '<i class="' . $icon_class . '"></i> ';
     $url = buddyc_account_url();
     return sprintf(
-        '<p class="bc-upgrade-link">%s ' . __( 'Manage <a href="%s" target="_blank">%s</a>.', 'buddyclients-free' ) . '</p>',
+        '<p class="buddyc-upgrade-link">%s ' . __( 'Manage <a href="%s" target="_blank">%s</a>.', 'buddyclients-free' ) . '</p>',
         $icon,
         esc_url( $url ),
         __( 'your BuddyClients subscription', 'buddyclients-free' )
@@ -141,12 +141,12 @@ function buddyc_enable_component_link( $component, $boxed = null ) {
     $icon = buddyc_icon( 'toggle_off' );
     
     // Build container if boxed
-    $open_container = $boxed ? '<div class="bc-upgrade-link-container">' : '';
+    $open_container = $boxed ? '<div class="buddyc-upgrade-link-container">' : '';
     $close_container = $boxed ? '</div>' : '';
     
     // Build link
     $link = sprintf(
-        '<p class="bc-upgrade-link">%s ' . __( 'The %s component is disabled. <a href="%s">Enable the component</a>.', 'buddyclients-free' ) . '</p>',
+        '<p class="buddyc-upgrade-link">%s ' . __( 'The %s component is disabled. <a href="%s">Enable the component</a>.', 'buddyclients-free' ) . '</p>',
         $icon,
         buddyc_component_name( $component ),
         esc_url( $url )
@@ -184,11 +184,11 @@ function buddyc_freelancer_mode_link( $enable = null, $boxed = null ) {
     $icon = buddyc_icon( 'toggle_off' );
     
     // Build container if boxed
-    $open_container = $boxed ? '<div class="bc-upgrade-link-container">' : '';
+    $open_container = $boxed ? '<div class="buddyc-upgrade-link-container">' : '';
     $close_container = $boxed ? '</div>' : '';
     
     // Build link
-    $link = '<p class="bc-upgrade-link">' . $icon . __( 'Freelancer Mode is enabled. <a href="%s">Disable Freelancer Mode</a>.', 'buddyclients-free' ) . '</p>';
+    $link = '<p class="buddyc-upgrade-link">' . $icon . __( 'Freelancer Mode is enabled. <a href="%s">Disable Freelancer Mode</a>.', 'buddyclients-free' ) . '</p>';
     
     // Build output
     $output = $open_container . $link . $close_container;

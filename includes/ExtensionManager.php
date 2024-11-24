@@ -238,7 +238,7 @@ class ExtensionManager {
         return [
             'type'              => 'profile',
             'content_callback'  => [new SalesProfile, 'build'],
-            'slug'              => 'bc-sales',
+            'slug'              => 'buddyc-sales',
             'name'              => __( 'Sales', 'buddyclients' ),
             'title'             => __( 'Sales Commission', 'buddyclients' ),
             'private'           => true,
@@ -255,7 +255,7 @@ class ExtensionManager {
         return [
             'type'              => 'settings',
             'content_callback'  => [new UserFilesForm, 'build'],
-            'slug'              => 'bc-files',
+            'slug'              => 'buddyc-files',
             'name'              => __( 'Files', 'buddyclients' ),
             'title'             => __( 'Manage Files', 'buddyclients' ),
             'private'           => true

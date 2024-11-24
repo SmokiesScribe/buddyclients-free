@@ -23,7 +23,7 @@
     text-align: left;
     background-color: #f4f4f4;
 }
-.bc-dashboard-item {
+.buddyc-dashboard-item {
     font-weight: normal;
     color: #333;
 }
@@ -60,18 +60,18 @@
 }
 
 /* Specific styling for tall items */
-.bc-canvas {
+.buddyc-canvas {
     width: 100%; /* Make canvas take full width of its container */
     height: 100%; /* Make canvas take full height of its container */
     object-fit: contain; /* Adjusts the canvas size to fit its container */
 }
 
-.bc-chart {
+.buddyc-chart {
     margin: 20px 10px;
     height: 100%;
 }
 
-.bc-chart h3 {
+.buddyc-chart h3 {
     margin-left: 20px;
 }
 
@@ -83,7 +83,7 @@
 }
 
 /* Key Metric Styling */
-.bc-dashboard-key-metric {
+.buddyc-dashboard-key-metric {
     display: flex; /* Use flexbox for alignment */
     align-items: center; /* Center items vertically */
     justify-content: center; /* Center items horizontally */
@@ -99,6 +99,6 @@
     width: 75%;
 }
 
-.bc-dashboard-key-metric span {
+.buddyc-dashboard-key-metric span {
     display: block; /* Make the span take full width */
 }

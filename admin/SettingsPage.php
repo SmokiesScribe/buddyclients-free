@@ -355,7 +355,7 @@ class SettingsPage {
     public function checkbox_table($type, $field_id, $field_data, $value) {
         ?>
         <div class="buddyclients-admin-field">
-            <table class="bc-checkbox-table">
+            <table class="buddyc-checkbox-table">
                 <tbody>
                     <?php foreach ($field_data['options'] as $option_key => $option_label) : 
                         $required = in_array($option_key, $field_data['required_options']);

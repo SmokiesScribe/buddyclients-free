@@ -37,12 +37,12 @@
 .checkout-table tfoot td {
     color: #000;
 }
-.bc-checkout-total {
+.buddyc-checkout-total {
     font-size: 32px;
     font-weight: 600;
 }
 
-.bc-test-mode-tag {
+.buddyc-test-mode-tag {
     display: inline-block; /* Make the tag only as wide as the content */
     padding: 8px 15px; /* Adjust padding as desired */
     border-radius: 5px;
@@ -51,7 +51,7 @@
     background-color: #f9edbf; /* Set the base background color */  
     color: #9b3617;
 }
-.bc-test-instructions {
+.buddyc-test-instructions {
     color: gray;
     background-color: #fff;
     padding: 10px;
@@ -62,7 +62,7 @@
 #free-checkout-submit:disabled {
     cursor: not-allowed;
 }
-#bc-create-account-success p {
+#buddyc-create-account-success p {
     border-radius: 10px;
     border: solid 1px #e7e9ec;
     background-color: #ffffff;

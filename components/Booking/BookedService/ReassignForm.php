@@ -28,7 +28,7 @@ class ReassignForm {
             'submission_class'  => __NAMESPACE__ . '\ReassignFormSubmission',
             'submit_text'       => __( 'Reassign', 'buddyclients' ),
             'submit_classes'    => 'button action',
-            'form_classes'      => 'bc-table-form',
+            'form_classes'      => 'buddyc-table-form',
             'values'            => $values
         ];
         

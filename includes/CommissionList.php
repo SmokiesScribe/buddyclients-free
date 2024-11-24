@@ -121,7 +121,7 @@ class CommissionList {
         }
         
         // Open table
-        $content .= '<table class="bc-booked-services-table">';
+        $content .= '<table class="buddyc-booked-services-table">';
         
         // Output headers
         $content .= $this->headers();

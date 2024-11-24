@@ -1,5 +1,5 @@
 /* Container */
-.bc-confirmation-container {
+.buddyc-confirmation-container {
     max-width: 650px;
     background-color: #fff;
     margin: auto;
@@ -11,19 +11,19 @@
 }
 
 /* Header */
-.bc-confirmation-container h1 {
+.buddyc-confirmation-container h1 {
     font-size: 24px;
     margin-bottom: 15px; /* Space below the header */
 }
 
 /* Content */
-.bc-confirmation-container div {
+.buddyc-confirmation-container div {
     margin-bottom: 20px; /* Space below the content */
     text-align: center; /* Center-aligns content */
 }
 
 /* Button */
-.bc-confirmation-button {
+.buddyc-confirmation-button {
     color: #fff;
     background-color: var(--buddyclients-primary-color);
     padding: 15px 20px;
@@ -35,7 +35,7 @@
     margin: 0 auto; /* Center-align the button */
 }
 
-.bc-confirmation-button:hover {
+.buddyc-confirmation-button:hover {
     color: #fff;
     background-color: var(--buddyclients-tertiary-color);
     cursor: pointer;

@@ -297,7 +297,7 @@ private function toggle_button( $show_form, $is_admin, $updated_date ) {
         $group_link = '<a href="' . $group_permalink . '">' . esc_html($group_name) . '</a>';
         $briefs_link = '<a href="' . $group_permalink . '/brief/">' . __('Briefs', 'buddyclients') . '</a>';
         
-        $content .= '<p class="bc-single-brief-breadcrumbs">' . $projects_link . $sep . $group_link . $sep . $briefs_link . $sep . get_the_title() . '</p>';
+        $content .= '<p class="buddyc-single-brief-breadcrumbs">' . $projects_link . $sep . $group_link . $sep . $briefs_link . $sep . get_the_title() . '</p>';
         
         // Title
         $content .= '<h1>' . get_the_title() . '</h1>';
@@ -306,7 +306,7 @@ private function toggle_button( $show_form, $is_admin, $updated_date ) {
         $content .= '<p></p>';
         
         // Open links container
-        $content .= '<div class="bc-brief-links">';
+        $content .= '<div class="buddyc-brief-links">';
         
         // Display last updated date
         if ($updated_date) {

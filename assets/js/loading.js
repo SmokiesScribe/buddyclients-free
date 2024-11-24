@@ -6,24 +6,24 @@
  */
 function bcLoadingIndicator( show, message ) {
     // Check if the indicator already exists
-    var loadingIndicator = document.getElementById('bc-loading-indicator-container');
+    var loadingIndicator = document.getElementById('buddyc-loading-indicator-container');
     
     if ( show ) {
         if ( ! loadingIndicator ) {
 
             // Create the loading indicator element if it does not exist
             loadingIndicator = document.createElement('div');
-            loadingIndicator.id = 'bc-loading-indicator-container';
+            loadingIndicator.id = 'buddyc-loading-indicator-container';
             loadingIndicator.style.opacity = '1';
             loadingIndicator.style.display = 'block';
             loadingIndicator.style.visibility = 'visible';
             
             // Build spinner
-            loadingIndicator.innerHTML = '<div id="bc-loading-indicator"></div>';
+            loadingIndicator.innerHTML = '<div id="buddyc-loading-indicator"></div>';
 
             // Add message
             if ( message ) {
-                loadingIndicator.innerHTML += '<div id="bc-loading-indicator-message">' + message + '</div>';
+                loadingIndicator.innerHTML += '<div id="buddyc-loading-indicator-message">' + message + '</div>';
             }
 
             // Insert the loading indicator into the body

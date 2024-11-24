@@ -6,13 +6,13 @@
  */
 (function() {
     document.addEventListener('DOMContentLoaded', function() {
-        const form = document.getElementById('bc-booking-form');
+        const form = document.getElementById('buddyc-booking-form');
         if ( ! form ) return;
 
         // Cache service options and team member fields
         const serviceOptions = form.querySelectorAll('.service-option');
         const teamFields = form.querySelectorAll('.team-select-field');
-        const uploadFields = form.querySelectorAll('.bc-upload-field');
+        const uploadFields = form.querySelectorAll('.buddyc-upload-field');
         const feeNumFields = form.querySelectorAll('.fee-num-field');
 
         // Ensure services exist
@@ -52,7 +52,7 @@
                         const adjustmentFieldName = 'adjustment-' + adjustmentID;
                         const adjustmentField = document.getElementById(adjustmentFieldName);
                         if (adjustmentField) {
-                            const adjustmentFieldDiv = adjustmentField.closest('.bc-form-group-container');
+                            const adjustmentFieldDiv = adjustmentField.closest('.buddyc-form-group-container');
                             adjustmentFieldDiv.style.display = isSelected ? 'block' : 'none';
                         }
                     });
@@ -76,7 +76,7 @@
             if ( uploadFields ) {
                 uploadFields.forEach(uploadField => {
                     const elementId = uploadField.id;
-                    const uploadFieldDiv = uploadField.closest('.bc-file-upload-container');
+                    const uploadFieldDiv = uploadField.closest('.buddyc-file-upload-container');
                     
                     // Extract the number using a regular expression
                     const match = elementId.match(/(\d+)$/);
@@ -133,7 +133,7 @@
                                 clonedField.name = newId;
                             } else if (!isSelected && existingField) {
                                 // Service deselected: Hide or remove the cloned field
-                                existingField.closest('.bc-form-group-container').style.display = 'none';
+                                existingField.closest('.buddyc-form-group-container').style.display = 'none';
                                 existingField.required = false;
                             }
                         });

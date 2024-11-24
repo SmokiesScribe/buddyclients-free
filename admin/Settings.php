@@ -898,7 +898,7 @@ class Settings {
                     'description' => sprintf(
                         /* translators: %s: URL to view the email log */
                         __('Email log settings. <a href="%s">View the email log.</a>', 'buddyclients'),
-                        esc_url(admin_url('/admin.php?page=bc-email-log')),
+                        esc_url(admin_url('/admin.php?page=buddyc-email-log')),
                     ),
                     'fields' => [
                         'email_log_time' => [

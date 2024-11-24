@@ -70,8 +70,8 @@ class Form {
     public function build() {        
         
         // Initialize form container and form tag
-        $form = '<div id="bc-' . $this->key . '-form-container" class="bc-form-container">';
-        $form .= '<form id="bc-' . $this->key . '-form" method="post" enctype="multipart/form-data" class="bc-form ' . ( $this->args['form_classes'] ?? '' ) . '">';
+        $form = '<div id="buddyc-' . $this->key . '-form-container" class="buddyc-form-container">';
+        $form .= '<form id="buddyc-' . $this->key . '-form" method="post" enctype="multipart/form-data" class="buddyc-form ' . ( $this->args['form_classes'] ?? '' ) . '">';
         
         // User avatar
         $form .= $this->user_avatar();
@@ -142,9 +142,9 @@ class Form {
             }
             
         $content .= '<div class="current-user form-group">';
-        $content .= '<div class="bc-form-user-profile">';
-        $content .= '<div class="bc-form-user-avatar">' . get_avatar( $user_id, 40 ) . '</div>';
-        $content .= '<div class="bc-form-user-name">' . $user_name . '</div>';
+        $content .= '<div class="buddyc-form-user-profile">';
+        $content .= '<div class="buddyc-form-user-avatar">' . get_avatar( $user_id, 40 ) . '</div>';
+        $content .= '<div class="buddyc-form-user-name">' . $user_name . '</div>';
         $content .= '</div>';
         $content .= '</div>';
         

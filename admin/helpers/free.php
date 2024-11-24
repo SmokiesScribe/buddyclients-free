@@ -13,7 +13,7 @@ function buddyc_free_admin_pages( $pages ) {
         'key' => 'free-upgrade',
         'settings' => false,
         'title' => __('Upgrade', 'buddyclients'),
-        'parent_slug' => 'bc-dashboard',
+        'parent_slug' => 'buddyc-dashboard',
         'buddyc_menu_order' => 30,
         'group' => 'settings',
         'callable' => 'buddyc_free_upgrade_content'
@@ -33,7 +33,7 @@ function buddyc_free_nav_tabs( $tabs ) {
     unset( $tabs['license'] );
 
     // Add upgrade tab
-    $tabs['free_upgrade'] = [__( 'Upgrade', 'buddyclients-free' ) => ['page'  => 'bc-free-upgrade']];
+    $tabs['free_upgrade'] = [__( 'Upgrade', 'buddyclients-free' ) => ['page'  => 'buddyc-free-upgrade']];
 
     return $tabs;
 }

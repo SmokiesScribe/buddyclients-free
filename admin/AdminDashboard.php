@@ -447,9 +447,9 @@ class AdminDashboard {
         foreach ( $this->booking_data as $data ) {
             $content .= '<tr>';
             $content .= '<td class="booking-dashboard-column-title">' . esc_html( $data['status'] ) . '</td>';
-            $content .= '<td><span class="bc-dashboard-item">' . esc_html( $data['count'] ) . '</span></td>';
-            $content .= '<td><span class="bc-dashboard-item">' . esc_html( '$' . number_format( $data['total'], 2 ) ) . '</span></td>';
-            $content .= '<td><span class="bc-dashboard-item">' . esc_html( '$' . number_format( $data['net'], 2 ) ) . '</span></td>';
+            $content .= '<td><span class="buddyc-dashboard-item">' . esc_html( $data['count'] ) . '</span></td>';
+            $content .= '<td><span class="buddyc-dashboard-item">' . esc_html( '$' . number_format( $data['total'], 2 ) ) . '</span></td>';
+            $content .= '<td><span class="buddyc-dashboard-item">' . esc_html( '$' . number_format( $data['net'], 2 ) ) . '</span></td>';
             $content .= '</tr>';
         }
         
@@ -470,7 +470,7 @@ class AdminDashboard {
      */
     private function key_metric( $label, $key ) {
         $value = $this->key_metrics[$key] ?? 'N/A';
-        $content = '<div class="bc-dashboard-key-metric">';
+        $content = '<div class="buddyc-dashboard-key-metric">';
         $content .= '<span>' . $label . ': ' . $value . '</span>';
         $content .= '</div>';
         return $content;

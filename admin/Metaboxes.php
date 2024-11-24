@@ -394,8 +394,8 @@ class Metaboxes {
         $field_value = $args['field_value'] ?? $default;
     
         $field = '';
-        $field .= '<input type="' . esc_attr($args['field_type']) . '" class="bc-meta-field" name="' . esc_attr($args['field_id']) . '" placeholder="' . esc_attr($args['placeholder']) . '" value="' . esc_attr($field_value) . '" size="10">';
-        $field .= '<div class="bc-meta-description">' . $args['description'] . '</div>';
+        $field .= '<input type="' . esc_attr($args['field_type']) . '" class="buddyc-meta-field" name="' . esc_attr($args['field_id']) . '" placeholder="' . esc_attr($args['placeholder']) . '" value="' . esc_attr($field_value) . '" size="10">';
+        $field .= '<div class="buddyc-meta-description">' . $args['description'] . '</div>';
         return $field;
     }
     
@@ -408,7 +408,7 @@ class Metaboxes {
      */
     private function dropdown_field( $args ) {
         $field = '';
-        $field .= '<select class="bc-meta-input bc-meta-field" id="' . esc_attr($args['field_id']) . '" name="' . esc_attr($args['field_id']) . '">';
+        $field .= '<select class="buddyc-meta-input buddyc-meta-field" id="' . esc_attr($args['field_id']) . '" name="' . esc_attr($args['field_id']) . '">';
         $field .= '<option value="">' . esc_html($args['placeholder']) . '</option>'; // Empty option
         
         // Initialize
@@ -446,7 +446,7 @@ class Metaboxes {
         
         // Close dropdown
         $field .= '</select>';
-        $field .= '<div class="bc-meta-description">' . $args['description'] . '</div>';
+        $field .= '<div class="buddyc-meta-description">' . $args['description'] . '</div>';
     
         // Display info if option not found for existing value
         if (!$match_found && $args['field_value'] !== '') {
@@ -478,7 +478,7 @@ class Metaboxes {
         $field_value = !empty($args['field_value']) ? (array)$args['field_value'] : $default;
     
         $field = '';
-        $field .= '<div class="bc-meta-description">' . $args['description'] . '</div>';
+        $field .= '<div class="buddyc-meta-description">' . $args['description'] . '</div>';
         $field .= '<div id="' . esc_attr($args['field_id']) . '">';
         foreach ($args['options'] as $option_value => $option_label) {
             if ($args['post_id'] === $option_value) {

@@ -739,7 +739,7 @@ class BookingForm {
                     'description'   => $upload->form_description . $help_link,
                     'file_types'    => $upload->file_types,
                     'multiple_files'=> $upload->multiple_files,
-                    'field_classes' => 'bc-upload-field',
+                    'field_classes' => 'buddyc-upload-field',
                     'data_atts' => [
                         'service_ids'   => implode(',', $upload->service_ids),
                         'file_required' => $upload->required

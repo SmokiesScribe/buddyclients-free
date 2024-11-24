@@ -1,14 +1,14 @@
 /* Single Brief Post */
-.bc-single-brief {
+.buddyc-single-brief {
     margin-top: 10px;
 }
 
-.bc-single-brief-breadcrumbs {
+.buddyc-single-brief-breadcrumbs {
     margin-bottom: 30px;
 }
 
 @media (min-width: 768px) {
-    .bc-single-brief-content {
+    .buddyc-single-brief-content {
         max-width: 650px;
         margin: auto;
     }
@@ -36,10 +36,10 @@
     padding: 15px 0;
     margin: 25px 0;
 }
-.bc-brief-links {
+.buddyc-brief-links {
     margin: 30px auto;
 }
-.bc-back-to-briefs-link:hover {
+.buddyc-back-to-briefs-link:hover {
     color: var(--buddyclients-tertiary-color);
 }
 .show-hide-brief-btn {

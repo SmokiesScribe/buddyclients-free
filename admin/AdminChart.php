@@ -75,9 +75,9 @@ class AdminChart {
         ob_start();
         ?>
 
-        <div class="bc-chart <?php echo esc_html( $this->chart_type ); ?>">
+        <div class="buddyc-chart <?php echo esc_html( $this->chart_type ); ?>">
         <h3><?php echo esc_html( $this->title ); ?></h3>
-        <canvas id="<?php echo esc_attr( $this->canvas_id ); ?>" class="bc-canvas"></canvas>
+        <canvas id="<?php echo esc_attr( $this->canvas_id ); ?>" class="buddyc-canvas"></canvas>
         </div>
 
         <?php

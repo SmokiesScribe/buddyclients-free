@@ -108,7 +108,7 @@ function buddyc_format_status( $value, $add_class = null ) {
     
     // Add original value as class
     if ( $add_class ) {
-        $formatted_value = '<span class="bc-status ' . esc_attr( $value ) . '">' . esc_html( $formatted_value ) . '</span>';
+        $formatted_value = '<span class="buddyc-status ' . esc_attr( $value ) . '">' . esc_html( $formatted_value ) . '</span>';
     }
     
     return $formatted_value;

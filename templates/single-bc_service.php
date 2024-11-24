@@ -14,19 +14,19 @@
     $booking_form_btn = '';
     
     // Start building the content
-    $service_content = '<div class="bc-single-service">';
+    $service_content = '<div class="buddyc-single-service">';
     
     // Breadcrumbs
     $sep = '<i class="fa-solid fa-angle-right" style="margin: 0 8px; font-size: 12px;"></i>';
     $services_link = '<a href="' . esc_url(site_url('/services/')) . '">' . esc_html__('Services', 'buddyclients') . '</a>';
     $service_type = get_the_title(get_post_meta($post_id, 'service_type', true));
-    $service_content .= '<p class="bc-single-brief-breadcrumbs">' . $services_link . $sep . esc_html($service_type) . $sep . esc_html(get_the_title()) . '</p>';
+    $service_content .= '<p class="buddyc-single-brief-breadcrumbs">' . $services_link . $sep . esc_html($service_type) . $sep . esc_html(get_the_title()) . '</p>';
     
     // Content wrap
-    $service_content .= '<div class="bc-single-service-content">';
+    $service_content .= '<div class="buddyc-single-service-content">';
     
     // Title
-    $service_content .= '<h1 class="bc-service-name">' . esc_html(get_the_title()) . '</h1>';
+    $service_content .= '<h1 class="buddyc-service-name">' . esc_html(get_the_title()) . '</h1>';
     
     // Get post meta
     $service_type = get_post_meta($post_id, 'service_type', true);
@@ -60,14 +60,14 @@
     $dependency_link = buddyc_single_service_dependencies($post_id);
     
     // Build single service content
-    $service_content .= '<div class="bc-service-post-content">';
+    $service_content .= '<div class="buddyc-service-post-content">';
     $service_content .= wp_kses_post(get_the_content());
     $service_content .= '</div>';
     
     $service_content .= $booking_form_btn;
     
     // Details
-    $service_content .= '<div class="bc-service-details">';
+    $service_content .= '<div class="buddyc-service-details">';
     
     $dependency_link = $dependency_link ? '<p>' . esc_html__('This service requires', 'buddyclients') . ' ' . $dependency_link . '</p>' : '';
     $rate_line = $rate_value ? '<p><b>' . esc_html($rate_label) . '</b>: $' . esc_html($rate_value) . ' ' . esc_html($rate_type_label) . '</p>' : '';

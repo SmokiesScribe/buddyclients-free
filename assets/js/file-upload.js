@@ -3,7 +3,7 @@ document.addEventListener('DOMContentLoaded', () => {
      * Check if the "Add Files" button and file input elements exist.
      * If they exist, attach an event listener to the "Add Files" button to trigger a click on the file input element.
      */
-    const uploadContainers = document.querySelectorAll('.bc-file-upload');
+    const uploadContainers = document.querySelectorAll('.buddyc-file-upload');
 
     uploadContainers.forEach(uploadContainer => {
         const addButton = uploadContainer.querySelector('.dz-button');

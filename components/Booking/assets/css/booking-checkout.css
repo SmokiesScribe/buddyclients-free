@@ -100,7 +100,7 @@
     color: gray;
 }
 
-#bc-checkout-project {
+#buddyc-checkout-project {
     font-weight: 300;
     margin: 10px;
 }
@@ -120,7 +120,7 @@
 .checkout-table tfoot td {
     color: #000;
 }
-#bc-checkout-total {
+#buddyc-checkout-total {
     font-size: 32px;
     font-weight: 600;
     color: #000;
@@ -128,20 +128,20 @@
 }
 
 /* Create account form */
-#bc-create-account {
+#buddyc-create-account {
     margin: auto;
     padding: 15px;
 }
 
-#bc-create-account .form-group {
+#buddyc-create-account .form-group {
     margin: 10px;
 }
 
-#bc-create-account input[type="text"],
-#bc-create-account input[type="email"]{
+#buddyc-create-account input[type="text"],
+#buddyc-create-account input[type="email"]{
     width: 100%;
 }
-.bc-test-mode-tag {
+.buddyc-test-mode-tag {
     display: inline-block; /* Make the tag only as wide as the content */
     padding: 8px 15px; /* Adjust padding as desired */
     border-radius: 5px;
@@ -150,7 +150,7 @@
     background-color: #f9edbf; /* Set the base background color */  
     color: #9b3617;
 }
-.bc-test-instructions {
+.buddyc-test-instructions {
     color: gray;
     background-color: #fff;
     padding: 10px;
