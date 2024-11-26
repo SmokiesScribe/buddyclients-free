@@ -1,4 +1,5 @@
 <?php
+if ( ! defined( 'ABSPATH' ) ) exit; // Exit if accessed directly
 use BuddyClients\Includes\Options as Options;
 /**
  * Generates an options array.

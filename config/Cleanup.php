@@ -1,5 +1,6 @@
 <?php
 namespace BuddyClients\Config;
+if ( ! defined( 'ABSPATH' ) ) exit; // Exit if accessed directly
 
 use BuddyClients\Components\Email\Email;
 use BuddyClients\Includes\FileHandler;

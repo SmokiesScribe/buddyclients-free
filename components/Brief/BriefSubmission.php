@@ -1,5 +1,6 @@
 <?php
 namespace BuddyClients\Components\Brief;
+if ( ! defined( 'ABSPATH' ) ) exit; // Exit if accessed directly
 
 use BuddyClients\Includes\FileHandler;
 

@@ -1,5 +1,6 @@
 <?php
 namespace BuddyClients\Components\Booking;
+if ( ! defined( 'ABSPATH' ) ) exit; // Exit if accessed directly
 
 use BuddyClients\Includes\{
     XprofileField as XprofileField

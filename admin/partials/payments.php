@@ -1,4 +1,5 @@
 <?php
+if ( ! defined( 'ABSPATH' ) ) exit; // Exit if accessed directly
 use BuddyClients\Components\Booking\BookedService\Payment;
 use BuddyClients\Admin\AdminTable;
 

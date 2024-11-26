@@ -1,5 +1,6 @@
 <?php
 namespace BuddyClients\Includes;
+if ( ! defined( 'ABSPATH' ) ) exit; // Exit if accessed directly
 
 /**
  * Generates options for dropdown and checkbox fields.

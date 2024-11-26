@@ -1,4 +1,5 @@
 <?php
+if ( ! defined( 'ABSPATH' ) ) exit; // Exit if accessed directly
 use BuddyClients\Config\ReferencePosts;
 /**
  * Retrieves the ID of a reference post by key.

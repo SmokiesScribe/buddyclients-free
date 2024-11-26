@@ -1,4 +1,5 @@
 <?php
+if ( ! defined( 'ABSPATH' ) ) exit; // Exit if accessed directly
 use BuddyClients\Components\Service\Adjustment;
 /**
  * Checks whether any valid services exist.

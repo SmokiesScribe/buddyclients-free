@@ -1,4 +1,5 @@
 <?php
+if ( ! defined( 'ABSPATH' ) ) exit; // Exit if accessed directly
 use BuddyClients\Includes\Project;
 /**
  * Handles AJAX calls to retrieve project data.

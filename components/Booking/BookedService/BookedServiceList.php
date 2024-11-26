@@ -1,5 +1,6 @@
 <?php
 namespace BuddyClients\Components\Booking\BookedService;
+if ( ! defined( 'ABSPATH' ) ) exit; // Exit if accessed directly
 
 use BuddyClients\Components\Booking\BookingIntent;
 use BuddyClients\Includes\Form\Form;

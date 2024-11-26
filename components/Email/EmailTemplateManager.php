@@ -1,5 +1,6 @@
 <?php
 namespace BuddyClients\Components\Email;
+if ( ! defined( 'ABSPATH' ) ) exit; // Exit if accessed directly
 
 /**
  * Manages plugin email templates.

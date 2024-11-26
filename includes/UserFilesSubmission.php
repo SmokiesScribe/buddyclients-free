@@ -1,5 +1,6 @@
 <?php
 namespace BuddyClients\Includes;
+if ( ! defined( 'ABSPATH' ) ) exit; // Exit if accessed directly
 
 /**
  * Handles submission of the initial user files deletion form.

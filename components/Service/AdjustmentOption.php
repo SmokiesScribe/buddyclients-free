@@ -1,5 +1,6 @@
 <?php
 namespace BuddyClients\Components\Service;
+if ( ! defined( 'ABSPATH' ) ) exit; // Exit if accessed directly
 
 /**
  * A single option for an adjustment.

@@ -1,4 +1,5 @@
 <?php
+if ( ! defined( 'ABSPATH' ) ) exit; // Exit if accessed directly
 use BuddyClients\Includes\ObjectHandler;
 use BuddyClients\Components\Email\Email;
 use BuddyClients\Admin\AdminTable;

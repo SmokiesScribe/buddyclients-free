@@ -1,4 +1,5 @@
 <?php
+if ( ! defined( 'ABSPATH' ) ) exit; // Exit if accessed directly
 use BuddyClients\Config\ComponentsHandler as ComponentsHandler;
 /**
  * Checks whether a component is enabled.

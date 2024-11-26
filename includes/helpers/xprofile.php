@@ -1,4 +1,5 @@
 <?php
+if ( ! defined( 'ABSPATH' ) ) exit; // Exit if accessed directly
 use BuddyClients\Includes\XprofileManager;
 use BuddyClients\Includes\XprofileField;
 use BuddyClients\Components\Booking\FilterField;

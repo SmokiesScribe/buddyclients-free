@@ -1,5 +1,6 @@
 <?php
 namespace BuddyClients\Admin;
+if ( ! defined( 'ABSPATH' ) ) exit; // Exit if accessed directly
 
 /**
  * Handles the registration of custom post types.
