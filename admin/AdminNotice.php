@@ -73,7 +73,7 @@ class AdminNotice {
         $this->extract_args( $args );
 
         // Cache key based on the message
-        $cache_key = 'admin_notice_' . md5( $this->message );
+        $cache_key = 'buddyc_admin_notice_' . md5( $this->message );
 
         // Check if the notice has already been shown
         if ( ! get_transient( $cache_key ) ) {
