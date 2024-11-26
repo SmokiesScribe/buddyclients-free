@@ -309,8 +309,8 @@ class PDF {
         if ( isset( $pdf->file_url ) && isset( $pdf->file_path ) ) {
             $pdf->file_url = str_replace( ABSPATH, trailingslashit( site_url() ), $pdf->file_path );
             if ( $pdf->file_url && $pdf->file_url !== '' ) {
-                $link_text = $type ? __( 'Download ', 'buddyclients' ) . ucfirst( $type ) . __( ' PDF', 'buddyclients' ) : __( 'Download PDF', 'buddyclients' );
-                return '<a href="' . esc_url( $pdf->file_url ) . '" ' . __( 'download', 'buddyclients' ) . '><i class="fa-solid fa-download"></i> ' . $link_text . '</a>';
+                $link_text = $type ? __( 'Download ', 'buddyclients-free' ) . ucfirst( $type ) . __( ' PDF', 'buddyclients-free' ) : __( 'Download PDF', 'buddyclients-free' );
+                return '<a href="' . esc_url( $pdf->file_url ) . '" ' . __( 'download', 'buddyclients-free' ) . '><i class="fa-solid fa-download"></i> ' . $link_text . '</a>';
             }
         }
     }

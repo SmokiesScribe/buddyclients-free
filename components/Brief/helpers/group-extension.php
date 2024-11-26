@@ -11,12 +11,12 @@ function buddyc_buddyc_brief_add_group_extension() {
 			function __construct() {
 				$args = array(
 					'slug'              => 'brief',
-					'name'              =>  __( 'Project Briefs', 'buddyclients' ),
+					'name'              =>  __( 'Project Briefs', 'buddyclients-free' ),
 					'nav_item_position' => 200,
 					'enable_nav_item'   => true,
 					'screens' => array(
 						'edit' => array(
-							'name'      => __( 'Project Briefs', 'buddyclients' ),
+							'name'      => __( 'Project Briefs', 'buddyclients-free' ),
 						),
 						'create'        => array( 'position' => 0, ),
 					),
@@ -28,7 +28,7 @@ function buddyc_buddyc_brief_add_group_extension() {
 				$group_id = bp_get_group_id();
 
 				$group_extension_status = groups_get_groupmeta( $group_id, 'group_extension_setting' );
-				$title = '<h3 class="project-brief-title">' . __( 'Project Briefs', 'buddyclients' ) . '</h3>' . esc_attr( $group_extension_status );
+				$title = '<h3 class="project-brief-title">' . __( 'Project Briefs', 'buddyclients-free' ) . '</h3>' . esc_attr( $group_extension_status );
                 echo wp_kses_post( $title );
 				
 				// List project briefs
@@ -103,7 +103,7 @@ function buddyc_project_briefs( $group_id ) {
         wp_reset_postdata();
     
     } else {
-        __e( 'No briefs available.', 'buddyclients' );
+        __e( 'No briefs available.', 'buddyclients-free' );
     }
     
     $content .= '</div>'; // Close terms container

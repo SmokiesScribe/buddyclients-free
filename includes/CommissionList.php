@@ -76,11 +76,11 @@ class CommissionList {
      */
     private static function header_list() {
         return [
-            __( 'Date', 'buddyclients' ),
-            __( 'Service', 'buddyclients' ),
-            __( 'Client', 'buddyclients' ),
-            __( 'Commission', 'buddyclients' ),
-            __( 'Payment Status', 'buddyclients' )
+            __( 'Date', 'buddyclients-free' ),
+            __( 'Service', 'buddyclients-free' ),
+            __( 'Client', 'buddyclients-free' ),
+            __( 'Commission', 'buddyclients-free' ),
+            __( 'Payment Status', 'buddyclients-free' )
         ];
     }
     
@@ -117,7 +117,7 @@ class CommissionList {
         
         // Make sure payments exist
         if ( ! $payments ) {
-            return '<p>' . __( 'No commission available.', 'buddyclients' ) . '</p>';
+            return '<p>' . __( 'No commission available.', 'buddyclients-free' ) . '</p>';
         }
         
         // Open table

@@ -30,7 +30,7 @@ function buddyc_create_plugin_page() {
         $plugin_page = ( new PluginPage( $page_key ) )->create_page( $args_sanitized );
     } else {
         // Handle the case where 'args' or 'page_key' is not set
-        $error_message = __( 'Invalid input for creating new page.', 'buddyclients' );
+        $error_message = __( 'Invalid input for creating new page.', 'buddyclients-free' );
         echo wp_json_encode([ 
             'success' => false, 
             'error_message' => $error_message
@@ -49,7 +49,7 @@ function buddyc_create_plugin_page() {
         
     } else {
         // If page creation failed, return an error message
-        $error_message = __( 'Failed to create a new page.', 'buddyclients' );
+        $error_message = __( 'Failed to create a new page.', 'buddyclients-free' );
         echo wp_json_encode([ 
             'success' => false, 
             'error_message' => $error_message

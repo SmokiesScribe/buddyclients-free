@@ -67,14 +67,14 @@ class AlertManager {
             $content = sprintf(
                 '<a href="%s">%s</a>',
                 esc_url( $link ),
-                __( 'Add your availability.', 'buddyclients' )
+                __( 'Add your availability.', 'buddyclients-free' )
             );
         
         // Check if the availability is expired
         } else if ( Availability::expired( $availability ) ) {
             $content = sprintf(
                 /* translators: %s: url to update availability */
-                __( 'Your availability has expired. <a href="%s">Update your availability.</a>', 'buddyclients' ),
+                __( 'Your availability has expired. <a href="%s">Update your availability.</a>', 'buddyclients-free' ),
                 esc_url( $link ),
             );
         }
@@ -132,7 +132,7 @@ class AlertManager {
         if ( $status === 'active' ) {
             $content = sprintf(
                 /* translators: %s: url to complete agreement */
-                __( 'Complete your <a href="%s">new team member agreement</a>.', 'buddyclients' ),
+                __( 'Complete your <a href="%s">new team member agreement</a>.', 'buddyclients-free' ),
                 esc_url( $link )
             );            
             
@@ -140,7 +140,7 @@ class AlertManager {
         } else if ( $status !== 'current' ) {
             $content = sprintf(
                 /* translators: %s: url to complete agreement */
-                __( 'Complete your <a href="%s">team member agreement</a>.', 'buddyclients' ),
+                __( 'Complete your <a href="%s">team member agreement</a>.', 'buddyclients-free' ),
                 esc_url( $link )
             );
         }

@@ -14,12 +14,12 @@ function buddyc_user_agreements_table() {
     
     // Define headers
     $headers = [
-        __( 'Date', 'buddyclients' ),
-        __( 'Status', 'buddyclients' ),
-        __( 'Type', 'buddyclients' ),
-        __( 'Legal Name', 'buddyclients' ),
-        __( 'Email', 'buddyclients' ),
-        __( 'Download PDF', 'buddyclients' ),
+        __( 'Date', 'buddyclients-free' ),
+        __( 'Status', 'buddyclients-free' ),
+        __( 'Type', 'buddyclients-free' ),
+        __( 'Legal Name', 'buddyclients-free' ),
+        __( 'Email', 'buddyclients-free' ),
+        __( 'Download PDF', 'buddyclients-free' ),
     ];
 
     // Get all user ids
@@ -32,7 +32,7 @@ function buddyc_user_agreements_table() {
 
     // Initialize user options
     $user_options = [
-        ''                   => __( 'All', 'buddyclients' ),
+        ''                   => __( 'All', 'buddyclients-free' ),
     ];
 
     // Build user options
@@ -57,20 +57,20 @@ function buddyc_user_agreements_table() {
         'headings'  => $headers,
         'columns'   => $columns,
         'items'     => $agreements,
-        'title'     => __( 'User Agreements', 'buddyclients' ),
+        'title'     => __( 'User Agreements', 'buddyclients-free' ),
         'filters'   => [
             'type'    => [
-                'label'     => __( 'Type', 'buddyclients' ),
+                'label'     => __( 'Type', 'buddyclients-free' ),
                 'property'  =>  'legal_type',
                 'options'   => [
-                    ''                   => __( 'All', 'buddyclients' ),
-                    'affiliate'          => __( 'Affiliate', 'buddyclients' ),
-                    'team'               => __( 'Team', 'buddyclients' ),
+                    ''                   => __( 'All', 'buddyclients-free' ),
+                    'affiliate'          => __( 'Affiliate', 'buddyclients-free' ),
+                    'team'               => __( 'Team', 'buddyclients-free' ),
                 ],
                 'default'   => 'succeeded'
             ],
             'user'    => [
-                'label'     => __( 'User', 'buddyclients' ),
+                'label'     => __( 'User', 'buddyclients-free' ),
                 'property'  =>  'user_id',
                 'options'   => $user_options
             ]

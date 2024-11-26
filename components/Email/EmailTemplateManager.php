@@ -48,7 +48,7 @@ class EmailTemplateManager {
             'abandoned_booking' => [
                 'label' => __('Abandoned Booking', 'buddyclients-free'),
                 'subject' => __('Need some help?', 'buddyclients-free'),
-                'content' => '<p>' . __( 'Looks like you didn’t finish booking your services with {{site_name}}. If you have questions, please respond to this email.', 'buddyclients' ) . '</p>',
+                'content' => '<p>' . __( 'Looks like you didn’t finish booking your services with {{site_name}}. If you have questions, please respond to this email.', 'buddyclients-free' ) . '</p>',
             ],
             'payment' => [
                 'label' => __('Payment Status Updated', 'buddyclients-free'),

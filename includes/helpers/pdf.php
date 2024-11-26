@@ -140,7 +140,7 @@ function buddyc_buddyc_generate_service_agreement_pdf( $booking_intent ) {
     $date = strtotime( $booking_intent->created_at );
     $date_human_readable = gmdate( 'F d, Y', $date );
     /* translators: %s: */
-    $message = __( '%1$s accepted this agreement by selecting a checkbox on %2$s at the website %3$s.', 'buddyclients' );
+    $message = __( '%1$s accepted this agreement by selecting a checkbox on %2$s at the website %3$s.', 'buddyclients-free' );
 
     /* translators: %1$s: client name; %2$s: date; %3$s: website URL */
     $date_string = sprintf( $message, $client_name, $date_human_readable, site_url() );
@@ -204,11 +204,11 @@ function buddyc_buddyc_generate_legal_pdf_from_user_data( $data, $type ) {
     
     // Add status string
     $curr_date = gmdate('F j, Y');
-    $status = $data['status'] ?? __( 'inactive', 'buddyclients' );
+    $status = $data['status'] ?? __( 'inactive', 'buddyclients-free' );
     $uc_status = strtoupper( $status );
 
     /* translators: %1$s: status of the agreement; %2$s: current date */
-    $message = __( 'This agreement is %1$s as of %2$s.', 'buddyclients' );
+    $message = __( 'This agreement is %1$s as of %2$s.', 'buddyclients-free' );
     $status_string = sprintf( $message, $uc_status, $curr_date );
     
     $pdf->MultiCell(0, 10, $status_string, 0, 'L');
