@@ -252,14 +252,14 @@ class Service {
                     $error[] = sprintf(
                         '<a href="%s" target="_blank">%s</a>',
                         buddyc_upgrade_url(),
-                        __('Upgrade BuddyClients', 'buddyclients') . ' ' . __('to offer paid services.', 'buddyclients')
+                        __('Upgrade BuddyClients', 'buddyclients-free') . ' ' . __('to offer paid services.', 'buddyclients-free')
                     );
                     $valid = false;
                 } else if ( ! buddyc_component_enabled( 'Stripe' ) ) {
                     $error[] = sprintf(
                         '<a href="%s">%s</a>',
                         buddyc_enable_component_url(),
-                        __('Enable the Stripe component', 'buddyclients') . ' ' . __('to offer paid services.', 'buddyclients')
+                        __('Enable the Stripe component', 'buddyclients-free') . ' ' . __('to offer paid services.', 'buddyclients-free')
                     );
                     $valid = false;
                 }

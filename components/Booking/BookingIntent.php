@@ -320,7 +320,7 @@ class BookingIntent {
                 'items'         => [
                     sprintf(
                         /* translators: %s: the url of the site */
-                        __('Accepted via checkbox on %s', 'buddyclients'),
+                        __('Accepted via checkbox on %s', 'buddyclients-free'),
                         site_url()
                     ),
                     gmdate('F d, Y')

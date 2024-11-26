@@ -69,7 +69,7 @@ function buddyc_email_log_admin_notice() {
         // Build note
         $message = sprintf(
             /* translators: %s: the amount of time emails are stored (e.g. for 90 days or forever) */
-            __('Emails are currently stored %s.', 'buddyclients'),
+            __('Emails are currently stored %s.', 'buddyclients-free'),
             $email_setting
         );
         

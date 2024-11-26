@@ -358,18 +358,18 @@ class Metaboxes {
             // Payment    
             case 'payment':
                 $options = [
-                    'pending' => __('Pending', 'buddyclients'),
-                    'eligible' => __('Eligible', 'buddyclients'),
-                    'paid' => __('Paid', 'buddyclients'),
+                    'pending' => __('Pending', 'buddyclients-free'),
+                    'eligible' => __('Eligible', 'buddyclients-free'),
+                    'paid' => __('Paid', 'buddyclients-free'),
                 ];
                 break;
             
             // Operator    
             case 'operator':
                 $options = [
-                    'x' => __('x (multiply)', 'buddyclients'),
-                    '+' => __('+ (add)', 'buddyclients'),
-                    '-' => __('- (subtract)', 'buddyclients'),
+                    'x' => __('x (multiply)', 'buddyclients-free'),
+                    '+' => __('+ (add)', 'buddyclients-free'),
+                    '-' => __('- (subtract)', 'buddyclients-free'),
                 ];
                 break;
             
@@ -459,7 +459,7 @@ class Metaboxes {
             $display = $title ? $title : ($name ?? $args['field_value']);
             $field .= sprintf(
                 /* translators: %s: the field title, name, or value */
-                __('Unavailable: %s', 'buddyclients'),
+                __('Unavailable: %s', 'buddyclients-free'),
                 esc_html( $display )
             );
         }

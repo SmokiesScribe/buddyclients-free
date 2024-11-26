@@ -160,7 +160,7 @@ class SettingsPage {
             <form method="post" action="options.php">
                 <?php settings_fields( $this->name . '_group' ); ?>
                 <?php do_settings_sections( $this->name ); ?>
-                <?php submit_button( __('Save Settings', 'buddyclients') ); ?>
+                <?php submit_button( __('Save Settings', 'buddyclients-free') ); ?>
             </form>
         </div>
         <?php
@@ -191,7 +191,7 @@ class SettingsPage {
             }
         // No settings data available
         } else {
-            echo wp_kses_post( __('Not available.', 'buddyclients') );
+            echo wp_kses_post( __('Not available.', 'buddyclients-free') );
         }
     }
     
@@ -571,7 +571,7 @@ class SettingsPage {
             $selected_page_permalink = ($value) ? get_permalink($value) : '#';
             
             // Create view page button
-            $button = '<a href="' . esc_url($selected_page_permalink) . '" target="_blank"><button type="button" class="button button-secondary">' . __('View Page', 'buddyclients') . '</button></a>';
+            $button = '<a href="' . esc_url($selected_page_permalink) . '" target="_blank"><button type="button" class="button button-secondary">' . __('View Page', 'buddyclients-free') . '</button></a>';
         } else {
             
             // Show create button
@@ -582,7 +582,7 @@ class SettingsPage {
                 post_content: \'' . esc_js($field_data['post_content']) . '\',
                 post_type: \'' . esc_js('page') . '\',
                 post_status: \'' . esc_js('publish') . '\'
-            });" type="button" class="button button-secondary">' . __('Create Page', 'buddyclients') . '</button>';
+            });" type="button" class="button button-secondary">' . __('Create Page', 'buddyclients-free') . '</button>';
         }
 
         // Escape the entire button HTML
@@ -623,7 +623,7 @@ class SettingsPage {
             '<a href="' . get_permalink($value) . '" target="_blank">
                 <button type="button" class="button button-primary" style="margin-right: 5px">' . 
                     /* translators: %s: label of the field */
-                    sprintf( esc_html__('View Active %s', 'buddyclients'), $field_data['label'] ) . 
+                    sprintf( esc_html__('View Active %s', 'buddyclients-free'), $field_data['label'] ) . 
                 '</button>
             </a>' : '';
         }
@@ -634,7 +634,7 @@ class SettingsPage {
             $edit_button = '<a href="' . get_edit_post_link($draft_id) . '">
                 <button type="button" class="button button-secondary" style="margin-right: 5px">' . 
                     /* translators: %s: label of the field */
-                    sprintf( esc_html__('Edit %s Draft', 'buddyclients'), $field_data['label'] ) . 
+                    sprintf( esc_html__('Edit %s Draft', 'buddyclients-free'), $field_data['label'] ) . 
                 '</button>
             </a>';
         } else {
@@ -652,7 +652,7 @@ class SettingsPage {
                 nonce: \'' . esc_js($create_nonce) . '\'
             });" type="button" class="button button-secondary" style="margin-right: 5px">' . 
                 /* translators: %s: label of the field */
-                sprintf( esc_html__('Create New %s', 'buddyclients'), esc_html($field_data['label'])) . 
+                sprintf( esc_html__('Create New %s', 'buddyclients-free'), esc_html($field_data['label'])) . 
             '</button>';
         }
         
@@ -674,7 +674,7 @@ class SettingsPage {
                     $version_trans_message = sprintf(
                         /* translators: %s: human-readable deadline */
                         /* translators: %s: label of the field */
-                        esc_html__('Users have until %1$s to accept the new %2$s.', 'buddyclients'),
+                        esc_html__('Users have until %1$s to accept the new %2$s.', 'buddyclients-free'),
                         $human_readable_deadline,
                         $field_data['label']
                     );
@@ -683,7 +683,7 @@ class SettingsPage {
             } else {
                 $version_trans_message = sprintf(
                     /* translators: %s: label of the field */
-                    esc_html__('Users have forever to accept the new %s.', 'buddyclients'),
+                    esc_html__('Users have forever to accept the new %s.', 'buddyclients-free'),
                     $field_data['label']
                 );
             }

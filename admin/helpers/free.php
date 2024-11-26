@@ -12,7 +12,7 @@ function buddyc_free_admin_pages( $pages ) {
     $pages['free_upgrade'] = [
         'key' => 'free-upgrade',
         'settings' => false,
-        'title' => __('Upgrade', 'buddyclients'),
+        'title' => __('Upgrade', 'buddyclients-free'),
         'parent_slug' => 'buddyc-dashboard',
         'buddyc_menu_order' => 30,
         'group' => 'settings',

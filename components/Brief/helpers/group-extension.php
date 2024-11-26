@@ -90,7 +90,7 @@ function buddyc_project_briefs( $group_id ) {
             $content .= '<div class="brief-type-term">';
             $content .= '<h3 style="margin-bottom: 10px;">' . sprintf(
                 /* translators: %s: the brief type (e.g. Editing) */
-                __('%s Brief', 'buddyclients'),
+                __('%s Brief', 'buddyclients-free'),
                 $brief_type )
                 . '</h3>';
                 $content .= '<icon class="' . esc_attr( $icon_class ) . '" style="font-size: 24px; color: ' . buddyc_color('accent') . ';"></icon>';

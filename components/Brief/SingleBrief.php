@@ -272,12 +272,12 @@ private function toggle_button( $show_form, $is_admin, $updated_date ) {
             $content .= '<div class="login-options">';
             $content .= '<p>' . sprintf(
                 /* translators: %s: the login url */
-                __('Please <a href="%s">log in</a> to access this brief.', 'buddyclients'),
+                __('Please <a href="%s">log in</a> to access this brief.', 'buddyclients-free'),
                 esc_url(wp_login_url(esc_html($current_url)))
             ) . '</p>';
             $content .= '</div>';
         } else {
-            $content .= '<p>' . __('You do not have permission to view this brief.', 'buddyclients') . '</p>';
+            $content .= '<p>' . __('You do not have permission to view this brief.', 'buddyclients-free') . '</p>';
         }
         
         return $content;
@@ -293,9 +293,9 @@ private function toggle_button( $show_form, $is_admin, $updated_date ) {
         
         // Breadcrumbs
         $sep = '<i class="fa-solid fa-angle-right" style="margin: 0 8px; font-size: 12px;"></i>';
-        $projects_link = '<a href="' . bp_get_loggedin_user_link() . '/groups">' . __('Projects', 'buddyclients') . '</a>';
+        $projects_link = '<a href="' . bp_get_loggedin_user_link() . '/groups">' . __('Projects', 'buddyclients-free') . '</a>';
         $group_link = '<a href="' . $group_permalink . '">' . esc_html($group_name) . '</a>';
-        $briefs_link = '<a href="' . $group_permalink . '/brief/">' . __('Briefs', 'buddyclients') . '</a>';
+        $briefs_link = '<a href="' . $group_permalink . '/brief/">' . __('Briefs', 'buddyclients-free') . '</a>';
         
         $content .= '<p class="buddyc-single-brief-breadcrumbs">' . $projects_link . $sep . $group_link . $sep . $briefs_link . $sep . get_the_title() . '</p>';
         
@@ -310,7 +310,7 @@ private function toggle_button( $show_form, $is_admin, $updated_date ) {
         
         // Display last updated date
         if ($updated_date) {
-            $content .= '<p>' . __('Last Updated:', 'buddyclients') . ' ' . gmdate('F j, Y,  h:i A', strtotime($updated_date)) . '</p>';
+            $content .= '<p>' . __('Last Updated:', 'buddyclients-free') . ' ' . gmdate('F j, Y,  h:i A', strtotime($updated_date)) . '</p>';
         }
         
         // Display toggle button

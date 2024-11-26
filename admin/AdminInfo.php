@@ -92,16 +92,16 @@ class AdminInfo {
             'payments'              => sprintf(
                 /* translators: %1$s: URL to booking settings */
                 __('View and manage all outgoing payments for your business.<p>These payments are generated automatically when bookings are completed. You will find payments for team members, affiliates, and salespeople.</p><p>The payment status will update to "eligible" automatically at the end of your cancellation window. When you have processed a payment, update the status to "paid" to keep track of your outgoing payments.</p><p><a href="%1$s">%2$s</a> to define how long clients have to request to cancel a service.</p>', 
-                'buddyclients'),
+                'buddyclients-free'),
                 esc_url(admin_url('/admin.php?page=buddyc-booking-settings')),
-                __('Update your cancellation window', 'buddyclients')
+                __('Update your cancellation window', 'buddyclients-free')
             ),
             'users'                 => sprintf(
                 /* translators: %1$s: URL to legal settings */
                 __('Use this page to quickly view and manage all team members, clients, and affiliates.<p>Download PDFs of users\' agreements.</p><p><a href="%1$s">%2$s</a>.</p>', 
-                'buddyclients'),
+                'buddyclients-free'),
                 esc_url(admin_url('/admin.php?page=buddyc-legal-settings')),
-                __('Update your legal agreements', 'buddyclients')
+                __('Update your legal agreements', 'buddyclients-free')
             ),
 
             // Settings
@@ -115,12 +115,12 @@ class AdminInfo {
             'emails'                => sprintf(
                 /* translators: %1$s: URL to email templates */
                 __('Update these settings to define which emails are sent and the appropriate email addresses.<p>Customize your <a href="%1$s">email templates</a>.</p>', 
-                'buddyclients'),
+                'buddyclients-free'),
                 esc_url(admin_url('/admin.php?page=edit.php?post_type=buddyc_email'))
             ),
             'legal'                 => sprintf(
                 /* translators: %s: link to user list */
-                __('These legal agreements are used for team members, affiliates, and clients.<p>Team members and affiliates will provide signatures, and clients will check a box accepting the service agreement when booking services.</p><p>When you create new legal agreements, users will be prompted to accept the new agreement within the timeframe below.</p><p>You can download PDF versions of these agreements from the <a href="%s">user list</a>.</p>', 'buddyclients'),
+                __('These legal agreements are used for team members, affiliates, and clients.<p>Team members and affiliates will provide signatures, and clients will check a box accepting the service agreement when booking services.</p><p>When you create new legal agreements, users will be prompted to accept the new agreement within the timeframe below.</p><p>You can download PDF versions of these agreements from the <a href="%s">user list</a>.</p>', 'buddyclients-free'),
                 esc_url( admin_url( '/admin.php?page=buddyc-users' ) )
             ),
             'affiliate'             => __( 'Manage the settings for your affiliate program, including the available payout methods and the affiliate commission percentage.<p>Lifetime affiliate commission applies to all services new clients ever book, while first-sale commission applies only to the client\'s first booking.</p>', 'buddyclients' ),

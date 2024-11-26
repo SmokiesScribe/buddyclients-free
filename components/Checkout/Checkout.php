@@ -418,7 +418,7 @@ class Checkout {
             $policies_text = implode(' and ',$policies);
             return sprintf(
                 /* translators: %s: the policies the user is agreeing to (e.g. privacy policy and service terms) */
-                __('By creating an account, you agree to the %s.', 'buddyclients'),
+                __('By creating an account, you agree to the %s.', 'buddyclients-free'),
                 $policies_text
             );
         }

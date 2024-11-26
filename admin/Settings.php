@@ -172,7 +172,7 @@ class Settings {
                 'team_types'            => [],
                 'self_select_roles'     => 'no',
                 'enable_registration'   => 'disable',
-                'register_button_text'  => __('Get Started', 'buddyclients'),
+                'register_button_text'  => __('Get Started', 'buddyclients-free'),
                 'admin_info'            => 'enable'
             ];
             
@@ -180,76 +180,76 @@ class Settings {
         } else {
            return [
                 'user_types' => [
-                    'title' => __('User Types and Permissions', 'buddyclients'),
-                    'description' => __('Select the member types for clients, team members, and site admins.', 'buddyclients'),
+                    'title' => __('User Types and Permissions', 'buddyclients-free'),
+                    'description' => __('Select the member types for clients, team members, and site admins.', 'buddyclients-free'),
                     'fields' => [
                         'client_types' => [
-                            'label' => __('Client Types', 'buddyclients'),
+                            'label' => __('Client Types', 'buddyclients-free'),
                             'type' => 'checkboxes',
                             'options' => buddyc_member_types(),
-                            'description' => __('Select the types for clients.', 'buddyclients'),
+                            'description' => __('Select the types for clients.', 'buddyclients-free'),
                         ],
                         'default_client_type' => [
-                            'label' => __('Default Client Type', 'buddyclients'),
+                            'label' => __('Default Client Type', 'buddyclients-free'),
                             'type' => 'dropdown',
                             'options' => buddyc_member_types(),
-                            'description' => __('Select the default member type for new clients.', 'buddyclients'),
+                            'description' => __('Select the default member type for new clients.', 'buddyclients-free'),
                         ],
                         'team_types' => [
-                            'label' => __('Team Types', 'buddyclients'),
+                            'label' => __('Team Types', 'buddyclients-free'),
                             'type' => 'checkboxes',
                             'options' => buddyc_member_types(),
-                            'description' => __('Select the types for team members.', 'buddyclients'),
+                            'description' => __('Select the types for team members.', 'buddyclients-free'),
                         ],
                     ],
                 ],
                 'self_select_roles' => [
-                    'title' => __('Allow Team to Self-Select Roles', 'buddyclients'),
-                    'description' => __('Should team members be allowed to select their own roles?', 'buddyclients'),
+                    'title' => __('Allow Team to Self-Select Roles', 'buddyclients-free'),
+                    'description' => __('Should team members be allowed to select their own roles?', 'buddyclients-free'),
                     'fields' => [
                         'self_select_role' => [
-                            'label' => __('Allow Self-Selection', 'buddyclients'),
+                            'label' => __('Allow Self-Selection', 'buddyclients-free'),
                             'type' => 'dropdown',
                             'options' => [
-                                'no' => __('No', 'buddyclients'),
-                                'yes' => __('Yes', 'buddyclients'),
+                                'no' => __('No', 'buddyclients-free'),
+                                'yes' => __('Yes', 'buddyclients-free'),
                             ],
-                            'description' => __('Allow team members to select their own roles.', 'buddyclients'),
+                            'description' => __('Allow team members to select their own roles.', 'buddyclients-free'),
                         ],
                     ],
                 ],
                 'registration' => [
-                    'title' => __('Registration', 'buddyclients'),
-                    'description' => __('Change the text and link for the signup button.', 'buddyclients'),
+                    'title' => __('Registration', 'buddyclients-free'),
+                    'description' => __('Change the text and link for the signup button.', 'buddyclients-free'),
                     'fields' => [
                         'enable_registration' => [
-                            'label' => __('User Registration', 'buddyclients'),
+                            'label' => __('User Registration', 'buddyclients-free'),
                             'type' => 'dropdown',
                             'options' => [
-                                'disable' => __('Disable', 'buddyclients'),
-                                'enable' => __('Enable', 'buddyclients'),
+                                'disable' => __('Disable', 'buddyclients-free'),
+                                'enable' => __('Enable', 'buddyclients-free'),
                             ],
-                            'description' => __('Should users be allowed to register for an account before booking services?', 'buddyclients'),
+                            'description' => __('Should users be allowed to register for an account before booking services?', 'buddyclients-free'),
                         ],
                         'register_button_text' => [
-                            'label' => __('Booking Button Text', 'buddyclients'),
+                            'label' => __('Booking Button Text', 'buddyclients-free'),
                             'type' => 'text',
-                            'description' => __('The text will appear on the button linking to the booking form when user registration is disabled.', 'buddyclients'),
+                            'description' => __('The text will appear on the button linking to the booking form when user registration is disabled.', 'buddyclients-free'),
                         ],
                     ],
                 ],
                 'admin' => [
-                    'title' => __('Admin', 'buddyclients'),
+                    'title' => __('Admin', 'buddyclients-free'),
                     'description' => '',
                     'fields' => [
                         'admin_info' => [
-                            'label' => __('Info Messages', 'buddyclients'),
+                            'label' => __('Info Messages', 'buddyclients-free'),
                             'type' => 'dropdown',
                             'options' => [
-                                'disable' => __('Disable', 'buddyclients'),
-                                'enable' => __('Enable', 'buddyclients'),
+                                'disable' => __('Disable', 'buddyclients-free'),
+                                'enable' => __('Enable', 'buddyclients-free'),
                             ],
-                            'description' => __('Display plugin info messages in the admin area.', 'buddyclients'),
+                            'description' => __('Display plugin info messages in the admin area.', 'buddyclients-free'),
                         ],
                     ],
                 ],
@@ -274,11 +274,11 @@ class Settings {
         } else {
            return [
                 'components' => [
-                    'title' => __('Components', 'buddyclients'),
-                    'description' => __('Enable BuddyClients components.', 'buddyclients'),
+                    'title' => __('Components', 'buddyclients-free'),
+                    'description' => __('Enable BuddyClients components.', 'buddyclients-free'),
                     'fields' => [
                         'components' => [
-                            'label' => __('Components', 'buddyclients'),
+                            'label' => __('Components', 'buddyclients-free'),
                             'type' => 'checkbox_table',
                             'options' => self::components_options(),
                             'descriptions' => self::components_descriptions(),
@@ -319,21 +319,21 @@ class Settings {
     private static function components_descriptions() {
         return [
             // Required
-            'Booking'       => __('Allow clients to book services.', 'buddyclients'),
-            'Checkout'      => __('Allow clients to check out on your website.', 'buddyclients'),
-            'Service'       => __('Create services.', 'buddyclients'),
+            'Booking'       => __('Allow clients to book services.', 'buddyclients-free'),
+            'Checkout'      => __('Allow clients to check out on your website.', 'buddyclients-free'),
+            'Service'       => __('Create services.', 'buddyclients-free'),
             // Core
-            'Email'         => __('Send email notifications to clients, team members, and admins.', 'buddyclients'),
-            'Brief'         => __('Request information from clients after booking.', 'buddyclients'),
-            'Stripe'        => __('Accept payments at checkout.', 'buddyclients'),
+            'Email'         => __('Send email notifications to clients, team members, and admins.', 'buddyclients-free'),
+            'Brief'         => __('Request information from clients after booking.', 'buddyclients-free'),
+            'Stripe'        => __('Accept payments at checkout.', 'buddyclients-free'),
             // Premium
-            'Affiliate'     => __('Allow users to earn commission for referring clients.', 'buddyclients'),
-            'Availability'  => __('Display the next date each team member is available.', 'buddyclients'),
-            'Contact'       => __('Accept messages through a contact page and a floating contact button.', 'buddyclients'),
-            'Legal'         => __('Manage legal agreements for clients, team members, and affiliates.', 'buddyclients'),
-            'Quote'         => __('Create custom quotes for one-off projects.', 'buddyclients'),
-            'Sales'         => __('Allow team members to create bookings on behalf of clients and earn commission.', 'buddyclients'),
-            'Testimonial'   => __('Accept and display testimonials from clients.', 'buddyclients'),
+            'Affiliate'     => __('Allow users to earn commission for referring clients.', 'buddyclients-free'),
+            'Availability'  => __('Display the next date each team member is available.', 'buddyclients-free'),
+            'Contact'       => __('Accept messages through a contact page and a floating contact button.', 'buddyclients-free'),
+            'Legal'         => __('Manage legal agreements for clients, team members, and affiliates.', 'buddyclients-free'),
+            'Quote'         => __('Create custom quotes for one-off projects.', 'buddyclients-free'),
+            'Sales'         => __('Allow team members to create bookings on behalf of clients and earn commission.', 'buddyclients-free'),
+            'Testimonial'   => __('Accept and display testimonials from clients.', 'buddyclients-free'),
         ];
     }
     
@@ -356,39 +356,39 @@ class Settings {
         } else {
             return [
                 'mode' => [
-                    'title' => __('Stripe Mode', 'buddyclients'),
+                    'title' => __('Stripe Mode', 'buddyclients-free'),
                     'description' => sprintf(
-                        __('<a href="https://dashboard.stripe.com/register" target="_blank">Create a Stripe account</a> to activate the payment integration.</p><p class="description">Set the Stripe Mode below to "Live" to accept real payments. <a href="https://docs.stripe.com/testing" target="_blank">Learn about test payments</a>.', 'buddyclients')
+                        __('<a href="https://dashboard.stripe.com/register" target="_blank">Create a Stripe account</a> to activate the payment integration.</p><p class="description">Set the Stripe Mode below to "Live" to accept real payments. <a href="https://docs.stripe.com/testing" target="_blank">Learn about test payments</a>.', 'buddyclients-free')
                     ),
                     'fields' => [
                         'stripe_mode' => [
-                            'label' => __('Stripe Mode', 'buddyclients'),
+                            'label' => __('Stripe Mode', 'buddyclients-free'),
                             'type' => 'stripe_dropdown',
                             'default' => 'test',
                             'options' => [
-                                'test' => __('Test', 'buddyclients'),
-                                'live' => __('Live', 'buddyclients')
+                                'test' => __('Test', 'buddyclients-free'),
+                                'live' => __('Live', 'buddyclients-free')
                             ],
-                            'description' => __('Select the Stripe mode.', 'buddyclients'),
+                            'description' => __('Select the Stripe mode.', 'buddyclients-free'),
                             'stripe_key'    => null
                         ],
                     ],
                 ],
                 'live_keys' => [
-                    'title' => __('Stripe Live Keys', 'buddyclients'),
+                    'title' => __('Stripe Live Keys', 'buddyclients-free'),
                     'description' => sprintf(
-                        __('Input your live keys to accept payments. <a href="https://support.stripe.com/questions/locate-api-keys-in-the-dashboard" target="_blank">Find your API keys</a>.', 'buddyclients')
+                        __('Input your live keys to accept payments. <a href="https://support.stripe.com/questions/locate-api-keys-in-the-dashboard" target="_blank">Find your API keys</a>.', 'buddyclients-free')
                     ),
                     'fields' => [
                         'secret_key_live' => [
-                            'label' => __('Live Stripe Secret Key', 'buddyclients'),
+                            'label' => __('Live Stripe Secret Key', 'buddyclients-free'),
                             'type' => 'stripe_input',
                             'default' => '',
                             'description' => '',
                             'stripe_key'    => 'secret'
                         ],
                         'public_key_live' => [
-                            'label' => __('Live Stripe Publishable Key', 'buddyclients'),
+                            'label' => __('Live Stripe Publishable Key', 'buddyclients-free'),
                             'type' => 'input',
                             'default' => '',
                             'description' => '',
@@ -397,18 +397,18 @@ class Settings {
                     ],
                 ],
                 'test_keys' => [
-                    'title' => __('Stripe Test Keys', 'buddyclients'),
-                    'description' => __('Input your test keys to test the payment system.', 'buddyclients'),
+                    'title' => __('Stripe Test Keys', 'buddyclients-free'),
+                    'description' => __('Input your test keys to test the payment system.', 'buddyclients-free'),
                     'fields' => [
                         'secret_key_test' => [
-                            'label' => __('Test Stripe Secret Key', 'buddyclients'),
+                            'label' => __('Test Stripe Secret Key', 'buddyclients-free'),
                             'type' => 'stripe_input',
                             'default' => '',
                             'description' => '',
                             'stripe_key'    => 'secret'
                         ],
                         'public_key_test' => [
-                            'label' => __('Test Stripe Publishable Key', 'buddyclients'),
+                            'label' => __('Test Stripe Publishable Key', 'buddyclients-free'),
                             'type' => 'stripe_input',
                             'default' => '',
                             'description' => '',
@@ -417,7 +417,7 @@ class Settings {
                     ],
                 ],
                 'webhooks' => [
-                    'title' => __('Stripe Webhooks', 'buddyclients'),
+                    'title' => __('Stripe Webhooks', 'buddyclients-free'),
                     'description' => sprintf(
                         __('Set up webhooks to retrieve successful Stripe payments.
                             <ol>
@@ -428,27 +428,27 @@ class Settings {
                                 <li>Select "payment_intent.succeeded" and "customer.created."</li>
                                 <li>Click "Add endpoint."</li>
                                 <li>Click into the newly created webhook. Under "Signing secret", click "Reveal". Copy and paste the secret code into the field below.</li>
-                            </ol>', 'buddyclients')
+                            </ol>', 'buddyclients-free')
                     ),
                     'fields' => [
                         'endpoint_url' => [
-                            'label' => __('Endpoint URL', 'buddyclients'),
+                            'label' => __('Endpoint URL', 'buddyclients-free'),
                             'type' => 'copy',
                             'content' => StripeKeys::endpoint_url(), // use helper function to get url
-                            'description' => __('Copy this link to your the Endpoint URL field for your Stripe webhook.', 'buddyclients'),
+                            'description' => __('Copy this link to your the Endpoint URL field for your Stripe webhook.', 'buddyclients-free'),
                         ],
                         'signing_live' => [
-                            'label' => __('Live Signing Secret', 'buddyclients'),
+                            'label' => __('Live Signing Secret', 'buddyclients-free'),
                             'type' => 'stripe_input',
                             'default' => '',
-                            'description' => __('Add the signing secret for your live mode webhook.', 'buddyclients'),
+                            'description' => __('Add the signing secret for your live mode webhook.', 'buddyclients-free'),
                             'stripe_key'    => 'signing'
                         ],
                         'signing_test' => [
-                            'label' => __('Test Signing Secret', 'buddyclients'),
+                            'label' => __('Test Signing Secret', 'buddyclients-free'),
                             'type' => 'stripe_input',
                             'default' => '',
-                            'description' => __('Add the signing secret for your test mode webhook.', 'buddyclients'),
+                            'description' => __('Add the signing secret for your test mode webhook.', 'buddyclients-free'),
                             'stripe_key'    => 'signing'
                         ],
                     ],
@@ -475,33 +475,33 @@ class Settings {
         } else {
             return [
                 'affiliate_program' => [
-                    'title' => __('Affiliate Program', 'buddyclients'),
-                    'description' => __('Define the payment methods and commission percentage for affiliates.', 'buddyclients'),
+                    'title' => __('Affiliate Program', 'buddyclients-free'),
+                    'description' => __('Define the payment methods and commission percentage for affiliates.', 'buddyclients-free'),
                     'fields' => [
                         'payment_options' => [
-                            'label' => __('Payment Methods', 'buddyclients'),
+                            'label' => __('Payment Methods', 'buddyclients-free'),
                             'type' => 'checkboxes',
                             'options' => [
-                                'paypal' => __('PayPal', 'buddyclients'),
-                                'digital_check' => __('Digital Check', 'buddyclients'),
-                                'physical_check' => __('Physical Check', 'buddyclients'),
-                                'venmo' => __('Venmo', 'buddyclients'),
+                                'paypal' => __('PayPal', 'buddyclients-free'),
+                                'digital_check' => __('Digital Check', 'buddyclients-free'),
+                                'physical_check' => __('Physical Check', 'buddyclients-free'),
+                                'venmo' => __('Venmo', 'buddyclients-free'),
                             ],
-                            'description' => __('Select the payment methods that are available to affiliates.', 'buddyclients'),
+                            'description' => __('Select the payment methods that are available to affiliates.', 'buddyclients-free'),
                         ],
                         'affiliate_percentage' => [
-                            'label' => __('Affiliate Percentage', 'buddyclients'),
+                            'label' => __('Affiliate Percentage', 'buddyclients-free'),
                             'type' => 'number',
-                            'description' => __('What percentage of the full fee do affiliates receive?', 'buddyclients'),
+                            'description' => __('What percentage of the full fee do affiliates receive?', 'buddyclients-free'),
                         ],
                         'commission_type' => [
-                            'label' => __('Commission Type', 'buddyclients'),
+                            'label' => __('Commission Type', 'buddyclients-free'),
                             'type' => 'dropdown',
                             'options' => [
-                                'lifetime' => __('Lifetime', 'buddyclients'),
-                                'first_sale' => __('First Sale', 'buddyclients'),
+                                'lifetime' => __('Lifetime', 'buddyclients-free'),
+                                'first_sale' => __('First Sale', 'buddyclients-free'),
                             ],
-                            'description' => __('Should affiliates receive commission for the first booking only or for every service the client books?', 'buddyclients'),
+                            'description' => __('Should affiliates receive commission for the first booking only or for every service the client books?', 'buddyclients-free'),
                         ],
                     ],
                 ],
@@ -532,63 +532,63 @@ class Settings {
         } else {
             return [
                 'booking' => [
-                    'title' => __('Bookings', 'buddyclients'),
-                    'description' => __('General booking settings.', 'buddyclients'),
+                    'title' => __('Bookings', 'buddyclients-free'),
+                    'description' => __('General booking settings.', 'buddyclients-free'),
                     'fields' => [
                         'accept_bookings' => [
-                            'label' => __('Accept Bookings', 'buddyclients'),
+                            'label' => __('Accept Bookings', 'buddyclients-free'),
                             'type' => 'dropdown',
                             'options' => [
-                                'open' => __('Open', 'buddyclients'),
-                                'closed' => __('Closed', 'buddyclients'),
+                                'open' => __('Open', 'buddyclients-free'),
+                                'closed' => __('Closed', 'buddyclients-free'),
                             ],
-                            'description' => __('Are you currently accepting bookings?', 'buddyclients'),
+                            'description' => __('Are you currently accepting bookings?', 'buddyclients-free'),
                         ],
                         'skip_payment' => [
-                            'label' => __('Skip Payment', 'buddyclients'),
+                            'label' => __('Skip Payment', 'buddyclients-free'),
                             'type' => 'hidden',
                             'options' => [
-                                'no' => __('No', 'buddyclients'),
-                                'yes' => __('Yes', 'buddyclients'),
+                                'no' => __('No', 'buddyclients-free'),
+                                'yes' => __('Yes', 'buddyclients-free'),
                             ],
-                            'description' => __('Select this to skip the payment and make every submitted booking successful.<br>Use this setting if you process payments elsewhere.', 'buddyclients'),
+                            'description' => __('Select this to skip the payment and make every submitted booking successful.<br>Use this setting if you process payments elsewhere.', 'buddyclients-free'),
                         ],
                         'cancellation_window' => [
-                            'label' => __('Cancellation Window', 'buddyclients'),
+                            'label' => __('Cancellation Window', 'buddyclients-free'),
                             'type' => 'number',
-                            'description' => __('How many days do clients have to cancel bookings?<br>Team and commission payments will be marked as "eligible" after this timeframe.', 'buddyclients'),
+                            'description' => __('How many days do clients have to cancel bookings?<br>Team and commission payments will be marked as "eligible" after this timeframe.', 'buddyclients-free'),
                         ],
                         'minimum_fee' => [
-                            'label' => __('Minimum Fee', 'buddyclients'),
+                            'label' => __('Minimum Fee', 'buddyclients-free'),
                             'type' => 'number',
-                            'description' => __('What is the minimum dollar amount per booking?<br>Note that paid bookings of less than $1 will fail.', 'buddyclients'),
+                            'description' => __('What is the minimum dollar amount per booking?<br>Note that paid bookings of less than $1 will fail.', 'buddyclients-free'),
                         ],
                     ],
                 ],
                 'freelancer_mode' => [
-                    'title' => __('Freelancer Mode', 'buddyclients'),
-                    'description' => __('Turn on Freelancer Mode to assign all services to one person. Team member payments will be disabled.', 'buddyclients'),
+                    'title' => __('Freelancer Mode', 'buddyclients-free'),
+                    'description' => __('Turn on Freelancer Mode to assign all services to one person. Team member payments will be disabled.', 'buddyclients-free'),
                     'fields' => [
                         'freelancer_id' => [
-                            'label' => __('Freelancer', 'buddyclients'),
+                            'label' => __('Freelancer', 'buddyclients-free'),
                             'type' => 'dropdown',
                             'options' => self::freelancer_options(),
-                            'description' => __('All services will be assigned to this person. This overrides all other assigned team member settings.', 'buddyclients'),
+                            'description' => __('All services will be assigned to this person. This overrides all other assigned team member settings.', 'buddyclients-free'),
                         ],
                     ],
                 ],
                 'team' => [
-                    'title' => __('Team', 'buddyclients'),
+                    'title' => __('Team', 'buddyclients-free'),
                     'description' => '',
                     'fields' => [
                         'lock_team' => [
-                            'label' => __('Lock Team Members', 'buddyclients'),
+                            'label' => __('Lock Team Members', 'buddyclients-free'),
                             'type' => 'dropdown',
                             'options' => [
-                                'lock' => __('Lock', 'buddyclients'),
-                                'unlock' => __('Unlock', 'buddyclients'),
+                                'lock' => __('Lock', 'buddyclients-free'),
+                                'unlock' => __('Unlock', 'buddyclients-free'),
                             ],
-                            'description' => __('Lock team members to require future services for each project to use the same team member for each role.', 'buddyclients'),
+                            'description' => __('Lock team members to require future services for each project to use the same team member for each role.', 'buddyclients-free'),
                         ],
                     ],
                 ],
@@ -618,43 +618,43 @@ class Settings {
         } else {
             return [
                 'assisted_bookings' => [
-                    'title' => __('Assisted Bookings', 'buddyclients'),
-                    'description' => __('Allow your team to create bookings on behalf of clients.', 'buddyclients'),
+                    'title' => __('Assisted Bookings', 'buddyclients-free'),
+                    'description' => __('Allow your team to create bookings on behalf of clients.', 'buddyclients-free'),
                     'fields' => [
                         'sales_team_mode' => [
-                            'label' => __('Enable Sales Mode', 'buddyclients'),
+                            'label' => __('Enable Sales Mode', 'buddyclients-free'),
                             'type' => 'dropdown',
                             'options' => [
-                                'yes' => __('Yes', 'buddyclients'),
-                                'no' => __('No', 'buddyclients'),
+                                'yes' => __('Yes', 'buddyclients-free'),
+                                'no' => __('No', 'buddyclients-free'),
                             ],
-                            'description' => __('Allow team members to create bookings for clients?', 'buddyclients'),
+                            'description' => __('Allow team members to create bookings for clients?', 'buddyclients-free'),
                         ],
                         'self_bookings' => [
-                            'label' => __('Self-Bookings', 'buddyclients'),
+                            'label' => __('Self-Bookings', 'buddyclients-free'),
                             'type' => 'dropdown',
                             'options' => [
-                                'yes' => __('Yes', 'buddyclients'),
-                                'no' => __('No', 'buddyclients'),
+                                'yes' => __('Yes', 'buddyclients-free'),
+                                'no' => __('No', 'buddyclients-free'),
                             ],
-                            'description' => __('Allow users to book their own services?', 'buddyclients'),
+                            'description' => __('Allow users to book their own services?', 'buddyclients-free'),
                         ],
                     ],
                 ],
                 'sales_team' => [
-                    'title' => __('Sales Team', 'buddyclients'),
-                    'description' => __('Allow your sales team to earn commission.', 'buddyclients'),
+                    'title' => __('Sales Team', 'buddyclients-free'),
+                    'description' => __('Allow your sales team to earn commission.', 'buddyclients-free'),
                     'fields' => [
                         'sales_types' => [
-                            'label' => __('Sales Types', 'buddyclients'),
+                            'label' => __('Sales Types', 'buddyclients-free'),
                             'type' => 'checkboxes',
                             'options' => buddyc_member_types( 'team' ),
-                            'description' => __('In addition to the site admin, which team members can book services on behalf of clients?', 'buddyclients'),
+                            'description' => __('In addition to the site admin, which team members can book services on behalf of clients?', 'buddyclients-free'),
                         ],
                         'sales_commission_percentage' => [
-                            'label' => __('Sales Team Commission', 'buddyclients'),
+                            'label' => __('Sales Team Commission', 'buddyclients-free'),
                             'type' => 'number',
-                            'description' => __('What percentage of the full fee should salespeople receive?', 'buddyclients'),
+                            'description' => __('What percentage of the full fee should salespeople receive?', 'buddyclients-free'),
                         ],
                     ],
                 ],
@@ -680,11 +680,11 @@ class Settings {
         } else {
             return [
                 'help' => [
-                    'title' => __('Help Posts', 'buddyclients'),
-                    'description' => __('Select all post types you wish to link to help articles for clients.', 'buddyclients'),
+                    'title' => __('Help Posts', 'buddyclients-free'),
+                    'description' => __('Select all post types you wish to link to help articles for clients.', 'buddyclients-free'),
                     'fields' => [
                         'help_post_types' => [
-                            'label' => __('Help Post Types', 'buddyclients'),
+                            'label' => __('Help Post Types', 'buddyclients-free'),
                             'type' => 'checkboxes',
                             'options' => self::help_post_types(),
                             'description' => '',
@@ -692,29 +692,29 @@ class Settings {
                     ],
                 ],
                 'help_popup' => [
-                    'title' => __('Help Popup', 'buddyclients'),
-                    'description' => __('Floating help button.', 'buddyclients'),
+                    'title' => __('Help Popup', 'buddyclients-free'),
+                    'description' => __('Floating help button.', 'buddyclients-free'),
                     'fields' => [
                         'help_popup_content' => [
-                            'label' => __('Help Popup Content', 'buddyclients'),
+                            'label' => __('Help Popup Content', 'buddyclients-free'),
                             'type' => 'dropdown',
                             'options' => [
-                                'both' => __('Help Docs and Contact Form', 'buddyclients'),
-                                'help_only' => __('Help Docs Only', 'buddyclients'),
-                                'contact_only' => __('Contact Form Only', 'buddyclients'),
+                                'both' => __('Help Docs and Contact Form', 'buddyclients-free'),
+                                'help_only' => __('Help Docs Only', 'buddyclients-free'),
+                                'contact_only' => __('Contact Form Only', 'buddyclients-free'),
                             ],
-                            'description' => __('By default, the user will search help docs and have the option to contact.', 'buddyclients'),
+                            'description' => __('By default, the user will search help docs and have the option to contact.', 'buddyclients-free'),
                         ],
                         'help_popup_display' => [
-                            'label' => __('Help Popup Display', 'buddyclients'),
+                            'label' => __('Help Popup Display', 'buddyclients-free'),
                             'type' => 'dropdown',
                             'options' => [
-                                'always_show' => __('Always Show', 'buddyclients'),
-                                'always_hide' => __('Always Hide', 'buddyclients'),
-                                'desktop_only' => __('Hide on Mobile', 'buddyclients'),
-                                'mobile_only' => __('Hide on Desktop', 'buddyclients'),
+                                'always_show' => __('Always Show', 'buddyclients-free'),
+                                'always_hide' => __('Always Hide', 'buddyclients-free'),
+                                'desktop_only' => __('Hide on Mobile', 'buddyclients-free'),
+                                'mobile_only' => __('Hide on Desktop', 'buddyclients-free'),
                             ],
-                            'description' => __('When to show the floating help button.', 'buddyclients'),
+                            'description' => __('When to show the floating help button.', 'buddyclients-free'),
                         ],
                     ],
                 ],
@@ -741,22 +741,22 @@ class Settings {
         } else {
             return [
                 'style' => [
-                    'title' => __('Style Settings', 'buddyclients'),
-                    'description' => __('Adjust global buddyclients styles to match your brand.', 'buddyclients'),
+                    'title' => __('Style Settings', 'buddyclients-free'),
+                    'description' => __('Adjust global buddyclients styles to match your brand.', 'buddyclients-free'),
                     'fields' => [
                         'primary_color' => [
-                            'label' => __('Primary Color', 'buddyclients'),
+                            'label' => __('Primary Color', 'buddyclients-free'),
                             'type' => 'color',
                             'class' => 'color-field',
                             'description' => '',
                         ],
                         'accent_color' => [
-                            'label' => __('Accent Color', 'buddyclients'),
+                            'label' => __('Accent Color', 'buddyclients-free'),
                             'type' => 'color',
                             'description' => '',
                         ],
                         'tertiary_color' => [
-                            'label' => __('Tertiary Color', 'buddyclients'),
+                            'label' => __('Tertiary Color', 'buddyclients-free'),
                             'type' => 'color',
                             'description' => '',
                         ],
@@ -788,9 +788,9 @@ class Settings {
                     'title' => __( 'Current Legal Agreements', 'buddyclients' ),
                     'description' => sprintf(
                         /* translators: %1$s: URL to add content to legal agreements; %2$s: link text */
-                        __('Select the current version of each legal agreement type. If transitioning to a new version, select the previous version and add a deadline for accepting the new agreement.<br><a href="%1$s">%2$s</a>', 'buddyclients'),
+                        __('Select the current version of each legal agreement type. If transitioning to a new version, select the previous version and add a deadline for accepting the new agreement.<br><a href="%1$s">%2$s</a>', 'buddyclients-free'),
                         esc_url(admin_url('edit.php?post_type=buddyc_legal_mod')),
-                        __('Add content to legal agreements for individual users.', 'buddyclients')
+                        __('Add content to legal agreements for individual users.', 'buddyclients-free')
                     ),
                     'fields' => self::current_legal_fields(),
                 ],
@@ -897,7 +897,7 @@ class Settings {
                     'title' => __( 'Email Log', 'buddyclients' ),
                     'description' => sprintf(
                         /* translators: %s: URL to view the email log */
-                        __('Email log settings. <a href="%s">View the email log.</a>', 'buddyclients'),
+                        __('Email log settings. <a href="%s">View the email log.</a>', 'buddyclients-free'),
                         esc_url(admin_url('/admin.php?page=buddyc-email-log')),
                     ),
                     'fields' => [
@@ -1024,12 +1024,12 @@ class Settings {
                 $settings[$page_type] = [
                     'title' => sprintf(
                         /* translators: %s: page type (e.g., 'Service', 'Product') */
-                        __('%s Pages.', 'buddyclients'),
+                        __('%s Pages.', 'buddyclients-free'),
                         esc_html( ucfirst( $page_type ) ),
                     ),
                     'description' => sprintf(
                         /* translators: %s: page type (e.g., 'service', 'product') */
-                        __('Choose or create your %s pages.', 'buddyclients'),
+                        __('Choose or create your %s pages.', 'buddyclients-free'),
                         esc_html( $page_type )
                     ),
                 ];
@@ -1180,7 +1180,7 @@ class Settings {
         // Loop through post types
         foreach ($post_types as $post_type) {
             // Skip buddyclients post types
-            if (strpos($post_type, 'buddyclients') !== false ||
+            if (strpos($post_type, 'buddyclients-free') !== false ||
             strpos($post_type, 'buddyc_') !== false ||
             
                 // Skip native WP post types

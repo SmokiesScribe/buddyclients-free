@@ -19,7 +19,7 @@ $content .= '<div class="testimonial-cards buddyc-archive-container">';
 
 // Build title
 $content .= '<div class="archive-title-container">';
-$content .= '<h1>' . esc_html__('Testimonials', 'buddyclients') . '</h1>';
+$content .= '<h1>' . esc_html__('Testimonials', 'buddyclients-free') . '</h1>';
 $content .= '</div>';
 
 // Check if testimonials are found
@@ -49,7 +49,7 @@ if ( ! empty( $testimonials) ) {
     }
     $content .= '</div>'; // Close .testimonial-cards
 } else {
-    $content .= '<p>' . esc_html__('No testimonials available.', 'buddyclients') . '</p>';
+    $content .= '<p>' . esc_html__('No testimonials available.', 'buddyclients-free') . '</p>';
 }
 
 // Close the container

@@ -434,7 +434,7 @@ class AdminTable {
             
             // Filter label
             echo '<label for="' . esc_attr( $name ) . '">';
-            echo esc_html__( 'Filter by', 'buddyclients') . ' ' . esc_html( $data['label'] ) . ': ';
+            echo esc_html__( 'Filter by', 'buddyclients-free') . ' ' . esc_html( $data['label'] ) . ': ';
             echo '</label>';
             
             // Build the dropdown

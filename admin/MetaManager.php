@@ -637,16 +637,16 @@ class MetaManager {
                     'Labels' => [
                         'meta' => [
                             'singular' => [
-                                'label' => __('Singular', 'buddyclients'),
+                                'label' => __('Singular', 'buddyclients-free'),
                                 'description' => '',
                                 'type' => 'text',
-                                'placeholder' => __('e.g. File, Manuscript', 'buddyclients'),
+                                'placeholder' => __('e.g. File, Manuscript', 'buddyclients-free'),
                             ],
                             'plural' => [
-                                'label' => __('Plural', 'buddyclients'),
+                                'label' => __('Plural', 'buddyclients-free'),
                                 'description' => '',
                                 'type' => 'text',
-                                'placeholder' => __('e.g. Files, Manuscripts', 'buddyclients'),
+                                'placeholder' => __('e.g. Files, Manuscripts', 'buddyclients-free'),
                             ],
                         ],
                     ],
@@ -657,18 +657,18 @@ class MetaManager {
                     'Description' => [
                         'meta' => [
                             'form_description' => [
-                                'label' => __('Description', 'buddyclients'),
-                                'description' => __('Instructions for users on booking form.', 'buddyclients'),
+                                'label' => __('Description', 'buddyclients-free'),
+                                'description' => __('Instructions for users on booking form.', 'buddyclients-free'),
                                 'type' => 'text',
-                                'placeholder' => __('e.g. Please upload your finalized manuscript.', 'buddyclients'),
+                                'placeholder' => __('e.g. Please upload your finalized manuscript.', 'buddyclients-free'),
                             ],
                         ],
                     ],
                     'Help Doc' => [
                         'meta' => [
                             'help_post_id' => [
-                                'label' => __('Help Post', 'buddyclients'),
-                                'description' => __('Help doc to show on booking form.', 'buddyclients'),
+                                'label' => __('Help Post', 'buddyclients-free'),
+                                'description' => __('Help doc to show on booking form.', 'buddyclients-free'),
                                 'type' => 'dropdown',
                                 'options' => 'help_docs',
                             ],
@@ -681,40 +681,40 @@ class MetaManager {
                     'File' => [
                         'meta' => [
                             'file_types' => [
-                                'label' => __('Accepted File Types', 'buddyclients'),
-                                'description' => __('Select all file types to accept.', 'buddyclients'),
+                                'label' => __('Accepted File Types', 'buddyclients-free'),
+                                'description' => __('Select all file types to accept.', 'buddyclients-free'),
                                 'type' => 'checkbox',
                                 'options' => [
-                                    '.pdf'           => __('PDF', 'buddyclients'),
-                                    '.jpg, .jpeg'    => __('JPG Image', 'buddyclients'),
-                                    '.png'           => __('PNG Image', 'buddyclients'),
-                                    '.doc, .docx'    => __('Microsoft Word', 'buddyclients'),
-                                    '.gif'           => __('GIF', 'buddyclients'),
-                                    '.xlsx, .xls'    => __('Microsoft Excel', 'buddyclients'),
-                                    '.pptx, .ppt'    => __('Microsoft PowerPoint', 'buddyclients'),
-                                    '.mp3'           => __('MP3 Audio', 'buddyclients'),
-                                    '.mp4, .mov'     => __('Video', 'buddyclients'),
-                                    '.zip'           => __('ZIP', 'buddyclients'),
-                                    '.txt'           => __('Text', 'buddyclients'),
+                                    '.pdf'           => __('PDF', 'buddyclients-free'),
+                                    '.jpg, .jpeg'    => __('JPG Image', 'buddyclients-free'),
+                                    '.png'           => __('PNG Image', 'buddyclients-free'),
+                                    '.doc, .docx'    => __('Microsoft Word', 'buddyclients-free'),
+                                    '.gif'           => __('GIF', 'buddyclients-free'),
+                                    '.xlsx, .xls'    => __('Microsoft Excel', 'buddyclients-free'),
+                                    '.pptx, .ppt'    => __('Microsoft PowerPoint', 'buddyclients-free'),
+                                    '.mp3'           => __('MP3 Audio', 'buddyclients-free'),
+                                    '.mp4, .mov'     => __('Video', 'buddyclients-free'),
+                                    '.zip'           => __('ZIP', 'buddyclients-free'),
+                                    '.txt'           => __('Text', 'buddyclients-free'),
                                 ],
                             ],
                             'multiple_files' => [
-                                'label' => __('Multiple Files', 'buddyclients'),
-                                'description' => __('Should multiple files be allowed?', 'buddyclients'),
+                                'label' => __('Multiple Files', 'buddyclients-free'),
+                                'description' => __('Should multiple files be allowed?', 'buddyclients-free'),
                                 'type' => 'dropdown',
                                 'options' => [
-                                    'false' => __('No', 'buddyclients'),
-                                    'true'  => __('Yes', 'buddyclients'),
+                                    'false' => __('No', 'buddyclients-free'),
+                                    'true'  => __('Yes', 'buddyclients-free'),
                                 ],
                                 'default' => false
                             ],
                             'required' => [
-                                'label' => __('Required', 'buddyclients'),
-                                'description' => __('Should this file upload be required?', 'buddyclients'),
+                                'label' => __('Required', 'buddyclients-free'),
+                                'description' => __('Should this file upload be required?', 'buddyclients-free'),
                                 'type' => 'dropdown',
                                 'options' => [
-                                    'false' => __('No', 'buddyclients'),
-                                    'true'  => __('Yes', 'buddyclients'),
+                                    'false' => __('No', 'buddyclients-free'),
+                                    'true'  => __('Yes', 'buddyclients-free'),
                                 ],
                                 'default' => false
                             ],
@@ -737,10 +737,10 @@ class MetaManager {
                     'Project' => [
                         'meta' => [
                             'project_id' => [
-                                'label' => __('Project', 'buddyclients'),
+                                'label' => __('Project', 'buddyclients-free'),
                                 'type' => 'dropdown',
                                 'options' => 'projects',
-                                'placeholder' => __('Select Project', 'buddyclients'),
+                                'placeholder' => __('Select Project', 'buddyclients-free'),
                             ],
                         ],
                     ],
@@ -751,7 +751,7 @@ class MetaManager {
                     'Updated' => [
                         'meta' => [
                             'updated_date' => [
-                                'label' => __('Last Updated', 'buddyclients'),
+                                'label' => __('Last Updated', 'buddyclients-free'),
                                 'type' => 'display_date',
                             ],
                         ],
@@ -773,8 +773,8 @@ class MetaManager {
                     'Brief Types' => [
                         'meta' => [
                             'brief_types' => [
-                                'label' => __('Brief Types', 'buddyclients'),
-                                'description' => __('Select the brief types that should display the field.', 'buddyclients'),
+                                'label' => __('Brief Types', 'buddyclients-free'),
+                                'description' => __('Select the brief types that should display the field.', 'buddyclients-free'),
                                 'type' => 'checkbox',
                                 'options' => 'brief_type',
                             ],
@@ -783,64 +783,64 @@ class MetaManager {
                     'Display' => [
                         'meta' => [
                             'field_type' => [
-                                'label' => __('Field Type', 'buddyclients'),
+                                'label' => __('Field Type', 'buddyclients-free'),
                                 'type' => 'dropdown',
-                                'placeholder' => __('Select one', 'buddyclients'),
+                                'placeholder' => __('Select one', 'buddyclients-free'),
                                 'options' => [
-                                    'disabled'      => __('Disabled', 'buddyclients'),
-                                    'text_area'     => __('Text Area', 'buddyclients'),
-                                    'input'         => __('Input', 'buddyclients'),
-                                    'checkbox'      => __('Checkbox', 'buddyclients'),
-                                    'dropdown'      => __('Dropdown', 'buddyclients'),
-                                    'upload'        => __('Upload', 'buddyclients'),
+                                    'disabled'      => __('Disabled', 'buddyclients-free'),
+                                    'text_area'     => __('Text Area', 'buddyclients-free'),
+                                    'input'         => __('Input', 'buddyclients-free'),
+                                    'checkbox'      => __('Checkbox', 'buddyclients-free'),
+                                    'dropdown'      => __('Dropdown', 'buddyclients-free'),
+                                    'upload'        => __('Upload', 'buddyclients-free'),
                                 ],
                             ],
                             'field_description' => [
-                                'label' => __('Field Description', 'buddyclients'),
+                                'label' => __('Field Description', 'buddyclients-free'),
                                 'type' => 'text',
-                                'placeholder' => __('e.g. Select an option.', 'buddyclients'),
+                                'placeholder' => __('e.g. Select an option.', 'buddyclients-free'),
                             ],
                             'help_post_id' => [
-                                'label' => __('Help Post', 'buddyclients'),
-                                'description' => __('Select a help doc to show on the brief form.', 'buddyclients'),
+                                'label' => __('Help Post', 'buddyclients-free'),
+                                'description' => __('Select a help doc to show on the brief form.', 'buddyclients-free'),
                                 'type' => 'dropdown',
                                 'options' => 'help_docs',
-                                'placeholder' => __('Select one', 'buddyclients')
+                                'placeholder' => __('Select one', 'buddyclients-free')
                             ],
                         ],
                     ],
                 ],
             ],
             'Upload Fields' => [
-                'description' => __('These options only apply to upload fields.', 'buddyclients'),
+                'description' => __('These options only apply to upload fields.', 'buddyclients-free'),
                 'tables' => [
                     'Field Options' => [
                         'meta' => [
                             'multiple_files' => [
-                                'label' => __('Multiple Files', 'buddyclients'),
-                                'description' => __('Should the upload field accept multiple files?', 'buddyclients'),
+                                'label' => __('Multiple Files', 'buddyclients-free'),
+                                'description' => __('Should the upload field accept multiple files?', 'buddyclients-free'),
                                 'type' => 'dropdown',
                                 'options' => [
-                                    false => __('No', 'buddyclients'),
-                                    true  => __('Yes', 'buddyclients'),
+                                    false => __('No', 'buddyclients-free'),
+                                    true  => __('Yes', 'buddyclients-free'),
                                 ]
                             ],
                             'file_types' => [
-                                'label' => __('Accepted File Types', 'buddyclients'),
-                                'description' => __('Select all file types to accept.', 'buddyclients'),
+                                'label' => __('Accepted File Types', 'buddyclients-free'),
+                                'description' => __('Select all file types to accept.', 'buddyclients-free'),
                                 'type' => 'checkbox',
                                 'options' => [
-                                    '.pdf'           => __('PDF', 'buddyclients'),
-                                    '.jpg, .jpeg'    => __('JPG Image', 'buddyclients'),
-                                    '.png'           => __('PNG Image', 'buddyclients'),
-                                    '.doc, .docx'    => __('Microsoft Word', 'buddyclients'),
-                                    '.gif'           => __('GIF', 'buddyclients'),
-                                    '.xlsx, .xls'    => __('Microsoft Excel', 'buddyclients'),
-                                    '.pptx, .ppt'    => __('Microsoft PowerPoint', 'buddyclients'),
-                                    '.mp3'           => __('MP3 Audio', 'buddyclients'),
-                                    '.mp4, .mov'     => __('Video', 'buddyclients'),
-                                    '.zip'           => __('ZIP', 'buddyclients'),
-                                    '.txt'           => __('Text', 'buddyclients'),
+                                    '.pdf'           => __('PDF', 'buddyclients-free'),
+                                    '.jpg, .jpeg'    => __('JPG Image', 'buddyclients-free'),
+                                    '.png'           => __('PNG Image', 'buddyclients-free'),
+                                    '.doc, .docx'    => __('Microsoft Word', 'buddyclients-free'),
+                                    '.gif'           => __('GIF', 'buddyclients-free'),
+                                    '.xlsx, .xls'    => __('Microsoft Excel', 'buddyclients-free'),
+                                    '.pptx, .ppt'    => __('Microsoft PowerPoint', 'buddyclients-free'),
+                                    '.mp3'           => __('MP3 Audio', 'buddyclients-free'),
+                                    '.mp4, .mov'     => __('Video', 'buddyclients-free'),
+                                    '.zip'           => __('ZIP', 'buddyclients-free'),
+                                    '.txt'           => __('Text', 'buddyclients-free'),
                                 ],
                             ],
                         ],
@@ -848,15 +848,15 @@ class MetaManager {
                 ],
             ],
             'Dropdown and Checkbox Fields' => [
-                'description' => __('These options only apply to dropdown and checkbox fields.', 'buddyclients'),
+                'description' => __('These options only apply to dropdown and checkbox fields.', 'buddyclients-free'),
                 'tables' => [
                     'Field Options' => [
                         'meta' => [
                             'field_options' => [
-                                'label' => __('Field Options', 'buddyclients'),
-                                'description' => __('Enter all options the client can select from.', 'buddyclients'),
+                                'label' => __('Field Options', 'buddyclients-free'),
+                                'description' => __('Enter all options the client can select from.', 'buddyclients-free'),
                                 'type' => 'text',
-                                'placeholder' => __('e.g. Option 1, Option 2', 'buddyclients')
+                                'placeholder' => __('e.g. Option 1, Option 2', 'buddyclients-free')
                             ],
                         ],
                     ],
@@ -878,14 +878,14 @@ class MetaManager {
                     'Project' => [
                         'meta' => [
                             'client_id' => [
-                                'label' => __('Client', 'buddyclients'),
-                                'description' => __('Select the client who can access this custom quote.', 'buddyclients'),
+                                'label' => __('Client', 'buddyclients-free'),
+                                'description' => __('Select the client who can access this custom quote.', 'buddyclients-free'),
                                 'type' => 'dropdown',
                                 'options' => 'client',
                             ],
                             'project_id' => [
-                                'label' => __('Project', 'buddyclients'),
-                                'description' => __('Optionally, select the project this quote applies to.', 'buddyclients'),
+                                'label' => __('Project', 'buddyclients-free'),
+                                'description' => __('Optionally, select the project this quote applies to.', 'buddyclients-free'),
                                 'type' => 'dropdown',
                                 'options' => 'projects',
                             ],
@@ -899,10 +899,10 @@ class MetaManager {
                     'Team Member' => [
                         'meta' => [
                             'team_member_role' => [
-                                'label' => __('Team Member Role', 'buddyclients'),
+                                'label' => __('Team Member Role', 'buddyclients-free'),
                                 'description' => sprintf(
                                     /* translators: %s: URL to add roles */
-                                    __('Select which team member role applies to this quote. <a href="%s">Add roles.</a>', 'buddyclients'),
+                                    __('Select which team member role applies to this quote. <a href="%s">Add roles.</a>', 'buddyclients-free'),
                                     esc_url(admin_url('/edit.php?post_type=buddyc_role'))
                                 ),
                                 'type' => 'dropdown',
@@ -910,8 +910,8 @@ class MetaManager {
                                 'required' => true,
                             ],
                             'assigned_team_member' => [
-                                'label' => __('Assigned Team Member', 'buddyclients'),
-                                'description' => __('Select a specific team member to be assigned this quote. Selecting a team member here disables the Choose a Team Member option on the booking form and overrides all team member filtering.', 'buddyclients'),
+                                'label' => __('Assigned Team Member', 'buddyclients-free'),
+                                'description' => __('Select a specific team member to be assigned this quote. Selecting a team member here disables the Choose a Team Member option on the booking form and overrides all team member filtering.', 'buddyclients-free'),
                                 'required' => false,
                                 'freelancer' => 'disable',
                                 'type' => 'dropdown',
@@ -926,16 +926,16 @@ class MetaManager {
                     'Client' => [
                         'meta' => [
                             'rate_value' => [
-                                'label' => __('Rate Value', 'buddyclients'),
-                                'description' => __('Enter the fee for this service.', 'buddyclients'),
+                                'label' => __('Rate Value', 'buddyclients-free'),
+                                'description' => __('Enter the fee for this service.', 'buddyclients-free'),
                                 'type' => 'number',
                                 'required' => false,
                             ],
                             'rate_type' => [
-                                'label' => __('Rate Type', 'buddyclients'),
+                                'label' => __('Rate Type', 'buddyclients-free'),
                                 'description' => sprintf(
                                     /* translators: %s: URL to add rate types */
-                                    __('Select the type of fee entered above. <a href="%s">Add rate types.</a>', 'buddyclients'),
+                                    __('Select the type of fee entered above. <a href="%s">Add rate types.</a>', 'buddyclients-free'),
                                     esc_url(admin_url('/edit.php?post_type=buddyc_rate_type'))
                                 ),
                                 'type' => 'dropdown',
@@ -947,8 +947,8 @@ class MetaManager {
                         'freelancer' => 'disable',
                         'meta' => [
                             'team_member_percentage' => [
-                                'label' => __('Team Member Percentage', 'buddyclients'),
-                                'description' => __('What percentage of the client fee do team members receive for this service? Ex: 50', 'buddyclients'),
+                                'label' => __('Team Member Percentage', 'buddyclients-free'),
+                                'description' => __('What percentage of the client fee do team members receive for this service? Ex: 50', 'buddyclients-free'),
                                 'type' => 'number',
                                 'required_component' => 'stripe',
                                 'freelancer' => 'disable',
@@ -958,8 +958,8 @@ class MetaManager {
                     'Adjustments' => [
                         'meta' => [
                             'adjustments' => [
-                                'label' => __('Adjustments', 'buddyclients'),
-                                'description' => __('Select any rate adjustments that apply to this service.', 'buddyclients'),
+                                'label' => __('Adjustments', 'buddyclients-free'),
+                                'description' => __('Select any rate adjustments that apply to this service.', 'buddyclients-free'),
                                 'type' => 'checkbox',
                                 'required' => false,
                                 'options' => 'buddyc_adjustment'
@@ -973,10 +973,10 @@ class MetaManager {
                     'Brief' => [
                         'meta' => [
                             'brief_type' => [
-                                'label' => __('Brief Type', 'buddyclients'),
+                                'label' => __('Brief Type', 'buddyclients-free'),
                                 'description' => sprintf(
                                     /* translators: %s: URL to add brief types */
-                                    __('Select the brief type(s) to create for this service. <a href="%s">Add brief types.</a>', 'buddyclients'),
+                                    __('Select the brief type(s) to create for this service. <a href="%s">Add brief types.</a>', 'buddyclients-free'),
                                     esc_url(admin_url('/edit-tags.php?taxonomy=brief_type&post_type=buddyc_brief'))
                                 ),
                                 'required' => false,
@@ -989,8 +989,8 @@ class MetaManager {
                     'File Uploads' => [
                         'meta' => [
                             'file_uploads' => [
-                                'label' => __('File Uploads', 'buddyclients'),
-                                'description' => __('Select any file upload types that apply to this service.', 'buddyclients'),
+                                'label' => __('File Uploads', 'buddyclients-free'),
+                                'description' => __('Select any file upload types that apply to this service.', 'buddyclients-free'),
                                 'type' => 'checkbox',
                                 'required' => false,
                                 'options' => 'buddyc_file_upload'
@@ -1014,14 +1014,14 @@ class MetaManager {
                     'Info' => [
                         'meta' => [
                             'user_id' => [
-                                'label' => __('User', 'buddyclients'),
-                                'description' => __('Select the users to apply this to.', 'buddyclients'),
+                                'label' => __('User', 'buddyclients-free'),
+                                'description' => __('Select the users to apply this to.', 'buddyclients-free'),
                                 'type' => 'checkbox',
                                 'options' => 'users',
                             ],
                             'legal_type' => [
-                                'label' => __('Legal Type', 'buddyclients'),
-                                'description' => __('Select the type of legal agreement this content is for.', 'buddyclients'),
+                                'label' => __('Legal Type', 'buddyclients-free'),
+                                'description' => __('Select the type of legal agreement this content is for.', 'buddyclients-free'),
                                 'type' => 'dropdown',
                                 'options' => function_exists('buddyc_legal_types') ? buddyc_legal_types() : [],
                             ],
@@ -1044,8 +1044,8 @@ class MetaManager {
                     'Author' => [
                         'meta' => [
                             'testimonial_author' => [
-                                'label' => __('Testimonial Author Name', 'buddyclients'),
-                                'description' => __('Enter a name here to override the author info.', 'buddyclients'),
+                                'label' => __('Testimonial Author Name', 'buddyclients-free'),
+                                'description' => __('Enter a name here to override the author info.', 'buddyclients-free'),
                                 'type' => 'text',
                             ],
                         ],

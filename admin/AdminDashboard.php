@@ -366,7 +366,7 @@ class AdminDashboard {
         
         // Filter label
         $content .= '<label for="' . $name . '">';
-        $content .= esc_html__( 'Date Range ', 'buddyclients');
+        $content .= esc_html__( 'Date Range ', 'buddyclients-free');
         $content .= '</label>';
         
         // Build the dropdown
@@ -516,7 +516,7 @@ class AdminDashboard {
             'labels'            => $labels,
             'tooltip_format'    => 'currency',
             'canvas_id'         => 'revenueChart',
-            'title'             => __('Revenue Over Time', 'buddyclients')
+            'title'             => __('Revenue Over Time', 'buddyclients-free')
         ];
         
         // Create and display the chart
@@ -609,7 +609,7 @@ class AdminDashboard {
             'data'              => $data,
             'labels'            => $labels,
             'canvas_id'         => 'abandonmentChart',
-            'title'             => __('Booking Success Over Time', 'buddyclients')
+            'title'             => __('Booking Success Over Time', 'buddyclients-free')
         ];
         
         // Create and display the chart
@@ -746,7 +746,7 @@ class AdminDashboard {
             'type'              => 'pie',
             'data'              => $chart_data,
             'canvas_id'         => 'bookingStatusBreakdownChart',
-            'title'             => __('Booking Success', 'buddyclients')
+            'title'             => __('Booking Success', 'buddyclients-free')
         ];
         
         $chart = new AdminChart($args);
