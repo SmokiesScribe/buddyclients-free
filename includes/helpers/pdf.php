@@ -67,7 +67,7 @@ function buddyc_pdf_download_link ( $pdf_id ) {
  * 
  * @param   BookingIntent   $booking_intent    The BookingIntent object.
  */
-function generate_service_agreement_pdf( $booking_intent ) {
+function buddyc_buddyc_generate_service_agreement_pdf( $booking_intent ) {
     if ( ! $booking_intent ) {
         return;
     }
@@ -166,7 +166,7 @@ function generate_service_agreement_pdf( $booking_intent ) {
  * @param   array   $data   The user's Legal data.
  * @param   string  $type   The type of agreement.
  */
-function generate_legal_pdf_from_user_data( $data, $type ) {
+function buddyc_buddyc_generate_legal_pdf_from_user_data( $data, $type ) {
     if ( ! isset( $data['version'] ) ) {
         return;
     }

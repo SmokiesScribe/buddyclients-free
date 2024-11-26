@@ -3,7 +3,7 @@
  * 
  * @since 0.1.0
  */
-function copyToClipboard(elementId) {
+function buddycCopyToClipboard(elementId) {
 
     // Select the element containing the link
     var linkElement = document.getElementById(elementId);

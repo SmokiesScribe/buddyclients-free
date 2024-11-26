@@ -27,7 +27,7 @@
             
             // Require services
             if ( ! lineItemsField.value ) {
-                preventSubmission('Please select your services.');
+                buddycPreventSubmission('Please select your services.');
                 return;
             }
             
@@ -37,14 +37,14 @@
             
             // Require minimum fee
             if ( totalValue < minimumValue ) {
-                preventSubmission('Please select services amounting to at least $' + minimumField.value + '.');
+                buddycPreventSubmission('Please select services amounting to at least $' + minimumField.value + '.');
                 return;
             }
         
             // Require confirmation checkboxes
             confirmCheckboxes.forEach(function ( checkbox ) {
                 if ( ! checkbox.checked ) {
-                    preventSubmission('Please check the confirmation box.');
+                    buddycPreventSubmission('Please check the confirmation box.');
                     return;
                 }
             });
@@ -57,7 +57,7 @@
          * 
          * @param   string  alertMessage  The message to display in the alert.
          */
-        function preventSubmission( alertMessage ) {
+        function buddycPreventSubmission( alertMessage ) {
                 event.preventDefault(); // Prevent form submission
                 alert( alertMessage );
         }

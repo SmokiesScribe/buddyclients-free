@@ -18,7 +18,7 @@
         // Ensure services exist
         if ( ! serviceOptions.length ) return;
 
-        function showServiceComponentFields() {
+        function buddycShowServiceComponentFields() {
             // Initialize role ids array
             const roleIds = [];
             
@@ -125,7 +125,7 @@
                                 // Update legend and field ID/name
                                 const legend = clonedDiv.querySelector('legend');
                                 if (legend) {
-                                    const label = getOptionLabel(option);
+                                    const label = buddycGetOptionLabel(option);
                                     legend.textContent += ` - ${label}`;
                                 }
 
@@ -159,7 +159,7 @@
                 
                 // Filter if selected
                 if ( isRoleSelected ) {
-                    filterTeamField( field );
+                    buddycFilterTeamField( field );
                 }
             });
         }
@@ -167,12 +167,12 @@
         // Event delegation for form inputs and selects
         form.addEventListener('change', function(event) {
             if (event.target.matches('input, select')) {
-                showServiceComponentFields();
+                buddycShowServiceComponentFields();
             }
         });
 
         // Initial call
-        showServiceComponentFields();
+        buddycShowServiceComponentFields();
     });
     
     /**
@@ -182,7 +182,7 @@
      * 
      * @param   html    $option     The option whose label to retrieve.
      */
-    function getOptionLabel( option ) {
+    function buddycGetOptionLabel( option ) {
         
         if ( ! option ) {
             return;
@@ -223,9 +223,9 @@
      * 
      * @param   teamField   The field to filter.
      */
-    function filterTeamField( teamField ) {
+    function buddycFilterTeamField( teamField ) {
         
-        // Create an array to store all promises for checkTeamFilters calls
+        // Create an array to store all promises for buddycCheckTeamFilters calls
         const promises = [];
         
         // Select all elements with the class 'project-filter-field'
@@ -259,7 +259,7 @@
                     const checkboxes = filterField.querySelectorAll('input[type="checkbox"]');
                     checkboxes.forEach(checkbox => {
                         if (checkbox.checked) {
-                            const checkboxLabel = getOptionLabel( checkbox );
+                            const checkboxLabel = buddycGetOptionLabel( checkbox );
                             checkboxValues.push(checkboxLabel); // Push the value to the array
                         }
                     });
@@ -273,7 +273,7 @@
             });
 
             // Add the promise to the array of promises
-            promises.push(checkTeamFilters(teamID, filterValues)
+            promises.push(buddycCheckTeamFilters(teamID, filterValues)
                 .then(enabled => {
                     
                     // At least one team member is available
@@ -334,7 +334,7 @@
          * @param   object  filterValues    The selected values of the filter fields, keyed by filter id.
          * @returns Promise<boolean>       Resolves to true if filters match, false otherwise.
          */
-        function teamFiltersMatch(teamID, filterValues) {
+        function buddycTeamFiltersMatch(teamID, filterValues) {
             return new Promise((resolve, reject) => {
                 jQuery.ajax({
                     type: 'POST',
@@ -366,9 +366,9 @@
          * @param   object  filterValues    The selected values of the filter fields, keyed by filter id.
          * @returns Promise<boolean>       Resolves to true if filters match, false otherwise.
          */
-        async function checkTeamFilters(teamID, filterValues) {
+        async function buddycCheckTeamFilters(teamID, filterValues) {
             try {
-                const enabled = await teamFiltersMatch(teamID, filterValues);
+                const enabled = await buddycTeamFiltersMatch(teamID, filterValues);
                 return enabled;
             } catch (error) {
                 console.error('Error:', error);

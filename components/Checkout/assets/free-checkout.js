@@ -1,4 +1,4 @@
-import { handleCreateAccount } from './create-account.js';
+import { buddycHandleCreateAccount } from './create-account.js';
 
 /**
  * Handles a free checkout.
@@ -29,7 +29,7 @@ document.addEventListener("DOMContentLoaded", function () {
         
         try {
             // Assuming ajaxurl is defined elsewhere in your script or passed as a parameter
-            const isSuccess = await handleCreateAccount(e, ajaxurl, submitButton);
+            const isSuccess = await buddycHandleCreateAccount(e, ajaxurl, submitButton);
             
             // Proceed with the next steps only if account creation is successful
             if (isSuccess) {

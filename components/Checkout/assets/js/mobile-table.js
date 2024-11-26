@@ -10,7 +10,7 @@ document.addEventListener("DOMContentLoaded", function() {
     const mobileButton = document.getElementById('checkout-mobile-button');
     const tableContainer = document.querySelector('.checkout-details-container');
     
-    function updateTableVisibility() {
+    function buddycUpdateTableVisibility() {
         const createAccountForm = document.getElementById('buddyc-create-account-form');
         
         // Toggle active class to trigger CSS transition
@@ -24,6 +24,6 @@ document.addEventListener("DOMContentLoaded", function() {
     
     // Add event listener
     if (mobileButton) {
-        mobileButton.addEventListener("click", updateTableVisibility);
+        mobileButton.addEventListener("click", buddycUpdateTableVisibility);
     }
 });

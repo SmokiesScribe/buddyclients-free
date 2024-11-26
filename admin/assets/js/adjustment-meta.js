@@ -3,12 +3,12 @@ document.addEventListener('DOMContentLoaded', function() {
     if ( ! addButton) {
         return;
     }
-    addButton.addEventListener('click', addNewOptionTable);
+    addButton.addEventListener('click', buddycAddNewOptionTable);
 });
 
 let optionCount = 6; // Starting count for new options
 
-function addNewOptionTable() {
+function buddycAddNewOptionTable() {
     const container = document.querySelector('#buddyc_adjustment-Options_metabox .inside');
 
     if (!container) {

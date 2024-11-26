@@ -5,7 +5,7 @@ use BuddyClients\Components\Brief\GroupBriefs;
  * 
  * @since 0.1.0
  */
-function brief_add_group_extension() {
+function buddyc_buddyc_brief_add_group_extension() {
 	if ( bp_is_active( 'groups' ) ) :
 		class Brief_Group_Extension extends BP_Group_Extension {
 			function __construct() {
@@ -39,7 +39,7 @@ function brief_add_group_extension() {
 	bp_register_group_extension( 'Brief_Group_Extension' );
 	endif;
 }
-add_action('bp_init', 'brief_add_group_extension');
+add_action('bp_init', 'buddyc_buddyc_brief_add_group_extension');
 
 /**
  * Group project briefs content.

@@ -14,10 +14,10 @@ document.addEventListener("DOMContentLoaded", function() {
     }
     
     // Function to handle email input change
-    function handleEmailInputChange() {
+    function buddycHandleEmailInputChange() {
         const enteredEmail = createAccountEmailInput.value;
         
-        if ( isValidEmailAddress( enteredEmail ) ) {
+        if ( buddycIsValidEmailAddress( enteredEmail ) ) {
 
             // AJAX request to update booking intent email
             jQuery.ajax({
@@ -46,12 +46,12 @@ document.addEventListener("DOMContentLoaded", function() {
         // Check if the changed element is the email input in the create account form
         if (event.target && event.target.matches('input[name="create-account-email"]')) {
             // Call the function to handle email input change
-            handleEmailInputChange();
+            buddycHandleEmailInputChange();
         }
     });
     
     // Function to validate email address
-    function isValidEmailAddress(email) {
+    function buddycIsValidEmailAddress(email) {
         // Regular expression for email validation
         const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
         return emailRegex.test(email);

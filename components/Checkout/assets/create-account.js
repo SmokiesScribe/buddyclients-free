@@ -9,7 +9,7 @@
  * @param {submitButton} stripe - The submit button.
  * @returns {Promise<boolean>} - Resolves to true if account creation is successful, false otherwise.
  */
-export function handleCreateAccount(e, ajaxurl, submitButton) {
+export function buddycHandleCreateAccount(e, ajaxurl, submitButton) {
   e.preventDefault();
 
   // Start account creation process first

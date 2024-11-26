@@ -10,7 +10,7 @@
  * @return {boolean} Returns false regardless of the user’s choice, to prevent 
  *                   further action in the event handler.
  */
-function confirmAction( url, message = null ) {
+function buddycConfirmAction( url, message = null ) {
     // Define message
     message = message ?? 'Are you sure you want to proceed?';
 

@@ -3,7 +3,7 @@
  * 
  * @since 0.1.0
  */
-function updateLineItemsTable(updatedLineItems) {
+function buddycUpdateLineItemsTable(updatedLineItems) {
     if (!document.getElementById('buddyc-booking-form')) return;
     
     var lineItemsTableBody = jQuery('.checkout-table tbody');
@@ -11,7 +11,7 @@ function updateLineItemsTable(updatedLineItems) {
     
     // No line items
     if ( ! updatedLineItems ) {
-        calculateTotalFee([0]);
+        buddycCalculateTotalFee([0]);
         return;
     }
     
@@ -36,7 +36,7 @@ function updateLineItemsTable(updatedLineItems) {
     });
 
     // Calculate and append the initial total fee
-    calculateTotalFee(serviceFees);
+    buddycCalculateTotalFee(serviceFees);
 }
 
 /**
@@ -51,7 +51,7 @@ jQuery(document).ready(function($) {
     const projectDisplay = $('#buddyc-checkout-project');
     const projectSelect = $('#buddyc_projects');
 
-    function updateProjectName() {
+    function buddycUpdateProjectName() {
         const projectName = projectInput.val();
         if (projectName) {
             projectDisplay.text(projectName);
@@ -62,16 +62,16 @@ jQuery(document).ready(function($) {
     
     // Listen for changes to project title
     projectInput.change(function() {
-        updateProjectName();
+        buddycUpdateProjectName();
     });
     
     // Listen for changes to project select
     projectSelect.change(function() {
-        updateProjectName();
+        buddycUpdateProjectName();
     });
     
     // Call the function initially
-    updateProjectName();
+    buddycUpdateProjectName();
 
 });
 
@@ -81,7 +81,7 @@ jQuery(document).ready(function($) {
  * 
  * @since 0.1.0
  */
-function calculateTotalFee(serviceFees) {
+function buddycCalculateTotalFee(serviceFees) {
     if (!document.getElementById('buddyc-booking-form')) return;
 
     // Calculate the total fee by summing up the service fees in the array
@@ -117,12 +117,12 @@ function calculateTotalFee(serviceFees) {
  * @since 0.1.0
  * @updated 0.2.3
  */
-function updateServiceValues() {
+function buddycUpdateServiceValues() {
     const form = document.getElementById('buddyc-booking-form');
     if (!form) return;
 
     // Disable submit button
-    bookingFormUpdating( false );
+    buddycBookingFormUpdating( false );
 
     var selectedServices = []; // Initialize an array to store selected service IDs
 
@@ -156,10 +156,10 @@ function updateServiceValues() {
         // Clear field if no service is selected
         jQuery('#hidden-line-items').val('');
         // Update the table
-        updateLineItemsTable();
+        buddycUpdateLineItemsTable();
 
         // Re-enable the submit button and reset its text
-        bookingFormUpdating( true );
+        buddycBookingFormUpdating( true );
         return;
     }
 
@@ -252,7 +252,7 @@ function updateServiceValues() {
                         
                         if (lineItem) {
                             lineItems.push(lineItem);
-                            updateLineItemsTable(lineItems);
+                            buddycUpdateLineItemsTable(lineItems);
                         } else {
                             console.error('Received invalid lineData:', lineItems);
                         }
@@ -266,7 +266,7 @@ function updateServiceValues() {
 
         // After all AJAX requests complete
         jQuery.when.apply(jQuery, ajaxRequests).done(function() {
-            bookingFormUpdating( true );  
+            buddycBookingFormUpdating( true );  
         });
     }
 }
@@ -279,7 +279,7 @@ function updateServiceValues() {
  * @param   bool    complete    Optional. Whether the update is complete.
  *                              Defaults to false.
  */
-function bookingFormUpdating( complete = false ) {
+function buddycBookingFormUpdating( complete = false ) {
     const form = document.getElementById('buddyc-booking-form');
     if ( ! form ) return;
 
@@ -329,12 +329,12 @@ jQuery(document).ready(function($) {
     jQuery('#buddyc-booking-form').on('change', 'input, select', function() {
         // Exclude the projectSelect element from handling
         if (this !== projectSelect) {
-            updateServiceValues();
+            buddycUpdateServiceValues();
         }
     });
     
     // Call the function initially to populate the readonly field
-    updateServiceValues();
+    buddycUpdateServiceValues();
 });
 
 

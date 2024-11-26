@@ -18,11 +18,11 @@ document.addEventListener('DOMContentLoaded', () => {
 
         /**
          * Attach an event listener to the file input element to listen for changes in the selected file.
-         * When a file is selected, call the displayFileName function to update the UI.
+         * When a file is selected, call the buddycDisplayFileName function to update the UI.
          */
         if (fileInput) {
             fileInput.addEventListener('change', (e) => {
-                displayFileName(fileInput, fileNameDisplay);
+                buddycDisplayFileName(fileInput, fileNameDisplay);
             });
         }
 
@@ -51,7 +51,7 @@ document.addEventListener('DOMContentLoaded', () => {
      * Display the name of the selected file in the UI.
      * If no file is selected, reset the UI.
      */
-    function displayFileName(fileInput, fileNameDisplay) {
+    function buddycDisplayFileName(fileInput, fileNameDisplay) {
         if (fileInput.files.length > 0) {
             let fileNames = '';
             for (let i = 0; i < fileInput.files.length; i++) {

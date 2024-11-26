@@ -575,7 +575,7 @@ class SettingsPage {
         } else {
             
             // Show create button
-            $button = '<button onclick="createNewPage({
+            $button = '<button onclick="buddycCreateNewPage({
                 page_key: \'' . esc_js($field_id) . '\',
                 settings_key: \'' . esc_js('pages') . '\',
                 post_title: \'' . esc_js($field_data['post_title']) . '\',
@@ -642,7 +642,7 @@ class SettingsPage {
             $create_nonce = wp_create_nonce( 'buddyc_create_new_page_nonce' );
             
             // Build create page button
-            $create_button = '<button onclick="createNewPage({
+            $create_button = '<button onclick="buddycCreateNewPage({
                 page_key: \'' . esc_js($field_id) . '\',
                 settings_key: \'' . esc_js('legal') . '\',
                 post_title: \'' . esc_js($field_data['label']) . '\',

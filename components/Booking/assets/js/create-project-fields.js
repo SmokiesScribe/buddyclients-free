@@ -14,7 +14,7 @@
         const projectName = document.getElementById('project_title');
     
         // Function to toggle the visibility of the fields
-        function toggleFieldsVisibility() {
+        function buddycToggleFieldsVisibility() {
             let display = 'none';
             projectName.required = false;
             
@@ -36,13 +36,13 @@
         }
 
         // Initial call to set visibility based on the select value
-        toggleFieldsVisibility();
+        buddycToggleFieldsVisibility();
     
         // Listen for changes in the select field
-        projectSelect.addEventListener('change', toggleFieldsVisibility);
+        projectSelect.addEventListener('change', buddycToggleFieldsVisibility);
         
         // Listen for changes in the projectName field
-        projectName.addEventListener('input', toggleFieldsVisibility);
+        projectName.addEventListener('input', buddycToggleFieldsVisibility);
     });
 })();
 
@@ -64,14 +64,14 @@
         var bookedServicesInput = document.getElementById('project-booked-services');
     
         // Function to update fields based on the selected option
-        function updateFieldsBasedOnSelectedOption(selectedOption) {
+        function buddycUpdateFieldsBasedOnSelectedOption(selectedOption) {
             if (selectedOption.value === '0') {
                 // Clear project title
                 titleElement.value = '';
                 // Clear filter fields
-                updateFilterFields( false );
+                buddycUpdateFilterFields( false );
                 // Update dependent services
-                enableDependentServices( false );
+                buddycEnableDependentServices( false );
                 // Clear booked services input
                 bookedServicesInput.value = '';
                 return;
@@ -117,13 +117,13 @@
                     }
                         
                     // Update filter fields
-                    updateFilterFields( filterData );
+                    buddycUpdateFilterFields( filterData );
                     
                     // Enable dependent services
-                    enableDependentServices( bookedServices );
+                    buddycEnableDependentServices( bookedServices );
                     
                     // Select team members
-                    selectTeamMembers( teamData, lockTeam );
+                    buddycSelectTeamMembers( teamData, lockTeam );
                 }
             });
         }
@@ -137,18 +137,18 @@
             var groupId = selectedOption.value;
     
             // Update fields based on the selected option
-            updateFieldsBasedOnSelectedOption(selectedOption);
+            buddycUpdateFieldsBasedOnSelectedOption(selectedOption);
         });
     
         // Trigger the 'change' event for the initially selected option when the page loads
         const initialSelectedOption = projectSelect.options[projectSelect.selectedIndex];
-        updateFieldsBasedOnSelectedOption(initialSelectedOption);
+        buddycUpdateFieldsBasedOnSelectedOption(initialSelectedOption);
         
         // Listen for changes to all form inputs and selects
         form.addEventListener('change', function(event) {
             if (event.target.matches('input, select')) {
-                selectTeamMembers();
-                enableDependentServices();
+                buddycSelectTeamMembers();
+                buddycEnableDependentServices();
             }
         });
         
@@ -159,7 +159,7 @@
          * 
          * @var array   bookedServices    The previously booked services.
          */
-        function enableDependentServices( bookedServices = null ) {
+        function buddycEnableDependentServices( bookedServices = null ) {
             
             // Default to hidden field value
             if ( ! bookedServices ) {
@@ -246,7 +246,7 @@
          * @var array   teamData    The project team data.
          * @var bool    lockTeam    Whether the project team members should be locked.
          */
-        function selectTeamMembers( teamData, lockTeam ) {
+        function buddycSelectTeamMembers( teamData, lockTeam ) {
             
             // Exit if team members should not be locked
             if ( ! lockTeam ) {
@@ -288,7 +288,7 @@
          * 
          * @var array   filterData The project filter data.
          */
-        function updateFilterFields( filterData ) {
+        function buddycUpdateFilterFields( filterData ) {
             
             // Select all elements with the class 'project-filter-field'
             const projectFilterFields = document.querySelectorAll('.project-filter-field');

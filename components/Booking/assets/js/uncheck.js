@@ -13,7 +13,7 @@
             return;
         }
         
-        function uncheckConfirmationCheckbox() {
+        function buddycUncheckConfirmationCheckbox() {
             confirmCheckboxes.forEach(checkbox => {
                 checkbox.checked = false;
             });
@@ -21,7 +21,7 @@
         
        // Listen for changes
         jQuery('.buddyc-form input:not(.confirmation-checkbox)').on('change', function() {
-            uncheckConfirmationCheckbox();
+            buddycUncheckConfirmationCheckbox();
         });
     });
 })();

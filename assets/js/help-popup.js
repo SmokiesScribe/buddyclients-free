@@ -69,9 +69,6 @@ document.addEventListener('DOMContentLoaded', function () {
                     }, 300); // Match the transition duration
                 }
             });
-    
-            // Call AJAX request function with postId
-            //helpContentAjaxRequest(postId);
         });
     });
     

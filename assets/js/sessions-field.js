@@ -8,7 +8,7 @@ document.addEventListener('DOMContentLoaded', function () {
     var facultyContainers = document.getElementsByClassName('faculty-member-container');
 
     // Define a separate function to handle the click event
-    function toggleCheckboxesContainer() {
+    function buddycToggleCheckboxesContainer() {
         // Get the element with the class 'faculty-checkboxes-container' within the clicked 'faculty-member-container'
         var facultyCheckboxesContainer = this.parentElement.getElementsByClassName('faculty-checkboxes-container')[0];
         
@@ -38,6 +38,6 @@ document.addEventListener('DOMContentLoaded', function () {
         var facultyIdContainer = facultyContainer.getElementsByClassName('faculty-id-container')[0];
 
         // Add a click event listener to the faculty-id-container
-        facultyIdContainer.addEventListener('click', toggleCheckboxesContainer);
+        facultyIdContainer.addEventListener('click', buddycToggleCheckboxesContainer);
     }
 });

@@ -3,7 +3,7 @@
  * 
  * @since 0.4.3
  */
-function togglePasswordVisibility() {
+function buddycTogglePasswordVisibility() {
   const passwordFields = document.querySelectorAll('.buddyc-password-field');
 
   if ( ! passwordFields ) {
@@ -11,7 +11,7 @@ function togglePasswordVisibility() {
   }
 
   passwordFields.forEach((field) => {
-    createPasswordFieldWrapper(field);
+    buddycCreatePasswordFieldWrapper(field);
   });
 }
 
@@ -20,15 +20,15 @@ function togglePasswordVisibility() {
  * 
  * @param {HTMLElement} field - The password field to wrap.
  */
-function createPasswordFieldWrapper(field) {
+function buddycCreatePasswordFieldWrapper(field) {
   const wrapper = document.createElement('div');
   wrapper.className = 'password-field-wrapper';
 
   field.parentElement.insertBefore(wrapper, field);
   wrapper.appendChild(field);
 
-  addToggleIcon(wrapper, field);
-  addGeneratePasswordAndStrengthIndicator(wrapper, field);
+  buddycAddToggleIcon(wrapper, field);
+  buddycAddGeneratePasswordAndStrengthIndicator(wrapper, field);
 }
 
 /**
@@ -37,7 +37,7 @@ function createPasswordFieldWrapper(field) {
  * @param {HTMLElement} wrapper - The wrapper around the password field.
  * @param {HTMLElement} field - The password field.
  */
-function addToggleIcon(wrapper, field) {
+function buddycAddToggleIcon(wrapper, field) {
   const toggleIcon = document.createElement('i');
   toggleIcon.className = 'bb-icon-eye bb-icon-l toggle-password-visibility';
 
@@ -60,7 +60,7 @@ function addToggleIcon(wrapper, field) {
  * @param {HTMLElement} wrapper - The wrapper around the password field.
  * @param {HTMLElement} field - The password field.
  */
-function addGeneratePasswordAndStrengthIndicator(wrapper, field) {
+function buddycAddGeneratePasswordAndStrengthIndicator(wrapper, field) {
   const generateLink = document.createElement('a');
   generateLink.textContent = 'Generate Password';
   generateLink.href = '#';
@@ -83,18 +83,18 @@ function addGeneratePasswordAndStrengthIndicator(wrapper, field) {
 
   wrapper.parentElement.insertBefore(container, wrapper.nextSibling);
 
-  updateStrengthIndicator(strengthIndicator, field.value);
+  buddycUpdateStrengthIndicator(strengthIndicator, field.value);
 
   generateLink.addEventListener('click', (e) => {
     e.preventDefault();
-    const newPassword = generateStrongPassword();
+    const newPassword = buddycGenerateStrongPassword();
     field.value = newPassword;
-    copyPasswordToClipboard(newPassword, messageContainer);
-    updateStrengthIndicator(strengthIndicator, newPassword);
+    buddycCopyPasswordToClipboard(newPassword, messageContainer);
+    buddycUpdateStrengthIndicator(strengthIndicator, newPassword);
   });
 
   field.addEventListener('input', () => {
-    updateStrengthIndicator(strengthIndicator, field.value);
+    buddycUpdateStrengthIndicator(strengthIndicator, field.value);
   });
 }
 
@@ -104,7 +104,7 @@ function addGeneratePasswordAndStrengthIndicator(wrapper, field) {
  * @param {number} length - The length of the generated password.
  * @returns {string} The generated strong password.
  */
-function generateStrongPassword(length = 12) {
+function buddycGenerateStrongPassword(length = 12) {
   const chars = 'abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789!@#$%^&*()_+[]{}|;:,.<>?';
   let password = '';
 
@@ -113,7 +113,7 @@ function generateStrongPassword(length = 12) {
     for (let i = 0; i < length; i++) {
       password += chars.charAt(Math.floor(Math.random() * chars.length));
     }
-  } while (!evaluatePasswordStrength(password).class === 'strong');
+  } while (!buddycEvaluatePasswordStrength(password).class === 'strong');
 
   return password;
 }
@@ -124,7 +124,7 @@ function generateStrongPassword(length = 12) {
  * @param {string} text - The text to copy to the clipboard.
  * @param {HTMLElement} messageContainer - The container to display the copy message.
  */
-function copyPasswordToClipboard(text, messageContainer) {
+function buddycCopyPasswordToClipboard(text, messageContainer) {
   navigator.clipboard.writeText(text)
     .then(() => {
       messageContainer.textContent = 'Password copied to clipboard!';
@@ -151,7 +151,7 @@ function copyPasswordToClipboard(text, messageContainer) {
  * @param {HTMLElement} indicator - The strength indicator element.
  * @param {string} password - The password to evaluate.
  */
-function updateStrengthIndicator(indicator, password) {
+function buddycUpdateStrengthIndicator(indicator, password) {
   if (!password) {
     // Hide the indicator if the password is empty
     indicator.style.display = 'none';
@@ -160,7 +160,7 @@ function updateStrengthIndicator(indicator, password) {
 
   // Show the indicator and update its content
   indicator.style.display = 'inline';
-  const strength = evaluatePasswordStrength(password);
+  const strength = buddycEvaluatePasswordStrength(password);
   indicator.textContent = strength.text;
   indicator.classList.remove('strength-strong', 'strength-medium', 'strength-weak');
   indicator.classList.add(`strength-${strength.class}`);
@@ -172,7 +172,7 @@ function updateStrengthIndicator(indicator, password) {
  * @param {string} password - The password to evaluate.
  * @returns {Object} An object containing strength text and class.
  */
-function evaluatePasswordStrength(password) {
+function buddycEvaluatePasswordStrength(password) {
   // Adjusted to match PHP criteria: at least 8 characters and include at least one of each type
   const strongPattern = /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[\W_]).{8,}$/;
   const mediumPattern = /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d).{8,}$/;
@@ -187,4 +187,4 @@ function evaluatePasswordStrength(password) {
 }
 
 // Call the function to apply the password toggle, generation, and strength indicator functionality
-togglePasswordVisibility();
+buddycTogglePasswordVisibility();

@@ -139,7 +139,7 @@ class AdminTableItem extends AdminTable {
             if ( $value ) {
                 
                 // Generate PDF
-                $pdf_link = generate_service_agreement_pdf( $booking_intent );
+                $pdf_link = buddyc_buddyc_generate_service_agreement_pdf( $booking_intent );
                 
                 // Update booking intent
                 buddyc_update_booking_intent( $booking_intent->ID, 'terms_pdf_link', $pdf_link );
@@ -380,7 +380,7 @@ class AdminTableItem extends AdminTable {
         $message = __( 'Are you sure you want to delete this booking? This action cannot be undone.', 'buddyclients' );
 
         // Output button
-        $delete_button = '<a href="#" onclick="return confirmAction(\'' . esc_url( $delete_url ) . '\', \'' . esc_js( $message ) . '\');" style="font-size: 16px"><i class="fa-solid fa-trash"></i></a>';
+        $delete_button = '<a href="#" onclick="return buddycConfirmAction(\'' . esc_url( $delete_url ) . '\', \'' . esc_js( $message ) . '\');" style="font-size: 16px"><i class="fa-solid fa-trash"></i></a>';
 
         return $delete_button;
     }
@@ -412,7 +412,7 @@ class AdminTableItem extends AdminTable {
             <p><span id="<?php echo esc_attr( $field_id ) ?>">
             <?php echo esc_html( $value ) ?>
             </span></p>
-            <button onclick="copyToClipboard('<?php echo esc_attr( $field_id ) ?>')" type="button" class="button button-secondary">Copy Memo</button>
+            <button onclick="buddycCopyToClipboard('<?php echo esc_attr( $field_id ) ?>')" type="button" class="button button-secondary">Copy Memo</button>
             <div class="buddyc-copy-success" style="margin: 10px; font-weight: 500"></div>
         </div>
         <?php
