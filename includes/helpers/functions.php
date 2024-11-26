@@ -12,18 +12,6 @@ function buddyc_color( $type ) {
 }
 
 /**
- * Echoes colors from settings.
- * 
- * @since 1.0.19
- * 
- * @param   string  $type   The color type to retrieve.
- *                          Accepts 'primary', 'accent', and 'tertiary'.
- */
-function e_buddyc_color( $type ) {
-    echo esc_attr( buddyc_color( $type ) );
-}
-
-/**
  * Retrieves the current url.
  * 
  * @since 1.0.4
