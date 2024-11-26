@@ -7,7 +7,7 @@ use BuddyClients\Components\Booking\BookedService\BookedServiceList;
  */
 function buddyc_services_add_group_extension() {
 	if ( bp_is_active( 'groups' ) ) :
-		class Services_Group_Extension extends BP_Group_Extension {
+		class Buddyc_Services_Group_Extension extends BP_Group_Extension {
 			function __construct() {
 				$args = array(
 					'slug'              => 'services',
@@ -40,7 +40,7 @@ function buddyc_services_add_group_extension() {
 			}
     }
     
-	bp_register_group_extension( 'Services_Group_Extension' );
+	bp_register_group_extension( 'Buddyc_Services_Group_Extension' );
 	endif;
 }
 add_action('bp_init', 'buddyc_services_add_group_extension');

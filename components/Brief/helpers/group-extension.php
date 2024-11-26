@@ -7,7 +7,7 @@ use BuddyClients\Components\Brief\GroupBriefs;
  */
 function buddyc_buddyc_brief_add_group_extension() {
 	if ( bp_is_active( 'groups' ) ) :
-		class Brief_Group_Extension extends BP_Group_Extension {
+		class Buddyc_Brief_Group_Extension extends BP_Group_Extension {
 			function __construct() {
 				$args = array(
 					'slug'              => 'brief',
@@ -36,7 +36,7 @@ function buddyc_buddyc_brief_add_group_extension() {
 			}
     }
     
-	bp_register_group_extension( 'Brief_Group_Extension' );
+	bp_register_group_extension( 'Buddyc_Brief_Group_Extension' );
 	endif;
 }
 add_action('bp_init', 'buddyc_buddyc_brief_add_group_extension');
