@@ -139,7 +139,7 @@ class AdminTableItem extends AdminTable {
             if ( $value ) {
                 
                 // Generate PDF
-                $pdf_link = buddyc_buddyc_generate_service_agreement_pdf( $booking_intent );
+                $pdf_link = buddyc_generate_service_agreement_pdf( $booking_intent );
                 
                 // Update booking intent
                 buddyc_update_booking_intent( $booking_intent->ID, 'terms_pdf_link', $pdf_link );
