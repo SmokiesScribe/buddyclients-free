@@ -1,6 +1,8 @@
 <?php
+if ( ! defined( 'ABSPATH' ) ) exit; // Exit if accessed directly
+
 /**
- * Template Name: Custom BC Service Archive
+ * Template Name: Custom BuddyClients Service Archive
  * Description: A custom template for the buddyc_service post type archive.
  */
 
@@ -44,7 +46,7 @@ $content .= '<div class="rate-cards buddyc-archive-container">';
 
 // Build title
 $content .= '<div class="archive-title-container">';
-$content .= '<h1>' . esc_html__('Services', 'buddyclients-free') . '</h1>';
+$content .= '<h1>' . esc_html__('Services', 'buddyclients') . '</h1>';
 $content .= '</div>';
 
 // Loop through each type
@@ -112,7 +114,7 @@ foreach ($types as $type) {
                             <div class="rate-content">
                                 <h3 class="rate-title">' . esc_html($rate_title) . '</h3>'
                                 . $service_type_label .
-                                '<div class="rate-excerpt">' . esc_html($post_info) . '<span> <i>' . esc_html__('Learn more.', 'buddyclients-free') . '</i></span></div>
+                                '<div class="rate-excerpt">' . esc_html($post_info) . '<span> <i>' . esc_html__('Learn more.', 'buddyclients') . '</i></span></div>
                             </div>
                         </div>
                     </a>

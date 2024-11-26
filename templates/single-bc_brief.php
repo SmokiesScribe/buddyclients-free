@@ -1,6 +1,8 @@
 <?php
+if ( ! defined( 'ABSPATH' ) ) exit; // Exit if accessed directly
+
 /**
- * Template Name: Single BC Brief
+ * Template Name: Single BuddyClients Brief
  * Description: A custom template for a single buddyc_brief post.
  */
 
@@ -12,7 +14,7 @@ $content = '<div class="buddyc-single-post">';
 
 // Class does not exist
 if ( ! class_exists( 'BuddyClients\Components\Brief\SingleBrief' ) ) {
-    $content .= '<p>' . __( 'Briefs are not enabled.', 'buddyclients-free' ) . '</p>';
+    $content .= '<p>' . __( 'Briefs are not enabled.', 'buddyclients' ) . '</p>';
 } else {
     // Generate content
     $content .= ( new BuddyClients\Components\Brief\SingleBrief )->display();

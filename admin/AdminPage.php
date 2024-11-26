@@ -71,6 +71,7 @@ class AdminPage {
      *     @type array          $callback_args  An array of data to pass with the callback.
      */
     public function __construct( $key, $args ) {
+        $this->key = $key;
         
         // Check for required component
         $this->check_component( $args['required_component'] ?? null );
@@ -89,12 +90,6 @@ class AdminPage {
             if ( isset( $args['singular_name'] ) && isset( $args['buddyc_menu_order'] ) && $args['buddyc_menu_order'] ) {
                 // Extract the data
                 $args = $this->post_type_data( $key, $args );
-                // Overwrite callback with redirect function
-                $this->callback = function() use ( $key ) {
-                    $link = esc_url( admin_url( 'edit.php?post_type=' . $key ) );
-                    $script = "window.location.href = '{$link}';";
-                    buddyc_inline_script( $script, $admin = true, $direct = true );
-                };
             }
         }
 

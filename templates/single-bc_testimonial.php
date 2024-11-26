@@ -1,7 +1,9 @@
 <?php
+if ( ! defined( 'ABSPATH' ) ) exit; // Exit if accessed directly
+
 use BuddyClients\Components\Testimonial\Testimonial;
 /**
- * Template Name: Single BC Testimonial
+ * Template Name: Single BuddyClients Testimonial
  * Description: A custom template for a single buddyc_testimonial post.
  */
 
@@ -23,7 +25,7 @@ use BuddyClients\Components\Testimonial\Testimonial;
     $content .= '</div>';
     
     $testimonials_page = esc_url( site_url( '/testimonials/' ) );
-    $more_testimonials_button = '<div class="more-testimonials-button-container"><a href="' . $testimonials_page . '" class="more-testimonials-button">' . esc_html__('All Testimonials', 'buddyclients-free') . '</a></div>';
+    $more_testimonials_button = '<div class="more-testimonials-button-container"><a href="' . $testimonials_page . '" class="more-testimonials-button">' . esc_html__('All Testimonials', 'buddyclients') . '</a></div>';
     
     // Append the additional content to the post content
     $content .= $more_testimonials_button;
