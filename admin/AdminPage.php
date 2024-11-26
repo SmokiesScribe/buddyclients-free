@@ -93,7 +93,7 @@ class AdminPage {
                 $this->callback = function() use ( $key ) {
                     $link = esc_url( admin_url( 'edit.php?post_type=' . $key ) );
                     $script = "window.location.href = '{$link}';";
-                    buddyclients_inline_script( $script, $admin = true, $direct = true );
+                    buddyc_inline_script( $script, $admin = true, $direct = true );
                 };
             }
         }

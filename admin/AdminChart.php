@@ -83,7 +83,7 @@ class AdminChart {
         <?php
 
         $script = $this->chart_script();
-        buddyclients_inline_script( $script, $admin = true, $direct = true );
+        buddyc_inline_script( $script, $admin = true, $direct = true );
         
         return ob_get_clean();
     }

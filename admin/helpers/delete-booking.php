@@ -42,7 +42,7 @@ function buddyc_delete_booking_success() {
     // Check if booking was successfully deleted
     if ( $deleted === 'true' ) {
         $message = "Booking deleted!";
-        buddyclients_js_alert( $message, $admin = true );
+        buddyc_js_alert( $message, $admin = true );
     }
 }
 add_action( 'admin_init', 'buddyc_delete_booking_success' );

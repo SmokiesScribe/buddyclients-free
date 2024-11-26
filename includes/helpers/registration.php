@@ -46,7 +46,7 @@ function buddyc_registration_button_text() {
             });';
         
         // Output inline script
-        buddyclients_inline_script( $script );
+        buddyc_inline_script( $script );
     }
 }
 add_action('init', 'buddyc_registration_button_text'); // main button

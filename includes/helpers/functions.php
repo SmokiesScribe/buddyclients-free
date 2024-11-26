@@ -133,7 +133,7 @@ function buddyc_time_has_passed( $target_time ) {
 * @param   bool    $admin     Optional. Whether to also apply the script to the admin area.
  *                             Defaults to false (i.e., front end).
  */
-function buddyclients_js_alert( $message, $admin = false ) {
+function buddyc_js_alert( $message, $admin = false ) {
     if ( empty( $message ) ) {
         return;
     }
@@ -143,7 +143,7 @@ function buddyclients_js_alert( $message, $admin = false ) {
     $inline_script = "alert('" . $esc_message . "');";
 
     // Output the script
-    buddyclients_inline_script( $inline_script, $admin );
+    buddyc_inline_script( $inline_script, $admin );
 }
 
 /**
@@ -158,7 +158,7 @@ function buddyclients_js_alert( $message, $admin = false ) {
  * Note: This function should be called on a hook that runs before `wp_enqueue_scripts`, 
  * such as `init`, to ensure the styles are properly enqueued and applied.
  */
-function buddyclients_inline_style( $css, $admin = false ) {
+function buddyc_inline_style( $css, $admin = false ) {
     // Define handle
     $handle = 'buddyclients-inline-style';
 
@@ -193,7 +193,7 @@ function buddyclients_inline_style( $css, $admin = false ) {
  * @param   bool    $direct    Optional. Whether to call the inline script function immediately,
  *                             as opposed to using a hook. Defaults to false.
  */
-function buddyclients_inline_script( $script, $admin = false, $direct = false ) {
+function buddyc_inline_script( $script, $admin = false, $direct = false ) {
     // Define global js handle
     $handle = 'buddyclients-buddyclients-class-global';
 

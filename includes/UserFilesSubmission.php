@@ -68,7 +68,7 @@ class UserFilesSubmission {
      * @param string $message The alert message.
      */
     private function alert( $message ) {
-        buddyclients_js_alert( $message );
+        buddyc_js_alert( $message );
     }
 }
     

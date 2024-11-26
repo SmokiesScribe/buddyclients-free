@@ -108,7 +108,7 @@ function buddyc_show_role_xprofile() {
         $inline_css = "{$class} { display: none !important; }";
 
         // Add inline css
-        buddyclients_inline_style( $inline_css );
+        buddyc_inline_style( $inline_css );
     }
 }
 add_action( 'init', 'buddyc_show_role_xprofile' );
@@ -149,7 +149,7 @@ function buddyc_no_roles_updates() {
                 pointer-events: none;
                 opacity: 0.5;
             }';
-            buddyclients_inline_style( $css, $admin = true );
+            buddyc_inline_style( $css, $admin = true );
     
     // Add an admin notice
     $args = [

@@ -63,7 +63,7 @@ class BookingFormSubmission {
                 __( '<p>Please %s for assistance</p>', 'buddyclients-free' ),
                 buddyc_contact_message( false, true ) );
             
-            buddyclients_output_popup( $message );
+            buddyc_output_popup( $message );
             return;
         }
 

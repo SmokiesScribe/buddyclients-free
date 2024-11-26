@@ -87,7 +87,7 @@ class AssetManager {
 			 *
 			 * @param array  $css_variables The associative array of css names and variables.
 			 */
-			$css_variables = apply_filters( 'buddyclients_css_variables', $css_variables );
+			$css_variables = apply_filters( 'buddyc_css_variables', $css_variables );
 
 			// Build custom css
 			$custom_css = ":root {";

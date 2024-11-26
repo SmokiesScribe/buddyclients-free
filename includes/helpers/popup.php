@@ -55,7 +55,7 @@ function buddyc_help_link( $post_id = null, $link_text = null, $url = null, $raw
  * 
  * @param   $content    string  The content of the popup.
  */
-function buddyclients_output_popup( $content ) {
+function buddyc_output_popup( $content ) {
     if ( ! empty ( $content ) ) {
         $popup = new Popup;
         $popup->output( $content );
