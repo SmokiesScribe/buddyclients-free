@@ -7,6 +7,8 @@ use BuddyClients\Includes\ObjectHandler;
 
 use GriffinVendor\TCPDF;
 
+use DOMDocument;
+
 /**
  * Handles the generation and retrieval of PDFs.
  * 
@@ -39,10 +41,11 @@ class PDF {
     
     /**
      * The ID of the user to whom the PDF belongs.
+     * Defaults to 0.
      * 
      * @var int
      */
-    public $user_id;
+    public $user_id = 0;
     
     /**
      * The file name.
@@ -111,6 +114,17 @@ class PDF {
      * Creates a new PDF from arguments.
      * 
      * @since 0.4.0
+     * 
+     * @param   array   $args {
+     *     An array of arguments for generating the PDF content.
+     * 
+     *     @int      $user_id       Optional. The user to whom the PDF belongs.
+     *     @string   $type          The type of PDF document.
+     *     @string   $title         The title of the PDF document.
+     *     @string   $content       The primary content to include in the PDF.
+     *     @array    $items         Optional. An array of strings to append to the document.
+     *     @string   $image_path    Optional. The file path to an image to include.
+     * }
      */
     public function create_pdf( $args ) {
         if ( ! $args ) {
@@ -157,7 +171,7 @@ class PDF {
         $this->file_name = $this->generate_file_name();
         
         // Get directory path
-        $this->dir_path = ( new Directory( $this->user_id ) )->full_path();
+        $this->dir_path = ( new Directory( 'pdfs/' . $this->user_id ) )->full_path();
         
         // Build the full path and url
         $this->file_path = trailingslashit( $this->dir_path ) . $this->file_name . '.pdf';
@@ -237,7 +251,7 @@ class PDF {
      */
     function format_content( $pdf, $content ) {
         // Split content into an array of paragraphs
-        $paragraphs = buddyc_split_paragraphs( $content );
+        $paragraphs = self::split_paragraphs( $content );
         
         // Make sure it's an array
         $paragraphs = is_array( $paragraphs ) ? $paragraphs : [$paragraphs];
@@ -271,6 +285,60 @@ class PDF {
             $pdf->Ln(8); // Add space
         }
         return $pdf;
+    }
+
+    /**
+     * Splits content into an array of paragraphs and elements.
+     * 
+     * @since 0.2.6
+     */
+    private static function split_paragraphs( $content ) {
+        // Create a DOMDocument object
+        $dom = new DOMDocument();
+
+        // Load HTML content, suppressing errors for malformed HTML
+        libxml_use_internal_errors(true);
+        $dom->loadHTML(mb_convert_encoding($content, 'HTML-ENTITIES', 'UTF-8'));
+        libxml_use_internal_errors(false);
+
+        // Initialize an array to hold paragraphs
+        $paragraphs = [];
+
+        // Get all elements inside the body
+        $body = $dom->getElementsByTagName('body')->item(0);
+        foreach ($body->childNodes as $node) {
+            self::process_node($node, $paragraphs);
+        }
+
+        // Remove empty paragraphs and normalize whitespace
+        $paragraphs = array_filter($paragraphs);
+        $paragraphs = array_map('trim', $paragraphs);
+
+        return $paragraphs;
+    }
+
+    /**
+     * Processes a single node.
+     * 
+     * @since 0.2.6
+     */
+    private static function process_node( $node, &$paragraphs ) {
+        // Handle text nodes
+        if ($node->nodeType === XML_TEXT_NODE && trim($node->nodeValue) !== '') {
+            $paragraphs[] = '<p>' . trim($node->nodeValue) . '</p>';
+        } elseif ($node->nodeType === XML_ELEMENT_NODE) {
+            $nodeName = strtolower($node->nodeName);
+
+            // Check if it's a block-level element or specific tags like <ul>, <ol>, <li>
+            if (in_array($nodeName, ['p', 'h1', 'h2', 'h3', 'h4', 'h5', 'h6', 'ul', 'ol', 'li'])) {
+                $paragraphs[] = $node->ownerDocument->saveHTML($node);
+            } elseif ($node->childNodes) {
+                // Recursively process child nodes
+                foreach ($node->childNodes as $childNode) {
+                    self::process_node($childNode, $paragraphs);
+                }
+            }
+        }
     }
     
     /**
@@ -310,8 +378,8 @@ class PDF {
         if ( isset( $pdf->file_url ) && isset( $pdf->file_path ) ) {
             $pdf->file_url = str_replace( ABSPATH, trailingslashit( site_url() ), $pdf->file_path );
             if ( $pdf->file_url && $pdf->file_url !== '' ) {
-                $link_text = $type ? __( 'Download ', 'buddyclients-free' ) . ucfirst( $type ) . __( ' PDF', 'buddyclients-free' ) : __( 'Download PDF', 'buddyclients-free' );
-                return '<a href="' . esc_url( $pdf->file_url ) . '" ' . __( 'download', 'buddyclients-free' ) . '><i class="fa-solid fa-download"></i> ' . $link_text . '</a>';
+                $link_text = $type ? __( 'Download ', 'buddyclients' ) . ucfirst( $type ) . __( ' PDF', 'buddyclients' ) : __( 'Download PDF', 'buddyclients' );
+                return '<a href="' . esc_url( $pdf->file_url ) . '" ' . __( 'download', 'buddyclients' ) . '><i class="fa-solid fa-download"></i> ' . $link_text . '</a>';
             }
         }
     }

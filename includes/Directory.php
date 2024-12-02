@@ -46,9 +46,11 @@ class Directory {
      * Constructs a Directory object.
      * 
      * @since 0.1.0
-     * @param string $path The path of the directory to be created.
+     * @param string $path  The subpath of the directory to be created.
+     *                      Default to '0' if no path defined.
      */
-    public function __construct( string $path ) {
+    public function __construct( $path = '0' ) {
+        $path = strval( $path );
 
         // Define full directory path
         $this->full_path = self::primary_dir( 'path' ) . $path;
