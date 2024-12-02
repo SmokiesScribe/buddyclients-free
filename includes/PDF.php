@@ -171,11 +171,14 @@ class PDF {
         $this->file_name = $this->generate_file_name();
         
         // Get directory path
-        $this->dir_path = ( new Directory( 'pdfs/' . $this->user_id ) )->full_path();
+        $directory = new Directory( 'pdfs/' . $this->user_id );
+        $this->dir_path = $directory->full_path();
         
         // Build the full path and url
         $this->file_path = trailingslashit( $this->dir_path ) . $this->file_name . '.pdf';
-        $this->file_url = str_replace( ABSPATH, trailingslashit( site_url() ), $this->file_path );
+
+        $dir_url = $directory->full_url();
+        $this->file_url = trailingslashit( $dir_url ) . $this->file_name . '.pdf';
     }
     
     /**
@@ -375,13 +378,9 @@ class PDF {
      */
     public static function download_link( $ID, $type = null ) {
         $pdf = self::get_pdf( $ID );
-        if ( isset( $pdf->file_url ) && isset( $pdf->file_path ) ) {
-            $pdf->file_url = str_replace( ABSPATH, trailingslashit( site_url() ), $pdf->file_path );
-            if ( $pdf->file_url && $pdf->file_url !== '' ) {
-                $link_text = $type ? __( 'Download ', 'buddyclients' ) . ucfirst( $type ) . __( ' PDF', 'buddyclients' ) : __( 'Download PDF', 'buddyclients' );
-                return '<a href="' . esc_url( $pdf->file_url ) . '" ' . __( 'download', 'buddyclients' ) . '><i class="fa-solid fa-download"></i> ' . $link_text . '</a>';
-            }
+        if ( isset( $pdf->file_url ) && ! empty( $pdf->file_url ) ) {
+            $link_text = $type ? __( 'Download ', 'buddyclients' ) . ucfirst( $type ) . __( ' PDF', 'buddyclients' ) : __( 'Download PDF', 'buddyclients' );
+            return '<a href="' . esc_url( $pdf->file_url ) . '" ' . __( 'download', 'buddyclients' ) . '><i class="fa-solid fa-download"></i> ' . $link_text . '</a>';
         }
-    }
-    
+    }    
 }

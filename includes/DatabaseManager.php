@@ -256,10 +256,10 @@ class DatabaseManager {
    
         // Compare fields from the expected structure with the current structure
         foreach ( $normalized_expected_structure as $field => $expected_type ) {
-            $normalized_expected_type = $this->normalize_column_type( $expected_type );
+            $normalized_expected_type = $this->buddyc_normalize_column_type( $expected_type );
    
             if ( isset( $normalized_current_structure[$field] ) ) {
-                $normalized_current_type = $this->normalize_column_type( $normalized_current_structure[$field] );
+                $normalized_current_type = $this->buddyc_normalize_column_type( $normalized_current_structure[$field] );
    
                 // Compare types
                 if ( $normalized_current_type !== $normalized_expected_type ) {
@@ -286,7 +286,7 @@ class DatabaseManager {
     * Normalize column types to ensure comparison is case-insensitive and ignores certain formatting differences.
     * Modify this function based on the specific formatting rules for your database.
     */
-   private function normalize_column_type( $type ) {
+   private function buddyc_normalize_column_type( $type ) {
         // Lowercase
         $type = strtolower( trim( $type ) );
 
@@ -401,7 +401,7 @@ class DatabaseManager {
             // Check if the query was successful
             if ( $result === false ) {
                 // Log error for debugging
-                error_log("Failed to alter table $his->table_name: " . $wpdb->last_error);
+                error_log("Failed to alter table $this->table_name: " . $wpdb->last_error);
                 return false; // Failure to update the table
             }
         }
@@ -438,7 +438,12 @@ class DatabaseManager {
         $sql .= ") $charset_collate;";
         
         // Include WordPress upgrade.php for dbDelta()
-        require_once( ABSPATH . 'wp-admin/includes/upgrade.php' );
+        $file = get_home_path() . 'wp-admin/includes/upgrade.php';
+        if ( file_exists( $file ) ) {
+            require_once( $file );
+        } else {
+            return;
+        }
         
         // Execute the SQL query using dbDelta()
         dbDelta( $sql );
