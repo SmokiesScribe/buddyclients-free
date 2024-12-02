@@ -88,6 +88,7 @@ class FileHandler {
             foreach ( $files as $field_id => $file_info ) {
                 $args['field_id'] = $field_id;
                 $file = new File;
+                
                 $file->upload_file( $file_info, $args );
                 $file_ids[] = $file->ID;
             }
@@ -179,12 +180,24 @@ class FileHandler {
         
         // Loop through files
         foreach ( $files as $file ) {
+
+            // Define properties to replace
+            $properties = ['dir_path', 'file_path', 'file_url'];
             
-            // Replace url
-            $file_args = [
-                'dir_path'  => str_replace( basename( $old_url ), basename( $new_url ), $file->dir_path ),
-                'file_path' => str_replace( basename( $old_url ), basename( $new_url ), $file->file_path )
-            ];
+            // Initialize array
+            $file_args = [];
+
+            //Replace old url with new url in property values
+            foreach ( $properties as $property ) {
+
+                // Get existing value
+                $old_value = $file->{$property};
+
+                if ( ! empty( $old_value ) ) {    
+                    // Replace site name                
+                    $file_args[$property] = str_replace( basename( $old_url ), basename( $new_url ), $old_value );
+                }
+            }
             
             // Update file object
             $updated = self::$object_handler->update_object_properties( $file->ID, $file_args );
@@ -336,9 +349,6 @@ class FileHandler {
             return;
         }
         
-        // Convert the file path to a url
-        $url = self::path_to_url( $file->file_path );
-        
         // Extract html args
         $classes    = $args['classes'] ?? '';
         $link       = $args['link'] ?? null;
@@ -348,25 +358,13 @@ class FileHandler {
         $image .= $link ? '<a href="' . $link . '">' : '';
         
         // Build the html image
-        $image .= '<img src="' . $url . '" class="' . $classes . '" alt="' . $alt . '">';
+        $image .= '<img src="' . $file->file_url . '" class="' . $classes . '" alt="' . $alt . '">';
         
         // Close link
         $image .= $link ? '</a>' : '';
         
         return $image;
     }
-     
-     /**
-      * Convert a full path to a url.
-      * 
-      * @since 0.1.0
-      * 
-      * @param  string  $file_path  The full file path.
-      */
-     public static function path_to_url( $file_path ) {
-         $subpath = str_replace( ABSPATH, '', $file_path );
-         return site_url( $subpath );
-     }
      
     /**
      * Generates download links from an array of files.
@@ -416,12 +414,9 @@ class FileHandler {
         // Make sure file is found
         if ( $file && $file->file_path ) {
             
-            // Convert the file path to a url
-            $url = self::path_to_url( $file->file_path );
-            
             // Check if the file exists on the server
             if ( ! file_exists( $file->file_path ) ) {
-                $download = '<div class="no-ms-message">' . __( 'File not found: ', 'buddyclients-free' ) . $file->file_name . '</div>';
+                $download = '<div class="no-ms-message">' . __( 'File not found: ', 'buddyclients' ) . $file->file_name . '</div>';
                 
             } else {
                 
@@ -429,8 +424,8 @@ class FileHandler {
                 $icon = buddyc_icon( 'download' );
                 
                 // Build download link
-                $text = $show_file_name ? __( 'Download File: ', 'buddyclients-free' ) . $file->file_name : __( 'Download File', 'buddyclients-free' );
-                $download = '<a class="ms-download-button" href="' . $url . '" download>' . $icon . ' ' . $text . '</a><br><br>';
+                $text = $show_file_name ? __( 'Download File: ', 'buddyclients' ) . $file->file_name : __( 'Download File', 'buddyclients' );
+                $download = '<a class="ms-download-button" href="' . $file->file_url . '" download>' . $icon . ' ' . $text . '</a><br><br>';
             }
         }
         

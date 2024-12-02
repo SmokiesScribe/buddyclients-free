@@ -70,6 +70,13 @@ class File {
      * @var string
      */
     public $file_path;
+
+    /**
+     * Full file url.
+     *
+     * @var string
+     */
+    public $file_url;
     
     /**
      * File name.
@@ -137,16 +144,11 @@ class File {
      * }
      */
     public function upload_file( $file_info, $args = [] ) {
-        
-        // Make sure it's not empty
-        if ( ! $file_info['tmp_name'] ) {
-            return false;
-        }
-        
-        // Check for upload errors
-        if ($file_info['error'] !== UPLOAD_ERR_OK) {
-            error_log('File upload error: ' . $file_info['name']);
-            return false;
+
+        // Validate file
+        $valid = $this->validate_file( $file_info );
+        if ( ! $valid ) {
+            return;
         }
         
         // Extract args
@@ -157,16 +159,21 @@ class File {
         
         // Build new file path
         $dir_key = $args['dir'] ?? $args['user_id'] ?? '';
-        $new_dir = (new Directory( $dir_key ) )->full_path();
+        $directory = new Directory( $dir_key );
+        $this->dir_path = $directory->full_path();
+
+        // Build dir url
+        $dir_url = $directory->full_url();
 
         // Set the upload directory
-        add_filter('upload_dir', function() use ( $new_dir ) {
+        $dir_path = $this->dir_path;
+        add_filter('upload_dir', function() use ( $dir_path, $dir_url ) {
             return [
-                'path'   => $new_dir,
-                'url'    => $new_dir,
+                'path'   => $this->dir_path,
+                'url'    => $dir_url,
                 'subdir' => '',
-                'basedir' => $new_dir,
-                'baseurl' => $new_dir,
+                'basedir' => $this->dir_path,
+                'baseurl' => $this->dir_path,
                 'error'  => false,
             ];
         });
@@ -175,7 +182,8 @@ class File {
         $uploaded_file = wp_handle_upload($file_info, ['test_form' => false]);
 
         // Reset the upload_dir filter after the upload
-        remove_filter('upload_dir', function() use ( $new_dir ) {});
+        $dir_path = $this->dir_path;
+        remove_filter('upload_dir', function() use ( $dir_path ) {});
 
         // Check for upload error
         if (isset($uploaded_file['error'])) {
@@ -185,6 +193,10 @@ class File {
 
         // Return file path
         $this->file_path = $uploaded_file['file']; // Get the file path from the uploaded file array
+        $this->file_url = $uploaded_file['url']; // Get the file url from the uploaded file array
+
+        echo 'uploaded file:';
+        var_dump($uploaded_file);
 
         // Format file name
         $this->file_name = self::format( $uploaded_file['file'] );
@@ -194,6 +206,30 @@ class File {
 
         // Return File ID
         return $this->ID;
+    }
+
+    /**
+     * Validates the file info.
+     * 
+     * @since 1.0.20
+     * 
+     * @param   array   $file_info  The array of file info.
+     * @return  bool    True if valid, false if not.
+     */
+    private function validate_file( $file_info ) {
+        // Make sure it's not empty
+        if ( ! $file_info['tmp_name'] ) {
+            return false;
+        }
+        
+        // Check for upload errors
+        if ($file_info['error'] !== UPLOAD_ERR_OK) {
+            error_log('File upload error: ' . $file_info['name']);
+            return false;
+        }
+
+        // Checks passed
+        return true;
     }
     
     /**
@@ -246,6 +282,25 @@ class File {
         
         // Return file path
         return $target_file;
+    }
+
+    /**
+     * Builds file url.
+     * 
+     * @since 1.0.20
+     * 
+     * @param   string  $dir_url    The full directory url.
+     * @param   string  $file_path  The full file path.
+     */
+    public function build_file_url( $dir_url, $file_path ) {
+        // Extract file name
+        $file_name = basename( $file_path );
+        
+        // Define target file path
+        $file_url = trailingslashit( $dir_url ) . $file_name;
+        
+        // Return file path
+        return $file_url;
     }
     
     /**
@@ -459,8 +514,13 @@ class File {
         $file_name = $file->file_name;
     
         // Build new file path
-        $new_dir = (new Directory( $new_path ))->full_path();
-        $target_file = $this->build_file_path( $new_dir, $file_name );
+        $directory = new Directory( $new_path );
+        $this->dir_path = $directory->full_path();
+        $target_file = $this->build_file_path( $this->dir_path, $file_name );
+
+        // Build new file url
+        $new_dir_url = $directory->full_url();
+        $target_url = $this->build_file_url( $new_dir_url, $file_name );
         
         // Initialize the WP_Filesystem
         global $wp_filesystem;
@@ -476,7 +536,7 @@ class File {
             // Check if successful
             if ( $moved ) {
                 // Update object
-                $updated = self::$object_handler->update_object_properties( $file_id, ['file_path' => $target_file] );
+                $updated = self::$object_handler->update_object_properties($file_id, ['file_path' => $target_file, 'file_url' => $target_url] );
                 return $updated; // Return the result of the update operation
             }
         }

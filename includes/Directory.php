@@ -27,6 +27,13 @@ class Directory {
      * @var string
      */
     private $full_path;
+
+    /**
+     * Full directory url.
+     *
+     * @var string
+     */
+    private $full_url;
     
     /**
      * True if site URL has changed.
@@ -42,9 +49,10 @@ class Directory {
      * @param string $path The path of the directory to be created.
      */
     public function __construct( string $path ) {
-        
+
         // Define full directory path
-        $this->full_path = self::primary_dir() . $path;
+        $this->full_path = self::primary_dir( 'path' ) . $path;
+        $this->full_url = self::primary_dir( 'url' ) . $path;
         
         // Create directory and associated files
         $this->create_dir();
@@ -58,12 +66,32 @@ class Directory {
      * Defines the primary directory for the plugin files.
      * 
      * @since 0.1.0
-     * @return string The path of the primary directory.
+     * 
+     * @param   string  The type of string to return.
+     *                  Accepts 'path' and 'url'. Defaults to 'path'.
+     * @return  string  The path or url of the plugin uploads directory.
      */
-    public static function primary_dir() {
+    public static function primary_dir( $type = 'path' ) {
          
         // Get WordPress upload base directory
-        $upload_dir = wp_upload_dir()['basedir'];
+        $wp_upload_dir = $upload_dir = wp_upload_dir();
+        if ( ! is_array( $wp_upload_dir ) ) {
+            return;
+        }
+
+        // Get base path or url
+        switch ( $type ) {
+            case 'path':
+                $upload_dir = $wp_upload_dir['basedir'] ?? null;
+                break;
+            case 'url':
+                $upload_dir = $wp_upload_dir['baseurl'] ?? null;
+                break;
+        }
+
+        if ( ! $upload_dir ) {
+            return;
+        }
         
         // Define plugin directory within upload directory
         $upload_dir = trailingslashit($upload_dir) . 'buddyc_files/' ;
@@ -194,7 +222,7 @@ class Directory {
     private function htaccess() {
         
         // Define the path to the .htaccess file
-        $htaccess_file = self::primary_dir() . '/.htaccess';
+        $htaccess_file = self::primary_dir( 'path' ) . '/.htaccess';
     
         // Check if the .htaccess file exists or needs updating
         if ( ! file_exists( $htaccess_file ) || $this->new_site_url ) {
@@ -211,7 +239,7 @@ class Directory {
             $htaccess_content .= "# Custom error page for 403 (Access Denied) error - redirect to homepage\n";
             $htaccess_content .= "ErrorDocument 403 " . site_url() . "/\n";
 
-            $file_dir = self::primary_dir();
+            $file_dir = self::primary_dir( 'path' );
             $this->create_file( $file_dir, '/.htaccess', $htaccess_content );
             
             // Set the current site URL as the option value for future checks
@@ -228,4 +256,13 @@ class Directory {
      public function full_path() {
          return $this->full_path;
      }
+
+    /**
+     * Gets full directory url.
+     * 
+     * @since 1.0.20
+     */
+    public function full_url() {
+        return $this->full_url;
+    }
 }
