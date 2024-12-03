@@ -47,16 +47,16 @@ add_action( 'buddyc_nav_tabs', 'buddyc_free_nav_tabs', 1, 10 );
  * @ignore
  */
 function buddyc_free_upgrade_content() {
-    ob_start();
+    $content = '';
     
     // Open container
-    echo '<div class="buddyc-upgrade-info">';
+    $content .= '<div class="buddyc-upgrade-info">';
     
     // Upgrade heading
-    echo __( '<h1>Upgrade BuddyClients to accept payments, manage projects, and <strong>grow your business</strong>.</h1>', 'buddyclients-free' );
+    $content .= __( '<h1>Upgrade BuddyClients to accept payments, manage projects, and <strong>grow your business</strong>.</h1>', 'buddyclients-free' );
     
     // Open options container
-    echo '<div class="buddyc-upgrade-options">';
+    $content .= '<div class="buddyc-upgrade-options">';
     
     // Define options
     $options = [
@@ -92,29 +92,29 @@ function buddyc_free_upgrade_content() {
     // BuddyClients Options
     foreach ( $options as $key => $data ) {
     
-        echo '<div class="buddyc-upgrade-option">';
-        echo '<div>';
-        echo '<h3>BuddyClients ' . $data['name'] . '</h3>';
-        echo '<p>' . $data['description'] . '</p>';
+        $content .= '<div class="buddyc-upgrade-option">';
+        $content .= '<div>';
+        $content .= '<h3>BuddyClients ' . $data['name'] . '</h3>';
+        $content .= '<p>' . $data['description'] . '</p>';
         
         // Features List
-        echo '<ul>';
+        $content .= '<ul>';
         foreach ( $data['features'] as $feature ) {
-            echo '<li><li><i class="feature-check bb-icon-check bb-icon-rf"></i>' . $feature . '</li>';
+            $content .= '<li><li><i class="feature-check bb-icon-check bb-icon-rf"></i>' . $feature . '</li>';
         }
-        echo '</ul>';
-        echo '</div>';
+        $content .= '</ul>';
+        $content .= '</div>';
 
-        echo '<a href="' . buddyc_upgrade_url() . '" class="buy-now" target="_blank">' . __( 'Learn More', 'buddyclients-free' ) . '</a>';
-        echo '</div>';
+        $content .= '<a href="' . buddyc_upgrade_url() . '" class="buy-now" target="_blank">' . __( 'Learn More', 'buddyclients-free' ) . '</a>';
+        $content .= '</div>';
         
     }
     
     // Close options container
-    echo '</div>';
+    $content .= '</div>';
     
     // Close container
-    echo '</div>';
-    
-    echo ob_get_clean();
+    $content .= '</div>';
+
+    echo wp_kses_post( $content );
 }
