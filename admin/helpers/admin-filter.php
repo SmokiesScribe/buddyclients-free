@@ -27,7 +27,7 @@ function buddyc_admin_filter_submission() {
                 continue;
             }
             // Add to params
-            $url_params[$key] = $value;
+            $url_params[$key] = sanitize_text_field( $value );
         }
 
         // Initialize param manager with current url

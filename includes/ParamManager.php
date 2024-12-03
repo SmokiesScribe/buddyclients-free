@@ -99,9 +99,19 @@ class ParamManager {
     public function add_param( $param, $value, $url = null ) {
         $url = $url ?? $this->url;
 
+        // Validate and sanitize the parameter name
+        $param = sanitize_key( $param );
+
+        // Sanitize the parameter value
+        if ( is_array( $value ) ) {
+            $value = array_map( 'sanitize_text_field', $value );
+        } else {
+            $value = sanitize_text_field( $value );
+        }
+
         // Parse existing query parameters from the URL
         $parsed_url = wp_parse_url( $url );
-        $query_params = array();
+        $query_params = [];
 
         // Check if 'query' exists and parse it
         if ( isset( $parsed_url['query'] ) ) {
@@ -119,21 +129,21 @@ class ParamManager {
 
         // Add the new parameter
         $query_params[$param] = $value;
-        
+
         // Rebuild the query string
         $new_query_string = http_build_query( $query_params );
-        
+
         // Rebuild the URL with updated query parameters
         $url = ( isset( $parsed_url['scheme'] ) ? $parsed_url['scheme'] . '://' : '' )
-                   . ( isset( $parsed_url['host'] ) ? $parsed_url['host'] : '' )
-                   . ( isset( $parsed_url['path'] ) ? $parsed_url['path'] : '' )
-                   . '?' . $new_query_string;
+                . ( isset( $parsed_url['host'] ) ? $parsed_url['host'] : '' )
+                . ( isset( $parsed_url['path'] ) ? $parsed_url['path'] : '' )
+                . '?' . $new_query_string;
 
         // Add hash fragment if it existed in the original URL
         if ( isset( $parsed_url['fragment'] ) ) {
             $url .= '#' . $parsed_url['fragment'];
         }
-        
+
         return $url;
     }
     

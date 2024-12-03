@@ -123,8 +123,9 @@ class FormSubmission {
      * 
      * @since 1.0.17
      */
-    private function get_nonce_field() {
+    private function get_nonce_field() {        
         foreach ( array_keys( $_POST ) as $key ) {
+            $key = sanitize_text_field( $key );
             if ( strpos( $key, $this->nonce_prefix ) === 0 && strpos( $key, $this->nonce_suffix ) === strlen( $key ) - strlen( $this->nonce_suffix ) ) {
                 return $key;
             }
@@ -205,8 +206,8 @@ class FormSubmission {
         $content = '<div style="text-align: center">';
         
         // Define failure content
-        $content .= '<h2>' . __( 'Uh oh, something went wrong.', 'buddyclients-free' ) . '</h2>';
-        $content .= '<p>' . __( 'Please try again later.', 'buddyclients-free' ) . '</p>';
+        $content .= '<h2>' . __( 'Uh oh, something went wrong.', 'buddyclients' ) . '</h2>';
+        $content .= '<p>' . __( 'Please try again later.', 'buddyclients' ) . '</p>';
         
         $content .= '</div>';
         
