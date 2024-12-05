@@ -4,6 +4,8 @@ if ( ! defined( 'ABSPATH' ) ) exit; // Exit if accessed directly
 
 use BuddyClients\Admin\PageManager;
 use BuddyClients\Components\Email\EmailTemplateManager;
+use BuddyClients\Config\LicenseHandler;
+use BuddyClients\Config\ReferencePosts;
 
 /**
  * Activation methods.
@@ -49,8 +51,10 @@ class Activator {
      * @since 0.1.0
      */
     public static function activate_components() {
-        $license_handler = new LicenseHandler;
-        $license_handler->update_license_and_components();
+        if ( class_exists( LicenseHandler::class ) ) {
+            $license_handler = new LicenseHandler;
+            $license_handler->update_license_and_components();
+        }
     }
     
     /**
