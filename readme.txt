@@ -1,5 +1,6 @@
 === BuddyClients Free ===
 Contributors: victoriagrif7
+Tags: buddypress-integration, service-business, business-tools, team-management, client-management
 Requires at least: 4.9.1
 Tested up to: 6.6.2
 Requires PHP: 7.2
