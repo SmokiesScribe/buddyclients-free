@@ -48,6 +48,15 @@
     margin-bottom: 10px;
 }
 
+.buddyc-admin-col-head-status {
+    width: 10%;
+}
+
+/* Update Booking Status Icon */
+.buddyc-update-booking-icon {
+    margin-left: 5px;
+}
+
 /* Freelancer Mode Message */
 .buddyc-freelancer-mode-message {
     margin: 40px;

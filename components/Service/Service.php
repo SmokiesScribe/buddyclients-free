@@ -244,29 +244,6 @@ class Service {
             $valid = false;
         }
         
-        // Check for paid service without stripe
-        if ( $this->rate_value > 0 ) {
-            // Allow skip payment
-            if ( buddyc_get_setting( 'booking', 'skip_payment' ) !== 'yes' ) {
-                // Check for Stripe component
-                if ( ! buddyc_component_exists( 'Stripe' ) ) {
-                    $error[] = sprintf(
-                        '<a href="%s" target="_blank">%s</a>',
-                        buddyc_upgrade_url(),
-                        __('Upgrade BuddyClients', 'buddyclients-free') . ' ' . __('to offer paid services.', 'buddyclients-free')
-                    );
-                    $valid = false;
-                } else if ( ! buddyc_component_enabled( 'Stripe' ) ) {
-                    $error[] = sprintf(
-                        '<a href="%s">%s</a>',
-                        buddyc_enable_component_url(),
-                        __('Enable the Stripe component', 'buddyclients-free') . ' ' . __('to offer paid services.', 'buddyclients-free')
-                    );
-                    $valid = false;
-                }
-            }
-        }
-        
         // Generate error string
         $error_string = implode('<br>', $error);
         $error_message = buddyc_admin_icon('error') . ' ' . $error_string;
@@ -283,6 +260,5 @@ class Service {
         // Set meta
         update_post_meta( $this->ID, 'valid', $valid_value );
         update_post_meta( $this->ID, 'visible', $visible_value );
-         
      }
 }

@@ -376,7 +376,7 @@ class Email {
          * 
          * @param   array   $constants      An associative array of variable keys and values.
          */
-        $constants = apply_filters( 'buddyc_email_constants' $constants );
+        $constants = apply_filters( 'buddyc_email_constants', $constants );
 
         return $constants;
     }

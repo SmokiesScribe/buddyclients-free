@@ -62,6 +62,13 @@ class Confirmation {
      * @var bool
      */
     private $free;
+
+    /**
+     * Whether it's an unpaid checkout.
+     * 
+     * @var bool
+     */
+    private $unpaid;
     
     /**
      * The status of the checkout.
@@ -132,6 +139,10 @@ class Confirmation {
             // Check if free
             $free = buddyc_get_param( 'free' );
             $this->free = $free === 'true';
+
+            // Check if unpaid
+            $unpaid = buddyc_get_param( 'unpaid' );
+            $this->unpaid = $unpaid === 'true';
         }
     }
     
@@ -307,9 +318,13 @@ class Confirmation {
         $has_briefs = $this->has_briefs();
         
         // Free or successful payment
-        $content .= $this->free 
-            ? '<p>' . __('Your services have been booked.', 'buddyclients-free') . '</p>' 
-            : '<p>' . __('Your payment has been processed, and your services have been booked.', 'buddyclients-free') . '</p>';
+        if ( $this->free  ) {
+            $content .= '<p>' . __('Your services have been booked.', 'buddyclients-free') . '</p>';
+        } else if ( $this->unpaid ) {
+            $content .= '<p>' . __('We will be in touch to arrange payment.', 'buddyclients-free') . '</p>';
+        } else {
+            $content .= '<p>' . __('Your payment has been processed, and your services have been booked.', 'buddyclients-free') . '</p>';
+        }
         
         // Project exists
         // @TODO Currently, success functions called by Stripe endpoint, which means project is not available here for paid checkouts

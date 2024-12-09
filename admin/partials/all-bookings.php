@@ -30,7 +30,7 @@ function buddyc_dashboard_content() {
     // Define columns
     $columns = [
         'date'          => ['created_at' => 'date'],
-        'status'        => ['status' => 'icons'],
+        'status'        => ['status' => 'booking_intent_status'],
         'services'      => ['service_names' => 'service_names_link'],
         'client_id'     => ['client_id' => 'user_link'],
         'client_email'  => ['client_email' => null],

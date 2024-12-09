@@ -125,6 +125,11 @@ function buddycGenerateStrongPassword(length = 12) {
  * @param {HTMLElement} messageContainer - The container to display the copy message.
  */
 function buddycCopyPasswordToClipboard(text, messageContainer) {
+  // Check if Clipboard API is supported
+  if (!navigator.clipboard || !navigator.clipboard.writeText) {
+    return;
+  }
+
   navigator.clipboard.writeText(text)
     .then(() => {
       messageContainer.textContent = 'Password copied to clipboard!';

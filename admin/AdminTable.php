@@ -164,6 +164,8 @@ class AdminTable {
             'i' => [ 'class' => [], 'style' => [] ],
             'span' => [ 'id' => [], 'class' => [] ],
             'button'   => ['onclick' => [], 'type' => [], 'class' => [], 'style' => []],
+            'th'    => ['class' => []],
+            'span'    => ['class' => []]
         ];        
         return array_merge( $form_tags, $additional_tags );
     }
@@ -320,7 +322,7 @@ class AdminTable {
         
         // Table Headings
         foreach ( $this->headings as $heading ) {
-            $content .= '<th scope="col">' . esc_html( $heading ) . '</th>';
+            $content .= '<th class="buddyc-admin-col-head-' . strtolower( $heading ) . '" scope="col">' . esc_html( $heading ) . '</th>';
         }
         
         $content .= '</tr></thead>';
@@ -332,7 +334,7 @@ class AdminTable {
             $content .= '<tr>';
             
             foreach ( $this->build_columns( $item ) as $key => $value ) {
-                $content .= '<td class="column-' . esc_attr( $key ) . '">';
+                $content .= '<td class="buddyc-admin-column-' . esc_attr( $key ) . '">';
                 if ( ! empty( $value ) ) {
                     $content .= $value;
                 }

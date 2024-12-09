@@ -49,11 +49,4 @@ document.addEventListener("DOMContentLoaded", function() {
             buddycHandleEmailInputChange();
         }
     });
-    
-    // Function to validate email address
-    function buddycIsValidEmailAddress(email) {
-        // Regular expression for email validation
-        const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
-        return emailRegex.test(email);
-    }
 });

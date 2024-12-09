@@ -344,10 +344,49 @@ class AdminTableItem extends AdminTable {
             'cancellation_requested'    => 'x',
             'canceled'                  => 'x',
             'in_progress'               => 'ready',
+            'unpaid'                    => 'ready',
         ];
         
         // Return icon if match or value if no matching array key
         return isset($icons[$value]) ? buddyc_admin_icon($icons[$value]) . ' ' . self::uc_format( $value ) : self::uc_format( $value );
+    }
+
+    /**
+     * Generates status for BookingIntent.
+     * 
+     * @since 1.0.20
+     */
+    protected static function booking_intent_status( $property, $value, $item_id ) {
+        $icon = self::icons( $property, $value );
+        $update = self::update_booking_intent_status( $property, $value, $item_id );
+        return $icon . $update;        
+    }
+
+    /**
+     * Generates a button to update the status of a BookingIntent.
+     * 
+     * @since 1.0.20
+     */
+    protected static function update_booking_intent_status( $property, $value, $item_id ) {
+        $values = [
+            'unpaid'    => 'succeeded',
+            'succeeded' => 'unpaid'
+        ];
+
+        if ( ! isset( $values[$value] ) ) {
+            return '';
+        }
+
+        // Build delete url
+        $update_url = admin_url( 'admin.php?page=buddyc-dashboard&action=update_booking&booking_id=' . $item_id . '&booking_property=status&booking_value=' . $values[$value] );
+
+        // Define confirmation message
+        $message = __( 'Are you sure you want to update this booking to ' . strtoupper( $values[$value] ) . '?', 'buddyclients-free' );
+
+        // Output button
+        $update_button = '<span class="buddyc-update-booking-icon"><a href="#" onclick="return buddycConfirmAction(\'' . esc_url( $update_url ) . '\', \'' . esc_js( $message ) . '\');" style="font-size: 16px"><i class="fa-solid fa-pen-to-square"></i></a></span>';
+
+        return $update_button;     
     }
     
     /**
@@ -381,7 +420,7 @@ class AdminTableItem extends AdminTable {
         $message = __( 'Are you sure you want to delete this booking? This action cannot be undone.', 'buddyclients-free' );
 
         // Output button
-        $delete_button = '<a href="#" onclick="return buddycConfirmAction(\'' . esc_url( $delete_url ) . '\', \'' . esc_js( $message ) . '\');" style="font-size: 16px"><i class="fa-solid fa-trash"></i></a>';
+        $delete_button = '<span class="buddyc-update-booking-icon"><a href="#" onclick="return buddycConfirmAction(\'' . esc_url( $delete_url ) . '\', \'' . esc_js( $message ) . '\');" style="font-size: 16px"><i class="fa-solid fa-trash"></i></a></span>';
 
         return $delete_button;
     }
@@ -528,7 +567,7 @@ class AdminTableItem extends AdminTable {
      */
     protected static function date( $property, $value ) {
         if ( $value && $value !== '0000-00-00 00:00:00') {
-            return gmdate( 'F j, Y', strtotime( $value ) );
+            return gmdate( 'M j, Y', strtotime( $value ) );
         }
     }
 }

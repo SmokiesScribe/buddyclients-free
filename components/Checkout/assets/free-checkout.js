@@ -1,4 +1,4 @@
-import { buddycHandleCreateAccount } from './create-account.js';
+import { buddycHandleCreateAccount } from './js/create-account.js';
 
 /**
  * Handles a free checkout.
@@ -6,18 +6,32 @@ import { buddycHandleCreateAccount } from './create-account.js';
  * @since 0.4.3
  */
 document.addEventListener("DOMContentLoaded", function () {
+    let submitButton = null;
 
     // Get the form and button elements
     const freeCheckoutForm = document.getElementById('buddyc-free-checkout-form');
-    const submitButton = document.getElementById('free-checkout-submit');
+    const freeSubmitButton = document.getElementById('free-checkout-submit');
+
+    const skipCheckoutForm = document.getElementById('buddyc-skip-payment-checkout-form');
+    const skipSubmitButton = document.getElementById('skip-payment-checkout-submit');
     
     // Ensure the form exists before proceeding
-    if (!freeCheckoutForm) {
+    if (!freeCheckoutForm && !skipCheckoutForm) {
         return;
+    }
+
+    // Define form
+    const form = freeCheckoutForm ? freeCheckoutForm : skipCheckoutForm;
+
+    // Define submit button by which form exists
+    if ( freeCheckoutForm ) {
+        submitButton = freeSubmitButton;
+    } else if ( skipCheckoutForm ) {
+        submitButton = skipSubmitButton;
     }
     
     // Get booking intent id from form
-    const bookingIntentId = freeCheckoutForm.querySelector('#booking_intent_id').value;
+    const bookingIntentId = form.querySelector('#booking_intent_id').value;
 
     // Add click event listener to the submit button
     submitButton.addEventListener("click", async (e) => {
@@ -35,7 +49,7 @@ document.addEventListener("DOMContentLoaded", function () {
             if (isSuccess) {
                 
                 // Allow default submission of form
-                freeCheckoutForm.submit();
+                form.submit();
             } else {
                 console.log("Account creation failed. Submission halted.");
             }

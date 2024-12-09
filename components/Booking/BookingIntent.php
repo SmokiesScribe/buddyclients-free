@@ -530,6 +530,8 @@ class BookingIntent {
         self::init_object_handler();
         // Update properties
         $updated = self::$object_handler->update_object_properties( $ID, [$property => $value] );
+
+        return $updated;
     }
     
     /**

@@ -72,6 +72,9 @@ class Checkout {
      */
     public function __construct() {
         @session_start();
+
+        // Check if Stripe is enabled
+        $this->stripe_enabled = buddyc_component_enabled( 'Stripe' );
         
         // Skip payment setting
         $this->skip_payment = buddyc_get_setting( 'booking', 'skip_payment' ) === 'yes';
@@ -288,16 +291,16 @@ class Checkout {
             $content .= '</div>';
         
         // Skip payment
-        } else if ( $this->skip_payment ) {
+        } else if ( ! $this->stripe_enabled ) {
             
             $content .= '<div style="margin: 20px">';
             
             // Skip payment header
             $content .= '<h4>' . __( 'Confirm Your Booking', 'buddyclients-free' ) . '</h4>';
-            $content .= '<p>' . __( 'We will be in touch to arrange your payment.', 'buddyclients-free' ) . '</p>';
+            $content .= '<p>' . __( 'Please use the button below to confirm. We will be in touch to arrange payment.', 'buddyclients-free' ) . '</p>';
             
             // Free booking form
-            $content .= $this->free_form();
+            $content .= $this->skip_payment_form();
             
             $content .= '</div>';
             
@@ -502,6 +505,24 @@ class Checkout {
         $args = [
             'key'                   => 'free-checkout',
             'submission_class'      => __NAMESPACE__ . '\FreeCheckout',
+            'fields_callback'       => [$this, 'free_form_fields'],
+            'submit_text'           => __( 'Complete Checkout', 'buddyclients-free' )
+        ];
+        
+        return (new Form( $args ) )->build();
+    }
+
+    /**
+     * Displays the skip paymnet booking form.
+     * 
+     * @since 0.1.0
+     */
+    private function skip_payment_form() {
+
+        // Define form args
+        $args = [
+            'key'                   => 'skip-payment-checkout',
+            'submission_class'      => __NAMESPACE__ . '\SkipPaymentCheckout',
             'fields_callback'       => [$this, 'free_form_fields'],
             'submit_text'           => __( 'Complete Checkout', 'buddyclients-free' )
         ];
