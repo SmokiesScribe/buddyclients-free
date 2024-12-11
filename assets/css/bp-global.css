@@ -9,7 +9,7 @@
     -webkit-appearance: none; /* Remove default checkbox appearance */
     -moz-appearance: none;
     appearance: none;
-    display: inline-block;
+    display: inline-block !important;
     opacity: 1 !important;
     width: 16px !important; /* Adjust size as needed */
     height: 16px;
