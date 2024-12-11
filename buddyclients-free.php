@@ -60,7 +60,7 @@ function buddyc_installed_notice() {
     }
 
     // Disable BuddyClients Free message.
-    if ( function_exists( 'buddyclients-free' ) ) {
+    if ( function_exists( 'buddyclients' ) ) {
         $plugins_url = is_network_admin() ? network_admin_url( 'plugins.php' ) : admin_url( 'plugins.php' );
 		$allowed_html = ['a' => ['href' => [], 'target' => []]];
         ?>
