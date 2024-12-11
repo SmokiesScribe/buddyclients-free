@@ -426,6 +426,11 @@ class DatabaseManager {
         if ( empty( $this->table_structure ) ) {
             return;
         }
+
+        // Make sure home path function exists
+        if ( ! function_exists( 'get_home_path' ) ) {
+            return;
+        }
         
         // Construct the CREATE TABLE SQL query
         $sql = "CREATE TABLE {$this->table_name} (";

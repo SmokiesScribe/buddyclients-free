@@ -64,6 +64,10 @@ class XprofileManager {
     public static function all_xprofile() {
         // Initialize
         $fields_array = [];
+
+        if ( ! function_exists( 'bp_profile_get_field_groups' ) ) {
+            return $fields_array;
+        }
         
         // Get all xprofile data
         $xprofile_groups = bp_profile_get_field_groups();

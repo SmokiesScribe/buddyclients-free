@@ -40,7 +40,7 @@ class FileHandler {
      */
     private static function init_object_handler() {
         if ( ! self::$object_handler ) {
-            self::$object_handler = new ObjectHandler( __NAMESPACE__ . '/File' );
+            self::$object_handler = new ObjectHandler( __NAMESPACE__ . '\File' );
         }
     }
 

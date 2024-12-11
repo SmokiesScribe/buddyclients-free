@@ -157,6 +157,10 @@ class XprofileField {
      * @since 0.1.0
      */
     private function get_first_field_group_id() {
+        if ( ! function_exists( 'bp_profile_get_field_groups' ) ) {
+            return null;
+        }
+
         $field_groups = bp_profile_get_field_groups();
 
         // Check if field groups are available
@@ -213,6 +217,11 @@ class XprofileField {
         
         // Exit if field exists
         if ( $this->field ) {
+            return;
+        }
+
+        // Exit if function not available
+        if ( ! function_exists( 'xprofile_insert_field' ) ) {
             return;
         }
         

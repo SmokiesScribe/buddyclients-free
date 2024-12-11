@@ -52,6 +52,10 @@ class Directory {
     public function __construct( $path = '0' ) {
         $path = strval( $path );
 
+        if ( ! function_exists( 'WP_Filesystem' ) ) {
+            return;
+        }
+
         // Define full directory path
         $this->full_path = self::primary_dir( 'path' ) . $path;
         $this->full_url = self::primary_dir( 'url' ) . $path;
