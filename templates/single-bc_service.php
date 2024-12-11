@@ -20,7 +20,7 @@ if ( ! defined( 'ABSPATH' ) ) exit; // Exit if accessed directly
     
     // Breadcrumbs
     $sep = '<i class="fa-solid fa-angle-right" style="margin: 0 8px; font-size: 12px;"></i>';
-    $services_link = '<a href="' . esc_url(site_url('/services/')) . '">' . esc_html__('Services', 'buddyclients') . '</a>';
+    $services_link = '<a href="' . esc_url(site_url('/services/')) . '">' . esc_html__('Services', 'buddyclients-free') . '</a>';
     $service_type = get_the_title(get_post_meta($post_id, 'service_type', true));
     $service_content .= '<p class="buddyc-single-brief-breadcrumbs">' . $services_link . $sep . esc_html($service_type) . $sep . esc_html(get_the_title()) . '</p>';
     
@@ -39,22 +39,22 @@ if ( ! defined( 'ABSPATH' ) ) exit; // Exit if accessed directly
     
     // Build the rate type label
     if ($rate_type === 'flat') {
-        $rate_type_label = esc_html__('flat', 'buddyclients');
+        $rate_type_label = esc_html__('flat', 'buddyclients-free');
     } else if ($rate_type) {
-        $rate_type_label = esc_html__('per', 'buddyclients') . ' ' . strtolower(esc_html(get_post_meta($rate_type, 'singular', true)));
+        $rate_type_label = esc_html__('per', 'buddyclients-free') . ' ' . strtolower(esc_html(get_post_meta($rate_type, 'singular', true)));
     } else {
         $rate_type_label = '';
     }
     
     // Define the rate label
-    $rate_label = $adjustments ? esc_html__('Starting At', 'buddyclients') : esc_html__('Rate', 'buddyclients');
+    $rate_label = $adjustments ? esc_html__('Starting At', 'buddyclients-free') : esc_html__('Rate', 'buddyclients-free');
     
     // Display button if not hidden from form
     if (!$hide_from_booking_form) {
         $booking_page_id = buddyc_get_setting('pages', 'booking_page');
         if ($booking_page_id) {
             $booking_page_url = get_the_permalink($booking_page_id);
-            $booking_form_btn = '<a href="' . esc_url($booking_page_url) . '"><button class="booking-form-btn">' . esc_html__('Book Now', 'buddyclients') . '</button></a>';
+            $booking_form_btn = '<a href="' . esc_url($booking_page_url) . '"><button class="booking-form-btn">' . esc_html__('Book Now', 'buddyclients-free') . '</button></a>';
         }
     }
     
@@ -71,14 +71,14 @@ if ( ! defined( 'ABSPATH' ) ) exit; // Exit if accessed directly
     // Details
     $service_content .= '<div class="buddyc-service-details">';
     
-    $dependency_link = $dependency_link ? '<p>' . esc_html__('This service requires', 'buddyclients') . ' ' . $dependency_link . '</p>' : '';
+    $dependency_link = $dependency_link ? '<p>' . esc_html__('This service requires', 'buddyclients-free') . ' ' . $dependency_link . '</p>' : '';
     $rate_line = $rate_value ? '<p><b>' . esc_html($rate_label) . '</b>: $' . esc_html($rate_value) . ' ' . esc_html($rate_type_label) . '</p>' : '';
     
     $service_content .= $rate_line;
     $service_content .= $dependency_link;
     
     $services_archive = esc_url(site_url('/services/'));
-    $all_services_button = '<a href="' . $services_archive . '" class="all-services-btn">' . esc_html__('All Services', 'buddyclients') . '</a>';
+    $all_services_button = '<a href="' . $services_archive . '" class="all-services-btn">' . esc_html__('All Services', 'buddyclients-free') . '</a>';
     
     // Append the additional content to the post content
     $service_content .= $all_services_button;
@@ -127,9 +127,9 @@ if ( ! defined( 'ABSPATH' ) ) exit; // Exit if accessed directly
                     
                     // Add comma before "or" when there are more than two items
                     if ($count > 2 && $i == $count - 2) {
-                        $dependency_list .= ', ' . esc_html__('or', 'buddyclients') . ' ';
+                        $dependency_list .= ', ' . esc_html__('or', 'buddyclients-free') . ' ';
                     } elseif ($i == $count - 2) {
-                        $dependency_list .= ' ' . esc_html__('or', 'buddyclients') . ' ';
+                        $dependency_list .= ' ' . esc_html__('or', 'buddyclients-free') . ' ';
                     } elseif ($i < $count - 1) {
                         $dependency_list .= ', ';
                     }

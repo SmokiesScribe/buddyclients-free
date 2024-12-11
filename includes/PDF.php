@@ -379,8 +379,8 @@ class PDF {
     public static function download_link( $ID, $type = null ) {
         $pdf = self::get_pdf( $ID );
         if ( isset( $pdf->file_url ) && ! empty( $pdf->file_url ) ) {
-            $link_text = $type ? __( 'Download ', 'buddyclients' ) . ucfirst( $type ) . __( ' PDF', 'buddyclients' ) : __( 'Download PDF', 'buddyclients' );
-            return '<a href="' . esc_url( $pdf->file_url ) . '" ' . __( 'download', 'buddyclients' ) . '><i class="fa-solid fa-download"></i> ' . $link_text . '</a>';
+            $link_text = $type ? __( 'Download ', 'buddyclients-free' ) . ucfirst( $type ) . __( ' PDF', 'buddyclients-free' ) : __( 'Download PDF', 'buddyclients-free' );
+            return '<a href="' . esc_url( $pdf->file_url ) . '" ' . __( 'download', 'buddyclients-free' ) . '><i class="fa-solid fa-download"></i> ' . $link_text . '</a>';
         }
     }    
 }
