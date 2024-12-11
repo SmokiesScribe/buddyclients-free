@@ -217,7 +217,7 @@ class AssetManager {
 		if ( ! wp_script_is( $handle, 'enqueued' ) ) {
 
 			// Register script
-			wp_register_script( $handle, $file_url, array(), BUDDYC_PLUGIN_VERSION, true );
+			wp_register_script( $handle, $file_url, array( 'jquery' ), BUDDYC_PLUGIN_VERSION, true );
 
 			// Enqueue script
 			wp_enqueue_script( $handle );
