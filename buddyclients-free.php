@@ -62,12 +62,14 @@ function buddyc_installed_notice() {
     // Disable BuddyClients Free message.
     if ( function_exists( 'buddyclients-free' ) ) {
         $plugins_url = is_network_admin() ? network_admin_url( 'plugins.php' ) : admin_url( 'plugins.php' );
+		$allowed_html = ['a' => ['href' => [], 'target' => []]];
         ?>
 
         <div id="message" class="error notice">
             <p><strong><?php esc_html_e( 'BuddyClients Error', 'buddyclients-free' ); ?></strong></p>
             <p><?php esc_html_e( 'Multiple versions of the BuddyClients Platform are installed.', 'buddyclients-free' ); ?></p>
-            <p><?php printf( wp_kses_post( __( 'Please <a href="%s">deactivate BuddyClients Free</a> to continue.', 'buddyclients-free' ) ), $plugins_url ); ?></p>
+			<?php /* translators: %s: link to deactivate BuddyClients Free */ ?>
+			<p><?php printf( wp_kses( __( 'Please <a href="%s">deactivate BuddyClients Free</a> to continue.', 'buddyclients-free' ), $allowed_html ), esc_url( $plugins_url ) ); ?></p>
         </div>
 
         <?php
@@ -95,15 +97,16 @@ function buddyc_missing_bp_notice_free() {
 
 	// Disable BuddyPress message.
 	if ( ! function_exists( 'buddypress' ) ) {
-		$bp_plugins_url = is_network_admin() ? network_admin_url( 'plugins.php' ) : admin_url( 'plugins.php' );
-		$link_plugins   = sprintf( "<a href='%s'>%s</a>", $bp_plugins_url, __( 'deactivate', 'buddyclients-free' ) );
 		$bp_install     = admin_url( '/plugin-install.php?s=buddypress&tab=search&type=term' );
+		$bb_install		= 'https://www.buddyboss.com/website-platform/';
+		$allowed_html	= ['a' => ['href' => [], 'target' => []]];	
 		?>
 
 		<div id="message" class="error notice">
 			<p><strong><?php esc_html_e( 'BuddyPress is missing.', 'buddyclients-free' ); ?></strong></p>
-			<p><?php printf( esc_html__( 'The BuddyClients Platform can\'t work without BuddyPress.', 'buddyclients-free' ), $link_plugins ); ?></p>
-			<p><?php printf( wp_kses_post( __( 'Install <a href="%s">BuddyPress</a> or <a href="%s" target="_blank">BuddyBoss</a>.', 'buddyclients-free' ), $bp_install, 'https://www.buddyboss.com/website-platform/' ) ); ?></p>
+			<p><?php esc_html_e( 'The BuddyClients Platform can\'t work without BuddyPress.', 'buddyclients-free' ); ?></p>
+			<?php /* translators: %1$s: link to install BuddyPress; %2$s: link to install BuddyBoss */ ?>
+			<p><?php printf( wp_kses( __( 'Install <a href="%1$s">BuddyPress</a> or <a href="%2$s" target="_blank">BuddyBoss</a>.', 'buddyclients-free' ), $allowed_html ), esc_url( $bp_install ), esc_url( $bb_install ) ); ?></p>
 		</div>
 
 		<?php
@@ -129,16 +132,15 @@ function buddyc_groups_disabled_notice_free() {
 	// Groups disabled message.
 	if ( function_exists( 'buddypress' ) && ! bp_is_active( 'groups' ) ) {
 	    $enable_link = admin_url( 'admin.php?page=bp-components' );
-	    
-		$bp_plugins_url = is_network_admin() ? network_admin_url( 'plugins.php' ) : admin_url( 'plugins.php' );
-		$link_plugins   = sprintf( "<a href='%s'>%s</a>", $bp_plugins_url, __( 'deactivate', 'buddyclients-free' ) );
-		$bp_install     = admin_url( '/plugin-install.php?s=buddypress&tab=search&type=term' );
+	    $bp_install     = admin_url( '/plugin-install.php?s=buddypress&tab=search&type=term' );
+		$allowed_html = ['a' => ['href' => [], 'target' => []]];
 		?>
 
 		<div id="message" class="error notice">
 			<p><strong><?php esc_html_e( 'Social groups are disabled.', 'buddyclients-free' ); ?></strong></p>
-			<p><?php printf( esc_html__( 'Groups must be enabled for the BuddyClients Platform to function properly.', 'buddyclients-free' ), $link_plugins ); ?></p>
-			<p><?php printf( wp_kses_post( __( '<a href="%s">Enable social groups.</a>', 'buddyclients-free' ) ), esc_url( $enable_link ) ); ?></p>
+			<p><?php esc_html_e( 'Groups must be enabled for the BuddyClients Platform to function properly.', 'buddyclients-free' ); ?></p>
+			<?php /* translators: %s: link to enable social groups */ ?>
+			<p><?php printf( wp_kses( __( '<a href="%s">Enable social groups.</a>', 'buddyclients-free' ), $allowed_html ), esc_url( $enable_link ) ); ?></p>
 		</div>
 
 		<?php
