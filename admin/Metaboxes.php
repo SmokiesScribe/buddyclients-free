@@ -187,7 +187,7 @@ class Metaboxes {
         foreach ( $data['tables'] as $title => $table_data ) {
             
             // Generate table
-            $content .= '<table class="widefat bp-postbox-table">';
+            $content .= '<table class="widefat buddyc-postbox-table bp-postbox-table">';
             $content .= '<thead>';
             $content .= '<tr>';
             $content .= '<th colspan="2">';

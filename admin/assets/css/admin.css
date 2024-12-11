@@ -19,6 +19,11 @@
 .margin-3 {margin: 0 3px !important}
 
 /* Grouped Meta Boxes */
+table.buddyc-postbox-table {
+    background: #f9f9f9;
+    margin-top: 22px;
+    border-radius: 3px;
+}
 .buddyc-meta-field {
     width: 100%
 }
