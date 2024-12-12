@@ -95,9 +95,6 @@ class Checkout {
 
         // Set email
         $this->client_email = $this->booking_intent->client_email;
-        
-        // Enqueue scripts
-        $this->enqueue_free_checkout_script();
     }
     
     /**
@@ -542,16 +539,6 @@ class Checkout {
             'value' => $this->booking_intent->ID,
         ];
         return [$args];
-    }
-    
-    /**
-     * Enqueues and localizes free checkout script.
-     * 
-     * @since 0.4.3
-     */
-    public function enqueue_free_checkout_script() {
-        // Enqueue script
-        wp_enqueue_script_module('buddyc-free-checkout-script', plugin_dir_url(__FILE__) . 'assets/free-checkout.js', array(), BUDDYC_PLUGIN_VERSION, true);
     }
     
     /**

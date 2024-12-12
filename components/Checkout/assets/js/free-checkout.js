@@ -1,5 +1,3 @@
-import { buddycHandleCreateAccount } from './create-account.js';
-
 /**
  * Handles a free checkout.
  * 
