@@ -38,8 +38,12 @@ function buddycHandleFormValidation() {
     // Get the service terms checkbox
     const serviceTermsCheckbox = document.getElementById('checkout-agree-terms-checkbox');
 
+    // Generate password link
+    const generatePasswordLinks = document.querySelectorAll('.buddyc-generate-password-link');
+
     // Function to validate the form and enable/disable the button accordingly
     function buddycValidateNewAccountForm() {
+        console.log('running');
         // Initialize variable inside the function
         let enableButton = true;
         
@@ -108,6 +112,14 @@ function buddycHandleFormValidation() {
     if (createAccountForm) {
         // Add event listener for input changes in required fields
         createAccountForm.addEventListener('input', buddycValidateNewAccountForm);
+
+        // START HERE - FIX THIS
+
+        // Check if generate password links exist
+        generatePasswordLinks.forEach((linkElement) => {
+            linkElement.addEventListener('click', buddycValidateNewAccountForm);
+        });
+
         // Validate the form initially on page load
         buddycValidateNewAccountForm();
     }

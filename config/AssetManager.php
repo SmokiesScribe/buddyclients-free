@@ -283,6 +283,8 @@ class AssetManager {
 			'create-project-fields'	=> [],
 			'search'				=> [],
 			'create-page'			=> [],
+			'password-field'		=> ['eyeClass' => buddyc_icon('eye', false),
+										'eyeSlashClass' => buddyc_icon('eye-slash', false)]
 		];
 
 	 	/**

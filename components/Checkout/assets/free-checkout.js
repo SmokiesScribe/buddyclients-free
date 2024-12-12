@@ -1,4 +1,4 @@
-import { buddycHandleCreateAccount } from './js/create-account.js';
+import { buddycHandleCreateAccount } from './create-account.js';
 
 /**
  * Handles a free checkout.

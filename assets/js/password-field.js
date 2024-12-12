@@ -38,18 +38,21 @@ function buddycCreatePasswordFieldWrapper(field) {
  * @param {HTMLElement} field - The password field.
  */
 function buddycAddToggleIcon(wrapper, field) {
+  const eyeClass = passwordFieldData.eyeClass;
+  const eyeSlashClass = passwordFieldData.eyeSlashClass;
+
   const toggleIcon = document.createElement('i');
-  toggleIcon.className = 'bb-icon-eye bb-icon-l toggle-password-visibility';
+  toggleIcon.className = eyeClass + ' toggle-password-visibility';
 
   wrapper.appendChild(toggleIcon);
 
   toggleIcon.addEventListener('click', () => {
     if (field.type === 'password') {
       field.type = 'text';
-      toggleIcon.className = 'bb-icon-eye-slash bb-icon-l toggle-password-visibility';
+      toggleIcon.className = eyeSlashClass + ' toggle-password-visibility';
     } else {
       field.type = 'password';
-      toggleIcon.className = 'bb-icon-eye bb-icon-l toggle-password-visibility';
+      toggleIcon.className = eyeClass + ' toggle-password-visibility';
     }
   });
 }

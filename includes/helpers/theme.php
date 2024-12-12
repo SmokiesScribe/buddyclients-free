@@ -1,5 +1,6 @@
 <?php
 if ( ! defined( 'ABSPATH' ) ) exit; // Exit if accessed directly
+use BuddyClients\Includes\Icon;
 /**
  * Check for BuddyBoss theme.
  * 
@@ -93,3 +94,18 @@ function buddyc_single_post_template( $template ) {
 }
 add_filter( 'template_include', 'buddyc_single_post_template' );
 
+/**
+ * Outputs an icon or icon class.
+ * 
+ * @since 1.0.20
+ * 
+ * @param   string  $key    The identifying key of the icon.
+ * @param   bool    $html   Optional. Outputs the full html if true,
+ *                          outputs the class only if false. Defaults to true.
+ * 
+ * @return  string  The full icon html or the icon classes.
+ */
+function buddyc_icon( $key, $html = true ) {
+    $icon = new Icon( $key );
+    return $html ? $icon->html : $icon->class;
+}
