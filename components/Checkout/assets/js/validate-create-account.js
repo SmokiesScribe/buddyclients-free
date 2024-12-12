@@ -43,7 +43,6 @@ function buddycHandleFormValidation() {
 
     // Function to validate the form and enable/disable the button accordingly
     function buddycValidateNewAccountForm() {
-        console.log('running');
         // Initialize variable inside the function
         let enableButton = true;
         
