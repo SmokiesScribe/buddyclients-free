@@ -2,15 +2,11 @@
 namespace BuddyClients\Components\Booking;
 if ( ! defined( 'ABSPATH' ) ) exit; // Exit if accessed directly
 
-use BuddyClients\Includes\{
-    Project     as Project,
-    FileHandler as FileHandler
-};
+use BuddyClients\Includes\Project;
+use BuddyClients\Includes\FileHandler;
 
-use BuddyClients\Components\Booking\BookedService\{
-    BookedService   as BookedService,
-    PaymentGroup    as PaymentGroup
-};
+use BuddyClients\Components\Booking\BookedService\BookedService;
+use BuddyClients\Components\Booking\BookedService\PaymentGroup;
 
 use BuddyClients\Components\Brief\Brief;
 
@@ -64,7 +60,7 @@ class SuccessfulBooking {
         $this->booking_intent = BookingIntent::get_booking_intent( $booking_intent_id );
         
         // Update BookingIntent to succeeded
-        $this->succeed_booking_intent( $booking_intent_id );
+        $this->booking_intent = $this->succeed_booking_intent( $booking_intent_id );
         
         // Unserialize line items
         $this->line_items = unserialize( $this->booking_intent->line_items );
@@ -160,10 +156,7 @@ class SuccessfulBooking {
         $this->project_id = $project_id;
         
         // Update booking intent with project id
-        BookingIntent::update_project_id( $this->booking_intent->ID, $project_id );
-        
-        // Retrieve updated booking intent
-        $this->booking_intent = BookingIntent::get_booking_intent( $this->booking_intent->ID );
+        $this->booking_intent = BookingIntent::update_project_id( $this->booking_intent->ID, $project_id );
     }
 
     
@@ -197,6 +190,9 @@ class SuccessfulBooking {
      */
     private function succeed_booking_intent( $booking_intent_id ) {
         // Update status
-        BookingIntent::update_status( $booking_intent_id, 'succeeded' );
+        $updated_intent = BookingIntent::update_status( $booking_intent_id, 'succeeded' );
+
+        // Return updated object
+        return $updated_intent;
     }
 }

@@ -2,7 +2,7 @@
 namespace BuddyClients\Components\Checkout;
 if ( ! defined( 'ABSPATH' ) ) exit; // Exit if accessed directly
 
-use BuddyClients\Components\Booking\SuccessfulBooking as SuccessfulBooking;
+use BuddyClients\Components\Booking\SuccessfulBooking;
 
 /**
  * Handles checkout for free services.

@@ -66,6 +66,7 @@ Banner URL: /assets/media/banner-772x250/banner.png
 * Improvement: Use scoped vendor libraries.
 * Improvement: Replaced ABSPATH with WP functions.
 * Fixed: BuddyPress compatibility bugs.
+* Fixed: Bug preventing booking status change.
 * Corresponding Premium Version: 1.0.20
 
 = 1.0.9 - October 30, 2024 =

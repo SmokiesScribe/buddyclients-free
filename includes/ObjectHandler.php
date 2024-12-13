@@ -366,7 +366,6 @@ class ObjectHandler {
         // Update the record in the database
         $this->database->update_record( strval( $ID ), $data );
     }
-
     
     /**
      * Updates an object property.
@@ -379,9 +378,6 @@ class ObjectHandler {
      */
     public function update_object_properties( $ID, $data ) {
         
-        // Initialize
-        $updated = [];
-        
         // Get object by ID
         $object = $this->get_object( $ID );
         
@@ -391,13 +387,6 @@ class ObjectHandler {
         
         // Loop through properties to update
         foreach ( $data as $property => $value ) {
-        
-            // Check if the value was changed
-            if ( property_exists( $object, $property ) ) {
-                $updated[$property] = $object->{$property} == $value ? false : true;
-            } else {
-                $updated[$property] = true;
-            }
             
             // Update the object property
             $object->{$property} = $value;
@@ -406,8 +395,8 @@ class ObjectHandler {
         // Update record in database
         $this->update_object( $ID, $object );
         
-        // Return array
-        return $updated;
+        // Return updated object
+        return $object;
     }
     
     /**

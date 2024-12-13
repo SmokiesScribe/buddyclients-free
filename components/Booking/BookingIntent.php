@@ -495,15 +495,16 @@ class BookingIntent {
         
         // Initialize object handler
         self::init_object_handler();
+
+        // Get old status
+        $old_object = self::get_booking_intent( $ID );
+        $old_status = $old_object->status;
         
         // Update status
-        $updated = self::$object_handler->update_object_properties( $ID, ['status' => $new_status] );
+        $booking_intent = self::update_booking_intent( $ID, 'status', $new_status );
         
         // Check if we transitioned to succeeded
-        if ( $updated['status'] && $new_status === 'succeeded' ) {
-            
-            // Get booking intent
-            $booking_intent = self::get_booking_intent( $ID );
+        if ( $old_status !== $new_status && $new_status === 'succeeded' ) {
             
             /**
              * Fires on transition to completed BookingIntent.
@@ -514,6 +515,9 @@ class BookingIntent {
              */
             do_action('buddyc_booking_intent_succeeded', $booking_intent);
         }
+
+        // Return updated object
+        return $booking_intent;
     }
     
     /**
@@ -528,10 +532,12 @@ class BookingIntent {
     public static function update_booking_intent( $ID, $property, $value ) {
         // Initialize object handler
         self::init_object_handler();
-        // Update properties
-        $updated = self::$object_handler->update_object_properties( $ID, [$property => $value] );
 
-        return $updated;
+        // Update properties
+        $updated_intent = self::$object_handler->update_object_properties( $ID, [$property => $value] );
+
+        // Return updated object
+        return $updated_intent;
     }
     
     /**
@@ -543,7 +549,7 @@ class BookingIntent {
      * @param   string  $new_status The status to update to.
      */
     public static function update_project_id( $ID, $project_id ) {
-        self::update_booking_intent( $ID, 'project_id', $project_id );
+        return self::update_booking_intent( $ID, 'project_id', $project_id );
     }
     
     /**
@@ -555,7 +561,7 @@ class BookingIntent {
      * @param   string  $new_status The ID of the PaymentIntent.
      */
     public static function update_payment_intent_id( $ID, $payment_intent_id ) {
-        self::update_booking_intent( $ID, 'payment_intent_id', $payment_intent_id );
+        return self::update_booking_intent( $ID, 'payment_intent_id', $payment_intent_id );
     }
     
     /**
@@ -568,7 +574,7 @@ class BookingIntent {
      * @return  bool                True on success. False on failure.
      */
     public static function update_client_id( $ID, $client_id ) {
-        self::update_booking_intent( $ID, 'client_id', $client_id );
+        return self::update_booking_intent( $ID, 'client_id', $client_id );
     }
     
     /**
@@ -581,7 +587,7 @@ class BookingIntent {
      * @return  bool                True on success. False on failure.
      */
     public static function update_client_email( $ID, $client_email ) {
-        self::update_booking_intent( $ID, 'client_email', $client_email );
+        return self::update_booking_intent( $ID, 'client_email', $client_email );
     }
     
     /**
@@ -606,7 +612,7 @@ class BookingIntent {
         $net_fee -= $payment_amount;
         
         // Update object
-        self::update_booking_intent( $ID, 'net_fee', $net_fee );
+        return self::update_booking_intent( $ID, 'net_fee', $net_fee );
     }
     
     /**
