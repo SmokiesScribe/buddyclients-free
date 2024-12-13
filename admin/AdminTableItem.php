@@ -86,6 +86,21 @@ class AdminTableItem extends AdminTable {
             return '<a href="' . esc_url( $link ) . '">' . esc_html( $title ) . '</a>';
         }
     }
+
+    /**
+     * Outputs a link to service details. 
+     * 
+     * @since 1.0.20
+     */
+    protected static function service_names_link( $property, $value, $item_id ) {
+        $status = buddyc_get_booking_intent_status( $item_id );
+        if ( $status === 'incomplete' ) {
+            return $value;
+        }
+
+        $url = admin_url( '/admin.php?page=buddyc-booked-services&booking_filter=' . $item_id );
+        return '<a href="' . esc_url( $url ) . '">' . esc_html( $value ) . '</a>';
+    }
     
     /**
      * Generates user link.
