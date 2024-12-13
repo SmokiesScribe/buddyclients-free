@@ -90,9 +90,9 @@ class BookingIntent {
     public $file_ids;
     
     /**
-     * Client ID.
+     * The ID of the client or 'guest'.
      * 
-     * @var int
+     * @var string|int
      */
     public $client_id;
     
@@ -521,7 +521,7 @@ class BookingIntent {
     }
     
     /**
-     * Updates project id.
+     * Updates a single property of a BookingIntent.
      * 
      * @since 0.1.0
      * 
@@ -535,6 +535,25 @@ class BookingIntent {
 
         // Update properties
         $updated_intent = self::$object_handler->update_object_properties( $ID, [$property => $value] );
+
+        // Return updated object
+        return $updated_intent;
+    }
+
+    /**
+     * Updates properties of a BookingIntent.
+     * 
+     * @since 0.1.0
+     * 
+     * @param   int     $ID         The BookingIntent ID.
+     * @param   array  $properties  An associative array of property-value pairs.
+     */
+    public static function update_booking_intent_properties( $ID, $properties ) {
+        // Initialize object handler
+        self::init_object_handler();
+
+        // Update properties
+        $updated_intent = self::$object_handler->update_object_properties( $ID, $properties );
 
         // Return updated object
         return $updated_intent;

@@ -72,9 +72,14 @@ use BuddyEvents\Includes\Registration\SponsorIntent;
                     $client_type = buddyc_get_setting( 'general', 'default_client_type' );
                     bp_set_member_type( $new_user_id, $client_type, true ); // append to existing
                     
+                    // Define new properties
+                    $properties = [
+                        'client_id'     => $new_user_id,
+                        'client_email'  => $user_email
+                    ];
+
                     // Update BookingIntent
-                    BookingIntent::update_client_id( $booking_intent_id, $new_user_id );
-                    BookingIntent::update_client_email( $booking_intent_id, $user_email );
+                    $updated_intent = BookingIntent::update_booking_intent_properties( $booking_intent_id, $properties );
                 }
                 
                 // Attendee type
