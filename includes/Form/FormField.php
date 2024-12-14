@@ -497,10 +497,7 @@ class FormField {
      * @since 0.1.0
      */
     private function checkbox_field() {
-        // Check if any values are passed to pre-select checkboxes
-        $values = is_array( $this->value ) ? $this->value : [$this->value];
-        $preselected_values = $values ?? array();
-    
+
         // Start building field
         $field = '<div class="form-group field_type_checkbox buddyc-form-group-container" style="' . esc_attr( $this->style ) .'">';
         $field .= '<fieldset>';
@@ -510,6 +507,7 @@ class FormField {
     
         // Build checkbox options
         foreach ($this->options as $option_key => $option_data) {
+            $checked = $this->checked_checkbox( $option_data['value'] );
             $args = [
                 'key' => $option_key,
                 'type' => 'checkbox',
@@ -517,7 +515,7 @@ class FormField {
                 'classes' => [$option_data['classes'] ?? '', 'bs-styled-checkbox'],
                 'disabled' => $option_data['disabled'] ?? '',
                 'data_atts' => $option_data['data_atts'] ?? '',
-                'checked'   => in_array( $option_data['value'], $preselected_values ),
+                'checked'   => $checked,
                 'required'  => $this->required
             ];
     
@@ -537,6 +535,33 @@ class FormField {
         return $field;
     }
 
+    /**
+     * Checks whether a checkbox field should be checked.
+     * 
+     * @since 1.0.20
+     * 
+     * @param   string  $option_value   The value of the option.
+     * @return  bool    True if the checkbox should be checked, false if not.
+     */
+    private function checked_checkbox( $option_value ) {
+        // Initialize
+        $checked = false;
+
+        // Make sure a value was passed
+        if ( empty( $option_value ) ) {
+            return $checked;
+        }
+
+        // Cast to array
+        $values = is_array( $this->value ) ? $this->value : [$this->value];
+        $preselected_values = $values ?? [];
+
+        // Check if value is in array
+        $checked = in_array( $option_data['value'], $preselected_values );
+
+        return $checked;
+    }
+    
     
     /**
      * Upload field.
