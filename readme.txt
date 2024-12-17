@@ -54,7 +54,7 @@ Banner URL: /assets/media/banner-772x250/banner.png
 
 == Changelog ==
 
-= 1.0.10 - Unreleased =
+= 1.0.10 - December 17, 2024 =
 * New Feature! Support for paid services without Stripe integration.
 * Improvement: Combined missing page notices.
 * Improvement: Load CSS variables separately.
