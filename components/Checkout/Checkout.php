@@ -65,7 +65,7 @@ class Checkout {
      */
     protected $stripe_form;
     
-    /**
+     /**
      * Constructor method.
      * 
      * @since 0.1.0
@@ -74,7 +74,7 @@ class Checkout {
         @session_start();
 
         // Check if Stripe is enabled
-        $this->stripe_enabled = buddyc_component_enabled( 'Stripe' );
+        $this->stripe_enabled = $this->stripe_is_enabled();
 
         // Init IntentHandler
         $intent_handler = new IntentHandler;
@@ -92,6 +92,33 @@ class Checkout {
 
         // Set email
         $this->client_email = $this->booking_intent->client_email;
+    }
+
+    /**
+     * Checks whether Stripe is enabled.
+     * 
+     * @since 1.0.20
+     */
+    private function stripe_is_enabled() {
+        // Check if component is enabled
+        $enabled = buddyc_component_enabled( 'Stripe' );
+        if ( ! $enabled ) {
+            return false;
+        }
+
+        // Fetch Stripe keys
+        $keys = new StripeKeys;
+        $key_types = ['publish', 'secret', 'signing'];
+
+        // Make sure keys exist
+        foreach ( $key_types as $key_type ) {
+            if ( empty( $keys->{$key_type} ) ) {
+                return false;
+            }
+        }
+
+        // Checks passed
+        return true;
     }
     
     /**
