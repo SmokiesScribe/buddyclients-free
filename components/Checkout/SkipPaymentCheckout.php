@@ -31,10 +31,7 @@ class SkipPaymentCheckout {
         $this->booking_intent_id = $post_data['booking_intent_id'];
 
         // Successful booking
-        new SuccessfulBooking( $this->booking_intent_id );
-
-        // Update booking intent status to 'unpaid'
-        $this->update_status();
+        new SuccessfulBooking( $this->booking_intent_id, $status = 'unpaid' );
 
         /**
          * Fires on submission of a booking that requires payment.
@@ -47,15 +44,6 @@ class SkipPaymentCheckout {
         
         // Redirect to group
         $this->redirect();
-    }
-
-    /**
-     * Updates the booking intent status.
-     * 
-     * @since 1.0.20
-     */
-    private function update_status() {
-        BookingIntent::update_status( $this->booking_intent_id, 'unpaid' );
     }
     
     /**

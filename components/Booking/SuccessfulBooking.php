@@ -53,20 +53,22 @@ class SuccessfulBooking {
      * @since 0.1.0
      *
      * @param   int     $booking_intent_id  The ID of the successful BookingIntent.
+     * @param   string  $status             Optional. The new status for the BookingIntent.
+     *                                      Defaults to 'succeeded'.
      */
-    public function __construct( $booking_intent_id ) {
+    public function __construct( $booking_intent_id, $status = 'succeeded' ) {
         
         // Get Booking Intent
         $this->booking_intent = BookingIntent::get_booking_intent( $booking_intent_id );
         
         // Update BookingIntent to succeeded
-        $this->booking_intent = $this->succeed_booking_intent( $booking_intent_id );
+        $this->booking_intent->status = $status;
         
         // Unserialize line items
         $this->line_items = unserialize( $this->booking_intent->line_items );
         
         // Create project
-        $this->create_project();
+        $this->booking_intent->project_id = $this->create_project();
         
         // Upgrade files
         $this->upgrade_files();
@@ -79,6 +81,9 @@ class SuccessfulBooking {
         
         // Create Brief objects
         $this->create_briefs( $this->booking_intent->project_id, $this->line_items );
+
+        // Update BookingIntent object
+        BookingIntent::update_booking_intent_object( $this->booking_intent->ID, $this->booking_intent );
         
         /**
          * Fires on a successful booking.
@@ -152,11 +157,8 @@ class SuccessfulBooking {
             });
         }
     
-        // Update project id
-        $this->project_id = $project_id;
-        
-        // Update booking intent with project id
-        $this->booking_intent = BookingIntent::update_project_id( $this->booking_intent->ID, $project_id );
+        // Return project id
+        return $project_id;
     }
 
     
@@ -179,20 +181,5 @@ class SuccessfulBooking {
             (new BookedService())->create( $this->booking_intent->ID, $line_item );
         }
         return $this;
-    }
-    
-    /**
-     * Updates Booking Intent.
-     * 
-     * @since 0.1.0
-     * 
-     * @param   int $booking_intent_id  The ID of the successful BookingIntent.
-     */
-    private function succeed_booking_intent( $booking_intent_id ) {
-        // Update status
-        $updated_intent = BookingIntent::update_status( $booking_intent_id, 'succeeded' );
-
-        // Return updated object
-        return $updated_intent;
     }
 }

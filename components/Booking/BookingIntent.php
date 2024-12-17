@@ -3,16 +3,15 @@ namespace BuddyClients\Components\Booking;
 if ( ! defined( 'ABSPATH' ) ) exit; // Exit if accessed directly
 
 use BuddyClients\Includes\{
-    Client          as Client,
-    Project         as Project,
-    FileHandler     as FileHandler,
-    ObjectHandler   as ObjectHandler,
-    PDF             as PDF
+    Client,
+    Project,
+    FileHandler,
+    ObjectHandler
 };
 
 use BuddyClients\Components\Booking\BookedService\{
-    Payment         as Payment,
-    BookedService   as BookedService
+    Payment,
+    BookedService
 };
 
 /**
@@ -518,6 +517,22 @@ class BookingIntent {
 
         // Return updated object
         return $booking_intent;
+    }
+
+    /**
+     * Updates a BookingIntent object.
+     * 
+     * @since 0.1.0
+     * 
+     * @param   int     $ID         The BookingIntent ID.
+     * @param   string  $object     The new BookingIntent object.
+     */
+    public static function update_booking_intent_object( $ID, $object ) {
+        // Initialize object handler
+        self::init_object_handler();
+
+        // Update object
+        self::$object_handler->update_object( $ID, $object );
     }
     
     /**
