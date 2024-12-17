@@ -742,12 +742,32 @@ class SettingsPage {
      * @since 0.1.0
      */
     public function copy_field($type, $field_id, $field_data) {
+        $allowed_html = [
+            'div' => [
+                'class' => [],
+            ],
+            'p' => [
+                'id' => [],
+                'class' => [],
+            ],
+            'input' => [
+                'type' => [],
+                'value' => [],
+                'size' => [],
+                'readonly' => [],
+                'class' => [],
+            ],
+            'span' => [
+                'class' => [],
+                'onclick' => [],
+            ],
+        ];
         ?>
         <div class="buddyclients-admin-field">
-            <label for="<?php echo esc_attr($this->name . '[' . $field_id . ']'); ?>"><?php echo esc_html($field_data['label']); ?></label>
+            <label for="<?php echo esc_attr($this->name . '[' . $field_id . ']'); ?>"><?php echo wp_kses( $field_data['label'], $allowed_html ); ?></label>
             <div class="buddyclients-admin-field-input-wrap">
-                <?php echo wp_kses_post( buddyc_copy_to_clipboard($field_data['content'], $field_id) ); ?>
-                <p class="description"><?php echo wp_kses_post( $field_data['description'] ); ?></p>
+                <?php echo wp_kses( buddyc_copy_to_clipboard($field_data['content'], $field_id), $allowed_html ); ?>
+                <p class="description"><?php echo esc_html( $field_data['description'] ); ?></p>
             </div>
         </div>
         <?php

@@ -50,6 +50,17 @@
     color: gray;
     cursor: pointer;
 }
+.buddyc-copy-success {
+    font-size: 14px;
+    font-weight: 500;
+    margin: 10px
+}
+.buddyc-copy-reference {
+    display: none;
+}
+.buddyc-copy-input {
+    max-width: 100%;
+}
 /* Archive */
 .archive-title-container {
     margin-top: 30px;
