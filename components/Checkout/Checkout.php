@@ -75,9 +75,6 @@ class Checkout {
 
         // Check if Stripe is enabled
         $this->stripe_enabled = buddyc_component_enabled( 'Stripe' );
-        
-        // Skip payment setting
-        $this->skip_payment = buddyc_get_setting( 'booking', 'skip_payment' ) === 'yes';
 
         // Init IntentHandler
         $intent_handler = new IntentHandler;
