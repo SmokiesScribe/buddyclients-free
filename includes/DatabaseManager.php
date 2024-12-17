@@ -218,7 +218,9 @@ class DatabaseManager {
 
             // Table does not exist, create it
             if ( $this->table_structure ) {
-                $success = $this->create_table();
+                add_action( 'init', function() {
+                    $success = $this->create_table();
+                });
             }
             
         } else {
@@ -424,12 +426,12 @@ class DatabaseManager {
         
         // Ensure table structure is not empty
         if ( empty( $this->table_structure ) ) {
-            return;
+            return false;
         }
 
         // Make sure home path function exists
         if ( ! function_exists( 'get_home_path' ) ) {
-            return;
+            return false;
         }
         
         // Construct the CREATE TABLE SQL query
@@ -447,7 +449,7 @@ class DatabaseManager {
         if ( file_exists( $file ) ) {
             require_once( $file );
         } else {
-            return;
+            return false;
         }
         
         // Execute the SQL query using dbDelta()
