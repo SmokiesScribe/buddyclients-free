@@ -557,7 +557,7 @@ class FormField {
         $preselected_values = $values ?? [];
 
         // Check if value is in array
-        $checked = in_array( $option_data['value'], $preselected_values );
+        $checked = in_array( $option_value, $preselected_values );
 
         return $checked;
     }
