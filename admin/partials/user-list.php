@@ -49,8 +49,8 @@ function buddyc_user_list() {
     
     // Define headers
     $headers = [
-        __( 'Date Registered', 'buddyclients-free' ),
         __( 'User', 'buddyclients-free' ),
+        __( 'Date Registered', 'buddyclients-free' ),
         __( 'Email', 'buddyclients-free' ),
         __( 'Type', 'buddyclients-free' ),
         __( 'Agreements', 'buddyclients-free' )
@@ -58,8 +58,8 @@ function buddyc_user_list() {
     
     // Define columns
     $columns = [
-        'date'              => ['date_registered' => 'date'],
         'id'                => ['ID' => 'user_link'],
+        'date'              => ['date_registered' => 'date'],
         'user_email'        => ['user_email' => 'direct'],
         'type'              => ['type' => null],
         'team_agreement'    => ['ID' => 'agreements']

@@ -1,5 +1,55 @@
 /** Admin CSS **/
 
+/** Booking Intent Actions **/
+.buddyc-admin-booking-action {
+    width: 10px;
+    display: inline-block; /* Ensures the span takes up space */
+    margin: 0 5px; /* Adjusts spacing between spans */
+}
+
+/** Admin Table Mobile CSS **/
+@media screen and (max-width: 768px) {
+
+    .buddyc-admin-table-mobile-row {
+        clear:both;
+    }
+
+    .buddyc-admin-table-header:not(.column-primary) {
+        display: none;
+    }
+
+    .buddyc-admin-table-cell:not(.column-primary) {
+        display: none;
+    }
+
+    .buddyc-expand-button-heading {
+        max-width: 50px;
+        text-align: right;
+    }
+
+    .buddyc-expand-button-cell {
+        max-width: 50px;
+        text-align: right;
+        margin: 0 10px;
+    }
+
+    .buddyc-expand-button {
+        margin: 0 10px;
+        color: black;
+        cursor: pointer;
+    }
+}
+
+/* Admin Table Desktop */
+@media screen and (min-width: 768px) {
+    .buddyc-expand-button-heading,
+    .buddyc-expand-button-cell,
+    .buddyc-expand-button {
+        display: none;
+    }
+}
+
+
 /** BuddyClients Icon **/
 .dashicons-buddyclients {
     background-image: url('../media/buddyclients-icon-white.png');
@@ -24,6 +74,7 @@ table.buddyc-postbox-table {
     margin-top: 22px;
     border-radius: 3px;
 }
+
 .buddyc-meta-field {
     width: 100%
 }
@@ -60,6 +111,12 @@ table.buddyc-postbox-table {
 /* Update Booking Status Icon */
 .buddyc-update-booking-icon {
     margin-left: 5px;
+}
+
+/* Booking Status */
+.buddyc-admin-booking-status {
+    white-space: nowrap;
+    margin-right: 10px;
 }
 
 /* Freelancer Mode Message */

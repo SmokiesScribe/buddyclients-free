@@ -87,6 +87,20 @@ class AdminTable {
      * @var int
      */
     private $current_page;
+
+    /**
+     * An array of classes to apply to the heading elements.
+     * 
+     * @var array
+     */
+    private $column_classes;
+
+    /**
+     * An array of column names.
+     * 
+     * @var array
+     */
+    private $colnames;
     
     /**
      * Admin page constructor.
@@ -135,6 +149,7 @@ class AdminTable {
     private function extract_args( $args ) {
         $this->key              = $args['key'] ?? '';
         $this->headings         = $args['headings'];
+        $this->column_classes   = $args['classes'] ?? [];
         $this->column_data      = $args['columns'];
         $this->items            = $args['items'];
         $this->title            = $args['title'] ?? '';
@@ -142,6 +157,7 @@ class AdminTable {
         $this->filters          = $args['filters'] ?? null;
         $this->table_header     = $args['header'] ?? '';
         $this->items_per_page   = $args['items_per_page'] ?? 10;
+        $this->colnames         = $this->build_colnames();
         
         // Ensure items are always an array
         if ( ! is_array( $this->items ) ) {
@@ -150,6 +166,25 @@ class AdminTable {
         
         // Ensure items are objects
         $this->items_are_objects();
+    }
+
+    /**
+     * Builds an associative array of column keys and names.
+     * 
+     * @since 1.0.21
+     */
+    private function build_colnames() {
+        $data = [];
+
+        $headings = $this->headings;
+        $columns = $this->column_data;
+
+        $header_index = 0;
+        foreach ( $columns as $key => $column ) {
+            $data[$key] = $headings[$header_index];
+            $header_index++; // Increment the index for headers
+        }
+        return $data;
     }
 
     /**
@@ -164,8 +199,6 @@ class AdminTable {
             'i' => [ 'class' => [], 'style' => [] ],
             'span' => [ 'id' => [], 'class' => [] ],
             'button'   => ['onclick' => [], 'type' => [], 'class' => [], 'style' => []],
-            'th'    => ['class' => []],
-            'span'    => ['class' => []]
         ];        
         return array_merge( $form_tags, $additional_tags );
     }
@@ -317,31 +350,77 @@ class AdminTable {
         $content .= '<h2>' . esc_html( $this->table_header ) . '</h2>';
         
         // Table
-        $content .= '<table class="wp-list-table widefat fixed striped">';
+        $content .= '<table class="wp-list-table widefat fixed striped buddyc-admin-table">';
         $content .= '<thead><tr>';
         
         // Table Headings
+        $first = true;
         foreach ( $this->headings as $heading ) {
-            $content .= '<th class="buddyc-admin-col-head-' . strtolower( $heading ) . '" scope="col">' . esc_html( $heading ) . '</th>';
+            // Initialize array with class
+            //$heading_classes = $this->get_column_classes( $heading, 'heading', ['buddyc-admin-table-header'] );
+
+            $heading_id = '';
+            if ( is_array( $this->colnames ) ) {
+                foreach ( $this->colnames as $key => $col_heading ) {
+                    if ( $col_heading === $heading ) {
+                        $heading_id = $key;
+                        break;
+                    }
+                }
+            }
+
+            $heading_classes = $first ? 'manage-column column-primary column-' . $heading_id : 'manage-column column-' . $heading_id;
+
+
+            $content .= '<th scope="col" id="' . esc_attr( $heading_id ) . '" class="' . esc_attr( $heading_classes ) . '" abbr="' . $heading . '">' . esc_html( $heading ) . '</th>';
+            $first = false;
         }
+
+        // Expand heading        
+        $content .= '<th scope="col" class="buddyc-expand-button-heading"></th>';
         
         $content .= '</tr></thead>';
-        $content .= '<tbody id="the-list">';
+        $content .= '<tbody id="the-list" class="buddyc-admin-table-body">';
         
         // Filter items for the current page
         $items_for_current_page = $this->filter_items_for_current_page( $this->items );
+
+        // Loop through filtered items
         foreach ( $items_for_current_page as $item ) {
-            $content .= '<tr>';
-            
+
+            // Define row id
+            $row_id = $item->ID ?? $item->id ?? null;
+
+            // Open table row
+            $content .= '<tr id="buddyc-admin-table-row-' . esc_attr( $row_id ) . '" class="buddyc-admin-table-row">';
+
+            // Build columns for the item
+            $first_col = true;
+
             foreach ( $this->build_columns( $item ) as $key => $value ) {
-                $content .= '<td class="buddyc-admin-column-' . esc_attr( $key ) . '">';
+
+                //$cell_classes = $this->get_column_classes( $key, 'cell', ['buddyc-admin-table-cell', 'buddyc-item-' . esc_attr( $key )] );
+                $cell_classes = $first_col ? 'title column-title has-row-actions column-primary page-title' : '';
+
+                $colname = $this->colnames[$key] ? 'data-colname="' . $this->colnames[$key] . '"' : '';
+                $content .= '<td class="' . esc_attr( $cell_classes ) . '" ' . $colname . '>';
+
                 if ( ! empty( $value ) ) {
                     $content .= $value;
                 }
+
+                $content .= '<button type="button" class="toggle-row"><span class="screen-reader-text">Show more details</span></button>';
+
                 $content .= '</td>';
+
+                $first_col = false;
             }
+
             
             $content .= '</tr>';
+
+
+
         }
         
         $content .= '</tbody></table>';
@@ -359,6 +438,52 @@ class AdminTable {
         
         // Return the collected HTML content
         return $content;
+    }
+
+    /**
+     * Applies styles to heading html.
+     * 
+     * @since 1.0.21
+     * 
+     * @param   string  $key            The key of the heading or row. 
+     * @param   string  $type           The type of class. 'heading' or 'cell'.
+     * @param   array   $classes        The initialized array of classes.
+     */
+    private function get_column_classes( $key, $type, $classes = [] ) {
+        // Get classes data
+        $classes_data = $this->column_classes;
+
+        // Normalize format
+        $key = trim( strtolower( $key ) );
+
+        // Make sure classes are passed
+        if ( ! empty( $classes_data ) ) {
+
+            // Loop through classes data
+            foreach ( $classes_data as $class => $class_data ) {
+
+                foreach ( $class_data as $heading_key => $cell_key ) {
+                    // Define key
+                    $curr_key = $type === 'heading' ? $heading_key : $cell_key;
+
+                    // Normalize format
+                    $curr_key = trim( strtolower( $curr_key ) );
+
+                    // Check for match
+                    if ( $curr_key === $key ) {
+                        // Add to array
+                        $classes[] = $class;
+                    }
+                }
+
+            }
+        }
+
+        // Implode to string
+        $classes_string = implode( ' ', $classes );
+
+        // Return string
+        return $classes_string;
     }
     
     /**

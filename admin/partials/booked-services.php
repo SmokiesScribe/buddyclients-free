@@ -15,9 +15,9 @@ function buddyc_booked_services_table() {
     
     // Define headers
     $headers = [
+        __( 'Name', 'buddyclients-free' ),
         __( 'Date', 'buddyclients-free' ),
         __( 'Status', 'buddyclients-free' ),
-        __( 'Name', 'buddyclients-free' ),
         __( 'Client', 'buddyclients-free' ),
         __( 'Team Member', 'buddyclients-free' ),
         __( 'Project', 'buddyclients-free' ),
@@ -28,9 +28,9 @@ function buddyc_booked_services_table() {
     
     // Define columns
     $columns = [
+        'name'          => ['name' => null],
         'date'          => ['created_at' => 'date'],
         'status'        => ['status' => 'icons'],
-        'name'          => ['name' => null],
         'client_id'     => ['client_id' => 'user_link'],
         'team_id'       => ['team_id' => 'user_link'],
         'project_id'    => ['project_id' => 'group_link'],

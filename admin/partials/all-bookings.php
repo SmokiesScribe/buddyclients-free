@@ -15,35 +15,37 @@ function buddyc_dashboard_content() {
     
     // Define headers
     $headers = [
+        __( 'Services', 'buddyclients-free' ),
         __( 'Date', 'buddyclients-free' ),
         __( 'Status', 'buddyclients-free' ),
-        __( 'Services', 'buddyclients-free' ),
         __( 'Client', 'buddyclients-free' ),
-        __( 'Client Email', 'buddyclients-free' ),
         __( 'Project', 'buddyclients-free' ),
         __( 'Total Fee', 'buddyclients-free' ),
-        __( 'Files', 'buddyclients-free' ),
-        __( 'Agreement', 'buddyclients-free' ),
-        __( 'Delete', 'buddyclients-free' )
+        __( 'Actions', 'buddyclients-free' ),
     ];
     
     // Define columns
     $columns = [
-        'date'          => ['created_at' => 'date'],
-        'status'        => ['status' => 'booking_intent_status'],
-        'services'      => ['service_names' => 'service_names_link'],
-        'client_id'     => ['client_id' => 'user_link'],
-        'client_email'  => ['client_email' => null],
-        'project_id'    => ['project_id' => 'group_link'],
-        'total_fee'     => ['total_fee' => 'usd'],
-        'files'         => ['file_ids' => 'files'],
-        'terms_pdf'     => ['terms_pdf' => 'terms_pdf'],
-        'delete'        => ['ID' => 'delete']
+        'services'              => ['service_names' => 'service_names_link'],
+        'date'                  => ['created_at' => 'date_time'],
+        'status'                => ['status' => 'booking_intent_status'],
+        'client_id'             => ['client_id' => 'booking_user_link_email'],
+        'project_id'            => ['project_id' => 'group_link'],
+        'total_fee'             => ['total_fee' => 'usd'],
+        'actions'               => ['ID' => 'booking_actions']
+    ];
+    
+    // Define classes for headers and columns
+    $classes = [
+        'column-primary'   => ['Date' => 'date'],
+        'secondary' => [],
+        'tertiary'  => [],
     ];
     
     $args = [
         'key'       => 'booking_intents',
         'headings'  => $headers,
+        'classes'   => $classes,
         'columns'   => $columns,
         'items'     => $booking_intents,
         'title'     => __( 'Bookings', 'buddyclients-free' ),

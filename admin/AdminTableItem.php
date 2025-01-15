@@ -5,6 +5,8 @@ if ( ! defined( 'ABSPATH' ) ) exit; // Exit if accessed directly
 use DateTime;
 use stdClass;
 
+use BuddyClients\Components\Booking\BookingIntent;
+
 use BuddyClients\Components\Booking\BookedService\{
     BookedService       as BookedService,
     PaymentStatusForm   as PaymentStatusForm,
@@ -101,6 +103,23 @@ class AdminTableItem extends AdminTable {
         $url = admin_url( '/admin.php?page=buddyc-booked-services&booking_filter=' . $item_id );
         return '<a href="' . esc_url( $url ) . '">' . esc_html( $value ) . '</a>';
     }
+
+    /**
+     * Outputs a link to a Stripe transaction.
+     * 
+     * @since 1.0.21
+     */
+    protected static function stripe_transaction_link( $property, $value, $item_id ) {
+        $payment_id = $value;
+        if ( ! empty( $payment_id ) ) {
+            $url = 'https://dashboard.stripe.com/payments/' . $payment_id;
+            $icon = '<i class="fa-solid fa-arrow-up-right-from-square"></i>';
+            /* translators: %s: Stripe, the name of the payment processor */
+            $title = sprintf( __( 'View transaction on %s', 'buddyclients-free' ), 'Stripe' );
+            $link = '<span class="buddyc-update-booking-icon"><a href="' . esc_url( $url ) . '" target="_blank" title="' . $title . '">' . $icon . '</a></span>';
+            return $link;
+        }
+    }
     
     /**
      * Generates user link.
@@ -130,6 +149,16 @@ class AdminTableItem extends AdminTable {
         } else {
             return esc_html( $value );
         }
+    }
+
+    /**
+     * Outputs user link and email
+     * 
+     * @since 0.1.21
+     */
+    protected static function booking_user_link_email( $property, $value, $item_id ) {
+        $user_link = self::user_link($property, $value );
+        return $user_link;
     }
     
     /**
@@ -175,7 +204,9 @@ class AdminTableItem extends AdminTable {
      * @since 0.4.0
      */
     protected static function terms_pdf( $property, $value ) {
-        self::agreement_download( $property, $value, __( 'Agreement', 'buddyclients-free' ) );
+        if( class_exists( PDF::class ) ) {
+            return PDF::download_link( $value, 'Agreement' );
+        }
     }
     
     /**
@@ -342,7 +373,7 @@ class AdminTableItem extends AdminTable {
         return ( new ReassignForm )->build( $values );
     }
     
-    /**
+     /**
      * Generates icon with value.
      * 
      * @since 0.1.0
@@ -374,7 +405,7 @@ class AdminTableItem extends AdminTable {
     protected static function booking_intent_status( $property, $value, $item_id ) {
         $icon = self::icons( $property, $value );
         $update = self::update_booking_intent_status( $property, $value, $item_id );
-        return $icon . $update;        
+        return '<span class="buddyc-admin-booking-status">' . $icon . $update . '</span>';        
     }
 
     /**
@@ -399,7 +430,8 @@ class AdminTableItem extends AdminTable {
         $message = __( 'Are you sure you want to update this booking to ' . strtoupper( $values[$value] ) . '?', 'buddyclients-free' );
 
         // Output button
-        $update_button = '<span class="buddyc-update-booking-icon"><a href="#" onclick="return buddycConfirmAction(\'' . esc_url( $update_url ) . '\', \'' . esc_js( $message ) . '\');" style="font-size: 16px"><i class="fa-solid fa-pen-to-square"></i></a></span>';
+        $title = __( 'Edit status', 'buddyclients-free' );
+        $update_button = '<span class="buddyc-update-booking-icon"><a href="#" title="' . $title . '" onclick="return buddycConfirmAction(\'' . esc_url( $update_url ) . '\', \'' . esc_js( $message ) . '\');" style="font-size: 16px"><i class="fa-solid fa-pen-to-square"></i></a></span>';
 
         return $update_button;     
     }
@@ -435,9 +467,55 @@ class AdminTableItem extends AdminTable {
         $message = __( 'Are you sure you want to delete this booking? This action cannot be undone.', 'buddyclients-free' );
 
         // Output button
-        $delete_button = '<span class="buddyc-update-booking-icon"><a href="#" onclick="return buddycConfirmAction(\'' . esc_url( $delete_url ) . '\', \'' . esc_js( $message ) . '\');" style="font-size: 16px"><i class="fa-solid fa-trash"></i></a></span>';
+        $title = __( 'Delete booking', 'buddyclients-free' );
+        $delete_button = '<span class="buddyc-update-booking-icon"><a href="#" title="' . $title . '" onclick="return buddycConfirmAction(\'' . esc_url( $delete_url ) . '\', \'' . esc_js( $message ) . '\');"><i class="fa-solid fa-trash"></i></a></span>';
 
         return $delete_button;
+    }
+
+    /**
+     * Outputs buttons for all booking intentactions.
+     * 
+     * @since 0.2.21
+     */
+    protected static function booking_actions( $property, $value, $item_id ) {
+        // Initialize
+        $buttons = [];
+
+        // Get BookingIntent
+        $booking_intent = BookingIntent::get_booking_intent( $item_id );
+
+        // Email        
+        $icon = '<i class="fa-solid fa-envelope"></i>';
+        $email = $booking_intent->client_email;
+        $email_link = ! empty( $email ) ? '<a href="mailto:' . $email . '" title="' . $email . '">' . $icon . '</a>' : '';
+        $buttons['email'] = $email_link;
+
+        // Download PDF
+        if( class_exists( PDF::class ) ) {
+            $pdf_id = $booking_intent->terms_pdf;
+            $pdf_download = PDF::download_icon( $pdf_id );
+            $buttons['pdf'] = $pdf_download;
+        }
+
+        // Stripe transaction
+        $stripe_payment_id = $booking_intent->payment_intent_id;
+        $external = $stripe_payment_id ? self::stripe_transaction_link( 'payment_intent_id', $stripe_payment_id, $item_id ) : '';
+        $buttons['stripe'] = $external;
+
+        // Delete
+        $delete = self::delete( $property, $value );
+        $buttons['delete'] = $delete;
+
+        // Add styling
+        $styled_actions = [];
+        foreach ( $buttons as $button ) {
+            $styled_actions[] = '<span class="buddyc-admin-booking-action">' . $button . '</span>';
+        }
+
+        $actions = implode( ' ', $styled_actions );
+
+        return '<div class="buddyc-admin-booking-actions">' . $actions . '</div>';
     }
     
     /**
@@ -583,6 +661,17 @@ class AdminTableItem extends AdminTable {
     protected static function date( $property, $value ) {
         if ( $value && $value !== '0000-00-00 00:00:00') {
             return gmdate( 'M j, Y', strtotime( $value ) );
+        }
+    }
+
+    /**
+     * Formats timestamp to date and time.
+     * 
+     * @since 0.1.21
+     */
+    protected static function date_time( $property, $value ) {
+        if ( $value && $value !== '0000-00-00 00:00:00') {
+            return gmdate( 'M j, Y, g:i A', strtotime( $value ) );
         }
     }
 }

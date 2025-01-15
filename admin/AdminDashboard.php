@@ -77,10 +77,16 @@ class AdminDashboard {
         
         // Build items
         $content .= $this->filter_form();
+
+        $content .= '<div class="buddyc-overview-content">';
+
         $content .= $this->overview_table();
         $content .= $this->revenue_chart();
         $content .= $this->key_metric( __( 'Average Booking Value', 'buddyclients-free' ), 'average_value' );
         $content .= $this->charts_row();
+
+        // Close content wrap
+        $content .= '</div>';
         
         // Close wrap
         $content .= '</div>';
@@ -289,7 +295,7 @@ class AdminDashboard {
      */
     private function within_date_range( $date ) {
         // Check if date range data is properly set
-        if ( !isset( $this->date_range_data['start_date'] ) || !isset( $this->date_range_data['end_date'] ) ) {
+        if ( ! isset( $this->date_range_data['start_date'] ) || ! isset( $this->date_range_data['end_date'] ) ) {
             // Handle error or default behavior
             return false;
         }
@@ -361,6 +367,9 @@ class AdminDashboard {
 
         // Start building the filter form
         $content .= '<form method="POST" style="margin-bottom: 20px;">';
+
+        // Nonce field
+        $content .= wp_nonce_field( 'buddyc_filter_nonce_action', 'buddyc_filter_nonce' );
         
         // Build the filter name
         $name = 'date_range_filter';
@@ -687,24 +696,14 @@ class AdminDashboard {
         // Initialize content
         $content = '';
 
-        // Start building the content
-        $content .= '<div class="charts-row">';
-        $content .= '<div class="chart-container pie">';
-
         // Add the booking success pie chart and key metric
         $content .= $this->booking_success_pie_chart();
         $content .= $this->key_metric( __( 'Conversion Rate', 'buddyclients-free' ), 'conversion_rate' );
-        
-        $content .= '</div>'; // Close pie chart container
 
-        // Add the abandonment chart
-        $content .= '<div class="chart-container">';
+        // Abandoned bookings chart
         $content .= $this->abandonment_chart();
-        $content .= '</div>'; // Close chart container
 
-        $content .= '</div>'; // Close charts row
-
-        // Return the collected content
+        // Return the content
         return $content;
     }
     
