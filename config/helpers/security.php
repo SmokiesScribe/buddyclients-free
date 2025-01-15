@@ -36,7 +36,7 @@ function buddyc_allowed_html_form() {
         'tr'       => ['id' => [], 'class' => []],
         'th'       => ['colspan' => [], 'class' => [], 'scope' => [], 'id' => [], 'abbr' => []],
         'tbody'    => ['class' => []],
-        'td'       => ['class' => [], 'data-colname' => []],
+        'td'       => ['class' => [], 'data-colname' => [], 'colspan' => []],
         'colgroup' => ['class' => []],
         'col'      => ['class' => []],
         'a'        => ['title' => [], 'href' => [], 'class' => [], 'download' => [], 'data-post-id' => [], 'data-url' => [], 'data-raw-content' => [], 'onclick' => [], 'target' => []],

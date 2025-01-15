@@ -334,7 +334,7 @@ class AdminTable {
         // Initialize content variable
         $content = '';
 
-        // Build HTML content
+        // Open page wrap
         $content .= '<div class="wrap">';
         
         // Display Title
@@ -350,80 +350,7 @@ class AdminTable {
         $content .= '<h2>' . esc_html( $this->table_header ) . '</h2>';
         
         // Table
-        $content .= '<table class="wp-list-table widefat fixed striped buddyc-admin-table">';
-        $content .= '<thead><tr>';
-        
-        // Table Headings
-        $first = true;
-        foreach ( $this->headings as $heading ) {
-            // Initialize array with class
-            //$heading_classes = $this->get_column_classes( $heading, 'heading', ['buddyc-admin-table-header'] );
-
-            $heading_id = '';
-            if ( is_array( $this->colnames ) ) {
-                foreach ( $this->colnames as $key => $col_heading ) {
-                    if ( $col_heading === $heading ) {
-                        $heading_id = $key;
-                        break;
-                    }
-                }
-            }
-
-            $heading_classes = $first ? 'manage-column column-primary column-' . $heading_id : 'manage-column column-' . $heading_id;
-
-
-            $content .= '<th scope="col" id="' . esc_attr( $heading_id ) . '" class="' . esc_attr( $heading_classes ) . '" abbr="' . $heading . '">' . esc_html( $heading ) . '</th>';
-            $first = false;
-        }
-
-        // Expand heading        
-        $content .= '<th scope="col" class="buddyc-expand-button-heading"></th>';
-        
-        $content .= '</tr></thead>';
-        $content .= '<tbody id="the-list" class="buddyc-admin-table-body">';
-        
-        // Filter items for the current page
-        $items_for_current_page = $this->filter_items_for_current_page( $this->items );
-
-        // Loop through filtered items
-        foreach ( $items_for_current_page as $item ) {
-
-            // Define row id
-            $row_id = $item->ID ?? $item->id ?? null;
-
-            // Open table row
-            $content .= '<tr id="buddyc-admin-table-row-' . esc_attr( $row_id ) . '" class="buddyc-admin-table-row">';
-
-            // Build columns for the item
-            $first_col = true;
-
-            foreach ( $this->build_columns( $item ) as $key => $value ) {
-
-                //$cell_classes = $this->get_column_classes( $key, 'cell', ['buddyc-admin-table-cell', 'buddyc-item-' . esc_attr( $key )] );
-                $cell_classes = $first_col ? 'title column-title has-row-actions column-primary page-title' : '';
-
-                $colname = $this->colnames[$key] ? 'data-colname="' . $this->colnames[$key] . '"' : '';
-                $content .= '<td class="' . esc_attr( $cell_classes ) . '" ' . $colname . '>';
-
-                if ( ! empty( $value ) ) {
-                    $content .= $value;
-                }
-
-                $content .= '<button type="button" class="toggle-row"><span class="screen-reader-text">Show more details</span></button>';
-
-                $content .= '</td>';
-
-                $first_col = false;
-            }
-
-            
-            $content .= '</tr>';
-
-
-
-        }
-        
-        $content .= '</tbody></table>';
+        $content .= $this->table_content();
         
         // Calculate total number of pages
         $total_pages = $this->calculate_total_pages( count( $this->filtered_items ) );
@@ -437,6 +364,168 @@ class AdminTable {
         $content .= '</div>';
         
         // Return the collected HTML content
+        return $content;
+    }
+
+    /**
+     * Outputs the table content.
+     * 
+     * @since 1.0.21
+     */
+    private function table_content() {
+        //  Initialize
+        $content = '';
+
+        // Open table
+        $content .= '<table class="wp-list-table widefat fixed striped buddyc-admin-table">';
+
+        // Table headings
+        $content .= $this->table_headings();
+
+        // Filter items for the current page
+        $items_for_current_page = $this->filter_items_for_current_page( $this->items );
+
+        // Table body
+        $content .= $this->table_body( $items_for_current_page ); 
+
+        // Close table
+        $content .= '</table>';
+
+        return $content;
+    }
+
+    /**
+     * Outputs the table headings.
+     * 
+     * @since 1.0.21
+     */
+    private function table_headings() {
+        // Initialize
+        $content = '';
+
+        // Open table head and row
+        $content .= '<thead><tr>';
+        
+        // Init flag
+        $first = true;
+
+        // Loop through headings
+        foreach ( $this->headings as $heading ) {
+            // Init id
+            $heading_id = '';
+
+            // Make sure it's an array
+            if ( is_array( $this->colnames ) ) {
+                // Loop through column names
+                foreach ( $this->colnames as $key => $col_heading ) {
+                    // Check if it's the matching col name
+                    if ( $col_heading === $heading ) {
+                        // Assign heading id and break loop
+                        $heading_id = $key;
+                        break;
+                    }
+                }
+            }
+
+            // Set primary heading class for first
+            $heading_classes = $first ? 'manage-column column-primary column-' . $heading_id : 'manage-column column-' . $heading_id;
+
+            // Build column heading
+            $content .= '<th scope="col" id="' . esc_attr( $heading_id ) . '" class="' . esc_attr( $heading_classes ) . '" abbr="' . $heading . '">' . esc_html( $heading ) . '</th>';
+
+            // Set flag
+            $first = false;
+        }
+        
+        // Close heading row
+        $content .= '</tr></thead>';
+
+        return $content;
+    }
+
+    /**
+     * Outputs the table body.
+     * 
+     * @since 1.0.21
+     * 
+     * @param   array   $items_for_current_page An array of filtered items.
+     */
+    private function table_body( $items_for_current_page ) {
+        // initialize
+        $content = '';
+
+        // Open table body
+        $content .= '<tbody id="the-list" class="buddyc-admin-table-body">';
+
+        // No items to display
+        if ( empty( $items_for_current_page ) ) {
+            $message = __( 'No items found', 'buddyclients-free' );
+            $colspan = count( $this->headings );
+            $content .= '<tr class="buddyc-admin-table-row no-items"><td class="colspanchange" colspan="' . esc_attr( $colspan ) . '">' . esc_html( $message ) . '</td></tr>';
+
+        // Otherwise build rows
+        } else {
+            $content .= $this->build_rows( $items_for_current_page );
+        }
+        
+        // Close table body
+        $content .= '</tbody>';
+
+        return $content;
+    }
+
+    /**
+     * Builds the table rows from the filtered items.
+     * 
+     * @since 1.0.21
+     * 
+     * @param   array   $items_for_current_page An array of filtered items.
+     */
+    private function build_rows( $items_for_current_page ) {
+        // init
+        $content = '';
+
+        // Loop through filtered items
+        foreach ( $items_for_current_page as $item ) {
+
+            // Define row id
+            $row_id = $item->ID ?? $item->id ?? null;
+
+            // Open table row
+            $content .= '<tr id="buddyc-admin-table-row-' . esc_attr( $row_id ) . '" class="buddyc-admin-table-row">';
+
+            // Build columns for the item
+            $first_col = true;
+
+            // Loop through cells for the item
+            foreach ( $this->build_columns( $item ) as $key => $value ) {
+
+                // Apply primary class to first cell
+                $cell_classes = $first_col ? 'title column-title has-row-actions column-primary page-title' : '';
+
+                // Apply atts and open cell
+                $colname = $this->colnames[$key] ? 'data-colname="' . $this->colnames[$key] . '"' : '';
+                $content .= '<td class="' . esc_attr( $cell_classes ) . '" ' . $colname . '>';
+
+                // Add value if not empty
+                if ( ! empty( $value ) ) {
+                    $content .= $value;
+                }
+
+                // Expand button for mobile
+                $content .= '<button type="button" class="toggle-row"><span class="screen-reader-text">Show more details</span></button>';
+
+                // Close cell
+                $content .= '</td>';
+
+                // Set flag for next iteration
+                $first_col = false;
+            }
+
+            // Close row
+            $content .= '</tr>';
+        }
+
         return $content;
     }
 

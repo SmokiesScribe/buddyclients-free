@@ -22,11 +22,6 @@
         display: none;
     }
 
-    .buddyc-expand-button-heading {
-        max-width: 50px;
-        text-align: right;
-    }
-
     .buddyc-expand-button-cell {
         max-width: 50px;
         text-align: right;
@@ -42,7 +37,6 @@
 
 /* Admin Table Desktop */
 @media screen and (min-width: 768px) {
-    .buddyc-expand-button-heading,
     .buddyc-expand-button-cell,
     .buddyc-expand-button {
         display: none;
