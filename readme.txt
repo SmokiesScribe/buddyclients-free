@@ -4,7 +4,7 @@ Tags: buddypress-integration, service-business, business-tools, team-management,
 Requires at least: 4.9.1
 Tested up to: 6.6.2
 Requires PHP: 7.2
-Stable tag: 1.0.10
+Stable tag: 1.0.11
 License: GPL-2.0-or-later
 License URI: https://www.gnu.org/licenses/gpl-2.0.html
 
@@ -53,6 +53,11 @@ The banner image used for the plugin page:
 Banner URL: /assets/media/banner-772x250/banner.png
 
 == Changelog ==
+
+= 1.0.11 - Unreleased =
+* Improvement: Made admin tables mobile responsive.
+* Fixed: Fixed date range filter in overview.
+* Corresponding Premium Version: 1.0.21
 
 = 1.0.10 - December 17, 2024 =
 * New Feature! Support for paid services without Stripe integration.
