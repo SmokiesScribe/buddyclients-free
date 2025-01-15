@@ -32,12 +32,14 @@ function buddyc_allowed_html_form() {
         'fieldset' => ['class' => [], 'id' => [], 'style' => []],
         'legend'   => ['class' => [], 'style' => []],
         'table'    => ['class' => []],
-        'thead'    => [],
-        'tr'       => [],
-        'th'       => ['colspan' => []],
-        'tbody'    => [],
-        'td'       => [],
-        'a'        => ['href' => [], 'class' => [], 'download' => [], 'data-post-id' => [], 'data-url' => [], 'data-raw-content' => [], 'onclick' => []],
+        'thead'    => ['class' => []],
+        'tr'       => ['id' => [], 'class' => []],
+        'th'       => ['colspan' => [], 'class' => [], 'scope' => [], 'id' => [], 'abbr' => []],
+        'tbody'    => ['class' => []],
+        'td'       => ['class' => [], 'data-colname' => []],
+        'colgroup' => ['class' => []],
+        'col'      => ['class' => []],
+        'a'        => ['title' => [], 'href' => [], 'class' => [], 'download' => [], 'data-post-id' => [], 'data-url' => [], 'data-raw-content' => [], 'onclick' => [], 'target' => []],
         'i'        => ['class' => [], 'id' => [], 'style' => []]
     ];
 }

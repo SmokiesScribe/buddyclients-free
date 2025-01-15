@@ -34,14 +34,14 @@ class SuccessfulBooking {
     public $line_items; 
 
     /**
-     * The client ID.
+     * The ID of the client.
      *
      * @var int
      */
     public $client_id; 
     
     /**
-     * The project group ID.
+     * The ID of the project group.
 
      * @var int
      */

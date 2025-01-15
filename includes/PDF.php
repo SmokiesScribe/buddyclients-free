@@ -382,5 +382,20 @@ class PDF {
             $link_text = $type ? __( 'Download ', 'buddyclients-free' ) . ucfirst( $type ) . __( ' PDF', 'buddyclients-free' ) : __( 'Download PDF', 'buddyclients-free' );
             return '<a href="' . esc_url( $pdf->file_url ) . '" ' . __( 'download', 'buddyclients-free' ) . '><i class="fa-solid fa-download"></i> ' . $link_text . '</a>';
         }
-    }    
+    }
+
+    /**
+     * Generates an HTML-formatted download link with an icon only.
+     * 
+     * @since 1.0.21
+     * 
+     * @param   string  $ID     The ID of the PDF.
+     */
+    public static function download_icon( $ID ) {
+        $pdf = self::get_pdf( $ID );
+        if ( isset( $pdf->file_url ) && ! empty( $pdf->file_url ) ) {
+            $title = __( 'Download PDF', 'buddyclients-free' );
+            return '<a title="' . $title . '" href="' . esc_url( $pdf->file_url ) . '" ' . __( 'download', 'buddyclients-free' ) . '><i class="fa-solid fa-download"></i></a>';
+        }
+    }
 }
