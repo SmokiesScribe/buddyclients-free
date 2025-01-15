@@ -59,6 +59,7 @@ class AdminNotice {
      *     @type    bool    $dismissable        Optional. Whether the notice should be dismissable.
      *                                          Defaults to false.
      *     @type    string  $color              Optional. The color of the notice.
+     *                                          Accepts 'green', 'blue', 'orange', 'red'.
      *                                          Defaults to blue.
      * }
      */
@@ -164,11 +165,21 @@ class AdminNotice {
         $notice = '<div class="notice notice-' . $class . $dismissable_class . '"><p>' . $this->message . ' ' . $repair_link . '</p></div>';
 
         // Escape and output notice
-        echo wp_kses( $notice, [
+        $allowed_html = self::allowed_html();
+        echo wp_kses( $notice, $allowed_html );
+    }
+
+    /**
+     * Defines the allowed html.
+     * 
+     * @since 1.0.21
+     */
+    private static function allowed_html() {
+        return [
             'div' => ['class' => true],
             'p' => [],
-            'a' => ['href' => true, 'class' => true],
-        ]);
+            'a' => ['href' => true, 'class' => true, 'target' => []],
+        ];
     }
 
     /**

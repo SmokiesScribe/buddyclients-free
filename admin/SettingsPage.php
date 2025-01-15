@@ -441,7 +441,7 @@ class SettingsPage {
      * @since 0.1.0
      */
     public function stripe_input_field( $type, $field_id, $field_data, $value ) {
-        $icon = $this->validate_stripe_icon( 'field', $field_data );
+        $icon = $this->validate_stripe_icon( 'field', $field_data, $value );
         
         ?>
         <div class="buddyclients-admin-field">
@@ -502,7 +502,7 @@ class SettingsPage {
      * 
      * @return  string  Icon html or empty string.
      */
-    private function validate_stripe_icon( $type, $field_data = null ) {
+    private function validate_stripe_icon( $type, $field_data = null, $value = null ) {
         // Initialize
         $icon = '';
 
@@ -522,7 +522,7 @@ class SettingsPage {
 
         // Validate field
         if ( $type === 'field' && is_array( $field_data ) && isset( $field_data['stripe_key'] ) ) {
-            $icon = buddyc_stripe_valid_icon( $field_data['stripe_key'] );
+            $icon = buddyc_stripe_valid_icon( $field_data['stripe_key'], $field_data['stripe_mode'], $value );
         }
         return $icon;
     }
@@ -576,7 +576,7 @@ class SettingsPage {
         } else {
             
             // Show create button
-            $button = '<button onclick="buddycCreateNewPage({
+            $button = '<button onclick="buddycbuddycbuddycbuddycCreateNewPage({
                 page_key: \'' . esc_js($field_id) . '\',
                 settings_key: \'' . esc_js('pages') . '\',
                 post_title: \'' . esc_js($field_data['post_title']) . '\',
@@ -643,7 +643,7 @@ class SettingsPage {
             $create_nonce = wp_create_nonce( 'buddyc_create_new_page_nonce' );
             
             // Build create page button
-            $create_button = '<button onclick="buddycCreateNewPage({
+            $create_button = '<button onclick="buddycbuddycbuddycbuddycCreateNewPage({
                 page_key: \'' . esc_js($field_id) . '\',
                 settings_key: \'' . esc_js('legal') . '\',
                 post_title: \'' . esc_js($field_data['label']) . '\',

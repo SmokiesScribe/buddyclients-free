@@ -54,7 +54,7 @@ Banner URL: /assets/media/banner-772x250/banner.png
 
 == Changelog ==
 
-= 1.0.11 - Unreleased =
+= 1.0.11 - January 15, 2025 =
 * Improvement: Made admin tables mobile responsive.
 * Fixed: Fixed date range filter in overview.
 * Corresponding Premium Version: 1.0.21

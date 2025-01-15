@@ -148,6 +148,19 @@ class AdminInfo {
             // Testimonials
             'testimonials'          => __( 'Testimonial drafts are created from submissions to the testimonials form. Publish a draft to display it on your testimonials page.<p>You can also create testimonials manually, adding the client\'s name and photo yourself.</p>', 'buddyclients-free' ),
 
+            // Legal
+            'user agreements'       => sprintf(
+                /* translators: %1$s: URL to legal settings; %2$s: URL to legal modifications */
+                __( 'Team and affiliate agreements will appear here after they are signed and submitted.<p>Manage agreements in the <a href="%1$s">legal settings</a>. Customize agreements for specific users by adding <a href="%1$s">legal modifications</a>.</p>', 'buddyclients-free' ),
+                esc_url( admin_url('/admin.php?page=buddyc-legal-settings' ) ),
+                esc_url( admin_url('/edit.php?post_type=buddyc_legal_mod' ) ),
+            ),
+            'legal modifications'   => sprintf(
+                /* translators: %s: URL to legal settings */
+                __( 'Customize legal agreements for specific individuals. The content of your legal modification will be appended to the legal agreement for the user(s) you select.<p>Manage agreements in the <a href="%s">legal settings</a>.</p>', 'buddyclients-free' ),
+                esc_url( admin_url('/admin.php?page=buddyc-legal-settings' ) )
+            ),
+
             // Files
             'file list'             => __( 'View all files associated with services and bookings here.<p>Click each file to view and manage it. If a file is not showing, ensure it has been attached correctly.</p>', 'buddyclients-free' ),
             'upload files'          => __( 'Upload files that may be required for bookings or team member profiles.<p>Specify the file types and sizes allowed for uploads. Ensure these settings align with your needs and storage limits.</p>', 'buddyclients-free' ),

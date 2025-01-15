@@ -307,7 +307,9 @@ class Settings {
         // Loop through post types
         foreach ( $components as $component ) {
             // Add to array
-            $options[$component] = buddyc_component_name( $component );
+            if ( function_exists( 'buddyc_component_name' ) ) {
+                $options[$component] = buddyc_component_name( $component );
+            }
         }
         return $options;
     }
@@ -386,14 +388,16 @@ class Settings {
                             'type' => 'stripe_input',
                             'default' => '',
                             'description' => '',
-                            'stripe_key'    => 'secret'
+                            'stripe_key'    => 'secret',
+                            'stripe_mode'   => 'live'
                         ],
                         'public_key_live' => [
                             'label' => __('Live Stripe Publishable Key', 'buddyclients-free'),
-                            'type' => 'input',
+                            'type' => 'stripe_input',
                             'default' => '',
                             'description' => '',
-                            'stripe_key'    => 'publish'
+                            'stripe_key'    => 'publish',
+                            'stripe_mode'   => 'live'
                         ],
                     ],
                 ],
@@ -406,14 +410,16 @@ class Settings {
                             'type' => 'stripe_input',
                             'default' => '',
                             'description' => '',
-                            'stripe_key'    => 'secret'
+                            'stripe_key'    => 'secret',
+                            'stripe_mode'   => 'test'
                         ],
                         'public_key_test' => [
                             'label' => __('Test Stripe Publishable Key', 'buddyclients-free'),
                             'type' => 'stripe_input',
                             'default' => '',
                             'description' => '',
-                            'stripe_key'    => 'publish'
+                            'stripe_key'    => 'publish',
+                            'stripe_mode'   => 'test'
                         ],
                     ],
                 ],
@@ -435,7 +441,7 @@ class Settings {
                         'endpoint_url' => [
                             'label' => __('Endpoint URL', 'buddyclients-free'),
                             'type' => 'copy',
-                            'content' => StripeKeys::endpoint_url(), // use helper function to get url
+                            'content' => buddyc_stripe_endpoint_url(), // use helper function to get url
                             'description' => __('Copy this link to your the Endpoint URL field for your Stripe webhook.', 'buddyclients-free'),
                         ],
                         'signing_live' => [
@@ -443,14 +449,16 @@ class Settings {
                             'type' => 'stripe_input',
                             'default' => '',
                             'description' => __('Add the signing secret for your live mode webhook.', 'buddyclients-free'),
-                            'stripe_key'    => 'signing'
+                            'stripe_key'    => 'signing',
+                            'stripe_mode'   => 'live'
                         ],
                         'signing_test' => [
                             'label' => __('Test Signing Secret', 'buddyclients-free'),
                             'type' => 'stripe_input',
                             'default' => '',
                             'description' => __('Add the signing secret for your test mode webhook.', 'buddyclients-free'),
-                            'stripe_key'    => 'signing'
+                            'stripe_key'    => 'signing',
+                            'stripe_mode'   => 'test'
                         ],
                     ],
                 ],

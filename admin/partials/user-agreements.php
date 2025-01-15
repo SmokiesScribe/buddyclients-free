@@ -15,10 +15,10 @@ function buddyc_user_agreements_table() {
     
     // Define headers
     $headers = [
-        __( 'Date', 'buddyclients-free' ),
-        __( 'Status', 'buddyclients-free' ),
-        __( 'Type', 'buddyclients-free' ),
         __( 'Legal Name', 'buddyclients-free' ),
+        __( 'Type', 'buddyclients-free' ),
+        __( 'Date', 'buddyclients-free' ),
+        __( 'Status', 'buddyclients-free' ),  
         __( 'Email', 'buddyclients-free' ),
         __( 'Download PDF', 'buddyclients-free' ),
     ];
@@ -45,10 +45,10 @@ function buddyc_user_agreements_table() {
     
     // Define columns
     $columns = [
+        'legal_name'    => ['legal_name' => null],
+        'type'          => ['legal_type' => null],
         'date'          => ['created_at' => 'date'],
         'status'        => ['ID' => 'agreement_status'],
-        'type'          => ['legal_type' => null],
-        'legal_name'    => ['legal_name' => null],
         'email'         => ['email' => 'direct'],
         'download_pdf'  => ['pdf' => 'pdf_download'],
     ];
