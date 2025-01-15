@@ -197,6 +197,9 @@ class BookingIntent {
         
         // Get affiliate ID
         $this->affiliate_id = $this->get_affiliate_id();
+
+        // Calculate net fee
+        $this->net_fee = $this->calculate_net_fee();
         
         // Handle file if not empty
         if ( $files ) {
@@ -299,6 +302,114 @@ class BookingIntent {
         do_action('buddyc_user_checkout', $this->client_id, $this->ID);
         
         return $this;
+    }
+
+    /**
+     * Calculates the net fee.
+     * 
+     * @since 1.0.21
+     */
+    public function calculate_net_fee() {
+        // Init to total fee
+        $gross_fee = $this->total_fee;
+
+        // Init fee
+        $team_fee = 0;
+
+        // Unserialize line items
+        $line_items = unserialize( $this->line_items );
+
+        // Loop through line items
+        foreach ( $line_items as $line_item ) {
+            // Add fee to total
+            $team_fee += self::format_currency( ( floatval( $line_item->service->team_member_percentage ) / 100) * self::format_currency( $line_item->service_fee ) );
+        }
+
+        // Get affiliate fee
+        $affiliate_fee = $this->calculate_affiliate_fee();
+
+        // Get sales fee
+        $sales_fee = $this->calculate_sales_fee();
+
+        // Add fees
+        $total_fees = $team_fee + $affiliate_fee + $sales_fee;
+
+        // Subtract from gross
+        $net_fee = $gross_fee - $total_fees;
+
+        return $net_fee;
+    }
+
+    /**
+     * Calculates the sales fee.
+     * 
+     * @since 1.0.21
+     */
+    private function calculate_sales_fee() {
+        // Init
+        $sales_fee = 0;
+
+       // Check if sales id exists
+       if ( isset( $this->sales_id ) ) {
+            
+            // Make sure sales mode is enabled
+            $sales_mode = buddyc_get_setting( 'booking', 'sales_team_mode' );
+            if ( $sales_mode !== 'yes' ) {
+                return 0;
+            }
+            
+            // Get commission percentage
+            $sales_percentage = buddyc_get_setting( 'sales', 'sales_commission_percentage' );
+            
+            // Calculate commission
+            $commission_fee = ( $sales_percentage / 100 ) * $this->total_fee;
+            
+            // Make sure the salesperson is qualified to receive commission
+            if ( $this->sales_id === $this->client_id ) {
+                return 0;
+            }            
+        }
+        return $sales_fee;
+    }
+
+    /**
+     * Calculates the affiliate fee.
+     * 
+     * @since 1.0.21
+     */
+    private function calculate_affiliate_fee() {
+        // Init
+        $affiliate_fee = 0;
+
+        // Check if affiliate id exists and affiliate program is enabled
+        if ( $this->affiliate_id && class_exists( Affiliate::class ) ) {
+            
+            // Exit if the affiliate is not qualified to receive commission
+            if ( ! ( new Affiliate( $this->affiliate_id ) )->is_qualified( $this ) ) {
+                return 0;
+            }
+            
+            // Get affiliate percentage
+            $affiliate_percentage = buddyc_get_setting( 'affiliate', 'affiliate_percentage' );
+            
+            if ( $affiliate_percentage == 0 || $this->total_fee == 0  ) {
+                return 0;
+            }
+            
+            // Calculate affiliate fee
+            $affiliate_fee = ( $affiliate_percentage / 100 ) * $this->total_fee;
+        }
+        return $affiliate_fee;
+    }
+
+     /**
+      * Formats number for currency.
+      * 
+      * @since 0.1.0
+      */
+      private static function format_currency( $value ) {
+        $value = str_replace( ',', '', $value );
+        return number_format((float) $value, 2, '.', '' );
     }
     
     /**

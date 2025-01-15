@@ -305,16 +305,17 @@ class Payment {
         self::init_object_handler();
         
         // Update status
-        $updated = self::$object_handler->update_object_properties( $ID, ['status' => $new_status] );
+        $updated_payment = self::$object_handler->update_object_properties( $ID, ['status' => $new_status] );
         
         // Check if we transitioned to a new status
-        if ( $updated['status'] ) {
+        if ( $updated_payment->status === $new_status ) {
 
             // Check if the new status is succeeded
             if ( $new_status === 'paid' ) {
                 
                 // Update paid date
-                self::$object_handler->update_object_properties( $ID, ['paid_date' => gmdate('Y-m-d H:i:s')] );
+                $curr_date_time = current_datetime()->format('Y-m-d H:i:s');
+                self::$object_handler->update_object_properties( $ID, ['paid_date' => $curr_date_time] );
                 
                 /**
                  * Fires on change of Payment status to 'paid'.

@@ -2,9 +2,9 @@
 namespace BuddyClients\Components\Booking\BookedService;
 if ( ! defined( 'ABSPATH' ) ) exit; // Exit if accessed directly
 
-use BuddyClients\Components\Booking\BookingIntent   as BookingIntent;
-use BuddyClients\Includes\ObjectHandler             as ObjectHandler;
-use BuddyClients\Includes\File                      as File;
+use BuddyClients\Components\Booking\BookingIntent;
+use BuddyClients\Includes\ObjectHandler;
+use BuddyClients\Includes\File;
 
 
 /**
@@ -287,10 +287,9 @@ class BookedService {
         if ( $booking_intent_id ) {
         
             // Retrieve all BookedService objects by booking intent id
-            return self::$object_handler->get_objects_by_property( 'booking_intent_id', $booking_intent_id );
+            return self::get_services_by_booking_intent( $booking_intent_id );
             
-        } else {
-            
+        } else {            
             // Get all objects
             return self::$object_handler->get_all_objects();
         }

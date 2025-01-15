@@ -4,6 +4,7 @@ if ( ! defined( 'ABSPATH' ) ) exit; // Exit if accessed directly
 
 use BuddyClients\Components\Booking\BookingIntent;
 use BuddyClients\Components\Affiliate\Affiliate;
+use BuddyClients\Components\Booking\BookedService\BookedService;
 
 /**
  * Payment group.
@@ -14,6 +15,13 @@ use BuddyClients\Components\Affiliate\Affiliate;
  */
 class PaymentGroup {
     
+    /**
+     * The ID of the BookingIntent object.
+     * 
+     * @var int
+     */
+    private $booking_intent_id;
+
     /**
      * The BookingIntent object.
      * 
@@ -33,23 +41,23 @@ class PaymentGroup {
      * 
      * @since 0.1.0
      * 
-     * @param   BookingIntent  $booking_intent  The BookingIntent object.
+     * @param   int     $booking_intent_id  The ID of the BookingIntent object.
+     * @param   array   $booked_services    Optional. An array of BookedService objects.
      */
-    public function __construct( BookingIntent $booking_intent ) {
+    public function __construct( $booking_intent_id, $booked_services = [] ) {
+        $this->booking_intent_id = $booking_intent_id;
+        $this->booking_intent = BookingIntent::get_booking_intent( $booking_intent_id );
         
         // Check for existing payments
-        if ( self::payments_exist( $booking_intent->ID ) ) {
+        if ( $this->payments_exist() ) {
             return;
         }
-        
-        // Get BookingIntent
-        $this->booking_intent = $booking_intent;
         
         // Initialize Payments
         $this->payments = [];
         
         // Create payments
-        $this-> team_payments();
+        $this-> team_payments( $booked_services );
         $this-> affiliate_payment();
         $this-> sales_payment();
     }
@@ -58,11 +66,9 @@ class PaymentGroup {
      * Checks for existing Payments for the booking intent.
      * 
      * @since 0.2.12
-     * 
-     * @param   int     $booking_intent_id  The ID of the booking intent.
      */
-    private static function payments_exist( $booking_intent_id ) {
-        $existing = Payment::get_payments_by_booking_intent( $booking_intent_id );
+    private function payments_exist() {
+        $existing = Payment::get_payments_by_booking_intent( $this->booking_intent_id );
         return ! empty( $existing ) ? true : false;
     }
     
@@ -70,11 +76,14 @@ class PaymentGroup {
      * Creates a team Payment.
      * 
      * @since 0.1.0
+     * 
+     * @param   array   $booked_services    An array of BookedService objects.
      */
-    private function team_payments() {
-        
-        // Get all BookedService objects for the BookingIntent
-        $booked_services = BookedService::get_all_services( $this->booking_intent->ID );
+    private function team_payments( $booked_services ) {
+
+        if ( empty( $booked_services ) || ! is_array( $booked_services ) ) {
+            return;
+        }
         
         // Build a Payment for each BookedService
         foreach ( $booked_services as $booked_service ) {

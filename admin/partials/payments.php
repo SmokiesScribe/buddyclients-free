@@ -15,10 +15,10 @@ function buddyc_payments_list() {
     
     // Define headers
     $headers = [
+        __( 'Payee', 'buddyclients-free' ),
         __( 'Date Created', 'buddyclients-free' ),
         __( 'Status', 'buddyclients-free' ),
         __( 'Type', 'buddyclients-free' ),
-        __( 'Payee ID', 'buddyclients-free' ),
         __( 'Amount', 'buddyclients-free' ),
         __( 'Memo', 'buddyclients-free' ),
         __( 'Paid Date', 'buddyclients-free' ),
@@ -27,13 +27,13 @@ function buddyc_payments_list() {
     
     // Define columns
     $columns = [
-        'date'          => ['created_at' => 'date'],
+        'payee_id'      => ['payee_id' => 'user_link'],
+        'date'          => ['created_at' => 'date_time'],
         'status'        => ['status' => 'icons'],
         'type'          => ['type' => null],
-        'payee_id'      => ['payee_id' => 'user_link'],
         'amount'        => ['amount' => 'usd'],
         'memo'          => ['memo' => 'copy_memo'],
-        'paid_date'     => ['paid_date' => 'date'],
+        'paid_date'     => ['paid_date' => 'date_time'],
         'update_status' => ['status' => 'payment_form']
     ];
     
