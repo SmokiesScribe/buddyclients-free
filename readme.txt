@@ -58,6 +58,7 @@ Banner URL: /assets/media/banner-772x250/banner.png
 * Improvement: Made admin tables mobile responsive.
 * Fixed: Fixed date range filter in overview.
 * Fixed: Correct net fee calculated for new BookingIntents.
+* Fixed: Fixed issue preventing file upload fields from displaying.
 * Corresponding Premium Version: 1.0.21
 
 = 1.0.10 - December 17, 2024 =

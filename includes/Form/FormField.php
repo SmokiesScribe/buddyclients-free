@@ -584,7 +584,7 @@ class FormField {
         $field .=           '<button class="dz-button buddyc-file-upload-button" type="button"><strong>' . __( 'Select File', 'buddyclients-free' ) . '</strong></button>';
         $field .=       '</div>';
         $field .=   '</div>';
-        $field .=   '<input type="file" class="opacity-0' . $this->field_classes . '" ' . $this->field_atts_string . '>';
+        $field .=   '<input type="file" class="opacity-0 ' . $this->field_classes . '" ' . $this->field_atts_string . '>';
         $field .=   '<p id="selected-file-name">' . $uploaded_files_list . '</p>';
         $field .=   '</div>';
         $field .= '</div>';

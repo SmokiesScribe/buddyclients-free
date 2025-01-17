@@ -743,7 +743,8 @@ class BookingForm {
                     'field_classes' => 'buddyc-upload-field',
                     'data_atts' => [
                         'service_ids'   => implode(',', $upload->service_ids),
-                        'file_required' => $upload->required
+                        'file_required' => $upload->required,
+                        'upload-id'     => $upload_post->ID
                     ]
                 ];
             }

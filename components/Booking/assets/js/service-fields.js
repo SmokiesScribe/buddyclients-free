@@ -12,7 +12,7 @@
         // Cache service options and team member fields
         const serviceOptions = form.querySelectorAll('.service-option');
         const teamFields = form.querySelectorAll('.team-select-field');
-        const uploadFields = form.querySelectorAll('.buddyc-upload-field');
+        const uploadFields = form.querySelectorAll('.buddyc-file-upload');
         const feeNumFields = form.querySelectorAll('.fee-num-field');
 
         // Ensure services exist
@@ -74,13 +74,14 @@
             
             // Upload fields
             if ( uploadFields ) {
+                console.log(uploadFieldsArray);
                 uploadFields.forEach(uploadField => {
                     const elementId = uploadField.id;
                     const uploadFieldDiv = uploadField.closest('.buddyc-file-upload-container');
                     
-                    // Extract the number using a regular expression
-                    const match = elementId.match(/(\d+)$/);
-                    const uploadId = match ? match[0] : null;
+                    // Get the upload id from the input element
+                    const uploadInputElement = uploadField.querySelector('input');
+                    const uploadId = uploadInputElement.getAttribute( 'data-upload-id' );
                     
                     if ( uploadId ) {
                         // Check if the number exists in the uploadFieldsArray
@@ -125,7 +126,7 @@
                                 // Update legend and field ID/name
                                 const legend = clonedDiv.querySelector('legend');
                                 if (legend) {
-                                    const label = buddycGetOptionLabel(option);
+                                    const label = getOptionLabel(option);
                                     legend.textContent += ` - ${label}`;
                                 }
 
@@ -182,7 +183,7 @@
      * 
      * @param   html    $option     The option whose label to retrieve.
      */
-    function buddycGetOptionLabel( option ) {
+    function getOptionLabel( option ) {
         
         if ( ! option ) {
             return;
@@ -259,7 +260,7 @@
                     const checkboxes = filterField.querySelectorAll('input[type="checkbox"]');
                     checkboxes.forEach(checkbox => {
                         if (checkbox.checked) {
-                            const checkboxLabel = buddycGetOptionLabel( checkbox );
+                            const checkboxLabel = getOptionLabel( checkbox );
                             checkboxValues.push(checkboxLabel); // Push the value to the array
                         }
                     });
