@@ -159,8 +159,13 @@ class BookedService {
         $this->status               = 'pending';
         $this->created_at           = $this->created_at ?? gmdate('Y-m-d H:i:s');
         
-        $this->booking_intent_var( $booking_intent )->line_items_var( $line_item );
+        // Set properties from booking intent
+        $this->booking_intent_var( $booking_intent );
         
+        // Set properties from line item
+        $this->line_items_var( $line_item );
+
+        // Get file IDs        
         $this->file_ids = $this->filter_file_ids( $this->file_ids );
         
         // Create new object in database
@@ -187,8 +192,6 @@ class BookedService {
         $this->client_id            = $booking_intent->client_id;
         $this->project_id           = $booking_intent->project_id;
         $this->file_ids             = $booking_intent->file_ids;
-         
-         return $this;
      }
      
      /**
@@ -239,8 +242,6 @@ class BookedService {
         $this->team_id              = $line_item->team_id;
         $this->client_fee           = self::format_currency( $line_item->service_fee );
         $this->team_fee             = self::format_currency( ( floatval( $line_item->service->team_member_percentage ) / 100) * self::format_currency( $line_item->service_fee ) );
-        
-        return $this;
      }
      
      /**

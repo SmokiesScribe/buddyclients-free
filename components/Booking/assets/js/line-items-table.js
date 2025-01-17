@@ -3,7 +3,7 @@
  * 
  * @since 0.1.0
  */
-function buddycUpdateLineItemsTable(updatedLineItems) {
+function buddycUpdateLineItemsTable( updatedLineItems ) {
     if (!document.getElementById('buddyc-booking-form')) return;
     
     var lineItemsTableBody = jQuery('.checkout-table tbody');
@@ -111,6 +111,9 @@ function buddycCalculateTotalFee(serviceFees) {
     jQuery('#total-fee').val(totalFee.toFixed(2)); // Set the value as a formatted string
 }
 
+// Initialize request map
+const buddycRequestMap = new Map();
+
 /**
  * Update service values.
  * 
@@ -118,13 +121,23 @@ function buddycCalculateTotalFee(serviceFees) {
  * @updated 0.2.3
  */
 function buddycUpdateServiceValues() {
-    const form = document.getElementById('buddyc-booking-form');
-    if (!form) return;
+    const formId = 'buddyc-booking-form';
+    const form = document.getElementById( formId );
+    if ( ! form ) return;
+
+    // Abort any ongoing request for this form
+    if ( buddycRequestMap.has( formId )) {
+        const ongoingRequest = buddycRequestMap.get( formId );
+        if ( ongoingRequest.readyState !== 4 ) {
+            ongoingRequest.abort();
+        }
+    }
 
     // Disable submit button
     buddycBookingFormUpdating( false );
 
-    var selectedServices = []; // Initialize an array to store selected service IDs
+    // Initialize an array to store selected service IDs
+    var selectedServices = [];
 
     // Get the parent element of all service options
     const serviceOptionsParent = form;
@@ -138,7 +151,7 @@ function buddycUpdateServiceValues() {
     // Loop through each element
     serviceOptions.forEach(option => {
         // Make sure the option is not disabled
-        if (!option.classList.contains('service-disabled')) {
+        if ( ! option.classList.contains( 'service-disabled' ) ) {
             // Check if the option is a checkbox
             if (option.type === 'checkbox' && option.checked) {
                 selectedServices.push(option.value); // Push the value to the array
@@ -148,11 +161,11 @@ function buddycUpdateServiceValues() {
         }
     });
 
-    // Initialize an array to store rateData for all selected services
-    let lineItems = [];
+    // Initialize array to store all line items for ajax request
+    let lineItemsData = [];
 
     // No service
-    if (selectedServices.length === 0) {
+    if ( selectedServices.length === 0 ) {
         // Clear field if no service is selected
         jQuery('#hidden-line-items').val('');
         // Update the table
@@ -164,9 +177,7 @@ function buddycUpdateServiceValues() {
     }
 
     // Valid and selected services exist
-    if (selectedServices.length > 0) {
-        // Create an array to hold the AJAX promises
-        let ajaxRequests = [];
+    if ( selectedServices.length > 0 ) {
 
         // Loop through selected services
         serviceOptions.forEach(option => {
@@ -229,45 +240,59 @@ function buddycUpdateServiceValues() {
                     teamID = roleField.value;
                 }
 
-                // Create AJAX request and add it to the promises array
-                console.time('AJAX Request');
+                // Build line item data array
+                let lineItemData = {
+                    action: 'buddyc_create_line_item',
+                    service_id: option.value,
+                    fee_num: feeNum,
+                    adjustments: selectedAdjustments,
+                    team_id: teamID,
+                    team_member_role: roleID,
+                    nonce: lineItemsTableData.nonce,
+                    nonceAction: lineItemsTableData.nonceAction,
+                };
 
-                // Create AJAX request
-                let request = jQuery.ajax({
-                    type: 'POST',
-                    url: ajaxurl,
-                    data: {
-                        action: 'buddyc_create_line_item',
-                        service_id: option.value,
-                        fee_num: feeNum,
-                        adjustments: selectedAdjustments,
-                        team_id: teamID,
-                        team_member_role: roleID,
-                        nonce: lineItemsTableData.nonce,
-                        nonceAction: lineItemsTableData.nonceAction,
-                    },
-                    success: function(response) {
-                        console.timeEnd('AJAX Request'); // Log time taken for the AJAX request
-                        var lineItem = JSON.parse(response);
-                        
-                        if (lineItem) {
-                            lineItems.push(lineItem);
-                            buddycUpdateLineItemsTable(lineItems);
-                        } else {
-                            console.error('Received invalid lineData:', lineItems);
-                        }
-                    },
-                });
-                
-
-                ajaxRequests.push(request);
+                // Push line item to array
+                lineItemsData.push(lineItemData);
             }
         });
 
-        // After all AJAX requests complete
-        jQuery.when.apply(jQuery, ajaxRequests).done(function() {
-            buddycBookingFormUpdating( true );  
+        // Create a new AJAX request
+        const ajaxRequest = jQuery.ajax({
+            type: 'POST',
+            url: ajaxurl,
+            data: {
+                action: 'buddyc_create_line_item',
+                nonce: lineItemsTableData.nonce,
+                nonceAction: lineItemsTableData.nonceAction,
+                lineItems: lineItemsData,
+            },
+            success: function(response) {
+                try {
+                    const lineItems = JSON.parse(response);
+                    if (lineItems) {
+                        buddycUpdateLineItemsTable( lineItems );
+                    }
+                } catch (error) {
+                    console.error('Error parsing response JSON:', error);
+                }
+            },
+            error: function(xhr, status, error) {
+                // Log error unless request was aborted intentionally
+                if ( status !== 'abort' ) {
+                    console.error('AJAX request failed:', status, error);
+                }
+            },            
+            complete: function() {
+                // Enable submit button
+                buddycBookingFormUpdating(true);
+                // Remove the request from the map when complete
+                buddycRequestMap.delete(formId);
+            },
         });
+
+        // Store the request in the map
+        buddycRequestMap.set( formId, ajaxRequest );
     }
 }
 

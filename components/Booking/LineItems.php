@@ -3,10 +3,10 @@ namespace BuddyClients\Components\Booking;
 if ( ! defined( 'ABSPATH' ) ) exit; // Exit if accessed directly
 
 use BuddyClients\Components\Service\{
-    Service as Service,
-    RateType as RateType,
-    Adjustment as Adjustment,
-    AdjustmentOption as AdjustmentOption
+    Service,
+    RateType,
+    Adjustment,
+    AdjustmentOption
 };
 
 /**
@@ -74,7 +74,7 @@ class LineItems {
         
         // Get service name and rate type label
         $this->service_name = $this->service->title;
-        $this->unit_label = '$' . $this->service->rate_value . ' ' . (new RateType ( $this->service->rate_type ))->unit_label;
+        $this->unit_label = $this->service->rate_value > 0 ? '$' . $this->service->rate_value . ' ' . (new RateType ( $this->service->rate_type ))->unit_label : 'Free';
         $this->adjustment_label = '';
 
         // Calculate service fee
