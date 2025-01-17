@@ -75,38 +75,38 @@ class BookedServiceList {
     private function headers() {
         
         $admin_headers = [
-            __( 'Date', 'buddyclients-free' ),
-            __( 'Service', 'buddyclients-free' ),
-            __( 'Client', 'buddyclients-free' ),
-            __( 'Project', 'buddyclients-free' ),
-            __( 'Team Member', 'buddyclients-free' ),
-            __( 'Status', 'buddyclients-free' ),
-            __( 'Files', 'buddyclients-free' ),
-            __( 'Client Fee', 'buddyclients-free' ),
-            __( 'Team Fee', 'buddyclients-free' ),
-            __( 'Cancel', 'buddyclients-free' )
+            __( 'Date', 'buddyclients' ),
+            __( 'Service', 'buddyclients' ),
+            __( 'Client', 'buddyclients' ),
+            __( 'Project', 'buddyclients' ),
+            __( 'Team Member', 'buddyclients' ),
+            __( 'Status', 'buddyclients' ),
+            __( 'Files', 'buddyclients' ),
+            __( 'Client Fee', 'buddyclients' ),
+            __( 'Team Fee', 'buddyclients' ),
+            __( 'Cancel', 'buddyclients' )
         ];
         
         $client_headers = [
-            __( 'Date', 'buddyclients-free' ),
-            __( 'Service', 'buddyclients-free' ),
-            __( 'Project', 'buddyclients-free' ),
-            __( 'Team Member', 'buddyclients-free' ),
-            __( 'Status', 'buddyclients-free' ),
-            __( 'Files', 'buddyclients-free' ),
-            __( 'Client Fee', 'buddyclients-free' ),
-            __( 'Cancel', 'buddyclients-free' )
+            __( 'Date', 'buddyclients' ),
+            __( 'Service', 'buddyclients' ),
+            __( 'Project', 'buddyclients' ),
+            __( 'Team Member', 'buddyclients' ),
+            __( 'Status', 'buddyclients' ),
+            __( 'Files', 'buddyclients' ),
+            __( 'Client Fee', 'buddyclients' ),
+            __( 'Cancel', 'buddyclients' )
         ];
         
         $team_headers = [
-            __( 'Date', 'buddyclients-free' ),
-            __( 'Service', 'buddyclients-free' ),
-            __( 'Client', 'buddyclients-free' ),
-            __( 'Project', 'buddyclients-free' ),
-            __( 'Status', 'buddyclients-free' ),
-            __( 'Files', 'buddyclients-free' ),
-            __( 'Team Fee', 'buddyclients-free' ),
-            __( 'Update Status', 'buddyclients-free' )
+            __( 'Date', 'buddyclients' ),
+            __( 'Service', 'buddyclients' ),
+            __( 'Client', 'buddyclients' ),
+            __( 'Project', 'buddyclients' ),
+            __( 'Status', 'buddyclients' ),
+            __( 'Files', 'buddyclients' ),
+            __( 'Team Fee', 'buddyclients' ),
+            __( 'Update Status', 'buddyclients' )
         ];
         
         switch ( $this->user_is ) {
@@ -159,7 +159,7 @@ class BookedServiceList {
     
         // No booked services
         if (!$booked_services) {
-            return __('You do not have any booked services.', 'buddyclients-free');
+            return __('You do not have any booked services.', 'buddyclients');
         }
     
         // Paginate
@@ -230,11 +230,11 @@ class BookedServiceList {
      */
     private function get_status_label( $status ) {
         $status_map = [
-            'pending'                   => __('Pending', 'buddyclients-free'),
-            'in_progress'               => __('In Progress', 'buddyclients-free'),
-            'cancellation_requested'    => __('Cancellation Requested', 'buddyclients-free'),
-            'canceled'                  => __('Canceled', 'buddyclients-free'),
-            'complete'                  => __('Complete', 'buddyclients-free'),
+            'pending'                   => __('Pending', 'buddyclients'),
+            'in_progress'               => __('In Progress', 'buddyclients'),
+            'cancellation_requested'    => __('Cancellation Requested', 'buddyclients'),
+            'canceled'                  => __('Canceled', 'buddyclients'),
+            'complete'                  => __('Complete', 'buddyclients'),
         ];
 
         $formatted_status = $status_map[$status]?? ucwords( str_replace('_', ' ', $status) );
@@ -280,17 +280,17 @@ class BookedServiceList {
      */
     private function get_table_columns($item) {    
         return [
-            __('Date', 'buddyclients-free')            => $item->created_at ? gmdate('F j, Y', strtotime($item->created_at)) : '',
-            __('Service', 'buddyclients-free')         => $item->name,
-            __('Client', 'buddyclients-free')          => bp_core_get_userlink($item->client_id),
-            __('Project', 'buddyclients-free')         => buddyc_group_link( $item->project_id ),
-            __('Team Member', 'buddyclients-free')     => bp_core_get_userlink($item->team_id),
-            __('Status', 'buddyclients-free')          => $this->build_status($item->status),
-            __('Files', 'buddyclients-free')           => buddyc_download_links($item->file_ids, true),
-            __('Client Fee', 'buddyclients-free')      => '$' . $item->client_fee,
-            __('Team Fee', 'buddyclients-free')        => '$' . $item->team_fee,
-            __('Cancel', 'buddyclients-free')          => (new CancelRequestForm($item->ID))->build(),
-            __('Update Status', 'buddyclients-free')   => (new ServiceStatusForm)->build(['update_status' => $item->status, 'booked_service_id' => $item->ID]),
+            __('Date', 'buddyclients')            => $item->created_at ? gmdate('F j, Y', strtotime($item->created_at)) : '',
+            __('Service', 'buddyclients')         => $item->name,
+            __('Client', 'buddyclients')          => bp_core_get_userlink($item->client_id),
+            __('Project', 'buddyclients')         => buddyc_group_link( $item->project_id ),
+            __('Team Member', 'buddyclients')     => bp_core_get_userlink($item->team_id),
+            __('Status', 'buddyclients')          => $this->build_status($item->status),
+            __('Files', 'buddyclients')           => buddyc_download_links($item->file_ids, false),
+            __('Client Fee', 'buddyclients')      => '$' . $item->client_fee,
+            __('Team Fee', 'buddyclients')        => '$' . $item->team_fee,
+            __('Cancel', 'buddyclients')          => (new CancelRequestForm($item->ID))->build(),
+            __('Update Status', 'buddyclients')   => (new ServiceStatusForm)->build(['update_status' => $item->status, 'booked_service_id' => $item->ID]),
         ];
     }
     

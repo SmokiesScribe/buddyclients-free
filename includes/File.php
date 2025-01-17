@@ -195,9 +195,6 @@ class File {
         $this->file_path = $uploaded_file['file']; // Get the file path from the uploaded file array
         $this->file_url = $uploaded_file['url']; // Get the file url from the uploaded file array
 
-        echo 'uploaded file:';
-        var_dump($uploaded_file);
-
         // Format file name
         $this->file_name = self::format( $uploaded_file['file'] );
 
@@ -310,7 +307,9 @@ class File {
      * 
      * @param   string  $file_name  The file name to format.
      */
-    private static function format( $file_name ) {
+    public static function format( $file_name ) {    
+        $file_name = basename( $file_name );
+            
         // Replace unwanted characters with underscores
         $file_name = preg_replace('/[^\w.-]/', '_', $file_name);
         

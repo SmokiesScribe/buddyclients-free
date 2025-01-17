@@ -425,7 +425,7 @@ class FileHandler {
                 
                 // Build download link
                 $text = $show_file_name ? __( 'Download File: ', 'buddyclients-free' ) . $file->file_name : __( 'Download File', 'buddyclients-free' );
-                $download = '<a class="ms-download-button" href="' . $file->file_url . '" download>' . $icon . ' ' . $text . '</a><br><br>';
+                $download = '<a class="ms-download-button" title="' . esc_attr( $file->file_name ) . '" href="' . esc_url( $file->file_url ) . '" download>' . $icon . ' ' . esc_html( $text ) . '</a><br><br>';
             }
         }
         
