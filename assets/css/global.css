@@ -65,9 +65,16 @@
 .archive-title-container {
     margin-top: 30px;
 }
+.buddyc-archive-container {
+    margin: 10px;
+    max-width: 1400px;
+    padding: 0 10px;
+}
 /* Single post */
 .buddyc-single-post {
-    margin-top: 10px;
+    margin: 10px;
+    max-width: 1200px;
+    padding: 0 10px;
 }
 /* Signature field */
 #signature-clear-button {

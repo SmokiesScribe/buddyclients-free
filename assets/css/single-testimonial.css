@@ -15,7 +15,7 @@
     border-color: var(--buddyclients-tertiary-color);
 }
 .more-testimonials-button-container {
-    margin-top: 40px;
+    margin: 40px 0;
 }
 .testimonial-author {
     padding-bottom: 20px;

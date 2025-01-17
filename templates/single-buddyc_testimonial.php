@@ -8,10 +8,10 @@ use BuddyClients\Components\Testimonial\Testimonial;
  */
 
     // Get header
-    get_header();
+    get_header();    
     
     // Initialize
-    $content = '<div class="buddyc-single-testimonial">';
+    $content = '<div class="buddyc-single-testimonial buddyc-single-post">';
 
     // Build testimonial
     $post_id = get_the_id();

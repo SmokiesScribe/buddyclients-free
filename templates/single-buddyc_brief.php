@@ -7,7 +7,7 @@ if ( ! defined( 'ABSPATH' ) ) exit; // Exit if accessed directly
  */
 
 // Get header
-get_header();
+get_header( 'header.php' );
 
 // Initialize
 $content = '<div class="buddyc-single-post">';
@@ -28,4 +28,3 @@ echo wp_kses( $content, buddyc_allowed_html_form() );
 
 // Get footer
 get_footer();
-?>

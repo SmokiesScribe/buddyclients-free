@@ -47,7 +47,7 @@ class BriefSubmission extends SingleBrief {
         $this->handle_files( $files );
         
         // Add last updated date
-        update_post_meta( $this->brief_id, 'updated_date', gmdate( 'Y-m-d H:i:s' ) );
+        update_post_meta( $this->brief_id, 'updated_date', current_time( 'Y-m-d H:i:s' ) );
         
         // Check whether values were updated
         if ( $this->updated ) {

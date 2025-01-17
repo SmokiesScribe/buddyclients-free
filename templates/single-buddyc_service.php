@@ -16,7 +16,7 @@ if ( ! defined( 'ABSPATH' ) ) exit; // Exit if accessed directly
     $booking_form_btn = '';
     
     // Start building the content
-    $service_content = '<div class="buddyc-single-service">';
+    $service_content = '<div class="buddyc-single-service buddyc-single-post">';
     
     // Breadcrumbs
     $sep = '<i class="fa-solid fa-angle-right" style="margin: 0 8px; font-size: 12px;"></i>';
