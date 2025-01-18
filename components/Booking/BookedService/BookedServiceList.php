@@ -49,6 +49,9 @@ class BookedServiceList {
         // Output table
         $table = $this->table();
         $allowed_html = buddyc_allowed_html_form();
+        if ( ! isset( $allowed_html['td']['data-label'] ) ) {
+            $allowed_html['td']['data-label'] = [];
+        }
         echo wp_kses( $table, $allowed_html );
     }
     
@@ -75,38 +78,38 @@ class BookedServiceList {
     private function headers() {
         
         $admin_headers = [
-            __( 'Date', 'buddyclients' ),
-            __( 'Service', 'buddyclients' ),
-            __( 'Client', 'buddyclients' ),
-            __( 'Project', 'buddyclients' ),
-            __( 'Team Member', 'buddyclients' ),
-            __( 'Status', 'buddyclients' ),
-            __( 'Files', 'buddyclients' ),
-            __( 'Client Fee', 'buddyclients' ),
-            __( 'Team Fee', 'buddyclients' ),
-            __( 'Cancel', 'buddyclients' )
+            __( 'Date', 'buddyclients-free' ),
+            __( 'Service', 'buddyclients-free' ),
+            __( 'Client', 'buddyclients-free' ),
+            __( 'Project', 'buddyclients-free' ),
+            __( 'Team Member', 'buddyclients-free' ),
+            __( 'Status', 'buddyclients-free' ),
+            __( 'Files', 'buddyclients-free' ),
+            __( 'Client Fee', 'buddyclients-free' ),
+            __( 'Team Fee', 'buddyclients-free' ),
+            __( 'Cancel', 'buddyclients-free' )
         ];
         
         $client_headers = [
-            __( 'Date', 'buddyclients' ),
-            __( 'Service', 'buddyclients' ),
-            __( 'Project', 'buddyclients' ),
-            __( 'Team Member', 'buddyclients' ),
-            __( 'Status', 'buddyclients' ),
-            __( 'Files', 'buddyclients' ),
-            __( 'Client Fee', 'buddyclients' ),
-            __( 'Cancel', 'buddyclients' )
+            __( 'Date', 'buddyclients-free' ),
+            __( 'Service', 'buddyclients-free' ),
+            __( 'Project', 'buddyclients-free' ),
+            __( 'Team Member', 'buddyclients-free' ),
+            __( 'Status', 'buddyclients-free' ),
+            __( 'Files', 'buddyclients-free' ),
+            __( 'Client Fee', 'buddyclients-free' ),
+            __( 'Cancel', 'buddyclients-free' )
         ];
         
         $team_headers = [
-            __( 'Date', 'buddyclients' ),
-            __( 'Service', 'buddyclients' ),
-            __( 'Client', 'buddyclients' ),
-            __( 'Project', 'buddyclients' ),
-            __( 'Status', 'buddyclients' ),
-            __( 'Files', 'buddyclients' ),
-            __( 'Team Fee', 'buddyclients' ),
-            __( 'Update Status', 'buddyclients' )
+            __( 'Date', 'buddyclients-free' ),
+            __( 'Service', 'buddyclients-free' ),
+            __( 'Client', 'buddyclients-free' ),
+            __( 'Project', 'buddyclients-free' ),
+            __( 'Status', 'buddyclients-free' ),
+            __( 'Files', 'buddyclients-free' ),
+            __( 'Team Fee', 'buddyclients-free' ),
+            __( 'Update Status', 'buddyclients-free' )
         ];
         
         switch ( $this->user_is ) {
@@ -158,9 +161,12 @@ class BookedServiceList {
         $booked_services = $this->get_booked_services();
     
         // No booked services
-        if (!$booked_services) {
-            return __('You do not have any booked services.', 'buddyclients');
+        if ( ! $booked_services ) {
+            return __('You do not have any booked services.', 'buddyclients-free');
         }
+
+        // Open container
+        $content .= '<div class="buddyc-booked-services-table-container">';
     
         // Paginate
         $pagination = new Pagination( $booked_services );
@@ -177,6 +183,9 @@ class BookedServiceList {
     
         // Add pagination controls
         $content .= $pagination->controls();
+
+        // Close container
+        $content .= '</div>';
     
         return $content;
     }
@@ -197,11 +206,13 @@ class BookedServiceList {
      */
     private function render_table_header() {
         $headers = $this->get_headers();
-        $header_content = '<tr>';
+        $header_content = '<thead>';
+        $header_content .= '<tr>';
         foreach ($headers as $header) {
             $header_content .= '<th>' . $header . '</th>';
         }
         $header_content .= '</tr>';
+        $header_content .= '</thead>';
         return $header_content;
     }
     
@@ -230,11 +241,11 @@ class BookedServiceList {
      */
     private function get_status_label( $status ) {
         $status_map = [
-            'pending'                   => __('Pending', 'buddyclients'),
-            'in_progress'               => __('In Progress', 'buddyclients'),
-            'cancellation_requested'    => __('Cancellation Requested', 'buddyclients'),
-            'canceled'                  => __('Canceled', 'buddyclients'),
-            'complete'                  => __('Complete', 'buddyclients'),
+            'pending'                   => __('Pending', 'buddyclients-free'),
+            'in_progress'               => __('In Progress', 'buddyclients-free'),
+            'cancellation_requested'    => __('Cancellation Requested', 'buddyclients-free'),
+            'canceled'                  => __('Canceled', 'buddyclients-free'),
+            'complete'                  => __('Complete', 'buddyclients-free'),
         ];
 
         $formatted_status = $status_map[$status]?? ucwords( str_replace('_', ' ', $status) );
@@ -269,7 +280,8 @@ class BookedServiceList {
     private function build_status( $status ) {
         $icon = $this->get_status_icon( $status );
         $label = $this->get_status_label( $status );
-        return $icon . $label;
+        $icon = '';// testing
+        return '<div class="buddyc-service-status ' . esc_attr( $status ) . '">' . $icon . $label . '</div>';
     }
     
     /**
@@ -280,17 +292,17 @@ class BookedServiceList {
      */
     private function get_table_columns($item) {    
         return [
-            __('Date', 'buddyclients')            => $item->created_at ? gmdate('F j, Y', strtotime($item->created_at)) : '',
-            __('Service', 'buddyclients')         => $item->name,
-            __('Client', 'buddyclients')          => bp_core_get_userlink($item->client_id),
-            __('Project', 'buddyclients')         => buddyc_group_link( $item->project_id ),
-            __('Team Member', 'buddyclients')     => bp_core_get_userlink($item->team_id),
-            __('Status', 'buddyclients')          => $this->build_status($item->status),
-            __('Files', 'buddyclients')           => buddyc_download_links($item->file_ids, false),
-            __('Client Fee', 'buddyclients')      => '$' . $item->client_fee,
-            __('Team Fee', 'buddyclients')        => '$' . $item->team_fee,
-            __('Cancel', 'buddyclients')          => (new CancelRequestForm($item->ID))->build(),
-            __('Update Status', 'buddyclients')   => (new ServiceStatusForm)->build(['update_status' => $item->status, 'booked_service_id' => $item->ID]),
+            __('Date', 'buddyclients-free')            => $item->created_at ? gmdate('F j, Y', strtotime($item->created_at)) : '',
+            __('Service', 'buddyclients-free')         => $item->name,
+            __('Client', 'buddyclients-free')          => bp_core_get_userlink($item->client_id),
+            __('Project', 'buddyclients-free')         => buddyc_group_link( $item->project_id ),
+            __('Team Member', 'buddyclients-free')     => bp_core_get_userlink($item->team_id),
+            __('Status', 'buddyclients-free')          => $this->build_status($item->status),
+            __('Files', 'buddyclients-free')           => buddyc_download_links($item->file_ids, false),
+            __('Client Fee', 'buddyclients-free')      => '$' . $item->client_fee,
+            __('Team Fee', 'buddyclients-free')        => '$' . $item->team_fee,
+            __('Cancel', 'buddyclients-free')          => (new CancelRequestForm($item->ID))->build(),
+            __('Update Status', 'buddyclients-free')   => (new ServiceStatusForm)->build(['update_status' => $item->status, 'booked_service_id' => $item->ID]),
         ];
     }
     
@@ -306,7 +318,7 @@ class BookedServiceList {
         $row = '<tr>';
         foreach ($columns as $header => $value) {
             if (in_array($header, $headers)) {
-                $row .= '<td>' . $value . '</td>';
+                $row .= '<td data-label="' . $header . '">' . $value . '</td>';
             }
         }
         $row .= '</tr>';

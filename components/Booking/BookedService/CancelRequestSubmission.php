@@ -65,6 +65,11 @@ class CancelRequestSubmission {
          * @param   CancelRequest   The CancelRequest object.
          */
         do_action( 'buddyc_cancel_request', $this );
+
+        // Redirect to the same page
+        $curr_url = buddyc_curr_url();
+        wp_redirect( $curr_url );
+        exit;
     }
 }
     

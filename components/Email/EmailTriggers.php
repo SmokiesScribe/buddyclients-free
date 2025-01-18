@@ -3,9 +3,9 @@ namespace BuddyClients\Components\Email;
 if ( ! defined( 'ABSPATH' ) ) exit; // Exit if accessed directly
 
 use BuddyClients\Components\Booking\{
-    BookingIntent as BookingIntent,
-    BookedService\BookedService as BookedService,
-    BookedService\Payment as Payment
+    BookingIntent,
+    BookedService\BookedService,
+    BookedService\Payment
 };
 
 /**
@@ -63,7 +63,6 @@ class EmailTriggers {
         foreach ( $hooks as $hook => $callable ) {
             add_action( $hook, $callable, 10, 1 );
         }
-
     }
     
     /**
@@ -125,16 +124,13 @@ class EmailTriggers {
      * @param string $old_status        The old status.
      * @param string $new_status        The new status.
      */
-    public static function service_status_email( $booked_service, $old_status, $new_status ) {
-        if ( $old_status === $new_status ) {
-            return;
-        }
+    public static function service_status_email( $booked_service ) {
         $args = [
             'to_user_id'            => $booked_service->client_id,
             'service_name'          => $booked_service->name,
             'project_id'            => $booked_service->project_id,
             'project_name'          => bp_get_group_name( groups_get_group( $booked_service->project_id ) ),
-            'service_status'        => $new_status,
+            'service_status'        => $booked_service->status,
             'project_link'          => bp_get_group_permalink( groups_get_group( $booked_service->project_id ) ),
         ];
         new Email( 'service_status', $args );

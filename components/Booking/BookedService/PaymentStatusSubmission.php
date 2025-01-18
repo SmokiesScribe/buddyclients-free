@@ -37,6 +37,11 @@ class PaymentStatusSubmission {
         
         // Update status
         Payment::update_status( $payment_id, $new_status );
+
+        // Redirect to the same page
+        $curr_url = buddyc_curr_url();
+        wp_redirect( $curr_url );
+        exit;
     }
 }
     

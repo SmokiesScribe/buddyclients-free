@@ -1,17 +1,108 @@
+/* Base styling for the table */
 .buddyc-booked-services-table {
     width: 100%;
     border-collapse: collapse;
+    font-size: 16px;
 }
 
 .buddyc-booked-services-table th,
 .buddyc-booked-services-table td {
     padding: 8px;
-    border: 1px solid #ddd; /* Optional: For better visibility of table borders */
     text-align: left;
-    word-wrap: break-word; /* This helps break long words */
-    white-space: normal;   /* Ensures content wraps within the cell */
+
+    white-space: normal;
 }
 
-.buddyc-booked-services-table td a {
-    word-break: break-word; /* Allows URLs or long text inside links to wrap properly */
+.buddyc-booked-services-table td {
+    border: 1px #E7E9EC solid;
+}
+
+td[data-label="Service"] {
+    font-weight: 600;
+}
+
+/* Alternating row background colors */
+.buddyc-booked-services-table tbody tr:nth-child(odd) {
+    background-color: #FAFBFD; /* Light gray for odd rows */
+}
+
+.buddyc-booked-services-table tbody tr:nth-child(even) {
+    background-color: #ffffff; /* White for even rows */
+}
+
+/* Handle theme layout constraints (if any) */
+.buddyc-booked-services-table-container {
+    width: 100%;
+    overflow-x: auto; /* Adds horizontal scroll if table is too wide for its container */
+}
+
+/* Status */
+.buddyc-service-status {
+    border-radius: 5px;
+    background-color: #909aa3;
+    padding: 5px;
+    font-weight: 500;
+    color: #000;
+    font-size: 12px;
+    text-align: center;
+    max-width: 150px;
+}
+.buddyc-service-status.in_progress {
+    background-color: #007bff;
+}
+.buddyc-service-status.complete {
+    background-color: #28a745;
+}
+
+/* Responsive styling for mobile */
+@media (max-width: 768px) {
+    .buddyc-booked-services-table {
+        display: block; /* Keeps it as a block element for mobile */
+        width: 100%; /* Ensures the table takes full width */
+    }
+
+    .buddyc-booked-services-table thead {
+        display: none; /* Hide the header for mobile */
+    }
+
+    /* Convert tbody and rows to block for stacking the td elements */
+    .buddyc-booked-services-table tbody {
+        display: block; /* Convert tbody to block for stacking */
+        width: 100%;
+    }
+
+    .buddyc-booked-services-table tbody tr {
+        display: block; /* Makes each row a block element */
+        width: 100%; /* Ensures each row takes full width */
+        padding-bottom: 10px; /* Adds spacing between rows */
+        padding-top: 20px;
+    }
+
+    .buddyc-booked-services-table td {
+        display: block; /* Converts td to block for stacking */
+        text-align: left; /* Aligns content to the right */
+        position: relative;
+        width: 100%; /* Ensures each td takes full width */
+        padding-left: 50%; /* Creates space for the label content */
+        border: none; /* Removes borders for mobile */
+    }
+
+    .buddyc-booked-services-table td:before {
+        content: attr(data-label); /* Uses the data-label attribute as a label */
+        position: absolute;
+        left: 10px; /* Align label to the left */
+        font-weight: bold;
+        white-space: nowrap;
+    }
+
+    /* Hide all header cells except the first one */
+    .buddyc-booked-services-table th:not(:first-child) {
+        display: none;
+    }
+
+    /* Ensure tbody and table take full width */
+    .buddyc-booked-services-table tbody,
+    .buddyc-booked-services-table {
+        width: 100% !important;
+    }
 }

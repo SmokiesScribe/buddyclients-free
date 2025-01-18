@@ -36,6 +36,11 @@ class ReassignFormSubmission {
         
         // Update status
         BookedService::update_team_id( $booked_service_id, $new_team_id );
+
+        // Redirect to the same page
+        $curr_url = buddyc_curr_url();
+        wp_redirect( $curr_url );
+        exit;
     }
 }
     

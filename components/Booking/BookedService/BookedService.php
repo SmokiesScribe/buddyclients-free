@@ -357,9 +357,10 @@ class BookedService {
         $updated = self::$object_handler->update_object_properties( $ID, ['status' => $new_status] );
         
         // Check if we transitioned to a new status
-        if ( $updated['status'] ) {
+        if ( $updated->status !== $old_status ) {
             
             $booked_service = self::get_booked_service( $ID );
+            $booked_service->status = $updated->status;
             
             /**
              * Fires on transition to new BookedService status.
@@ -370,7 +371,7 @@ class BookedService {
              * @param string $old_status        The old status.
              * @param string $new_status        The new status.
              */
-            do_action('buddyc_service_status_updated', $booked_service, $old_status, $new_status);
+            do_action( 'buddyc_service_status_updated', $booked_service );
         }
     }
     
