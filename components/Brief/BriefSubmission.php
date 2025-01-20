@@ -102,6 +102,9 @@ class BriefSubmission extends SingleBrief {
                 
                 // Update brief meta
                 update_post_meta( $this->brief_id, $field_id, $value );
+            } else {
+                // No value, delete meta
+                delete_post_meta( $this->brief_id, $field_id );
             }
         }
     }

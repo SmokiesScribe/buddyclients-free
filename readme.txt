@@ -59,6 +59,7 @@ Banner URL: /assets/media/banner-772x250/banner.png
 * Improvement: Responsive mobile styling for booked service list.
 * Improvement: Improved styling for service list.
 * Improvement: Display payment status in service list.
+* Improvement: Added list of incomplete brief fields.
 * Fixed: Fixed date range filter in overview.
 * Fixed: Correct net fee calculated for new BookingIntents.
 * Fixed: Fixed issue preventing file upload fields from displaying.

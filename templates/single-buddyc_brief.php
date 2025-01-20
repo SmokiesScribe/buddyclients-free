@@ -24,7 +24,10 @@ if ( ! class_exists( 'BuddyClients\Components\Brief\SingleBrief' ) ) {
 $content .= '</div>';
 
 // Output content
-echo wp_kses( $content, buddyc_allowed_html_form() );
+$allowed_html = buddyc_allowed_html_form();
+$allowed_html['ul'] = ['class' => []];
+$allowed_html['li'] = [];
+echo wp_kses( $content, $allowed_html );
 
 // Get footer
 get_footer();

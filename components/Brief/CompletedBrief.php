@@ -13,6 +13,13 @@ if ( ! defined( 'ABSPATH' ) ) exit; // Exit if accessed directly
  * @see SingleBrief
  */
 class CompletedBrief extends SingleBrief {
+
+    /**
+     * Empty fields without a submitted value.
+     * 
+     * @var array
+     */
+    private $empty_fields;
     
     /**
      * Constructor method.
@@ -36,7 +43,7 @@ class CompletedBrief extends SingleBrief {
         $brief_content .= '<div class="custom-content">';
         
         // Add hidden header to anchor auto TOC
-        $brief_content .= '<h2 style="display: none"></h2>';
+        $brief_content .= '<h2 class="buddyc-hidden"></h2>';
         
         // Check that field options exist
         if ( $this->fields ) {
@@ -49,6 +56,9 @@ class CompletedBrief extends SingleBrief {
 
             }
         }
+
+        // Add empty fields list
+        $brief_content .= $this->empty_fields_list();
         
         // Close the content container
         $brief_content .= '</div>';
@@ -71,9 +81,15 @@ class CompletedBrief extends SingleBrief {
         
         // Get field value
         $field_value = get_post_meta($this->brief_id, $field_id, true);
+
+        // Skip empty and disabled fields
+        if ( ! $field_value ) {
+            $this->empty_fields[] = $data['label'];
+            return;
+        }
         
         // Skip empty and disabled fields
-        if (!$field_value || $data['type'] === 'disabled') {
+        if ( ! $field_value || $data['type'] === 'disabled' ) {
             return;
         }
         
@@ -132,5 +148,39 @@ class CompletedBrief extends SingleBrief {
         $brief_content .= '</div>';
         
         return $brief_content;
+    }
+
+    /**
+     * Builds a list of incomplete fields.
+     * 
+     * @since 1.0.21
+     */
+    private function empty_fields_list() {
+        // Init content
+        $content = '';
+
+        // Get empty field labels
+        $empty_fields = $this->empty_fields;
+
+        // Exit if no incomplete fields exist
+        if ( empty( $empty_fields ) ) {
+            return;
+        }
+
+        // Header
+        $content .= '<h3>Incomplete Fields</h3>';
+
+        // Open list
+        $content .= '<ul>';
+
+        // Loop through incomplete field labels
+        foreach ( $empty_fields as $empty_field_label ) {
+            $content .= '<li>' . esc_html( $empty_field_label ) . '</li>';
+        }
+
+        // Close list
+        $content .= '</ul>';
+
+        return $content;
     }
 }
