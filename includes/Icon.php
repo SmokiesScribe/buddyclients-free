@@ -41,6 +41,10 @@ class Icon {
      */
     private static function icon_data() {
         return [
+            'edit' => [
+                'bb-icon-class' => 'bb-icon-l bb-icon-edit',
+                'fa-icon-class' => 'fa-solid fa-pen-to-square',
+            ],
             'check' => [
                 'bb-icon-class' => 'bb-icon-check bb-icon-rf',
                 'fa-icon-class' => 'fa-solid fa-circle-check',

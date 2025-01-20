@@ -74,7 +74,6 @@
             
             // Upload fields
             if ( uploadFields ) {
-                console.log(uploadFieldsArray);
                 uploadFields.forEach(uploadField => {
                     const elementId = uploadField.id;
                     const uploadFieldDiv = uploadField.closest('.buddyc-file-upload-container');

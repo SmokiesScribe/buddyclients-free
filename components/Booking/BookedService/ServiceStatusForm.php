@@ -53,9 +53,17 @@ class ServiceStatusForm {
      */
     public function build( $values = null ) {
         $booked_service_id = $values['booked_service_id'] ?? null;
+
+        // Check whether user is allowed to edit
         if ( ! $this->user_allowed( $booked_service_id ) ) {
             return;
         }
+
+        // Check if the update is allowed based on status
+        if ( ! $this->update_allowed( $values ) ) {
+            return;
+        }
+        
         $args = [
             'key'               => 'update_service_status',
             'fields_callback'   => [$this, 'form_fields'],
@@ -67,6 +75,32 @@ class ServiceStatusForm {
         ];
         
         return ( new Form( $args ) )->build();
+    }
+
+    /**
+     * Checks whether updates are not allowed based on the current status.
+     * 
+     * @since 1.0.21
+     * 
+     * @param   array   $values     An array of values passed to the form.
+     */
+    private function update_allowed( $values ) {
+        // Initialize
+        $allowed = true;
+
+        // Define statuses not allowed
+        $no_update_statuses = ['canceled', 'cancellation_requested'];
+
+        // Get current status
+        $curr_status = $values['update_status'] ?? null;
+
+        if ( $curr_status ) {
+            if ( in_array( $curr_status, $no_update_statuses ) ) {
+                $allowed = false;
+            }
+        }
+
+        return $allowed;
     }
     
     

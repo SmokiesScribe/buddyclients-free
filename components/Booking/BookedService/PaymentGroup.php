@@ -184,6 +184,7 @@ class PaymentGroup {
      
         // Define args
         $args = [
+            'booked_service_id'     => $booked_service_id,
             'booking_intent_id'     => $this->booking_intent->ID,
             'service_names'         => $this->booking_intent->service_names,
             'project_id'            => $this->booking_intent->project_id,

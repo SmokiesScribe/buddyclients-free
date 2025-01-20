@@ -54,6 +54,9 @@ class CheckoutTable {
 
         // Loading indicator
         $output .= '<div class="checkout-loading-indicator" id="buddyc-loading-indicator"></div>';
+
+        // Working message
+        $output .= '<div class="buddyc-working-message"></div>';
     
         // Add the table to the container
         $output .= '<table class="checkout-table">';

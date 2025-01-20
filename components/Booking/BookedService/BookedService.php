@@ -2,6 +2,7 @@
 namespace BuddyClients\Components\Booking\BookedService;
 if ( ! defined( 'ABSPATH' ) ) exit; // Exit if accessed directly
 
+use BuddyClients\Components\Booking\BookedService\Payment;
 use BuddyClients\Components\Booking\BookingIntent;
 use BuddyClients\Includes\ObjectHandler;
 use BuddyClients\Includes\File;
@@ -45,6 +46,13 @@ class BookedService {
      * @var string
      */
     public $created_at;
+
+    /**
+     * The timestamp when the service was completed.
+     * 
+     * @var string
+     */
+    public $complete_date;
     
     /**
      * Service ID.
@@ -336,6 +344,35 @@ class BookedService {
         $booked_service = self::get_booked_service( $ID );
         return $booked_service->created_at;
     }
+
+    /**
+     * Retrieves the associated team Payment object.
+     * 
+     * @since 1.0.21
+     * 
+     * @param   int     $ID         The ID of the BookedService.
+     */
+    public static function team_payment_object( $ID ) {
+        $booked_service = self::get_booked_service( $ID );
+        $payment = Payment::get_booked_service_payment( $ID, $booked_service->team_id );
+        if ( $payment ) {
+            return $payment;
+        }
+    }
+
+    /**
+     * Retrieves the status of the associated team payment.
+     * 
+     * @since 1.0.21
+     * 
+     * @param   int     $ID         The ID of the BookedService.
+     */
+    public static function team_payment_status( $ID ) {
+        $payment = self::team_payment_object( $ID );
+        if ( $payment && isset( $payment->status ) ) {
+            return $payment->status;
+        }
+    }
     
     /**
      * Updates status.
@@ -361,6 +398,13 @@ class BookedService {
             
             $booked_service = self::get_booked_service( $ID );
             $booked_service->status = $updated->status;
+
+            // Check if we transitioned to 'complete' status
+            if ( $updated->status === 'complete' ) {
+                $curr_time = current_time( 'timestamp' );
+                $booked_service->complete_date = $curr_time;
+                $updated = self::$object_handler->update_object_properties( $ID, ['status' => $new_status, 'complete_date' => $curr_time] );
+            }
             
             /**
              * Fires on transition to new BookedService status.
@@ -371,7 +415,7 @@ class BookedService {
              * @param string $old_status        The old status.
              * @param string $new_status        The new status.
              */
-            do_action( 'buddyc_service_status_updated', $booked_service );
+            do_action( 'buddyc_service_status_updated', $updated );
         }
     }
     
@@ -389,7 +433,7 @@ class BookedService {
         self::init_object_handler();
         
         // Update object
-        $updated = self::$object_handler->update_object_properties( $ID, ['cancellation_reason' => $cancellation_reason] );
+        $updated = self::$object_handler->update_object_properties( $ID, ['cancellation_reason' => $cancellation_reason, 'status' => 'cancellation_requested'] );
     }
     
     /**

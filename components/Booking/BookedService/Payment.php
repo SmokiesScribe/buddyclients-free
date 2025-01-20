@@ -114,6 +114,13 @@ class Payment {
      * @var string
      */
     public $paid_date;
+
+    /**
+     * The timestamp the payment will be eligible.
+     * 
+     * @var string
+     */
+    public $time_eligible;
     
     /**
      * ObjectHandler instance.
@@ -183,12 +190,12 @@ class Payment {
 
         // Build memo
         $this->memo = $this->build_memo();
+
+        // Schedule update to eligible
+        $this->schedule_eligible();
         
         // Create new object in database
         $this->ID = self::$object_handler->new_object( $this );
-        
-        // Schedule update to eligible
-        $this->schedule_eligible();
         
         // Return the Payment object
         return $this;
@@ -227,17 +234,21 @@ class Payment {
         // Eligible if no cancellation window set
         if ( $cancellation_window == 0 ) {
             $this->status = 'eligible';
+            $this->time_eligible = current_time('timestamp');
             return;
         }
         
         // Calculate the eligible time
         $scheduled_date = strtotime('+' . $cancellation_window . ' days', current_time('timestamp') );
+
+        // Set the scheduled time property
+        $this->time_eligible = $scheduled_date;
         
         // Store payment ID in a variable
         $payment_id = $this->ID;
         
         // Schedule the update_status function
-        wp_schedule_single_event( $scheduled_date, 'buddyc_payment_eligible', array( $payment_id, $cancellation_window, current_time('timestamp') ) );
+        wp_schedule_single_event( $scheduled_date, 'buddyc_payment_eligible', [$this->ID, $cancellation_window, current_time('timestamp')] );
     }
     
     /**
@@ -275,6 +286,30 @@ class Payment {
         
         // Retrieve payment
         return self::$object_handler->get_object( $payment_id );
+    }
+
+    /**
+     * Retrieves a Payment by the ID of the BookedService.
+     * 
+     * @since 0.1.0
+     * 
+     * @param   int     $booked_service_id  The ID of the BookedService.
+     * @param   int     $team_id            The ID of the team member.
+     */
+    public static function get_booked_service_payment( $booked_service_id, $team_id ) {
+        
+        // Initialize object handler
+        self::init_object_handler();
+
+        // Get payments
+        $payments = self::$object_handler->get_objects_by_property( 'booked_service_id', $booked_service_id );
+
+        // Make sure team id matches
+        foreach ( $payments as $payment ) {
+            if ( $payment->payee_id === $team_id ) {
+                return $payment;
+            }
+        }
     }
     
     /**
@@ -315,7 +350,7 @@ class Payment {
                 
                 // Update paid date
                 $curr_date_time = current_datetime()->format('Y-m-d H:i:s');
-                self::$object_handler->update_object_properties( $ID, ['paid_date' => $curr_date_time] );
+                self::$object_handler->update_object_properties( $ID, ['paid_date' => $curr_date_time, 'status' => $new_status] );
                 
                 /**
                  * Fires on change of Payment status to 'paid'.
@@ -328,7 +363,7 @@ class Payment {
                 
             } else {
                 // Clear paid date
-                self::$object_handler->update_object_properties( $ID, ['paid_date' => ''] );
+                self::$object_handler->update_object_properties( $ID, ['paid_date' => '', 'status' => $new_status] );
             }
         }
     }

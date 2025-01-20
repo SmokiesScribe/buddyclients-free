@@ -42,16 +42,36 @@ td[data-label="Service"] {
     background-color: #909aa3;
     padding: 5px;
     font-weight: 500;
-    color: #000;
+    color: #fff;
     font-size: 12px;
     text-align: center;
     max-width: 150px;
 }
-.buddyc-service-status.in_progress {
-    background-color: #007bff;
+.buddyc-service-status.in_progress,
+.buddyc-service-status.eligible {
+    background-color: #449eff;
 }
-.buddyc-service-status.complete {
+.buddyc-service-status.complete,
+.buddyc-service-status.paid {
     background-color: #28a745;
+}
+.buddyc-service-status-date {
+    font-size: 12px;
+    color: gray;
+    font-style: italic;
+}
+
+/* Update service form */
+.buddyc-update-service-form-container {
+    display: none;
+}
+.buddyc-service-edit-button i {
+    color: #fff;
+    margin-left: 5px;
+    cursor: pointer;
+}
+.buddyc-service-edit-button i:hover {
+    color: #d6d6d6;
 }
 
 /* Responsive styling for mobile */

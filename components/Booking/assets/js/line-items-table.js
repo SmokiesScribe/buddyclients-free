@@ -296,6 +296,67 @@ function buddycUpdateServiceValues() {
     }
 }
 
+let buddycWorkingMessageInterval = null;
+
+/**
+ * Helper function to manage periodic "working" messages.
+ * 
+ * @param {boolean} start Whether to start or stop the message updates.
+ * @param {HTMLCollection} detailsContainers Collection of details containers.
+ */
+function manageWorkingMessages(start, detailsContainers) {
+    // No containers found
+    if ( ! detailsContainers || detailsContainers.length === 0 ) {
+        return;
+    }
+    
+    // Loop thorugh containers
+    for (let i = 0; i < detailsContainers.length; i++) {
+        const container = detailsContainers[i];
+
+        // Get working message div
+        const workingMessageContainer = container.querySelector('.buddyc-working-message');
+
+        if ( ! workingMessageContainer ) {
+            return;
+        }
+
+        // Show the workling messages
+        if ( start ) {
+
+            // Show container
+            workingMessageContainer.style.display = 'block';
+
+            // Define messages
+            const messages = [
+                'Still working...',
+                'Hang tight, almost done!',
+                'Processing your request...',
+                'Thanks for your patience!'
+            ];
+            let messageIndex = 0;
+
+            // Clear any existing interval to prevent duplicates
+            if ( buddycWorkingMessageInterval ) {
+                clearInterval( buddycWorkingMessageInterval );
+            }
+
+            // Start updating messages
+            buddycWorkingMessageInterval = setInterval(() => {
+                workingMessageContainer.textContent = messages[messageIndex];
+                messageIndex = (messageIndex + 1) % messages.length; // Loop through messages
+            }, 3000); // Update every 3 seconds
+        } else {
+            // Stop message updates
+            clearInterval( buddycWorkingMessageInterval );
+            buddycWorkingMessageInterval = null;
+            if ( workingMessageContainer ) {
+                workingMessageContainer.textContent = '';
+            }
+        }
+    }
+}
+
 /**
  * Updates text of submit button and visibility of details container content.
  * 
@@ -304,18 +365,23 @@ function buddycUpdateServiceValues() {
  * @param   bool    complete    Optional. Whether the update is complete.
  *                              Defaults to false.
  */
-function buddycBookingFormUpdating( complete = false ) {
+function buddycBookingFormUpdating(complete = false) {
+
     const form = document.getElementById('buddyc-booking-form');
-    if ( ! form ) return;
+    if (!form) {
+        return;
+    }
 
     const submitButton = document.getElementById('booking-submit');
-    if ( ! submitButton ) return;
+    if (!submitButton) {
+        return;
+    }
 
     // Define variables
-    var submitDisabled = ! complete;
+    const submitDisabled = !complete;
 
     // Cache the original value of the submit button
-    if ( ! submitButton.dataset.originalValue ) {
+    if (!submitButton.dataset.originalValue) {
         submitButton.dataset.originalValue = submitButton.value;
     }
 
@@ -329,21 +395,25 @@ function buddycBookingFormUpdating( complete = false ) {
     // Loop through containers and modify content visibility
     for (let i = 0; i < detailsContainers.length; i++) {
         const childElements = detailsContainers[i].children; // Get all child elements
-    
+
         // Show loading indicator and hide existing content except for loading indicators
         for (let j = 0; j < childElements.length; j++) {
             if (childElements[j].classList.contains('checkout-loading-indicator')) {
-                // Show the loading indicator
                 childElements[j].style.display = complete ? 'none' : 'block';
             } else {
-                // Hide other child elements
                 childElements[j].style.display = complete ? 'block' : 'none';
             }
         }
     }
+
+    // Start or stop the working messages
+    manageWorkingMessages(!complete, detailsContainers);
 }
 
 
+/**
+ * Calls function to update values on changes to the form.
+ */
 jQuery(document).ready(function($) {
     if (!document.getElementById('buddyc-booking-form')) return;
     

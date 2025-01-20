@@ -51,9 +51,6 @@ class CancelRequestSubmission {
         $this->booked_service_id = $post_data['booked_service_id'];
         $this->cancellation_reason = $post_data['cancellation_reason'];
         
-        // Update status to cancellation requested
-        BookedService::update_status( $this->booked_service_id, 'cancellation_requested' );
-        
         // Update cancellation reason
         BookedService::update_cancellation_reason( $this->booked_service_id, $this->cancellation_reason );
         

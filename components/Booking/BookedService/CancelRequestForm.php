@@ -48,15 +48,17 @@ class CancelRequestForm {
      * @since 0.1.0
      */
     public function build() {
+
+        $no_cancel_statuses = ['cancellation_requested', 'complete', 'canceled'];
         
-        // Check if cancellation has already been requested
-        if ( $this->status === 'cancellation_requested' ) {
-            return __( 'Cancellation requested.', 'buddyclients-free' );
+        // Check if the status procludes cancellation
+        if ( in_array( $this->status, $no_cancel_statuses ) ) {
+            return;
         }
         
         // Check if cancellation is allowed
         if ( ! $this->cancellation_allowed() ) {
-            return '-';
+            return;
         }
         
         // Otherwise build form
