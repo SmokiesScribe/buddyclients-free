@@ -9,7 +9,6 @@
 .buddyc-booked-services-table td {
     padding: 8px;
     text-align: left;
-
     white-space: normal;
 }
 
@@ -94,8 +93,8 @@ td[data-label="Service"] {
     .buddyc-booked-services-table tbody tr {
         display: block; /* Makes each row a block element */
         width: 100%; /* Ensures each row takes full width */
-        padding-bottom: 10px; /* Adds spacing between rows */
-        padding-top: 20px;
+        padding: 20px 0; /* Adds spacing between rows */
+        border: 1px #E7E9EC solid;
     }
 
     .buddyc-booked-services-table td {

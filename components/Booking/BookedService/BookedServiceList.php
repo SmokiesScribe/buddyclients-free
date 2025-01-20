@@ -278,8 +278,13 @@ class BookedServiceList {
         $headers = $this->get_headers();
         $row = '<tr>';
         foreach ( $headers as $header ) {
-            if ( array_key_exists( $header, $columns ) ) {
-                $row .= '<td data-label="' . $header . '">' . $columns[$header] . '</td>';
+            $header_exists = array_key_exists( $header, $columns );
+            $value = $columns[$header] ?? null;            
+            if ( $header_exists ) {
+                // Only add data-label if the item has a value
+                $data_label = $value ? 'data-label="' . $header : '';
+                // Build the row
+                $row .= '<td ' . $data_label . '">' . $value . '</td>';
             }
         }
         $row .= '</tr>';
