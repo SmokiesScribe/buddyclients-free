@@ -234,7 +234,13 @@ class ParamManager {
             $nonce = sanitize_text_field( wp_unslash( $query_params[$this->nonce_name] ) );
             if ( ! wp_verify_nonce( $nonce, $this->nonce_action ) ) {
                 // Exit if nonce fails
-                return;
+                $new_url = $this->remove_nonce();
+                if ( ! empty( $new_url ) ) {
+                    wp_redirect( esc_url_raw( $new_url ) );
+                    exit;
+                } else {
+                    return;
+                }                
             }
         }
     
@@ -246,7 +252,16 @@ class ParamManager {
 
         // Param not found
         return null;
-    }    
+    }
+
+    /**
+     * Removes the nonce from the url.
+     * 
+     * @since 1.0.21
+     */
+    private function remove_nonce() {
+        return $this->remove_param( $this->nonce_name );
+    }
 
     /**
      * Retrieves all url parameters.
