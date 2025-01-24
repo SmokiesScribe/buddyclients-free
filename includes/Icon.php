@@ -130,6 +130,16 @@ class Icon {
                 'fa-icon-class' => 'fa fa-spinner',
                 'color' => 'green',
             ],
+            'square' => [
+                'bb-icon-class' => 'bb-icon-stop bb-icon-l',
+                'fa-icon-class' => 'fa-regular fa-square',
+                'color' => 'green',
+            ],
+            'checkbox' => [
+                'bb-icon-class' => 'bb-icon-checkbox bb-icon-l',
+                'fa-icon-class' => 'fa-regular fa-square-checked',
+                'color' => 'green',
+            ],
             'default' => [
                 'bb-icon-class' => 'bb-icon-circle bb-icon-l',
                 'fa-icon-class' => 'fa-regular fa-circle',

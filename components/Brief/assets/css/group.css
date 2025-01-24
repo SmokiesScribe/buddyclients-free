@@ -1,10 +1,10 @@
-/* Group Briefs */
-.brief-type-terms-container {
+/* Group Briefs Container */
+.buddyc-group-briefs-container {
     display: flex;
     gap: 15px;
 }
-/* brief cards */
-.brief-type-term {
+/* Individual Briefs */
+.buddyc-group-brief {
     flex: 1;
     align-items: center;
     text-align: center;
@@ -17,18 +17,24 @@
     transition: background-color 0.3s, color 0.3s;
     border-radius: 15px;
 }
-.brief-type-term-link {
+.buddyc-group-brief i.buddyc-icon {
+    font-size: 30px;
+}
+.buddyc-group-brief p {
+    margin-top: 20px;
+}
+.buddyc-group-briefs-container a {
     text-decoration: none;
 }
 @media (max-width: 768px) {
-    .brief-type-term {
+    .buddyc-group-brief {
         flex-direction: column;
         width: 100%;
     }
-    .brief-type-terms-container {
+    .buddyc-group-briefs-container {
         display: block;
     }
 }
-.brief-type-term:hover {
+.buddyc-group-brief:hover {
     box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
 }
