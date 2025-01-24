@@ -2,8 +2,6 @@
 namespace BuddyClients\Components\Booking\BookedService;
 if ( ! defined( 'ABSPATH' ) ) exit; // Exit if accessed directly
 
-use BuddyClients\Includes\Form\Form as Form;
-
 /**
  * Payment status form.
  * 
@@ -40,7 +38,7 @@ class PaymentStatusForm {
             'values'                => $values
         ];
         
-        return ( new Form( $args ) )->build();
+        return buddyc_build_form( $args );
     }
     
     

@@ -2,10 +2,6 @@
 namespace BuddyClients\Components\Booking\BookedService;
 if ( ! defined( 'ABSPATH' ) ) exit; // Exit if accessed directly
 
-use BuddyClients\Includes\{
-    Form\Form as Form
-};
-
 /**
  * Cancellation request form.
  * 
@@ -70,9 +66,7 @@ class CancelRequestForm {
             'form_classes'      => 'buddyc-table-form'
         ];
 
-        $form = new Form( $args );
-        $content = $form->build();
-        return $content;
+        return buddyc_build_form( $args );
     }
     
     /**

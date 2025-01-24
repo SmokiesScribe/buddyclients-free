@@ -2,10 +2,6 @@
 namespace BuddyClients\Components\Booking\BookedService;
 if ( ! defined( 'ABSPATH' ) ) exit; // Exit if accessed directly
 
-use BuddyClients\Includes\{
-    Form\Form          as Form
-};
-
 /**
  * Form to reassign services to team members.
  * 
@@ -33,7 +29,7 @@ class ReassignForm {
             'values'            => $values
         ];
         
-        return ( new Form( $args ) )->build();
+        return buddyc_build_form( $args );
     }
     
     

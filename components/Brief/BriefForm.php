@@ -2,8 +2,6 @@
 namespace BuddyClients\Components\Brief;
 if ( ! defined( 'ABSPATH' ) ) exit; // Exit if accessed directly
 
-use BuddyClients\Includes\Form\Form;
-
 /**
  * Generates the brief form content.
  *
@@ -31,8 +29,7 @@ class BriefForm extends SingleBrief {
             'fields_callback'       => [$this, 'form_fields'],
             'submission_class'      => __NAMESPACE__ . '\BriefSubmission',
         ];
-        $form = new Form( $args );
-        return $form->build();
+        return buddyc_build_form( $args );
     }
     
     /**

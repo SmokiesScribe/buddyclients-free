@@ -3,11 +3,7 @@
 namespace BuddyClients\Components\Booking;
 if ( ! defined( 'ABSPATH' ) ) exit; // Exit if accessed directly
 
-use BuddyClients\Includes\{
-    Form\Form,
-    Client,
-    PostQuery
-};
+use BuddyClients\Includes\Client;
 
 use BuddyClients\Components\Service\{
     Service,
@@ -234,7 +230,7 @@ class BookingForm {
          $content = apply_filters( 'buddyc_before_booking_form', $content );
          
         // Display form
-        $content .= (new Form( $form_args ) )->build();
+        $content .= buddyc_build_form( $form_args );
         
         /**
          * Filters the Checkout content after the Booking Form is added
@@ -475,12 +471,12 @@ class BookingForm {
         $args = [];
         
         // Get filter field posts
-        $filter_fields = new PostQuery( 'buddyc_filter' );
+        $filter_fields = buddyc_post_query( 'buddyc_filter' );
         
         // Exit if no filter fields
-        if ( $filter_fields->posts ) {
+        if ( $filter_fields ) {
             // Loop through filter fields
-            foreach ($filter_fields->posts as $filter_field) {
+            foreach ( $filter_fields as $filter_field ) {
                 $args[] = ( new FilterField( $filter_field->ID ) )->args();
             }
         }
@@ -499,24 +495,24 @@ class BookingForm {
         $args = [];
         
         // Get all service types
-        $service_types = (new PostQuery( 'buddyc_service_type' ));
+        $service_types = buddyc_post_query( 'buddyc_service_type' );
         
         // Exit if no service types exist
-        if ( ! $service_types->posts ) {
+        if ( ! $service_types ) {
             return;
         }
         
         // Loop through each type
-        foreach ( $service_types->posts as $type ) {
+        foreach ( $service_types as $type ) {
             
             // Service type object
             $service_type = new ServiceType( $type->ID );
             
             // Get services by type
-            $services = new PostQuery('buddyc_service', ['service_type' => $service_type->ID]);
+            $services = buddyc_post_query( 'buddyc_service', ['service_type' => $service_type->ID] );
             
             // Exit if no services have the type
-            if ( ! $services->posts ) {
+            if ( ! $services ) {
                 return;
             }
             
@@ -534,7 +530,7 @@ class BookingForm {
             }
             
             // Loop through services
-            foreach ( $services->posts as $service ) {
+            foreach ( $services as $service ) {
                 
                 // New service object
                 $service = new Service( $service->ID );
@@ -599,7 +595,7 @@ class BookingForm {
         $args = [];
         
         // Get rate types
-        $rate_types = (new PostQuery( 'buddyc_rate_type' ))->posts;
+        $rate_types = buddyc_post_query( 'buddyc_rate_type' );
     
         if ($rate_types) {
             // Loop through rate types
@@ -644,7 +640,7 @@ class BookingForm {
         $args = [];
         
         // Get adjustments
-        $adjustments = (new PostQuery( 'buddyc_adjustment' ))->posts;
+        $adjustments = buddyc_post_query( 'buddyc_adjustment' );
     
         if ( $adjustments ) {
             // Loop through adjustments
@@ -719,7 +715,7 @@ class BookingForm {
         $args = [];
         
         // Get upload types
-        $file_uploads = (new PostQuery( 'buddyc_file_upload' ))->posts;
+        $file_uploads = buddyc_post_query( 'buddyc_file_upload' );
     
         if ($file_uploads) {
             // Loop through adjustments
@@ -775,7 +771,7 @@ class BookingForm {
         $args = [];
         
         // Get roles
-        $roles = (new PostQuery( 'buddyc_role' ))->posts;
+        $roles = buddyc_post_query( 'buddyc_role' );
         
         // Get xprofile field
         $xprofile_id = buddyc_roles_field_id();

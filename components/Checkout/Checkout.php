@@ -9,7 +9,6 @@ use BuddyClients\Components\Checkout\IntentHandler;
 use BuddyClients\Components\Booking\BookingIntent;
 use BuddyClients\Components\Stripe\StripeForm;
 use BuddyClients\Components\Stripe\StripeKeys;
-use BuddyClients\Includes\Form\Form;
 use BuddyClients\Includes\Client;
 use BuddyClients\Includes\Popup;
 
@@ -65,7 +64,7 @@ class Checkout {
      */
     protected $stripe_form;
     
-     /**
+    /**
      * Constructor method.
      * 
      * @since 0.1.0
@@ -350,8 +349,8 @@ class Checkout {
                 'submission_class'      => null,
                 'submit_button'         => false
             ];
-            
-            $content = (new Form( $args ) )->build();
+
+            $content = buddyc_build_form( $args );
             $content .= '<div id="buddyc-create-account-success"></div>';
             return $content;
         }

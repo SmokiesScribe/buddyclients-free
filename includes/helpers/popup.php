@@ -62,3 +62,18 @@ function buddyc_output_popup( $content ) {
         $popup->output( $content );
     }
 }
+
+/**
+ * Updates popup content.
+ * 
+ * @since 1.0.21
+ * 
+ * @param   $content    string  The content of the popup.
+ */
+function buddyc_update_popup( $content ) {
+    // Get popup instance
+    $popup = Popup::get_instance();
+    
+    // Modify content and set visibility
+    $popup->update_content( $content );
+}

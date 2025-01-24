@@ -3,7 +3,6 @@ namespace BuddyClients\Components\Booking\BookedService;
 if ( ! defined( 'ABSPATH' ) ) exit; // Exit if accessed directly
 
 use BuddyClients\Components\Booking\BookingIntent;
-use BuddyClients\Includes\Form\Form;
 use BuddyClients\Includes\Pagination;
 
 /**
@@ -298,7 +297,7 @@ class BookedServiceList {
      */
     public function form( $key, $values = null ) {
         
-        $forms = [
+        $form_args = [
             'cancel' => [
                 'key'               => 'cancel_service',
                 'fields_callback'   => [$this, 'cancellation_fields'],
@@ -315,7 +314,10 @@ class BookedServiceList {
             ],
         ];
         
-        return ( new Form( $forms[$key] ) )->build();
+        $args = $form_args[$key] ?? null;
+        if ( $args ) {
+            return buddyc_build_form( $args );
+        }
     }
     
     /**
@@ -388,7 +390,7 @@ class BookedServiceList {
 
         // Build each field and append to $fields
         foreach ( $args as $key => $field_args ) {
-            $fields .= ( new FormField( $field_args ) )->build();
+            $fields .= buddyc_build_form_field( $field_args );
         }
 
         return $fields;

@@ -1,8 +1,6 @@
 <?php
-namespace BuddyClients\Includes\Form;
+namespace BuddyClients\Includes;
 if ( ! defined( 'ABSPATH' ) ) exit; // Exit if accessed directly
-
-use BuddyClients\Includes\Popup;
 
 /**
  * Form submission.
@@ -211,11 +209,8 @@ class FormSubmission {
         
         $content .= '</div>';
         
-        // Get popup instance
-        $popup = Popup::get_instance();
-        
-        // Modify content and set visibility
-        $popup->update_content( $content );
+        // Update popup
+        buddyc_update_popup( $content );
     }
     
     /**

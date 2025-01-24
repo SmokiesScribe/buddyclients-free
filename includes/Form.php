@@ -1,5 +1,5 @@
 <?php
-namespace BuddyClients\Includes\Form;
+namespace BuddyClients\Includes;
 if ( ! defined( 'ABSPATH' ) ) exit; // Exit if accessed directly
 
 /**
@@ -42,8 +42,7 @@ class Form {
      *     @type    string      $submit_classes         Optional. Classes to apply to the submit button.
      *     @type    array       $values                 Optional. A keyed array of values to populate the form fields.
      *     @type    int         $avatar                 Optional. Creates a user avatar above the form.
-     *     @type    string      $form_classes           Optional. Classes to apply to the form.
-     *                          
+     *     @type    string      $form_classes           Optional. Classes to apply to the form.                    
      * }
      */
     public function __construct( $args ) { 

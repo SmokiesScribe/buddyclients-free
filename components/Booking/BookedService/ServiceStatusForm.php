@@ -2,7 +2,6 @@
 namespace BuddyClients\Components\Booking\BookedService;
 if ( ! defined( 'ABSPATH' ) ) exit; // Exit if accessed directly
 
-use BuddyClients\Includes\Form\Form;
 use BuddyClients\Components\Booking\BookedService\BookedService;
 
 /**
@@ -73,8 +72,8 @@ class ServiceStatusForm {
             'form_classes'      => 'buddyc-table-form',
             'values'            => $values
         ];
-        
-        return ( new Form( $args ) )->build();
+
+        return buddyc_build_form( $args );
     }
 
     /**

@@ -2,8 +2,6 @@
 namespace BuddyClients\Includes;
 if ( ! defined( 'ABSPATH' ) ) exit; // Exit if accessed directly
 
-use BuddyClients\Includes\Form\Form;
-
 /**
  * Form to filter items in post archive.
  * 
@@ -108,9 +106,8 @@ class ArchiveFilterForm {
             'submission_class'      => null,
             'no_submit'             => true
         ];
-        
-        $form = new Form( $form_args );
-        return $form->build();
+
+        return buddyc_build_form( $form_args );
     }
     
     /**
