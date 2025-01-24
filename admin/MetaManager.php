@@ -181,7 +181,11 @@ class MetaManager {
                         'meta' => [
                             'adjustments' => [
                                 'label' => __( 'Adjustments', 'buddyclients-free' ),
-                                'description' => __( 'Select any rate adjustments that apply to this service.', 'buddyclients-free' ),
+                                'description' => sprintf(
+                                    /* translators: %s: the url to add adjustment fields */
+                                    __( 'Select any rate adjustments that apply to this service. <a href="%s">Add adjustment fields.</a>', 'buddyclients-free' ),
+                                    admin_url('/edit.php?post_type=buddyc_adjustment')
+                                ),
                                 'type' => 'checkbox',
                                 'required' => false,
                                 'options' => 'buddyc_adjustment',

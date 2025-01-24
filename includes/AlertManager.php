@@ -121,10 +121,26 @@ class AlertManager {
         
         // Initialize
         $content = null;
+
+        // Define translations
+        $translated_types = [
+            'affiliate' => __( 'affiliate', 'buddyclients-free' ),
+            'team'      => __( 'team member', 'buddyclients-free' ),
+            'sales'     => __( 'sales', 'buddyclients-free' ),
+        ];
+
+        $translated_type = $translated_types[$type] ?? '';
         
         // Get legal data
         $user_id = get_current_user_id();
         $status = buddyc_user_agreement_status( $user_id, $type );
+
+        // Make sure an agreement exists
+        $curr_version = buddyc_current_legal_version( $type );
+
+        if ( ! $curr_version ) {
+            return;
+        }
         
         // Get profile link
         $link = buddyc_profile_ext_link( $type );
@@ -132,17 +148,19 @@ class AlertManager {
         // Transitioning
         if ( $status === 'active' ) {
             $content = sprintf(
-                /* translators: %s: url to complete agreement */
-                __( 'Complete your <a href="%s">new team member agreement</a>.', 'buddyclients-free' ),
-                esc_url( $link )
+                /* translators: %1$s: url to complete agreement; %2$s: the type of agreement (e.g. affiliate or team) */
+                __( 'Complete your <a href="%1$s">new %2$s agreement</a>.', 'buddyclients-free' ),
+                esc_url( $link ),
+                $translated_type
             );            
             
         // Stable and not current
         } else if ( $status !== 'current' ) {
             $content = sprintf(
-                /* translators: %s: url to complete agreement */
-                __( 'Complete your <a href="%s">team member agreement</a>.', 'buddyclients-free' ),
-                esc_url( $link )
+                /* translators: %1$s: url to complete agreement; %2$s: the type of agreement (e.g. affiliate or team) */
+                __( 'Complete your <a href="%1$s">%2$s agreement</a>.', 'buddyclients-free' ),
+                esc_url( $link ),
+                $translated_type
             );
         }
         

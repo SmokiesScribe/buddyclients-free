@@ -475,10 +475,11 @@ class FormField {
                 'classes' => $option_data['classes'] ?? '',
                 'disabled' => $option_data['disabled'] ?? '',
                 'data_atts' => $option_data['data_atts'] ?? '',
+                'selected'  => $option_data['selected'] ?? null,
             ];
     
             // Check if the current option matches the provided value
-            $selected = ( $option_args['value'] == $this->value ) ? 'selected' : '';
+            $selected = $option_args['selected'] ?? ( ( $option_args['value'] == $this->value ) ? 'selected' : '' );
     
             $field .=   '<option ' . $this->attributes_string( $option_args ) . ' ' . $selected . '>' . ($option_data['label'] ?? '') . '</option>';
         }
@@ -491,7 +492,7 @@ class FormField {
     }
 
     
-    /**
+     /**
      * Checkbox field.
      * 
      * @since 0.1.0
@@ -507,7 +508,7 @@ class FormField {
     
         // Build checkbox options
         foreach ($this->options as $option_key => $option_data) {
-            $checked = $this->checked_checkbox( $option_data['value'] );
+            $checked = $option_data['selected'] ?? ( $this->checked_checkbox( $option_data['value'] ) );
             $args = [
                 'key' => $option_key,
                 'type' => 'checkbox',
@@ -516,7 +517,7 @@ class FormField {
                 'disabled' => $option_data['disabled'] ?? '',
                 'data_atts' => $option_data['data_atts'] ?? '',
                 'checked'   => $checked,
-                'required'  => $this->required
+                'required'  => $this->required,
             ];
     
             // Check if the current option's value is in the preselected values
@@ -561,7 +562,7 @@ class FormField {
 
         return $checked;
     }
-    
+
     
     /**
      * Upload field.

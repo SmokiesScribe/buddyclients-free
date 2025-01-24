@@ -5,6 +5,176 @@
 .buddyc-hidden {
     display: none;
 }
+.buddyc-visible {
+    display: block;
+}
+
+/* Max width */
+.buddyc-max-650 {
+    max-width: 650px;
+    margin: auto;
+}
+.buddyc-max-800 {
+    max-width: 800px;
+    margin: auto;
+}
+.buddyc-max-1000 {
+    max-width: 1000px;
+    margin: auto;
+}
+.buddyc-max-1200 {
+    max-width: 1200px;
+    margin: auto;
+}
+
+/* Text */
+.buddyc-text-center {
+    text-align: center;
+}
+.buddyc-font-small {
+    font-size: 11px;
+}
+.buddyc-font-med {
+    font-size: 15px;
+}
+.buddyc-font-large {
+    font-size: 18px;
+}
+
+/* Margins */
+.buddyc-top-margin-small {
+    margin-top: 10px;
+}
+.buddyc-top-margin-med {
+    margin-top: 30px;
+}
+.buddyc-top-margin-large {
+    margin-top: 80px;
+}
+.buddyc-bot-margin-small {
+    margin-bottom: 10px;
+}
+.buddyc-bot-margin-med {
+    margin-bottom: 30px;
+}
+.buddyc-bot-margin-large {
+    margin-bottom: 80px;
+}
+
+/* Boxed */
+.buddyc-box {
+    margin: auto;
+    background-color: #fff;
+    border: var(--buddyclients-default-border);
+    margin-bottom: 20px;
+    padding: 30px;
+    border-radius: 15px;
+}
+
+/* Tag label */
+.buddyc-tag-label {
+    background-color: var(--buddyclients-primary-color);
+    color: #fff;
+    padding: 2px 10px;
+    border-radius: 5px;
+    font-size: 12px;
+    display: inline-block;
+}
+.buddyc-tag-label.tag-0 {
+    background-color: var(--buddyclients-primary-color);
+}
+.buddyc-tag-label.tag-1 {
+    background-color: var(--buddyclients-accent-color);
+}
+.buddyc-tag-label.tag-2 {
+    background-color: var(--buddyclients-tertiary-color);
+}
+/* Dynamically adjusted colors */
+.buddyc-tag-label.tag-3 {
+    background-color: var(--buddyclients-primary-color);
+    filter: brightness(1.2);
+}
+.buddyc-tag-label.tag-4 {
+    background-color: var(--buddyclients-accent-color);
+    filter: brightness(1.2);
+}
+.buddyc-tag-label.tag-5 {
+    background-color: var(--buddyclients-tertiary-color);
+    filter: brightness(1.2);
+}
+.buddyc-tag-label.tag-6 {
+    background-color: var(--buddyclients-primary-color);
+    filter: brightness(0.8);
+}
+.buddyc-tag-label.tag-7 {
+    background-color: var(--buddyclients-accent-color);
+    filter: brightness(0.8);
+}
+.buddyc-tag-label.tag-8 {
+    background-color: var(--buddyclients-tertiary-color);
+    filter: brightness(0.8);
+}
+
+
+/* Button Container */
+.buddyc-btn-container {
+    display: flex; /* Flex layout for consistent spacing */
+    gap: 20px; /* Adds spacing between multiple buttons */
+    margin: 40px auto;
+}
+
+/* Buttons */
+.buddyc-btn {
+    padding: 10px;
+    border-radius: 5px;
+    text-decoration: none;
+    transition: all 0.3s ease; /* Smooth transitions for hover effects */
+    display: inline-block; /* Ensures buttons behave properly inline */
+    margin: 0; /* Resets any unwanted margin */
+    font-weight: 600;
+}
+.buddyc-btn:hover {
+    filter: brightness(115%); /* Slightly brighten */
+    opacity: 0.9; /* Subtle transparency */
+    transform: translateY(-2px); /* Slightly lifts the button */
+    box-shadow: 0px 4px 6px rgba(0, 0, 0.1, 0.1); /* Adds a gentle shadow */
+}
+.buddyc-btn.small {
+    padding: 5px 10px;
+    font-size: 12px;
+}
+.buddyc-btn.medium {
+    padding: 12px;
+    font-size: 16px;
+}
+.buddyc-btn.large {
+    padding: 18px;
+    font-size: 18px;
+}
+.buddyc-btn.wide {
+    padding: 12px 50px;
+    font-size: 16px;
+}
+.buddyc-btn.primary {
+    background-color: var(--buddyclients-primary-color);
+    border: none;
+    color: #fff;
+}
+.buddyc-btn.secondary {
+    background-color: var(--buddyclients-accent-color);
+    border: none;
+    color: #fff;
+}
+.buddyc-btn.outline {
+    color: var(--buddyclients-tertiary-color);
+    border: solid 1.5px var(--buddyclients-tertiary-color);
+}
+
+/* Breadcrumbs */
+.buddyc-breadcrumbs {
+    margin: 0 8px;
+    font-size: 12px;
+}
 
 /* Profile extensions */
 .buddyc-files-cancel-container {
@@ -71,12 +241,6 @@
 .buddyc-archive-container {
     margin: 10px;
     max-width: 1400px;
-    padding: 0 10px;
-}
-/* Single post */
-.buddyc-single-post {
-    margin: 10px;
-    max-width: 1200px;
     padding: 0 10px;
 }
 /* Signature field */
@@ -172,6 +336,18 @@
     padding: 3px;
 }
 
+/* Horizontal checkboxes */
+.horizontal .bp-checkbox-wrap {
+    display: inline-flex; /* Align checkboxes horizontally */
+    align-items: center; /* Vertically center checkbox and label */
+    margin-right: 15px; /* Adds space between checkboxes */
+}
+
+/* Styling for label, optional for better alignment */
+.horizontal .bp-checkbox-wrap label {
+    display: inline-block;
+    margin-right: 10px; /* Space between label and checkbox */
+}
 
 /* User profile */
 .buddyc-form-user-profile {

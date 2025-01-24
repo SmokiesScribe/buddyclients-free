@@ -20,6 +20,20 @@ class Directory {
      * @var string
      */
     private $path;
+
+    /**
+     * The base folder path.
+     *
+     * @var string
+     */
+    private $base_path;
+
+    /**
+     * The base folder url.
+     *
+     * @var string
+     */
+    private $base_url;
     
     /**
      * Full directory path.
@@ -56,9 +70,13 @@ class Directory {
             return;
         }
 
+        // Define the base path and url
+        $this->base_path = self::primary_dir( 'path' );
+        $this->base_url = self::primary_dir( 'url' );
+
         // Define full directory path
-        $this->full_path = self::primary_dir( 'path' ) . $path;
-        $this->full_url = self::primary_dir( 'url' ) . $path;
+        $this->full_path = $this->base_path . $path;
+        $this->full_url = $this->base_url . $path;
         
         // Create directory and associated files
         $this->create_dir();
@@ -80,7 +98,7 @@ class Directory {
     public static function primary_dir( $type = 'path' ) {
          
         // Get WordPress upload base directory
-        $wp_upload_dir = $upload_dir = wp_upload_dir();
+        $wp_upload_dir = wp_upload_dir();
         if ( ! is_array( $wp_upload_dir ) ) {
             return;
         }
@@ -228,7 +246,7 @@ class Directory {
     private function htaccess() {
         
         // Define the path to the .htaccess file
-        $htaccess_file = self::primary_dir( 'path' ) . '/.htaccess';
+        $htaccess_file = $this->base_path . '/.htaccess';
     
         // Check if the .htaccess file exists or needs updating
         if ( ! file_exists( $htaccess_file ) || $this->new_site_url ) {
@@ -245,7 +263,7 @@ class Directory {
             $htaccess_content .= "# Custom error page for 403 (Access Denied) error - redirect to homepage\n";
             $htaccess_content .= "ErrorDocument 403 " . site_url() . "/\n";
 
-            $file_dir = self::primary_dir( 'path' );
+            $file_dir = $this->base_path;
             $this->create_file( $file_dir, '/.htaccess', $htaccess_content );
             
             // Set the current site URL as the option value for future checks

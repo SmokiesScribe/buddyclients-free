@@ -236,11 +236,15 @@ class PDF {
         
         // Save the PDF to a file on the server
         $pdf->Output( $this->file_path, 'F' );
+
+        echo 'pdf file path: ' . $this->file_path;
         
         // Check if the file was successfully created
         if ( file_exists( $this->file_path ) && is_readable( $this->file_path ) ) {
+            echo 'pdf exists at location';
             return true;
         } else {
+            echo 'pdf does not exist at location';
             return false;
         }
     }

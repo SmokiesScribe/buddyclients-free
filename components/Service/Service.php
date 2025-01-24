@@ -153,6 +153,14 @@ class Service {
      */
     public $dependencies_string;
 
+    /**
+     * Whether the service is visible.
+     * 'Visible' if visible.
+     * 
+     * @var string
+     */
+    public $visible;
+
      
     /**
      * Constructor method.

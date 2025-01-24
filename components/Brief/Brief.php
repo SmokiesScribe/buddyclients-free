@@ -2,11 +2,10 @@
 namespace BuddyClients\Components\Brief;
 if ( ! defined( 'ABSPATH' ) ) exit; // Exit if accessed directly
 
-use BuddyClients\Includes\PostQuery as PostQuery;
-
+use BuddyClients\Includes\Project;
 
 /**
- * Brief.
+ * A single brief.
  *
  * @since 0.1.0
  */
@@ -32,6 +31,20 @@ class Brief {
      * @var int
      */
     public $project_name;
+
+    /**
+     * The link to the project group.
+     * 
+     * @var string
+     */
+    public $project_link;
+
+    /**
+     * The Project object.
+     * 
+     * @var Project
+     */
+    public $project;
     
     /**
      * The date the brief was last updated.
@@ -46,6 +59,13 @@ class Brief {
      * @var array
      */
     public $brief_types;
+
+    /**
+     * The brief type ID.
+     * 
+     * @var int
+     */
+    public $brief_type_id;
     
     /**
      * A string of brief type names.
@@ -75,10 +95,25 @@ class Brief {
      */
     private function get_brief_info( $ID ) {
         $this->project_id = get_post_meta( $ID, 'project_id', true );
-        $this->project_name = bp_get_group_name( groups_get_group( $this->project_id ) );
+        $this->project = new Project( $this->project_id );
+        $this->project_name = $this->project->name;
+        $this->project_link = $this->project->permalink;
         $this->updated_date = get_post_meta( $ID, 'updated_date', true );
         $this->brief_types = wp_get_post_terms( $ID, 'brief_type', array( 'fields' => 'names' ) );
+        $this->brief_type_id = $this->get_brief_type_id( $ID );
         $this->brief_type_names = ucfirst( implode( ', ', $this->brief_types ) );
+    }
+
+    /**
+     * Retrieves the first brief type id.
+     * 
+     * @since 1.0.21
+     * 
+     * @param   int     $ID     The ID of the brief.
+     */
+    private function get_brief_type_id( $ID ) {
+        $brief_type_ids = wp_get_post_terms( $ID, 'brief_type', array( 'fields' => 'ids' ) );
+        return isset( $brief_type_ids[0] ) ? $brief_type_ids[0] : null;
     }
     
     /**

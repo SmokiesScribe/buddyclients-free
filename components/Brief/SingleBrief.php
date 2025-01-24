@@ -2,7 +2,7 @@
 namespace BuddyClients\Components\Brief;
 if ( ! defined( 'ABSPATH' ) ) exit; // Exit if accessed directly
 
-use BuddyClients\Includes\PostQuery;
+use BuddyClients\Components\Brief\Brief;
 
 /**
  * Single brief content.
@@ -22,6 +22,20 @@ class SingleBrief {
      * @var int
      */
     public $brief_id;
+
+    /**
+     * The Brief object.
+     * 
+     * @var Brief
+     */
+    public $brief;
+
+    /**
+     * The title of the brief.
+     * 
+     * @var string
+     */
+    public $title;
     
     /**
      * The brief type ID.
@@ -31,58 +45,99 @@ class SingleBrief {
     public $brief_type;
     
     /**
-     * The ID of the associated project.
-     * 
-     * @var int
-     */
-    public $project_id;
-    
-    /**
      * Brief fields data.
      * 
      * @var array
      */
     public $fields;
-    
+
+    /**
+     * The view for the page.
+     * 'form' or 'completed'.
+     * 
+     * @var string
+     */
+    public $view;
+
+    /**
+     * Whether the current user is a group admin.
+     * 
+     * @var bool
+     */
+    public $is_admin;
+
+    /**
+     * Whether the current user is a group member.
+     * 
+     * @var bool
+     */
+    public $is_member;
+
+    /**
+     * Whether to show the form.
+     * 
+     * @var bool
+     */
+    public $show_form;
+
     /**
      * Constructor method.
      * 
      * @since 0.1.0
      */
     public function __construct( $brief_id = null ) {
-        
-        // Define brief ID
-        if ( $brief_id ) {
-            $this->brief_id = $brief_id;
-        } else {
-            global $post;
-            $this->brief_id = $post->ID;
-        }
-        
-        // Get brief type
-        $this->brief_type = self::get_brief_type( $this->brief_id );
-        
-        // Get proejct ID
-        $this->project_id = get_post_meta( $this->brief_id, 'project_id', true );
-        
-        // Get fields for brief type
+        $this->brief_id = $this->get_brief_id( $brief_id );
+        $this->get_var();
+        $this->get_user_status();
+        $this->get_brief_state();
+    }
+
+    /**
+     * Retrieves properties.
+     * 
+     * @since 1.0.21
+     */
+    private function get_var() {
+        $this->brief = new Brief( $this->brief_id );
+        $this->title = get_the_title( $this->brief_id );
+        $this->brief_type = $this->brief->brief_type_id;
         $this->fields = self::get_fields( $this->brief_type );
     }
-    
+
     /**
-     * Retrieves the brief type of a single brief post.
+     * Retrieves status-based properties.
      * 
-     * Returns the first brief type found.
-     * 
-     * @since 0.1.0
-     * 
-     * @param   int     $brief_id       The ID of the brief post.
+     * @since 1.0.21
      */
-    private static function get_brief_type( $brief_id ) {
-        $brief_types = wp_get_post_terms( $brief_id, 'brief_type', array('fields' => 'ids') );
-        if ( $brief_types ) {
-            return $brief_types[0];
+    private function get_brief_state() {
+        $this->view = buddyc_get_param( 'brief-view' );
+        $this->show_form = $this->show_form();
+    }
+
+    /**
+     * Retrieves the current user's group status.
+     * 
+     * @since 1.0.21
+     */
+    private function get_user_status() {
+        $curr_user = get_current_user_id();
+        $this->is_admin = groups_is_user_admin( $curr_user, $this->brief->project_id ) || buddyc_is_admin();
+        $this->is_member = groups_is_user_member( $curr_user, $this->brief->project_id );
+    }
+
+    /**
+     * Defines the brief ID.
+     * 
+     * @since 1.0.21
+     * 
+     * @param   ?int    $brief_id   Optional. The brief ID.
+     */
+    private function get_brief_id( $brief_id = null ) {
+        if ( empty( $brief_id ) ) {
+            global $post;
+            $brief_id = $post->ID;
         }
+        return $brief_id;     
     }
     
     /**
@@ -98,7 +153,7 @@ class SingleBrief {
         $fields = [];
         
         // Get all brief fields
-        $brief_fields = ( new PostQuery( 'buddyc_brief_field' ) )->posts;
+        $brief_fields = buddyc_post_query( 'buddyc_brief_field' );
         
         // Loop through fields
         foreach ( $brief_fields as $field ) {
@@ -135,37 +190,11 @@ class SingleBrief {
      */
     public function display() {
         
-        // Initialize
-        $content = '';
-        
-        // Check brief view
-        $brief_view = buddyc_get_param( 'brief-view' );
-        
-        // Get brief type
-        $brief_type_name = implode(', ', wp_get_post_terms($this->brief_id, 'brief_type', array('fields' => 'names')));
-        
-        // Get post meta
-        $updated_date = get_post_meta($this->brief_id, 'updated_date', true);
-        $project_id = get_post_meta($this->brief_id, 'project_id', true);
-        
-        // Check user status
-        $current_user_id = get_current_user_id();
-        $is_admin = groups_is_user_admin( $current_user_id, $project_id ) || buddyc_is_admin();
-        $is_member = groups_is_user_member( $current_user_id, $project_id );
-        
-        // Get project details
-        $group_obj = groups_get_group($project_id);
-        $group_permalink = bp_get_group_permalink($group_obj);
-        $group_name = bp_get_group_name($group_obj);
-        
-        // Check form vs completed brief criteria
-        $show_form = $this->show_form( $is_admin, $updated_date, $brief_view );
-        
-        // Define toggle button
-        $toggle_button = $this->toggle_button( $show_form, $is_admin, $updated_date );
+        // Initialize with title
+        $content = '<h1>' . esc_html( $this->title ) . '</h1>';
         
         // Display brief content based on user status and brief view
-        $content = $this->content_by_status( $show_form, $is_member, $is_admin, $group_permalink, $group_name, $toggle_button, $updated_date );
+        $content .= $this->content_by_status();
         
         return $content;
     }
@@ -175,19 +204,19 @@ class SingleBrief {
      * 
      * @since 0.1.0
      */
-    private function show_form( $is_admin, $updated_date, $brief_view ) {
+    private function show_form( ) {
         // Hide from non group admins - or site admins
-        if ( ! $is_admin ) {
+        if ( ! $this->is_admin ) {
             return false;
         }
         
         // Brief completed and brief view is not form
-        if ( $updated_date && $brief_view !== 'form' ) {
+        if ( $this->brief->updated_date && $this->view !== 'form' ) {
             return false;
         }
         
         // Brief view is 'completed'
-        if ( $brief_view === 'completed' ) {
+        if ( $this->view === 'completed' ) {
             return false;
         }
         
@@ -200,60 +229,57 @@ class SingleBrief {
      * 
      * @since 0.1.0
      */
-private function toggle_button( $show_form, $is_admin, $updated_date ) {
-    $toggle_button = '';
-    $btn_type = null;
-    $updated_url = null;
-    
-    // Initialize param manager
-    $param_manager = buddyc_param_manager();
+    private function toggle_button() {
+        // Initialize url
+        $updated_url = null;
+        
+        // Initialize param manager
+        $param_manager = buddyc_param_manager();
 
-    // Is admin viewing completed brief
-    if ( ! $show_form && $is_admin ) {
-        $updated_url = $param_manager->add_param( 'brief-view', 'form' );
-        $btn_type = 'edit';
-        
-        
-    // Is admin viewing form and the brief has been completed
-    } else if ( $show_form && $is_admin && $updated_date ) {
-        $updated_url = $param_manager->add_param( 'brief-view', 'completed' );
-        $btn_type = 'view';
-        
-    // Default
-    } else {
-        // Remove 'brief-view' parameter if set
-        if ( isset( $query_params['brief-view'] ) ) {
-            unset( $query_params['brief-view'] );
+        // Is admin viewing completed brief
+        if ( ! $this->show_form && $this->is_admin ) {
+            $updated_url = $param_manager->add_param( 'brief-view', 'form' );
+            $label = __( 'Edit Your Brief Submission', 'buddyclients-free' );
+            
+            
+        // Is admin viewing form and the brief has been completed
+        } else if ( $this->show_form && $this->is_admin && $this->brief->updated_date ) {
+            $updated_url = $param_manager->add_param( 'brief-view', 'completed' );
+            $label = __( 'View Your Brief Submission', 'buddyclients-free' );
+            
+        // Default
+        } else {
+            // Remove 'brief-view' parameter if set
+            if ( isset( $query_params['brief-view'] ) ) {
+                unset( $query_params['brief-view'] );
+            }
+        }
+
+        // Generate the button HTML
+        if ( $updated_url ) {
+
+            $btn_args = [
+                'text'  => $label,
+                'link'  => esc_url( $updated_url ),
+                'type'  => 'outline',
+                'size'  => 'medium'
+            ];
+            return buddyc_btn( $btn_args );
         }
     }
-    
-    // Define labels
-    $labels = [
-        'edit'      => __( 'Edit', 'buddyclients-free' ),
-        'view'      => __( 'View', 'buddyclients-free' ),
-    ];
-
-    // Generate the button HTML
-    if ( $updated_url ) {
-        $toggle_button = '<a class="show-hide-brief-btn ' . $btn_type . '" href="' . esc_url( $updated_url ) . '">' . ( $labels[$btn_type] ?? '' ) . ' Your Brief Submission</a>';
-    }
-    
-    return $toggle_button;
-}
-
     
     /**
      * Generate the content based on user status and brief view.
      * 
      * @since 0.1.0
      */
-    private function content_by_status( $show_form, $is_member, $is_admin, $group_permalink, $group_name, $toggle_button, $updated_date ) {
+    private function content_by_status() {
         $content = '';
         
-        if ( ! $is_member && ! $is_admin ) {
+        if ( ! $this->is_member && ! $this->is_admin ) {
             $content .= $this->not_member_content();
         } else {
-            $content .= $this->member_content( $show_form, $group_permalink, $group_name, $toggle_button, $updated_date );
+            $content .= $this->member_content();
         }
         
         return $content;
@@ -289,49 +315,45 @@ private function toggle_button( $show_form, $is_admin, $updated_date ) {
      * 
      * @since 0.1.0
      */
-    private function member_content( $show_form, $group_permalink, $group_name, $toggle_button, $updated_date ) {
+    private function member_content() {
         $content = '';
         
-        // Breadcrumbs
-        $sep = '<i class="fa-solid fa-angle-right" style="margin: 0 8px; font-size: 12px;"></i>';
-        $projects_link = '<a href="' . bp_get_loggedin_user_link() . '/groups">' . __('Projects', 'buddyclients-free') . '</a>';
-        $group_link = '<a href="' . $group_permalink . '">' . esc_html($group_name) . '</a>';
-        $briefs_link = '<a href="' . $group_permalink . '/brief/">' . __('Briefs', 'buddyclients-free') . '</a>';
-        
-        $content .= '<p class="buddyc-single-brief-breadcrumbs">' . $projects_link . $sep . $group_link . $sep . $briefs_link . $sep . get_the_title() . '</p>';
-        
-        // Title
-        $content .= '<h1>' . get_the_title() . '</h1>';
-        
-        // Last updated
-        $content .= '<p></p>';
-        
-        // Open links container
-        $content .= '<div class="buddyc-brief-links">';
-        
-        // Display last updated date
-        if ($updated_date) {
-            $content .= '<p>' . __('Last Updated:', 'buddyclients-free') . ' ' . gmdate('F j, Y,  h:i A', strtotime($updated_date)) . '</p>';
+        // Last updated date
+        if ( $this->brief->updated_date ) {
+            $content .= __( sprintf(
+                /* translators: %s: the date and time the brief was last updated */
+                '<p>Last Updated: %s</p>',
+                esc_html( gmdate( 'F j, Y, h:i A', strtotime( $this->brief->updated_date ) ) )
+            ));
         }
         
-        // Display toggle button
-        $content .= $toggle_button;
-        
-        // Close links container
-        $content .= '</div>';
-        
-        // Completed Brief Content
-        if ( ! $show_form ) {
-            
-            // Show submitted brief content
-            $content .= ( new CompletedBrief )->display( $content );
-    
-        } else {
-            
-            // Brief Form
-            $content .= ( new BriefForm )->form();
-        }
+        // Toggle button
+        $content .= $this->toggle_button();
+
+        // Build content by status
+        $content .= ! $this->show_form ? $this->completed_brief() : $this->brief_form();
         
         return $content;
+    }
+
+    /**
+     * Outputs the completed brief content.
+     * 
+     * @since 1.0.21
+     */
+    private function completed_brief() {
+        $completed_brief = new CompletedBrief;
+        return $completed_brief->display();
+
+    }
+
+    /**
+     * Outputs the brief form.
+     * 
+     * @since 1.0.21
+     */
+    private function brief_form() {
+        $form = new BriefForm;
+        return $form->form();
     }
 }

@@ -45,6 +45,10 @@ class Icon {
                 'bb-icon-class' => 'bb-icon-l bb-icon-edit',
                 'fa-icon-class' => 'fa-solid fa-pen-to-square',
             ],
+            'question' => [
+                'bb-icon-class' => 'bb-icon-f bb-icon-question',
+                'fa-icon-class' => 'fa-solid fa-question',
+            ],
             'check' => [
                 'bb-icon-class' => 'bb-icon-check bb-icon-rf',
                 'fa-icon-class' => 'fa-solid fa-circle-check',

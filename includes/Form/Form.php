@@ -236,6 +236,10 @@ class Form {
      * @since 0.1.0
      */
     private function submit_field() {
+        $no_submit = $this->args['no_submit'] ?? null;
+        if ( $no_submit ) {
+            return;
+        }
         
         $submit_button = $this->args['submit_button'] ?? true;
         $submit_text = $this->args['submit_text'] ?? 'Submit';

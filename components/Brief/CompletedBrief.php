@@ -37,33 +37,24 @@ class CompletedBrief extends SingleBrief {
      */
     public function display() {
         // Initialize
-        $brief_content = '';
-        
-        // Add the container (wraps both columns)
-        $brief_content .= '<div class="custom-content">';
-        
-        // Add hidden header to anchor auto TOC
-        $brief_content .= '<h2 class="buddyc-hidden"></h2>';
+        $content = '';
         
         // Check that field options exist
-        if ( $this->fields ) {
+        if ( ! empty( $this->fields ) && is_array( $this->fields ) ) {
         
             // Loop through the fields and append their values with human-readable names to the custom content
             foreach ( $this->fields as $field_id => $data ) {
                 
                 // Single field
-                $brief_content .= $this->single_field( $field_id, $data );
+                $content .= $this->single_field( $field_id, $data );
 
             }
         }
 
         // Add empty fields list
-        $brief_content .= $this->empty_fields_list();
+        $content .= $this->empty_fields_list();
         
-        // Close the content container
-        $brief_content .= '</div>';
-        
-        return $brief_content;
+        return $content;
     }
     
     /**
@@ -77,77 +68,127 @@ class CompletedBrief extends SingleBrief {
     private function single_field( $field_id, $data ) {
         
         // Initialize
-        $brief_content = '';
+        $content = '';
         
         // Get field value
-        $field_value = get_post_meta($this->brief_id, $field_id, true);
+        $field_value = get_post_meta( $this->brief_id, $field_id, true );
 
-        // Skip empty and disabled fields
+        // Skip disabled fields
+        if ( $data['type'] === 'disabled' ) {
+            return;
+        }
+
+        // Add empty field to array and skip
         if ( ! $field_value ) {
-            $this->empty_fields[] = $data['label'];
+            $this->empty_fields[] = $data['label'] ?? '';
             return;
         }
         
-        // Skip empty and disabled fields
-        if ( ! $field_value || $data['type'] === 'disabled' ) {
-            return;
-        }
-        
-        // Begin building field
-        $brief_content .= '<div class="single-brief-field">';
-        $brief_content .= '<h4><strong>' . esc_html($data['label']) . '</strong></h4>';
-            
-        // Upload field
-        if ($data['type'] === 'upload') {
-            
-            // Handle upload field
-            $brief_content .= buddyc_download_links( $field_value, true );
-        
-        // Not upload field    
-        } else {
-            
-            // Checkboxes
-            if (is_array($field_value)) { // handle checkboxes
-                
-                // Get field value as an array
-                $field_value = get_post_meta($this->brief_id, $field_id, false);  
-                
-                // Initialize the string to store formatted values
-                $formatted_field_value = '';
-                
-                // Loop through each array of values
-                foreach ($field_value as $values_array) {
-                    // Loop through each individual value in the array
-                    foreach ($values_array as $value) {
-                        // Format the value and append it to the formatted string
-                        $formatted_field_value .= trim(ucwords(str_replace('_', ' ', esc_html($value)))) . ', ';
-                    }
-                }
-                
-                // Remove the trailing comma and space
-                $formatted_field_value = rtrim($formatted_field_value, ', ');
-            
-            // Single value    
-            } else {
-                
-                if ($data['type'] === 'text_area' || $data['type'] === 'input') {
-                    // No formatting
-                    $formatted_field_value = trim($field_value);
-                } else {
-                    // Format single value
-                    $formatted_field_value = trim(ucwords(str_replace('_', ' ', esc_html($field_value))));
-                }
-            }
-                
-            // Output the field content
-            $brief_content .= '<p>' . $formatted_field_value . '</p>';
+        // Open container
+        $content .= '<div class="buddyc-box">';
 
-        }
+        // Field label
+        $content .= '<h4><strong>' . esc_html( $data['label'] ) . '</strong></h4>';
+
+        // Add content by type
+        $content .= $this->field_content( $field_id, $data, $field_value );
         
         // Close the field
-        $brief_content .= '</div>';
+        $content .= '</div>';
         
-        return $brief_content;
+        return $content;
+    }
+
+    /**
+     * Builds the field value based on the field type.
+     * 
+     * @since 1.0.21
+     * 
+     * @param   string  $field_id       The ID of the field.
+     * @param   array   $data           An array of data for the field.
+     * @param   mixed   $field_value    The value of the field.
+     */
+    private function field_content( $field_id, $data, $field_value ) {
+        $type = $data['type'] ?? 'input';
+
+        // Upload field
+        if ( $type === 'upload' ) {
+            return buddyc_download_links( $field_value, true );
+        }
+
+        // Array
+        if ( is_array( $field_value ) ) {
+            return $this->checkbox_field_content( $field_id, $data );
+        }
+        
+        // Single value
+        return $this->single_value( $type, $field_value );
+    }
+
+    /**
+     * Formats the value for a single value field.
+     * 
+     * @since 1.0.21
+     * 
+     * @param   string  $type           The type of field.
+     * @pearam  string  $field_value    The value of the field.
+     */
+    private function single_value( $type, $field_value ) {
+        switch ( $type ) {
+            case 'text_area':
+                // Don't format text area
+                $content = trim( $field_value );
+                break;
+            default:
+                $content = $this->format_value( $field_value );
+                break;
+        }
+        return $content;
+    }
+
+    /**
+     * Builds the content for a checkbox field.
+     * 
+     * @since 1.0.21
+     * 
+     * @param   string  $field_id       The ID of the field.
+     * @param   array   $data           An array of data for the field.
+     */
+    private function checkbox_field_content( $field_id, $data ) {
+
+        // Get field value as an array
+        $field_value = get_post_meta( $this->brief_id, $field_id, false );
+    
+        // Initialize the string to store formatted values
+        $value_string = '';
+    
+        if ( ! empty( $field_value ) && is_array( $field_value ) ) {
+            // Flatten the multidimensional array
+            $flattened_values = array_merge( ...$field_value );
+    
+            // Format and join the values into a string
+            $value_string = implode(
+                ', ',
+                array_map(
+                    function ( $value ) {
+                        return $this->format_value( $value );
+                    },
+                    $flattened_values
+                )
+            );
+        }
+        return $value_string;
+    }    
+
+    /**
+     * Formats a single value.
+     * 
+     * @since 1.0.21
+     */
+    private function format_value( $value ) {
+        if ( ! empty( $value ) ) {
+            return trim( ucwords( str_replace( '_', ' ', $value ) ) );
+        }
     }
 
     /**

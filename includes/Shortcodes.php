@@ -3,11 +3,11 @@ namespace BuddyClients\Includes;
 if ( ! defined( 'ABSPATH' ) ) exit; // Exit if accessed directly
 
 use BuddyClients\Components\{
-    Booking\BookingForm as BookingForm,
-    Checkout\Checkout as Checkout,
-    Testimonial\TestimonialForm as TestimonialForm,
-    Contact\ContactForm as ContactForm,
-    Checkout\Confirmation as Confirmation
+    Booking\BookingForm,
+    Checkout\Checkout,
+    Testimonial\TestimonialForm,
+    Contact\ContactForm,
+    Checkout\Confirmation
 };
 
 /**
@@ -24,8 +24,7 @@ class Shortcodes {
      *
      * @since 0.1.0
      */
-    public static function run() {
-        
+    public static function run() {        
         // Not admin area or login
         if ( ! is_admin() && $GLOBALS['pagenow'] === 'index.php' ) {
             // Register shortcodes
@@ -42,23 +41,23 @@ class Shortcodes {
         $shortcodes = [];
     
         // Check if the class exists before instantiating
-        if (class_exists(BookingForm::class)) {
+        if ( class_exists( BookingForm::class ) ) {
             $shortcodes['buddyc_booking_form'] = [new BookingForm, 'build_form'];
         }
     
-        if (class_exists(Checkout::class)) {
+        if ( class_exists( Checkout::class ) ) {
             $shortcodes['buddyc_checkout'] = [new Checkout, 'build'];
         }
     
-        if (class_exists(TestimonialForm::class)) {
+        if ( class_exists( TestimonialForm::class ) ) {
             $shortcodes['buddyc_testimonial_form'] = [new TestimonialForm, 'build'];
         }
         
-        if (class_exists(ContactForm::class)) {
+        if ( class_exists( ContactForm::class ) ) {
             $shortcodes['buddyc_contact_form'] = [new ContactForm, 'build'];
         }
         
-        if (class_exists(Confirmation::class)) {
+        if ( class_exists( Confirmation::class ) ) {
             $shortcodes['buddyc_confirmation'] = [new Confirmation, 'build'];
         }
         
@@ -86,7 +85,5 @@ class Shortcodes {
                 add_shortcode( $shortcode, $callable );
             }
         }
-    }
-
-    
+    }    
 }
