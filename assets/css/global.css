@@ -27,6 +27,11 @@
     margin: auto;
 }
 
+/* Spacers */
+.buddyc-spacer-20 {
+    height: 20px;
+}
+
 /* Text */
 .buddyc-text-center {
     text-align: center;
@@ -39,6 +44,9 @@
 }
 .buddyc-font-large {
     font-size: 18px;
+}
+.buddyc-text-red {
+    color: red;
 }
 
 /* Margins */
@@ -210,6 +218,10 @@
 .buddyc-icon.fa-icon-class {
     font-size: 16px;
 }
+.buddyc-icon.admin-info {
+    margin-right: 10px;
+    color: #7face1;
+}
 
 /* Subnav */
 .buddyc-subnav {
@@ -233,6 +245,10 @@
 }
 .buddyc-copy-input {
     max-width: 100%;
+}
+.buddyc-copy-success {
+    margin: 10px;
+    font-weight: 500;
 }
 /* Archive */
 .archive-title-container {

@@ -196,9 +196,9 @@ class AdminTable {
         $form_tags = buddyc_allowed_html_form();
         $additional_tags = [
             'script' => [],
-            'i' => [ 'class' => [], 'style' => [] ],
+            'i' => [ 'class' => [] ],
             'span' => [ 'id' => [], 'class' => [] ],
-            'button'   => ['onclick' => [], 'type' => [], 'class' => [], 'style' => []],
+            'button'   => ['onclick' => [], 'type' => [], 'class' => []],
         ];        
         return array_merge( $form_tags, $additional_tags );
     }
@@ -627,7 +627,7 @@ class AdminTable {
         }
         
         // Start building the filter form
-        echo '<form method="POST" style="margin-bottom: 20px;">';
+        echo '<form method="POST">';
 
         // Nonce field
         wp_nonce_field( 'buddyc_filter_nonce_action', 'buddyc_filter_nonce' );
@@ -655,7 +655,7 @@ class AdminTable {
             echo '</label>';
             
             // Build the dropdown
-            echo '<select name="' .  esc_attr( $name ) . '" id="' . esc_attr( $name ) . '" style="margin-right: 5px;">';
+            echo '<select name="' .  esc_attr( $name ) . '" id="' . esc_attr( $name ) . '">';
             
             // Loop through the options
             foreach ( $data['options'] as $option_key => $option_label ) {

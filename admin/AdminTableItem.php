@@ -431,7 +431,8 @@ class AdminTableItem extends AdminTable {
 
         // Output button
         $title = __( 'Edit status', 'buddyclients-free' );
-        $update_button = '<span class="buddyc-update-booking-icon"><a href="#" title="' . $title . '" onclick="return buddycConfirmAction(\'' . esc_url( $update_url ) . '\', \'' . esc_js( $message ) . '\');" style="font-size: 16px"><i class="fa-solid fa-pen-to-square"></i></a></span>';
+        $edit_icon = buddyc_icon( 'edit' );
+        $update_button = '<span class="buddyc-update-booking-icon"><a href="#" title="' . $title . '" onclick="return buddycConfirmAction(\'' . esc_url( $update_url ) . '\', \'' . esc_js( $message ) . '\');">' . $edit_icon . '</a></span>';
 
         return $update_button;     
     }
@@ -546,7 +547,7 @@ class AdminTableItem extends AdminTable {
             <?php echo esc_html( $value ) ?>
             </span></p>
             <button onclick="buddycCopyToClipboard('<?php echo esc_attr( $field_id ) ?>')" type="button" class="button button-secondary">Copy Memo</button>
-            <div class="buddyc-copy-success" style="margin: 10px; font-weight: 500"></div>
+            <div class="buddyc-copy-success"></div>
         </div>
         <?php
 

@@ -201,7 +201,7 @@ class FormSubmission {
      */
     private function failure_message() {
         // Generate container to align center
-        $content = '<div style="text-align: center">';
+        $content = '<div class="buddyc-text-center">';
         
         // Define failure content
         $content .= '<h2>' . __( 'Uh oh, something went wrong.', 'buddyclients-free' ) . '</h2>';

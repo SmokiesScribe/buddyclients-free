@@ -388,12 +388,7 @@ class BookedServiceList {
             ]
         ];
 
-        // Build each field and append to $fields
-        foreach ( $args as $key => $field_args ) {
-            $fields .= buddyc_build_form_field( $field_args );
-        }
-
-        return $fields;
+        return $args;
     }
 
     /**

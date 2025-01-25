@@ -176,9 +176,10 @@ class AdminNotice {
      */
     private static function allowed_html() {
         return [
-            'div' => ['class' => true],
-            'p' => [],
-            'a' => ['href' => true, 'class' => true, 'target' => []],
+            'div'   => ['class' => true],
+            'p'     => [],
+            'a'     => ['href' => true, 'class' => true, 'target' => []],
+            'i'     => ['class' => []]
         ];
     }
 

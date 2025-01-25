@@ -622,7 +622,7 @@ class SettingsPage {
         if ( $post ) {
             $view_button = $post ? 
             '<a href="' . get_permalink($value) . '" target="_blank">
-                <button type="button" class="button button-primary" style="margin-right: 5px">' . 
+                <button type="button" class="button button-primary">' . 
                     /* translators: %s: label of the field */
                     sprintf( esc_html__('View Active %s', 'buddyclients-free'), $field_data['label'] ) . 
                 '</button>
@@ -633,7 +633,7 @@ class SettingsPage {
         $draft_id = buddyc_get_setting('legal', $field_id . '_draft');
         if ( $draft_id ) {
             $edit_button = '<a href="' . get_edit_post_link($draft_id) . '">
-                <button type="button" class="button button-secondary" style="margin-right: 5px">' . 
+                <button type="button" class="button button-secondary">' . 
                     /* translators: %s: label of the field */
                     sprintf( esc_html__('Edit %s Draft', 'buddyclients-free'), $field_data['label'] ) . 
                 '</button>
@@ -651,7 +651,7 @@ class SettingsPage {
                 post_type: \'' . esc_js('buddyc_legal') . '\',
                 post_status: \'' . esc_js('draft') . '\',
                 nonce: \'' . esc_js($create_nonce) . '\'
-            });" type="button" class="button button-secondary" style="margin-right: 5px">' . 
+            });" type="button" class="button button-secondary">' . 
                 /* translators: %s: label of the field */
                 sprintf( esc_html__('Create New %s', 'buddyclients-free'), esc_html($field_data['label'])) . 
             '</button>';
@@ -693,7 +693,7 @@ class SettingsPage {
         // Build output
         $output .= '<div class="buddyclients-admin-field">';
         $output .= '<label for="' . esc_attr($this->name . '[' . $field_id . ']') . '">' . esc_html($field_data['label']) . '</label>';
-        $output .= '<div class="buddyclients-admin-field-input-wrap" style="margin-bottom: 15px">';
+        $output .= '<div class="buddyclients-admin-field-input-wrap">';
         $output .= '<input type="hidden" name="' . esc_attr($this->name . '[' . $field_id . ']') . '" value="' . esc_attr($value) . '">';
     
         $output .= $view_button;

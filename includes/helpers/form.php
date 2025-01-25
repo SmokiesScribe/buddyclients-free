@@ -50,13 +50,3 @@ function buddyc_echo_form( $args ) {
     $form = new Form( $args );
     return $form->echo();
 }
-
-/**
- * Builds a new FormField from an array of args.
- * 
- * @since 1.0.21
- */
-function buddyc_build_form_field( $args ) {
-    $field = new FormField( $field_args );
-    return $field->build();
-}

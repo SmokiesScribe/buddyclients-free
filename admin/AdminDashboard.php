@@ -366,7 +366,7 @@ class AdminDashboard {
         $content = '';
 
         // Start building the filter form
-        $content .= '<form method="POST" style="margin-bottom: 20px;">';
+        $content .= '<form method="POST">';
 
         // Nonce field
         $content .= wp_nonce_field( 'buddyc_filter_nonce_action', 'buddyc_filter_nonce' );
@@ -380,7 +380,7 @@ class AdminDashboard {
         $content .= '</label>';
         
         // Build the dropdown
-        $content .= '<select name="' .  esc_attr( $name ) . '" id="' . esc_attr( $name ) . '" style="margin-right: 5px;">';
+        $content .= '<select name="' .  esc_attr( $name ) . '" id="' . esc_attr( $name ) . '">';
         
         // Loop through the options
         foreach ( $this->filter_options() as $option_key => $option_label ) {

@@ -65,13 +65,15 @@ class AdminInfo {
     private function generate_notice( $message ) {
         // Make sure message exists
         if ( ! empty( $message ) ) {
+
+            $icon = buddyc_icon( 'admin-info' );
             
             // Define notice args
             $notice_args = [
                 'repair_link'       => ['/admin.php?page=buddyc-general-settings', 'https://buddyclients.com/help'],
                 'dismissable'       => true,
                 'repair_link_text'  => [__( 'Disable tips', 'buddyclients-free' ), __( 'Help docs', 'buddyclients-free' )],
-                'message'           => '<i style="margin-right: 10px; color: #7face1" class="fa-solid fa-circle-info"></i>' . $message,
+                'message'           => $icon . $message,
                 'color'             => 'blue'
             ];
             

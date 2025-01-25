@@ -2,10 +2,10 @@
 namespace BuddyClients\Admin;
 if ( ! defined( 'ABSPATH' ) ) exit; // Exit if accessed directly
 
-use BuddyClients\Admin\PageManager as PageManager;
-use BuddyClients\Components\Stripe\StripeKeys as StripeKeys;
-use BuddyClients\Components\Email\EmailTemplateManager as EmailTemplateManager;
-use BuddyClients\Config\ComponentsHandler as ComponentsHandler;
+use BuddyClients\Admin\PageManager;
+use BuddyClients\Components\Stripe\StripeKeys;
+use BuddyClients\Components\Email\EmailTemplateManager;
+use BuddyClients\Config\ComponentsHandler;
 
 /**
  * Settings manager.
@@ -868,7 +868,7 @@ class Settings {
                             'type' => 'checkboxes',
                             'options' => self::email_options(),
                             'default' => self::email_options( true ),
-                            'description' => __( 'Select the events you would like to trigger email notifications for users.<br><span style="color: red">*</span> Disabling starred emails may impact plugin functionality.', 'buddyclients-free' ),
+                            'description' => __( 'Select the events you would like to trigger email notifications for users.<br><span class="buddyc-text-red">*</span> Disabling starred emails may impact plugin functionality.', 'buddyclients-free' ),
                         ],
                     ],
                 ],
@@ -1107,7 +1107,7 @@ class Settings {
         
         foreach ( $templates as $key => $data ) {
             if ( isset($data['required']) && $data['required'] ) {
-                $required = '<span style="color: red"> *</span>';
+                $required = '<span class="buddyc-text-red"> *</span>';
             } else {
                 $required = '';
             }

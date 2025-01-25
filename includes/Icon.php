@@ -41,6 +41,10 @@ class Icon {
      */
     private static function icon_data() {
         return [
+            'admin-info' => [
+                'bb-icon-class' => 'bb-icon-rf bb-icon-info',
+                'fa-icon-class' => 'fa-solid fa-circle-info',
+            ],
             'edit' => [
                 'bb-icon-class' => 'bb-icon-l bb-icon-edit',
                 'fa-icon-class' => 'fa-solid fa-pen-to-square',
@@ -173,7 +177,7 @@ class Icon {
         // Check if icon exists
         if ( isset( $icon_data[$this->key] ) ) {
             // Initialize array
-            $classes = ['buddyc-icon', $class_type];
+            $classes = ['buddyc-icon', $this->key, $class_type];
 
             // Add icon class
             $classes[] = $icon_data[$this->key][$class_type] ?? null;
