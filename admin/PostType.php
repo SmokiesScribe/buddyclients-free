@@ -2,8 +2,6 @@
 namespace BuddyClients\Admin;
 if ( ! defined( 'ABSPATH' ) ) exit; // Exit if accessed directly
 
-use BuddyClients\Includes\Loader as Loader;
-
 /**
  * Post type.
  *

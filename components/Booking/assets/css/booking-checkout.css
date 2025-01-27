@@ -3,19 +3,19 @@
     display: none;
 }
 
-.booking-checkout-container {
+.buddyc-booking-checkout-container {
     display: flex;
     flex-wrap: nowrap; /* Do not allow line break between columns */
     justify-content: space-between;
 }
 
-.booking-form-column {
+.buddyc-booking-form-column {
     flex: 65%;
     max-width: 65%;
     margin-bottom: 20px; /* Add margin for spacing */
 }
 
-.checkout-fee-column {
+.buddyc-checkout-fee-column {
     flex: 30%;
     max-width: 30%;
     margin: 20px;

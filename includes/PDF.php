@@ -1,12 +1,7 @@
 <?php
 namespace BuddyClients\Includes;
 if ( ! defined( 'ABSPATH' ) ) exit; // Exit if accessed directly
-
-use BuddyClients\Includes\FileHandler;
-use BuddyClients\Includes\ObjectHandler;
-
 use GriffinVendor\TCPDF;
-
 use DOMDocument;
 
 /**
@@ -89,7 +84,7 @@ class PDF {
      */
     private static function init_object_handler() {
         if ( ! self::$object_handler ) {
-            self::$object_handler = new ObjectHandler( __CLASS__ );
+            self::$object_handler = buddyc_object_handler( __CLASS__ );
         }
     }
     
@@ -167,17 +162,29 @@ class PDF {
         foreach ( $args as $key => $value ) {
             $this->{$key} = $value;
         }
+
         // Build file name
         $this->file_name = $this->generate_file_name();
-        
-        // Get directory path
-        $directory = new Directory( 'pdfs/' . $this->user_id );
-        $this->dir_path = $directory->full_path();
+
+        // Set paths and urls
+        $this->set_dir_properties();
+    }
+
+    /**
+     * Sets the directory paths and urls.
+     * 
+     * @since 1.0.21
+     */
+    private function set_dir_properties() {
+        // Init Directory
+        $directory = buddyc_directory( 'pdfs/' . $this->user_id );
+
+        // Get dir path and url
+        $dir_path = $directory->full_path();
+        $dir_url = $directory->full_url();
         
         // Build the full path and url
-        $this->file_path = trailingslashit( $this->dir_path ) . $this->file_name . '.pdf';
-
-        $dir_url = $directory->full_url();
+        $this->file_path = trailingslashit( $dir_path ) . $this->file_name . '.pdf';
         $this->file_url = trailingslashit( $dir_url ) . $this->file_name . '.pdf';
     }
     
@@ -189,64 +196,203 @@ class PDF {
      * @return  string  The URL of the newly created PDF.
      */
     private function generate_pdf() {
-        
+
+        // Initialize the PDF
+        $pdf = $this->init_pdf();
+
+        // Add a page
+        $this->add_page( $pdf );
+
+        // Add the title
+        $this->add_title( $pdf );
+
+        // Add content
+        $this->add_content( $pdf );
+
+        // Add image
+        $this->add_image( $pdf );
+
+        // Additional content
+        $this->additional_content( $pdf );
+
+        // Save to server
+        $success = $this->save_to_server( $pdf );
+
+        // Return bool
+        return $success;
+    }
+
+    /**
+     * Initializes the PDF and its info.
+     * 
+     * @since 1.0.21
+     */
+    private function init_pdf() {
         // Create a new instance of TCPDF class
         $pdf = new TCPDF();
-        $pdf->SetCreator(PDF_CREATOR);
-        $pdf->SetAuthor( get_bloginfo( 'name' ) );
-        $pdf->SetTitle( $this->title );
-        $pdf->SetSubject( $this->title );
-        $pdf->SetKeywords( 'User, Legal, PDF' );
         
+        // Set PDF info
+        $pdf->SetCreator(PDF_CREATOR);
+
+        // Set author
+        $pdf->SetAuthor( get_bloginfo( 'name' ) );
+
+        // Set title
+        $pdf->SetTitle( $this->title );
+
+        // Set subject
+        $pdf->SetSubject( $this->title );
+
+        // Set keywords
+        $pdf->SetKeywords( 'User, Legal, PDF' );
+
         // Set default font subsetting mode
         $pdf->setFontSubsetting(true);
-        
+
+        // Return pdf
+        return $pdf;
+    }
+
+    /**
+     * Saves the PDF to the server.
+     * 
+     * @since 1.0.21
+     * 
+     * @param   TCPDF   $pdf    The PDF object.
+     * @return  bool            True if the file was saved successfully, false otherwise.
+     */
+    private function save_to_server( $pdf ) {
+        try {
+            // Save the PDF to a file on the server
+            $pdf->Output( $this->file_path, 'F' );
+
+            // Check if the file exists
+            if ( $this->exists() ) {
+                return true;
+            } else {
+                // File does not exist
+                $error_message = __( sprintf(
+                    /* translators: %s: the file path */
+                    'PDF file was not created at %s',
+                    $this->file_path
+                ), 'buddyclients-free' );
+                error_log( $error_message );
+                return false;
+            }
+        } catch ( Exception $e ) {
+            // TCPDF error
+            $error_message = __( sprintf(
+                /* translators: %s: the error message */
+                'PDF generation failed: %s',
+                $e->getMessage()
+            ), 'buddyclients-free' );
+            error_log( $error_message );
+            return false;
+        }
+    }
+
+    /**
+     * Check whether the PDF exists and is readable.
+     * 
+     * @since 1.0.21
+     * 
+     * @return  bool    True if the file exists and is readable, false if not.
+     */
+    private function exists() {
+        return file_exists( $this->file_path ) && is_readable( $this->file_path );
+    }
+
+    /**
+     * Adds a PDF page.
+     * 
+     * @since 1.0.21
+     * 
+     * @param   TCPDF   $pdf    The PDF object.
+     */
+    private function add_page( $pdf ) {
         // Add a page
         $pdf->AddPage();
+    }
+
+    /**
+     * Adds the document title.
+     * 
+     * @since 1.0.21
+     * 
+     * @param   TCPDF   $pdf    The PDF object.
+     */
+    private function add_title( $pdf ) {
+        // Set the font size
+        $this->set_font( $pdf, 18, 'B' );
         
-        // Set title font
-        $pdf->SetFont('helvetica', 'B', 18);
-        
-        // Add title
-        $pdf->Ln(10); // Add space
-        $pdf->Cell(0, 10, $this->title, 0, 1, 'C');
-        $pdf->Ln(10); // Add space
-        
+        // Add space
+        $pdf->Ln(10);
+
+        // Add title cell
+        $pdf->Cell( 0, 10, $this->title, 0, 1, 'C' );
+
+        // Add space
+        $pdf->Ln(10);
+    }
+
+    /**
+     * Adds the PDF content.
+     * 
+     * @since 1.0.21
+     * 
+     * @param   TCPDF   $pdf    The PDF object.
+     */
+    private function add_content( $pdf ) {
         // Set content font
-        $pdf->SetFont('helvetica', '', 12);
-        
+        $this->set_font( $pdf, 12, '' );
+
         // Convert HTML to formatted text with headings
         $pdf = $this->format_content( $pdf, $this->content );
         
         // Add space
         $pdf->Ln(20);
-        
-        // Add image (such as signature)
-        if ( $this->image_path && $this->image_path !== '' ) {
+    }
+
+    /**
+     * Adds an image, such as a signature.
+     * 
+     * @since 1.0.21
+     * 
+     * @param   TCPDF   $pdf    The PDF object.
+     */
+    private function add_image( $pdf ) {
+        if ( ! empty( $this->image_path ) ) {
             $pdf->Image( $this->image_path, 10, $pdf->GetY() + 10, 80 );
             $pdf->Ln(40); // Add space after the signature image
         }
-        
-        // Add additional items
-        if ( $this->items && is_array( $this->items ) ) {
+    }
+
+    /**
+     * Adds additional content from the array.
+     * 
+     * @since 1.0.21
+     * 
+     * @param   TCPDF   $pdf    The PDF object.
+     */
+    private function additional_content( $pdf ) {
+        if ( ! empty( $this->items ) && is_array( $this->items ) ) {
             foreach ( $this->items as $string ) {
                 $pdf = $this->format_content( $pdf, $string );
             }
         }
-        
-        // Save the PDF to a file on the server
-        $pdf->Output( $this->file_path, 'F' );
+    }
 
-        echo 'pdf file path: ' . $this->file_path;
-        
-        // Check if the file was successfully created
-        if ( file_exists( $this->file_path ) && is_readable( $this->file_path ) ) {
-            echo 'pdf exists at location';
-            return true;
-        } else {
-            echo 'pdf does not exist at location';
-            return false;
-        }
+    /**
+     * Sets the font size and style.
+     * 
+     * @since 1.0.21
+     * 
+     * @param   TCPDF   $pdf    The PDF object.
+     * @param   int     $size   The font size.
+     * @param   string  $style  Optional. The font style (e.g. 'B').   
+     */
+    private function set_font( $pdf, $size, $style = '' ) {
+        $pdf->SetFont( 'helvetica', $style, $size );
     }
     
     /**

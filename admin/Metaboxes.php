@@ -168,56 +168,76 @@ class Metaboxes {
         $content = '';
 
         // Get data passed to callback
-        $data = $metabox['args']['data'];
+        $data = $metabox['args']['data'] ?? null;
+
+        if ( ! $data ) {
+            return;
+        }
 
         // Generate a nonce field for this meta box
         $content .= wp_nonce_field( 'save_' . $this->post_type . '_meta', $this->post_type . '_meta_nonce' );
         
-        // Echo metabox category description
-        $content .= isset( $data['description'] ) ? wp_kses_post( $data['description'] ) : '';
+        // Get the metabox category description
+        $content .= $data['description'] ?? '';
         
         // Check for Freelancer Mode
         $freelancer_check = self::freelancer_check( $data );
+
+        // Return freelancer mode link if necessary
         if ( $freelancer_check ) {
-            $content .= wp_kses_post( $freelancer_check . '</fieldset>' );
+            $content .= wp_kses_post( $freelancer_check );
+            $content .= '</fieldset>';
             return $content;
         }
+
+        // Make sure metabox tables exist
+        if ( ! empty( $data['tables'] ) && is_array( $data['tables'] ) ) {
         
-        // Loop through metabox tables
-        foreach ( $data['tables'] as $title => $table_data ) {
-            
-            // Generate table
-            $content .= '<table class="widefat buddyc-postbox-table bp-postbox-table">';
-            $content .= '<thead>';
-            $content .= '<tr>';
-            $content .= '<th colspan="2">';
-            $content .= esc_html( $title );
-            $content .= '</th>';
-            $content .= '</tr>';
-            $content .= '</thead>';
-            $content .= '<tbody>';
-            
-            // Check for Freelancer Mode
-            $freelancer_check = self::freelancer_check( $table_data );
-            if ( $freelancer_check ) {
-                $content .= '<tr><td>';
-                $content .= wp_kses_post( $freelancer_check );
-                $content .= '</td></tr>';
-            } else {
-                // Generate meta fields
-                $meta_group = $this->meta_group( $post, $table_data ) ?? '';
-                //echo wp_kses_post( $meta_group );
-                $content .= $meta_group;
+            //  Loop through metabox tables
+            foreach ( $data['tables'] as $title => $table_data ) {
+                
+                // Generate table
+                $content .= '<table class="widefat buddyc-postbox-table bp-postbox-table">';
+                $content .= '<thead>';
+                $content .= '<tr>';
+                $content .= '<th colspan="2">';
+                $content .= esc_html( $title );
+                $content .= '</th>';
+                $content .= '</tr>';
+                $content .= '</thead>';
+                $content .= '<tbody>';
+                
+                // Check for Freelancer Mode
+                $freelancer_check = self::freelancer_check( $table_data );
+
+                if ( $freelancer_check ) {
+                    $content .= '<tr><td>';
+                    $content .= wp_kses_post( $freelancer_check );
+                    $content .= '</td></tr>';
+                } else {
+                    // Generate meta fields
+                    $meta_group = $this->meta_group( $post, $table_data ) ?? '';
+                    $content .= $meta_group;
+                }
+                
+                // Close table
+                $content .= '</tbody>';
+                $content .= '</table>';
             }
-            
-            // Close table
-            $content .= '</tbody>';
-            $content .= '</table>';
         }
         
         // Escape and output content
-        $allowed_html = buddyc_allowed_html_form();
+        $allowed_html = $this->allowed_html();
         echo wp_kses( $content, $allowed_html );
+    }
+
+    /**
+     * Defines the allowed html. 
+     * 
+     * @since 1.0.21
+     */
+    private function allowed_html() {
+        return buddyc_allowed_html_form();
     }
     
     /**

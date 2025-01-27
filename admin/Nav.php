@@ -184,7 +184,7 @@ class Nav {
         }
         
         // Escape the entire output with allowed HTML tags and attributes
-        $allowed_tags = [
+        $allowed_html = [
             'h1' => ['class' => []],
             'span' => ['class' => []],
             'h2' => ['class' => []],
@@ -195,7 +195,7 @@ class Nav {
             ],
         ];
 
-        echo wp_kses( $tabs, $allowed_tags );
+        echo wp_kses( $tabs, $allowed_html );
     }
 
     

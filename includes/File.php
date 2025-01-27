@@ -1,8 +1,6 @@
 <?php
 namespace BuddyClients\Includes;
 if ( ! defined( 'ABSPATH' ) ) exit; // Exit if accessed directly
-
-use BuddyClients\Components\Booking\BookedService\BookedService;
 use WP_Filesystem;
 
 /**
@@ -106,7 +104,7 @@ class File {
      */
     private static function init_object_handler() {
         if ( ! self::$object_handler ) {
-            self::$object_handler = new ObjectHandler( __CLASS__ );
+            self::$object_handler = buddyc_object_handler( __CLASS__ );
         }
     }
     
@@ -159,7 +157,7 @@ class File {
         
         // Build new file path
         $dir_key = $args['dir'] ?? $args['user_id'] ?? '';
-        $directory = new Directory( $dir_key );
+        $directory = buddyc_directory( $dir_key );
         $this->dir_path = $directory->full_path();
 
         // Build dir url
@@ -513,7 +511,7 @@ class File {
         $file_name = $file->file_name;
     
         // Build new file path
-        $directory = new Directory( $new_path );
+        $directory = buddyc_directory( $new_path );
         $this->dir_path = $directory->full_path();
         $target_file = $this->build_file_path( $this->dir_path, $file_name );
 
@@ -560,7 +558,7 @@ class File {
         $file = self::$object_handler->get_object( $file_id );
         
         // Look for services that are using this file
-        $user_services = BookedService::get_services_by( 'client_id', $file->user_id );
+        $user_services = buddyc_get_booked_services_by( 'client_id', $file->user_id );
         
         foreach ( $user_services as $service ) {
             

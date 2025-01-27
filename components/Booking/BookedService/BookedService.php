@@ -4,9 +4,6 @@ if ( ! defined( 'ABSPATH' ) ) exit; // Exit if accessed directly
 
 use BuddyClients\Components\Booking\BookedService\Payment;
 use BuddyClients\Components\Booking\BookingIntent;
-use BuddyClients\Includes\ObjectHandler;
-use BuddyClients\Includes\File;
-
 
 /**
  * Booked service.
@@ -145,7 +142,7 @@ class BookedService {
      */
     private static function init_object_handler() {
         if ( ! self::$object_handler ) {
-            self::$object_handler = new ObjectHandler( __CLASS__ );
+            self::$object_handler = buddyc_object_handler( __CLASS__ );
         }
     }
     
@@ -156,8 +153,9 @@ class BookedService {
      * 
      * @param   int         $booking_intent_id  The ID of the BookingIntent.
      * @param   LineItem    $line_item          Single LineItem object.
+     * @param   int         $project_id         The ID of the project group.
      */
-    public function create( $booking_intent_id, $line_item ) {
+    public function create( $booking_intent_id, $line_item, $project_id ) {
         
         // Get BookingIntent data
         $booking_intent = BookingIntent::get_booking_intent( $booking_intent_id );
@@ -175,6 +173,11 @@ class BookedService {
 
         // Get file IDs        
         $this->file_ids = $this->filter_file_ids( $this->file_ids );
+
+        // Set project id
+        if ( ! empty( $project_id ) ) {
+            $this->project_id = $project_id;
+        }
         
         // Create new object in database
         self::$object_handler->new_object( $this );
@@ -225,7 +228,7 @@ class BookedService {
          
          // Loop through the file ids
          foreach ( $file_ids as $file_id ) {
-             $upload_id = File::get_file_upload_id( $file_id );
+             $upload_id = buddyc_get_file_upload_id( $file_id );
              
              // Check if the file id is in the service uploads
              if ( in_array( $upload_id, $service_upload_ids ) ) {
@@ -481,5 +484,21 @@ class BookedService {
         
         // Delete object
         self::$object_handler->delete_object( $booked_service_id );
+    }
+
+    /**
+     * Deletes all BookedService objects associated with a BookingIntent.
+     * 
+     * @since 1.0.21
+     * 
+     * @param   int     $booking_intent_id      The ID of the BookingIntent.
+     */
+    public static function delete_intent_booked_services( $booking_intent_id ) {
+        $services = self::get_services_by_booking_intent( $booking_intent_id );
+        if ( $services ) {
+            foreach ( $services as $service ) {
+                self::delete_booked_service( $service->ID );
+            }
+        }
     }
 }

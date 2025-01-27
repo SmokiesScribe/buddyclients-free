@@ -74,7 +74,7 @@ class SuccessfulBooking {
         $this->upgrade_files();
         
         // Create BookedService objects
-        $booked_services = $this->create_booked_services();
+        $booked_services = $this->create_booked_services( $this->booking_intent->project_id );
         
         // Create PaymentGroup
         new PaymentGroup( $this->booking_intent->ID, $booked_services );
@@ -169,7 +169,7 @@ class SuccessfulBooking {
      * 
      * @return  array   An array of newly created BookedService objects.
      */
-    private function create_booked_services() {
+    private function create_booked_services( $project_id ) {
         
         // Check if booked services exist for booking intent
         $existing_services = BookedService::get_services_by_booking_intent( $this->booking_intent->ID );
@@ -181,7 +181,7 @@ class SuccessfulBooking {
         foreach ( $this->line_items as $line_item ) {
             // Create new BookedService
             $booked_service = new BookedService;
-            $booked_service->create( $this->booking_intent->ID, $line_item );
+            $booked_service->create( $this->booking_intent->ID, $line_item, $project_id );
 
             // Add to array
             $created_booked_services[] = $booked_service;

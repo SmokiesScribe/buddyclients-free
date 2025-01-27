@@ -1,6 +1,5 @@
 <?php
 if ( ! defined( 'ABSPATH' ) ) exit; // Exit if accessed directly
-use BuddyClients\Includes\ObjectHandler;
 use BuddyClients\Components\Email\Email;
 use BuddyClients\Admin\AdminTable;
 
@@ -12,16 +11,15 @@ use BuddyClients\Admin\AdminTable;
 function buddyc_email_log_content() {
     
     // Initialize object handler
-    $object_handler = new ObjectHandler( Email::class );
-    $emails = $object_handler->get_all_objects();
+    $emails = buddyc_get_all_objects( Email::class );
     
     // Define headers
     $headers = [
-        __( 'Sent At', 'buddyclients-free' ),
-        __( 'To', 'buddyclients-free' ),
-        __( 'Email', 'buddyclients-free' ),
-        __( 'Subject', 'buddyclients-free' ),
-        __( 'Content', 'buddyclients-free' )
+        __( 'Sent At', 'buddyclients' ),
+        __( 'To', 'buddyclients' ),
+        __( 'Email', 'buddyclients' ),
+        __( 'Subject', 'buddyclients' ),
+        __( 'Content', 'buddyclients' )
     ];
     
     // Define columns
@@ -38,7 +36,7 @@ function buddyc_email_log_content() {
         'headings'      => $headers,
         'columns'       => $columns,
         'items'         => $emails,
-        'title'         => __( 'Email Log', 'buddyclients-free' ),
+        'title'         => __( 'Email Log', 'buddyclients' ),
     ];
     
     new AdminTable( $args );
@@ -64,13 +62,13 @@ function buddyc_email_log_admin_notice() {
         // Format setting value
         $email_setting = is_numeric( $email_setting )
             /* translators: %d: the numnber of days emails are retained */
-            ? sprintf( __( 'for %d days', 'buddyclients-free' ), $email_setting ) 
-            : __( 'forever', 'buddyclients-free' );
+            ? sprintf( __( 'for %d days', 'buddyclients' ), $email_setting ) 
+            : __( 'forever', 'buddyclients' );
             
         // Build note
         $message = sprintf(
             /* translators: %s: the amount of time emails are stored (e.g. for 90 days or forever) */
-            __('Emails are currently stored %s.', 'buddyclients-free'),
+            __('Emails are currently stored %s.', 'buddyclients'),
             $email_setting
         );
         
@@ -78,7 +76,7 @@ function buddyc_email_log_admin_notice() {
         $notice_args = [
             'repair_link'       => ['/admin.php?page=buddyc-email-settings'],
             'dismissable'       => true,
-            'repair_link_text'  => [__( 'Change setting.', 'buddyclients-free' )],
+            'repair_link_text'  => [__( 'Change setting.', 'buddyclients' )],
             'message'           => $message,
             'color'             => 'blue'
         ];
@@ -87,4 +85,4 @@ function buddyc_email_log_admin_notice() {
         buddyc_admin_notice( $notice_args );
     }
 }
-add_action('admin_enqueue_scripts', 'buddyc_email_log_admin_notice'); // Fire after screen is available but before admin_notices
+add_action('admin_enqueue_scripts', 'buddyc_email_log_admin_notice'); // Fire after screen is available but before 'buddyclients-free'

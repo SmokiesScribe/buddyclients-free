@@ -1,16 +1,11 @@
 <?php
 if ( ! defined( 'ABSPATH' ) ) exit; // Exit if accessed directly
-/**
- * Retrieves colors from settings.
- * 
- * @since 0.1.0
- * 
- * @param   string  $type   The color type to retrieve.
- *                          Accepts 'primary', 'accent', and 'tertiary'.
+
+/** 
+ * ========================
+ * Utilities
+ * ========================
  */
-function buddyc_color( $type ) {
-    return buddyc_get_setting('style', $type . '_color');
-}
 
 /**
  * Retrieves the current url.
@@ -124,6 +119,12 @@ function buddyc_time_has_passed( $target_time ) {
     // Check if time has passed
     return $current_timestamp > $target_time;
 }
+
+/** 
+ * ========================
+ * Scripts and Styles
+ * ========================
+ */
 
 /**
  * Outputs a javascript alert.

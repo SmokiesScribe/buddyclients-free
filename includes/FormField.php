@@ -108,6 +108,20 @@ class FormField {
      * @var string
      */
     private $style;
+
+    /**
+     * Whether to hide the field.
+     * 
+     * @var bool
+     */
+    private $hide;
+
+    /**
+     * A list of container classes for the form group.
+     * 
+     * @var string
+     */
+    private $container_classes;
     
     /**
      * Constructor method.
@@ -126,6 +140,9 @@ class FormField {
         
         // Extract variables from args
         $this->extract_var( $args );
+
+        // Build container classes
+        $this->container_classes = $this->build_container_classes();
         
         // Build field atts string
         $this->field_atts_string = $this->attributes_string( $args );
@@ -148,6 +165,20 @@ class FormField {
         $this->value            = $args['value'] ?? null;
         $this->placeholder      = $args['placeholder'] ?? null;
         $this->required         = $args['required'] ?? null;
+        $this->hide             = $args['hide'] ?? false;
+    }
+
+    /**
+     * Builds list of classes for the form group.
+     * 
+     * @saince 1.0.21
+     */
+    private function build_container_classes() {
+        $classes = [];
+        if ( $this->hide ) {
+            $classes[] = 'buddyc-hidden';
+        }
+        return implode( ' ', $classes );
     }
     
     /**
@@ -361,9 +392,9 @@ class FormField {
                 break;
             default:
                 $field = $this->input_field();
-                break;
-                
+                break; 
         }
+
         return $field;
     }
     
@@ -385,7 +416,7 @@ class FormField {
      */
     private function input_field() {
         
-        $field = '<div class="form-group form-group field_type_textbox buddyc-form-group-container" style="' . $this->style .'">';
+        $field = '<div class="form-group form-group field_type_textbox buddyc-form-group-container ' . $this->container_classes . '" style="' . $this->style .'">';
         $field .=   '<legend>' . $this->label . '</legend>';
         $field .=   '<p class="description">' . $this->description . '</p>';
         $field .=   '<input type="' . $this->type . '" ' . $this->field_atts_string . '>';
@@ -401,7 +432,7 @@ class FormField {
      */
     private function textarea_field() {
         
-        $field = '<div class="form-group form-group field_type_textarea buddyc-form-group-container" style="' . $this->style .'">';
+        $field = '<div class="form-group form-group field_type_textarea buddyc-form-group-container ' . $this->container_classes . '" style="' . $this->style .'">';
         $field .=   '<legend>' . $this->label . '</legend>';
         $field .=   '<p class="description">' . $this->description . '</p>';
         $field .=   '<textarea ' . $this->field_atts_string . '>' . $this->value . '</textarea>';
@@ -417,7 +448,7 @@ class FormField {
      */
     private function tinymce_field() {
         
-        $field = '<div class="form-group form-group field_type_tinymce buddyc-form-group-container" style="' . $this->style .'">';
+        $field = '<div class="form-group form-group field_type_tinymce buddyc-form-group-container ' . $this->container_classes . '" style="' . $this->style .'">';
         $field .=   '<legend>' . $this->label . '</legend>';
         $field .=   '<p class="description">' . $this->description . '</p>';
         
@@ -462,7 +493,7 @@ class FormField {
      */
     private function dropdown_field() {
         // Start building field
-        $field = '<div class="form-group form-group field_type_selectbox buddyc-form-group-container" style="' . $this->style .'">';
+        $field = '<div class="form-group form-group field_type_selectbox buddyc-form-group-container ' . $this->container_classes . '" style="' . $this->style .'">';
         $field .=   '<legend>' . $this->label . '</legend>';
         $field .=   '<p class="description">' . $this->description . '</p>';
         $field .=   '<select ' . $this->field_atts_string . '>';
@@ -500,7 +531,7 @@ class FormField {
     private function checkbox_field() {
 
         // Start building field
-        $field = '<div class="form-group field_type_checkbox buddyc-form-group-container" style="' . esc_attr( $this->style ) .'">';
+        $field = '<div class="form-group field_type_checkbox buddyc-form-group-container ' . $this->container_classes . '" style="' . esc_attr( $this->style ) .'">';
         $field .= '<fieldset>';
         $field .= '<legend>' . esc_html( $this->label ) . '</legend>';
         $field .= '<p class="description">' . $this->description . '</p>';
@@ -573,7 +604,7 @@ class FormField {
         
         $uploaded_files_list = $this->value ? buddyc_file_names( $this->value ) : '';
         
-        $field = '<div class="buddyc-file-upload-container buddyc-form-group-container" style="' . $this->style .'">';
+        $field = '<div class="buddyc-file-upload-container buddyc-form-group-container ' . $this->container_classes . '" style="' . $this->style .'">';
         
         $field .= '<div class="form-group buddyc-file-upload">';
         $field .=   '<div class="media-uploader-wrapper">';
@@ -603,7 +634,7 @@ class FormField {
      */
     private function submit_field() {
         
-        $field = '<div class="form-group form-group" style="' . $this->style . '">';
+        $field = '<div class="form-group form-group ' . $this->container_classes . '" style="' . $this->style . '">';
         $field .= '<input type="submit" class="' . $this->field_classes . '" name="' . $this->key . '[]" id="' . $this->key . '" ' . $this->field_atts_string . '>';
         $field .= '</div>';
         
@@ -639,7 +670,7 @@ class FormField {
      * @since 0.1.0
      */
     private function display_field() {
-        $field = '<div class="form-group form-group" style="' . $this->style .'">';
+        $field = '<div class="form-group form-group ' . $this->container_classes . '" style="' . $this->style .'">';
         $field .= '<legend>' . $this->label .'</legend>';
         $field .= $this->value;
         $field .= '</div>';
@@ -653,7 +684,7 @@ class FormField {
      * @since 0.1.0
      */
     private function signature_field() {
-        $field = '<div class="form-group form-group style="' . $this->style .'">';
+        $field = '<div class="form-group form-group ' . $this->container_classes . '" style="' . $this->style .'">';
         $field .= '<legend>' . __( 'Sign Here', 'buddyclients-free' ) . '</legend>';
         $field .= '<canvas id="signatureCanvas" width="600" height="200" style="border-radius: 5px; border: 1px solid #D4D6D8;" data-signature="signature-data"></canvas><br>';
         $field .= '<button type="button" id="signature-clear-button">' . __( 'Clear Signature', 'buddyclients-free' ) . '</button>';

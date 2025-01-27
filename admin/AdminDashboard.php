@@ -104,19 +104,25 @@ class AdminDashboard {
      * @since 1.0.17
      */
     private function allowed_html() {
-        // Defined allowed html tags
-        $allowed_html = buddyc_allowed_html_form();
-
-        // Define tags for chart html
-        $chart_html = [
-            'div' => ['class' => true],
+        return [
+            'div' => [ 'class' => [] ],
+            'h1' => [],
+            'form' => [ 'method' => [], 'action' => [], 'class' => [] ],
+            'input' => [ 'type' => [], 'name' => [], 'value' => [], 'id' => [] ],
+            'label' => [ 'for' => [] ],
+            'select' => [ 'name' => [], 'id' => [] ],
+            'option' => [ 'value' => [] ],
+            'button' => [ 'type' => [], 'class' => [] ],
+            'table' => [ 'class' => [], 'id' => [] ],
+            'thead' => [],
+            'tbody' => [],
+            'tr' => [],
+            'th' => [ 'scope' => [] ],
+            'td' => [ 'class' => [] ],
+            'span' => [ 'class' => [] ],
             'h3' => [],
-            'canvas' => ['id' => true, 'class' => true],
-            'script' => [],
+            'canvas' => [ 'id' => [], 'class' => [], 'width' => [], 'height' => [], 'style' => [] ],
         ];
-        
-        // Merge allowed html arrays
-        return array_merge( $allowed_html, $chart_html );
     }
     
     /**
@@ -256,7 +262,7 @@ class AdminDashboard {
             // Check for filter
             if ( $filter_property && $filter_value !== null ) {
                 if ( property_exists( $item, $filter_property ) && $item->{$filter_property} === $filter_value ) {
-                    $carry += $item->{$property} ?? 0;
+                    $carry += (float) ($item->{$property} ?? 0);
                 }
             } else {
                 $carry += $item->{$property} ?? 0;
@@ -561,8 +567,8 @@ class AdminDashboard {
                 $net_revenue = $booking_intent->net_fee ?? 0;
                 
                 // Aggregate revenue by date
-                $daily_revenue[$formatted_date] = ($daily_revenue[$formatted_date] ?? 0) + $gross_revenue;
-                $daily_net[$formatted_date] = ($daily_net[$formatted_date] ?? 0) + $net_revenue;
+                $daily_revenue[$formatted_date] = (float) ($daily_revenue[$formatted_date] ?? 0) + (float) $gross_revenue;
+                $daily_net[$formatted_date] = (float) ($daily_net[$formatted_date] ?? 0) + (float) $net_revenue;
             }
         }
         

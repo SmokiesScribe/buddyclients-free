@@ -2,11 +2,6 @@
 namespace BuddyClients\Includes;
 if ( ! defined( 'ABSPATH' ) ) exit; // Exit if accessed directly
 
-use BuddyClients\Includes\{
-    Directory,
-    File
-};
-
 /**
  * Handles multiple files.
  * 
@@ -40,7 +35,7 @@ class FileHandler {
      */
     private static function init_object_handler() {
         if ( ! self::$object_handler ) {
-            self::$object_handler = new ObjectHandler( __NAMESPACE__ . '\File' );
+            self::$object_handler = buddyc_file_object_handler();
         }
     }
 
@@ -77,7 +72,7 @@ class FileHandler {
         $file_ids = [];
         
         // Get directory path
-        $args['dir_path'] = (new Directory( $args['user_id'] ))->full_path();
+        $args['dir_path'] = buddyc_directory_path( $args['user_id'] );
         
         // Extract files from superglobal
         $files = self::extract_files( $file );
@@ -432,4 +427,3 @@ class FileHandler {
         return $download;
     }
 }
-?>

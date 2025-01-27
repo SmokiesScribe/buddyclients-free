@@ -240,7 +240,7 @@ class Service {
         
         // Check for team member role
         if ( ! buddyc_freelancer_mode() ) {
-            if ( ! $this->team_member_role || $this->team_member_role === '' ) {
+            if ( ! $this->exists( $this->team_member_role ) ) {
                 $error[] = __( 'Team Member Role is required.', 'buddyclients-free' );
                 $valid = false;
             }
@@ -268,5 +268,19 @@ class Service {
         // Set meta
         update_post_meta( $this->ID, 'valid', $valid_value );
         update_post_meta( $this->ID, 'visible', $visible_value );
+
+        // Return
+        return $valid_value;
      }
+
+    /**
+     * Checks whether a post exists.
+     * 
+     * @since 0.1.0
+     */
+    function exists( $post_id ) {
+        // Check if post ID is valid and published
+        return ! empty( $post_id ) && get_post_status( $post_id ) === 'publish';
+    }
+      
 }

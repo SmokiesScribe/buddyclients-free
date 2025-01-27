@@ -69,6 +69,16 @@
     margin-bottom: 80px;
 }
 
+.buddyc-margin-20 {
+    margin: 20px;
+}
+
+/* Lists */
+.buddyc-no-list {
+    list-style: none;
+    padding: 0;
+}
+
 /* Boxed */
 .buddyc-box {
     margin: auto;
@@ -379,6 +389,10 @@
     margin-left: 20px;
 }
 
+.buddyc-form-user-avatar img {
+    border-radius: 50%;
+}
+
 .buddyc-form-user-name {
     font-weight: bold;
     color: var(--buddyclients-primary-color);
@@ -430,4 +444,9 @@
 }
 .alert-message-icon {
     font-size: 20px;
+}
+
+/* Signature */
+.buddyc-legal-signature {
+    max-width: 300px;
 }

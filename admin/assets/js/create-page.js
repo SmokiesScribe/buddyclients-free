@@ -3,12 +3,9 @@
  * 
  * @since 0.1.0
  */
-function buddycCreateNewPage(args) {
+function buddycbuddycbuddycbuddycCreateNewPage(args) {
     // Show loading indicator
     buddycLoadingIndicator( true, 'Creating page...' );
-
-    console.log(args);
-    console.log(createPageData);
     
     jQuery.post(ajaxurl, {
         action: 'buddyc_admin_create_new_page',
@@ -21,7 +18,6 @@ function buddycCreateNewPage(args) {
         var responseData = JSON.parse(response);
         // Check if the response indicates success
         if (responseData.success) {
-            console.log(responseData);
             // If successful, check if an edit post URL is provided
             if (responseData.edit_post_url) {
                 // Redirect to the edit post URL

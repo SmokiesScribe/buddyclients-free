@@ -2,18 +2,6 @@
 namespace BuddyClients\Components\Booking;
 if ( ! defined( 'ABSPATH' ) ) exit; // Exit if accessed directly
 
-use BuddyClients\Includes\{
-    Client,
-    Project,
-    FileHandler,
-    ObjectHandler
-};
-
-use BuddyClients\Components\Booking\BookedService\{
-    Payment,
-    BookedService
-};
-
 /**
  * Single booking intent.
  * 
@@ -209,9 +197,6 @@ class BookingIntent {
         // Add object to database
         $this->ID = self::$object_handler->new_object( $this );
         
-        // Create checkout link and update object
-        $this->build_checkout_link();
-        
         // Schedule abandoned booking check
         $this->schedule_abandoned_booking_check();
         
@@ -228,7 +213,7 @@ class BookingIntent {
      */
     private static function init_object_handler() {
         if ( ! self::$object_handler ) {
-            self::$object_handler = new ObjectHandler( __CLASS__ );
+            self::$object_handler = buddyc_object_handler( __CLASS__ );
         }
     }
     
@@ -246,7 +231,7 @@ class BookingIntent {
             'temporary'         => true,
         ];
         
-        $file_handler = new FileHandler( $files, $args );
+        $file_handler = buddyc_file_handler( $files, $args );
         return $file_handler->file_ids;
     }
     
@@ -281,7 +266,7 @@ class BookingIntent {
         $this->client_id            = $this->post['user-id'];
         $this->client_email         = $this->post['user-email'] ?? null;
         $this->project_id           = $this->post['buddyc_projects'] ?? null;
-        $this->total_fee            = $this->post['total-fee'];
+        $this->total_fee            = isset($this->post['total-fee']) ? (float) $this->post['total-fee'] : 0.0;
         $this->line_items           = serialize(json_decode(stripslashes( $this->post['hidden-line-items'] )));
         $this->service_names        = $this->service_names();
         $this->sales_id             = $this->post['sales-id'] ?? null;
@@ -332,10 +317,10 @@ class BookingIntent {
         $sales_fee = $this->calculate_sales_fee();
 
         // Add fees
-        $total_fees = $team_fee + $affiliate_fee + $sales_fee;
+        $total_fees = (float) $team_fee + (float) $affiliate_fee + (float) $sales_fee;
 
         // Subtract from gross
-        $net_fee = $gross_fee - $total_fees;
+        $net_fee = (float) $gross_fee - (float) $total_fees;
 
         return $net_fee;
     }
@@ -448,17 +433,14 @@ class BookingIntent {
      * 
      * @since 0.1.0
      */
-    private function build_checkout_link() {
+    public function build_checkout_link() {
         
         // Get checkout page id
         $checkout_page = buddyc_get_setting('pages', 'checkout_page');
         $checkout_url = get_permalink($checkout_page);
         
         // Build checkout link
-        $this->checkout_link = $checkout_url . '?booking_id=' . $this->ID;
-        
-        // Update object in database
-        self::$object_handler->update_object_properties( $this->ID, ['checkout_link' => $this->checkout_link] );
+        return $checkout_url . '?booking_id=' . $this->ID;
     }
     
     /**
@@ -775,20 +757,10 @@ class BookingIntent {
         $booking_intent = self::get_booking_intent( $booking_intent_id );
         
         // Delete associated payments
-        $payments = Payment::get_payments_by_booking_intent( $booking_intent_id );
-        if ( $payments ) {
-            foreach ( $payments as $payment ) {
-                Payment::delete_payment( $payment->ID );
-            }
-        }
+        buddyc_delete_booking_intent_payments( $booking_intent_id );
         
         // Delete associated services
-        $services = BookedService::get_services_by_booking_intent( $booking_intent_id );
-        if ( $services ) {
-            foreach ( $services as $service ) {
-                BookedService::delete_booked_service( $service->ID );
-            }
-        }
+        buddyc_delete_booking_intent_booked_services( $booking_intent_id );
         
         // Delete object
         self::$object_handler->delete_object( $booking_intent_id );

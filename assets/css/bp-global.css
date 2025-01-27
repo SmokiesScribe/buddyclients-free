@@ -19,6 +19,9 @@
     cursor: pointer; /* Change cursor on hover */
     margin-right: 5px; /* Add some space between checkbox and label */
     vertical-align: middle; /* Align checkbox vertically */
+    position: relative; /* To position the checkmark inside */
+    text-align: center; /* Center text (checkmark) horizontally */
+    line-height: 16px; /* Vertically align the checkmark */
 }
 
 /* Style checked state of checkboxes */
@@ -29,22 +32,28 @@
 /* Style the checkmark inside the checkbox */
 .buddyc-form input[type="checkbox"]::before {
     content: "\2713"; /* Unicode checkmark character */
-    font-size: 16px; /* Adjust size as needed */
+    font-size: 12px; /* Adjust size of checkmark */
     color: #fff; /* Checkmark color */
     display: inline-block;
     width: 16px !important;
     height: 16px;
-    text-align: left;
-    line-height: 0; /* Align checkmark vertically */
-    vertical-align: middle;
-    position: relative; /* Set position to relative */
-    left: -5px; /* Adjust left position */
+    text-align: center; /* Center checkmark horizontally */
+    line-height: 16px; /* Vertically align the checkmark */
+    position: absolute; /* Position relative to the checkbox */
+    top: 0; /* Align top of checkmark to top of the checkbox */
+    left: 0; /* Align left of checkmark to left of the checkbox */
     visibility: hidden; /* Hide checkmark by default */
 }
 
 /* Show checkmark when checkbox is checked */
 .buddyc-form input[type="checkbox"]:checked::before {
     visibility: visible; /* Show checkmark */
+}
+
+/* Disabled checkbox */
+.buddyc-form input[type="checkbox"]:disabled {
+    background-color: #dddddd;
+    cursor: not-allowed;
 }
 
 /* Style the checkbox label */

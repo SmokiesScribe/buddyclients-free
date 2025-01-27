@@ -1,9 +1,8 @@
 /* Single post */
 .buddyc-single-post {
-    margin: 10px;
     padding: 0 10px;
     width: 100%;
-    margin: auto;
+    margin: 10px auto 20px;
 }
 
 /* Breadcrumbs */

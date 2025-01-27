@@ -2,8 +2,6 @@
 namespace BuddyClients\Components\Email;
 if ( ! defined( 'ABSPATH' ) ) exit; // Exit if accessed directly
 
-use BuddyClients\Includes\ObjectHandler as ObjectHandler;
-
 /**
  * Handles a single email notification.
  * 
@@ -107,7 +105,7 @@ class Email {
      */
     private static function init_object_handler() {
         if ( ! self::$object_handler ) {
-            self::$object_handler = new ObjectHandler( __CLASS__ );
+            self::$object_handler = buddyc_object_handler( __CLASS__ );
         }
     }
     

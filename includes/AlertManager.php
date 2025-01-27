@@ -155,7 +155,7 @@ class AlertManager {
             );            
             
         // Stable and not current
-        } else if ( $status !== 'current' ) {
+        } else if ( ( $type !== 'affiliate' && $status !== 'current' ) || ( $type === 'affiliate' && $status === 'inactive' ) ) {
             $content = sprintf(
                 /* translators: %1$s: url to complete agreement; %2$s: the type of agreement (e.g. affiliate or team) */
                 __( 'Complete your <a href="%1$s">%2$s agreement</a>.', 'buddyclients-free' ),

@@ -215,10 +215,10 @@ class BookingForm {
         ];
         
         // Open container
-        $content = '<div class="booking-checkout-container">';
+        $content = '<div class="buddyc-booking-checkout-container">';
         
         // Open form container
-        $content .= '<div class="booking-form-column">';
+        $content .= '<div class="buddyc-booking-form-column">';
         
         /**
          * Filters the Checkout content before the Booking Form is added
@@ -245,7 +245,7 @@ class BookingForm {
         $content .= '</div>';
         
         // Table
-        $content .= '<div class="checkout-fee-column" style="max-width="200px !important">';
+        $content .= '<div class="buddyc-checkout-fee-column">';
         $content .= $this->line_items_table();
         $content .= '</div>';
         
@@ -456,7 +456,6 @@ class BookingForm {
             'type'              => 'text',
             'label'             => __( 'Project Title', 'buddyclients-free' ),
             'field_classes'     => 'create-project',
-            'style'             => 'display: none;'
         ];
     }
         
@@ -536,10 +535,10 @@ class BookingForm {
                 $service = new Service( $service->ID );
                 
                 // Skip if invalid or hidden
-                if ( ! $service->valid || ! $service->visible ) {
+                if ( $service->validate() != 'valid' || $service->visible != 'visible' ) {
                     continue;
                 }
-                
+
                 // Check for freelancer mode
                 $freelancer = buddyc_freelancer_id();
                 
@@ -612,7 +611,6 @@ class BookingForm {
                 // Build field
                 $args[] = [
                     'key'           => 'fee-number-' . $rate_type->ID,
-                    'style'         => 'display: none;',
                     'field_classes' => 'fee-num-field',
                     'type'          => 'number',
                     'label'         => $rate_type->plural,
@@ -622,7 +620,8 @@ class BookingForm {
                         'service_ids'   => implode(',', $rate_type->service_ids),
                         'attach'        => $rate_type->attach,
                         'rate-type'     => $rate_type->ID
-                    ]
+                    ],
+                    'hide'          => true
                 ];
             }
         }
@@ -689,7 +688,6 @@ class BookingForm {
                 // Build field
                 $args[] = [
                     'key'           => 'adjustment-' . $adjustment->ID,
-                    'style'         => 'display: none;',
                     'type'          => $adjustment->form_field_type,
                     'label'         => $adjustment->label,
                     'field_classes' => 'adjustment-field',
@@ -697,7 +695,8 @@ class BookingForm {
                     'options'       => $options,
                     'data_atts' => [
                         'service_ids' => implode(',', $adjustment->service_ids),
-                    ]
+                    ],
+                    'hide'          => true
                 ];
             }
         }
@@ -731,7 +730,6 @@ class BookingForm {
                 $args[] = [
                     'key'           => 'booking-upload-' . $upload_post->ID,
                     'type'          => 'upload',
-                    'style'         => 'display: none;',
                     'label'         => $upload->field_label,
                     'description'   => $upload->form_description . $help_link,
                     'file_types'    => $upload->file_types,
@@ -741,7 +739,8 @@ class BookingForm {
                         'service_ids'   => implode(',', $upload->service_ids),
                         'file_required' => $upload->required,
                         'upload-id'     => $upload_post->ID
-                    ]
+                    ],
+                    'hide'          => true
                 ];
             }
         }
@@ -843,7 +842,6 @@ class BookingForm {
                 // Build field
                 $args[] = [
                     'key'           => 'role-' . $role->ID,
-                    'style'         => 'display: none;',
                     'field_classes' => 'team-select-field',
                     'type'          => 'dropdown',
                     'label'         => $role->plural,
@@ -855,7 +853,8 @@ class BookingForm {
                     'options'       => $team_options,
                     'data_atts'     => [
                         'role-id' => $role->ID,
-                    ]
+                    ],
+                    'hide'          => true
                 ];
             }
         }

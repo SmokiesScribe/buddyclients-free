@@ -87,7 +87,8 @@ function buddyc_upgrade_link( $boxed = null ) {
     
     // Build link
     $link = sprintf(
-        '<p class="buddyc-upgrade-link">%s ' . __( 'Upgrade to <a href="%s" target="_blank">BuddyClients Essential or BuddyClients Business</a>.', 'buddyclients-free' ),
+        /* translators: %1$s: the rocket icon html; %2$s: the url to upgrade the plugin */
+        '<p class="buddyc-upgrade-link">%1$s ' . __( 'Upgrade to <a href="%2$s" target="_blank">BuddyClients Essential or BuddyClients Business</a>.', 'buddyclients-free' ),
         $icon,
         esc_url( $url )
     );
@@ -96,6 +97,27 @@ function buddyc_upgrade_link( $boxed = null ) {
     $output = $open_container . $link . $close_container;
     
     return $output;
+}
+
+/**
+ * Echoes an upgrade link.
+ * 
+ * @since 1.0.21
+ * 
+ * @ignore
+ * 
+ * @param   ?bool    $boxed      Optional. Whether to style the message in a container.
+ *                               Defaults to null.
+ */
+function buddyc_echo_upgrade_link( $boxed = null ) {
+    $allowed_html = [
+        'div' => [ 'class' => [] ],
+        'p' => [ 'class' => [] ],
+        'a' => [ 'href' => [], 'target' => [] ],
+        'i' => [ 'class' => [] ],
+    ];
+    $content = buddyc_upgrade_link( $boxed );
+    echo wp_kses( $content, $allowed_html );
 }
 
 /**
@@ -110,10 +132,10 @@ function buddyc_account_link() {
     $icon = '<i class="' . $icon_class . '"></i> ';
     $url = buddyc_account_url();
     return sprintf(
-        '<p class="buddyc-upgrade-link">%s ' . __( 'Manage <a href="%s" target="_blank">%s</a>.', 'buddyclients-free' ) . '</p>',
+        /* translators: %1$s: the gear icon html; %2$s: the url to access a BuddyClients account */
+        '<p class="buddyc-upgrade-link">%1$s ' . __( 'Manage <a href="%2$s" target="_blank">your BuddyClients subscription</a>.', 'buddyclients-free' ) . '</p>',
         $icon,
-        esc_url( $url ),
-        __( 'your BuddyClients subscription', 'buddyclients-free' )
+        esc_url( $url )
     );
 }
 
@@ -147,7 +169,8 @@ function buddyc_enable_component_link( $component, $boxed = null ) {
     
     // Build link
     $link = sprintf(
-        '<p class="buddyc-upgrade-link">%s ' . __( 'The %s component is disabled. <a href="%s">Enable the component</a>.', 'buddyclients-free' ) . '</p>',
+        /* translators: %1$s: the toggle off icon html; %2$s: the component name (e.g. Booking or Stripe); %3$s: the url to enable plugin components */
+        '<p class="buddyc-upgrade-link">%1$s ' . __( 'The %2$s component is disabled. <a href="%3$s">Enable the component</a>.', 'buddyclients-free' ) . '</p>',
         $icon,
         buddyc_component_name( $component ),
         esc_url( $url )
@@ -157,6 +180,27 @@ function buddyc_enable_component_link( $component, $boxed = null ) {
     $output = $open_container . $link . $close_container;
     
     return $output;
+}
+
+/**
+ * Echoes a link to enable a component.
+ * 
+ * @since 1.0.21
+ * 
+ * @ignore
+ * 
+ * @param   string   $component  The component to be enabled.
+ * @param   ?bool    $boxed      Optional. Whether to style the message in a container.
+ *                               Defaults to null.
+ */
+function buddyc_echo_enable_component_link( $component, $boxed = null ) {
+    $allowed_html = [
+        'p' => ['class' => []], // Allow class attribute on <p>
+        'i' => ['class' => []], // Allow class attribute on <i> (for icons)
+        'a' => ['href' => [], 'class' => []], // Allow href and class attributes on <a>
+    ];
+    $content = buddyc_enable_component_link( $component, $boxed );
+    echo wp_kses( $content, $allowed_html );
 }
 
 /**
@@ -189,6 +233,7 @@ function buddyc_freelancer_mode_link( $enable = null, $boxed = null ) {
     $close_container = $boxed ? '</div>' : '';
     
     // Build link
+    /* translators: %s: the url to disable freelancer mode */
     $link = '<p class="buddyc-upgrade-link">' . $icon . __( 'Freelancer Mode is enabled. <a href="%s">Disable Freelancer Mode</a>.', 'buddyclients-free' ) . '</p>';
     
     // Build output

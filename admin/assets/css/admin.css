@@ -259,3 +259,18 @@ ul.wp-submenu.wp-submenu-wrap li a[href="buddyc-separator"] {
     margin: 0 10px;
     display: inline-block;
 }
+
+/* Welcome message */
+.buddyc-dismiss-welcome-btn {
+    color: #fff;
+    background-color: #e74c3c;
+    padding: 0.5em 1em;
+    margin: 10px 0;
+    text-decoration: none;
+    border-radius: 5px;
+}
+.buddyc-dismiss-welcome-btn:hover {
+    color: #fff;
+    background-color: #cd5043;
+    text-decoration: none;
+}

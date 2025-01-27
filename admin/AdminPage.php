@@ -153,7 +153,7 @@ class AdminPage {
      * @since 0.1.0
      */
     public static function upgrade_link() {
-        echo wp_kses_post( buddyc_upgrade_link( true ) );
+        buddyc_echo_upgrade_link( $boxed = true );
     }
     
     /**
@@ -162,7 +162,7 @@ class AdminPage {
      * @since 0.1.0
      */
     public function enable_link() {
-        echo wp_kses_post( buddyc_enable_component_link( $this->required_component, true ) );
+        buddyc_echo_enable_component_link( $this->required_component, $boxed = true );
     }
     
     /**

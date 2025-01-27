@@ -2,14 +2,8 @@
 namespace BuddyClients\Components\Booking\BookedService;
 if ( ! defined( 'ABSPATH' ) ) exit; // Exit if accessed directly
 
-use BuddyClients\Includes\ObjectHandler;
-
 /**
- * Payment.
- * 
  * Handles a single payment for a BookedService.
- *
- * 
  *
  * @since 0.1.0
  */
@@ -152,7 +146,7 @@ class Payment {
      */
     private static function init_object_handler() {
         if ( ! self::$object_handler ) {
-            self::$object_handler = new ObjectHandler( __CLASS__ );
+            self::$object_handler = buddyc_object_handler( __CLASS__ );
         }
     }
     
@@ -413,5 +407,21 @@ class Payment {
         
         // Update property
         self::$object_handler->update_object_properties( $ID, [$property => $value] );
+    }
+
+    /**
+     * Deletes all Payments associated with a BookingIntent.
+     * 
+     * @since 1.0.21
+     * 
+     * @param   int     $booking_intent_id      The ID of the BookingIntent.
+     */
+    public static function delete_intent_payments( $booking_intent_id ) {
+        $payments = self::get_payments_by_booking_intent( $booking_intent_id );
+        if ( $payments ) {
+            foreach ( $payments as $payment ) {
+                self::delete_payment( $payment->ID );
+            }
+        }
     }
 }

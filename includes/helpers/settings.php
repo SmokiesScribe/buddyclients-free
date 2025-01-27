@@ -36,6 +36,18 @@ function buddyc_help_post_types() {
 }
 
 /**
+ * Retrieves colors from settings.
+ * 
+ * @since 0.1.0
+ * 
+ * @param   string  $type   The color type to retrieve.
+ *                          Accepts 'primary', 'accent', and 'tertiary'.
+ */
+function buddyc_color( $type ) {
+    return buddyc_get_setting('style', $type . '_color');
+}
+
+/**
  * Retrieves the permalink to a page defined in the plugin settings.
  * 
  * @since 0.1.0

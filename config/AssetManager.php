@@ -278,7 +278,7 @@ class AssetManager {
 			'email-entered' 		=> [],
 			'help-popup'			=> [],
 			'create-account'		=> [],
-			'line-items-table'		=> [],
+			'booking-form'			=> [],
 			'service-fields'		=> [],
 			'create-project-fields'	=> [],
 			'search'				=> [],

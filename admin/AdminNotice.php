@@ -179,7 +179,11 @@ class AdminNotice {
             'div'   => ['class' => true],
             'p'     => [],
             'a'     => ['href' => true, 'class' => true, 'target' => []],
-            'i'     => ['class' => []]
+            'i'     => ['class' => []],
+            'ul'    => ['class' => []],
+            'li'    => ['class' => []],
+            'h2'    => ['class' => []],
+            'h4'    => ['class' => []],
         ];
     }
 

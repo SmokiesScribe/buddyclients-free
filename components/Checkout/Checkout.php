@@ -252,7 +252,7 @@ class Checkout {
             }
     
             // Copy paste link
-            $checkout_link = $this->booking_intent->checkout_link;
+            $checkout_link = $this->booking_intent->build_checkout_link();
             $content .= '<p>' . __( 'The client can check out at the following link.', 'buddyclients-free' ) . '</p>';
             $content .= buddyc_copy_to_clipboard( $checkout_link, 'buddyc_checkout_link' );
         }
@@ -300,7 +300,7 @@ class Checkout {
         // Check total
         if ( $this->booking_intent->total_fee == 0 ) {
             
-            $content .= '<div style="margin: 20px">';
+            $content .= '<div class="buddyc-margin-20">';
             
             // Free header
             $content .= '<h4>' . __( 'Yay! Your services are free.', 'buddyclients-free' ) . '</h4>';
@@ -313,7 +313,7 @@ class Checkout {
         // Skip payment
         } else if ( ! $this->stripe_enabled ) {
             
-            $content .= '<div style="margin: 20px">';
+            $content .= '<div class="buddyc-margin-20">';
             
             // Skip payment header
             $content .= '<h4>' . __( 'Confirm Your Booking', 'buddyclients-free' ) . '</h4>';
@@ -465,7 +465,7 @@ class Checkout {
                 'submit_button'         => false
             ];
             
-            return (new Form( $args ) )->build();
+            return buddyc_build_form( $args );
         }        
     }
     
@@ -529,7 +529,7 @@ class Checkout {
             'submit_text'           => __( 'Complete Checkout', 'buddyclients-free' )
         ];
         
-        return (new Form( $args ) )->build();
+        return buddyc_build_form( $args );
     }
 
     /**
@@ -547,7 +547,7 @@ class Checkout {
             'submit_text'           => __( 'Complete Checkout', 'buddyclients-free' )
         ];
         
-        return (new Form( $args ) )->build();
+        return buddyc_build_form( $args );
     }
     
     /**
