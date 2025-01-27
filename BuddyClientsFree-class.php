@@ -284,7 +284,7 @@ if ( ! class_exists( 'BuddyClientsFree' ) ) {
          * @since 0.1.0
          */
         public function form_submission() {
-            new BuddyClients\Includes\Form\FormSubmission();
+            new BuddyClients\Includes\FormSubmission();
         }
     
         /**
