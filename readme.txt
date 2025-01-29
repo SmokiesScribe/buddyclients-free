@@ -4,7 +4,7 @@ Tags: buddypress-integration, service-business, business-tools, team-management,
 Requires at least: 4.9.1
 Tested up to: 6.7.1
 Requires PHP: 7.2
-Stable tag: 1.0.11
+Stable tag: 1.0.12
 License: GPL-2.0-or-later
 License URI: https://www.gnu.org/licenses/gpl-2.0.html
 
@@ -53,6 +53,10 @@ The banner image used for the plugin page:
 Banner URL: /assets/media/banner-772x250/banner.png
 
 == Changelog ==
+
+= 1.0.22 - Unreleased =
+* Improvement: Added no posts message in archive.
+* Corresponding Premium Version: 1.0.22
 
 = 1.0.11 - January 27, 2025 =
 * Improvement: Made admin tables mobile responsive.

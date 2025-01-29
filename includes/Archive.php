@@ -60,16 +60,26 @@ class Archive {
         // Add title content
         $content .= $this->pre_posts_content();
 
-        // Loop through posts
-        foreach ( $this->posts as $post ) {
+        // Make sure posts exist
+        if ( empty( $this->posts ) || ! is_array( $this->posts ) ) {
 
-            // Add single service item
-            if ( $this->post_type === 'buddyc_service' ) {
-                $content .= $this->handle_service( $post );
+            // No posts found
+            $content .= $this->no_posts_content();
 
-            // Single testimonial
-            } else if ( $this->post_type === 'buddyc_testimonial' ) {
-                $content .= $this->handle_testimonial( $post );
+        // Posts exist
+        } else {
+
+            // Loop through posts
+            foreach ( $this->posts as $post ) {
+
+                // Add single service item
+                if ( $this->post_type === 'buddyc_service' ) {
+                    $content .= $this->handle_service( $post );
+
+                // Single testimonial
+                } else if ( $this->post_type === 'buddyc_testimonial' ) {
+                    $content .= $this->handle_testimonial( $post );
+                }
             }
         }
         
@@ -77,6 +87,35 @@ class Archive {
         $content .= '</div>';
 
         // Return content
+        return $content;
+    }
+
+   /**
+     * Retrieves the plural name for the post type.
+     * 
+     * @since 1.0.22
+     */
+    private function get_plural_name() {
+        $post_type_object = get_post_type_object( $this->post_type );
+        if ( $post_type_object ) {
+            return $post_type_object->labels->name;
+        }
+        // Default to 'posts'
+        return __( 'posts', 'buddyclients-free' );
+    }
+
+    /**
+     * Generates the content when no posts are found.
+     * 
+     * @since 1.0.22
+     */
+    private function no_posts_content() {
+        $plural_name = $this->get_plural_name();
+        /* translators: %s: the plural name for the post type (e.g. posts) */
+        $message = __( sprintf( 'No %s found.',
+                    strtolower( $plural_name ) ),
+                    'buddyclients-free' );
+        $content = '<p>' . $message . '</p>';
         return $content;
     }
 
