@@ -318,9 +318,6 @@ class Email {
         // Get content from template
         $content = get_post_field( $post_field, $template_id );
         
-        // Get settings
-        $booking_page_id = buddyc_get_setting( 'pages', 'booking_page' );
-        
         // Define constant variables
         $constants = $this->constant_variables();
         
@@ -361,7 +358,7 @@ class Email {
         // Define constant variables
         $constants = array(
             'site_name'                 => get_option('blogname'),
-            'booking_form_link'         => $booking_page_id ? get_permalink( $booking_page_id ) : site_url(),
+            'booking_form_link'         => buddyc_get_page_link( 'booking_page' ) !== '#' ? buddyc_get_page_link( 'booking_page' ) : site_url(),
             'admin_bookings_link'       => admin_url('/admin.php?page=buddyc-dashboard'),
             'admin_testimonials_link'   => admin_url('/edit.php?post_type=testimonial'),
             'site_url'                  => site_url()

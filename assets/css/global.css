@@ -188,6 +188,18 @@
     border: solid 1.5px var(--buddyclients-tertiary-color);
 }
 
+/* Background overlay */
+#buddyc-overlay {
+    position: fixed;  /* Fixed position to cover the entire viewport */
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: var(--buddyclients-primary-overlay);
+    z-index: 999;  /* Make sure it's behind the popup */
+    display: none;
+}
+
 /* Breadcrumbs */
 .buddyc-breadcrumbs {
     margin: 0 8px;

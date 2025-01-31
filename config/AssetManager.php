@@ -79,6 +79,8 @@ class AssetManager {
 				'accent-color'		=> buddyc_color( 'accent' ),
 				'tertiary-color'	=> buddyc_color( 'tertiary' ),
 				'default-border'	=> 'solid 1px #e7e9ec',
+				'primary-overlay'	=> buddyc_hex_to_rgba( buddyc_color( 'primary' ), 0.6 ),
+				'accent-overlay'	=> buddyc_hex_to_rgba( buddyc_color( 'accent' ), 0.6 ),
 			];
 
 			/**

@@ -295,7 +295,7 @@ class DatabaseManager {
         // If key found, replace with value
         $replace = [
             'datetime'      => 'datetime',
-            'int(11)'       => 'int(11)',
+            'int'           => 'int(11)',
             'boolean'       => 'tinyint(1)',
             'varchar(255)'  => 'varchar(255)',
         ];
@@ -899,4 +899,3 @@ class DatabaseManager {
         return $cache_key;
     }
 }
-?>

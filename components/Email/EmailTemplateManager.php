@@ -99,6 +99,12 @@ class EmailTemplateManager {
                 'content' => '<p>' . __('Your services from {{site_name}} are ready! <a href="{{sales_checkout_link}}">Click here to finalize your booking.</a>', 'buddyclients-free') . '</p>',
                 'required' => true
             ],
+            'lead_gen' => [
+                'label' => __('New Lead', 'buddyclients-free'),
+                'subject' => __('New Lead', 'buddyclients-free'),
+                'content' => '<p><strong>' . __( 'New Lead from {{site_name}}</strong></p><p>Name: {{lead_name}}</p><p>Email: {{lead_email}}</p><p>Interests: {{lead_interest}}</p>', 'buddyclients-free') . '</p>',
+                'required' => true
+            ],
         ];
         
         /**

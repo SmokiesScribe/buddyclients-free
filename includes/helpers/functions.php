@@ -120,6 +120,28 @@ function buddyc_time_has_passed( $target_time ) {
     return $current_timestamp > $target_time;
 }
 
+/**
+ * Converts a hex code to rgba.
+ * 
+ * @since 1.0.23
+ * 
+ * @param   string  $hex    The hex code to convert.
+ * @param   int     $alpha  Optional. The alpha value for transparency.
+ *                          Defaults to 0.6.
+ */
+function buddyc_hex_to_rgba( $hex, $alpha = 0.6 ) {
+    // Remove the '#' if it's included in the hex value
+    $hex = ltrim( $hex, '#' );
+
+    // Convert hex to RGB
+    $r = hexdec( substr( $hex, 0, 2 ) );
+    $g = hexdec( substr( $hex, 2, 2 ) );
+    $b = hexdec( substr( $hex, 4, 2 ) );
+
+    // Return rgba value with the alpha for transparency
+    return "rgba($r, $g, $b, $alpha)";
+}
+
 /** 
  * ========================
  * Scripts and Styles
