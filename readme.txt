@@ -54,10 +54,10 @@ Banner URL: /assets/media/banner-772x250/banner.png
 
 == Changelog ==
 
-= 1.0.12 - Unreleased =
+= 1.0.12 - January 31, 2025 =
 * Improvement: Added no posts message in archive.
 * Fixed: Error retrieving booking form link for emails.
-* Corresponding Premium Version: 1.0.22
+* Corresponding Premium Version: 1.0.23
 
 = 1.0.11 - January 27, 2025 =
 * Improvement: Made admin tables mobile responsive.
