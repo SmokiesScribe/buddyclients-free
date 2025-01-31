@@ -68,7 +68,7 @@ class ObjectHandler {
         $object->ID = $this->database->insert_record();
         
         // Get created at time
-        if ( property_exists( $object, 'created_at' ) ) {
+        if ( property_exists( $object, 'created_at' ) && $object->created_at ) {
             $record = $this->database->get_record_by_id( $object->ID );
             $object->created_at = $record->created_at;
         }
