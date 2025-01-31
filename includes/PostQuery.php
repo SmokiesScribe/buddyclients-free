@@ -33,21 +33,41 @@ class PostQuery {
      public $posts;
      
     /**
+     * The number of posts per page.
+     * Defaults to -1 for no limit.
+     * 
+     * @var int
+     */
+     public $max;
+     
+    /**
      * Constructor method.
      *
      * @since 0.1.0
-     *
-     * @param array $args
      * 
-     * $meta_query optional array key, value, compare, type
+     * @param   string  $post_type  The slug of the post type.
+     * @param   array   $args {}
+     *     An optional array of args for the post query.
+     * 
+     *     @type    array   $meta           An associative array of meta keys and values.
+     *     @type    string  $compare        The compare operator for the meta queries.
+     *                                      Defaults to '='.
+     *     @type    array   $tax            An associative arary of tax names and tags.
+     * }
      */
-    public function __construct( $post_type, $meta_query = null, $compare = null ) {
+    public function __construct( $post_type, $args = [] ) {
         
         // Get post type
         $this->post_type = $post_type;
         
+        // Get max posts
+        $this->max = $args['max'] ?? -1;
+        
         // Build meta query
-        $this->meta_query( $meta_query, $compare );
+        $this->meta_query = $this->build_meta_query( $args );
+
+        // Build tax query
+        $this->tax_query = $this->build_tax_query( $args );
         
         // Retrieve posts
         $this->posts = $this->get_posts();
@@ -58,19 +78,44 @@ class PostQuery {
      * 
      * @since 0.1.0
      */
-    private function meta_query( $meta_query, $compare ) {
+    private function build_meta_query( $args ) {
+        $meta_query = [];
+        $meta_array = $args['meta'] ?? null;
+        $compare = $args['compare'] ?? null;
         
-        if ($meta_query) {
-            foreach ($meta_query as $key => $value) {
-                $query = [
+        if ( ! empty( $meta_array ) && is_array( $meta_array ) ) {
+            foreach ( $meta_array as $key => $value ) {
+                $query[] = [
                     'key' => $key,
                     'value' => $value,
                     'compare' => $compare ?? '='
                 ];
             }
-            $this->meta_query = $query;
+            $meta_query = $query;
         }
-        return $this;
+        return $meta_query;
+    }
+    
+    /**
+     * Generates tax query.
+     * 
+     * @since 1.0.23
+     */
+    private function build_tax_query( $args ) {
+        $tax_query = [];
+        $tax_array = $args['tax'] ?? null;
+
+        if ( ! empty( $tax_array ) && is_array( $tax_array ) ) {
+            foreach ( $tax_array as $tax => $slugs ) {
+                $tax_query[] = [
+                    'taxonomy' => $tax,
+                    'field'    => 'slug',
+                    'terms'    => $slugs,
+                    'operator' => 'IN',
+                ];
+            }
+        }
+        return $tax_query;
     }
     
     /**
@@ -82,19 +127,19 @@ class PostQuery {
         
         $args = array(
             'post_type'      => $this->post_type,
-            'posts_per_page' => -1,
-            'meta_query' => array(
+            'posts_per_page' => $this->max,
+            'meta_query'     => array(
                 'relation' => 'AND',
-                
+        
                 // Custom key value from args
                 $this->meta_query ?? array(),
-                
+        
                 // Hidden not selected
                 array(
                     'key'     => 'hide',
                     'compare' => 'NOT EXISTS',
                 ),
-                
+        
                 // Order by 'order' if it exists
                 array(
                     'relation' => 'OR',
@@ -108,12 +153,16 @@ class PostQuery {
                     ),
                 ),
             ),
-            'orderby'    => 'meta_value_num',
-            'order'      => 'DESC',
+            // Build tax query
+            'tax_query' => $this->tax_query ?? [],
+
+            // Order by  meta field
+            'orderby' => 'meta_value_num',
+            'order'   => 'DESC',
         );
-    
+        
         // Get the posts
-        return get_posts( $args );
+        return get_posts( $args );        
     }
     
     /**
