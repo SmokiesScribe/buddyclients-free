@@ -7,7 +7,10 @@ phpdoc.dist.xml
 
 # Vendor dirs
 /vendor/
-/scoped-vendor/
+/unscoped-vendor/
 
 # Composer executable
 composer.phar
+
+# PHP Scoper
+scoper.inc.php
