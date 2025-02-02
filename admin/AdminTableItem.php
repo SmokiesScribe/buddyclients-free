@@ -675,4 +675,52 @@ class AdminTableItem extends AdminTable {
             return gmdate( 'M j, Y, g:i A', strtotime( $value ) );
         }
     }
+
+    /**
+     * Outputs Email details.
+     * 
+     * @since 1.0.24
+     */
+    protected static function email_details( $property, $value ) {
+        $email_id = $value;
+        $email = buddyc_get_email( $email_id );
+
+        // Initialize
+        $items = [];
+
+        $info = [
+            'created_at'    => [
+                'function'  => 'date_time',
+                'label'     => 'Created At'
+            ],
+            'to_user_id'    => [
+                'function'  => 'user_link',
+                'label'     => 'To'
+            ],
+            'to_email'    => [
+                'function'  => 'direct',
+                'label'     => 'Email'
+            ],
+            'subject'    => [
+                'function'  => 'direct',
+                'label'     => 'Subject'
+            ]
+        ];
+
+        if ( ! empty( $email ) ) {
+            // Loop through info items
+            foreach ( $info as $property => $data ) {
+                $function = $data['function'] ?? null;
+                $label = $data['label'] ?? '';
+                if ( method_exists( self::class, $function ) && property_exists( $email, $property ) ) {
+                    $value = self::$function( $property, $email->{$property} );
+                    $items[] = '<li><span class="buddyc-text-bold">' . $label . '</span>: ' . $value . '</li>';
+                    //$items[] = '<strong>' . $label . '</strong>: ' . $value;
+                }
+            }            
+        }
+        if ( ! empty( $items ) ) {
+            return implode( '<br>', $items );
+        }
+    }
 }

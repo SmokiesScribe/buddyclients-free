@@ -48,6 +48,9 @@
 .buddyc-text-red {
     color: red;
 }
+.buddyc-text-bold {
+    font-weight: bold;
+}
 
 /* Margins */
 .buddyc-top-margin-small {

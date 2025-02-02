@@ -417,5 +417,32 @@ class Email {
         // Delete expired email objects
         self::$object_handler->delete_objects( $expired_emails );
     }
-    
+
+    /**
+     * Retrieves an Email object by ID.
+     * 
+     * @since 1.0.24
+     * 
+     * @param   int $email_id   The ID of the Email.
+     */
+    public static function get_email( $email_id ) {
+        // Initialize object handler
+        self::init_object_handler();
+
+        // Get object by ID
+        return self::$object_handler->get_object( $email_id );
+    }
+
+    /**
+     * Retrieves all Email objects.
+     * 
+     * @since 1.0.24
+     */
+    public static function get_all_emails() {
+        // Initialize object handler
+        self::init_object_handler();
+
+        // Get all objects
+        return self::$object_handler->get_all_objects();
+    }    
 }

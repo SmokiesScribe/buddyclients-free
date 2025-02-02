@@ -24,3 +24,23 @@ function buddyc_email_enabled( $key ) {
         return false;
     }
 }
+
+/**
+ * Retrieves an Email object by ID.
+ * 
+ * @since 1.0.24
+ * 
+ * @param   int $email_id   The ID of the Email.
+ */
+function buddyc_get_email( $email_id ) {
+    return Email::get_email( $email_id );
+}
+
+/**
+ * Retrieves all Email objects.
+ * 
+ * @since 1.0.24
+ */
+function buddyc_get_all_emails() {
+    return Email::get_all_emails();
+}
