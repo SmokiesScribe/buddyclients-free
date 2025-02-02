@@ -93,6 +93,9 @@ class Email {
         
         // Initialize object handler
         self::init_object_handler();
+
+        // Set created at
+        $this->created_at = current_time( 'mysql' );
         
         // Send email
         $this->sent = $this->send( $args );

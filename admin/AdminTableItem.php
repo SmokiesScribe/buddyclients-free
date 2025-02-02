@@ -682,14 +682,16 @@ class AdminTableItem extends AdminTable {
      * @since 1.0.24
      */
     protected static function email_details( $property, $value ) {
+        // Get Email object
         $email_id = $value;
         $email = buddyc_get_email( $email_id );
 
-        // Initialize
-        $items = [];
+        // Initialize string to return
+        $items = '';
 
+        // Define items to include
         $info = [
-            'created_at'    => [
+            'created_at'    => [ // property
                 'function'  => 'date_time',
                 'label'     => 'Created At'
             ],
@@ -707,20 +709,22 @@ class AdminTableItem extends AdminTable {
             ]
         ];
 
+        // Make sure an email object was found
         if ( ! empty( $email ) ) {
             // Loop through info items
             foreach ( $info as $property => $data ) {
                 $function = $data['function'] ?? null;
                 $label = $data['label'] ?? '';
+
+                // Make sure the method exists in this class
                 if ( method_exists( self::class, $function ) && property_exists( $email, $property ) ) {
+                    // Get the value from the defined method
                     $value = self::$function( $property, $email->{$property} );
-                    $items[] = '<li><span class="buddyc-text-bold">' . $label . '</span>: ' . $value . '</li>';
-                    //$items[] = '<strong>' . $label . '</strong>: ' . $value;
+                    // Add the item to the string
+                    $items .= '<p><span class="buddyc-text-bold">' . $label . '</span>: ' . $value . '</p>';
                 }
             }            
         }
-        if ( ! empty( $items ) ) {
-            return implode( '<br>', $items );
-        }
+        return $items;
     }
 }
