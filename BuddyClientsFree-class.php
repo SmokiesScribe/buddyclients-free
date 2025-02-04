@@ -87,6 +87,11 @@ if ( ! class_exists( 'BuddyClientsFree' ) ) {
     		if ( ! defined( 'BUDDYC_PLUGIN_URL' ) ) {
     			define( 'BUDDYC_PLUGIN_URL', plugin_dir_url(__FILE__) );
     		}
+
+			// Vendor dir
+			if ( ! defined( 'BUDDYC_VENDOR_DIR' ) ) {
+				define( 'BUDDYC_VENDOR_DIR', BUDDYC_PLUGIN_DIR . 'vendor' );
+			}
     		
     		// BuddyClients website
             if ( ! defined( 'BUDDYC_URL' ) ) {
