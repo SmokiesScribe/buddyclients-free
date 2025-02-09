@@ -218,9 +218,7 @@ class DatabaseManager {
 
             // Table does not exist, create it
             if ( $this->table_structure ) {
-                add_action( 'init', function() {
-                    $success = $this->create_table();
-                });
+                $success = $this->create_table();
             }
             
         } else {

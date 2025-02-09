@@ -256,7 +256,7 @@ if ( ! class_exists( 'BuddyClientsFree' ) ) {
 			// Register the FontAwesome stylesheet
 			wp_register_style(
 				'font-awesome-stylesheet', 
-				plugins_url('scoped-vendor/fortawesome/font-awesome/css/all.min.css', __FILE__), 
+				plugins_url('vendor/fortawesome/font-awesome/css/all.min.css', __FILE__), 
 				array(), 
 				'6.5.1'
 			);
