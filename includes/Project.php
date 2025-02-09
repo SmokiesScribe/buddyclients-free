@@ -284,15 +284,10 @@ class Project {
         // Loop through line items
         foreach ( $line_items as $line_item ) {
             $service_id = $line_item->service_id ?? null;
-            
-            error_log('Service ID: ' . $service_id);
-            
+                        
             // Add to array
             $booked_services[] = $service_id;
         }
-        
-        error_log('Booked services:');
-        error_log(print_r($booked_services, true));
         
         // Update group meta
         self::update_project_meta( $this->ID, [ 'booked_services' => $booked_services ] );

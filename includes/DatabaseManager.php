@@ -401,7 +401,6 @@ class DatabaseManager {
             // Check if the query was successful
             if ( $result === false ) {
                 // Log error for debugging
-                error_log("Failed to alter table $this->table_name: " . $wpdb->last_error);
                 return false; // Failure to update the table
             }
         }

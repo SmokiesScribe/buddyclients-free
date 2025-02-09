@@ -582,12 +582,12 @@ class AdminColumns {
             }
             
             if ( $type_name ) {
-                $content = __( sprintf(
+                $content = sprintf(
                     /* translators: %1$s: the value of the rate type; %2$s: the label of the rate type */
                     '$%1$s %2$s',
                     esc_html( $value ),
                     esc_html( $type_name )
-                ), 'buddyclients-free' );
+                );
             }
 
         }

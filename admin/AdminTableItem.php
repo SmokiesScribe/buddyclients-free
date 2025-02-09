@@ -8,10 +8,10 @@ use stdClass;
 use BuddyClients\Components\Booking\BookingIntent;
 
 use BuddyClients\Components\Booking\BookedService\{
-    BookedService       as BookedService,
-    PaymentStatusForm   as PaymentStatusForm,
-    ServiceStatusForm   as ServiceStatusForm,
-    ReassignForm        as ReassignForm
+    BookedService,
+    PaymentStatusForm,
+    ServiceStatusForm,
+    ReassignForm
 };
 
 use BuddyClients\Includes\PDF;
@@ -427,7 +427,11 @@ class AdminTableItem extends AdminTable {
         $update_url = admin_url( 'admin.php?page=buddyc-dashboard&action=update_booking&booking_id=' . $item_id . '&booking_property=status&booking_value=' . $values[$value] );
 
         // Define confirmation message
-        $message = __( 'Are you sure you want to update this booking to ' . strtoupper( $values[$value] ) . '?', 'buddyclients-free' );
+        $message = sprintf(
+            /* translators: %s: the new status */
+            __( 'Are you sure you want to update this booking to %s?', 'buddyclients-free' ),
+            strtoupper( $values[$value] )
+        );
 
         // Output button
         $title = __( 'Edit status', 'buddyclients-free' );

@@ -133,11 +133,11 @@ class GroupBriefs {
      * @param   Brief   $brief   The Brief object.
      */
     private function brief_header( $brief ) {
-        return __( sprintf(
+        return sprintf(
             /* translators: %s: the type of brief (e.g. Design) */
             __( '%s Brief', 'buddyclients-free' ),
             $brief->brief_type_names
-        ));
+        );
     }
 
     /**

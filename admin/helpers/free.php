@@ -53,7 +53,14 @@ function buddyc_free_upgrade_content() {
     $content .= '<div class="buddyc-upgrade-info">';
     
     // Upgrade heading
-    $content .= __( '<h1>Upgrade BuddyClients to accept payments, manage projects, and <strong>grow your business</strong>.</h1>', 'buddyclients-free' );
+    $content .= '<h1>';
+    $content .= sprintf(
+        /* translators: %1$s: the opening <strong> tag, %2$s: the closing </strong> tag */
+        __( 'Upgrade BuddyClients to accept payments, manage projects, and %1$sgrow your business%2$s.', 'buddyclients-free' ),
+        '<strong>',
+        '</strong>'
+    );
+    $content .= '</h1>';
     
     // Open options container
     $content .= '<div class="buddyc-upgrade-options">';

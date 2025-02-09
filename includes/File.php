@@ -185,7 +185,6 @@ class File {
 
         // Check for upload error
         if (isset($uploaded_file['error'])) {
-            error_log('Upload error: ' . $uploaded_file['error']);
             return false; // or handle the error as needed
         }
 
@@ -219,7 +218,6 @@ class File {
         
         // Check for upload errors
         if ($file_info['error'] !== UPLOAD_ERR_OK) {
-            error_log('File upload error: ' . $file_info['name']);
             return false;
         }
 

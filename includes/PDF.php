@@ -271,22 +271,20 @@ class PDF {
                 return true;
             } else {
                 // File does not exist
-                $error_message = __( sprintf(
+                $error_message = sprintf(
                     /* translators: %s: the file path */
-                    'PDF file was not created at %s',
+                    __( 'PDF file was not created at %s', 'buddyclients-free' ),
                     $this->file_path
-                ), 'buddyclients-free' );
-                error_log( $error_message );
+                );
                 return false;
             }
         } catch ( Exception $e ) {
             // TCPDF error
-            $error_message = __( sprintf(
+            $error_message = sprintf(
                 /* translators: %s: the error message */
-                'PDF generation failed: %s',
+                __( 'PDF generation failed: %s', 'buddyclients-free' ),
                 $e->getMessage()
-            ), 'buddyclients-free' );
-            error_log( $error_message );
+            );
             return false;
         }
     }

@@ -148,7 +148,6 @@ class Activator {
                         __( 'Post with title "%s" already exists. Skipping creation.', 'buddyclients-free' ),
                         $post_title
                     );
-                    error_log( $error_message );
                     continue;
                 }
     
@@ -173,7 +172,6 @@ class Activator {
                         __( 'Error creating post: %s', 'buddyclients-free' ),
                         $post_id->get_error_message()
                     );
-                    error_log( $error_message );
                     continue;
                 }
     

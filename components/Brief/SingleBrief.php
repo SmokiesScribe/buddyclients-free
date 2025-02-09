@@ -320,11 +320,13 @@ class SingleBrief {
         
         // Last updated date
         if ( $this->brief->updated_date ) {
-            $content .= __( sprintf(
+            $content .= '<p>';
+            $content .= sprintf(
                 /* translators: %s: the date and time the brief was last updated */
-                '<p>Last Updated: %s</p>',
+                __( 'Last Updated: %s', 'buddyclients-free' ),
                 esc_html( gmdate( 'F j, Y, h:i A', strtotime( $this->brief->updated_date ) ) )
-            ));
+            );
+            $content .= '</p>';
         }
         
         // Toggle button

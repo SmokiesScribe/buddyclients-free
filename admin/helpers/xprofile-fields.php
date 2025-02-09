@@ -39,13 +39,3 @@ function buddyc_xprofile_filter_options() {
     }
     return $options;
 }
-
-/**
- * Builds an array of match type fields based on xprofile filter selections.
- * 
- * @since 0.1.0
- */
-function buddyc_xprofile_match_type_fields() {
-    $filter_fields = buddyc_get_setting( 'booking', 'xprofile_fields' );
-    var_dump($filter_fields);
-}

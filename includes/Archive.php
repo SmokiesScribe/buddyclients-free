@@ -110,11 +110,12 @@ class Archive {
      * @since 1.0.22
      */
     private function no_posts_content() {
-        $plural_name = $this->get_plural_name();
-        /* translators: %s: the plural name for the post type (e.g. posts) */
-        $message = __( sprintf( 'No %s found.',
-                    strtolower( $plural_name ) ),
-                    'buddyclients-free' );
+        $plural_name = $this->get_plural_name();        
+        $message = sprintf(
+                    /* translators: %s: the plural name for the post type (e.g. posts) */
+                    __( 'No %s found.', 'buddyclients-free' ),
+                    strtolower( $plural_name )
+                );
         $content = '<p>' . $message . '</p>';
         return $content;
     }

@@ -213,10 +213,9 @@ class Email {
         // Get email from user id if no email specified
         } else if (isset($args['to_user_id'])) {
             $to_email = bp_core_get_user_email($args['to_user_id']);
-            
-        // Oops, neither is specified
+
         } else {
-            error_log( __( 'No email recipient information provided.', 'buddyclients-free' ) );
+            // Oops, neither is specified
         }
         
         return $to_email;
