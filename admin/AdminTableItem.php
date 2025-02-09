@@ -115,7 +115,7 @@ class AdminTableItem extends AdminTable {
             $url = 'https://dashboard.stripe.com/payments/' . $payment_id;
             $icon = '<i class="fa-solid fa-arrow-up-right-from-square"></i>';
             /* translators: %s: Stripe, the name of the payment processor */
-            $title = sprintf( __( 'View transaction on %s', 'buddyclients' ), 'Stripe' );
+            $title = sprintf( __( 'View transaction on %s', 'buddyclients-free' ), 'Stripe' );
             $link = '<span class="buddyc-update-booking-icon"><a href="' . esc_url( $url ) . '" target="_blank" title="' . $title . '">' . $icon . '</a></span>';
             return $link;
         }
@@ -193,7 +193,7 @@ class AdminTableItem extends AdminTable {
             
         // Generate download link
         if ( $pdf_link ) {
-            $download_link = '<a href="' . esc_url( $pdf_link ) . '" download><i class="fa-solid fa-download"></i> ' . __( 'Download PDF', 'buddyclients' ) . '</a>';
+            $download_link = '<a href="' . esc_url( $pdf_link ) . '" download><i class="fa-solid fa-download"></i> ' . __( 'Download PDF', 'buddyclients-free' ) . '</a>';
             return $download_link;
         }
     }
@@ -239,9 +239,9 @@ class AdminTableItem extends AdminTable {
         
         // Define agreement types
         $types = [
-            'team'     => __( 'Team', 'buddyclients' ),
-            'faculty'  => __( 'Faculty', 'buddyclients' ),
-            'affiliate'=> __( 'Affiliate', 'buddyclients' )
+            'team'     => __( 'Team', 'buddyclients-free' ),
+            'faculty'  => __( 'Faculty', 'buddyclients-free' ),
+            'affiliate'=> __( 'Affiliate', 'buddyclients-free' )
         ];
         
         // Loop through types
@@ -318,7 +318,7 @@ class AdminTableItem extends AdminTable {
         // Make sure the user has sessions
         if ( $value && is_array( $value ) && ! empty( $value ) ) {
             $url = admin_url( '/admin.php?page=buddyc-sessions&faculty_ids_filter=' . $item_id );
-            return '<a href="' . esc_url( $url ) . '">' . __( 'Sessions', 'buddyclients' ) . '</a>';
+            return '<a href="' . esc_url( $url ) . '">' . __( 'Sessions', 'buddyclients-free' ) . '</a>';
         }
     }
     
@@ -427,10 +427,10 @@ class AdminTableItem extends AdminTable {
         $update_url = admin_url( 'admin.php?page=buddyc-dashboard&action=update_booking&booking_id=' . $item_id . '&booking_property=status&booking_value=' . $values[$value] );
 
         // Define confirmation message
-        $message = __( 'Are you sure you want to update this booking to ' . strtoupper( $values[$value] ) . '?', 'buddyclients' );
+        $message = __( 'Are you sure you want to update this booking to ' . strtoupper( $values[$value] ) . '?', 'buddyclients-free' );
 
         // Output button
-        $title = __( 'Edit status', 'buddyclients' );
+        $title = __( 'Edit status', 'buddyclients-free' );
         $edit_icon = buddyc_icon( 'edit' );
         $update_button = '<span class="buddyc-update-booking-icon"><a href="#" title="' . $title . '" onclick="return buddycConfirmAction(\'' . esc_url( $update_url ) . '\', \'' . esc_js( $message ) . '\');">' . $edit_icon . '</a></span>';
 
@@ -465,10 +465,10 @@ class AdminTableItem extends AdminTable {
         $delete_url = admin_url( 'admin.php?page=buddyc-dashboard&action=delete_booking&booking_id=' . $value );
 
         // Define confirmation message
-        $message = __( 'Are you sure you want to delete this booking? This action cannot be undone.', 'buddyclients' );
+        $message = __( 'Are you sure you want to delete this booking? This action cannot be undone.', 'buddyclients-free' );
 
         // Output button
-        $title = __( 'Delete booking', 'buddyclients' );
+        $title = __( 'Delete booking', 'buddyclients-free' );
         $delete_button = '<span class="buddyc-update-booking-icon"><a href="#" title="' . $title . '" onclick="return buddycConfirmAction(\'' . esc_url( $delete_url ) . '\', \'' . esc_js( $message ) . '\');"><i class="fa-solid fa-trash"></i></a></span>';
 
         return $delete_button;
@@ -624,13 +624,13 @@ class AdminTableItem extends AdminTable {
         $status = '';
         switch ( $value ) {
             case 'paid':
-                $status = __( 'Paid', 'buddyclients' );
+                $status = __( 'Paid', 'buddyclients-free' );
                 break;
             case 'pending':
-                $status = __( 'Pending', 'buddyclients' );
+                $status = __( 'Pending', 'buddyclients-free' );
                 break;
             case 'failed':
-                $status = __( 'Failed', 'buddyclients' );
+                $status = __( 'Failed', 'buddyclients-free' );
                 break;
         }
         return $status;
@@ -642,7 +642,7 @@ class AdminTableItem extends AdminTable {
      * @since 0.1.0
      */
     protected static function link( $property, $value ) {
-        return '<a href="' . esc_url( $value ) . '">' . __( 'View', 'buddyclients' ) . '</a>';
+        return '<a href="' . esc_url( $value ) . '">' . __( 'View', 'buddyclients-free' ) . '</a>';
     }
     
     /**

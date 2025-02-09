@@ -179,7 +179,7 @@ class Email {
         
         // Check for admin
         if ( $args['to_email'] === 'admin' ) {
-            return __( 'Admin', 'buddyclients' );
+            return __( 'Admin', 'buddyclients-free' );
         }
         
         // No user id
@@ -216,7 +216,7 @@ class Email {
             
         // Oops, neither is specified
         } else {
-            error_log( __( 'No email recipient information provided.', 'buddyclients' ) );
+            error_log( __( 'No email recipient information provided.', 'buddyclients-free' ) );
         }
         
         return $to_email;
