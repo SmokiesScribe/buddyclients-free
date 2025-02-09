@@ -74,7 +74,6 @@ class Admin {
         add_action('admin_enqueue_scripts', [$this, 'enqueue_styles']);
         add_action('admin_enqueue_scripts', [$this, 'enqueue_scripts']);
         add_action('admin_enqueue_scripts', [$this, 'color_picker']);
-        add_action('admin_enqueue_scripts', [$this, 'chart_script']);
         add_action('admin_menu', [$this, 'menu']);
         add_action('admin_menu', [$this, 'admin_pages']);
         add_action('init', [$this, 'page_manager']);
@@ -90,15 +89,6 @@ class Admin {
         wp_enqueue_style('wp-color-picker');
         wp_enqueue_script('iris');
         wp_enqueue_script('wp-color-picker');
-    }
-    
-    /**
-     * Loads chart js.
-     * 
-     * @since 1.0.2
-     */
-    public function chart_script() {
-        wp_enqueue_script( 'chart-js', 'https://cdn.jsdelivr.net/npm/chart.js', [], '4.4.4', true );
     }
     
     /**

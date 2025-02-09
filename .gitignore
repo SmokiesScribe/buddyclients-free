@@ -14,3 +14,6 @@ composer.phar
 
 # PHP Scoper
 scoper.inc.php
+
+# Dependency lock
+package-lock.json
