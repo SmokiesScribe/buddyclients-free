@@ -54,7 +54,7 @@ Banner URL: /assets/media/banner-772x250/banner.png
 
 == Changelog ==
 
-= 1.0.13 - Unreleased =
+= 1.0.13 - February 8, 2025 =
 * Improvement: Updated email log.
 * Corresponding Premium Version: 1.0.24
 
