@@ -525,10 +525,29 @@ class PDF {
      * @param   string  $type   Optional. A word to add to the download link text.
      */
     public static function download_link( $ID, $type = null ) {
+        // Get PDF object
         $pdf = self::get_pdf( $ID );
+
+        // Make sure the file url exists
         if ( isset( $pdf->file_url ) && ! empty( $pdf->file_url ) ) {
-            $link_text = $type ? __( 'Download ', 'buddyclients-free' ) . ucfirst( $type ) . __( ' PDF', 'buddyclients-free' ) : __( 'Download PDF', 'buddyclients-free' );
-            return '<a href="' . esc_url( $pdf->file_url ) . '" ' . __( 'download', 'buddyclients-free' ) . '><i class="fa-solid fa-download"></i> ' . $link_text . '</a>';
+            // Build the link text
+            if ( ! empty( $type ) ) {
+                $link_text = sprintf(
+                    /* translators: %s: the PDF type (e.g. 'Agreement') */
+                    __( 'Download %s PDF'),
+                    ucfirst( esc_html( $type ) )
+                );
+            } else {
+                // No PDF type
+                $link_text = __( 'Download PDF', 'buddyclients-free' );
+            }
+
+            // Build the html link
+            return sprintf(
+                '<a href="%1$s" download><i class="fa-solid fa-download"></i> %2$s</a>',
+                esc_url( $pdf->file_url ),
+                esc_html( $link_text )
+            );
         }
     }
 

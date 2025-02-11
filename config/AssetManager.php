@@ -71,7 +71,7 @@ class AssetManager {
 		if ( ! wp_style_is( 'buddyclients-css-variables', 'enqueued' ) ) {
 
 			// Enqueue variables file
-			wp_enqueue_style( 'buddyclients-css-variables', BUDDYC_PLUGIN_URL . 'assets/css/variables.css' );
+			wp_enqueue_style( 'buddyclients-css-variables', BUDDYC_PLUGIN_URL . 'assets/css/variables.css', [], BUDDYC_PLUGIN_VERSION );
 
 			// Initialize core variables
 			$css_variables = [

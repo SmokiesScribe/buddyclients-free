@@ -113,15 +113,18 @@ class SettingsPage {
      * @since 1.0.17 Use sanitization callback.
      */
     public function register_settings() {
-        register_setting( $this->name . '_group', $this->name, [
-            'sanitize_callback' => [ $this, 'sanitize_settings' ]
+        $settings_group_name = $this->name . '_group';
+        $settings_section_name = $this->name . '_section';
+
+        register_setting( $settings_group_name, $this->name, [
+            'sanitize_callback' => [ get_called_class(), 'sanitize_settings' ]  // Use static method
         ]);
-    
-        add_settings_section( $this->name . '_section', '', [ $this, 'section_callback' ], $this->name );
-    } 
-    
+
+        add_settings_section( $settings_section_name . '_section', '', [ $this, 'section_callback' ], $this->name );
+    }
+
     /**
-     * Sanitize settings.
+     * Sanitizes settings.
      *
      * Ensures that empty checkboxes are saved as an empty array.
      * 
@@ -130,8 +133,7 @@ class SettingsPage {
      * @param array $input The raw settings input.
      * @return array Sanitized settings.
      */
-    public function sanitize_settings( $input ) {
-
+    public static function sanitize_settings( $input ) {
         // Loop through settings fields and ensure checkboxes are set to an empty array if no value is submitted
         foreach ( $this->data as $section_key => $section_data ) {
 

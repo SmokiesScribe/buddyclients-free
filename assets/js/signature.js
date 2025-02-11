@@ -1,13 +1,34 @@
+/**
+ * Initializes a signature capture functionality on a canvas element.
+ *
+ * Allows users to draw a signature on a canvas, converts it to a
+ * base64-encoded image, and stores it in a hidden input field for form submission.
+ * 
+ * @since 1.0.0
+ */
 document.addEventListener("DOMContentLoaded", function() {
-    // DOM is loaded, now execute code
-    const canvas = document.getElementById("signatureCanvas");
+
+    // Get signature field container
+    const signatureContainer = document.querySelector( '.buddyc-signature-container' );
     
     // Exit if no signature field on page
-    if ( ! canvas  ) {
+    if ( ! signatureContainer  ) {
         return;
     }
+
+    // Define element Ids
+    const signatureIds = {
+        canvas:     'buddyc-signature-canvas',
+        data:       'buddyc-signature-data',
+        clear:      'buddyc-signature-clear-button',
+    };
+
+    // Get elements
+    const canvas = signatureContainer.querySelector( '#' + signatureIds.canvas );
+    const signatureInput = signatureContainer.querySelector( '#' + signatureIds.data );
+    const clearButton = signatureContainer.querySelector( '#' + signatureIds.clear );
     
-    const signatureInput = document.getElementById("signature-data");
+    // Get constants    
     const ctx = canvas.getContext("2d");
     let isDrawing = false;
     let lastX = 0;
@@ -49,7 +70,6 @@ document.addEventListener("DOMContentLoaded", function() {
         });
     
         // Clear the canvas
-        const clearButton = document.getElementById("signature-clear-button");
         if (clearButton) {
             clearButton.addEventListener("click", () => {
                 ctx.clearRect(0, 0, canvas.width, canvas.height);
@@ -71,14 +91,3 @@ document.addEventListener("DOMContentLoaded", function() {
         }
     }
 });
-
-
-
-// Convert the canvas data to a data URL
-//const signatureData = canvas.toDataURL('image/png');
-
-//console.log('Signature Data: ' + signatureData);
-
-// Extract and store base64 data in the canvas dataset
-//const base64Data = signatureData.split(',')[1];
-//canvas.dataset.signature = base64Data;

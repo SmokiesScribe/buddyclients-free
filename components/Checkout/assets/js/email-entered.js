@@ -31,10 +31,9 @@ document.addEventListener("DOMContentLoaded", function() {
                     nonce: emailEnteredData.nonce,
                     nonceAction: emailEnteredData.nonceAction
                 },
-                success: function(response) {
-                    // Check if the response was successful
-                    if (response.success) {
-                        console.log(response);
+                success: function( response ) {                    
+                    if ( response.success ) {
+                        // Successful response
                     }
                 }
             });

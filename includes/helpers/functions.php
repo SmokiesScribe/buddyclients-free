@@ -193,7 +193,7 @@ function buddyc_inline_style( $css, $admin = false ) {
     add_action( $hook, function() use ( $handle, $css ) {
         // Register the style if it's not already registered
         if ( ! wp_style_is( $handle, 'registered' ) ) {            
-            wp_register_style( $handle, false );
+            wp_register_style( $handle, false, [], BUDDYC_PLUGIN_VERSION );
         }
         
         // Enqueue the style if it's not already enqueued
@@ -228,7 +228,13 @@ function buddyc_inline_script( $script, $admin = false, $direct = false ) {
     add_action( $hook, function() use ( $handle ) {
         // Register the script if it's not registered already
         if ( ! wp_script_is( $handle, 'registered' ) ) {
-            wp_register_script( $handle, BUDDYC_PLUGIN_URL . 'assets/js/global.js', array(), null, true );
+            wp_register_script( 
+                $handle, 
+                BUDDYC_PLUGIN_URL . 'assets/js/global.js', 
+                [], 
+                BUDDYC_PLUGIN_VERSION,
+                true 
+            );            
         }
 
         // Enqueue the script if it's not already enqueued

@@ -44,15 +44,15 @@ document.addEventListener("DOMContentLoaded", function () {
             const isSuccess = await buddycHandleCreateAccount(e, ajaxurl, submitButton);
             
             // Proceed with the next steps only if account creation is successful
-            if (isSuccess) {
+            if ( isSuccess ) {
                 
                 // Allow default submission of form
                 form.submit();
             } else {
-                console.log("Account creation failed. Submission halted.");
+                // Account creation failed. Submission halted.
             }
-        } catch (error) {
-            console.error("An error occurred during free checkout:", error);
+        } catch ( error ) {
+            console.error( "An error occurred during free checkout:", error );
         } finally {
             // Re-enable the button after processing
             submitButton.disabled = false;
