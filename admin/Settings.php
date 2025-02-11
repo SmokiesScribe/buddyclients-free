@@ -3,15 +3,14 @@ namespace BuddyClients\Admin;
 if ( ! defined( 'ABSPATH' ) ) exit; // Exit if accessed directly
 
 use BuddyClients\Admin\PageManager;
-use BuddyClients\Components\Stripe\StripeKeys;
 use BuddyClients\Components\Email\EmailTemplateManager;
 use BuddyClients\Config\ComponentsHandler;
 
 /**
- * Settings manager.
- * 
  * Organizes all settings data.
  * Retreives and updates settings values.
+ * 
+ * @since 0.1.0
  */
 class Settings {
 	
@@ -114,7 +113,7 @@ class Settings {
 	}
     
     /**
-     * Retrieves current value of a setting.
+     * Retrieves the current value of a setting.
      * 
      * @since 0.1.0
      * 
@@ -137,7 +136,7 @@ class Settings {
         } else {
                     
             // Get the current setting
-            $curr_settings = get_option('buddyc_' . $settings_group . '_settings');
+            $curr_settings = get_option( 'buddyc_' . $settings_group . '_settings' );
             
             // Fallback to defaults
             $field_value = $curr_settings[$settings_field] ?? self::get_defaults( $settings_group, $settings_field ) ?? '';
@@ -148,19 +147,23 @@ class Settings {
     }
     
     /**
-     * Retrieves current value of a setting.
+     * Updates the value of a setting.
      * 
      * @since 0.1.0
+     * 
+     * @param   string  $settings_key       The key of the settings group.
+     * @param   string  $field_key          The key of the settings field.
+     * @param   mixed   $value              The new value for the setting.
      */
     public static function update_value( $settings_key, $field_key, $value ) {
         $settings_name = 'buddyc_' . $settings_key . '_settings';
-        $settings = get_option($settings_name);
+        $settings = get_option( $settings_name );
         $settings[$field_key] = $value;
-        update_option($settings_name, $settings);
+        update_option( $settings_name, $settings );
     }
     
     /**
-     * General settings.
+     * Defines the general settings.
      * 
      * @since 0.1.0
      */
@@ -173,7 +176,7 @@ class Settings {
                 'team_types'            => [],
                 'self_select_roles'     => 'no',
                 'enable_registration'   => 'disable',
-                'register_button_text'  => __('Get Started', 'buddyclients-free'),
+                'register_button_text'  => __( 'Get Started', 'buddyclients-free' ),
                 'admin_info'            => 'enable'
             ];
             
@@ -259,7 +262,7 @@ class Settings {
     }
     
     /**
-     * Components settings.
+     * Defines the components settings.
      * 
      * @since 0.1.0
      */
@@ -341,7 +344,7 @@ class Settings {
     }
     
     /**
-     * Stripe settings.
+     * Defines Stripe settings.
      * 
      * @since 0.1.0
      * 
@@ -361,7 +364,11 @@ class Settings {
                 'mode' => [
                     'title' => __('Stripe Mode', 'buddyclients-free'),
                     'description' => sprintf(
-                        __('<a href="https://dashboard.stripe.com/register" target="_blank">Create a Stripe account</a> to activate the payment integration.</p><p class="description">Set the Stripe Mode below to "Live" to accept real payments. <a href="https://docs.stripe.com/testing" target="_blank">Learn about test payments</a>.', 'buddyclients-free')
+                        '%1$s %2$s</p><p class="description">%3$s %4$s',
+                        '<a href="https://dashboard.stripe.com/register" target="_blank">' . __( 'Create a Stripe account', 'buddyclients-free' ) . '</a>',
+                        __( 'to activate the payment integration.', 'buddyclients-free' ),
+                        __( 'Set the Stripe Mode below to "Live" to accept real payments.', 'buddyclients-free' ),
+                        '<a href="https://docs.stripe.com/testing" target="_blank">' . __( 'Learn about test payments', 'buddyclients-free' ) . '</a>'
                     ),
                     'fields' => [
                         'stripe_mode' => [
@@ -380,7 +387,10 @@ class Settings {
                 'live_keys' => [
                     'title' => __('Stripe Live Keys', 'buddyclients-free'),
                     'description' => sprintf(
-                        __('Input your live keys to accept payments. <a href="https://support.stripe.com/questions/locate-api-keys-in-the-dashboard" target="_blank">Find your API keys</a>.', 'buddyclients-free')
+                        '%s <a href="%s" target="_blank">%s</a>.',
+                        __( 'Input your live keys to accept payments.', 'buddyclients-free' ),
+                        'https://support.stripe.com/questions/locate-api-keys-in-the-dashboard',
+                        __( 'Find your API keys', 'buddyclients-free' )
                     ),
                     'fields' => [
                         'secret_key_live' => [
@@ -426,16 +436,25 @@ class Settings {
                 'webhooks' => [
                     'title' => __('Stripe Webhooks', 'buddyclients-free'),
                     'description' => sprintf(
-                        __('Set up webhooks to retrieve successful Stripe payments.
-                            <ol>
-                                <li>Log into your <a href="https://dashboard.stripe.com/" target="_blank">Stripe Dashboard</a>.</li>
-                                <li>Go to "Developers" -> "Webhooks" -> "Add endpoint"</li>
-                                <li>Paste the URL below in the Endpoint URL field.</li>
-                                <li>Click "Select events."</li>
-                                <li>Select "payment_intent.succeeded" and "customer.created."</li>
-                                <li>Click "Add endpoint."</li>
-                                <li>Click into the newly created webhook. Under "Signing secret", click "Reveal". Copy and paste the secret code into the field below.</li>
-                            </ol>', 'buddyclients-free')
+                        '%s <ol>
+                            <li>%s <a href="%s" target="_blank">%s</a>.</li>
+                            <li>%s</li>
+                            <li>%s</li>
+                            <li>%s</li>
+                            <li>%s</li>
+                            <li>%s</li>
+                            <li>%s</li>
+                        </ol>',
+                        __( 'Set up webhooks to retrieve successful Stripe payments.', 'buddyclients-free' ),
+                        __( 'Log into your', 'buddyclients-free' ),
+                        'https://dashboard.stripe.com/',
+                        __( 'Stripe Dashboard', 'buddyclients-free' ),
+                        __( 'Go to "Developers" -> "Webhooks" -> "Add endpoint"', 'buddyclients-free' ),
+                        __( 'Paste the URL below in the Endpoint URL field.', 'buddyclients-free' ),
+                        __( 'Click "Select events."', 'buddyclients-free' ),
+                        __( 'Select "payment_intent.succeeded" and "customer.created."', 'buddyclients-free' ),
+                        __( 'Click "Add endpoint."', 'buddyclients-free' ),
+                        __( 'Click into the newly created webhook. Under "Signing secret", click "Reveal". Copy and paste the secret code into the field below.', 'buddyclients-free' )
                     ),
                     'fields' => [
                         'endpoint_url' => [
@@ -468,7 +487,7 @@ class Settings {
 
     
     /**
-     * Affiliate settings.
+     * Defines affiliate settings.
      * 
      * @since 0.1.0
      */
@@ -519,7 +538,7 @@ class Settings {
     }
     
     /**
-     * Booking settings.
+     * Defines booking settings.
      * 
      * @since 0.1.0
      */
@@ -560,17 +579,17 @@ class Settings {
                                 'no' => __('No', 'buddyclients-free'),
                                 'yes' => __('Yes', 'buddyclients-free'),
                             ],
-                            'description' => __('Select this to skip the payment and make every submitted booking successful.<br>Use this setting if you process payments elsewhere.', 'buddyclients-free'),
+                            'description' => __( 'Select this to skip the payment and make every submitted booking successful.', 'buddyclients-free' ) . '<br>' . __( 'Use this setting if you process payments elsewhere.', 'buddyclients-free'),
                         ],
                         'cancellation_window' => [
                             'label' => __('Cancellation Window', 'buddyclients-free'),
                             'type' => 'number',
-                            'description' => __('How many days do clients have to cancel bookings?<br>Team and commission payments will be marked as "eligible" after this timeframe.', 'buddyclients-free'),
+                            'description' => __( 'How many days do clients have to cancel bookings?', 'buddyclients-free' ) . '<br>' . __( 'Team and commission payments will be marked as "eligible" after this timeframe.', 'buddyclients-free'),
                         ],
                         'minimum_fee' => [
                             'label' => __('Minimum Fee', 'buddyclients-free'),
                             'type' => 'number',
-                            'description' => __('What is the minimum dollar amount per booking?<br>Note that paid bookings of less than $1 will fail.', 'buddyclients-free'),
+                            'description' => __( 'What is the minimum dollar amount per booking?', 'buddyclients-free' ) . '<br>' . __( 'Note that paid bookings of less than $1 will fail.', 'buddyclients-free'),
                         ],
                     ],
                 ],
@@ -607,7 +626,7 @@ class Settings {
 
     
     /**
-     * Sales settings.
+     * Defines sales settings.
      * 
      * @since 0.1.0
      */
@@ -672,7 +691,7 @@ class Settings {
     }
     
     /**
-     * Help settings.
+     * Defines help and contact settings.
      * 
      * @since 0.1.0
      */
@@ -732,7 +751,7 @@ class Settings {
     }
     
     /**
-     * Style settings.
+     * Defines style settings.
      * 
      * @since 0.1.0
      */
@@ -777,7 +796,7 @@ class Settings {
 
     
     /**
-     * Legal settings.
+     * Defines legal settings.
      * 
      * @since 0.1.0
      */
@@ -797,9 +816,10 @@ class Settings {
                     'title' => __( 'Current Legal Agreements', 'buddyclients-free' ),
                     'description' => sprintf(
                         /* translators: %1$s: URL to add content to legal agreements; %2$s: link text */
-                        __('Select the current version of each legal agreement type. If transitioning to a new version, select the previous version and add a deadline for accepting the new agreement.<br><a href="%1$s">%2$s</a>', 'buddyclients-free'),
-                        esc_url(admin_url('edit.php?post_type=buddyc_legal_mod')),
-                        __('Add content to legal agreements for individual users.', 'buddyclients-free')
+                        '%s<br><a href="%s">%s</a>',
+                        __( 'Select the current version of each legal agreement type. If transitioning to a new version, select the previous version and add a deadline for accepting the new agreement.', 'buddyclients-free' ),
+                        esc_url( admin_url( 'edit.php?post_type=buddyc_legal_mod' ) ),
+                        __( 'Add content to legal agreements for individual users.', 'buddyclients-free' )
                     ),
                     'fields' => self::current_legal_fields(),
                 ],
@@ -841,7 +861,7 @@ class Settings {
     }
     
     /**
-     * Email settings.
+     * Defines email settings.
      * 
      * @since 0.1.0
      */
@@ -868,7 +888,7 @@ class Settings {
                             'type' => 'checkboxes',
                             'options' => self::email_options(),
                             'default' => self::email_options( true ),
-                            'description' => __( 'Select the events you would like to trigger email notifications for users.<br><span class="buddyc-text-red">*</span> Disabling starred emails may impact plugin functionality.', 'buddyclients-free' ),
+                            'description' => __( 'Select the events you would like to trigger email notifications for users.', 'buddyclients-free' ) . '<br><span class="buddyc-text-red">*</span> ' . __( 'Disabling starred emails may impact plugin functionality.', 'buddyclients-free' ),
                         ],
                     ],
                 ],
@@ -906,8 +926,10 @@ class Settings {
                     'title' => __( 'Email Log', 'buddyclients-free' ),
                     'description' => sprintf(
                         /* translators: %s: URL to view the email log */
-                        __('Email log settings. <a href="%s">View the email log.</a>', 'buddyclients-free'),
-                        esc_url(admin_url('/admin.php?page=buddyc-email-log')),
+                        '%s <a href="%s">%s</a>',
+                        __( 'Email log settings.', 'buddyclients-free' ),
+                        esc_url( admin_url( 'admin.php?page=buddyc-email-log' ) ),
+                        __( 'View the email log.', 'buddyclients-free' )
                     ),
                     'fields' => [
                         'email_log_time' => [
@@ -930,7 +952,7 @@ class Settings {
     }
     
     /**
-     * Integrations settings.
+     * Defines integrations settings.
      * 
      * @since 0.4.0
      */
@@ -939,35 +961,82 @@ class Settings {
         // Check whether we want defaults
         if ( $defaults ) {
             return [
-                
+                'enable_recaptcha'      => 'disable',
+                'recaptcha_threshold'   => '0.5',
             ];
             
         // Otherwise return settings data
         } else {
             return [
-                'meta' => [
-                    'title' => __( 'Meta Ads Integration', 'buddyclients-free' ),
-                    'description' => __( 'Set up the API integration to send conversion events to Meta (Facebook).', 'buddyclients-free' ),
+                'recaptcha' => [
+                    'title' => __( 'reCAPTCHA Integration', 'buddyclients-free' ),
+                    'description' => sprintf(
+                        '%1$s <a href="%2$s" target="_blank">%3$s</a>',
+                        __( 'Protect your website against spam with Google reCAPTCHA.', 'buddyclients-free' ),
+                        'https://cloud.google.com/recaptcha/docs/create-key-website',
+                        __( 'Learn how to create reCAPTCHA keys.', 'buddyclients-free' )
+                    ),
                     'fields' => [
-                        'meta_access_token' => [
-                            'label' => __( 'Access Token', 'buddyclients-free' ),
-                            'type' => 'text',
-                            'description' => __( 'Enter your access token.', 'buddyclients-free' ),
+                        'enable_recaptcha' => [
+                            'label' => __( 'Enable reCAPTCHA', 'buddyclients-free' ),
+                            'type' => 'dropdown',
+                            'options' => [
+                                'disable' => __( 'Disable', 'buddyclients-free' ),
+                                'enable'    => __( 'Enable', 'buddyclients-free' ),
+                            ],
+                            'description' => __( 'Enable reCAPTCHA to protect your forms from spam.', 'buddyclients-free' ),
                         ],
-                        'meta_pixel_id' => [
-                            'label' => __( 'Pixel ID', 'buddyclients-free' ),
+                        'recaptcha_site_key' => [
+                            'label' => __( 'Site Key', 'buddyclients-free' ),
                             'type' => 'text',
-                            'description' => __( 'Enter your pixel ID.', 'buddyclients-free' ),
+                            'description' => __( 'Enter your site key.', 'buddyclients-free' ),
+                        ],
+                        'recaptcha_secret_key' => [
+                            'label' => __( 'Secret Key', 'buddyclients-free' ),
+                            'type' => 'text',
+                            'description' => __( 'Enter your secret key.', 'buddyclients-free' ),
+                        ],
+                        'recaptcha_threshold' => [
+                            'label' => __( 'reCAPTCHA Threshold', 'buddyclients-free' ),
+                            'type' => 'dropdown',
+                            'options' => [
+                                '0.9'     => __( '0.9 - Most sensitive', 'buddyclients-free' ),
+                                '0.8'     => __( '0.8', 'buddyclients-free' ),
+                                '0.7'     => __( '0.7', 'buddyclients-free' ),
+                                '0.6'     => __( '0.6', 'buddyclients-free' ),
+                                '0.5'     => __( '0.5 - Default', 'buddyclients-free' ),
+                                '0.4'     => __( '0.4', 'buddyclients-free' ),
+                                '0.3'     => __( '0.3', 'buddyclients-free' ),
+                                '0.2'     => __( '0.2', 'buddyclients-free' ),
+                                '0.1'     => __( '0.1 - Least sensitive', 'buddyclients-free' ),
+                            ],
+                            'description' => __( 'Determine how sensitive the spam filter should be. Thresholds above 0.5 may block valid submissions.', 'buddyclients-free' ),
                         ],
                     ],
                 ],
+                //'meta' => [
+                //    'title' => __( 'Meta Ads Integration', 'buddyclients-free' ),
+                //    'description' => __( 'Set up the API integration to send conversion events to Meta (Facebook).', 'buddyclients-free' ),
+                //    'fields' => [
+                //        'meta_access_token' => [
+                //            'label' => __( 'Access Token', 'buddyclients-free' ),
+                //            'type' => 'text',
+                //            'description' => __( 'Enter your access token.', 'buddyclients-free' ),
+                //        ],
+                //        'meta_pixel_id' => [
+                //            'label' => __( 'Pixel ID', 'buddyclients-free' ),
+                //            'type' => 'text',
+                //            'description' => __( 'Enter your pixel ID.', 'buddyclients-free' ),
+                //        ],
+                //    ],
+                //],
             ];
         }
     }
 
         
     /**
-     * License settings.
+     * Defines license settings.
      * 
      * @since 0.1.0
      */

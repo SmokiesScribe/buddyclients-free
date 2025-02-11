@@ -286,7 +286,8 @@ class AssetManager {
 			'search'				=> [],
 			'create-page'			=> [],
 			'password-field'		=> ['eyeClass' => buddyc_icon('eye', false),
-										'eyeSlashClass' => buddyc_icon('eye-slash', false)]
+										'eyeSlashClass' => buddyc_icon('eye-slash', false)],
+			'recaptcha'				=> ['siteKey' => buddyc_recaptcha_site_key()],
 		];
 
 	 	/**

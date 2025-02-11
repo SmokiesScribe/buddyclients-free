@@ -26,7 +26,7 @@ jQuery(document).ready(function() {
         project: document.getElementById( 'buddyc_projects' ),
         items: bookingForm.querySelector( '#hidden-line-items' ),
         services: bookingForm.querySelectorAll('.service-option'),
-        submit: bookingForm.querySelector('input[type="submit"]'),
+        submit: bookingForm.querySelector('[data-action="submit"]'),
         confirm: document.querySelectorAll('.confirmation-checkbox'),
         hiddenTotal: bookingForm.querySelector( '#total-fee' ),
         create: document.querySelectorAll('.create-project'),
@@ -112,13 +112,14 @@ jQuery(document).ready(function() {
      * 
      * @since 1.0.0
      */
-    jQuery(document).ready(function($) {
-        // Listen for form submission
-        bookingForm.addEventListener('submit', function (event) {
-            // Validate submission
-            buddycValidateBookingSubmission( event );
-        });
-    });
+        if ( bookingForm ) {   
+            // Listen for form submission
+            bookingForm.addEventListener('submit', function( event ) {
+                // Call your custom validation function
+                buddycValidateBookingSubmission(event);
+            });
+        }
+    
 
     /**
      * Calls function to update the visibility of project fields.
@@ -197,6 +198,7 @@ jQuery(document).ready(function() {
      * @since 0.1.0
      */
     function buddycUpdateLineItemsTable( updatedLineItems ) {
+
         // Get the table body
         const lineItemsTableBody = jQuery(`.${classNames.table} tbody`);
 
@@ -344,7 +346,7 @@ jQuery(document).ready(function() {
         }
 
         // Valid and selected services exist
-        if ( selectedServices.length > 0 ) {
+        if ( selectedServices.length > 0 ) {            
 
             // Fetch line items data
             const lineItemsData = buddycGetLineItemsData( selectedServices );
@@ -715,22 +717,23 @@ jQuery(document).ready(function() {
      * @param   bool    complete    Optional. Whether the update is complete.
      *                              Defaults to false.
      */
-    function buddycBookingFormUpdating( complete = false ) {        
-        if ( ! fields.submit ) {
-            return;
-        }
+    function buddycBookingFormUpdating( complete = false ) {
 
         // Define variable
         const submitDisabled = ! complete;
 
-        // Cache the original value of the submit button
-        if ( ! fields.submit.dataset.originalValue ) {
-            fields.submit.dataset.originalValue = fields.submit.value;
-        }
+        // Make sure submit button exists
+        if ( fields.submit ) {
 
-        // Disable the submit button and change its text
-        fields.submit.disabled = submitDisabled;
-        fields.submit.value = complete ? fields.submit.dataset.originalValue : 'Updating...';
+            // Cache the original value of the submit button
+            if ( ! fields.submit.dataset.originalValue ) {
+                fields.submit.dataset.originalValue = fields.submit.value;
+            }
+
+            // Disable the submit button and change its text
+            fields.submit.disabled = submitDisabled;
+            fields.submit.value = complete ? fields.submit.dataset.originalValue : 'Updating...';
+        }
 
         // Get details containers
         const detailsContainers = document.getElementsByClassName( classNames.detailsContainer );
@@ -1693,10 +1696,7 @@ jQuery(document).ready(function() {
      * @since 0.1.0
      */
     function buddycValidateBookingSubmission( event ) {
-            
-        // Initialize valid to true
-        let valid = true;
-        
+
         // Require services
         if ( ! fields.items.value ) {
             buddycPreventSubmission( event, 'Please select your services.' );
@@ -1720,6 +1720,9 @@ jQuery(document).ready(function() {
                 return;
             }
         });
+
+        // Validate reCAPTCHA
+        buddycRecaptchaSubmit( event, true );
     }
             
     /**

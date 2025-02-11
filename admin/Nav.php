@@ -49,7 +49,7 @@ class Nav {
                 __( 'Legal', 'buddyclients-free' )               => ['page'  => 'buddyc-legal-settings', 'post_type'  => 'buddyc_legal'],
                 __( 'Affiliate', 'buddyclients-free' )           => ['page'  => 'buddyc-affiliate-settings'],
                 __( 'Help Posts', 'buddyclients-free' )          => ['page'  => 'buddyc-help-settings'],
-                //__( 'Integrations', 'buddyclients-free' )        => ['page'  => 'buddyc-integrations-settings'],
+                __( 'Integrations', 'buddyclients-free' )        => ['page'  => 'buddyc-integrations-settings'],
             ],
             'services' => [
                 __( 'Services', 'buddyclients-free' )            => ['post_type'  => 'buddyc_service'],

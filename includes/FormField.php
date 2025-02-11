@@ -122,6 +122,14 @@ class FormField {
      * @var string
      */
     private $container_classes;
+
+    /**
+     * Whether the reCAPATCHA class should be excluded
+     * from the submit button. 
+     * 
+     * @var bool
+     */
+    private $manual_recaptcha;
     
     /**
      * Constructor method.
@@ -166,6 +174,7 @@ class FormField {
         $this->placeholder      = $args['placeholder'] ?? null;
         $this->required         = $args['required'] ?? null;
         $this->hide             = $args['hide'] ?? false;
+        $this->manual_recaptcha = $args['manual_recaptcha'] ?? false;
     }
 
     /**
@@ -628,14 +637,33 @@ class FormField {
     }
     
     /**
-     * Submit button.
+     * Generates the submit button with reCAPTCHA v3 integration.
      * 
      * @since 0.1.0
      */
     private function submit_field() {
-        
-        $field = '<div class="form-group form-group ' . $this->container_classes . '" style="' . $this->style . '">';
-        $field .= '<input type="submit" class="' . $this->field_classes . '" name="' . $this->key . '[]" id="' . $this->key . '" ' . $this->field_atts_string . '>';
+
+        // Form container with additional classes and inline styles
+        $field = '<div class="form-group ' . $this->container_classes . '" style="' . $this->style . '">';
+
+        // Initialize
+        $data_atts = ' ';
+
+        // Check if reCAPTCHA is enabled
+        if ( buddyc_recaptcha_enabled() ) {
+            $site_key = buddyc_recaptcha_site_key();
+            if ( ! $this->manual_recaptcha ) {
+                $this->field_classes .= empty( $this->field_classes ) ? 'g-recaptcha' : ' g-recaptcha';
+            }
+            $data_atts = ' data-sitekey="' . esc_attr( $site_key ) . '"';
+        }
+
+        // Generate submit field
+        $field .= '<button class="' . $this->field_classes . '"';
+        $field .= $data_atts;
+        $field .= 'data-action="submit">Submit</button>';
+
+        // Close the div container
         $field .= '</div>';
         
         return $field;
@@ -684,12 +712,12 @@ class FormField {
      * @since 0.1.0
      */
     private function signature_field() {
-        $field = '<div class="form-group form-group ' . $this->container_classes . '" style="' . $this->style .'">';
+        $field = '<div class="form-group buddyc-signature-container ' . $this->container_classes . '">';
         $field .= '<legend>' . __( 'Sign Here', 'buddyclients-free' ) . '</legend>';
-        $field .= '<canvas id="signatureCanvas" width="600" height="200" style="border-radius: 5px; border: 1px solid #D4D6D8;" data-signature="signature-data"></canvas><br>';
-        $field .= '<button type="button" id="signature-clear-button">' . __( 'Clear Signature', 'buddyclients-free' ) . '</button>';
+        $field .= '<canvas id="buddyc-signature-canvas" width="600" height="200" style="border-radius: 5px; border: 1px solid #D4D6D8;" data-signature="signature-data"></canvas><br>';
+        $field .= '<button type="button" id="buddyc-signature-clear-button">' . __( 'Clear Signature', 'buddyclients-free' ) . '</button>';
         
-        $field .= '<input type="hidden" id="signature-data" name="signature-data" value="">';
+        $field .= '<input type="hidden" id="buddyc-signature-data" name="buddyc-signature-data" value="">';
         $field .= '</div>';
         return $field;
     }

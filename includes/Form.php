@@ -58,6 +58,13 @@ class Form {
     public function echo() {
         $form = $this->build();
         $allowed_html = buddyc_allowed_html_form();
+        if ( ! isset( $allowed_html['button'] ) ) {
+            $allowed_html['button'] = [];
+        }
+        $allowed_html['button']['data-sitekey'] = [];
+        $allowed_html['button']['data-callback'] = [];
+        $allowed_html['button']['data-action'] = [];
+        
         echo wp_kses( $form, $allowed_html );
         return;
     }
@@ -104,6 +111,9 @@ class Form {
         
         // Honeypot field
         $form .= $this->honeypot_field();
+
+        // Hidden reCAPTCHA response field
+        $form .= $this->recaptcha_response_field();
         
         // Nonce
         $form .= $this->nonce_field();
@@ -228,6 +238,21 @@ class Form {
         // Add the field to the content
         return ( new FormField( $args ) )->build();
     }
+
+    /**
+     * Creates a hidden reCAPTCHA response field.
+     *
+     * @since 1.0.4
+     */
+    private function recaptcha_response_field() {
+        $args = [
+            'key'           => 'recaptcha_response',
+            'type'          => 'hidden',
+        ];
+        
+        // Add the field to the content
+        return ( new FormField( $args ) )->build();
+    }
     
     /**
      * Submit button.
@@ -246,10 +271,11 @@ class Form {
         
         if ( $submit_button ) {
             $args = [
-                'key'           => $this->key . '-submit',
-                'type'          => 'submit',
-                'value'         => $submit_text,
-                'field_classes' => $submit_classes,
+                'key'               => $this->key . '-submit',
+                'type'              => 'submit',
+                'value'             => $submit_text,
+                'field_classes'     => $submit_classes,
+                'manual_recaptcha'  => $this->args['manual_recaptcha'] ?? false,
             ];
             
             // Add the field to the content

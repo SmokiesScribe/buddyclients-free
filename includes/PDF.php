@@ -273,7 +273,7 @@ class PDF {
                 // File does not exist
                 $error_message = sprintf(
                     /* translators: %s: the file path */
-                    __( 'PDF file was not created at %s', 'buddyclients-free' ),
+                    __( 'PDF file was not created at %s', 'buddyclients' ),
                     $this->file_path
                 );
                 return false;
@@ -282,7 +282,7 @@ class PDF {
             // TCPDF error
             $error_message = sprintf(
                 /* translators: %s: the error message */
-                __( 'PDF generation failed: %s', 'buddyclients-free' ),
+                __( 'PDF generation failed: %s', 'buddyclients' ),
                 $e->getMessage()
             );
             return false;
@@ -534,12 +534,12 @@ class PDF {
             if ( ! empty( $type ) ) {
                 $link_text = sprintf(
                     /* translators: %s: the PDF type (e.g. 'Agreement') */
-                    __( 'Download %s PDF'),
+                    __( 'Download %s PDF', 'buddyclients' ),
                     ucfirst( esc_html( $type ) )
                 );
             } else {
                 // No PDF type
-                $link_text = __( 'Download PDF', 'buddyclients-free' );
+                $link_text = __( 'Download PDF', 'buddyclients' );
             }
 
             // Build the html link
@@ -561,8 +561,8 @@ class PDF {
     public static function download_icon( $ID ) {
         $pdf = self::get_pdf( $ID );
         if ( isset( $pdf->file_url ) && ! empty( $pdf->file_url ) ) {
-            $title = __( 'Download PDF', 'buddyclients-free' );
-            return '<a title="' . $title . '" href="' . esc_url( $pdf->file_url ) . '" ' . __( 'download', 'buddyclients-free' ) . '><i class="fa-solid fa-download"></i></a>';
+            $title = __( 'Download PDF', 'buddyclients' );
+            return '<a title="' . $title . '" href="' . esc_url( $pdf->file_url ) . '" ' . __( 'download', 'buddyclients' ) . '><i class="fa-solid fa-download"></i></a>';
         }
     }
 }

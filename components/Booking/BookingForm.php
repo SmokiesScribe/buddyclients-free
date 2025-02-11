@@ -211,7 +211,8 @@ class BookingForm {
             'fields_callback'       => [$this, 'form_fields'],
             'submission_class'      => __NAMESPACE__ . '\BookingFormSubmission',
             'submit_text'           => $this->submit_text,
-            'avatar'                => $this->client_id
+            'avatar'                => $this->client_id,
+            'manual_recaptcha'      => true
         ];
         
         // Open container
@@ -508,7 +509,8 @@ class BookingForm {
             $service_type = new ServiceType( $type->ID );
             
             // Get services by type
-            $services = buddyc_post_query( 'buddyc_service', ['service_type' => $service_type->ID] );
+            $args = ['meta' => ['service_type' => $service_type->ID]];
+            $services = buddyc_post_query( 'buddyc_service', $args );
             
             // Exit if no services have the type
             if ( ! $services ) {

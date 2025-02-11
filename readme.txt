@@ -55,6 +55,7 @@ Banner URL: /assets/media/banner-772x250/banner.png
 == Changelog ==
 
 = 1.0.14 - Unreleased =
+* New Feature! Google reCAPTCHA integration.
 * Fixed: Corrected translation issues.
 * Corresponding Premium Version: 1.0.25
 

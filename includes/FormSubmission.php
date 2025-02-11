@@ -8,8 +8,6 @@ if ( ! defined( 'ABSPATH' ) ) exit; // Exit if accessed directly
  * Handles all form submissions.
  *
  * @since 0.1.0
- * 
- * @todo Review warning: Processing form data without nonce verification.
  */
 class FormSubmission {
 
@@ -106,6 +104,60 @@ class FormSubmission {
     }
 
     /**
+     * Verifies the reCAPTCHA.
+     * 
+     * @since 1.0.25
+     */
+    function verify_recaptcha() {
+
+        // Return true if not enabled
+        $enabled = buddyc_recaptcha_enabled();
+        if ( ! $enabled ) {
+            return true;
+        }
+
+        // reCAPTCHA settings
+        $secret_key = buddyc_recaptcha_secret_key();
+        $threshold = buddyc_recaptcha_threshold();
+
+        // reCAPTCHA response
+        $recaptcha_response = isset( $_POST['recaptcha_response'] ) ? trim( $_POST['recaptcha_response'] ) : null;
+
+        if ( ! $recaptcha_response ) {
+            return false; // No response, so reject
+        }
+        
+        // reCAPTCHA verification URL
+        $verify_url = 'https://www.google.com/recaptcha/api/siteverify';
+
+        // Make the POST request to verify the reCAPTCHA response
+        $response = wp_remote_post( $verify_url, [
+            'body' => [
+                'secret'   => $secret_key,
+                'response' => $recaptcha_response,
+            ]
+        ]);
+
+        // Check for errors in the response
+        if ( is_wp_error( $response ) ) {
+            return false; // Return false if request failed
+        }
+
+        // Get the response body
+        $response_body = wp_remote_retrieve_body( $response );
+
+        // Decode the response
+        $result = json_decode( $response_body );
+
+        // Check if the score is above the threshold
+        if ( isset( $result->score ) && $result->score > $threshold ) {
+            return true; // reCAPTCHA passed
+        } else {
+            return false; // reCAPTCHA failed
+        }
+    }
+
+    /**
      * Retrieves and sanitizes the nonce value.
      * 
      * @since 1.0.17
@@ -188,6 +240,10 @@ class FormSubmission {
         if ( wp_verify_nonce( $this->nonce_value, $this->form_key ) ) {
             // Check for honeypot submission
             if ( isset( $_POST['website'] ) && ! empty( $_POST['website'] ) ) {
+                return true;
+            }
+            // Check reCAPTCHA
+            if ( ! $this->verify_recaptcha() ) {
                 return true;
             }
         }
