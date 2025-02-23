@@ -51,6 +51,9 @@ class Settings {
 
         // Post types added or deleted
         add_action( 'admin_init', [$this, 'clear_cache_post_types'], 30 );
+
+        // Available components change
+        add_action( 'buddyc_available_components_updated', [$this, 'clear_cache_components'] );
     }
 
     /**
@@ -204,6 +207,15 @@ class Settings {
     }
 
     /**
+     * Clears the cache when available components are updated.
+     * 
+     * @since 1.0.25
+     */
+    public function clear_cache_components() {
+        $this->clear_cache( 'components' );
+    }
+
+    /**
      * Clears the cache for a settings group or for all
      * settings data if no group is defined.
      * 
@@ -213,6 +225,25 @@ class Settings {
      *                                  Defaults to null and clears the cache for all groups.
      */
     private function clear_cache( $settings_group = null ) {
+        if ( function_exists( 'buddyc_version_cache' ) ) {
+            $this->run_clear_cache($settings_group);
+        } else {
+            add_action( 'init', function() use ( $settings_group ) {
+                $this->run_clear_cache( $settings_group );
+            });
+        }
+    }
+
+    /**
+     * Clears the cache for a settings group or for all
+     * settings data if no group is defined.
+     * 
+     * @since 1.0.25
+     * 
+     * @param   string|array  $settings_group Optional. The name of the settings group to clear.
+     *                                  Defaults to null and clears the cache for all groups.
+     */
+    private function run_clear_cache( $settings_group = null ) {
         // Get versions
         $version_cache = buddyc_version_cache();
 

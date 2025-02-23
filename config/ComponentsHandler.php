@@ -1,172 +1,170 @@
-<?php 
-
+<?php
 namespace BuddyClients\Config;
-
+if ( ! defined( 'ABSPATH' ) ) exit; // Exit if accessed directly
 use BuddyClients\Includes\DatabaseManager;
-use BuddyClients\Admin\AdminNotice;
-
-if (!defined('ABSPATH')) exit; // Exit if accessed directly
 
 /**
- * Class ComponentsHandler
- * Handles component management, encryption, and dependencies.
+ * Handles plugin components.
+ * 
+ * @since 0.1.0
+ * 
+ * @ignore
  */
 class ComponentsHandler {
-    private static $database = null;
-    private static $encryption_key = 'mellons';
-    private $components;
-
+    
     /**
-     * Initialize the database connection if not already set.
+     * DatabaseManager instance.
+     * 
+     * @var DatabaseManager
+     */
+    private static $database = null;
+    
+    /**
+     * Components data.
+     * 
+     * @var array
+     */
+    private $components;
+    
+    /**
+     * Initializes the DatabaseManager.
+     * 
+     * @since 0.1.0
      */
     private static function init_database() {
-        if (!self::$database) {
-            self::$database = new DatabaseManager('components');
+        if ( ! self::$database ) {
+            self::$database = new DatabaseManager( 'components' );
         }
     }
-
+    
     /**
-     * ComponentsHandler constructor.
+     * Constructor method.
+     * 
+     * @since 0.1.0
      */
     public function __construct() {
+        // Initialize DatabaseManager
         self::init_database();
     }
-
+    
     /**
-     * Retrieve and decrypt stored components.
-     *
-     * @return array Decrypted components list.
+     * Retrieves components.
+     * 
+     * @since 0.1.0
      */
     public static function get_components() {
-        $decrypted_components = [];
-        self::init_database();
-
-        $record = self::$database->get_record_by_id(1);
-        if ($record) {
-            $encrypted_components = $record->components;
-            $decrypted_components = self::decrypt($encrypted_components);
-        }
-
-        return is_array($decrypted_components) ? $decrypted_components : [];
+        return [
+            // Required
+            'Booking',
+            'Checkout',
+            'Service',
+            // Core
+            'Email',
+            'Brief',
+        ];
     }
-
+    
     /**
-     * List of required components.
-     *
-     * @return array
+     * Defines required components.
+     * 
+     * @since 0.1.0
      */
     public static function required_components() {
-        return ['Booking', 'Checkout', 'Service'];
+        return [
+            'Booking',
+            'Checkout',
+            'Service',
+        ];
     }
-
+    
     /**
-     * List of components with dependencies.
-     *
-     * @return array
+     * Defines dependent components.
+     * 
+     * @since 0.1.0
      */
     public static function dependent_components() {
-        return ['Affiliate' => 'Legal'];
+        return [];
     }
-
+    
     /**
-     * Update and store encrypted components in the database.
-     *
-     * @param array $components List of components.
+     * Checks whether an item is in the components.
+     * 
+     * @since 0.1.0
+     * 
+     * @param   string  $component  The component to check.
+     * @return  bool
      */
-    public static function update_components($components) {
-        self::init_database();
+    public static function in_components( $component ) {
 
-        if (!$components) {
-            $components = [];
-        }
+        // Check if available components have changed
+        $prev_components = get_option( '_buddyc_available_components', [] );
 
-        // Ensure required components are included
-        $required_components = self::required_components();
-        foreach ($required_components as $required_component) {
-            if (!in_array($required_component, $components)) {
-                $components[] = $required_component;
-            }
-        }
-
-        // Encrypt and store in the database
-        $record = self::$database->get_record_by_id(1);
-        $encrypted_components = self::encrypt($components);
-
-        if ($record) {
-            self::$database->update_record(1, ['components' => $encrypted_components]);
-        } else {
-            self::$database->insert_record(['components' => $encrypted_components]);
-        }
-    }
-
-    /**
-     * Check if a component is active and meets dependency requirements.
-     *
-     * @param string $component Component name.
-     * @return bool True if active, false otherwise.
-     */
-    public static function in_components($component) {
+        // Retrieve components
         $components = self::get_components();
 
-        if (!in_array($component, $components)) {
+        if ( $prev_components !== $components ) {
+
+            // Update option
+            set_option( '_buddyc_available_components', $components );
+
+            /**
+             * Fires when available components are changed.
+             * 
+             * @since 1.0.26
+             */
+            do_action( 'buddyc_available_components_updated' );
+        }
+        
+        // Check if the component is in the array
+        if ( ! in_array( $component, $components ) ) {
             return false;
         }
-
-        $enabled_components = buddyc_get_setting('components', 'components');
-        if (!is_array($enabled_components) || !in_array($component, $enabled_components)) {
+        
+        // Make sure the component is not disabled
+        $enabled_components = buddyc_get_setting( 'components', 'components' );
+        if ( ! in_array( $component, $enabled_components ) ) {
             return false;
         }
-
-        // Check dependencies
+        
+        // Get dependent components
         $dependent_components = self::dependent_components();
-        if (isset($dependent_components[$component])) {
+        
+        // Check if the component is dependent
+        if ( isset( $dependent_components[$component] ) ) {
             $necessary_component = $dependent_components[$component];
-            if (!in_array($necessary_component, $enabled_components)) {
+            if ( ! in_array( $necessary_component, $enabled_components ) ) {
                 $notice_args = [
-                    'repair_link' => 'admin.php?page=buddyc-components-settings',
-                    'message' => "The $component component requires the $necessary_component component to be enabled.",
-                    'color' => 'orange'
+                    'repair_link'   => 'admin.php?page=buddyc-components-settings',
+                    'message'       => 'The ' . $component . ' component requires the ' . $necessary_component . ' component to be enabled.',
+                    'color'         => 'orange'
                 ];
-                new AdminNotice($notice_args);
+                buddyc_admin_notice( $notice_args );
                 return false;
             }
         }
-
+        
+        // Checks passed
         return true;
     }
-
+    
     /**
-     * Check if a component exists in the database.
-     *
-     * @param string $component Component name.
-     * @return bool True if exists, false otherwise.
+     * Checks if the component exists.
+     * 
+     * @since 0.1.0
+     * 
+     * @param   string  $component  The component to check.
+     * @return  bool
      */
-    public static function component_exists($component) {
-        return in_array($component, self::get_components());
-    }
-
-    /**
-     * Encrypt data using AES-256-CBC.
-     *
-     * @param mixed $data Data to encrypt.
-     * @return string Encrypted data in base64 format.
-     */
-    private static function encrypt($data) {
-        $iv = openssl_random_pseudo_bytes(16);
-        $encrypted_data = openssl_encrypt(serialize($data), 'AES-256-CBC', self::$encryption_key, 0, $iv);
-        return base64_encode($iv . $encrypted_data);
-    }
-
-    /**
-     * Decrypt data using AES-256-CBC.
-     *
-     * @param string $data Base64 encoded encrypted data.
-     * @return mixed Decrypted data.
-     */
-    private static function decrypt($data) {
-        $data = base64_decode($data);
-        $iv = substr($data, 0, 16);
-        $encrypted_data = substr($data, 16);
-        return unserialize(openssl_decrypt($encrypted_data, 'AES-256-CBC', self::$encryption_key, 0, $iv));
+    public static function component_exists( $component ) {
+        
+        // Retrieve components
+        $components = self::get_components();
+        
+        // Check if the component is in the array
+        if ( ! in_array( $component, $components ) ) {
+            return false;
+        } else {
+            return true;
+        }        
     }
 }
