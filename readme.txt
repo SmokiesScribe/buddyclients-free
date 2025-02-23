@@ -64,15 +64,18 @@ Banner URL: /assets/media/banner-772x250/banner.png
 * Improvement: Improved admin asset handling.
 * Fixed: Ensured auto password generator is always strong.
 * Fixed: Corrected translation issues.
+* Synced versioning between Free and Premium plugins.
 
-= 1.0.24 - February 8, 2025 =
+= 1.0.13 - February 8, 2025 =
 * Improvement: Updated email log.
+* Corresponding Premium Version: 1.0.24
 
-= 1.0.23 - January 31, 2025 =
+= 1.0.12 - January 31, 2025 =
 * Improvement: Added no posts message in archive.
 * Fixed: Error retrieving booking form link for emails.
+* Corresponding Premium Version: 1.0.23
 
-= 1.0.21 - January 27, 2025 =
+= 1.0.11 - January 27, 2025 =
 * Improvement: Made admin tables mobile responsive.
 * Improvement: Responsive mobile styling for booked service list.
 * Improvement: Improved styling for service list.
@@ -83,8 +86,9 @@ Banner URL: /assets/media/banner-772x250/banner.png
 * Fixed: Fixed date range filter in overview.
 * Fixed: Correct net fee calculated for new BookingIntents.
 * Fixed: Fixed issue preventing file upload fields from displaying.
+* Corresponding Premium Version: 1.0.21
 
-= 1.0.20 - December 17, 2024 =
+= 1.0.10 - December 17, 2024 =
 * New Feature! Support for paid services without Stripe integration.
 * Improvement: Combined missing page notices.
 * Improvement: Load CSS variables separately.
@@ -98,15 +102,18 @@ Banner URL: /assets/media/banner-772x250/banner.png
 * Fixed: BuddyPress compatibility bugs.
 * Fixed: Bug preventing booking status change.
 * Fixed: Bug preventing assignment of user ID to bookings.
+* Corresponding Premium Version: 1.0.20
 
-= 1.0.19 - October 30, 2024 =
+= 1.0.9 - October 30, 2024 =
 * Improvement: Filter constant email variables.
 * Improvement: New function to echo color hex.
+* Corresponding Premium Version: 1.0.19
 
-= 1.0.18 - October 27, 2024 =
+= 1.0.8 - October 27, 2024 =
 * Improvement: Trimmed TCPDF library.
+* Corresponding Premium Version: 1.0.18
 
-= 1.0.17 - October 25, 2024 =
+= 1.0.6 - October 25, 2024 =
 * Improvement: Consistent method to generate testimonial content.
 * Improvement: Modified create account text on login page.
 * Improvement: Improved method for processing user file deletions.
@@ -119,11 +126,12 @@ Banner URL: /assets/media/banner-772x250/banner.png
 * Fixed: Added hidden menu to fix null titles in admin area.
 * Fixed: Adjusted commission list filtering.
 * Fixed: Fixed file deletion form.
+* Corresponding Premium Version: 1.0.17
 
-= 1.0.16 - October 10, 2024 =
+= 1.0.6 - October 10, 2024 =
 * Fixed: Updated text domain to buddyclients-free.
 * Improvement: Updated language files.
-* Synced versioning between Free and Premium plugins to maintain consistency
+* Corresponding Premium Version: 1.0.16
 
 = 1.0.5 - October 10, 2024 =
 * Improvement: Implemented plugin-wide fixes for security and performance in accordance with Wordpress repo guidelines.
