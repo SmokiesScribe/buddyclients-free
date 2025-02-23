@@ -66,7 +66,9 @@ class Cleanup {
      * @since 0.1.0
      */
     public function cleanup_email_log() {
-        Email::cleanup_database();
+        if ( class_exists( Email::class ) ) {
+            Email::cleanup_database();
+        }
     }
     
     /**
@@ -75,6 +77,8 @@ class Cleanup {
      * @since 0.1.0
      */
     public function cleanup_temp_files() {
-        FileHandler::clear_temporary_files();
+        if ( class_exists( FileHandler::class ) ) {
+            FileHandler::clear_temporary_files();
+        }
     }
 }

@@ -36,7 +36,9 @@ class PluginLinks {
      * @since 1.0.25
      */
     private function get_license() {
-        return buddyc_get_license();
+        if ( function_exists( 'buddyc_get_license' ) ) {
+            return buddyc_get_license();
+        }
     }
 
     /**

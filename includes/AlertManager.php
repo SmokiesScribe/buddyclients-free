@@ -50,7 +50,7 @@ class AlertManager {
      * @since 1.0.4
      */
     public function availability_alert() {
-        if ( ! buddyc_component_enabled( 'Availability' ) || ! buddyc_is_team() ) {
+        if ( ! class_exists( Availability::class ) || ! buddyc_component_enabled( 'Availability' ) || ! buddyc_is_team() ) {
             return;
         }
         
@@ -101,6 +101,7 @@ class AlertManager {
      * @since 1.0.4
      */
      public function affiliate_alert() {
+        if ( ! function_exists( 'buddyc_is_affiliate' ) ) return;
         if ( buddyc_component_enabled( 'Affiliate' ) && buddyc_is_affiliate() ) {
             self::legal_alert( 'affiliate' );
         }
@@ -118,7 +119,7 @@ class AlertManager {
         $content = null;
 
         // Make sure legal component is enabled
-        if ( ! buddyc_component_enabled( 'Legal' ) ) return;
+        if ( ! function_exists( 'buddyc_legal_get_current_version' ) ) return;
 
         // Make sure an agreement exists
         $curr_version = buddyc_legal_get_current_version( $type );
