@@ -43,13 +43,21 @@ class EmailTemplateManager {
                         '{{service_status}}',
                         self::link( '{{project_link}}', __( 'View your project.', 'buddyclients-free' ) )
                     ),
-                    __( 'Thank you for choosing {{site_name}}!', 'buddyclients-free' ),
+                    sprintf(
+                        /* translators: %s: the site name */
+                        __('Thank you for choosing %s!', 'buddyclients-free'),
+                        '{{site_name}}'
+                    ),
                 ],
                 'description'   => __( 'Notifies the client when the status of their service changes.', 'buddyclients-free' )
             ],
             'updated_brief' => [
                 'label'         => __('Project Brief Updated', 'buddyclients-free'),
-                'subject'       => __('Brief updated for {{project_name}}', 'buddyclients-free'),
+                'subject'       => sprintf(
+                    /* translators: %s: the name of the project */
+                    __( 'Brief updated for %s', 'buddyclients-free' ),
+                    '{{project_name}}'
+                ),
                 'content'       => [
                     sprintf(
                         /* translators: %1$s: the type of brief; %2$s: the project name; %3$s: the link to the project briefs page */
@@ -87,7 +95,11 @@ class EmailTemplateManager {
             ],
             'new_assignment' => [
                 'label'         => __('New Team Member Assignment', 'buddyclients-free'),
-                'subject'       => __('New Assignment: {{service_name}}', 'buddyclients-free'),
+                'subject'       => sprintf(
+                    /* translators: %s: the name of the service */
+                    __('New Assignment: %s', 'buddyclients-free'),
+                    '{{service_name}}'
+                ),
                 'content'       => [
                     __( 'You have a new assignment!', 'buddyclients-free' ),
                     sprintf(
@@ -265,9 +277,11 @@ class EmailTemplateManager {
                 'subject'       => __('Cancellation Request', 'buddyclients-free'),
                 'content'       => [
                     sprintf(
-                        /* translators: %1$s: the project link; %2$s: the project name */
-                        __('{{client_name}} has requested to cancel {{service_name}} for %1$s.', 'buddyclients-free'),
-                        self::link('{{project_link}}', '{{project_name}}')
+                        /* translators: %1$s: the name of the client; %2$s: the name of the service; %3$s: the link to the project */
+                        __('%1$s has requested to cancel %2$s for %3$s.', 'buddyclients-free'),
+                        '{{client_name}}',
+                        '{{service_name}}',
+                        self::link( '{{project_link}}', '{{project_name}}' )
                     ),
                     sprintf(
                         /* translators: %1$s: the cancellation reason */
@@ -281,7 +295,11 @@ class EmailTemplateManager {
             ],
             'contact_form_admin' => [
                 'label'         => __('Contact Form Admin Notification', 'buddyclients-free'),
-                'subject'       => __('{{site_name}} Contact Form', 'buddyclients-free'),
+                'subject'       => sprintf(
+                    /* translators: %s: the name of the site */
+                    __('%s Contact Form', 'buddyclients-free'),
+                    '{{site_name}}'
+                ),
                 'content'       => [
                     sprintf(
                         /* translators: %1$s: the message content */
