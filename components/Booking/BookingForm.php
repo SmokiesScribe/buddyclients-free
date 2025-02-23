@@ -849,8 +849,11 @@ class BookingForm {
                         || ($role->singular === $user_roles)) {
                             
                         $availability = function_exists( 'buddyc_get_availability' ) ? buddyc_get_availability( $team_member->ID ) : '';
-                        $availability_message = $availability ? __( ' - Available ', 'buddyclients-free' ) . $availability : '';
-                            
+                        $availability_message = $availability ? sprintf(
+                            ' - %s',
+                            __( 'Available', 'buddyclients' )
+                        ) : '';
+                                                    
                         $team_options[$role->ID . '-' . $team_member->ID] = [
                             'label'     => $team_member->display_name . $availability_message,
                             'value'     => $team_member->ID,

@@ -154,8 +154,11 @@ function buddyc_options( $key, $args = null ) {
             if ($expiration) {
                 $exp_timestamp = strtotime($expiration);
                 $curr_timestamp = time();
-                if ($curr_timestamp > $exp_timestamp) {
-                    $expired = ' - Expired';
+                if ( $curr_timestamp > $exp_timestamp ) {
+                    $expired = sprintf(
+                        ' - %s',
+                        __( 'Expired', 'buddyclients' )
+                    );
                 }
             }
             
