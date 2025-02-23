@@ -1,6 +1,18 @@
 <?php
 if ( ! defined( 'ABSPATH' ) ) exit; // Exit if accessed directly
 use BuddyClients\Components\Email\Email;
+use BuddyClients\Components\Email\EmailTemplateManager;
+
+/**
+ * Defines email hooks.
+ * 
+ * @since 1.0.25
+ */
+function buddyc_email_hooks() {
+    add_action( 'add_meta_boxes', [EmailTemplateManager::class, 'add_placeholder_meta_box'] );
+}
+buddyc_email_hooks();
+
 /**
  * Checks whether a certain email is enabled.
  * 

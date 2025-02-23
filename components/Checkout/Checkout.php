@@ -201,6 +201,14 @@ class Checkout {
             if ( $mode === 'test' ) {
                 $content = '<div><p class="buddyc-test-mode-tag">' . __( 'Test Mode', 'buddyclients-free' ) . '</p></div>';
                 if ( ! $tag_only ) {
+                    $content .= sprintf(
+                        '<p class="buddyc-test-instructions">%s</p>',
+                        sprintf(
+                            /* translators: %s: the card number */
+                            __( 'Use card number %s to simulate a successful payment.', 'buddyclients-free' ),
+                            '4242 4242 4242 4242'
+                        )
+                    );
                     $content .= '<p class="buddyc-test-instructions">' . __( 'Use card number 4242 4242 4242 4242 to simulate a successful payment.', 'buddyclients-free' ) . '</p>';
                 }
                 return $content;
@@ -432,8 +440,8 @@ class Checkout {
         $policies = [];
         
         // Get pages from settings
-        $privacy_policy = buddyc_get_setting( 'pages', __( 'privacy_policy', 'buddyclients-free' ) );
-        $site_terms = buddyc_get_setting( 'pages', __( 'terms_of_service', 'buddyclients-free' ) );
+        $privacy_policy = buddyc_get_setting( 'pages', 'privacy_policy' );
+        $site_terms = buddyc_get_setting( 'pages', 'terms_of_service' );
         
         // Generate policy links
         if ($privacy_policy) {

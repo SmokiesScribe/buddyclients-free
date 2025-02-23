@@ -28,11 +28,19 @@ class EmailTemplateManager {
         $templates = [
             'service_status' => [
                 'label'         => __('Service Status Updated', 'buddyclients-free'),
-                'subject'       => __('Your {{service_name}} is {{service_status}}', 'buddyclients-free'),
+                'subject'       => sprintf(
+                    /* translators: %1$s: the name of the service; %2$s: the status of the service */
+                    __('Your %1$s is %2$s', 'buddyclients-free'),
+                    '{{service_name}}',
+                    '{{service_status}}'
+                ),
                 'content'       => [
                     sprintf(
-                        /* translators: %s: the link to view project */
-                        __('The status of your service has changed. Your {{service_name}} for {{project_name}} is now {{service_status}}. %s', 'buddyclients-free' ),
+                        /* translators: %1$s: the name of the service; %2$s: the project name; %3$s: the service status; %4$s: the link to view the project */
+                        __('The status of your %1$s for %2$s is now %3$s. %4$s', 'buddyclients-free' ),
+                        '{{service_name}}',
+                        '{{project_name}}',
+                        '{{service_status}}',
                         self::link( '{{project_link}}', __( 'View your project.', 'buddyclients-free' ) )
                     ),
                     __( 'Thank you for choosing {{site_name}}!', 'buddyclients-free' ),
@@ -44,8 +52,10 @@ class EmailTemplateManager {
                 'subject'       => __('Brief updated for {{project_name}}', 'buddyclients-free'),
                 'content'       => [
                     sprintf(
-                        /* translators: %s: the link to the project briefs page */
-                        __('The {{brief_type}} for {{project_name}} has been updated. %s', 'buddyclients-free'),
+                        /* translators: %1$s: the type of brief; %2$s: the project name; %3$s: the link to the project briefs page */
+                        __('The %1$s for %2$s has been updated. %3$s', 'buddyclients-free'),
+                        '{{brief_type}}',
+                        '{{project_name}}',
                         self::link('{{project_link}}/brief', __('Go to project briefs.', 'buddyclients-free'))
                     ),
                     __( 'Thank you for using {{site_name}}!', 'buddyclients-free' ),
@@ -57,16 +67,21 @@ class EmailTemplateManager {
                 'subject'       => __('New custom quote', 'buddyclients-free'),
                 'content'       => [
                     sprintf(
-                        /* translators: %s: the service name */
-                        __('You have a new custom quote available: {{service_name}}. %s', 'buddyclients-free'),
-                        __('This quote expires {{quote_expiration}}.', 'buddyclients-free')
+                        /* translators: %1$s: the service name; %2$s: the quote expiration date */
+                        __('You have a new custom quote available: %1$s. This quote expires %2$s.', 'buddyclients-free'),
+                        '{{service_name}}',
+                        '{{quote_expiration}}'
                     ),
                     sprintf(
-                        /* translators: %s: the link to the booking form */
-                        __('You can book this service anytime using the %s.', 'buddyclients-free'),
+                        /* translators: %1$s: the link to the booking form */
+                        __('You can book this service anytime using the %1$s.', 'buddyclients-free'),
                         self::link('{{booking_form_link}}', __('booking form', 'buddyclients-free'))
                     ),
-                    __( 'Thank you for using {{site_name}}!', 'buddyclients-free' ),
+                    sprintf(
+                        /* translators: %s: the name of the site */
+                        __( 'Thank you for using %s!', 'buddyclients-free' ),
+                        '{{site_name}}'
+                    )
                 ],
                 'description'   => __( 'Notifies the client when they have a new custom quote available.', 'buddyclients-free' )
             ],
@@ -88,9 +103,17 @@ class EmailTemplateManager {
                 'label'         => __('Abandoned Booking', 'buddyclients-free'),
                 'subject'       => __('Need some help?', 'buddyclients-free'),
                 'content'       => [
-                    __( 'Looks like you didn’t finish booking your services with {{site_name}}. If you have questions, please respond to this email.', 'buddyclients-free' ),
+                    sprintf(
+                        /* translators: %s: the site name */
+                        __('Looks like you didn’t finish booking your services with %s. If you have questions, please respond to this email.', 'buddyclients-free'),
+                        '{{site_name}}'
+                    ),
                     __( 'We’re here to help!', 'buddyclients-free' ),
-                    __( 'Thank you for choosing {{site_name}}!', 'buddyclients-free' ),
+                    sprintf(
+                        /* translators: %s: the site name */
+                        __('Thank you for choosing %s!', 'buddyclients-free'),
+                        '{{site_name}}'
+                    ),
                 ],
                 'description'   => __( 'Sends an email to convert users who have abandoned bookings before submitting payment.', 'buddyclients-free' )
             ],
@@ -99,13 +122,16 @@ class EmailTemplateManager {
                 'subject'       => __('Payment Status Updated', 'buddyclients-free'),
                 'content'       => [
                     sprintf(
-                        /* translators: %s: the payment status */
-                        __('The status of your payment for {{service_name}} for {{project_name}} is now {{payment_status}}. %s', 'buddyclients-free'),
+                        /* translators: %1$s: the service name; %2$s: the project name; %3$s: the payment status; %4$s: additional payment details */
+                        __('The status of your payment for %1$s for %2$s is now %3$s. %4$s', 'buddyclients-free'),
+                        '{{service_name}}',
+                        '{{project_name}}',
+                        '{{payment_status}}',
                         __('You can check the status and more details on your project.', 'buddyclients-free')
                     ),
                     sprintf(
-                        /* translators: %s: the link to view the project */
-                        __('View the project: %s', 'buddyclients-free'),
+                        /* translators: %1$s: the link to view the project */
+                        __('View the project: %1$s', 'buddyclients-free'),
                         self::link('{{project_link}}', __('Click here', 'buddyclients-free'))
                     ),
                     __( 'Thank you for your business!', 'buddyclients-free' ),
@@ -117,13 +143,15 @@ class EmailTemplateManager {
                 'subject'       => __('Woo hoo! New Booking', 'buddyclients-free'),
                 'content'       => [
                     sprintf(
-                        /* translators: %s: the client name */
-                        __('A new booking has been confirmed. {{client_name}} successfully booked {{service_name}}. %s', 'buddyclients-free'),
+                        /* translators: %1$s: the client name; %2$s: the service name; %3$s: additional details */
+                        __('A new booking has been confirmed. %1$s successfully booked %2$s. %3$s', 'buddyclients-free'),
+                        '{{client_name}}',
+                        '{{service_name}}',
                         __('You can view more details and manage bookings in the admin area.', 'buddyclients-free')
                     ),
                     sprintf(
-                        /* translators: %s: the link to admin bookings */
-                        __('View all bookings: %s', 'buddyclients-free'),
+                        /* translators: %1$s: the link to admin bookings */
+                        __('View all bookings: %1$s', 'buddyclients-free'),
                         self::link('{{admin_bookings_link}}', __('Click here', 'buddyclients-free'))
                     ),
                     __( 'Thank you for your attention!', 'buddyclients-free' ),
@@ -132,23 +160,47 @@ class EmailTemplateManager {
             ],
             'contact_form_confirmation' => [
                 'label'         => __('Contact Form User Confirmation', 'buddyclients-free'),
-                'subject'       => __('Thank you for contacting {{site_name}}', 'buddyclients-free'),
+                'subject'       => sprintf(
+                    /* translators: %1$s: the site name */
+                    __('Thank you for contacting %1$s', 'buddyclients-free'),
+                    '{{site_name}}'
+                ),
                 'content'       => [
                     __( 'We have received your message and will be in touch as soon as possible.', 'buddyclients-free' ),
                     __( '<strong>Your Submitted Information:</strong>', 'buddyclients-free' ),
-                    sprintf(__('Name: %s', 'buddyclients-free'), '{{client_name}}'),
-                    sprintf(__('Email: %s', 'buddyclients-free'), '{{user_email}}'),
-                    sprintf(__('Message: %s', 'buddyclients-free'), '{{message}}'),
+                    sprintf(
+                        /* translators: %1$s: the client name */
+                        __('Name: %1$s', 'buddyclients-free'),
+                        '{{client_name}}'
+                    ),
+                    sprintf(
+                        /* translators: %1$s: the user email */
+                        __('Email: %1$s', 'buddyclients-free'),
+                        '{{user_email}}'
+                    ),
+                    sprintf(
+                        /* translators: %1$s: the message */
+                        __('Message: %1$s', 'buddyclients-free'),
+                        '{{message}}'
+                    ),
                     __( 'Thank you for reaching out to us!', 'buddyclients-free' ),
                 ],
                 'description'   => __( 'Sends a confirmation message after a user submits the contact form.', 'buddyclients-free' )
             ],
             'new_testimonial' => [
                 'label'         => __('New Testimonial Submission', 'buddyclients-free'),
-                'subject'       => __('New Testimonial Submission on {{site_name}}', 'buddyclients-free'),
+                'subject'       => sprintf(
+                    /* translators: %1$s: the site name */
+                    __('New Testimonial Submission on %1$s', 'buddyclients-free'),
+                    '{{site_name}}'
+                ),
                 'content'       => [
-                    sprintf(__('You have received a new testimonial submission from {{client_name}}. %s', 'buddyclients-free'),
-                    self::link('{{admin_testimonials_link}}', __('View all submissions.', 'buddyclients-free'))),
+                    sprintf(
+                        /* translators: %1$s: the client name; %2$s: the link to admin testimonials */
+                        __('You have received a new testimonial submission from %1$s. %2$s', 'buddyclients-free'),
+                        '{{client_name}}',
+                        self::link('{{admin_testimonials_link}}', __('View all submissions.', 'buddyclients-free'))
+                    ),
                     __( 'Thank you for your continued support!', 'buddyclients-free' ),
                 ],
                 'description'   => __( 'Sends a confirmation message when a user submits a testimonial.', 'buddyclients-free' )
@@ -157,8 +209,16 @@ class EmailTemplateManager {
                 'label'         => __('New Affiliate', 'buddyclients-free'),
                 'subject'       => __('Welcome to the Affiliate Program!', 'buddyclients-free'),
                 'content'       => [
-                    __( 'Welcome to {{site_name}}’s affiliate program!', 'buddyclients-free' ),
-                    sprintf(__('Share your unique affiliate link to begin earning commission: %s', 'buddyclients-free'), '{{affiliate_link}}'),
+                    sprintf(
+                        /* translators: %1$s: the site name */
+                        __('Welcome to %1$s’s affiliate program!', 'buddyclients-free'),
+                        '{{site_name}}'
+                    ),
+                    sprintf(
+                        /* translators: %1$s: the affiliate link */
+                        __('Share your unique affiliate link to begin earning commission: %1$s', 'buddyclients-free'),
+                        '{{affiliate_link}}'
+                    ),
                     __( 'We’re excited to have you with us!', 'buddyclients-free' ),
                 ],
                 'description'   => __( 'Sends a welcome message when a user joins the affiliate program.', 'buddyclients-free' )
@@ -167,8 +227,11 @@ class EmailTemplateManager {
                 'label'         => __('Update Availability Reminder', 'buddyclients-free'),
                 'subject'       => __('Update Your Availability', 'buddyclients-free'),
                 'content'       => [
-                    sprintf(__('Your availability date is expiring. %s', 'buddyclients-free'),
-                    self::link('{{availability_link}}', __('Log in to {{site_name}}', 'buddyclients-free'))),
+                    sprintf(
+                        /* translators: %1$s: the link to availability page; %2$s: the site name */
+                        __('Your availability date is expiring. %1$s', 'buddyclients-free'),
+                        self::link('{{availability_link}}', __('Log in to %2$s', 'buddyclients-free'))
+                    ),
                     __( 'Please update your availability as soon as possible.', 'buddyclients-free' ),
                 ],
                 'description'   => __( 'Notifies a team member when their set availability date is about to expire.', 'buddyclients-free' )
@@ -178,10 +241,21 @@ class EmailTemplateManager {
                 'subject'       => __('New Lead', 'buddyclients-free'),
                 'content'       => [
                     __( '<strong>New Lead from {{site_name}}</strong>', 'buddyclients-free' ),
-                    sprintf(__('Name: %s', 'buddyclients-free'), '{{lead_name}}'),
-                    sprintf(__('Email: %s', 'buddyclients-free'), '{{lead_email}}'),
-                    sprintf(__('Interests: %s', 'buddyclients-free'), '{{lead_interest}}'),
-                    __( 'Please follow up with this lead as soon as possible.', 'buddyclients-free' ),
+                    sprintf(
+                        /* translators: %1$s: the lead name */
+                        __('Name: %1$s', 'buddyclients-free'),
+                        '{{lead_name}}'
+                    ),
+                    sprintf(
+                        /* translators: %1$s: the lead email */
+                        __('Email: %1$s', 'buddyclients-free'),
+                        '{{lead_email}}'
+                    ),
+                    sprintf(
+                        /* translators: %1$s: the lead interest */
+                        __('Interests: %1$s', 'buddyclients-free'),
+                        '{{lead_interest}}'
+                    )
                 ],
                 'description'   => __( 'Notifies the site admin of a new submission to the lead generation form.', 'buddyclients-free' ),
                 'critical'      => false
@@ -190,8 +264,16 @@ class EmailTemplateManager {
                 'label'         => __('Cancellation Request Admin Notification', 'buddyclients-free'),
                 'subject'       => __('Cancellation Request', 'buddyclients-free'),
                 'content'       => [
-                    sprintf(__('{{client_name}} has requested to cancel {{service_name}} for %s.', 'buddyclients-free'), self::link('{{project_link}}', '{{project_name}}')),
-                    sprintf(__('Reason: %s', 'buddyclients-free'), '{{cancellation_reason}}'),
+                    sprintf(
+                        /* translators: %1$s: the project link; %2$s: the project name */
+                        __('{{client_name}} has requested to cancel {{service_name}} for %1$s.', 'buddyclients-free'),
+                        self::link('{{project_link}}', '{{project_name}}')
+                    ),
+                    sprintf(
+                        /* translators: %1$s: the cancellation reason */
+                        __('Reason: %1$s', 'buddyclients-free'),
+                        '{{cancellation_reason}}'
+                    ),
                     __( 'Please review the cancellation request and take appropriate action.', 'buddyclients-free' ),
                 ],
                 'description'   => __( 'Notifies the site admin when a client requests the cancellation of a service.', 'buddyclients-free' ),
@@ -201,9 +283,21 @@ class EmailTemplateManager {
                 'label'         => __('Contact Form Admin Notification', 'buddyclients-free'),
                 'subject'       => __('{{site_name}} Contact Form', 'buddyclients-free'),
                 'content'       => [
-                    sprintf(__('Message: %s', 'buddyclients-free'), '{{message}}'),
-                    sprintf(__('From: %s', 'buddyclients-free'), '{{client_name}}'),
-                    sprintf(__('Reply To: %s', 'buddyclients-free'), '{{reply_to}}'),
+                    sprintf(
+                        /* translators: %1$s: the message content */
+                        __('Message: %1$s', 'buddyclients-free'),
+                        '{{message}}'
+                    ),
+                    sprintf(
+                        /* translators: %1$s: the client name */
+                        __('From: %1$s', 'buddyclients-free'),
+                        '{{client_name}}'
+                    ),
+                    sprintf(
+                        /* translators: %1$s: the reply-to address */
+                        __('Reply To: %1$s', 'buddyclients-free'),
+                        '{{reply_to}}'
+                    ),
                     __( 'Please review the contact form submission and respond accordingly.', 'buddyclients-free' ),
                 ],
                 'description'   => __( 'Notifies the site admin when the contact form is submitted.', 'buddyclients-free' ),
@@ -213,7 +307,12 @@ class EmailTemplateManager {
                 'label'         => __('Sales Team Booking', 'buddyclients-free'),
                 'subject'       => __('Ready for Checkout', 'buddyclients-free'),
                 'content'       => [
-                    sprintf(__('Your services from %s are ready! %s', 'buddyclients-free'), '{{site_name}}', self::link('{{sales_checkout_link}}', __('Click here to finalize your booking.', 'buddyclients-free'))),
+                    sprintf(
+                        /* translators: %1$s: the site name; %2$s: the link to finalize booking */
+                        __('Your services from %1$s are ready! %2$s', 'buddyclients-free'),
+                        '{{site_name}}',
+                        self::link('{{sales_checkout_link}}', __('Click here to finalize your booking.', 'buddyclients-free'))
+                    ),
                     __( 'Please complete the checkout process to confirm your booking.', 'buddyclients-free' ),
                 ],
                 'description'   => __( 'Sends a message with a link to submit payment when a booking is created manually by the sales team or site admin.', 'buddyclients-free' ),
@@ -225,9 +324,21 @@ class EmailTemplateManager {
                 'content'       => [
                     __( 'Thank you for contacting {{site_name}}. We would love to hear more about your project.', 'buddyclients-free' ),
                     __( '<strong>Your Submitted Info:</strong>', 'buddyclients-free' ),
-                    sprintf(__('Name: %s', 'buddyclients-free'), '{{lead_name}}'),
-                    sprintf(__('Email: %s', 'buddyclients-free'), '{{lead_email}}'),
-                    sprintf(__('Interests: %s', 'buddyclients-free'), '{{lead_interest}}'),
+                    sprintf(
+                        /* translators: %1$s: the lead name */
+                        __('Name: %1$s', 'buddyclients-free'),
+                        '{{lead_name}}'
+                    ),
+                    sprintf(
+                        /* translators: %1$s: the lead email */
+                        __('Email: %1$s', 'buddyclients-free'),
+                        '{{lead_email}}'
+                    ),
+                    sprintf(
+                        /* translators: %1$s: the lead interest */
+                        __('Interests: %1$s', 'buddyclients-free'),
+                        '{{lead_interest}}'
+                    ),
                     __( 'We will get back to you as soon as possible to discuss your project further.', 'buddyclients-free' ),
                 ],
                 'description'   => __( 'Sends an auto-response to the user when they submit the lead generation form.', 'buddyclients-free' ),
@@ -345,5 +456,83 @@ class EmailTemplateManager {
             $url,
             $text
         );
+    }
+
+    /**
+     * Adds a meta box to display available placeholders for an email template.
+     * 
+     * @since 1.0.25
+     */
+    public static function add_placeholder_meta_box() {
+        add_meta_box(
+            'buddyc_email_placeholders', // Meta box ID
+            __( 'Available Placeholders', 'buddyclients-free' ), // Title
+            [EmailTemplateManager::class, 'display_placeholders_meta_box'], // Callback function
+            'buddyc_email', // Post type (email template)
+            'side', // Context (sidebar)
+            'default' // Priority
+        );
+    }
+
+    /**
+     * Displays the placeholders meta box content.
+     * 
+     * @since 1.0.25
+     */
+    public static function display_placeholders_meta_box( $post ) {
+        // Get the template key dynamically
+        $template_key = get_post_meta( $post->ID, '_buddyc_email_key', true );
+    
+        // Fetch the available placeholders
+        $placeholders = self::get_placeholders( $template_key );
+    
+        // Check if placeholders exist
+        if ( ! empty( $placeholders ) ) {
+            $content = '<ul>';
+            foreach ( $placeholders as $placeholder ) {
+                $content .= '<li>';
+                $content .= sprintf(
+                    '<span>{{%s}}</span>',
+                    esc_html( $placeholder )
+                );
+                $content .= '</li>';
+            }
+            echo '</ul>';
+        } else {
+            $content = sprintf(
+                '<p>%s</p>',
+                __('No placeholders available for this template.', 'buddyclients-free')
+            );
+        }
+
+        $allowed_html = [
+            'p' => [],
+            'ul' => [],
+            'li' => [],
+            'span' => [ 'class' => [] ],
+        ];
+        echo wp_kses( $content, $allowed_html );
+    }
+
+    /**
+     * Generates an array of placeholders available for an email template.
+     * 
+     * @since 1.0.25
+     * 
+     * @param   string  $template_key   The key for the email template.
+     */
+    private static function get_placeholders( $template_key ) {
+        $templates = self::templates();
+        $data = $templates[$template_key] ?? null;
+        if ( ! $data ) return;
+
+        $content = self::format_content( $data['content'] ?? '' );
+        $subject = $data['subject'] ?? '';
+
+        // Extract placeholders from content and subject using a regular expression
+        preg_match_all('/{{(.*?)}}/', $content . ' ' . $subject, $matches);
+
+        // Return unique placeholders
+        return array_unique($matches[1]);
     }
 }

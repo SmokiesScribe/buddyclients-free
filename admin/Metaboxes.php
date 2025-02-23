@@ -593,9 +593,18 @@ class Metaboxes {
                 'paid'     => __( 'Paid', 'buddyclients-free' ),
             ],
             'operator' => [
-                'x' => __( 'x (multiply)', 'buddyclients-free' ),
-                '+' => __( '+ (add)', 'buddyclients-free' ),
-                '-' => __( '- (subtract)', 'buddyclients-free' ),
+                'x' => sprintf(
+                    'x (%s)',
+                    __( 'multiply', 'buddyclients-free' )
+                ),
+                '+' => sprintf(
+                    '+ (%s)',
+                    __( 'add', 'buddyclients-free' )
+                ),
+                '-' => sprintf(
+                    '- (%s)',
+                    __( 'subtract', 'buddyclients-free' )
+                )
             ],
             'help_docs' => buddyc_options( 'posts', ['post_type' => buddyc_help_post_types()] ),
             default => [],

@@ -420,8 +420,16 @@ class AdminDashboard {
         return [
             'year_to_date'      => __( 'Year to Date', 'buddyclients-free' ),
             'month_to_date'     => __( 'Month to Date', 'buddyclients-free' ),
-            'last_30_days'      => __( 'Last 30 Days', 'buddyclients-free' ),
-            'last_365_days'     => __( 'Last 365 Days', 'buddyclients-free' ),
+            'last_30_days'      => sprintf(
+                /* translators: %s: the number of days (30) */
+                __( 'Last %s Days', 'buddyclients-free' ),
+                '30'
+            ),
+            'last_365_days'      => sprintf(
+                /* translators: %s: the number of days (30) */
+                __( 'Last %s Days', 'buddyclients-free' ),
+                '365'
+            ),
             'today_only'        => __( 'Today Only', 'buddyclients-free' ),
             'yesterday_only'    => __( 'Yesterday Only', 'buddyclients-free' ),
         ];

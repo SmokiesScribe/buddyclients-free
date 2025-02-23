@@ -335,6 +335,7 @@ class AdminColumns {
                 $output = $this->sponsorship_options( $value, $post_id );
                 break;
             case '_buddyc_email_description':
+            case '_buddyc_email_subject':
                 $output = $this->direct_display( $value, $post_id );
                 break;
             case '_buddyc_email_enabled':
@@ -363,7 +364,7 @@ class AdminColumns {
      * @since 1.0.25
      */
     private function direct_display( $value ) {
-        return is_array( $value ) ? implode( ', ', $value ) : str_replace( '_', ' ', $value );
+        return is_array( $value ) ? implode( ', ', $value ) : $value;
     }
     
     /**

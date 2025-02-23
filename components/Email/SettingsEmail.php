@@ -90,10 +90,22 @@ class SettingsEmail {
                         'type' => 'dropdown',
                         'default' => '182',
                         'options' => [
-                            '30'  => __( '30 Days', 'buddyclients-free' ),
-                            '90'  => __( '90 Days', 'buddyclients-free' ),
-                            '182' => __( '6 Months', 'buddyclients-free' ),
-                            '365' => __( '1 Year', 'buddyclients-free' ),
+                            '30'  => sprintf(
+                                '30 %s',
+                                __( 'Days', 'buddyclients-free' )
+                            ),
+                            '90'  => sprintf(
+                                '90 %s',
+                                __( 'Days', 'buddyclients-free' )
+                            ),
+                            '182'  => sprintf(
+                                '6 %s',
+                                __( 'Months', 'buddyclients-free' )
+                            ),
+                            '365'  => sprintf(
+                                '1 %s',
+                                __( 'Year', 'buddyclients-free' )
+                            ),
                             'always' => __( 'Forever', 'buddyclients-free' )
                         ],
                         'description' => __( 'Email log records older than the selected timeframe will be deleted.', 'buddyclients-free' ),
