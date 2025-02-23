@@ -26,7 +26,7 @@ jQuery(document).ready(function() {
         project: document.getElementById( 'buddyc_projects' ),
         items: bookingForm.querySelector( '#hidden-line-items' ),
         services: bookingForm.querySelectorAll('.service-option'),
-        submit: bookingForm.querySelector('[data-action="submit"]'),
+        submit: bookingForm.querySelector('.buddyc-form-submit-btn'),
         confirm: document.querySelectorAll('.confirmation-checkbox'),
         hiddenTotal: bookingForm.querySelector( '#total-fee' ),
         create: document.querySelectorAll('.create-project'),

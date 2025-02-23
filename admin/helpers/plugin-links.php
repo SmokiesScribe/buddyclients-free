@@ -1,40 +1,14 @@
 <?php
 if ( ! defined( 'ABSPATH' ) ) exit; // Exit if accessed directly
+use BuddyClients\Admin\PluginLinks;
+
 /**
- * Initializes the plugin links.
+ * Initializes the links added to the plugin page.
  * 
  * @since 0.2.1
+ * @since 1.0.25 Initializes the class only.
  */
 function buddyc_plugin_page_links() {
-    
-    // Build array
-    $links = [
-        '<a href="admin.php?page=buddyc-general-settings">' . __( 'Settings', 'buddyclients-free' ) . '</a>',
-        '<a href="' . trailingslashit( BUDDYC_URL ) . 'help" target="_blank">' . __( 'User Guides', 'buddyclients-free' ) . '</a>',
-        '<a href="' . trailingslashit( BUDDYC_URL ) . 'license" target="_blank">' . __( 'Account', 'buddyclients-free' ) . '</a>',
-    ];
-    
-    // Get current license status
-    $license = get_option( 'buddyc_license' );
-    
-    if ( ! $license ) {
-        return;
-    }
-    
-    // Define upgrade links
-    $upgrade_links = [
-        'buddyc_basic'  => 'license',
-        'buddyc_free'   => 'pricing'
-    ];
-    
-    // Add upgrade link
-    foreach ( $upgrade_links as $product => $link ) {
-        if ( strpos( $license->product, $product ) !== false ) {
-            $links[] = '<a href="' . trailingslashit( BUDDYC_URL ) . $link . '" target="_blank">' . __( 'Upgrade', 'buddyclients-free' ) . '</a>';
-        }
-    }
-    
-    // Initialize plugin links
-    new BuddyClients\Admin\PluginLinks( $links );
+    new PluginLinks;
 }
 add_action('init', 'buddyc_plugin_page_links');

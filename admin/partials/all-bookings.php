@@ -3,6 +3,8 @@ if ( ! defined( 'ABSPATH' ) ) exit; // Exit if accessed directly
 use BuddyClients\Components\Booking\BookingIntent;
 use BuddyClients\Admin\AdminTable;
 
+use BuddyClients\Components\Booking\SuccessfulBooking; // TEMPORARY
+
 /**
  * Callback to display all BookingIntents.
  * 
@@ -12,16 +14,18 @@ function buddyc_dashboard_content() {
     
     // Get all booking intents
     $booking_intents = BookingIntent::get_all_booking_intents();
+
+    new SuccessfulBooking($booking_intents[0]->ID);
     
     // Define headers
     $headers = [
-        __( 'Services', 'buddyclients-free' ),
-        __( 'Date', 'buddyclients-free' ),
-        __( 'Status', 'buddyclients-free' ),
-        __( 'Client', 'buddyclients-free' ),
-        __( 'Project', 'buddyclients-free' ),
-        __( 'Total Fee', 'buddyclients-free' ),
-        __( 'Actions', 'buddyclients-free' ),
+        __( 'Services', 'buddyclients' ),
+        __( 'Date', 'buddyclients' ),
+        __( 'Status', 'buddyclients' ),
+        __( 'Client', 'buddyclients' ),
+        __( 'Project', 'buddyclients' ),
+        __( 'Total Fee', 'buddyclients' ),
+        __( 'Actions', 'buddyclients' ),
     ];
     
     // Define columns
@@ -48,14 +52,14 @@ function buddyc_dashboard_content() {
         'classes'   => $classes,
         'columns'   => $columns,
         'items'     => $booking_intents,
-        'title'     => __( 'Bookings', 'buddyclients-free' ),
+        'title'     => __( 'Bookings', 'buddyclients' ),
         'filters'   => [
             'status'    => [
-                'label'     => __( 'Status', 'buddyclients-free' ),
+                'label'     => __( 'Status', 'buddyclients' ),
                 'property'  =>  'status',
                 'options'   => [
-                    'succeeded'   => __( 'Succeeded', 'buddyclients-free' ),
-                    'incomplete'  => __( 'Incomplete', 'buddyclients-free' ),
+                    'succeeded'   => __( 'Succeeded', 'buddyclients' ),
+                    'incomplete'  => __( 'Incomplete', 'buddyclients' ),
                 ],
                 'default'   => 'succeeded'
             ]

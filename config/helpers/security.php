@@ -10,7 +10,7 @@ function buddyc_allowed_html_form() {
         'form'     => ['method' => [], 'action' => [], 'class' => [], 'id' => [], 'style' => [], 'enctype' => []],
         'input'    => ['type' => [], 'name' => [], 'value' => [], 'class' => [], 'id' => [], 'required' => [], 'placeholder' => [], 'style' => [], 'maxlength' => [], 'minlength' => [], 'pattern' => [], 'size' => [], 'readonly' => [], 'checked' => []],
         'label'    => ['for' => [], 'class' => []],
-        'button'   => ['type' => [], 'id' => [], 'class' => [], 'style' => []],
+        'button'   => ['type' => [], 'id' => [], 'class' => [], 'style' => [], 'data-sitekey' => [], 'data-action' => [], 'data-callback'],
         'div'      => ['class' => true, 'id' => [], 'style' => []],
         'p'        => ['class' => [], 'style' => [], 'id' => []],
         'br'       => [],

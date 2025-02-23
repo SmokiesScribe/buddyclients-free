@@ -77,37 +77,37 @@ class BookedServiceList {
     private function headers() {        
         
         $admin_headers = [
-            __( 'Date', 'buddyclients-free' ),
-            __( 'Service', 'buddyclients-free' ),
-            __( 'Project', 'buddyclients-free' ),
-            __( 'Client Fee', 'buddyclients-free' ),
-            __( 'Team Fee', 'buddyclients-free' ),
-            __( 'Client', 'buddyclients-free' ),
-            __( 'Team Member', 'buddyclients-free' ),
-            __( 'Status', 'buddyclients-free' ),
-            __( 'Files', 'buddyclients-free' ),
+            __( 'Date', 'buddyclients' ),
+            __( 'Service', 'buddyclients' ),
+            __( 'Project', 'buddyclients' ),
+            __( 'Client Fee', 'buddyclients' ),
+            __( 'Team Fee', 'buddyclients' ),
+            __( 'Client', 'buddyclients' ),
+            __( 'Team Member', 'buddyclients' ),
+            __( 'Status', 'buddyclients' ),
+            __( 'Files', 'buddyclients' ),
         ];
         
         $client_headers = [
-            __( 'Date', 'buddyclients-free' ),
-            __( 'Service', 'buddyclients-free' ),
-            __( 'Client Fee', 'buddyclients-free' ),
-            __( 'Project', 'buddyclients-free' ),
-            __( 'Team Member', 'buddyclients-free' ),
-            __( 'Status', 'buddyclients-free' ),
-            __( 'Files', 'buddyclients-free' ),
+            __( 'Date', 'buddyclients' ),
+            __( 'Service', 'buddyclients' ),
+            __( 'Client Fee', 'buddyclients' ),
+            __( 'Project', 'buddyclients' ),
+            __( 'Team Member', 'buddyclients' ),
+            __( 'Status', 'buddyclients' ),
+            __( 'Files', 'buddyclients' ),
         ];
         
         $team_headers = [
-            __( 'Date', 'buddyclients-free' ),
-            __( 'Service', 'buddyclients-free' ),
-            __( 'Client', 'buddyclients-free' ),
-            __( 'Project', 'buddyclients-free' ),
-            __( 'Team Member', 'buddyclients-free' ),
-            __( 'Status', 'buddyclients-free' ),
-            __( 'Files', 'buddyclients-free' ),
-            __( 'Team Fee', 'buddyclients-free' ),
-            __( 'Payment Status', 'buddyclients-free' ),
+            __( 'Date', 'buddyclients' ),
+            __( 'Service', 'buddyclients' ),
+            __( 'Client', 'buddyclients' ),
+            __( 'Project', 'buddyclients' ),
+            __( 'Team Member', 'buddyclients' ),
+            __( 'Status', 'buddyclients' ),
+            __( 'Files', 'buddyclients' ),
+            __( 'Team Fee', 'buddyclients' ),
+            __( 'Payment Status', 'buddyclients' ),
         ];
         
         switch ( $this->user_is ) {
@@ -160,7 +160,7 @@ class BookedServiceList {
     
         // No booked services
         if ( ! $booked_services ) {
-            return __('You do not have any booked services.', 'buddyclients-free');
+            return __('You do not have any booked services.', 'buddyclients');
         }
 
         // Open container
@@ -239,16 +239,16 @@ class BookedServiceList {
      */
     private function get_table_columns($item) {    
         return [
-            __('Date', 'buddyclients-free')            => $item->created_at ? gmdate('F j, Y', strtotime($item->created_at)) : '',
-            __('Service', 'buddyclients-free')         => $item->name,
-            __('Client', 'buddyclients-free')          => bp_core_get_userlink($item->client_id),
-            __('Client Fee', 'buddyclients-free')      => '$' . $item->client_fee,
-            __('Project', 'buddyclients-free')         => buddyc_group_link( $item->project_id ),
-            __('Team Member', 'buddyclients-free')     => bp_core_get_userlink($item->team_id),
-            __('Status', 'buddyclients-free')          => $this->service_status( $item ),
-            __('Files', 'buddyclients-free')           => buddyc_download_links($item->file_ids, false),
-            __('Team Fee', 'buddyclients-free')        => $this->team_fee( $item ),
-            __('Payment Status', 'buddyclients-free')  => $this->team_payment_status( $item->ID ),
+            __('Date', 'buddyclients')            => $item->created_at ? gmdate('F j, Y', strtotime($item->created_at)) : '',
+            __('Service', 'buddyclients')         => $item->name,
+            __('Client', 'buddyclients')          => bp_core_get_userlink($item->client_id),
+            __('Client Fee', 'buddyclients')      => '$' . $item->client_fee,
+            __('Project', 'buddyclients')         => buddyc_group_link( $item->project_id ),
+            __('Team Member', 'buddyclients')     => bp_core_get_userlink($item->team_id),
+            __('Status', 'buddyclients')          => $this->service_status( $item ),
+            __('Files', 'buddyclients')           => buddyc_download_links($item->file_ids, false),
+            __('Team Fee', 'buddyclients')        => $this->team_fee( $item ),
+            __('Payment Status', 'buddyclients')  => $this->team_payment_status( $item->ID ),
         ];
     }
 
@@ -399,13 +399,13 @@ class BookedServiceList {
      */
     private function get_status_label( $status ) {
         $status_map = [
-            'pending'                => __('Pending', 'buddyclients-free'),
-            'in_progress'            => __('In Progress', 'buddyclients-free'),
-            'cancellation_requested' => __('Cancellation Requested', 'buddyclients-free'),
-            'canceled'               => __('Canceled', 'buddyclients-free'),
-            'complete'               => __('Complete', 'buddyclients-free'),
-            'eligible'               => __('Eligible', 'buddyclients-free'),
-            'paid'                   => __('Paid', 'buddyclients-free'),
+            'pending'                => __('Pending', 'buddyclients'),
+            'in_progress'            => __('In Progress', 'buddyclients'),
+            'cancellation_requested' => __('Cancellation Requested', 'buddyclients'),
+            'canceled'               => __('Canceled', 'buddyclients'),
+            'complete'               => __('Complete', 'buddyclients'),
+            'eligible'               => __('Eligible', 'buddyclients'),
+            'paid'                   => __('Paid', 'buddyclients'),
         ];
 
         // If the status exists in the map, return it; otherwise, format it
@@ -496,7 +496,7 @@ class BookedServiceList {
         if ( $form ) {
             $icon = buddyc_icon( 'edit' );
             $form_container_id = 'buddyc-update-service-form-container-' . $booked_service->ID;
-            $title = __( 'Edit service status', 'buddyclients-free' );
+            $title = __( 'Edit service status', 'buddyclients' );
             $edit_button = '<a class="buddyc-service-edit-button" title="' . $title . '" onclick="buddycShowElement(\'' . $form_container_id . '\')">' . $icon . '</a>';
             $wrapped_form = '<div id="' . esc_attr( $form_container_id ) . '" class="buddyc-update-service-form-container">' . $form . '</div>';
 
@@ -514,7 +514,7 @@ class BookedServiceList {
         if ( $form ) {
             $icon = buddyc_icon( 'x' );
             $form_container_id = 'buddyc-cancel-service-form-container-' . $booked_service->ID;
-            $title = __( 'Request service cancellation', 'buddyclients-free' );
+            $title = __( 'Request service cancellation', 'buddyclients' );
             $edit_button = '<a class="buddyc-service-edit-button" title="' . $title . '" onclick="buddycShowElement(\'' . $form_container_id . '\')">' . $icon . '</a>';
             $wrapped_form = '<div id="' . esc_attr( $form_container_id ) . '" class="buddyc-update-service-form-container">' . $form . '</div>';
 
@@ -544,7 +544,7 @@ class BookedServiceList {
         }
 
         // Format and return the date note HTML
-        $prefix = __( 'Complete ', 'buddyclients-free' );
+        $prefix = __( 'Complete ', 'buddyclients' );
         $formatted_date = gmdate( 'M j, Y', $timestamp );
         return '<div class="buddyc-service-status-date">' . $prefix . $formatted_date . '</div>';
     }
@@ -587,11 +587,11 @@ class BookedServiceList {
         switch ( $payment_status ) {
             case 'pending':
                 $timestamp = $payment->time_eligible ?? null;
-                $prefix = __( 'Eligible ', 'buddyclients-free' );
+                $prefix = __( 'Eligible ', 'buddyclients' );
                 break;
             case 'paid':
                 $timestamp = strtotime( $payment->paid_date ) ?? null;
-                $prefix = __( 'Paid ', 'buddyclients-free' );
+                $prefix = __( 'Paid ', 'buddyclients' );
                 break;
             default:
                 return '';  // Return early if the status doesn't match

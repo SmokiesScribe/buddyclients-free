@@ -290,10 +290,18 @@ class ParamManager {
         if ( isset( $parsed_url['query'] ) ) {
             // Parse the query string into an associative array
             parse_str( $parsed_url['query'], $query_params );
-    
+        
             // Decode each parameter
-            foreach ($query_params as $key => $value) {
-                $query_params[$key] = urldecode($value);
+            foreach ( $query_params as $key => $value ) {
+                if ( is_array( $value ) ) {
+                    // If the value is an array, decode each element individually
+                    foreach ( $value as &$sub_value ) {
+                        $sub_value = urldecode( $sub_value );
+                    }
+                } else {
+                    // Decode the single value
+                    $query_params[$key] = urldecode( $value );
+                }
             }
         }
 

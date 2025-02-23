@@ -1,95 +1,64 @@
 <?php
 if ( ! defined( 'ABSPATH' ) ) exit; // Exit if accessed directly
-/**
- * Change registration button text.
- * 
- * @since 0.1.0
- */
-function buddyc_registration_button_text() {
-    
-    // Check settings
-    $enable_registration = buddyc_get_setting( 'general', 'enable_registration' );
-    $register_button_text = buddyc_get_setting( 'general', 'register_button_text' );
-    
-    /**
-     * Filters the register button text.
-     * 
-     * @since 0.4.0
-     * 
-     * @param   string  $register_button_text   The text for the register button.
-     */
-    $register_button_text = apply_filters( 'buddyc_register_button_text', $register_button_text );
-    
-    // User registration enabled
-    if ( $enable_registration == 'enable' ) {
-        // Allow registration
-        update_option('users_can_register', true);
-        return;
-        
-    // User registration disabled
-    } else {
-            
-        // Allow registration
-        update_option( 'users_can_register', true );
-        
-        $script =
-            'document.addEventListener("DOMContentLoaded", function() {
-                var signUpButton = document.querySelector("a.button.small.signup");
-                if (signUpButton) {
-                    signUpButton.textContent = "' . esc_js( $register_button_text ) . '";
-                }
 
-                // Login page text
-                var createAccountLink = document.querySelector(".login-heading a");
-                if (createAccountLink) {
-                    createAccountLink.textContent = "' . esc_js( $register_button_text ) . '";
-                }
-            });';
-        
-        // Output inline script
-        buddyc_inline_script( $script );
-    }
+/**
+ * Retrieves the CTA button text from settings.
+ * 
+ * @since 1.0.25
+ */
+function buddyc_cta_btn_text() {
+    return buddyc_get_setting( 'general', 'register_button_text' );
 }
-add_action('init', 'buddyc_registration_button_text'); // main button
 
 /**
- * Change registration button link.
+ * Retrieves the CTA button url from settings.
  * 
- * @since 0.1.0
- * 
- * @param   string  $url    The url to modify.
+ * @since 1.0.25
  */
-function buddyc_change_register_url( $url ) {
-    
-    // Get setting
-    $enable_registration = buddyc_get_setting( 'general', 'enable_registration' );
+function buddyc_cta_btn_url() {
+    return buddyc_get_setting( 'general', 'register_button_url' );
+}
 
-    // User registration enabled
-    if ($enable_registration != 'enable') {
-        
-        // Get booking page
-        $booking_page = buddyc_get_setting( 'pages', 'booking_page' );
-        
-        // No booking page
-        if ( $booking_page ) {
-            
-            // Get booking page link
-            $booking_page_link = get_permalink( $booking_page );
-            
-            // Change link
-            $url = $booking_page_link;
+/**
+ * Checks if the CTA button is enabledin settings.
+ * 
+ * @since 1.0.25
+ */
+function buddyc_enable_cta_btn() {
+    $setting = buddyc_get_setting( 'general', 'enable_cta' );
+    return $setting === 'enable';
+}
+
+/**
+ * Builds the array of info for localizing the header button script.
+ * 
+ * @since 1.0.25
+ */
+function buddyc_header_btn_info() {
+    // Initialize
+    $info = [];
+
+    // Check if WP registration is enabled
+    $reg_enabled = get_option( 'users_can_register' );
+
+    // Check if CTA button is enabled
+    $cta_enabled = buddyc_enable_cta_btn();
+
+    if ( ! $reg_enabled && $cta_enabled ) {
+        // Define text and url
+        $btn_text = buddyc_cta_btn_text();
+        $btn_url = buddyc_cta_btn_url();
+
+        // Make sure they exist
+        if ( ! empty( $btn_url ) && $btn_url !== '#' && ! empty( $btn_text ) ) {
+
+            // Build array
+            $info = [
+                'btnText'       => $btn_text,
+                'btnUrl'        => esc_url( $btn_url ),
+            ];
         }
-        
-        /**
-         * Filters the register button url.
-         * 
-         * @since 0.4.0
-         * 
-         * @param   string  $url   The url for the register button.
-         */
-        $url = apply_filters( 'buddyc_register_button_url', $url );
     }
-    
-    return $url;
+
+    return $info;
 }
-add_filter('register_url', 'buddyc_change_register_url', 20 );

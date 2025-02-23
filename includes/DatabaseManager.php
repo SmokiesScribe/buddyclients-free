@@ -35,6 +35,13 @@ class DatabaseManager {
      * @var array
      */
     private $table_structure;
+
+    /**
+     * Whether the table exists and has the correct structure.
+     * 
+     * @var bool
+     */
+    private $valid;
     
     /**
      * Defines the custom table structures.
@@ -136,7 +143,14 @@ class DatabaseManager {
                 'version'           => 'TEXT',
                 'hash'              => 'TEXT',
                 'created_at'        => 'DATETIME NOT NULL DEFAULT CURRENT_TIMESTAMP',
-            ]
+            ],
+            'Lead' => [
+                'ID'                => 'INT(11) NOT NULL AUTO_INCREMENT PRIMARY KEY',
+                'Lead'              => 'TEXT',
+                'email'             => 'VARCHAR(255)',
+                'status'            => 'VARCHAR(255)',
+                'created_at'        => 'DATETIME NOT NULL DEFAULT CURRENT_TIMESTAMP',
+            ],
         ];
         
         /**
@@ -166,16 +180,8 @@ class DatabaseManager {
         $this->table_key = $this->clean_table_key( $table_key );
         $this->table_name = $wpdb->prefix . 'buddyc_' . $this->table_key;
 
-        // Retrieve expected table structure
-        $this->table_structure = $this->get_expected_structure();
-
-        // Exit if table structure not defined
-        if ( ! $this->table_structure ) {
-            return;
-        }
-
         // Create or update table if necessary
-        $success = $this->check_table();
+        $this->valid = $this->validate_table();
     }
 
     /**
@@ -201,6 +207,29 @@ class DatabaseManager {
         $tables = self::define_tables();
         return $tables[$this->table_key] ?? null;
     }
+
+    /**
+     * Validates the table.
+     * 
+     * @since 1.0.25
+     */
+    private function validate_table() {
+        // Define option key for plugin version
+        $option_key = 'buddyc_table_valid_' . $this->table_name . '_' . BUDDYC_PLUGIN_VERSION;
+
+        // Check transient
+        $valid = get_option( $option_key );
+        if ( $valid ) return true;
+
+        // Check the table
+        $new_valid = $this->check_table();
+
+        // Set transient
+        update_option( $option_key, $new_valid );
+
+        // Return result
+        return $new_valid;
+    }
     
     /**
      * Checks if the table needs to be created or updated.
@@ -212,6 +241,14 @@ class DatabaseManager {
     private function check_table() {
         // Initialize
         $success = false;
+
+        // Retrieve expected table structure
+        $this->table_structure = $this->get_expected_structure();
+
+        // Exit if table structure not defined
+        if ( ! $this->table_structure ) {
+            return false;
+        }
         
         // Check if the table exists
         if ( ! $this->table_exists() ) {
@@ -229,6 +266,9 @@ class DatabaseManager {
             // Check if differences exist
             if ( ! empty( $differences ) ) {
                 $success = $this->update_table_structure( $differences );
+            } else {
+                // Structure is correct
+                $success = true;
             }
         }
         return $success;
@@ -337,8 +377,8 @@ class DatabaseManager {
             // Get columns
             $columns = $wpdb->get_results( "DESCRIBE " . esc_sql( $this->table_name ) );
 
-            // Set cache for the results
-            wp_cache_set( $cache_key, $columns );
+            // Cache the results for 1 hour
+            wp_cache_set( $cache_key, $columns, '', 3600 );
         }
 
         // Loop through columns and build array
@@ -505,7 +545,10 @@ class DatabaseManager {
      * @return bool            True on success, false on failure.
      */
     public function update_record( $record_id, $data ) {
+        if ( ! $this->valid ) return;
+
         global $wpdb;
+
         $updated = $wpdb->update( $this->table_name, $data, array( 'ID' => $record_id ) );
         
         // Invalidate cache if update was successful
@@ -526,6 +569,8 @@ class DatabaseManager {
      * @return  array|null  An array of records or null if no records found.
      */
     public function get_all_records( $order_key = null, $order = null ) {
+        if ( ! $this->valid ) return;
+
         global $wpdb;
 
         // Default to newest first
@@ -558,9 +603,9 @@ class DatabaseManager {
             "SELECT * FROM %i {$orderby}",
             $this->table_name
             ));
-    
-        // Set cache for the results
-        wp_cache_set( $cache_key, $records );
+
+        // Cache the results for 1 hour
+        wp_cache_set( $cache_key, $records, '', 3600 );
     
         return $records;
     }
@@ -598,8 +643,8 @@ class DatabaseManager {
             
         }
 
-        // Set cache for the results
-        wp_cache_set( $cache_key, $columns );
+        // Cache the results for 1 hour
+        wp_cache_set( $cache_key, $columns, '', 3600 );
 
         // Loop through and check columns
         foreach ( $columns as $column ) {
@@ -622,6 +667,8 @@ class DatabaseManager {
      * @return  array|null  The retrieved record as an associative array, or null if not found.
      */
     public function get_record_by_id( $record_id ) {
+        if ( ! $this->valid ) return;
+
         global $wpdb;
 
         // Create cache key
@@ -641,8 +688,8 @@ class DatabaseManager {
             $record_id
             ) );
     
-        // Set cache for the results
-        wp_cache_set( $cache_key, $record );
+        // Cache the results for 1 hour
+        wp_cache_set( $cache_key, $record, '', 3600 );
 
         // Return record
         return $record;
@@ -657,6 +704,8 @@ class DatabaseManager {
      * @return  array|null  The record matching the column value or null if not found.
      */
     public function get_record_by_column( $column_name, $column_value ) {
+        if ( ! $this->valid ) return;
+
         global $wpdb;
 
         // Create cache key
@@ -679,8 +728,8 @@ class DatabaseManager {
                 $column_value
             ));
 
-        // Set cache for the results
-        wp_cache_set( $cache_key, $record );
+        // Cache the results for 1 hour
+        wp_cache_set( $cache_key, $record, '', 3600 );
 
         return $record;
     }
@@ -698,6 +747,8 @@ class DatabaseManager {
      * @return  array|null  The records matching the column value or null if not found.
      */
     public function get_all_records_by_column( $column_name, $column_value, $return_ids = false, $search_arrays = false ) {
+        if ( ! $this->valid ) return;
+        
         global $wpdb;
 
         // Check if the column exists in the table
@@ -747,9 +798,9 @@ class DatabaseManager {
                 return $result->ID;
             }, $results );
         }
-
-        // Set cache for the results
-        wp_cache_set( $cache_key, $results );
+        
+        // Cache the results for 1 hour
+        wp_cache_set( $cache_key, $results, '', 3600 );
 
         // Return results    
         return $results;
@@ -763,6 +814,8 @@ class DatabaseManager {
      * @return  bool    True on success, false on failure.
      */
     public function delete_record( $record_id ) {
+        if ( ! $this->valid ) return;
+        
         global $wpdb;
         
         // Perform the delete operation
@@ -801,9 +854,9 @@ class DatabaseManager {
     
         // Prepare the SQL query with a placeholder for the table name
         $result = $wpdb->get_var( $wpdb->prepare( "SHOW TABLES LIKE %s", $this->table_name ) );
-
-        // Set cache for the results
-        wp_cache_set( $cache_key, $result );
+        
+        // Cache the results for 1 hour
+        wp_cache_set( $cache_key, $result, '', 3600 );
     
         // Check if the result is not false or null
         return $result !== null;

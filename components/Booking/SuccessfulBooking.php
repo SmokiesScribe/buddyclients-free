@@ -59,7 +59,15 @@ class SuccessfulBooking {
     public function __construct( $booking_intent_id, $status = 'succeeded' ) {
         
         // Get Booking Intent
-        $this->booking_intent = BookingIntent::get_booking_intent( $booking_intent_id );
+        $this->booking_intent = buddyc_get_booking_intent( $booking_intent_id );
+
+        if ( ! $this->booking_intent ) {
+            return;
+        }
+
+        if ( $this->booking_intent->status === 'succeeded' ) {
+            return;
+        }
         
         // Update BookingIntent to succeeded
         $this->booking_intent->status = $status;

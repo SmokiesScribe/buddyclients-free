@@ -5,7 +5,7 @@
  * Description: BuddyClients is a flexible and comprehensive platform for any service-based business. Compatible with BuddyPress and BuddyBoss.
  * Author:      Victoria Griffin
  * Author URI:  https://victoriagriffin.com/
- * Version:     1.0.14
+ * Version:     1.0.25
  * Text Domain: buddyclients-free
  * Domain Path: /languages/
  * License:     GPL-2.0-or-later
@@ -18,7 +18,7 @@ defined( 'ABSPATH' ) || exit;
 
 // Define constants
 if ( ! defined( 'BUDDYC_PLUGIN_VERSION' ) ) {
-	define( 'BUDDYC_PLUGIN_VERSION', '1.0.14' );
+	define( 'BUDDYC_PLUGIN_VERSION', '1.0.25' );
 }
 
 if ( ! defined( 'BUDDYC_PLUGIN_FILE' ) ) {
@@ -94,19 +94,26 @@ function buddyc_missing_bp_notice_free() {
 	if ( ! current_user_can( 'activate_plugins' ) ) {
 		return;
 	}
+	
+	// Prevent notice from showing on the plugin install page.
+	$screen = get_current_screen();
+	if ( $screen && 'plugin-install' === $screen->id ) {
+		return;
+	}
 
 	// Disable BuddyPress message.
 	if ( ! function_exists( 'buddypress' ) ) {
 		$bp_install     = admin_url( '/plugin-install.php?s=buddypress&tab=search&type=term' );
 		$bb_install		= 'https://www.buddyboss.com/website-platform/';
 		$allowed_html	= ['a' => ['href' => [], 'target' => []]];	
+		
 		?>
 
 		<div id="message" class="error notice">
-			<p><strong><?php esc_html_e( 'BuddyPress is missing.', 'buddyclients-free' ); ?></strong></p>
-			<p><?php esc_html_e( 'The BuddyClients Platform can\'t work without BuddyPress.', 'buddyclients-free' ); ?></p>
+			<p><strong><?php esc_html_e( 'BuddyPress is missing.', 'buddyclients' ); ?></strong></p>
+			<p><?php esc_html_e( 'The BuddyClients Platform can\'t work without BuddyPress.', 'buddyclients' ); ?></p>
 			<?php /* translators: %1$s: link to install BuddyPress; %2$s: link to install BuddyBoss */ ?>
-			<p><?php printf( wp_kses( __( 'Install <a href="%1$s">BuddyPress</a> or <a href="%2$s" target="_blank">BuddyBoss</a>.', 'buddyclients-free' ), $allowed_html ), esc_url( $bp_install ), esc_url( $bb_install ) ); ?></p>
+			<p><?php printf( wp_kses( __( 'Install <a href="%1$s">BuddyPress</a> or <a href="%2$s" target="_blank">BuddyBoss</a>.', 'buddyclients' ), $allowed_html ), esc_url( $bp_install ), esc_url( $bb_install ) ); ?></p>
 		</div>
 
 		<?php
@@ -137,10 +144,10 @@ function buddyc_groups_disabled_notice_free() {
 		?>
 
 		<div id="message" class="error notice">
-			<p><strong><?php esc_html_e( 'Social groups are disabled.', 'buddyclients-free' ); ?></strong></p>
-			<p><?php esc_html_e( 'Groups must be enabled for the BuddyClients Platform to function properly.', 'buddyclients-free' ); ?></p>
+			<p><strong><?php esc_html_e( 'Social groups are disabled.', 'buddyclients' ); ?></strong></p>
+			<p><?php esc_html_e( 'Groups must be enabled for the BuddyClients Platform to function properly.', 'buddyclients' ); ?></p>
 			<?php /* translators: %s: link to enable social groups */ ?>
-			<p><?php printf( wp_kses( __( '<a href="%s">Enable social groups.</a>', 'buddyclients-free' ), $allowed_html ), esc_url( $enable_link ) ); ?></p>
+			<p><?php printf( wp_kses( __( '<a href="%s">Enable social groups.</a>', 'buddyclients' ), $allowed_html ), esc_url( $enable_link ) ); ?></p>
 		</div>
 
 		<?php

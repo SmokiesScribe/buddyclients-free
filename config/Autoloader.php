@@ -28,13 +28,17 @@ class Autoloader {
      * 
      * @since 0.4.3
      */
-    private static function autoload( $class ) {    
- 
+    private static function autoload( $class ) { 
 
         // Not a BuddyClients class
         if ( strpos( $class, 'BuddyClients' ) === false ) {
             return;
         }
+
+        // Vendor class
+        if ( strpos( $class, 'BuddyClientsVendor' ) !== false ) {
+            return;
+        }        
         
         // Format path
         $path = self::get_path( $class );

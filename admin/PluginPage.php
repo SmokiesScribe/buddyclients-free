@@ -160,9 +160,7 @@ class PluginPage extends PageManager {
             buddyc_update_setting( $this->settings_key, $field_key, $this->post_id );
             
             // Assign vars
-            if ( $this->post_status === 'draft' ) {
-                $this->edit_post_url = admin_url( 'post.php?post=' . $this->post_id . '&action=edit' );
-            }
+            $this->edit_post_url = admin_url( 'post.php?post=' . $this->post_id . '&action=edit' );
             $this->permalink = get_the_permalink( $this->post_id );
             
             // Add setting key to post meta

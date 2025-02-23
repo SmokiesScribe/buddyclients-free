@@ -67,7 +67,7 @@ class ServiceStatusForm {
             'key'               => 'update_service_status',
             'fields_callback'   => [$this, 'form_fields'],
             'submission_class'  => __NAMESPACE__ . '\ServiceStatusSubmission',
-            'submit_text'       => __( 'Update Status', 'buddyclients-free' ),
+            'submit_text'       => __( 'Update Status', 'buddyclients' ),
             'submit_classes'    => 'button action button-secondary',
             'form_classes'      => 'buddyc-table-form',
             'values'            => $values
@@ -115,23 +115,23 @@ class ServiceStatusForm {
         // Status dropdown options
         $options = [
             'pending' => [
-                'label' => __( 'Pending', 'buddyclients-free' ),
+                'label' => __( 'Pending', 'buddyclients' ),
                 'value' => 'pending',
             ],
             'in_progress' => [
-                'label' => __( 'In Progress', 'buddyclients-free' ),
+                'label' => __( 'In Progress', 'buddyclients' ),
                 'value' => 'in_progress',
             ],
             'complete' => [
-                'label' => __( 'Complete', 'buddyclients-free' ),
+                'label' => __( 'Complete', 'buddyclients' ),
                 'value' => 'complete',
             ],
             'cancellation_requested' => [
-                'label' => __( 'Cancellation Requested', 'buddyclients-free' ),
+                'label' => __( 'Cancellation Requested', 'buddyclients' ),
                 'value' => 'cancellation_requested',
             ],
             'canceled' => [
-                'label' => __( 'Canceled', 'buddyclients-free' ),
+                'label' => __( 'Canceled', 'buddyclients' ),
                 'value' => 'canceled',
             ],
         ];

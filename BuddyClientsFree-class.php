@@ -197,9 +197,6 @@ if ( ! class_exists( 'BuddyClientsFree' ) ) {
     	        'BuddyClients\Config\UpdateManager',
     	        'BuddyClients\Includes\ExtensionManager',
     	        'BuddyClients\Includes\AlertManager',
-    	        'BuddyClients\Components\Affiliate\Visit',
-    	        'BuddyClients\Components\Sales\SalesForm',
-    	        'BuddyClients\Components\Contact\FloatingContact',
     	        'BuddyClients\Components\Service\ServiceHandler'
     	    ];
     	    foreach ( $classes as $class ) {
@@ -224,8 +221,7 @@ if ( ! class_exists( 'BuddyClientsFree' ) ) {
             add_action('wp', [$this, 'register_shortcodes']);
             
             // Form submissions
-            add_action('init', [$this, 'form_submission']);
-            
+            add_action('init', [$this, 'form_submission']);            
         }
     
         /**
@@ -236,10 +232,10 @@ if ( ! class_exists( 'BuddyClientsFree' ) ) {
         public function enqueue_scripts() {
             // Loading script
             $this->enqueue_asset( 'assets/js', 'loading.js' );
-			
+
 			// Load Font Awesome
 			$this->enqueue_font_awesome();
-
+								
             // All CSS
             $this->enqueue_assets('assets/css');
             

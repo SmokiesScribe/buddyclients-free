@@ -32,7 +32,7 @@ class PaymentStatusForm {
             'key'                   => 'update_payment_status',
             'fields_callback'       => [$this, 'form_fields'],
             'submission_class'      => __NAMESPACE__ . '\PaymentStatusSubmission',
-            'submit_text'           => __( 'Update', 'buddyclients-free' ),
+            'submit_text'           => __( 'Update', 'buddyclients' ),
             'submit_classes'        => 'button action',
             'form_classes'          => 'buddyc-table-form',
             'values'                => $values
@@ -56,15 +56,15 @@ class PaymentStatusForm {
                 'type'          => 'dropdown',
                 'options'       => [
                     'pending' => [
-                        'label' => __( 'Pending', 'buddyclients-free' ),
+                        'label' => __( 'Pending', 'buddyclients' ),
                         'value' => 'pending',
                     ],
                     'eligible' => [
-                            'label' => __( 'Eligible', 'buddyclients-free' ),
+                            'label' => __( 'Eligible', 'buddyclients' ),
                             'value' => 'eligible',
                         ],
                     'paid' => [
-                            'label' => __( 'Paid', 'buddyclients-free' ),
+                            'label' => __( 'Paid', 'buddyclients' ),
                             'value' => 'paid',
                         ],
                     ],

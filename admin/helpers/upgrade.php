@@ -88,7 +88,7 @@ function buddyc_upgrade_link( $boxed = null ) {
     // Build link
     $link = sprintf(
         /* translators: %1$s: the rocket icon html; %2$s: the url to upgrade the plugin */
-        '<p class="buddyc-upgrade-link">%1$s ' . __( 'Upgrade to <a href="%2$s" target="_blank">BuddyClients Essential or BuddyClients Business</a>.', 'buddyclients-free' ),
+        '<p class="buddyc-upgrade-link">%1$s ' . __( 'Upgrade to <a href="%2$s" target="_blank">BuddyClients Essential or BuddyClients Business</a>.', 'buddyclients' ),
         $icon,
         esc_url( $url )
     );
@@ -133,7 +133,7 @@ function buddyc_account_link() {
     $url = buddyc_account_url();
     return sprintf(
         /* translators: %1$s: the gear icon html; %2$s: the url to access a BuddyClients account */
-        '<p class="buddyc-upgrade-link">%1$s ' . __( 'Manage <a href="%2$s" target="_blank">your BuddyClients subscription</a>.', 'buddyclients-free' ) . '</p>',
+        '<p class="buddyc-upgrade-link">%1$s ' . __( 'Manage <a href="%2$s" target="_blank">your BuddyClients subscription</a>.', 'buddyclients' ) . '</p>',
         $icon,
         esc_url( $url )
     );
@@ -170,7 +170,7 @@ function buddyc_enable_component_link( $component, $boxed = null ) {
     // Build link
     $link = sprintf(
         /* translators: %1$s: the toggle off icon html; %2$s: the component name (e.g. Booking or Stripe); %3$s: the url to enable plugin components */
-        '<p class="buddyc-upgrade-link">%1$s ' . __( 'The %2$s component is disabled. <a href="%3$s">Enable the component</a>.', 'buddyclients-free' ) . '</p>',
+        '<p class="buddyc-upgrade-link">%1$s ' . __( 'The %2$s component is disabled. <a href="%3$s">Enable the component</a>.', 'buddyclients' ) . '</p>',
         $icon,
         buddyc_component_name( $component ),
         esc_url( $url )
@@ -234,7 +234,7 @@ function buddyc_freelancer_mode_link( $enable = null, $boxed = null ) {
     
     // Build link
     /* translators: %s: the url to disable freelancer mode */
-    $link = '<p class="buddyc-upgrade-link">' . $icon . __( 'Freelancer Mode is enabled. <a href="%s">Disable Freelancer Mode</a>.', 'buddyclients-free' ) . '</p>';
+    $link = '<p class="buddyc-upgrade-link">' . $icon . __( 'Freelancer Mode is enabled. <a href="%s">Disable Freelancer Mode</a>.', 'buddyclients' ) . '</p>';
     
     // Build output
     $output = $open_container . $link . $close_container;

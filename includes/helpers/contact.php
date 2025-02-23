@@ -15,10 +15,10 @@ function buddyc_contact_message( $site_name = false, $lowercase = false ) {
     $link = null;
     
     // Check for contact page
-    $contact_page_link = buddyc_get_page_link( 'contact' );
+    $contact_page_link = buddyc_get_page_link( 'contact_form' );
     
     // Contact page exists
-    if ( $contact_page_link !== '#' ) {
+    if ( $contact_page_link !== '#' && buddyc_component_enabled( 'Contact' ) ) {
         $link = $contact_page_link;
         
     // No contact page
@@ -38,10 +38,11 @@ function buddyc_contact_message( $site_name = false, $lowercase = false ) {
         return;
     }
     
-    $name = $site_name ? get_bloginfo( 'name' ) : __('us', 'buddyclients-free');
+    $name = $site_name ? get_bloginfo( 'name' ) : __('us', 'buddyclients');
     /* translators: %s: the site name */
-    $text = $lowercase ? sprintf( __( 'contact %s', 'buddyclients-free' ), $name ) : sprintf( __( 'Contact %s', 'buddyclients-free' ), $name ) . '.';
+    $text = $lowercase ? sprintf( __( 'contact %s', 'buddyclients' ), $name ) : sprintf( __( 'Contact %s', 'buddyclients' ), $name ) . '.';
     $message = '<a href="' . esc_url( $link ) . '">' . $text . '</a>';
     
     return $message;
 }
+add_action('init', 'buddyc_contact_message');

@@ -47,7 +47,7 @@ class CheckoutTable {
         $output = '';
         
         // Build the mobile button
-        $output .= '<div id="checkout-mobile-button">' . __( 'View Summary', 'buddyclients-free' ) . '</div>';
+        $output .= '<div id="checkout-mobile-button">' . __( 'View Summary', 'buddyclients' ) . '</div>';
         
         // Table container div
         $output .= '<div class="checkout-details-container">';
@@ -90,7 +90,7 @@ class CheckoutTable {
         $output .= '</tbody>';
         $output .= '<tfoot>';
         $output .= '<tr>';
-        $output .= '<th>' . __( 'Total:', 'buddyclients-free' ) . '</th>';
+        $output .= '<th>' . __( 'Total:', 'buddyclients' ) . '</th>';
         $output .= '<td><span class="buddyc-checkout-total-fee">$' . number_format($this->total_fee, 2) . '</span></td>';
         $output .= '</tr>';
         $output .= '</tfoot>';

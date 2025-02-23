@@ -6,7 +6,8 @@ use BuddyClients\Components\Service\{
     Service,
     RateType,
     Adjustment,
-    AdjustmentOption
+    AdjustmentOption,
+    ServiceCache
 };
 
 /**
@@ -70,11 +71,11 @@ class LineItems {
         $this->line_items       = [];
         
         // Create service object
-        $this->service = new Service( $this->service_id );
+        $this->service = buddyc_get_service_cache( 'service', $this->service_id );
         
         // Get service name and rate type label
         $this->service_name = $this->service->title;
-        $this->unit_label = $this->service->rate_value > 0 ? '$' . $this->service->rate_value . ' ' . (new RateType ( $this->service->rate_type ))->unit_label : 'Free';
+        $this->unit_label = $this->service->rate_value > 0 ? '$' . $this->service->rate_value . ' ' . ( buddyc_get_service_cache( 'rate_type', $this->service->rate_type ) )->unit_label : 'Free';
         $this->adjustment_label = '';
 
         // Calculate service fee
@@ -158,7 +159,7 @@ class LineItems {
     private function sort_adjustments() {
         $adjustment_objects = [];
         foreach ( $this->adjustments as $option_key ) {
-            $adjustment_objects[] = new AdjustmentOption( $option_key );
+            $adjustment_objects[] = buddyc_get_service_cache( 'adjustment_option', $option_key );
         }
         
         // Define the desired order of operators

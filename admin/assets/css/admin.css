@@ -260,12 +260,128 @@ ul.wp-submenu.wp-submenu-wrap li a[href="buddyc-separator"] {
     display: inline-block;
 }
 
-/* Welcome message */
+/* Admin Notice */
+.buddyc-admin-notice {
+    background: #fff;
+    border-radius: 8px;
+    position:relative;
+}
+
+/* Container styles */
+.buddyc-admin-notice-content {
+    padding: 24px;
+    padding-left: 100px;
+    display: flex;
+    align-items: flex-start; /* Ensures icon stays at the top */
+    gap: 12px; /* Space between icon and text */
+}
+
+/* Icon styles */
+.buddyc-admin-notice-icon {
+    flex-shrink: 0; /* Prevents shrinking */
+    display: flex;
+    align-items: flex-start; /* Align icon to the top */
+    margin-top: 2px; /* Slight adjustment for alignment */
+}
+
+/* Message styles */
+.buddyc-admin-notice-message {
+    flex-grow: 1; /* Takes up remaining space */
+    line-height: 1.5;
+    display: flex;
+    flex-direction: column; /* Ensures paragraphs stack vertically */
+}
+
+/* Ensure paragraphs inside the message stack properly */
+.buddyc-admin-notice-message p {
+    margin: 0 0 8px;
+    font-size: 14px;
+}
+
+.buddyc-admin-notice-message p:last-child {
+    margin-bottom: 0;
+}
+
+.buddyc-admin-notice-repair {
+    margin: 20px 0 10px;
+}
+
+/* Icon styles */
+.buddyc-admin-notice-bc-icon {
+    position: absolute; /* Absolutely position it within the parent */
+    top: 50px; /* Vertically center the icon */
+    left: 15px; /* Position it inside the left border */
+    transform: translateY(-50%); /* Adjust for exact vertical centering */
+    width: 40px; /* Adjust size to match the icon's proportions */
+    height: 40px;
+    background-image: url('../media/buddyclients-icon-color.png');
+    background-size: contain; /* Ensure the icon scales properly */
+    background-repeat: no-repeat; /* Prevent repeating the background */
+    background-position: center; /* Center the background image within the element */
+}
+
+
+/* Create the thick left border */
+.buddyc-admin-notice::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 80px; /* Thickness of the left border */
+    height: 100%;
+    background-color: rgb(235, 239, 248); /* Color of the left border */
+}
+
+
+/* Mobile Styling */
+@media (max-width: 768px) {
+    /* Adjust padding for smaller screens */
+    .buddyc-admin-notice-content {
+        padding: 0;
+        padding-left: 100px;
+    }
+
+    /* Stack content vertically */
+    .buddyc-admin-notice-content {
+        flex-direction: column; /* Stack icon and message vertically */
+        align-items: flex-start;
+    }
+
+    /* Ensure icon and text are properly spaced */
+    .buddyc-admin-notice-icon {
+        margin-bottom: 10px; /* Space between icon and message */
+    }
+
+    /* Adjust font size for better readability on small screens */
+    .buddyc-admin-notice-message p {
+        font-size: 16px; /* Slightly larger text for mobile */
+    }
+}
+
+/* Welcome Message */
+
+/* Quick links */
+.buddyc-quick-links {
+    display: inline-block;
+    padding: 20px 30px;
+    border-radius: 10px;
+    border: 2px solid #E7E9EC;
+    margin: 20px 0;
+    background-color: #fff;
+}
+.buddyc-quick-links-title {
+    font-weight: bold;
+    padding-right: 10px;
+}
+
+/* Dismiss button */
+.buddyc-dismiss-welcome-btn-container {
+    margin: 10px 0 0;
+}
 .buddyc-dismiss-welcome-btn {
     color: #fff;
     background-color: #e74c3c;
-    padding: 0.5em 1em;
-    margin: 10px 0;
+    padding: 0.5em 1em;    
     text-decoration: none;
     border-radius: 5px;
 }

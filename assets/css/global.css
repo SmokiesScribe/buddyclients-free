@@ -248,6 +248,20 @@
     color: #7face1;
 }
 
+/* Admin notice icon colors */
+.buddyc-icon.buddyc-icon-color-admin-blue {
+    color: #7face1;
+}
+.buddyc-icon.buddyc-icon-color-admin-green {
+    color: #48a13e;
+}
+.buddyc-icon.buddyc-icon-color-admin-orange {
+    color: #d3a83e;
+}
+.buddyc-icon.buddyc-icon-color-admin-red {
+    color: #c5443f;
+}
+
 /* Subnav */
 .buddyc-subnav {
     margin-right: 20px;
@@ -329,6 +343,7 @@
     align-items: center;
     max-width: 650px;
     margin: auto;
+    width: 100%
 }
 
 .buddyc-form {
@@ -464,4 +479,23 @@
 /* Signature */
 .buddyc-legal-signature {
     max-width: 300px;
+}
+
+.buddyc-signature-container canvas {
+    margin: 10px 0;
+    background-color: var(--bb-content-background-color);
+    border: 1px solid var(--bb-content-border-color);
+    border-radius: var(--bb-input-radius);
+    box-shadow: none;
+    padding: 0 12px;
+    color: var(--bb-body-text-color);
+}
+
+.form-group.buddyc-signature-container .buddyc-signature-clear-button {
+    background-color: #fff;
+    color: gray;
+    border: 1px solid gray;
+    padding: 5px 10px;
+    font-size: 12px;
+    float: right;
 }

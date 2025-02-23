@@ -166,7 +166,7 @@ class Brief {
 
         // Define the new brief args
         $args = array(
-            'post_title' => $this->project_name . ' ' . $term->name . ' ' . __( 'Brief', 'buddyclients-free' ),
+            'post_title' => $this->project_name . ' ' . $term->name . ' ' . __( 'Brief', 'buddyclients' ),
             'post_status'   => 'publish',
             'post_type'     => 'buddyc_brief',
         );

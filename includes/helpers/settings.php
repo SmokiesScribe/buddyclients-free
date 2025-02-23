@@ -10,7 +10,8 @@ use BuddyClients\Admin\Settings;
  * @param   string  $settings_key       Optional. The specific setting to retrieve.
  */
 function buddyc_get_setting( $settings_group, $settings_key = null ) {
-    return Settings::get_value( $settings_group, $settings_key );
+    $settings = new Settings( $settings_group );
+    return $settings->get_value( $settings_key );
 }
 
 /**
@@ -44,7 +45,7 @@ function buddyc_help_post_types() {
  *                          Accepts 'primary', 'accent', and 'tertiary'.
  */
 function buddyc_color( $type ) {
-    return buddyc_get_setting('style', $type . '_color');
+    return buddyc_get_setting('general', $type . '_color');
 }
 
 /**

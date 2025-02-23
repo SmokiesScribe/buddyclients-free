@@ -1,7 +1,6 @@
 <?php
 if ( ! defined( 'ABSPATH' ) ) exit; // Exit if accessed directly
 use BuddyClients\Includes\Popup;
-use BuddyClients\Includes\LeadGenPopup;
 /**
  * Retrieves help doc content.
  * 
@@ -78,18 +77,6 @@ function buddyc_update_popup( $content ) {
     // Modify content and set visibility
     $popup->update_content( $content );
 }
-
-/** 
- * Initializes the LeadGenPopup.
- * 
- * @since 1.0.23 
-*/
-function buddyc_lead_gen_popup() {
-    if ( class_exists( LeadGenPopup::class ) ) {
-        new LeadGenPopup;
-    }
-}
-add_action('init', 'buddyc_lead_gen_popup');
 
 /**
  * Initializes the overlay.

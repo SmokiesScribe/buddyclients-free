@@ -111,48 +111,50 @@ class Adjustment extends ServiceComponent {
         // Construct ServiceComponent
         parent::__construct( $post_id );
         
-        // Build adjustment options
-        $this->get_options( $post_id );
+        // Retrieves the adjustment options
+        $this->get_options();
     }
-    
+
     /**
-     * Retrieves the number of options.
+     * Retrieves the AdjustmentOption objects and count.
      * 
      * @since 0.1.0
-     * 
-     * @param   int     $post_id    The ID of the adjustment post.
      */
-    private function get_options( $post_id ) {
-        // Initialize
-        $options_count = 0;
+    private function get_options() {
+        $this->options          = $this->get_adjustment_options();
+        $this->options_count    = $this->get_adjustment_option_count();
+    }
+
+    /**
+     * Retrieves the attached AdjustmentOption objects.
+     * 
+     * @since 1.0.25
+     */
+    private function get_adjustment_options() {
         $options = [];
-        
-        // Get all meta
-        $all_meta = get_post_meta( $post_id );
-        
-        // Iterate through all meta data
-        foreach ( $all_meta as $meta_key => $value ) {
-            
-            // Check if the meta key matches the pattern 'option_X_label'
-            if ( preg_match('/^option_\d+_label$/', $meta_key ) ) {
-                
-                // Get the option number
-                $parts = explode( '_', $meta_key );
-                $option_number = $parts[1];
-                
-                // Build the object
-                $adjustment_option = new AdjustmentOption( $post_id . '-' . $option_number );
-                
-                // Validate the option
-                if ( $adjustment_option->validate() ) {
-                    // Add to array
-                    $options[$post_id . '-' . $option_number] = $adjustment_option;
-                    // Increment counter
-                    $options_count += 1;
+    
+        // Get all meta keys that match 'option_X_label'
+        foreach ( get_post_meta( $this->ID ) as $meta_key => $value ) {
+            if ( preg_match('/^option_(\d+)_label$/', $meta_key, $matches ) ) {
+                $option_number = $matches[1];
+    
+                // Retrieve and validate adjustment option
+                $cache_key = "{$this->ID}-{$option_number}";
+                if ( ( $adjustment_option = buddyc_get_service_cache( 'adjustment_option', $cache_key )) && $adjustment_option->validate() ) {
+                    $options[$cache_key] = $adjustment_option;
                 }
             }
         }
-        $this->options = $options;
-        $this->options_count = $options_count;
+    
+        return $options;
+    }
+
+    /**
+     * Counts the attached Adjustment Option objects.
+     * 
+     * @since 1.0.25
+     */
+    private function get_adjustment_option_count() {
+        return count( $this->options );
     }
 }

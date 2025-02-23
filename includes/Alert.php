@@ -27,23 +27,22 @@ class Alert {
      * @param   ?int    $priority   Optional. The priority of the alert.
      */
     public function __construct( $content, $priority = null ) {
-        if ( $content ) {
+        if ( is_admin() ) return;
+        if ( empty( $content ) ) return;
             
-            // Define var
-            $this->content = $content;
-            
-            
-            // Check the priority
-            if ( ! $this->greater_priority( $priority ) ) {
-                return;
-            }
-            
-            // Set priority
-            self::$priority = $priority;
-            
-            // Define hooks
-            $this->define_hooks();
+        // Define var
+        $this->content = $content;
+        
+        // Check the priority
+        if ( ! $this->greater_priority( $priority ) ) {
+            return;
         }
+        
+        // Set priority
+        self::$priority = $priority;
+        
+        // Define hooks
+        $this->define_hooks();
     }
     
     /**

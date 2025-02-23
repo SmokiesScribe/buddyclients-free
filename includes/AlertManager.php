@@ -39,7 +39,7 @@ class AlertManager {
      * @since 1.0.4
      */
     private function alert( $content = null, $priority = 50 ) {
-        if ( $content ) {
+        if ( ! empty( $content ) ) {
             new Alert( $content, $priority );
         }
     }
@@ -68,14 +68,14 @@ class AlertManager {
             $content = sprintf(
                 '<a href="%s">%s</a>',
                 esc_url( $link ),
-                __( 'Add your availability.', 'buddyclients-free' )
+                __( 'Add your availability.', 'buddyclients' )
             );
         
         // Check if the availability is expired
         } else if ( Availability::expired( $availability ) ) {
             $content = sprintf(
                 /* translators: %s: url to update availability */
-                __( 'Your availability has expired. <a href="%s">Update your availability.</a>', 'buddyclients-free' ),
+                __( 'Your availability has expired. <a href="%s">Update your availability.</a>', 'buddyclients' ),
                 esc_url( $link ),
             );
         }
@@ -101,7 +101,7 @@ class AlertManager {
      * @since 1.0.4
      */
      public function affiliate_alert() {
-        if ( buddyc_component_enabled( 'Affiliate' ) && buddyc_was_affiliate() ) {
+        if ( buddyc_component_enabled( 'Affiliate' ) && buddyc_is_affiliate() ) {
             self::legal_alert( 'affiliate' );
         }
      }
@@ -115,32 +115,26 @@ class AlertManager {
      *                          Accepts 'team' and 'affiliate'.
      */
     private function legal_alert( $type ) {
-        if ( ! class_exists( Legal::class ) ) {
-            return;
-        }
-        
-        // Initialize
         $content = null;
 
-        // Define translations
-        $translated_types = [
-            'affiliate' => __( 'affiliate', 'buddyclients-free' ),
-            'team'      => __( 'team member', 'buddyclients-free' ),
-            'sales'     => __( 'sales', 'buddyclients-free' ),
-        ];
+        // Make sure legal component is enabled
+        if ( ! buddyc_component_enabled( 'Legal' ) ) return;
 
-        $translated_type = $translated_types[$type] ?? '';
+        // Make sure an agreement exists
+        $curr_version = buddyc_legal_get_current_version( $type );
+        if ( ! $curr_version ) return;        
+
+        // Define translated legal type
+        $translated_type = match ( $type ) {
+            'affiliate' => __( 'affiliate', 'buddyclients' ),
+            'team'      => __( 'team member', 'buddyclients' ),
+            'sales'     => __( 'sales', 'buddyclients' ),
+            default     => ''
+        };
         
         // Get legal data
         $user_id = get_current_user_id();
         $status = buddyc_user_agreement_status( $user_id, $type );
-
-        // Make sure an agreement exists
-        $curr_version = buddyc_current_legal_version( $type );
-
-        if ( ! $curr_version ) {
-            return;
-        }
         
         // Get profile link
         $link = buddyc_profile_ext_link( $type );
@@ -149,7 +143,7 @@ class AlertManager {
         if ( $status === 'active' ) {
             $content = sprintf(
                 /* translators: %1$s: url to complete agreement; %2$s: the type of agreement (e.g. affiliate or team) */
-                __( 'Complete your <a href="%1$s">new %2$s agreement</a>.', 'buddyclients-free' ),
+                __( 'Complete your <a href="%1$s">new %2$s agreement</a>.', 'buddyclients' ),
                 esc_url( $link ),
                 $translated_type
             );            
@@ -158,7 +152,7 @@ class AlertManager {
         } else if ( ( $type !== 'affiliate' && $status !== 'current' ) || ( $type === 'affiliate' && $status === 'inactive' ) ) {
             $content = sprintf(
                 /* translators: %1$s: url to complete agreement; %2$s: the type of agreement (e.g. affiliate or team) */
-                __( 'Complete your <a href="%1$s">%2$s agreement</a>.', 'buddyclients-free' ),
+                __( 'Complete your <a href="%1$s">%2$s agreement</a>.', 'buddyclients' ),
                 esc_url( $link ),
                 $translated_type
             );

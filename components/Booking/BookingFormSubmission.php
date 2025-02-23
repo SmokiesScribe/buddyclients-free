@@ -36,7 +36,7 @@ class BookingFormSubmission {
     private function handle_form_submission(array $post_data, ?array $files_data) {
         
         // Create booking intent
-        $booking_intent = new BookingIntent($post_data, $files_data);
+        $booking_intent = new BookingIntent( $post_data, $files_data );
         
         // Store in session
         $_SESSION['booking_id'] = $booking_intent->ID;
@@ -58,13 +58,13 @@ class BookingFormSubmission {
         // Output popup if no checkout page set
         if ( $checkout_url === '#' ) {
             $message = '<p>';
-            $message .= __( 'Checkout is unavailable at this time.', 'buddyclients-free' );
+            $message .= __( 'Checkout is unavailable at this time.', 'buddyclients' );
             $message .= '</p>';
 
             $message = '<p>';
             $message .= sprintf(
                 /* translators: %s: the contact us link */
-                __( 'Please %s for assistance', 'buddyclients-free' ),
+                __( 'Please %s for assistance', 'buddyclients' ),
                 buddyc_contact_message( false, true ) );
             $message .= '</p>';
             

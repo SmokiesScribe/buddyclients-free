@@ -260,6 +260,10 @@ class FileHandler {
       * @since 0.1.0
       */
      public static function clear_temporary_files() {
+
+        // Check transient
+        $cleaned = get_transient( 'buddyc_files_cleaned' );
+        if ( $cleaned ) return;
          
         // Initialize object handler
         self::init_object_handler();
@@ -276,6 +280,9 @@ class FileHandler {
         
         // Delete expired files
         self::$object_handler->delete_objects( $deleted_files );
+
+        // Set transient
+        set_transient( 'buddyc_files_cleaned', true, DAY_IN_SECONDS );
      }
      
     /**
@@ -411,7 +418,7 @@ class FileHandler {
             
             // Check if the file exists on the server
             if ( ! file_exists( $file->file_path ) ) {
-                $download = '<div class="no-ms-message">' . __( 'File not found: ', 'buddyclients-free' ) . $file->file_name . '</div>';
+                $download = '<div class="no-ms-message">' . __( 'File not found: ', 'buddyclients' ) . $file->file_name . '</div>';
                 
             } else {
                 
@@ -419,7 +426,7 @@ class FileHandler {
                 $icon = buddyc_icon( 'download' );
                 
                 // Build download link
-                $text = $show_file_name ? __( 'Download File: ', 'buddyclients-free' ) . $file->file_name : __( 'Download File', 'buddyclients-free' );
+                $text = $show_file_name ? __( 'Download File: ', 'buddyclients' ) . $file->file_name : __( 'Download File', 'buddyclients' );
                 $download = '<a class="ms-download-button" title="' . esc_attr( $file->file_name ) . '" href="' . esc_url( $file->file_url ) . '" download>' . $icon . ' ' . esc_html( $text ) . '</a><br><br>';
             }
         }

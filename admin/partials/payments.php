@@ -15,26 +15,28 @@ function buddyc_payments_list() {
     
     // Define headers
     $headers = [
-        __( 'Payee', 'buddyclients-free' ),
-        __( 'Date Created', 'buddyclients-free' ),
-        __( 'Status', 'buddyclients-free' ),
-        __( 'Type', 'buddyclients-free' ),
-        __( 'Amount', 'buddyclients-free' ),
-        __( 'Memo', 'buddyclients-free' ),
-        __( 'Paid Date', 'buddyclients-free' ),
-        __( 'Update Status', 'buddyclients-free' )
+        __( 'Payee', 'buddyclients' ),
+        __( 'Date Created', 'buddyclients' ),
+        __( 'Status', 'buddyclients' ),
+        __( 'Type', 'buddyclients' ),
+        __( 'Amount', 'buddyclients' ),
+        __( 'Payment Method', 'buddyclients' ),
+        __( 'Memo', 'buddyclients' ),
+        __( 'Paid Date', 'buddyclients' ),
+        __( 'Update Status', 'buddyclients' )
     ];
     
     // Define columns
     $columns = [
-        'payee_id'      => ['payee_id' => 'user_link'],
-        'date'          => ['created_at' => 'date_time'],
-        'status'        => ['status' => 'icons'],
-        'type'          => ['type' => null],
-        'amount'        => ['amount' => 'usd'],
-        'memo'          => ['memo' => 'copy_memo'],
-        'paid_date'     => ['paid_date' => 'date_time'],
-        'update_status' => ['status' => 'payment_form']
+        'payee_id'                  => ['payee_id' => 'user_link'],
+        'date'                      => ['created_at' => 'date_time'],
+        'status'                    => ['status' => 'icons'],
+        'type'                      => ['type' => null],
+        'amount'                    => ['amount' => 'usd'],
+        'legal_payment_preference'  => ['payee_id' => 'legal_payment_preference'],
+        'memo'                      => ['memo' => 'copy_memo'],
+        'paid_date'                 => ['paid_date' => 'date_time'],
+        'update_status'             => ['status' => 'payment_form']
     ];
     
     $args = [
@@ -42,27 +44,27 @@ function buddyc_payments_list() {
         'headings'  => $headers,
         'columns'   => $columns,
         'items'     => $payments,
-        'title'     => __( 'Payments', 'buddyclients-free' ),
+        'title'     => __( 'Payments', 'buddyclients' ),
         'filters'   => [
             'type'    => [
-                'label'     => __( 'Type', 'buddyclients-free' ),
+                'label'     => __( 'Type', 'buddyclients' ),
                 'property'  => 'type',
                 'options'   => [
-                    ''              => __( 'All', 'buddyclients-free' ),
-                    'team'          => __( 'Team', 'buddyclients-free' ),
-                    'affiliate'     => __( 'Affiliate', 'buddyclients-free' ),
-                    'sales'         => __( 'Sales', 'buddyclients-free' ),
+                    ''              => __( 'All', 'buddyclients' ),
+                    'team'          => __( 'Team', 'buddyclients' ),
+                    'affiliate'     => __( 'Affiliate', 'buddyclients' ),
+                    'sales'         => __( 'Sales', 'buddyclients' ),
                 ],
                 'default'   => ''
             ],
             'payment_status'    => [
-                'label'     => __( 'Status', 'buddyclients-free' ),
+                'label'     => __( 'Status', 'buddyclients' ),
                 'property'  => 'status',
                 'options'   => [
-                    ''          => __( 'All', 'buddyclients-free' ),
-                    'pending'   => __( 'Pending', 'buddyclients-free' ),
-                    'eligible'  => __( 'Eligible', 'buddyclients-free' ),
-                    'paid'      => __( 'Paid', 'buddyclients-free' ),
+                    ''          => __( 'All', 'buddyclients' ),
+                    'pending'   => __( 'Pending', 'buddyclients' ),
+                    'eligible'  => __( 'Eligible', 'buddyclients' ),
+                    'paid'      => __( 'Paid', 'buddyclients' ),
                 ],
                 'default'   => ''
             ],

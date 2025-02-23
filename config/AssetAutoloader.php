@@ -87,16 +87,29 @@ class AssetAutoloader {
      */
     public function define_hooks() {
         add_action('wp_enqueue_scripts', [$this, 'enqueue_scripts']);
+        add_action('admin_enqueue_scripts', [$this, 'enqueue_admin_scripts']);
     }
     
     /**
-     * Enqueue scripts and styles.
+     * Enqueues scripts and styles.
      *
      * @since 0.1.0
      */
     public function enqueue_scripts() {
-        $this->enqueue_assets('assets/css');
-        $this->enqueue_assets('assets/js');
+        $this->enqueue_assets( 'assets/css' );
+        $this->enqueue_assets( 'assets/js' );
+    }
+
+    /**
+     * Enqueues admin scripts and styles.
+     * 
+     * Loads css and js files that includes 'admin' in the admin area.
+     *
+     * @since 1.0.25
+     */
+    public function enqueue_admin_scripts() {
+        $this->enqueue_assets( 'assets/css', true );
+        $this->enqueue_assets( 'assets/js', true );
     }
 
     /**
@@ -104,10 +117,12 @@ class AssetAutoloader {
      *
      * @since 0.1.0
      *
-     * @param string $dir The directory path where assets are located.
+     * @param   string  $dir    The directory path where assets are located.
+     * @param   bool    $admin  Optional. Whether we are enqueuing admin scripts.
+     *                          Defaults to false.
      */
-    public function enqueue_assets( $dir ) {
-        $asset_manager = new AssetManager( $this->path, $dir );
+    public function enqueue_assets( $dir, $admin = false ) {
+        $asset_manager = new AssetManager( $this->path, $dir, $file = null, $admin );
         $asset_manager->run();
     }
 }

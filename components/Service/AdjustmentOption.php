@@ -84,6 +84,6 @@ class AdjustmentOption {
      * @since 0.1.0
      */
     public function validate() {
-        return ( $this->label && ( $this->label !== '' ) );
+        return ( ! empty( $this->label ) );
     }
 }

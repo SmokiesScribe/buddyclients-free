@@ -1,77 +1,77 @@
 /* Enable sticky */
 #page{
-    overflow-x: clip;
-  }
-  
-  .checkout-details-container {
-      border-radius: 10px;
-      border: solid 1px #e7e9ec;
-      background-color: #ffffff;
-      padding: 25px;
-      box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
-      z-index: 300;
-  }
-  
-  .checkout-loading-indicator {
-      display: none;
-  }
-  
-  .buddyc-working-message {
-      text-align: center;
-      font-style: italic;
-      color: gray;
-  }
-  
-  .checkout-table {
-      border-collapse: collapse;
-      width: 100%;
-      border: none;
-  }
-  
-  .checkout-table tfoot {
-      margin-top: 50px !important;
-  }
-  
-  .checkout-table th,
-  .checkout-table td {
-      border: none; /* Set the border to a light gray color */
-      padding: 15px 8px;
-      text-align: left;
-  }
-  
-  .checkout-table tfoot th,
-  .checkout-table tfoot td {
-      color: #000;
-  }
-  .buddyc-checkout-total {
-      font-size: 32px;
-      font-weight: 600;
-  }
-  
-  .buddyc-test-mode-tag {
-      display: inline-block; /* Make the tag only as wide as the content */
-      padding: 8px 15px; /* Adjust padding as desired */
-      border-radius: 5px;
-      font-size: 14;
-      font-weight: 500;
-      background-color: #f9edbf; /* Set the base background color */  
-      color: #9b3617;
-  }
-  .buddyc-test-instructions {
-      color: gray;
-      background-color: #fff;
-      padding: 10px;
-      border-radius: 5px;
-      border: solid 1px #e7e9ec;
-      max-width: 800px;
-  }
-  #free-checkout-submit:disabled {
-      cursor: not-allowed;
-  }
-  #buddyc-create-account-success p {
-      border-radius: 10px;
-      border: solid 1px #e7e9ec;
-      background-color: #ffffff;
-      padding: 25px;
-      margin: 20px 0;
-  }
+  overflow-x: clip;
+}
+
+.checkout-details-container {
+    border-radius: 10px;
+    border: solid 1px #e7e9ec;
+    background-color: #ffffff;
+    padding: 25px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+    z-index: 300;
+}
+
+.checkout-loading-indicator {
+    display: none;
+}
+
+.buddyc-working-message {
+    text-align: center;
+    font-style: italic;
+    color: gray;
+}
+
+.checkout-table {
+    border-collapse: collapse;
+    width: 100%;
+    border: none;
+}
+
+.checkout-table tfoot {
+    margin-top: 50px !important;
+}
+
+.checkout-table th,
+.checkout-table td {
+    border: none; /* Set the border to a light gray color */
+    padding: 15px 8px;
+    text-align: left;
+}
+
+.checkout-table tfoot th,
+.checkout-table tfoot td {
+    color: #000;
+}
+.buddyc-checkout-total {
+    font-size: 32px;
+    font-weight: 600;
+}
+
+.buddyc-test-mode-tag {
+    display: inline-block; /* Make the tag only as wide as the content */
+    padding: 8px 15px; /* Adjust padding as desired */
+    border-radius: 5px;
+    font-size: 14;
+    font-weight: 500;
+    background-color: #f9edbf; /* Set the base background color */  
+    color: #9b3617;
+}
+.buddyc-test-instructions {
+    color: gray;
+    background-color: #fff;
+    padding: 10px;
+    border-radius: 5px;
+    border: solid 1px #e7e9ec;
+    max-width: 800px;
+}
+#free-checkout-submit:disabled {
+    cursor: not-allowed;
+}
+#buddyc-create-account-success p {
+    border-radius: 10px;
+    border: solid 1px #e7e9ec;
+    background-color: #ffffff;
+    padding: 25px;
+    margin: 20px 0;
+}

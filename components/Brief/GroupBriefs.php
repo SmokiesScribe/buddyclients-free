@@ -77,7 +77,7 @@ class GroupBriefs {
             }
         
         } else {
-            $content .= __( 'No briefs available.', 'buddyclients-free' );
+            $content .= __( 'No briefs available.', 'buddyclients' );
         }
         
         $content .= '</div>'; // Close terms container
@@ -117,10 +117,10 @@ class GroupBriefs {
      * @param   bool   $complete   Whether the brief has been submitted.
      */
     private function brief_message( $complete ) {
-        $click_action = $complete ? __( 'view', 'buddyclients-free' ) : __( 'complete', 'buddyclients-free' );
+        $click_action = $complete ? __( 'view', 'buddyclients' ) : __( 'complete', 'buddyclients' );
         return sprintf(
             /* translators: %s: the click action (e.g. view) */
-            __( 'Click to %s.', 'buddyclients-free' ),
+            __( 'Click to %s.', 'buddyclients' ),
             $click_action
         );
     }
@@ -135,7 +135,7 @@ class GroupBriefs {
     private function brief_header( $brief ) {
         return sprintf(
             /* translators: %s: the type of brief (e.g. Design) */
-            __( '%s Brief', 'buddyclients-free' ),
+            __( '%s Brief', 'buddyclients' ),
             $brief->brief_type_names
         );
     }

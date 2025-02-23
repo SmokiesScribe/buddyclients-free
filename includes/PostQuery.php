@@ -49,10 +49,11 @@ class PostQuery {
      * @param   array   $args {}
      *     An optional array of args for the post query.
      * 
-     *     @type    array   $meta           An associative array of meta keys and values.
-     *     @type    string  $compare        The compare operator for the meta queries.
+     *     @array   array   $meta           An associative array of meta keys and values.
+     *     @string  string  $compare        The compare operator for the meta queries.
      *                                      Defaults to '='.
-     *     @type    array   $tax            An associative arary of tax names and tags.
+     *     @array   array   $tax            An associative arary of tax names and tags.
+     *     @int     int     $max            The maximum number of posts to retrieve.
      * }
      */
     public function __construct( $post_type, $args = [] ) {

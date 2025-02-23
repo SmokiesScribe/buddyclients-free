@@ -11,6 +11,7 @@ use BuddyClients\Components\Stripe\StripeForm;
 use BuddyClients\Components\Stripe\StripeKeys;
 use BuddyClients\Includes\Client;
 use BuddyClients\Includes\Popup;
+use BuddyClients\Components\Booking\SuccessfulBooking;
 
 /**
  * Checkout page content.
@@ -83,6 +84,11 @@ class Checkout {
 
         if ( ! $this->booking_intent ) {
             return;
+        }
+
+        // Succeed if previously paid
+        if ( $this->booking_intent->previously_paid ) {
+            new SuccessfulBooking( $this->booking_intent->ID );
         }
 
         // Check intent type
@@ -193,9 +199,9 @@ class Checkout {
             $stripe_keys = new StripeKeys;
             $mode = $stripe_keys->mode;
             if ( $mode === 'test' ) {
-                $content = '<div><p class="buddyc-test-mode-tag">' . __( 'Test Mode', 'buddyclients-free' ) . '</p></div>';
+                $content = '<div><p class="buddyc-test-mode-tag">' . __( 'Test Mode', 'buddyclients' ) . '</p></div>';
                 if ( ! $tag_only ) {
-                    $content .= '<p class="buddyc-test-instructions">' . __( 'Use card number 4242 4242 4242 4242 to simulate a successful payment.', 'buddyclients-free' ) . '</p>';
+                    $content .= '<p class="buddyc-test-instructions">' . __( 'Use card number 4242 4242 4242 4242 to simulate a successful payment.', 'buddyclients' ) . '</p>';
                 }
                 return $content;
             }
@@ -225,9 +231,9 @@ class Checkout {
      * @since 0.1.0
      */
     private function sales_message() {
-        $client_name = $this->booking_intent->client_id ? bp_core_get_user_displayname( $this->booking_intent->client_id ) : __( 'The client', 'buddyclients-free' );
+        $client_name = $this->booking_intent->client_id ? bp_core_get_user_displayname( $this->booking_intent->client_id ) : __( 'The client', 'buddyclients' );
     
-        $content = '<h4>' . __( 'The booking has been created!', 'buddyclients-free' ) . '</h4>';
+        $content = '<h4>' . __( 'The booking has been created!', 'buddyclients' ) . '</h4>';
     
         // Make sure it's not a manual booking
         if ( ! $this->booking_intent->previously_paid ) {
@@ -236,7 +242,7 @@ class Checkout {
             if ( function_exists( 'buddyc_email_enabled' ) && buddyc_email_enabled( 'sales_sub' ) ) {
                 $content .= '<p>' . sprintf(
                     /* translators: %1$s: the name of the client; %2$s: the email address of the client */
-                    __( '%1$s has been notified at %2$s.', 'buddyclients-free' ),
+                    __( '%1$s has been notified at %2$s.', 'buddyclients' ),
                     $client_name,
                     $this->client_email )
                     . '</p>';
@@ -245,7 +251,7 @@ class Checkout {
             } else {
                 $content .= '<p>' . sprintf(
                     /* translators: %1$s: the name of the client; %2$s: the email address of the client */
-                    __( 'Emails are not enabled. %1$s has NOT been notified at %2$s.', 'buddyclients-free' ),
+                    __( 'Emails are not enabled. %1$s has NOT been notified at %2$s.', 'buddyclients' ),
                     $client_name,
                     $this->client_email )
                     . '</p>';
@@ -253,7 +259,7 @@ class Checkout {
     
             // Copy paste link
             $checkout_link = $this->booking_intent->build_checkout_link();
-            $content .= '<p>' . __( 'The client can check out at the following link.', 'buddyclients-free' ) . '</p>';
+            $content .= '<p>' . __( 'The client can check out at the following link.', 'buddyclients' ) . '</p>';
             $content .= buddyc_copy_to_clipboard( $checkout_link, 'buddyc_checkout_link' );
         }
     
@@ -267,7 +273,7 @@ class Checkout {
      */
     private function back_to_form() {
         $form_page = buddyc_get_setting( 'pages', 'booking_page' );
-        return '<a href="' . esc_url( get_permalink( $form_page ) ) . '">' . __( 'Book services here.', 'buddyclients-free' ) . '</a>';
+        return '<a href="' . esc_url( get_permalink( $form_page ) ) . '">' . __( 'Book services here.', 'buddyclients' ) . '</a>';
     }
     
     /**
@@ -303,7 +309,7 @@ class Checkout {
             $content .= '<div class="buddyc-margin-20">';
             
             // Free header
-            $content .= '<h4>' . __( 'Yay! Your services are free.', 'buddyclients-free' ) . '</h4>';
+            $content .= '<h4>' . __( 'Yay! Your services are free.', 'buddyclients' ) . '</h4>';
             
             // Free booking form
             $content .= $this->free_form();
@@ -316,8 +322,8 @@ class Checkout {
             $content .= '<div class="buddyc-margin-20">';
             
             // Skip payment header
-            $content .= '<h4>' . __( 'Confirm Your Booking', 'buddyclients-free' ) . '</h4>';
-            $content .= '<p>' . __( 'Please use the button below to confirm. We will be in touch to arrange payment.', 'buddyclients-free' ) . '</p>';
+            $content .= '<h4>' . __( 'Confirm Your Booking', 'buddyclients' ) . '</h4>';
+            $content .= '<p>' . __( 'Please use the button below to confirm. We will be in touch to arrange payment.', 'buddyclients' ) . '</p>';
             
             // Free booking form
             $content .= $this->skip_payment_form();
@@ -369,7 +375,7 @@ class Checkout {
                 'type'          => 'text',
                 'description' => sprintf(
                     /* translators: %1$s: the login url, %2$s: html linking to the privacy policy and/or service terms */
-                    __( 'Have an account? <a href="%1$s">Log in here</a><br>%2$s', 'buddyclients-free' ),
+                    __( 'Have an account? <a href="%1$s">Log in here</a><br>%2$s', 'buddyclients' ),
                     esc_url( wp_login_url( get_permalink() ) ),
                     $this->policies()
                 ),
@@ -380,14 +386,14 @@ class Checkout {
             'email' => [
                 'key'           => 'create-account-email',
                 'type'          => 'email',
-                'placeholder'   => __( 'Your email', 'buddyclients-free' ),
+                'placeholder'   => __( 'Your email', 'buddyclients' ),
                 'field_classes' => 'buddyc-create-account-field margin-free',
                 'required'      => true
             ],
             'password' => [
                 'key'           => 'create-account-password',
                 'type'          => 'password',
-                'placeholder'   => __( 'Create password', 'buddyclients-free' ),
+                'placeholder'   => __( 'Create password', 'buddyclients' ),
                 'field_classes' => 'buddyc-create-account-field margin-free',
                 'required'      => true,
                 'field_classes' => 'buddyc-password-field'
@@ -426,15 +432,15 @@ class Checkout {
         $policies = [];
         
         // Get pages from settings
-        $privacy_policy = buddyc_get_setting( 'pages', __( 'privacy_policy', 'buddyclients-free' ) );
-        $site_terms = buddyc_get_setting( 'pages', __( 'terms_of_service', 'buddyclients-free' ) );
+        $privacy_policy = buddyc_get_setting( 'pages', __( 'privacy_policy', 'buddyclients' ) );
+        $site_terms = buddyc_get_setting( 'pages', __( 'terms_of_service', 'buddyclients' ) );
         
         // Generate policy links
         if ($privacy_policy) {
-            $policies[] = Popup::link( $privacy_policy, __( 'privacy policy', 'buddyclients-free' ) );
+            $policies[] = Popup::link( $privacy_policy, __( 'privacy policy', 'buddyclients' ) );
         }
         if ($site_terms) {
-            $policies[] = Popup::link( $site_terms, __( 'website terms', 'buddyclients-free' ) );
+            $policies[] = Popup::link( $site_terms, __( 'website terms', 'buddyclients' ) );
         }
         
         // Generate policies message
@@ -442,7 +448,7 @@ class Checkout {
             $policies_text = implode(' and ',$policies);
             return sprintf(
                 /* translators: %s: the policies the user is agreeing to (e.g. privacy policy and service terms) */
-                __('By creating an account, you agree to the %s.', 'buddyclients-free'),
+                __('By creating an account, you agree to the %s.', 'buddyclients'),
                 $policies_text
             );
         }
@@ -503,8 +509,8 @@ class Checkout {
                     'checkout-agree-terms-checkbox' => [
                     'label' => sprintf(
                         /* translators: %s: the html linking to the service terms */
-                        __( 'I agree to the %s.', 'buddyclients-free' ),
-                        Popup::link($service_terms, __( 'service terms', 'buddyclients-free' ) )
+                        __( 'I agree to the %s.', 'buddyclients' ),
+                        Popup::link($service_terms, __( 'service terms', 'buddyclients' ) )
                     ),
                         'value' => true,
                     ]
@@ -526,7 +532,7 @@ class Checkout {
             'key'                   => 'free-checkout',
             'submission_class'      => __NAMESPACE__ . '\FreeCheckout',
             'fields_callback'       => [$this, 'free_form_fields'],
-            'submit_text'           => __( 'Complete Checkout', 'buddyclients-free' )
+            'submit_text'           => __( 'Complete Checkout', 'buddyclients' )
         ];
         
         return buddyc_build_form( $args );
@@ -544,7 +550,7 @@ class Checkout {
             'key'                   => 'skip-payment-checkout',
             'submission_class'      => __NAMESPACE__ . '\SkipPaymentCheckout',
             'fields_callback'       => [$this, 'free_form_fields'],
-            'submit_text'           => __( 'Complete Checkout', 'buddyclients-free' )
+            'submit_text'           => __( 'Complete Checkout', 'buddyclients' )
         ];
         
         return buddyc_build_form( $args );
@@ -573,7 +579,7 @@ class Checkout {
         if ( class_exists( StripeForm::class ) ) {
             return (new StripeForm)->build();
         } else {
-            $message = '<p>' . __( 'Payments are not enabled on this website. ', 'buddyclients-free' ) . buddyc_contact_message() . '</p>';
+            $message = '<p>' . __( 'Payments are not enabled on this website. ', 'buddyclients' ) . buddyc_contact_message() . '</p>';
             echo wp_kses_post( $message );
         }
     }

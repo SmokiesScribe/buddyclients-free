@@ -260,8 +260,8 @@ class FormSubmission {
         $content = '<div class="buddyc-text-center">';
         
         // Define failure content
-        $content .= '<h2>' . __( 'Uh oh, something went wrong.', 'buddyclients-free' ) . '</h2>';
-        $content .= '<p>' . __( 'Please try again later.', 'buddyclients-free' ) . '</p>';
+        $content .= '<h2>' . __( 'Uh oh, something went wrong.', 'buddyclients' ) . '</h2>';
+        $content .= '<p>' . __( 'Please try again later.', 'buddyclients' ) . '</p>';
         
         $content .= '</div>';
         

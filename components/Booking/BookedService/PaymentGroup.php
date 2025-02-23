@@ -98,39 +98,20 @@ class PaymentGroup {
      */
     private function affiliate_payment() {
         
-        // Check if affiliate ID exists
-        if ( $this->booking_intent->affiliate_id ) {
-            $affiliate_id = $this->booking_intent->affiliate_id;
-            $client_id = $this->booking_intent->client_id;
-            
-            // Exit if the affiliate is not qualified to receive commission
-            if ( ! ( new Affiliate( $affiliate_id ) )->is_qualified( $this->booking_intent ) ) {
-                return;
+        // Make sure affiliate program enabled and affiliate ID exists
+        if ( function_exists( 'buddyc_referral' ) && ! empty( $this->booking_intent->affiliate_id ) ) {
+
+            // Build the new Referral
+            $referral = buddyc_referral( $this->booking_intent );
+
+            error_log("Printing referral");
+            error_log(print_r($referral, true));
+
+            // Make sure commission exists
+            if ( $referral->commission_amount > 0 ) {
+                // Create the affiliate payment
+                $this->create_payment( 'affiliate', $referral->affiliate_id, $referral->commission_amount );
             }
-            
-            // Update client user meta
-            update_user_meta( $client_id, 'buddyc_affiliate', $affiliate_id );
-            
-            // Get client fee
-            $client_fee = $this->booking_intent->total_fee;
-            
-            // Get affiliate percentage
-            $affiliate_percentage = buddyc_get_setting( 'affiliate', 'affiliate_percentage' );
-            
-            if ( $affiliate_percentage == 0 || $client_fee == 0  ) {
-                return;
-            }
-            
-            // Calculate affiliate fee
-            $affiliate_fee = ( $affiliate_percentage / 100 ) * $client_fee;
-            
-            // Exit if affiliate program not enabled
-            if ( ! class_exists( Affiliate::class ) ) {
-                return;
-            }
-            
-            // Create the affiliate payment
-            $this->create_payment( 'affiliate', $affiliate_id, $affiliate_fee );
         }
     }
     

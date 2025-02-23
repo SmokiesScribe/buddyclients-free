@@ -20,19 +20,35 @@ function buddyc_buddyboss_theme() {
 }
 
 /**
- * Outputs an icon or icon class.
+ * Outputs icon html.
  * 
  * @since 1.0.20
  * 
  * @param   string  $key    The identifying key of the icon.
- * @param   bool    $html   Optional. Outputs the full html if true,
- *                          outputs the class only if false. Defaults to true.
+ * @param   string  $color  Optional. The color of the icon.
+ *                          Accepts 'blue', 'black', 'green', 'red', or 'gray'.
  * 
- * @return  string  The full icon html or the icon classes.
+ * @return  string  The icon html.
  */
-function buddyc_icon( $key, $html = true ) {
-    $icon = new Icon( $key );
-    return $html ? $icon->html : $icon->class;
+function buddyc_icon( $key, $color = null ) {
+    $icon = new Icon( $key, $color );
+    return $icon->html;
+}
+
+/**
+ * Outputs a string of icon classes
+ * 
+ * @since 1.0.25
+ * 
+ * @param   string  $key    The identifying key of the icon.
+ * @param   string  $color  Optional. The color of the icon.
+ *                          Accepts 'blue', 'black', 'green', 'red', or 'gray'.
+ * 
+ * @return  string  The string of icon classes.
+ */
+function buddyc_icon_class( $key, $color = null ) {
+    $icon = new Icon( $key, $color );
+    return $icon->class;
 }
 
 /**

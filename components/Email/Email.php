@@ -179,7 +179,7 @@ class Email {
         
         // Check for admin
         if ( $args['to_email'] === 'admin' ) {
-            return __( 'Admin', 'buddyclients-free' );
+            return __( 'Admin', 'buddyclients' );
         }
         
         // No user id
@@ -213,7 +213,7 @@ class Email {
         // Get email from user id if no email specified
         } else if (isset($args['to_user_id'])) {
             $to_email = bp_core_get_user_email($args['to_user_id']);
-
+            
         } else {
             // Oops, neither is specified
         }
@@ -402,6 +402,10 @@ class Email {
      * @since 0.1.0
      */
     public static function cleanup_database() {
+        // Check transient
+        $cleaned = get_transient( 'buddyc_database_cleaned' );
+        if ( $cleaned ) return;
+
         // Initialize object handler
         self::init_object_handler();
         
@@ -418,6 +422,9 @@ class Email {
         
         // Delete expired email objects
         self::$object_handler->delete_objects( $expired_emails );
+
+        // Set transient
+        set_transient( 'buddyc_database_cleaned', true, DAY_IN_SECONDS );
     }
 
     /**

@@ -108,15 +108,33 @@ function buddycAddGeneratePasswordAndStrengthIndicator(wrapper, field) {
  * @returns {string} The generated strong password.
  */
 function buddycGenerateStrongPassword(length = 12) {
-  const chars = 'abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789!@#$%^&*()_+[]{}|;:,.<>?';
+  const lowerCase = 'abcdefghijklmnopqrstuvwxyz';
+  const upperCase = 'ABCDEFGHIJKLMNOPQRSTUVWXYZ';
+  const digits = '0123456789';
+  const symbols = '!@#$%^&*()_+[]{}|;:,.<>?';
+  
+  const allChars = lowerCase + upperCase + digits + symbols;
   let password = '';
 
-  do {
-    password = '';
-    for (let i = 0; i < length; i++) {
-      password += chars.charAt(Math.floor(Math.random() * chars.length));
-    }
-  } while (!buddycEvaluatePasswordStrength(password).class === 'strong');
+  // Ensure password meets criteria by selecting at least one of each type
+  password += lowerCase.charAt(Math.floor(Math.random() * lowerCase.length));
+  password += upperCase.charAt(Math.floor(Math.random() * upperCase.length));
+  password += digits.charAt(Math.floor(Math.random() * digits.length));
+  password += symbols.charAt(Math.floor(Math.random() * symbols.length));
+
+  // Fill in the rest of the password with random characters
+  for (let i = password.length; i < length; i++) {
+    password += allChars.charAt(Math.floor(Math.random() * allChars.length));
+  }
+
+  // Shuffle the password to randomize the order
+  password = password.split('').sort(() => Math.random() - 0.5).join('');
+
+  // Ensure password meets strong criteria
+  while (!buddycEvaluatePasswordStrength(password).class === 'strong') {
+    // Regenerate if it doesn't meet strength
+    password = buddycGenerateStrongPassword(length);
+  }
 
   return password;
 }

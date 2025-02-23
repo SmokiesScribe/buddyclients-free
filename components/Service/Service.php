@@ -161,7 +161,6 @@ class Service {
      */
     public $visible;
 
-     
     /**
      * Constructor method.
      *
@@ -170,13 +169,8 @@ class Service {
      * @param   int    $post_id The ID of the service post.
      */
     public function __construct( $post_id ) {
-        
-        // Get post
         $this->ID = $post_id;
-
-        // All post vars
         $this->get_var( $post_id );
-
     }
     
     /**
@@ -208,23 +202,46 @@ class Service {
      * 
      * @param   int     $post_id    The ID of the post.
      */
-     private function get_meta( $post_id ) {
-        
-        // Get all meta data
-        $meta_data = get_post_meta( $post_id );
-        
-        if ($meta_data) {
-            // Loop through the meta data
-            foreach ($meta_data as $key => $value) {
-                // Check if the value is serialized
-                $unserialized_value = maybe_unserialize($value[0]);
-        
-                // Assign the unserialized value to the object property
-                $this->{$key} = is_array($unserialized_value) ? $unserialized_value : $value[0];
+    private function get_meta( $post_id ) {
+        // Define the meta keys and their expected types (array or single value)
+        $meta_keys = [
+            'service_type'           => 'single',
+            'team_member_role'       => 'single',
+            'rate_value'             => 'single',
+            'rate_type'              => 'single',
+            'team_member_percentage' => 'single',
+            'manuscript_required'    => 'single',
+            'assigned_team_member'   => 'single',
+            'order'                  => 'single',
+            'file_required'          => 'single',
+            'hide'                   => 'single',
+            'dependencies_string'    => 'single',
+            'visible'                => 'single',
+            'adjustments'            => 'array',
+            'file_uploads'           => 'array',
+            'brief_type'             => 'array',
+            'dependency'             => 'array'
+        ];
+    
+        // Loop through each meta key and fetch its value
+        foreach ( $meta_keys as $meta_key => $type ) {
+            $value = get_post_meta($post_id, $meta_key, true); // Get only one value (not an array)
+    
+            if ( $value ) {
+                // Handle the value based on the expected type
+                if ( $type === 'array' ) {
+                    $unserialized_value = maybe_unserialize( $value );
+                    $this->{$meta_key} = is_array( $unserialized_value ) ? $unserialized_value : [$value];
+                } else {
+                    $unserialized_value = maybe_unserialize( $value );
+                    $this->{$meta_key} = is_array( $unserialized_value ) ? $unserialized_value : $value;
+                }
             }
         }
+    
         return $this;
-     }
+    }
+    
     
     /**
      * Validates the service.
@@ -241,14 +258,14 @@ class Service {
         // Check for team member role
         if ( ! buddyc_freelancer_mode() ) {
             if ( ! $this->exists( $this->team_member_role ) ) {
-                $error[] = __( 'Team Member Role is required.', 'buddyclients-free' );
+                $error[] = __( 'Team Member Role is required.', 'buddyclients' );
                 $valid = false;
             }
         }
         
         // Check for service type
         if ( ! $this->service_type || $this->service_type === '' ) {
-            $error[] = __( 'Service Type is required.', 'buddyclients-free' );
+            $error[] = __( 'Service Type is required.', 'buddyclients' );
             $valid = false;
         }
         
@@ -257,7 +274,7 @@ class Service {
         $error_message = buddyc_admin_icon('error') . ' ' . $error_string;
         
         // Check if service or service type is hidden
-        if ( $this->hide || ( new ServiceType( $this->service_type ) )->hide ) {
+        if ( $this->hide || ( buddyc_get_service_cache( 'service_type', $this->service_type ) )->hide ) {
             $visible = false;
         }
         
@@ -277,10 +294,11 @@ class Service {
      * Checks whether a post exists.
      * 
      * @since 0.1.0
+     * 
+     * @param int $post_id The ID of the service post.
      */
     function exists( $post_id ) {
         // Check if post ID is valid and published
         return ! empty( $post_id ) && get_post_status( $post_id ) === 'publish';
-    }
-      
+    }      
 }

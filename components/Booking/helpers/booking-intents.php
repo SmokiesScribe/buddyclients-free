@@ -1,6 +1,6 @@
 <?php
 if ( ! defined( 'ABSPATH' ) ) exit; // Exit if accessed directly
-use BuddyClients\Components\Booking\BookingIntent as BookingIntent;
+use BuddyClients\Components\Booking\BookingIntent;
 /**
  * Retrieves a BookingIntent object.
  * 
@@ -8,7 +8,7 @@ use BuddyClients\Components\Booking\BookingIntent as BookingIntent;
  * 
  * @param   int     $booking_intent_id  The ID of the BookingIntent to retrieve.
  */
-function buddyc_get_booking_intent( $booking_intent_id ) {
+function buddyc_get_booking_intent( int $booking_intent_id ) {
     return BookingIntent::get_booking_intent( $booking_intent_id );
 }
 

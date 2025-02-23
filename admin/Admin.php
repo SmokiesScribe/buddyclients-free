@@ -71,13 +71,13 @@ class Admin {
      * @since 1.0.0
      */
     private function define_hooks() {
-        add_action('admin_enqueue_scripts', [$this, 'enqueue_styles']);
-        add_action('admin_enqueue_scripts', [$this, 'enqueue_scripts']);
+        add_action('admin_init', [$this, 'enqueue_styles']);
+        add_action('admin_init', [$this, 'enqueue_scripts']);
         add_action('admin_enqueue_scripts', [$this, 'color_picker']);
         add_action('admin_menu', [$this, 'menu']);
         add_action('admin_menu', [$this, 'admin_pages']);
         add_action('init', [$this, 'page_manager']);
-        add_action('init', [$this, 'initialize_post_types']);
+        add_action('init', [$this, 'initialize_post_types'], 0); // register early on init
     }
     
     /**
@@ -176,7 +176,7 @@ class Admin {
      * @since 1.0.0
      */
     public function enqueue_scripts() {
-        $this->enqueue_asset( 'assets/js', 'loading.js' );
+        $this->enqueue_assets( 'assets/js', 'loading.js' );
         $this->enqueue_assets( 'assets/js' );
     }
     
@@ -191,27 +191,15 @@ class Admin {
     }
 
     /**
-     * Enqueues all assets.
+     * Enqueues a single asset or all assets in a directory if no file name.
      *
      * @since 1.0.0
      *
-     * @param string $dir The directory path where assets are located.
+     * @param   string  $dir        The directory path where assets are located.
+     * @param   string  $file_name  Optional. The file name of the single asset to load.
      */
-    private function enqueue_assets($dir) {
-        $asset_manager = new AssetManager( __FILE__, $dir );
-        $asset_manager->run();
-    }
-    
-    /**
-     * Enqueues a single asset.
-     *
-     * @since 1.0.0
-     *
-     * @param   string  $dir        The directory path in which the asset is located.
-     * @param   string  $file_name  The file name of the single asset to load.
-     */
-    private function enqueue_asset( $dir, $file_name ) {
-        $asset_manager = new AssetManager( BUDDYC_PLUGIN_FILE, $dir, $file_name );
+    private function enqueue_assets( $dir, $file_name = null ) {
+        $asset_manager = new AssetManager( __FILE__, $dir, $file_name, true );
         $asset_manager->run();
     }
 }

@@ -92,14 +92,13 @@ class AdminChart {
     /**
      * Defines the chart JavaScript.
      */
-    public function chart_script() {
+    private function chart_script() {
         ob_start();
         ?>
         document.addEventListener('DOMContentLoaded', function() {
             const ctx = document.getElementById('<?php echo esc_attr( $this->canvas_id ); ?>').getContext('2d');
             
             if (!ctx) {
-                console.error('Canvas context not found!');
                 return;
             }
             
@@ -124,6 +123,8 @@ class AdminChart {
                             }
                         },
                         y: {
+                            beginAtZero: true, // Ensures the y-axis starts at zero
+                            min: 0, // Explicitly set minimum y-value
                             title: {
                                 display: true,
                                 text: <?php echo wp_json_encode($this->labels['y_label'] ?? ''); ?>,
@@ -131,8 +132,15 @@ class AdminChart {
                                 font: {
                                     weight: 'bold' // Bold y-axis label
                                 }
+                            },
+                            <?php if ( $this->tooltip_format === 'currency' ) : ?>
+                            ticks: {
+                                callback: function(value) {
+                                    return '$' + value.toFixed(2); // Format y-axis values as currency
+                                }
                             }
-                        }
+                            <?php endif; ?>
+                        },
                     },
                     plugins: {
                         tooltip: {

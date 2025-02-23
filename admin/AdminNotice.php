@@ -17,7 +17,8 @@ class AdminNotice {
     private $message;
 
     /**
-     * The notice color.
+     * The notice color ('red', 'orange', 'blue', or 'green').
+     * Defaults to 'blue'.
      * 
      * @var string
      */
@@ -45,6 +46,35 @@ class AdminNotice {
     private $repair_link_text;
 
     /**
+     * Additional classes for the admin notice.
+     * 
+     * @var string
+     */
+    private $classes;
+
+    /**
+     * The icon key. 
+     * 
+     * @var string
+     */
+    private $icon_key;
+
+    /**
+     * The icon color. 
+     * 'blue', 'black', 'green', 'red', or 'gray'.
+     * 
+     * @var string
+     */
+    private $icon_color;
+
+    /**
+     * The priority for the hook.
+     * 
+     * @var int
+     */
+    private $priority;
+
+    /**
      * Constructor method.
      * 
      * @since 0.1.0
@@ -52,15 +82,20 @@ class AdminNotice {
      * @param   array   $args {
      *     An array of arguments for building the admin notice.
      * 
-     *     @type    string  $repair_link        The link to the repair page.
-     *     @type    string  $repair_link_text   Optional. The link text.
-     *                                          Defaults to 'Repair'.
-     *     @type    string  $message            The message to display in the notice.
-     *     @type    bool    $dismissable        Optional. Whether the notice should be dismissable.
-     *                                          Defaults to false.
-     *     @type    string  $color              Optional. The color of the notice.
-     *                                          Accepts 'green', 'blue', 'orange', 'red'.
-     *                                          Defaults to blue.
+     *     @string      $repair_link          The link to the repair page.
+     *     @string      $repair_link_text     Optional. The link text.
+     *                                        Defaults to 'Repair'.
+     *     @string      $message              The message to display in the notice.
+     *     @bool        $dismissable          Optional. Whether the notice should be dismissable.
+     *                                        Defaults to false.
+     *     @string      $color                Optional. The color of the notice.
+     *                                        Accepts 'green', 'blue', 'orange', 'red'.
+     *                                        Defaults to blue.
+     *     @string      $classes              Additional classes for the admin notice.
+     *     @int         $priority             Optional. The priority for the hook.
+     *                                        Defaults to 10.
+     *     @array       $display              Optional. An array of places to display the notice.
+     *                                        'sitewide', 'plugin', 'dashboard'
      * }
      */
     public function __construct( $args ) {
@@ -99,7 +134,65 @@ class AdminNotice {
         $this->repair_link_text = isset( $args['repair_link_text'] ) ? (array) $args['repair_link_text'] : ['Repair'];
         $this->dismissable = $args['dismissable'] ?? false;
         $this->color = $args['color'] ?? 'blue';
+        $this->classes = $args['classes'] ?? '';
+        $this->icon_color = $args['icon_color'] ?? $this->default_icon( 'color' );
+        $this->icon_key = $args['icon'] ?? $this->default_icon( 'key' );
+        $this->priority = $args['priority'] ?? 10;
+        $this->display = $args['display'] ?? $this->get_display();
     }
+
+    /**
+     * Builds the display options.
+     * 
+     * @since 1.0.25
+     */
+    private function get_display() {
+        switch ( $this->color ) {
+            case 'red':
+                return ['sitewide'];
+            case 'orange':
+                return ['plugin', 'dashboard'];
+            case 'blue':
+                return ['plugin'];
+            case 'green':
+                return ['plugin'];
+        }
+    }
+
+    /**
+     * Checks whether we're on a display page.
+     * 
+     * @since 1.0.25
+     */
+    private function display_match() {
+        $allowed_pages = $this->display;
+
+        if ( empty( $allowed_pages ) ) {
+            return false;
+        }
+
+        $screen = get_current_screen();
+        if ( ! $screen ) {
+            return false;
+        }
+
+        // Define admin page matches
+        $page_matches = [
+            'sitewide'   => true, // Always show if sitewide
+            'dashboard'  => ( 'dashboard' === $screen->id || 'toplevel_page_buddyc-dashboard' === $screen->id),
+            'plugin'     => ( false !== strpos( $screen->id, 'buddyc' ) ), // Adjust for your plugin slug
+        ];
+
+        // Check if the current page matches any allowed display setting
+        foreach ( $allowed_pages as $page ) {
+            if ( isset( $page_matches[ $page ] ) && $page_matches[ $page ] ) {
+                return true;
+            }
+        }
+
+        return false;
+    }
+
     
     /**
      * Retrieves repair link or links.
@@ -143,7 +236,7 @@ class AdminNotice {
      * @since 0.1.0
      */
     private function define_hooks() {
-        add_action('admin_notices', [$this, 'build']);
+        add_action('admin_notices', [$this, 'build'], $this->priority);
     }
 
     /**
@@ -152,21 +245,108 @@ class AdminNotice {
      * @since 0.1.0
      */
     public function build() {
-        // Define the notice class
-        $class = $this->notice_class( $this->color );
+        // Check if we're on a displayed page
+        if ( ! $this->display_match() ) {
+            return;
+        }
 
         // Build the repair link html
         $repair_link = $this->build_repair_link();
 
-        // Define the dismissable class
-        $dismissable_class = $this->dismissable ? ' is-dismissible' : '';
+        // Build the notice classes
+        $classes = $this->build_classes();
 
         // Build the notice
-        $notice = '<div class="notice notice-' . $class . $dismissable_class . '"><p>' . $this->message . ' ' . $repair_link . '</p></div>';
+        $notice = sprintf(
+            '<div class="%1$s">
+                <span class="dashicons dashicons-buddyclients-darkk buddyc-admin-notice-bc-icon"></span>
+                <div class="buddyc-admin-notice-content">
+                    <span class="buddyc-admin-notice-icon">%2$s</span>
+                    <div class="buddyc-admin-notice-message">
+                        %3$s
+                        <div class="buddyc-admin-notice-repair">%4$s</div>
+                    </div>
+                </div>
+            </div>',
+            $classes,
+            $this->build_icon(),
+            $this->message,
+            $repair_link
+        );
 
         // Escape and output notice
         $allowed_html = self::allowed_html();
         echo wp_kses( $notice, $allowed_html );
+    }
+
+    /**
+     * Builds the admin notice branded header.
+     * 
+     * @since 1.0.25
+     */
+    private function build_header() {
+        $content = '<span class="dashicons dashicons-buddyclients-dark"></span>';
+        $content .= '<span class="buddyc-admin-notice-header-title">BuddyClients</span>';
+        return $content;
+    }
+
+    /**
+     * Builds the icon html.
+     * 
+     * @since 1.0.25
+     */
+    private function build_icon() {
+        if ( ! empty( $this->icon_key ) ) {
+            return buddyc_icon( $this->icon_key, $this->icon_color );
+        }
+    }
+
+    /**
+     * Defines the default icon key for the notice color.
+     * 
+     * @since 1.0.25
+     * 
+     * @param   $type   string  The item to return ('key' or 'color').
+     */
+    private function default_icon( $type = 'key' ) {
+        $key = '';
+        $color = null;
+
+        switch ( $this->color ) {
+            case 'red':
+                $key = 'error';
+                $color = 'admin-red';
+                break;
+            case 'orange':
+                $key = 'error';
+                $color = 'admin-orange';
+                break;
+            case 'blue':
+                $key = 'info';
+                $color = 'admin-blue';
+                break;
+            case 'green':
+                $key = 'check';
+                $color = 'admin-green';
+                break;
+        }
+        return $type === 'key' ? $key : $color;
+    }
+
+    /**
+     * Defines classes for the admin notice.
+     * 
+     * @since 1.0.25
+     */
+    private function build_classes() {
+        $classes = [
+            'notice',
+            'buddyc-admin-notice',
+            $this->notice_class( $this->color ),
+            $this->dismissable ? 'is-dismissible' : '',
+            $this->classes
+        ];
+        return implode( ' ', $classes );
     }
 
     /**
@@ -176,14 +356,17 @@ class AdminNotice {
      */
     private static function allowed_html() {
         return [
-            'div'   => ['class' => true],
-            'p'     => [],
-            'a'     => ['href' => true, 'class' => true, 'target' => []],
-            'i'     => ['class' => []],
-            'ul'    => ['class' => []],
-            'li'    => ['class' => []],
-            'h2'    => ['class' => []],
-            'h4'    => ['class' => []],
+            'div'       => ['class' => true],
+            'p'         => [],
+            'a'         => ['href' => true, 'class' => true, 'target' => []],
+            'i'         => ['class' => []],
+            'ul'        => ['class' => []],
+            'li'        => ['class' => []],
+            'h2'        => ['class' => []],
+            'h3'        => ['class' => []],
+            'h4'        => ['class' => []],
+            'span'      => ['class' => []],
+            'strong'    => [],
         ];
     }
 
@@ -245,6 +428,7 @@ class AdminNotice {
      * @since 0.1.0
      * 
      * @param   string  $color  Optional. The color for the class.
+     *                          'red', 'orange', 'blue', or 'green'
      *                          Defaults to 'info'.
      */
     private function notice_class( $color = null ) {
@@ -254,6 +438,7 @@ class AdminNotice {
             'blue'      => 'info',
             'green'     => 'success'
         ];
-        return $classes[$color] ?? 'info';
+        $class_type = $classes[$color] ?? 'info';
+        return 'notice-' . $class_type;
     }
 }

@@ -40,43 +40,24 @@ class Cleanup {
      * @since 0.1.0
      */
     public function __construct() {
-        // Schedule daily run
-        $this->daily_cleanup();
-        
-        // Define hooks
-        $this->define_hooks();
+        $this->run_cleanup();
     }
 
     /**
-     * Defines hooks.
+     * Runs the cleanup processes.
      * 
-     * @since 0.1.0
+     * @since 1.0.25
      */
-    public function define_hooks() {
-        // Hook cleanup method to scheduled event
-        add_action('cleanup_event', [$this, 'run_daily_cleanup']);
-    }
-    
-    /**
-     * Schedule cleanup event.
-     *
-     * @since 0.1.0
-     */
-    public function daily_cleanup() {
-        // FILE 63 - Temporary for testing
-        if ( ! wp_next_scheduled('cleanup_event') ) {
-            wp_schedule_event(time(), 'daily', 'cleanup_event');
-        }
-    }
+    private function run_cleanup() {
+        // Check transient
+        $cleaned = get_transient( 'buddyc_cleanup_complete' );
+        if ( $cleaned ) return;
 
-    /**
-     * Performs all cleanup tasks.
-     *
-     * @since 0.1.0
-     */
-    public function run_daily_cleanup() {
         $this->cleanup_email_log();
         $this->cleanup_temp_files();
+
+        // Set transient
+        set_transient( 'buddyc_cleanup_complete', true, DAY_IN_SECONDS );
     }
     
     /**

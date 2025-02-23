@@ -468,7 +468,7 @@ class FormField {
             'teeny' => true, // Use the "teeny" mode, which is a simplified version of the editor
             'quicktags' => false,
             'tinymce' => array(
-                'toolbar1' => __( 'bold italic underline | undo redo', 'buddyclients-free' ), // Customize the buttons in the first row
+                'toolbar1' => __( 'bold italic underline | undo redo', 'buddyclients' ), // Customize the buttons in the first row
                 'toolbar2' => '', // Customize the buttons in the second row (empty for none)
             ),
         );
@@ -622,7 +622,7 @@ class FormField {
         $field .=       '<p id="file-upload-note"></p>';
         $field .=       '<div class="dropzone document-dropzone dz-clickable" id="media-uploader">';
         $field .=           '<div class="dz-default dz-message">';
-        $field .=           '<button class="dz-button buddyc-file-upload-button" type="button"><strong>' . __( 'Select File', 'buddyclients-free' ) . '</strong></button>';
+        $field .=           '<button class="dz-button buddyc-file-upload-button" type="button"><strong>' . __( 'Select File', 'buddyclients' ) . '</strong></button>';
         $field .=       '</div>';
         $field .=   '</div>';
         $field .=   '<input type="file" class="opacity-0 ' . $this->field_classes . '" ' . $this->field_atts_string . '>';
@@ -641,13 +641,10 @@ class FormField {
      * 
      * @since 0.1.0
      */
-    private function submit_field() {
-
-        // Form container with additional classes and inline styles
-        $field = '<div class="form-group ' . $this->container_classes . '" style="' . $this->style . '">';
+    private function submit_field() {        
 
         // Initialize
-        $data_atts = ' ';
+        $data_atts = '';
 
         // Check if reCAPTCHA is enabled
         if ( buddyc_recaptcha_enabled() ) {
@@ -655,18 +652,19 @@ class FormField {
             if ( ! $this->manual_recaptcha ) {
                 $this->field_classes .= empty( $this->field_classes ) ? 'g-recaptcha' : ' g-recaptcha';
             }
-            $data_atts = ' data-sitekey="' . esc_attr( $site_key ) . '"';
+            $data_atts = 'data-sitekey="' . esc_attr( $site_key ) . '"';
         }
 
         // Generate submit field
-        $field .= '<button class="' . $this->field_classes . '"';
-        $field .= $data_atts;
-        $field .= 'data-action="submit">Submit</button>';
-
-        // Close the div container
-        $field .= '</div>';
-        
-        return $field;
+        return sprintf(
+            '<div class="form-group %1$s">
+                <button class="buddyc-form-submit-btn %2$s" %3$s data-action="submit">%4$s</button>
+            </div>',
+            $this->container_classes,
+            $this->field_classes,
+            $data_atts,
+            $this->value
+        );
     }
     
     /**
@@ -713,11 +711,11 @@ class FormField {
      */
     private function signature_field() {
         $field = '<div class="form-group buddyc-signature-container ' . $this->container_classes . '">';
-        $field .= '<legend>' . __( 'Sign Here', 'buddyclients-free' ) . '</legend>';
-        $field .= '<canvas id="buddyc-signature-canvas" width="600" height="200" style="border-radius: 5px; border: 1px solid #D4D6D8;" data-signature="signature-data"></canvas><br>';
-        $field .= '<button type="button" id="buddyc-signature-clear-button">' . __( 'Clear Signature', 'buddyclients-free' ) . '</button>';
+        $field .= '<legend>' . __( 'Sign Here', 'buddyclients' ) . '</legend>';
+        $field .= '<canvas class="buddyc-signature-canvas" width="600" height="200" data-signature="signature-data"></canvas><br>';
+        $field .= '<button type="button" class="buddyc-signature-clear-button">' . __( 'Clear Signature', 'buddyclients' ) . '</button>';
         
-        $field .= '<input type="hidden" id="buddyc-signature-data" name="buddyc-signature-data" value="">';
+        $field .= '<input type="hidden" class="buddyc-signature-data" name="buddyc-signature-data" value="">';
         $field .= '</div>';
         return $field;
     }

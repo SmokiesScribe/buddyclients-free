@@ -2,10 +2,12 @@
 namespace BuddyClients\Admin;
 if ( ! defined( 'ABSPATH' ) ) exit; // Exit if accessed directly
 
+use BuddyClients\Admin\Settings;
+
 /**
- * Settings page.
- *
- * Creates single settings page.
+ * Creates a single admin settings page.
+ * 
+ * @since 0.1.0
  */
 class SettingsPage {
     
@@ -77,11 +79,9 @@ class SettingsPage {
         $this->title = $args['title'] ?? 'Settings';
         $this->name = $this->build_settings_name();
         
-        // Get settings callback
-        $callback = Settings::get_callback( $args['key'] );
-        if ( is_callable( $callback ) ) {
-            $this->data = call_user_func( $callback );
-        }
+        // Get settings data
+        $settings = new Settings( $args['key'] );
+        $this->data = $settings->get_data();
         
         // Define hooks
         $this->define_hooks();
@@ -161,7 +161,7 @@ class SettingsPage {
             <form method="post" action="options.php">
                 <?php settings_fields( $this->name . '_group' ); ?>
                 <?php do_settings_sections( $this->name ); ?>
-                <?php submit_button( __('Save Settings', 'buddyclients-free') ); ?>
+                <?php submit_button( __('Save Settings', 'buddyclients') ); ?>
             </form>
         </div>
         <?php
@@ -192,7 +192,7 @@ class SettingsPage {
             }
         // No settings data available
         } else {
-            echo wp_kses_post( __('Not available.', 'buddyclients-free') );
+            echo wp_kses_post( __('Not available.', 'buddyclients') );
         }
     }
     
@@ -286,24 +286,6 @@ class SettingsPage {
     }
     
     /**
-     * Retrieves setting value.
-     * 
-     * @since 0.1.0
-     */
-    public function get_setting_value($settings_key, $field_key) {
-        $data = $this->data;
-        foreach ($data as $section_key => $section_data) {
-            foreach ($section_data['fields'] as $field_id => $field_data) {
-                if ($field_id === $field_key) {
-                    $curr_settings = get_option('buddyc_' . $settings_key . '_settings');
-                    $field_value = $curr_settings[$field_id] ?? $field_data['default'] ?? '';
-                    return $field_value;
-                }
-            }
-        }
-    }
-    
-    /**
      * Displays content directly.
      *
      * @since 0.1.0
@@ -359,7 +341,7 @@ class SettingsPage {
             <table class="buddyc-checkbox-table">
                 <tbody>
                     <?php foreach ($field_data['options'] as $option_key => $option_label) : 
-                        $required = in_array($option_key, $field_data['required_options']);
+                        $required = in_array($option_key, ( $field_data['required_options'] ?? [] ));
                         $checked = is_array($value) && in_array($option_key, $value) || $required ? 'checked' : ''; ?>
                         <tr class="<?php echo $checked ? 'checked' : ''; ?> <?php echo $required ? 'required' : ''; ?>">
                             <td>
@@ -372,7 +354,7 @@ class SettingsPage {
                             <td>
                                 <p class="description">
                                     <?php echo $required ? 'Required. ' : ''; ?>
-                                    <?php echo isset($field_data['descriptions'][$option_key]) ? esc_html($field_data['descriptions'][$option_key]) : ''; ?>
+                                    <?php echo isset($field_data['descriptions'][$option_key]) ? $field_data['descriptions'][$option_key] : ''; ?>
                                 </p>
                             </td>
                         </tr>
@@ -572,18 +554,18 @@ class SettingsPage {
             $selected_page_permalink = ($value) ? get_permalink($value) : '#';
             
             // Create view page button
-            $button = '<a href="' . esc_url($selected_page_permalink) . '" target="_blank"><button type="button" class="button button-secondary">' . __('View Page', 'buddyclients-free') . '</button></a>';
+            $button = '<a href="' . esc_url($selected_page_permalink) . '" target="_blank"><button type="button" class="button button-secondary">' . __('View Page', 'buddyclients') . '</button></a>';
         } else {
             
             // Show create button
-            $button = '<button onclick="buddycbuddycbuddycbuddycCreateNewPage({
+            $button = '<button onclick="buddycCreateNewPage({
                 page_key: \'' . esc_js($field_id) . '\',
                 settings_key: \'' . esc_js('pages') . '\',
                 post_title: \'' . esc_js($field_data['post_title']) . '\',
                 post_content: \'' . esc_js($field_data['post_content']) . '\',
                 post_type: \'' . esc_js('page') . '\',
                 post_status: \'' . esc_js('publish') . '\'
-            });" type="button" class="button button-secondary">' . __('Create Page', 'buddyclients-free') . '</button>';
+            });" type="button" class="button button-secondary">' . __('Create Page', 'buddyclients') . '</button>';
         }
 
         // Escape the entire button HTML
@@ -624,7 +606,7 @@ class SettingsPage {
             '<a href="' . get_permalink($value) . '" target="_blank">
                 <button type="button" class="button button-primary">' . 
                     /* translators: %s: label of the field */
-                    sprintf( esc_html__('View Active %s', 'buddyclients-free'), $field_data['label'] ) . 
+                    sprintf( esc_html__('View Active %s', 'buddyclients'), $field_data['label'] ) . 
                 '</button>
             </a>' : '';
         }
@@ -635,7 +617,7 @@ class SettingsPage {
             $edit_button = '<a href="' . get_edit_post_link($draft_id) . '">
                 <button type="button" class="button button-secondary">' . 
                     /* translators: %s: label of the field */
-                    sprintf( esc_html__('Edit %s Draft', 'buddyclients-free'), $field_data['label'] ) . 
+                    sprintf( esc_html__('Edit %s Draft', 'buddyclients'), $field_data['label'] ) . 
                 '</button>
             </a>';
         } else {
@@ -643,7 +625,7 @@ class SettingsPage {
             $create_nonce = wp_create_nonce( 'buddyc_create_new_page_nonce' );
             
             // Build create page button
-            $create_button = '<button onclick="buddycbuddycbuddycbuddycCreateNewPage({
+            $create_button = '<button onclick="buddycCreateNewPage({
                 page_key: \'' . esc_js($field_id) . '\',
                 settings_key: \'' . esc_js('legal') . '\',
                 post_title: \'' . esc_js($field_data['label']) . '\',
@@ -653,7 +635,7 @@ class SettingsPage {
                 nonce: \'' . esc_js($create_nonce) . '\'
             });" type="button" class="button button-secondary">' . 
                 /* translators: %s: label of the field */
-                sprintf( esc_html__('Create New %s', 'buddyclients-free'), esc_html($field_data['label'])) . 
+                sprintf( esc_html__('Create New %s', 'buddyclients'), esc_html($field_data['label'])) . 
             '</button>';
         }
         
@@ -675,7 +657,7 @@ class SettingsPage {
                     $version_trans_message = sprintf(
                         /* translators: %s: human-readable deadline */
                         /* translators: %s: label of the field */
-                        esc_html__('Users have until %1$s to accept the new %2$s.', 'buddyclients-free'),
+                        esc_html__('Users have until %1$s to accept the new %2$s.', 'buddyclients'),
                         $human_readable_deadline,
                         $field_data['label']
                     );
@@ -684,7 +666,7 @@ class SettingsPage {
             } else {
                 $version_trans_message = sprintf(
                     /* translators: %s: label of the field */
-                    esc_html__('Users have forever to accept the new %s.', 'buddyclients-free'),
+                    esc_html__('Users have forever to accept the new %s.', 'buddyclients'),
                     $field_data['label']
                 );
             }

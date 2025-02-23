@@ -25,8 +25,11 @@ function buddyc_profile_link( $args = null ) {
  * 
  * @since 0.1.0
  * 
- * @param   string  $key   The profile extension key.
+ * @param   string     $slug        The profile tab slug.
+ * @param   int        $user_id     Optional. The ID of the user.
+ *                                  Defaults to current user.
+ * @return  string      The url to the profile extension tab.
  */
-function buddyc_profile_ext_link( $key ) {
-    return ProfileExtension::link( $key );
+function buddyc_profile_ext_link( $key, $user_id = null ) {
+    return ProfileExtension::link( $key, $user_id );
 }

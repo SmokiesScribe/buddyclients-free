@@ -7,11 +7,14 @@ use stdClass;
 
 use BuddyClients\Components\Booking\BookingIntent;
 
+use BuddyClients\Components\Contact\Lead\LeadStatusForm;
+
 use BuddyClients\Components\Booking\BookedService\{
     BookedService,
     PaymentStatusForm,
     ServiceStatusForm,
-    ReassignForm
+    ReassignForm,
+    Payment
 };
 
 use BuddyClients\Includes\PDF;
@@ -115,7 +118,7 @@ class AdminTableItem extends AdminTable {
             $url = 'https://dashboard.stripe.com/payments/' . $payment_id;
             $icon = '<i class="fa-solid fa-arrow-up-right-from-square"></i>';
             /* translators: %s: Stripe, the name of the payment processor */
-            $title = sprintf( __( 'View transaction on %s', 'buddyclients-free' ), 'Stripe' );
+            $title = sprintf( __( 'View transaction on %s', 'buddyclients' ), 'Stripe' );
             $link = '<span class="buddyc-update-booking-icon"><a href="' . esc_url( $url ) . '" target="_blank" title="' . $title . '">' . $icon . '</a></span>';
             return $link;
         }
@@ -193,7 +196,7 @@ class AdminTableItem extends AdminTable {
             
         // Generate download link
         if ( $pdf_link ) {
-            $download_link = '<a href="' . esc_url( $pdf_link ) . '" download><i class="fa-solid fa-download"></i> ' . __( 'Download PDF', 'buddyclients-free' ) . '</a>';
+            $download_link = '<a href="' . esc_url( $pdf_link ) . '" download><i class="fa-solid fa-download"></i> ' . __( 'Download PDF', 'buddyclients' ) . '</a>';
             return $download_link;
         }
     }
@@ -239,9 +242,9 @@ class AdminTableItem extends AdminTable {
         
         // Define agreement types
         $types = [
-            'team'     => __( 'Team', 'buddyclients-free' ),
-            'faculty'  => __( 'Faculty', 'buddyclients-free' ),
-            'affiliate'=> __( 'Affiliate', 'buddyclients-free' )
+            'team'     => __( 'Team', 'buddyclients' ),
+            'faculty'  => __( 'Faculty', 'buddyclients' ),
+            'affiliate'=> __( 'Affiliate', 'buddyclients' )
         ];
         
         // Loop through types
@@ -318,7 +321,7 @@ class AdminTableItem extends AdminTable {
         // Make sure the user has sessions
         if ( $value && is_array( $value ) && ! empty( $value ) ) {
             $url = admin_url( '/admin.php?page=buddyc-sessions&faculty_ids_filter=' . $item_id );
-            return '<a href="' . esc_url( $url ) . '">' . __( 'Sessions', 'buddyclients-free' ) . '</a>';
+            return '<a href="' . esc_url( $url ) . '">' . __( 'Sessions', 'buddyclients' ) . '</a>';
         }
     }
     
@@ -423,18 +426,18 @@ class AdminTableItem extends AdminTable {
             return '';
         }
 
-        // Build delete url
+        // Build update url
         $update_url = admin_url( 'admin.php?page=buddyc-dashboard&action=update_booking&booking_id=' . $item_id . '&booking_property=status&booking_value=' . $values[$value] );
 
         // Define confirmation message
         $message = sprintf(
             /* translators: %s: the new status */
-            __( 'Are you sure you want to update this booking to %s?', 'buddyclients-free' ),
+            __( 'Are you sure you want to update this booking to %s?', 'buddyclients' ),
             strtoupper( $values[$value] )
         );
 
         // Output button
-        $title = __( 'Edit status', 'buddyclients-free' );
+        $title = __( 'Edit status', 'buddyclients' );
         $edit_icon = buddyc_icon( 'edit' );
         $update_button = '<span class="buddyc-update-booking-icon"><a href="#" title="' . $title . '" onclick="return buddycConfirmAction(\'' . esc_url( $update_url ) . '\', \'' . esc_js( $message ) . '\');">' . $edit_icon . '</a></span>';
 
@@ -469,10 +472,10 @@ class AdminTableItem extends AdminTable {
         $delete_url = admin_url( 'admin.php?page=buddyc-dashboard&action=delete_booking&booking_id=' . $value );
 
         // Define confirmation message
-        $message = __( 'Are you sure you want to delete this booking? This action cannot be undone.', 'buddyclients-free' );
+        $message = __( 'Are you sure you want to delete this booking? This action cannot be undone.', 'buddyclients' );
 
         // Output button
-        $title = __( 'Delete booking', 'buddyclients-free' );
+        $title = __( 'Delete booking', 'buddyclients' );
         $delete_button = '<span class="buddyc-update-booking-icon"><a href="#" title="' . $title . '" onclick="return buddycConfirmAction(\'' . esc_url( $delete_url ) . '\', \'' . esc_js( $message ) . '\');"><i class="fa-solid fa-trash"></i></a></span>';
 
         return $delete_button;
@@ -628,13 +631,13 @@ class AdminTableItem extends AdminTable {
         $status = '';
         switch ( $value ) {
             case 'paid':
-                $status = __( 'Paid', 'buddyclients-free' );
+                $status = __( 'Paid', 'buddyclients' );
                 break;
             case 'pending':
-                $status = __( 'Pending', 'buddyclients-free' );
+                $status = __( 'Pending', 'buddyclients' );
                 break;
             case 'failed':
-                $status = __( 'Failed', 'buddyclients-free' );
+                $status = __( 'Failed', 'buddyclients' );
                 break;
         }
         return $status;
@@ -646,7 +649,7 @@ class AdminTableItem extends AdminTable {
      * @since 0.1.0
      */
     protected static function link( $property, $value ) {
-        return '<a href="' . esc_url( $value ) . '">' . __( 'View', 'buddyclients-free' ) . '</a>';
+        return '<a href="' . esc_url( $value ) . '">' . __( 'View', 'buddyclients' ) . '</a>';
     }
     
     /**
@@ -730,5 +733,94 @@ class AdminTableItem extends AdminTable {
             }            
         }
         return $items;
+    }
+
+    /**
+     * Outputs Lead status.
+     * 
+     * @since 1.0.24
+     */
+    protected static function lead_status( $property, $value, $item_id ) {
+        $statuses = [
+            'active'    => [
+                'label' => __( 'Active', 'buddyclients' ),
+                'icon'  => 'ready'
+            ],
+            'won'       => [
+                'label' => __( 'Won', 'buddyclients' ),
+                'icon'  => 'check'
+            ],
+            'lost'      => [
+                'label' => __( 'Lost', 'buddyclients' ),
+                'icon'  => 'x'
+            ],
+            'spam'      => [
+                'label' => __( 'Spam', 'buddyclients' ),
+                'icon'  => 'x'
+            ],
+        ];
+
+        // Exit if no status
+        if( empty( $value ) ) {
+            return;
+        }
+
+        // Edit ID
+        $div_id = 'buddyc-lead-status-' . $item_id;
+
+        // Hover title
+        $title = __( 'Edit status', 'buddyclients' );
+
+        // Icon
+        $content = buddyc_icon( $statuses[$value]['icon'] );
+
+        // Open edit link
+        $content .= '<a href="#" title="' . esc_attr($title) . '" onclick="buddycShowElement(\'' . esc_js($div_id) . '\')">';
+
+        // Status label
+        $content .= isset( $statuses[$value] ) ? $statuses[$value]['label'] : uc_first( $value );
+
+        // Close link
+        $content .= '</a>';
+
+        // Update status form
+        $content .= '<div id="' . esc_attr( $div_id ) . '" class="buddyc-hidden">';
+        $content .= self::lead_status_form( $property, $value, $item_id );
+        $content .= '</div>';
+
+        return $content;
+    }
+
+    /**
+     * Generates Lead status form.
+     * 
+     * @since 1.0.24
+     */
+    protected static function lead_status_form( $property, $value, $item_id ) {
+        if ( class_exists( LeadStatusForm::class ) ) {
+            $values = ['status' => $value, 'lead_id' => $item_id];
+            return ( new LeadStatusForm )->build( $values );
+        }
+    }
+
+    /**
+     * Outputs the status of the Lead auto email.
+     * 
+     * @since 1.0.24
+     */
+    protected static function lead_auto_email( $property, $value, $item_id ) {
+        return $value ? buddyc_icon( 'check' ) : buddyc_icon( 'x' );
+    }
+
+    /**
+     * Outputs the user's payment preference.
+     * 
+     * @since 1.0.25
+     */
+    protected static function legal_payment_preference( $property, $value, $item_id ) {
+        $user_id = $value;
+        $payment = Payment::get_payment( $item_id );
+        $type = $payment->type;
+        return buddyc_get_user_payment_method_human( $user_id, $type );
     }
 }

@@ -58,13 +58,6 @@ class Form {
     public function echo() {
         $form = $this->build();
         $allowed_html = buddyc_allowed_html_form();
-        if ( ! isset( $allowed_html['button'] ) ) {
-            $allowed_html['button'] = [];
-        }
-        $allowed_html['button']['data-sitekey'] = [];
-        $allowed_html['button']['data-callback'] = [];
-        $allowed_html['button']['data-action'] = [];
-        
         echo wp_kses( $form, $allowed_html );
         return;
     }
@@ -85,6 +78,9 @@ class Form {
         
         // Form title
         $form .= ( isset( $this->args['title'] ) && $this->args['title'] ) ? '<h3>' . $this->args['title'] . '</h3>' : '';
+
+        // Form subtitle
+        $form .= ( isset( $this->args['subtitle'] ) && $this->args['subtitle'] ) ? '<p>' . $this->args['subtitle'] . '</p>' : '';
         
         // Call form fields method
         if ( is_callable( $this->args['fields_callback'] ) ) {
@@ -247,6 +243,7 @@ class Form {
     private function recaptcha_response_field() {
         $args = [
             'key'           => 'recaptcha_response',
+            'id'            => 'recaptcha_response_' . $this->key,
             'type'          => 'hidden',
         ];
         

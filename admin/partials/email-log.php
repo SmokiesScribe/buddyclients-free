@@ -14,8 +14,8 @@ function buddyc_email_log_content() {
     
     // Define headers
     $headers = [
-        __( 'Details', 'buddyclients-free' ),
-        __( 'Email', 'buddyclients-free' )
+        __( 'Details', 'buddyclients' ),
+        __( 'Email', 'buddyclients' )
     ];
     
     // Define columns
@@ -29,7 +29,7 @@ function buddyc_email_log_content() {
         'headings'      => $headers,
         'columns'       => $columns,
         'items'         => $emails,
-        'title'         => __( 'Email Log', 'buddyclients-free' ),
+        'title'         => __( 'Email Log', 'buddyclients' ),
     ];
     
     new AdminTable( $args );
@@ -55,13 +55,13 @@ function buddyc_email_log_admin_notice() {
         // Format setting value
         $email_setting = is_numeric( $email_setting )
             /* translators: %d: the numnber of days emails are retained */
-            ? sprintf( __( 'for %d days', 'buddyclients-free' ), $email_setting ) 
-            : __( 'forever', 'buddyclients-free' );
+            ? sprintf( __( 'for %d days', 'buddyclients' ), $email_setting ) 
+            : __( 'forever', 'buddyclients' );
             
         // Build note
         $message = sprintf(
             /* translators: %s: the amount of time emails are stored (e.g. for 90 days or forever) */
-            __('Emails are currently stored %s.', 'buddyclients-free'),
+            __('Emails are currently stored %s.', 'buddyclients'),
             $email_setting
         );
         
@@ -69,7 +69,7 @@ function buddyc_email_log_admin_notice() {
         $notice_args = [
             'repair_link'       => ['/admin.php?page=buddyc-email-settings'],
             'dismissable'       => true,
-            'repair_link_text'  => [__( 'Change setting.', 'buddyclients-free' )],
+            'repair_link_text'  => [__( 'Change setting.', 'buddyclients' )],
             'message'           => $message,
             'color'             => 'blue'
         ];

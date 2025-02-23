@@ -196,14 +196,19 @@ class BookingIntent {
         
         // Add object to database
         $this->ID = self::$object_handler->new_object( $this );
+
+        /**
+         * Fires when user ID passed to checkout.
+         * 
+         * @since 0.1.0
+         * 
+         * @param   int $user_id            The ID of the user.
+         * @param   int $booking_intent_id  The ID of the BookingIntent.
+         */
+        do_action( 'buddyc_user_checkout', $this->client_id, $this->ID );
         
         // Schedule abandoned booking check
         $this->schedule_abandoned_booking_check();
-        
-        // Succeed if previously paid
-        if ( $this->previously_paid ) {
-            new SuccessfulBooking( $this->ID );
-        }
     }
     
     /**
@@ -241,20 +246,9 @@ class BookingIntent {
      * @since 0.4.3
      */
     private function get_affiliate_id() {
-        @session_start();
-        
-        // Initialize
-        $affiliate_id = null;
-        
-        // Check for affilaite ID in user meta
-        $affiliate_id = get_user_meta( $this->client_id, 'buddyc_affiliate', true );
-        
-        // Check for affiliate ID in session
-        if ( ! $affiliate_id && isset( $_SESSION['buddyc_affiliate'] ) ) {
-            $affiliate_id = isset( $_SESSION['buddyc_affiliate'] ) ? sanitize_text_field( wp_unslash( $_SESSION['buddyc_affiliate'] ) ) : null;
+        if ( function_exists( 'buddyc_get_affiliate_id' ) ) {
+            return buddyc_get_affiliate_id();
         }
-        
-        return $affiliate_id;
     }
     
     /**
@@ -270,21 +264,11 @@ class BookingIntent {
         $this->line_items           = serialize(json_decode(stripslashes( $this->post['hidden-line-items'] )));
         $this->service_names        = $this->service_names();
         $this->sales_id             = $this->post['sales-id'] ?? null;
-        $this->previously_paid      = $this->post['previously-paid'] ?? null;
+        $this->previously_paid      = isset( $this->post['previously-paid'] ) && $this->post['previously-paid'] === 'paid';
         $this->checkout_link        = null;
         $this->payment_intent_id    = 0;
         $this->terms_version        = isset( $this->post['terms-checkbox'] ) ? $this->post['terms-checkbox'][0] : null;
         $this->terms_pdf            = $this->generate_terms_pdf( $this->terms_version );
-        
-        /**
-         * Fires when user ID passed to checkout.
-         * 
-         * @since 0.1.0
-         * 
-         * @param   int $user_id            The ID of the user.
-         * @param   int $booking_intent_id  The ID of the BookingIntent.
-         */
-        do_action('buddyc_user_checkout', $this->client_id, $this->ID);
         
         return $this;
     }
@@ -416,7 +400,7 @@ class BookingIntent {
                 'items'         => [
                     sprintf(
                         /* translators: %s: the url of the site */
-                        __('Accepted via checkbox on %s', 'buddyclients-free'),
+                        __('Accepted via checkbox on %s', 'buddyclients'),
                         site_url()
                     ),
                     gmdate('F d, Y')
@@ -748,6 +732,7 @@ class BookingIntent {
      * @since 0.2.4
      * 
      * @param   int     $booking_intent_id  The ID of the BookingIntent to delete.
+     * @return  bool    True on success, false on failure.
      */
     public static function delete_booking_intent( $booking_intent_id ) {
         // Initialize object handler
@@ -763,6 +748,6 @@ class BookingIntent {
         buddyc_delete_booking_intent_booked_services( $booking_intent_id );
         
         // Delete object
-        self::$object_handler->delete_object( $booking_intent_id );
+        return self::$object_handler->delete_object( $booking_intent_id );
     }
 }

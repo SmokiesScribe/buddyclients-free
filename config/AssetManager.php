@@ -40,6 +40,14 @@ class AssetManager {
 	protected $source;
 
 	/**
+	 * Whether we are enqueuing assets for the admin area.
+	 * Defaults to false.
+	 * 
+	 * @var bool
+	 */
+	protected $admin;
+
+	/**
 	 * Constructor method.
 	 *
 	 * @since 0.1.0
@@ -47,19 +55,23 @@ class AssetManager {
 	 * @param   string  $source_file    The class file name with extension.
 	 * @param   string  $dir            The directory partial path.
 	 * @param   string  $file           Optional. The specific file to load.
+     * @param   bool    $admin  		Optional. Whether we are enqueuing admin scripts.
+     *                          		Defaults to false.
 	 */
-	public function __construct( $source_file, $dir, $file = null ) {
+	public function __construct( $source_file, $dir, $file = null, $admin = false ) {
 	    
         // Define variables
 		$this->dir_path = plugin_dir_path( $source_file ) . $dir;
 		$this->dir_url = plugin_dir_url( $source_file ) . $dir;
-		$this->file = $file ?? null;		
+		$this->file = $file ?? null;
+		$this->admin = $admin;
 		
 		// Get source file name for handle
         $this->source = pathinfo( basename( $source_file ), PATHINFO_FILENAME );
 
-		// Load CSS variables if necessary
+		// Load CSS variables to front end and admin
 		add_action( 'wp_enqueue_scripts', [$this, 'load_variables'] );
+		add_action( 'admin_enqueue_scripts', [$this, 'load_variables'] );
 	}
 
 	/**
@@ -81,6 +93,9 @@ class AssetManager {
 				'default-border'	=> 'solid 1px #e7e9ec',
 				'primary-overlay'	=> buddyc_hex_to_rgba( buddyc_color( 'primary' ), 0.6 ),
 				'accent-overlay'	=> buddyc_hex_to_rgba( buddyc_color( 'accent' ), 0.6 ),
+				'brand-blue'		=> '#037AAD',
+				'brand-blue-hover'  => '#005f8c',
+				'brand-green'		=> '#067F06',
 			];
 
 			/**
@@ -188,6 +203,11 @@ class AssetManager {
 		if ( ! $this->verify_file( $file, $file_name, $extension ) ) {
 			return;
 		}
+
+		// Make sure the file matches admin or no
+		if ( ! $this->admin_match( $file_name ) ) {
+			return;
+		}
 	    
 	    // Build script handle
         $handle = $this->build_handle( $file_name );
@@ -204,6 +224,36 @@ class AssetManager {
 				$this->enqueue_css( $handle, $file_url, $file_name );
 				break;
 			}
+	}
+
+	/**
+	 * Checks whether the file is meant to load in the admin area
+	 * and whether we are currently loading admin files.
+	 * 
+	 * @since 1.0.25
+	 * 
+	 * @param	string	$file_name	The name of the file to check.
+	 * @return	bool	True if the file matches requirements, false if not.
+	 */
+	private function admin_match( $file_name ) {
+		// Check whether the file name includes 'admin'
+		$is_admin_file = strpos( $file_name, 'admin' ) !== false;
+
+		// Check whether we're in the admin dir
+		$is_admin_dir = strpos( $this->dir_path, 'buddyclients/admin/assets' );
+
+		// Admin file on front end
+		if ( ! $this->admin && ( $is_admin_file || $is_admin_dir ) ) {
+			return false;
+		}
+
+		// Front end file on admin
+		if ( $this->admin && ( ! $is_admin_file && ! $is_admin_dir ) ) {
+			return false;
+		}
+
+		// Five by five
+		return true;
 	}
 
 	/**
@@ -274,30 +324,40 @@ class AssetManager {
 	 * Defines localization data.
 	 * 
 	 * @since 1.0.15
+	 * 
+	 * @param	string	$file_name	The name of the script file.
 	 */
-	private static function localization_info() {
-		$localization_info = [
-			'email-entered' 		=> [],
-			'help-popup'			=> [],
-			'create-account'		=> [],
-			'booking-form'			=> [],
-			'service-fields'		=> [],
-			'create-project-fields'	=> [],
-			'search'				=> [],
-			'create-page'			=> [],
-			'password-field'		=> ['eyeClass' => buddyc_icon('eye', false),
-										'eyeSlashClass' => buddyc_icon('eye-slash', false)],
-			'recaptcha'				=> ['siteKey' => buddyc_recaptcha_site_key()],
-		];
+	private static function localization_info( $file_name ) {
 
-	 	/**
-		 * Filters the script localization info.
-		 * 
-		 * @since 1.0.15
-		 */
-		$localization_info = apply_filters( 'buddyc_script_localization', $localization_info );		
-
-		return $localization_info;
+		switch ( $file_name ) {
+			case 'password-field':
+				return [
+					'eyeClass' => buddyc_icon_class( 'eye' ),
+					'eyeSlashClass' => buddyc_icon_class( 'eye-slash' )
+				];
+			case 'lead-gen':
+				if ( function_exists( 'buddyc_lead_gen_info' ) ) {
+					return buddyc_lead_gen_info();
+				}
+			case 'recaptcha':
+				if ( function_exists( 'buddyc_recaptcha_site_key' ) ) {
+					return ['siteKey' => buddyc_recaptcha_site_key()];
+				}
+			case 'header-button':
+				if ( function_exists( 'buddyc_header_btn_info' ) ) {
+					return buddyc_header_btn_info();
+				}
+			case 'email-entered':
+			case 'help-popup':
+			case 'create-account':
+			case 'booking-form':
+			case 'service-fields':
+			case 'create-project-fields':
+			case 'search':
+			case 'create-page':
+			case 'admin-create-legal':
+				return [];
+		}
 	}
 
 	/**
@@ -307,21 +367,19 @@ class AssetManager {
 	 */
 	public function localize_script( $file_name, $handle ) {
 		// Fetch localization info
-		$localization_info = self::localization_info();
+		$localization_info = self::localization_info( $file_name );
 
 		// Check if localization info exists for the file
-		if ( isset( $localization_info[$file_name] ) ) {
-			// Initialize array
-			$file_localization_info = $localization_info[$file_name] ?? [];
+		if ( is_array( $localization_info ) ) {
 
 			// Build nonce
-			$file_localization_info['nonce'] = wp_create_nonce( $this->build_nonce_action( $file_name ) );
-			$file_localization_info['nonceAction'] = $this->build_nonce_action( $file_name );
-			$file_localization_info['fileName'] = $file_name;
+			$localization_info['nonce'] = wp_create_nonce( $this->build_nonce_action( $file_name ) );
+			$localization_info['nonceAction'] = $this->build_nonce_action( $file_name );
+			$localization_info['fileName'] = $file_name;
 
 			// Localize and pass data
 			$data_name = $this->build_data_name( $file_name );
-	        wp_localize_script( $handle, $data_name, $file_localization_info );
+	        wp_localize_script( $handle, $data_name, $localization_info );
 		}
 	}
 	

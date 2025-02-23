@@ -26,66 +26,67 @@ class Nav {
         
         $tabs = [
             'dashboard' => [
-                __( 'All Bookings', 'buddyclients-free' )        => ['page'  => 'buddyc-dashboard'],
+                __( 'All Bookings', 'buddyclients' )        => ['page'  => 'buddyc-dashboard'],
                 ''                                          => ['page'  => 'buddyc-booked-services'],
-                __( 'Overview', 'buddyclients-free' )            => ['page'  => 'buddyc-bookings-dashboard'],
-                __( 'Payments', 'buddyclients-free' )            => ['page'  => 'buddyc-payments'],
-                __( 'Users', 'buddyclients-free' )               => ['page'  => 'buddyc-users'],
+                __( 'Overview', 'buddyclients' )            => ['page'  => 'buddyc-bookings-dashboard'],
+                __( 'Payments', 'buddyclients' )            => ['page'  => 'buddyc-payments'],
+                __( 'Users', 'buddyclients' )               => ['page'  => 'buddyc-users'],
+                __( 'Leads', 'buddyclients' )               => ['page'  => 'buddyc-leads'],
             ],
             'legal' => [
-                __( 'User Agreements', 'buddyclients-free' )    => ['page'  => 'buddyc-user-agreements'],
-                __( 'Legal Modifications', 'buddyclients-free' )=> ['post_type'  => 'buddyc_legal_mod'],
-                __( 'Settings', 'buddyclients-free' )     => ['page'  => 'buddyc-legal-settings', 'post_type'  => 'buddyc_legal'],
+                __( 'User Agreements', 'buddyclients' )    => ['page'  => 'buddyc-user-agreements'],
+                __( 'Legal Agreements', 'buddyclients' )   => ['page'  => 'buddyc-legal-agreements'],
+                __( 'Legal Modifications', 'buddyclients' )=> ['post_type'  => 'buddyc_legal_mod'],
+                __( 'Settings', 'buddyclients' )           => ['page'  => 'buddyc-legal-settings', 'post_type'  => 'buddyc_legal'],
             ], 
             'settings' => [
-                __( 'General', 'buddyclients-free' )            => ['page'  => 'buddyc-general-settings'],
-                __( 'Components', 'buddyclients-free' )          => ['page'  => 'buddyc-components-settings'],
-                __( 'Pages', 'buddyclients-free' )               => ['page'  => 'buddyc-pages-settings'],
-                __( 'Styles', 'buddyclients-free' )              => ['page'  => 'buddyc-style-settings'],
-                __( 'Bookings', 'buddyclients-free' )            => ['page'  => 'buddyc-booking-settings'],
+                __( 'General', 'buddyclients' )            => ['page'  => 'buddyc-general-settings'],
+                __( 'Components', 'buddyclients' )          => ['page'  => 'buddyc-components-settings'],
+                __( 'Pages', 'buddyclients' )               => ['page'  => 'buddyc-pages-settings'],
+                __( 'Bookings', 'buddyclients' )            => ['page'  => 'buddyc-booking-settings'],
                 'Stripe'                                    => ['page'  => 'buddyc-stripe-settings'],
-                __( 'Sales', 'buddyclients-free' )               => ['page'  => 'buddyc-sales-settings'],
-                __( 'Emails', 'buddyclients-free' )              => ['page'  => 'buddyc-email-settings'],
-                __( 'Legal', 'buddyclients-free' )               => ['page'  => 'buddyc-legal-settings', 'post_type'  => 'buddyc_legal'],
-                __( 'Affiliate', 'buddyclients-free' )           => ['page'  => 'buddyc-affiliate-settings'],
-                __( 'Help Posts', 'buddyclients-free' )          => ['page'  => 'buddyc-help-settings'],
-                __( 'Integrations', 'buddyclients-free' )        => ['page'  => 'buddyc-integrations-settings'],
+                __( 'Sales', 'buddyclients' )               => ['page'  => 'buddyc-sales-settings'],
+                __( 'Emails', 'buddyclients' )              => ['page'  => 'buddyc-email-settings'],
+                __( 'Legal', 'buddyclients' )               => ['page'  => 'buddyc-legal-settings', 'post_type'  => 'buddyc_legal'],
+                __( 'Affiliate', 'buddyclients' )           => ['page'  => 'buddyc-affiliate-settings'],
+                __( 'Contact', 'buddyclients' )             => ['page'  => 'buddyc-help-settings'],
+                __( 'Integrations', 'buddyclients' )        => ['page'  => 'buddyc-integrations-settings'],
             ],
             'services' => [
-                __( 'Services', 'buddyclients-free' )            => ['post_type'  => 'buddyc_service'],
-                __( 'Service Types', 'buddyclients-free' )       => ['post_type'  => 'buddyc_service_type'],
-                __( 'Rate Types', 'buddyclients-free' )          => ['post_type'  => 'buddyc_rate_type'],
-                __( 'Team Roles', 'buddyclients-free' )          => ['post_type'  => 'buddyc_role'],
-                __( 'Adjustment Fields', 'buddyclients-free' )   => ['post_type'  => 'buddyc_adjustment'],
-                __( 'Filter Fields', 'buddyclients-free' )       => ['post_type'  => 'buddyc_filter'],
-                __( 'File Upload Types', 'buddyclients-free' )   => ['post_type'  => 'buddyc_file_upload'],
+                __( 'Services', 'buddyclients' )            => ['post_type'  => 'buddyc_service'],
+                __( 'Service Types', 'buddyclients' )       => ['post_type'  => 'buddyc_service_type'],
+                __( 'Rate Types', 'buddyclients' )          => ['post_type'  => 'buddyc_rate_type'],
+                __( 'Team Roles', 'buddyclients' )          => ['post_type'  => 'buddyc_role'],
+                __( 'Adjustment Fields', 'buddyclients' )   => ['post_type'  => 'buddyc_adjustment'],
+                __( 'Filter Fields', 'buddyclients' )       => ['post_type'  => 'buddyc_filter'],
+                __( 'File Upload Types', 'buddyclients' )   => ['post_type'  => 'buddyc_file_upload'],
             ],
             'payments' => [
-                __( 'Team Payments', 'buddyclients-free' )       => ['page'  => 'buddyc-team-payments'],
-                __( 'Affiliate Payments', 'buddyclients-free' )  => ['page'  => 'buddyc-affiliate-payments'],
-                __( 'Sales Payments', 'buddyclients-free' )      => ['page'  => 'buddyc-sales-payments'],
+                __( 'Team Payments', 'buddyclients' )       => ['page'  => 'buddyc-team-payments'],
+                __( 'Affiliate Payments', 'buddyclients' )  => ['page'  => 'buddyc-affiliate-payments'],
+                __( 'Sales Payments', 'buddyclients' )      => ['page'  => 'buddyc-sales-payments'],
             ],
             'briefs' => [
-                __( 'Briefs', 'buddyclients-free' )              => ['post_type'  => 'buddyc_brief'],
-                __( 'Brief Types', 'buddyclients-free' )         => ['taxonomy'   => 'brief_type', 'post_type'  => 'buddyc_brief'],
-                __( 'Brief Fields', 'buddyclients-free' )        => ['post_type'  => 'buddyc_brief_field'],
+                __( 'Briefs', 'buddyclients' )              => ['post_type'  => 'buddyc_brief'],
+                __( 'Brief Types', 'buddyclients' )         => ['taxonomy'   => 'brief_type', 'post_type'  => 'buddyc_brief'],
+                __( 'Brief Fields', 'buddyclients' )        => ['post_type'  => 'buddyc_brief_field'],
             ],
             'emails' => [
-                __( 'Email Templates', 'buddyclients-free' )    => ['post_type'  => 'buddyc_email'],
-                __( 'Email Log', 'buddyclients-free' )          => ['page'  => 'buddyc-email-log'],
+                __( 'Email Templates', 'buddyclients' )    => ['post_type'  => 'buddyc_email'],
+                __( 'Email Log', 'buddyclients' )          => ['page'  => 'buddyc-email-log'],
             ],
             'users' => [
-                __( 'Team', 'buddyclients-free' )                => ['page'  => 'buddyc-team'],
-                __( 'Affiliates', 'buddyclients-free' )          => ['page'  => 'buddyc-affiliates'],
+                __( 'Team', 'buddyclients' )                => ['page'  => 'buddyc-team'],
+                __( 'Affiliates', 'buddyclients' )          => ['page'  => 'buddyc-affiliates'],
             ],
             'testimonials' => [
-                __( 'Testimonials', 'buddyclients-free' )       => ['post_type'  => 'buddyc_testimonial'],
+                __( 'Testimonials', 'buddyclients' )       => ['post_type'  => 'buddyc_testimonial'],
             ],  
             'custom_quotes' => [
-                __( 'Custom Quotes', 'buddyclients-free' )      => ['post_type'  => 'buddyc_quote'],
+                __( 'Custom Quotes', 'buddyclients' )      => ['post_type'  => 'buddyc_quote'],
             ],
             'license' => [
-                __( 'License Key', 'buddyclients-free' )        => ['page'  => 'buddyc-license-settings'],
+                __( 'License Key', 'buddyclients' )        => ['page'  => 'buddyc-license-settings'],
             ]
         ];
 
@@ -122,7 +123,7 @@ class Nav {
         add_action('buddyc_admin', [self::class, 'open_menu'], 10, 1 );
         add_action('buddyc_admin', [self::class, 'active_submenu'], 10, 1 );
     }
-    
+        
     /**
      * Displays navigation tabs.
      *

@@ -4,6 +4,7 @@ namespace BuddyClients\Components\Booking;
 if ( ! defined( 'ABSPATH' ) ) exit; // Exit if accessed directly
 
 use BuddyClients\Includes\Client;
+use BuddyClients\Components\Contact\ContactForm;
 
 use BuddyClients\Components\Service\{
     Service,
@@ -11,11 +12,11 @@ use BuddyClients\Components\Service\{
     RateType,
     Role,
     Adjustment,
-    FileUpload
+    FileUpload,
+    ServiceCache
 };
 
 use BuddyClients\Components\Checkout\CheckoutTable;
-use BuddyClients\Components\Legal\Legal;
 
 
 /**
@@ -111,7 +112,7 @@ class BookingForm {
          *
          * @param string  $submit_text The submit text.
          */
-         $this->submit_text = apply_filters( 'buddyc_booking_submit_text', __( 'Go to Checkout', 'buddyclients-free' ) );
+         $this->submit_text = apply_filters( 'buddyc_booking_submit_text', __( 'Go to Checkout', 'buddyclients' ) );
         
         // Get user projects
         $this->projects = $this->client_id ? (new Client($this->client_id))->projects : false;
@@ -155,9 +156,33 @@ class BookingForm {
         if ( buddyc_is_admin() || buddyc_is_team() ) {
             return false;
         }
-        $message = __( 'Please contact us to book services.', 'buddyclients-free' );
+        $contact_form = $this->contact_form();
         $self_bookings = buddyc_get_setting( 'sales', 'self_bookings' );
-        return $self_bookings === 'no' ? $message : false;
+        return $self_bookings === 'no' ? $contact_form : false;
+    }
+
+    /**
+     * Builds the contact message when self-bookings are disabled.
+     * 
+     * @since 1.0.25
+     */
+    private function contact_form() {
+        if ( class_exists( ContactForm::class  ) ) {
+
+            $args = [
+                'title'     => __( 'Read to Get Started?', 'buddyclients' ),
+                'subtitle'  => __( 'Tell us about your project, and we\'ll be in touch soon!', 'buddyclients')
+            ];
+
+            $contact_form = new ContactForm( $args );
+            return $contact_form->build();
+        } else {
+            sprintf(
+                /* translators: %s: the link to email the admin */
+                __( 'Please %s to book services.', 'buddyclients' ),
+                buddyc_contact_message()
+            );
+        }
     }
     
     /**
@@ -166,7 +191,7 @@ class BookingForm {
      * @since 0.4.0
      */
     private function no_services() {
-        $message = __( 'No services are currently available.', 'buddyclients-free' );
+        $message = __( 'No services are currently available.', 'buddyclients' );
         return $message;
     }
     
@@ -176,7 +201,7 @@ class BookingForm {
      * @since 0.1.0
      */
     private function is_closed() {
-        $message = __( 'We are not currently accepting new bookings.', 'buddyclients-free' );
+        $message = __( 'We are not currently accepting new bookings.', 'buddyclients' );
         $open = buddyc_get_setting('booking', 'accept_bookings');
         return $open !== 'open' ? $message : false;
     }
@@ -413,7 +438,7 @@ class BookingForm {
         
         // Initialize options array with a default option to create a new project
         $project_options[0] = [
-            'label' => __( 'Create a New Project', 'buddyclients-free' ),
+            'label' => __( 'Create a New Project', 'buddyclients' ),
             'value' => 0,
         ];
         
@@ -455,7 +480,7 @@ class BookingForm {
         return [
             'key'               => 'project_title',
             'type'              => 'text',
-            'label'             => __( 'Project Title', 'buddyclients-free' ),
+            'label'             => __( 'Project Title', 'buddyclients' ),
             'field_classes'     => 'create-project',
         ];
     }
@@ -506,7 +531,7 @@ class BookingForm {
         foreach ( $service_types as $type ) {
             
             // Service type object
-            $service_type = new ServiceType( $type->ID );
+            $service_type = buddyc_get_service_cache( 'service_type', $type->ID );
             
             // Get services by type
             $args = ['meta' => ['service_type' => $service_type->ID]];
@@ -523,7 +548,7 @@ class BookingForm {
                 $options[] = [
                     'label' => sprintf(
                         /* translators: %s: the name of the service */
-                        __( 'Select Your %s Service', 'buddyclients-free' ),
+                        __( 'Select Your %s Service', 'buddyclients' ),
                         $service_type->title
                     ),
                     'value' => '',
@@ -534,7 +559,7 @@ class BookingForm {
             foreach ( $services as $service ) {
                 
                 // New service object
-                $service = new Service( $service->ID );
+                $service = buddyc_get_service_cache( 'service', $service->ID );
                 
                 // Skip if invalid or hidden
                 if ( $service->validate() != 'valid' || $service->visible != 'visible' ) {
@@ -603,7 +628,7 @@ class BookingForm {
             foreach ($rate_types as $rate_type_post) {
                 
                 // New rate type object
-                $rate_type = new RateType( $rate_type_post->ID );
+                $rate_type = buddyc_get_service_cache( 'rate_type', $rate_type_post->ID );
                 
                 // Skip flat rate services
                 if ($rate_type->ID === 'flat') {
@@ -648,7 +673,7 @@ class BookingForm {
             foreach ($adjustments as $adjustment_post) {
                 
                 // New adjustment object
-                $adjustment = new Adjustment( $adjustment_post->ID );
+                $adjustment = buddyc_get_service_cache( 'adjustment', $adjustment_post->ID );
                 
                 // Exit if no options
                 if ( ! is_array( $adjustment->options ) ) {
@@ -661,7 +686,7 @@ class BookingForm {
                     $options[] = [
                         'label' => sprintf(
                             /* translators: %s: the name of the rate adjustment */
-                            __( 'Select %s', 'buddyclients-free' ),
+                            __( 'Select %s', 'buddyclients' ),
                             $adjustment->label
                         ),
                         'value' => '',
@@ -723,7 +748,7 @@ class BookingForm {
             foreach ($file_uploads as $upload_post) {
                 
                 // New rate type object
-                $upload = new FileUpload( $upload_post->ID );
+                $upload = buddyc_get_service_cache( 'file_upload', $upload_post->ID );
                 
                 // Build help link
                 $help_link = $upload->help_post_id ? ' ' . buddyc_help_link( $upload->help_post_id ) : '';
@@ -785,44 +810,37 @@ class BookingForm {
             foreach ( $roles as $role_post ) {
                 
                 // New rate type object
-                $role = new Role( $role_post->ID );
+                $role = buddyc_get_service_cache( 'role', $role_post->ID );
                 
                 // Initialize options
                 $team_options = [
                     '' => [
                         'label' => sprintf(
                             /* translators: %s: the singular name of the team member role (e.g. Editor) */
-                            __( 'Select Your %s', 'buddyclients-free' ),
+                            __( 'Select Your %s', 'buddyclients' ),
                             $role->singular
                         ),
                         'value' => '',
                     ]
                 ];
+
+                // Check whether to require legal agreement
+                $require_agreement = buddyc_get_setting( 'legal', 'require_agreement' ) == 'yes';
                         
                 // Loop through team members
-                foreach ($team_members['users'] as $team_member) {
+                foreach ( $team_members['users'] as $team_member ) {
                     $add = false;
-                    $user_roles = xprofile_get_field_data($xprofile_id, $team_member->ID);
+                    $user_roles = xprofile_get_field_data( $xprofile_id, $team_member->ID );
                     
                     // Check team member agreement
-                    if ( class_exists( Legal::class ) && buddyc_get_setting( 'legal', 'require_agreement' ) == 'yes' ) {
+                    if ( function_exists( 'buddyc_user_legal' ) && $require_agreement ) {
                         
-                        // Get require agreement setting
-                        $require_agreement = buddyc_get_setting( 'legal', 'require_agreement' );
+                        // Build legal object
+                        $user_legal = buddyc_user_legal( $team_member->ID, 'team' );
                         
-                        // Only check if the setting is to require active agreement
-                        if ( $require_agreement === 'yes' ) {
-                        
-                            // Build legal object
-                            $legal = new Legal( 'team' );
-                            
-                            // Get team member legal data
-                            $user_data = $legal->get_user_data( $team_member->ID );
-                            
-                            // Skip if team agreement is not active
-                            if ( ! $user_data['active'] ) {
-                                continue;
-                            }
+                        // Skip if team agreement is not active
+                        if ( ! $user_legal->agreement_status ) {
+                            continue;
                         }
                     }
                     
@@ -831,7 +849,7 @@ class BookingForm {
                         || ($role->singular === $user_roles)) {
                             
                         $availability = function_exists( 'buddyc_get_availability' ) ? buddyc_get_availability( $team_member->ID ) : '';
-                        $availability_message = $availability ? __( ' - Available ', 'buddyclients-free' ) . $availability : '';
+                        $availability_message = $availability ? __( ' - Available ', 'buddyclients' ) . $availability : '';
                             
                         $team_options[$role->ID . '-' . $team_member->ID] = [
                             'label'     => $team_member->display_name . $availability_message,
@@ -849,7 +867,7 @@ class BookingForm {
                     'label'         => $role->plural,
                     'description'   => sprintf(
                         /* translators: %s: the singular name of the team member role (e.g. editor) */
-                        __( 'Select your %s.', 'buddyclients-free' ),
+                        __( 'Select your %s.', 'buddyclients' ),
                         strtolower( $role->singular )
                     ) . buddyc_team_select_help(),
                     'options'       => $team_options,
@@ -876,7 +894,7 @@ class BookingForm {
         
         // Initialize
         $service_agreement_id = '';
-        $option_label = __( 'I confirm that the information above is correct.', 'buddyclients-free' );
+        $option_label = __( 'I confirm that the information above is correct.', 'buddyclients' );
         
         // Check for service agreement
         $service_agreement_id = buddyc_get_setting('legal', 'client_legal_version');
@@ -884,8 +902,8 @@ class BookingForm {
         if ( $service_agreement_id ) {
             $option_label = sprintf(
                 /* translators: %s: the terms being agreed to (e.g. service terms) */
-                __( 'I agree to the %s.', 'buddyclients-free' ),
-                buddyc_help_link( $service_agreement_id, __( 'service terms', 'buddyclients-free' ) )
+                __( 'I agree to the %s.', 'buddyclients' ),
+                buddyc_help_link( $service_agreement_id, __( 'service terms', 'buddyclients' ) )
             );
         }
             

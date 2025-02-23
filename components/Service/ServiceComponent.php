@@ -1,8 +1,7 @@
 <?php
 namespace BuddyClients\Components\Service;
 if ( ! defined( 'ABSPATH' ) ) exit; // Exit if accessed directly
-
-use BuddyClients\Includes\PostQuery as PostQuery;
+use BuddyClients\Includes\PostQuery;
 
 /**
  * Abstract class representing a service component.

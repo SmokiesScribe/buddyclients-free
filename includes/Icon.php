@@ -12,13 +12,6 @@ use BuddyClients\Admin\Settings;
  * @since 1.0.20
  */
 class Icon {
-    
-    /**
-     * Whether the BuddyBoss theme is active.
-     * 
-     * @var bool
-     */
-     public $bb_theme;
      
     /**
      * The formatted icon html.
@@ -35,12 +28,28 @@ class Icon {
     public $class;
 
     /**
-     * Defines all icon data.
+     * The color of the icon.
+     * 
+     * @var string
+     */
+    public $color;
+
+    /**
+     * The array of icon data. 
+     * 
+     * @var array
+     */
+    private $icon_data;
+
+    /**
+     * Retrieves the icon data by key.
      * 
      * @since 1.0.20
+     * 
+     * @param   string  $key    The icon key.
      */
-    private static function icon_data() {
-        return [
+    private static function get_icon_data( $key ) {
+        $data = [
             'admin-info' => [
                 'bb-icon-class' => 'bb-icon-rf bb-icon-info',
                 'fa-icon-class' => 'fa-solid fa-circle-info',
@@ -150,6 +159,7 @@ class Icon {
                 'color' => 'black',
             ],
         ];
+        return $data[$key] ?? null;
     }
      
     /**
@@ -158,11 +168,21 @@ class Icon {
      * @since 0.1.0
      *
      * @param   string  $key    The identifying key of the icon.
+     * @param   string  $color  Optional. The color of the icon.
+     *                          Accepts 'blue', 'black', 'green', 'red', or 'gray'.
      */
-    public function __construct( $key ) {
+    public function __construct( $key, $color = null ) {
         $this->key = $key;
-        $this->bb_theme = buddyc_buddyboss_theme();
-        $this->build_icon();        
+        $this->color = $color;
+
+        // Get the icon data by key
+        $this->icon_data = self::get_icon_data( $key );
+
+        // Build the icon
+        if ( ! empty( $this->icon_data ) ) {            
+            $this->class = $this->build_classes();
+            $this->html = $this->build_icon();
+        }
     }
 
     /**
@@ -171,28 +191,62 @@ class Icon {
      * @since 1.0.20
      */
     private function build_icon() {
-        $icon_data = self::icon_data();
-        $class_type = $this->bb_theme ? 'bb-icon-class' : 'fa-icon-class';
+        // Build icon html
+        return sprintf(
+            '<i class="%s"></i>',
+            $this->class
+        );
+    }
 
-        // Check if icon exists
-        if ( isset( $icon_data[$this->key] ) ) {
-            // Initialize array
-            $classes = ['buddyc-icon', $this->key, $class_type];
+    /**
+     * Builds the icon classes.
+     * 
+     * @since 1.0.25
+     * 
+     * @return  string  A string of class names.
+     */
+    private function build_classes() {
+        // Define class type based on theme
+        $class_type = buddyc_buddyboss_theme() ? 'bb-icon-class' : 'fa-icon-class';
 
-            // Add icon class
-            $classes[] = $icon_data[$this->key][$class_type] ?? null;
+        $classes = [
+            'buddyc-icon', // general class
+            $this->key, // icon key
+            $class_type, // theme class
+            $this->icon_data[$class_type] ?? '', // icon class
+            $this->color_class() // color class
+        ];
 
-            // Add color class
-            $icon_color = $icon_data[$this->key]['color'] ?? null;
-            if ( $icon_color ) {
-                $classes[] = 'buddyc-icon-color-' . $icon_color;
-            }
+        return implode( ' ', $classes );
+    }
 
-            // Implode classes
-            $this->class = implode( ' ', $classes );
+    /**
+     * Builds the color class.
+     * 
+     * @since 1.0.25
+     * 
+     * @return  string  The class defining the icon color.
+     */
+    private function color_class() {
+        // Initialize
+        $color = null;
+        $color_class = '';
 
-            // Build icon html
-            $this->html = '<i class="' . $this->class . '"></i>';
+        // Check if the color was defined directly
+        if ( ! empty( $this->color ) ) {
+            $color = $this->color;
+        
+        // Otherwise check for icon-specific color
+        } else if ( isset( $this->icon_data['color'] ) ) {
+            $color = $this->icon_data['color'];
         }
+
+        // Define the class if color exists
+        if ( $color ) {
+            $color_class = 'buddyc-icon-color-' . $color;
+        }
+
+        // Return class
+        return $color_class;
     }
 }

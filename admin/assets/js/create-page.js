@@ -3,7 +3,7 @@
  * 
  * @since 0.1.0
  */
-function buddycbuddycbuddycbuddycCreateNewPage(args) {
+function buddycCreateNewPage( args ) {
     // Show loading indicator
     buddycLoadingIndicator( true, 'Creating page...' );
     

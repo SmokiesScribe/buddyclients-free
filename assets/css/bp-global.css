@@ -182,3 +182,10 @@
     background-color: var(--buddyclients-tertiary-color);
     cursor: pointer;
 }
+
+/* Signature */
+.buddyc-signature-container canvas {
+    background-color: #fff;
+    border-radius: 5px;
+    border: solid 1px #d7d9dd;
+}
