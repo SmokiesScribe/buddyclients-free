@@ -260,8 +260,11 @@ class Options {
             if ($expiration) {
                 $exp_timestamp = strtotime($expiration);
                 $curr_timestamp = time();
-                if ($curr_timestamp > $exp_timestamp) {
-                    $expired = __( ' - Expired', 'buddyclients-free' );
+                if ( $curr_timestamp > $exp_timestamp ) {
+                    $expired = sprintf(
+                        ' - %s',
+                        __( 'Expired', 'buddyclients' )
+                    );
                 }
             }
             
