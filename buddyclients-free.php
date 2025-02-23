@@ -69,8 +69,18 @@ function buddyc_installed_notice() {
             <p><strong><?php esc_html_e( 'BuddyClients Error', 'buddyclients-free' ); ?></strong></p>
             <p><?php esc_html_e( 'Multiple versions of the BuddyClients Platform are installed.', 'buddyclients-free' ); ?></p>
 			<?php /* translators: %s: link to deactivate BuddyClients Free */ ?>
-			<p><?php printf( wp_kses( __( 'Please <a href="%s">deactivate BuddyClients Free</a> to continue.', 'buddyclients-free' ), $allowed_html ), esc_url( $plugins_url ) ); ?></p>
-        </div>
+			<p><?php 
+				printf( 
+					wp_kses(
+						/* translators: %s: link to deactivate BuddyClients Free */
+						sprintf( __( 'Please %s to continue.', 'buddyclients-free' ), 
+							sprintf( '<a href="%s">deactivate BuddyClients Free</a>', esc_url( $plugins_url ) )
+						),
+						$allowed_html 
+					) 
+				); 
+			?></p>
+		</div>
 
         <?php
     }
@@ -113,7 +123,17 @@ function buddyc_missing_bp_notice_free() {
 			<p><strong><?php esc_html_e( 'BuddyPress is missing.', 'buddyclients-free' ); ?></strong></p>
 			<p><?php esc_html_e( 'The BuddyClients Platform can\'t work without BuddyPress.', 'buddyclients-free' ); ?></p>
 			<?php /* translators: %1$s: link to install BuddyPress; %2$s: link to install BuddyBoss */ ?>
-			<p><?php printf( wp_kses( __( 'Install <a href="%1$s">BuddyPress</a> or <a href="%2$s" target="_blank">BuddyBoss</a>.', 'buddyclients-free' ), $allowed_html ), esc_url( $bp_install ), esc_url( $bb_install ) ); ?></p>
+			<p><?php 
+				printf(
+					wp_kses(
+						/* translators: %s: link to BuddyPress installation */
+						__( 'Install %s or %s.', 'buddyclients-free' ),
+						$allowed_html
+					),
+					sprintf( '<a href="%s">BuddyPress</a>', esc_url( $bp_install ) ),
+					sprintf( '<a href="%s" target="_blank">BuddyBoss</a>', esc_url( $bb_install ) )
+				); 
+			?></p>
 		</div>
 
 		<?php
