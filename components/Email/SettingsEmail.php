@@ -126,7 +126,6 @@ class SettingsEmail {
         // Initialize
         $options = [];
         $default_options = [];
-        $required_options = [];
         
         // Retrieve all email templates
         $templates = EmailTemplateManager::templates();
@@ -134,10 +133,6 @@ class SettingsEmail {
         foreach ( $templates as $key => $data ) {
             $options[$key] = $data['label'];
             $default_options[] = $options[$key];
-        }
-
-        if ( $required ) {
-            return $required_options;
         }
         
         // Return defaults or options

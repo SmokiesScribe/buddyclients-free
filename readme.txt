@@ -4,7 +4,7 @@ Tags: buddypress-integration, service-business, business-tools, team-management,
 Requires at least: 4.9.1
 Tested up to: 6.7.1
 Requires PHP: 7.2
-Stable tag: 1.0.25
+Stable tag: 1.0.26
 License: GPL-2.0-or-later
 License URI: https://www.gnu.org/licenses/gpl-2.0.html
 
@@ -53,6 +53,9 @@ The banner image used for the plugin page:
 Banner URL: /assets/media/banner-772x250/banner.png
 
 == Changelog ==
+
+= 1.0.26 - February 23, 2025 =
+* Fixed: Bug in email templates.
 
 = 1.0.25 - February 22, 2025 =
 * New Feature! Google reCAPTCHA integration to reduce spam.
