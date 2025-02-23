@@ -79,6 +79,9 @@ class PluginLinks {
         // Get license
         $license = $this->get_license();
 
+        // Default to free
+        $curr_product = $license?->product ?? 'buddyc_free';
+
         // Define upgrade links
         $upgrade_links = [
             'buddyc_basic'  => 'license',
@@ -88,7 +91,7 @@ class PluginLinks {
         // Loop through upgrade link options
         foreach ( $upgrade_links as $product => $slug ) {
             // Check if the product matches the license
-            if ( strpos( $license->product, $product ) !== false ) {
+            if ( strpos( $curr_product, $product ) !== false ) {
                 // Add to array
                 $link_data['upgrade'] = [
                     'url'       => trailingslashit( BUDDYC_URL ) . $slug,
