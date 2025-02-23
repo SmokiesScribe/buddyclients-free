@@ -15,15 +15,15 @@ function buddyc_booked_services_table() {
     
     // Define headers
     $headers = [
-        __( 'Name', 'buddyclients' ),
-        __( 'Date', 'buddyclients' ),
-        __( 'Status', 'buddyclients' ),
-        __( 'Client', 'buddyclients' ),
-        __( 'Team Member', 'buddyclients' ),
-        __( 'Project', 'buddyclients' ),
-        __( 'Files', 'buddyclients' ),
-        __( 'Update Status', 'buddyclients' ),
-        __( 'Reassign', 'buddyclients' )
+        __( 'Name', 'buddyclients-free' ),
+        __( 'Date', 'buddyclients-free' ),
+        __( 'Status', 'buddyclients-free' ),
+        __( 'Client', 'buddyclients-free' ),
+        __( 'Team Member', 'buddyclients-free' ),
+        __( 'Project', 'buddyclients-free' ),
+        __( 'Files', 'buddyclients-free' ),
+        __( 'Update Status', 'buddyclients-free' ),
+        __( 'Reassign', 'buddyclients-free' )
     ];
     
     // Define columns
@@ -44,23 +44,23 @@ function buddyc_booked_services_table() {
         'headings'  => $headers,
         'columns'   => $columns,
         'items'     => $booked_services,
-        'title'     => __( 'Bookings', 'buddyclients' ),
+        'title'     => __( 'Bookings', 'buddyclients-free' ),
         'filters'   => [
             'status'    => [
-                'label'     => __( 'Status', 'buddyclients' ),
+                'label'     => __( 'Status', 'buddyclients-free' ),
                 'property'  =>  'status',
                 'options'   => [
-                    ''                          => __( 'All', 'buddyclients' ),
-                    'pending'                   => __( 'Pending', 'buddyclients' ),
-                    'in_progress'               => __( 'In Progress', 'buddyclients' ),
-                    'complete'                  => __( 'Complete', 'buddyclients' ),
-                    'cancellation_requested'    => __( 'Cancellation Requested', 'buddyclients' ),
-                    'canceled'                  => __( 'Canceled', 'buddyclients' )
+                    ''                          => __( 'All', 'buddyclients-free' ),
+                    'pending'                   => __( 'Pending', 'buddyclients-free' ),
+                    'in_progress'               => __( 'In Progress', 'buddyclients-free' ),
+                    'complete'                  => __( 'Complete', 'buddyclients-free' ),
+                    'cancellation_requested'    => __( 'Cancellation Requested', 'buddyclients-free' ),
+                    'canceled'                  => __( 'Canceled', 'buddyclients-free' )
                 ],
                 'default'   => 'succeeded'
             ],
             'booking'    => [
-                'label'     => __( 'Booking', 'buddyclients' ),
+                'label'     => __( 'Booking', 'buddyclients-free' ),
                 'property'  =>  'booking_intent_id',
                 'options'   => [],
                 'default'   => 'succeeded'

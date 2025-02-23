@@ -73,11 +73,11 @@ class ServicePost {
 
         // Flat rate type
         if ( $this->service->rate_type === 'flat' ) {
-            $label = esc_html__( 'flat', 'buddyclients' );
+            $label = esc_html__( 'flat', 'buddyclients-free' );
 
         // Other rate type
         } else if ( $this->service->rate_type ) {
-            $label = esc_html__( 'per', 'buddyclients' ) . ' ' . strtolower( esc_html( get_post_meta( $this->service->rate_type, 'singular', true ) ) );
+            $label = esc_html__( 'per', 'buddyclients-free' ) . ' ' . strtolower( esc_html( get_post_meta( $this->service->rate_type, 'singular', true ) ) );
         }
         return $label;
     }
@@ -88,7 +88,7 @@ class ServicePost {
      * @since 1.0.21
      */
     private function get_rate_label() {
-        return $this->service->adjustments ? esc_html__( 'Starting At', 'buddyclients' ) : esc_html__( 'Rate', 'buddyclients' );
+        return $this->service->adjustments ? esc_html__( 'Starting At', 'buddyclients-free' ) : esc_html__( 'Rate', 'buddyclients-free' );
     }
 
     /**
@@ -104,7 +104,7 @@ class ServicePost {
             // Make sure the booking page exists
             if ( $booking_page_link && $booking_page_link !== '#' ) {
                 $btn_args = [
-                    'text'  => __( 'Book Now', 'buddyclients' ),
+                    'text'  => __( 'Book Now', 'buddyclients-free' ),
                     'link'  => buddyc_get_page_link( 'pages', 'booking_page' ),
                     'type'  => 'secondary',
                     'size'  => 'wide'
@@ -181,7 +181,7 @@ class ServicePost {
             return sprintf(
                 /* translators: %1$s: 'This service requires'; %2$s: the links to the services this service requires */
                 '<p>%1$s %2$s</p>',
-                esc_html__( 'This service requires', 'buddyclients' ),
+                esc_html__( 'This service requires', 'buddyclients-free' ),
                 $dependency_link
             );
         }
@@ -223,9 +223,9 @@ class ServicePost {
                     $dependency_list .= $dependency_array[ $i ];
 
                     if ( $count > 2 && $i == $count - 2 ) {
-                        $dependency_list .= ', ' . esc_html__( 'or', 'buddyclients' ) . ' ';
+                        $dependency_list .= ', ' . esc_html__( 'or', 'buddyclients-free' ) . ' ';
                     } elseif ( $i == $count - 2 ) {
-                        $dependency_list .= ' ' . esc_html__( 'or', 'buddyclients' ) . ' ';
+                        $dependency_list .= ' ' . esc_html__( 'or', 'buddyclients-free' ) . ' ';
                     } elseif ( $i < $count - 1 ) {
                         $dependency_list .= ', ';
                     }

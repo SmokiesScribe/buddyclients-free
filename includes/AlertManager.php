@@ -68,14 +68,14 @@ class AlertManager {
             $content = sprintf(
                 '<a href="%s">%s</a>',
                 esc_url( $link ),
-                __( 'Add your availability.', 'buddyclients' )
+                __( 'Add your availability.', 'buddyclients-free' )
             );
         
         // Check if the availability is expired
         } else if ( Availability::expired( $availability ) ) {
             $content = sprintf(
                 /* translators: %s: url to update availability */
-                __( 'Your availability has expired. <a href="%s">Update your availability.</a>', 'buddyclients' ),
+                __( 'Your availability has expired. <a href="%s">Update your availability.</a>', 'buddyclients-free' ),
                 esc_url( $link ),
             );
         }
@@ -126,9 +126,9 @@ class AlertManager {
 
         // Define translated legal type
         $translated_type = match ( $type ) {
-            'affiliate' => __( 'affiliate', 'buddyclients' ),
-            'team'      => __( 'team member', 'buddyclients' ),
-            'sales'     => __( 'sales', 'buddyclients' ),
+            'affiliate' => __( 'affiliate', 'buddyclients-free' ),
+            'team'      => __( 'team member', 'buddyclients-free' ),
+            'sales'     => __( 'sales', 'buddyclients-free' ),
             default     => ''
         };
         
@@ -143,7 +143,7 @@ class AlertManager {
         if ( $status === 'active' ) {
             $content = sprintf(
                 /* translators: %1$s: url to complete agreement; %2$s: the type of agreement (e.g. affiliate or team) */
-                __( 'Complete your <a href="%1$s">new %2$s agreement</a>.', 'buddyclients' ),
+                __( 'Complete your <a href="%1$s">new %2$s agreement</a>.', 'buddyclients-free' ),
                 esc_url( $link ),
                 $translated_type
             );            
@@ -152,7 +152,7 @@ class AlertManager {
         } else if ( ( $type !== 'affiliate' && $status !== 'current' ) || ( $type === 'affiliate' && $status === 'inactive' ) ) {
             $content = sprintf(
                 /* translators: %1$s: url to complete agreement; %2$s: the type of agreement (e.g. affiliate or team) */
-                __( 'Complete your <a href="%1$s">%2$s agreement</a>.', 'buddyclients' ),
+                __( 'Complete your <a href="%1$s">%2$s agreement</a>.', 'buddyclients-free' ),
                 esc_url( $link ),
                 $translated_type
             );

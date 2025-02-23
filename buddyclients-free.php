@@ -110,10 +110,10 @@ function buddyc_missing_bp_notice_free() {
 		?>
 
 		<div id="message" class="error notice">
-			<p><strong><?php esc_html_e( 'BuddyPress is missing.', 'buddyclients' ); ?></strong></p>
-			<p><?php esc_html_e( 'The BuddyClients Platform can\'t work without BuddyPress.', 'buddyclients' ); ?></p>
+			<p><strong><?php esc_html_e( 'BuddyPress is missing.', 'buddyclients-free' ); ?></strong></p>
+			<p><?php esc_html_e( 'The BuddyClients Platform can\'t work without BuddyPress.', 'buddyclients-free' ); ?></p>
 			<?php /* translators: %1$s: link to install BuddyPress; %2$s: link to install BuddyBoss */ ?>
-			<p><?php printf( wp_kses( __( 'Install <a href="%1$s">BuddyPress</a> or <a href="%2$s" target="_blank">BuddyBoss</a>.', 'buddyclients' ), $allowed_html ), esc_url( $bp_install ), esc_url( $bb_install ) ); ?></p>
+			<p><?php printf( wp_kses( __( 'Install <a href="%1$s">BuddyPress</a> or <a href="%2$s" target="_blank">BuddyBoss</a>.', 'buddyclients-free' ), $allowed_html ), esc_url( $bp_install ), esc_url( $bb_install ) ); ?></p>
 		</div>
 
 		<?php
@@ -144,10 +144,10 @@ function buddyc_groups_disabled_notice_free() {
 		?>
 
 		<div id="message" class="error notice">
-			<p><strong><?php esc_html_e( 'Social groups are disabled.', 'buddyclients' ); ?></strong></p>
-			<p><?php esc_html_e( 'Groups must be enabled for the BuddyClients Platform to function properly.', 'buddyclients' ); ?></p>
+			<p><strong><?php esc_html_e( 'Social groups are disabled.', 'buddyclients-free' ); ?></strong></p>
+			<p><?php esc_html_e( 'Groups must be enabled for the BuddyClients Platform to function properly.', 'buddyclients-free' ); ?></p>
 			<?php /* translators: %s: link to enable social groups */ ?>
-			<p><?php printf( wp_kses( __( '<a href="%s">Enable social groups.</a>', 'buddyclients' ), $allowed_html ), esc_url( $enable_link ) ); ?></p>
+			<p><?php printf( wp_kses( __( '<a href="%s">Enable social groups.</a>', 'buddyclients-free' ), $allowed_html ), esc_url( $enable_link ) ); ?></p>
 		</div>
 
 		<?php

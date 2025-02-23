@@ -101,7 +101,7 @@ class RepairButton {
             $form .= '<button type="submit" name="repair_' . esc_attr( $this->key ) . '_submit" class="button button-secondary">';
             
             // Label
-            $form .= esc_html__( 'Repair', 'buddyclients' ) . ' ' . esc_html( $this->get_label() );
+            $form .= esc_html__( 'Repair', 'buddyclients-free' ) . ' ' . esc_html( $this->get_label() );
 
             // Close button and form
             $form .= '</button>';

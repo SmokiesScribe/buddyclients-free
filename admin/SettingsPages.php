@@ -49,12 +49,12 @@ class SettingsPages {
             $settings[$page_type] = [
                 'title' => sprintf(
                     /* translators: %s: page type (e.g., 'Service', 'Product') */
-                    __('%s Pages', 'buddyclients'),
+                    __('%s Pages', 'buddyclients-free'),
                     esc_html( ucfirst( $page_type ) ),
                 ),
                 'description' => sprintf(
                     /* translators: %s: page type (e.g., 'service', 'product') */
-                    __('Choose or create your %s pages.', 'buddyclients'),
+                    __('Choose or create your %s pages.', 'buddyclients-free'),
                     esc_html( $page_type )
                 ),
             ];
@@ -81,7 +81,7 @@ class SettingsPages {
      */
     private static function page_options() {
         // Initialize
-        $options = [ '' => __( 'Select a Page', 'buddyclients' ) ];
+        $options = [ '' => __( 'Select a Page', 'buddyclients-free' ) ];
         
         // Retrieve all pages
         $all_pages = get_pages(); // wp function

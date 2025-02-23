@@ -118,7 +118,7 @@ class AdminTableItem extends AdminTable {
             $url = 'https://dashboard.stripe.com/payments/' . $payment_id;
             $icon = '<i class="fa-solid fa-arrow-up-right-from-square"></i>';
             /* translators: %s: Stripe, the name of the payment processor */
-            $title = sprintf( __( 'View transaction on %s', 'buddyclients' ), 'Stripe' );
+            $title = sprintf( __( 'View transaction on %s', 'buddyclients-free' ), 'Stripe' );
             $link = '<span class="buddyc-update-booking-icon"><a href="' . esc_url( $url ) . '" target="_blank" title="' . $title . '">' . $icon . '</a></span>';
             return $link;
         }
@@ -196,7 +196,7 @@ class AdminTableItem extends AdminTable {
             
         // Generate download link
         if ( $pdf_link ) {
-            $download_link = '<a href="' . esc_url( $pdf_link ) . '" download><i class="fa-solid fa-download"></i> ' . __( 'Download PDF', 'buddyclients' ) . '</a>';
+            $download_link = '<a href="' . esc_url( $pdf_link ) . '" download><i class="fa-solid fa-download"></i> ' . __( 'Download PDF', 'buddyclients-free' ) . '</a>';
             return $download_link;
         }
     }
@@ -242,9 +242,9 @@ class AdminTableItem extends AdminTable {
         
         // Define agreement types
         $types = [
-            'team'     => __( 'Team', 'buddyclients' ),
-            'faculty'  => __( 'Faculty', 'buddyclients' ),
-            'affiliate'=> __( 'Affiliate', 'buddyclients' )
+            'team'     => __( 'Team', 'buddyclients-free' ),
+            'faculty'  => __( 'Faculty', 'buddyclients-free' ),
+            'affiliate'=> __( 'Affiliate', 'buddyclients-free' )
         ];
         
         // Loop through types
@@ -321,7 +321,7 @@ class AdminTableItem extends AdminTable {
         // Make sure the user has sessions
         if ( $value && is_array( $value ) && ! empty( $value ) ) {
             $url = admin_url( '/admin.php?page=buddyc-sessions&faculty_ids_filter=' . $item_id );
-            return '<a href="' . esc_url( $url ) . '">' . __( 'Sessions', 'buddyclients' ) . '</a>';
+            return '<a href="' . esc_url( $url ) . '">' . __( 'Sessions', 'buddyclients-free' ) . '</a>';
         }
     }
     
@@ -432,12 +432,12 @@ class AdminTableItem extends AdminTable {
         // Define confirmation message
         $message = sprintf(
             /* translators: %s: the new status */
-            __( 'Are you sure you want to update this booking to %s?', 'buddyclients' ),
+            __( 'Are you sure you want to update this booking to %s?', 'buddyclients-free' ),
             strtoupper( $values[$value] )
         );
 
         // Output button
-        $title = __( 'Edit status', 'buddyclients' );
+        $title = __( 'Edit status', 'buddyclients-free' );
         $edit_icon = buddyc_icon( 'edit' );
         $update_button = '<span class="buddyc-update-booking-icon"><a href="#" title="' . $title . '" onclick="return buddycConfirmAction(\'' . esc_url( $update_url ) . '\', \'' . esc_js( $message ) . '\');">' . $edit_icon . '</a></span>';
 
@@ -472,10 +472,10 @@ class AdminTableItem extends AdminTable {
         $delete_url = admin_url( 'admin.php?page=buddyc-dashboard&action=delete_booking&booking_id=' . $value );
 
         // Define confirmation message
-        $message = __( 'Are you sure you want to delete this booking? This action cannot be undone.', 'buddyclients' );
+        $message = __( 'Are you sure you want to delete this booking? This action cannot be undone.', 'buddyclients-free' );
 
         // Output button
-        $title = __( 'Delete booking', 'buddyclients' );
+        $title = __( 'Delete booking', 'buddyclients-free' );
         $delete_button = '<span class="buddyc-update-booking-icon"><a href="#" title="' . $title . '" onclick="return buddycConfirmAction(\'' . esc_url( $delete_url ) . '\', \'' . esc_js( $message ) . '\');"><i class="fa-solid fa-trash"></i></a></span>';
 
         return $delete_button;
@@ -631,13 +631,13 @@ class AdminTableItem extends AdminTable {
         $status = '';
         switch ( $value ) {
             case 'paid':
-                $status = __( 'Paid', 'buddyclients' );
+                $status = __( 'Paid', 'buddyclients-free' );
                 break;
             case 'pending':
-                $status = __( 'Pending', 'buddyclients' );
+                $status = __( 'Pending', 'buddyclients-free' );
                 break;
             case 'failed':
-                $status = __( 'Failed', 'buddyclients' );
+                $status = __( 'Failed', 'buddyclients-free' );
                 break;
         }
         return $status;
@@ -649,7 +649,7 @@ class AdminTableItem extends AdminTable {
      * @since 0.1.0
      */
     protected static function link( $property, $value ) {
-        return '<a href="' . esc_url( $value ) . '">' . __( 'View', 'buddyclients' ) . '</a>';
+        return '<a href="' . esc_url( $value ) . '">' . __( 'View', 'buddyclients-free' ) . '</a>';
     }
     
     /**
@@ -743,19 +743,19 @@ class AdminTableItem extends AdminTable {
     protected static function lead_status( $property, $value, $item_id ) {
         $statuses = [
             'active'    => [
-                'label' => __( 'Active', 'buddyclients' ),
+                'label' => __( 'Active', 'buddyclients-free' ),
                 'icon'  => 'ready'
             ],
             'won'       => [
-                'label' => __( 'Won', 'buddyclients' ),
+                'label' => __( 'Won', 'buddyclients-free' ),
                 'icon'  => 'check'
             ],
             'lost'      => [
-                'label' => __( 'Lost', 'buddyclients' ),
+                'label' => __( 'Lost', 'buddyclients-free' ),
                 'icon'  => 'x'
             ],
             'spam'      => [
-                'label' => __( 'Spam', 'buddyclients' ),
+                'label' => __( 'Spam', 'buddyclients-free' ),
                 'icon'  => 'x'
             ],
         ];
@@ -769,7 +769,7 @@ class AdminTableItem extends AdminTable {
         $div_id = 'buddyc-lead-status-' . $item_id;
 
         // Hover title
-        $title = __( 'Edit status', 'buddyclients' );
+        $title = __( 'Edit status', 'buddyclients-free' );
 
         // Icon
         $content = buddyc_icon( $statuses[$value]['icon'] );

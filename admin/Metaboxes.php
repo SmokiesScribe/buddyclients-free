@@ -588,14 +588,14 @@ class Metaboxes {
             'team', 'client', 'affiliate', 'users' => buddyc_options( 'users', ['user_type' => $option_key] ),
             'projects' => buddyc_options( 'projects' ),
             'payment' => [
-                'pending'  => __( 'Pending', 'buddyclients' ),
-                'eligible' => __( 'Eligible', 'buddyclients' ),
-                'paid'     => __( 'Paid', 'buddyclients' ),
+                'pending'  => __( 'Pending', 'buddyclients-free' ),
+                'eligible' => __( 'Eligible', 'buddyclients-free' ),
+                'paid'     => __( 'Paid', 'buddyclients-free' ),
             ],
             'operator' => [
-                'x' => __( 'x (multiply)', 'buddyclients' ),
-                '+' => __( '+ (add)', 'buddyclients' ),
-                '-' => __( '- (subtract)', 'buddyclients' ),
+                'x' => __( 'x (multiply)', 'buddyclients-free' ),
+                '+' => __( '+ (add)', 'buddyclients-free' ),
+                '-' => __( '- (subtract)', 'buddyclients-free' ),
             ],
             'help_docs' => buddyc_options( 'posts', ['post_type' => buddyc_help_post_types()] ),
             default => [],
@@ -678,7 +678,7 @@ class Metaboxes {
             $display = $title ?: $name ?: $field_value;
 
             $field .= sprintf(
-                '<p class="buddyc-meta-unavailable">' . __('Unavailable: %s', 'buddyclients') . '</p>',
+                '<p class="buddyc-meta-unavailable">' . __('Unavailable: %s', 'buddyclients-free') . '</p>',
                 esc_html( $display )
             );
         }
@@ -764,7 +764,7 @@ class Metaboxes {
      */
     private function button( $field_id, $field_data ) {
         // Set default values
-        $label = ! empty( $field_data['value'] ) ? esc_html( $field_data['value'] ) : __( 'Click Here', 'buddyclients' );
+        $label = ! empty( $field_data['value'] ) ? esc_html( $field_data['value'] ) : __( 'Click Here', 'buddyclients-free' );
         $href = ! empty( $field_data['href'] ) ? esc_url( $field_data['href'] ) : '#';
         $class = ! empty( $field_data['class'] ) ? esc_attr( $field_data['class'] ) : 'button-secondary';
 

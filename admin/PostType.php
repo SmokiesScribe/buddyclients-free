@@ -96,41 +96,41 @@ class PostType {
         $this->labels = array(
             'name'               => $plural_name,
             'singular_name'      => $singular_name,
-            'add_new'            => __( 'Add New', 'buddyclients' ),
+            'add_new'            => __( 'Add New', 'buddyclients-free' ),
             'add_new_item'       => sprintf(
                 /* translators: %s: label of the singular item */
-                __( 'Add New %s', 'buddyclients' ),
+                __( 'Add New %s', 'buddyclients-free' ),
                 $singular_name
             ),
             'edit_item'          => sprintf(
                 /* translators: %s: label of the singular item */
-                __( 'Edit %s', 'buddyclients' ),
+                __( 'Edit %s', 'buddyclients-free' ),
                 $singular_name
             ),
             'new_item'           => sprintf(
                 /* translators: %s: label of the singular item */
-                __( 'New %s', 'buddyclients' ),
+                __( 'New %s', 'buddyclients-free' ),
                 $singular_name
             ),
             'all_items'          => $menu_name,
             'view_item'          => sprintf(
                 /* translators: %s: label of the singular item */
-                __( 'View %s', 'buddyclients' ),
+                __( 'View %s', 'buddyclients-free' ),
                 $singular_name
             ),
             'search_items'       => sprintf(
                 /* translators: %s: label of the plural item */
-                __( 'Search %s', 'buddyclients' ),
+                __( 'Search %s', 'buddyclients-free' ),
                 $plural_name
             ),
             'not_found'          => sprintf(
                 /* translators: %s: label of the plural item */
-                __( 'No %s found', 'buddyclients' ),
+                __( 'No %s found', 'buddyclients-free' ),
                 strtolower($plural_name)
             ),
             'not_found_in_trash' => sprintf(
                 /* translators: %s: label of the plural item */
-                __( 'No %s found in trash', 'buddyclients' ),
+                __( 'No %s found in trash', 'buddyclients-free' ),
                 strtolower($plural_name)
             ),
             'parent_item_colon'  => '',

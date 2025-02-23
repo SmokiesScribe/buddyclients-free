@@ -15,12 +15,12 @@ function buddyc_user_agreements_table() {
     
     // Define headers
     $headers = [
-        __( 'Legal Name', 'buddyclients' ),
-        __( 'Type', 'buddyclients' ),
-        __( 'Date', 'buddyclients' ),
-        __( 'Status', 'buddyclients' ),  
-        __( 'Email', 'buddyclients' ),
-        __( 'Download PDF', 'buddyclients' ),
+        __( 'Legal Name', 'buddyclients-free' ),
+        __( 'Type', 'buddyclients-free' ),
+        __( 'Date', 'buddyclients-free' ),
+        __( 'Status', 'buddyclients-free' ),  
+        __( 'Email', 'buddyclients-free' ),
+        __( 'Download PDF', 'buddyclients-free' ),
     ];
     
     // Define columns
@@ -38,21 +38,21 @@ function buddyc_user_agreements_table() {
         'headings'  => $headers,
         'columns'   => $columns,
         'items'     => $agreements,
-        'title'     => __( 'User Agreements', 'buddyclients' ),
+        'title'     => __( 'User Agreements', 'buddyclients-free' ),
         'filters'   => [
             'type'    => [
-                'label'     => __( 'Type', 'buddyclients' ),
+                'label'     => __( 'Type', 'buddyclients-free' ),
                 'property'  =>  'legal_type',
                 'options'   => [
-                    ''                   => __( 'All', 'buddyclients' ),
-                    'affiliate'          => __( 'Affiliate', 'buddyclients' ),
-                    'team'               => __( 'Team', 'buddyclients' ),
-                    'client'             => __( 'Client', 'buddyclients' ),
+                    ''                   => __( 'All', 'buddyclients-free' ),
+                    'affiliate'          => __( 'Affiliate', 'buddyclients-free' ),
+                    'team'               => __( 'Team', 'buddyclients-free' ),
+                    'client'             => __( 'Client', 'buddyclients-free' ),
                 ],
                 'default'   => 'succeeded'
             ],
             'user'    => [
-                'label'     => __( 'User', 'buddyclients' ),
+                'label'     => __( 'User', 'buddyclients-free' ),
                 'property'  =>  'user_id',
                 'options'   => buddyc_build_agreement_user_options( $agreements )
             ]
@@ -82,7 +82,7 @@ function buddyc_build_agreement_user_options( $agreements ) {
     $user_ids = array_filter( $user_ids );
 
     // Initialize user options
-    $user_options = ['' => __( 'All', 'buddyclients' ) ];
+    $user_options = ['' => __( 'All', 'buddyclients-free' ) ];
 
     // Build user options
     if ( ! empty( $user_ids ) ) {

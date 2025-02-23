@@ -15,12 +15,12 @@ function buddyc_leads_list() {
     
     // Define headers
     $headers = [
-        __( 'Email', 'buddyclients' ),
-        __( 'Name', 'buddyclients' ),
-        __( 'Status', 'buddyclients' ),
-        __( 'Date', 'buddyclients' ),
-        __( 'Interests', 'buddyclients' ),
-        __( 'Auto Email', 'buddyclients' ),        
+        __( 'Email', 'buddyclients-free' ),
+        __( 'Name', 'buddyclients-free' ),
+        __( 'Status', 'buddyclients-free' ),
+        __( 'Date', 'buddyclients-free' ),
+        __( 'Interests', 'buddyclients-free' ),
+        __( 'Auto Email', 'buddyclients-free' ),        
     ];
     
     // Define columns
@@ -36,13 +36,13 @@ function buddyc_leads_list() {
     // Define filters
     $filters = [
         'status'    => [
-            'label'     => __( 'Status', 'buddyclients' ),
+            'label'     => __( 'Status', 'buddyclients-free' ),
             'property'  => 'status',
             'options'   => [
-                ''       => __( 'All', 'buddyclients' ),
-                'active' => __( 'Active', 'buddyclients' ),
-                'won'    => __( 'Won', 'buddyclients' ),
-                'lost'   => __( 'Lost', 'buddyclients' )
+                ''       => __( 'All', 'buddyclients-free' ),
+                'active' => __( 'Active', 'buddyclients-free' ),
+                'won'    => __( 'Won', 'buddyclients-free' ),
+                'lost'   => __( 'Lost', 'buddyclients-free' )
             ],
         ]
     ];
@@ -52,7 +52,7 @@ function buddyc_leads_list() {
         'headings'          => $headers,
         'columns'           => $columns,
         'items'             => $leads,
-        'title'             => __( 'Leads', 'buddyclients' ),
+        'title'             => __( 'Leads', 'buddyclients-free' ),
         'items_per_page'    => 20,
         'filters'           => $filters
     ];

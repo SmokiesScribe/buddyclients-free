@@ -47,8 +47,8 @@ class TaxManager {
         $taxonomies = [
             'brief_type' => [
                 'post_type'             => 'buddyc_brief',
-                'singular_name'         => __( 'Brief Type', 'buddyclients' ),
-                'plural_name'           => __( 'Brief Types', 'buddyclients' ),
+                'singular_name'         => __( 'Brief Type', 'buddyclients-free' ),
+                'plural_name'           => __( 'Brief Types', 'buddyclients-free' ),
                 'show_in_menu'          => null,
                 'hierarchical'          => true,
                 'public'                => true,
@@ -56,8 +56,8 @@ class TaxManager {
             ],
             'buddyc_testimonial_tag' => [
                 'post_type'             => 'buddyc_testimonial',
-                'singular_name'         => __( 'Tag', 'buddyclients' ),
-                'plural_name'           => __( 'Tags', 'buddyclients' ),
+                'singular_name'         => __( 'Tag', 'buddyclients-free' ),
+                'plural_name'           => __( 'Tags', 'buddyclients-free' ),
                 'show_in_menu'          => null,
                 'hierarchical'          => false,
                 'public'                => true,
@@ -65,8 +65,8 @@ class TaxManager {
             ],
             'buddyc_legal_type' => [
                 'post_type'             => 'buddyc_legal',
-                'singular_name'         => __( 'Type', 'buddyclients' ),
-                'plural_name'           => __( 'Types', 'buddyclients' ),
+                'singular_name'         => __( 'Type', 'buddyclients-free' ),
+                'plural_name'           => __( 'Types', 'buddyclients-free' ),
                 'show_in_menu'          => null,
                 'hierarchical'          => true,
                 'public'                => false,

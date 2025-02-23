@@ -32,71 +32,71 @@ class SettingsEmail {
     public static function settings() {
         return [
             'enable' => [
-                'title' => __( 'Enable Email Notifications', 'buddyclients' ),
-                'description' => __( 'Specify which email notifications to enable.', 'buddyclients' ),
+                'title' => __( 'Enable Email Notifications', 'buddyclients-free' ),
+                'description' => __( 'Specify which email notifications to enable.', 'buddyclients-free' ),
                 'fields' => [
                     'send_notifications' => [
-                        'label' => __( 'Enable Email Notifications', 'buddyclients' ),
+                        'label' => __( 'Enable Email Notifications', 'buddyclients-free' ),
                         'type' => 'checkbox_table',
                         'options' => self::email_options(),
                         'default' => self::email_options( true ),
                         'descriptions' => self::email_descriptions(),
-                        'description' => __( 'Select the events you would like to trigger email notifications for users.', 'buddyclients' ) . '<br><span class="buddyc-text-red">*</span> ' . __( 'Disabling starred emails may impact plugin functionality.', 'buddyclients' ),
+                        'description' => __( 'Select the events you would like to trigger email notifications for users.', 'buddyclients-free' ) . '<br><span class="buddyc-text-red">*</span> ' . __( 'Disabling starred emails may impact plugin functionality.', 'buddyclients-free' ),
                     ],
                 ],
             ],
             'send' => [
-                'title' => __( 'Email Sender', 'buddyclients' ),
-                'description' => __( 'Specify the sent-from name and email.', 'buddyclients' ),
+                'title' => __( 'Email Sender', 'buddyclients-free' ),
+                'description' => __( 'Specify the sent-from name and email.', 'buddyclients-free' ),
                 'fields' => [
                     'from_email' => [
-                        'label' => __( 'From Email', 'buddyclients' ),
+                        'label' => __( 'From Email', 'buddyclients-free' ),
                         'type' => 'email',
                         'default' => get_option('admin_email'),
-                        'description' => __( 'Notifications will be sent to users from this email address.', 'buddyclients' ),
+                        'description' => __( 'Notifications will be sent to users from this email address.', 'buddyclients-free' ),
                     ],
                     'from_name' => [
-                        'label' => __( 'From Name', 'buddyclients' ),
+                        'label' => __( 'From Name', 'buddyclients-free' ),
                         'type' => 'text',
                         'default' => get_option('blogname'),
-                        'description' => __( 'What name should appear on email notifications?', 'buddyclients' ),
+                        'description' => __( 'What name should appear on email notifications?', 'buddyclients-free' ),
                     ],
                 ],
             ],
             'admin' => [
-                'title' => __( 'Admin Email Notifications', 'buddyclients' ),
-                'description' => __( 'Handle how you receive admin notifications.', 'buddyclients' ),
+                'title' => __( 'Admin Email Notifications', 'buddyclients-free' ),
+                'description' => __( 'Handle how you receive admin notifications.', 'buddyclients-free' ),
                 'fields' => [
                     'notification_email' => [
-                        'label' => __( 'Notification Email', 'buddyclients' ),
+                        'label' => __( 'Notification Email', 'buddyclients-free' ),
                         'type' => 'email',
                         'default' => get_option('admin_email'),
-                        'description' => __( 'Where would you like to receive admin email notifications?', 'buddyclients' ),
+                        'description' => __( 'Where would you like to receive admin email notifications?', 'buddyclients-free' ),
                     ],
                 ],
             ],
             'log' => [
-                'title' => __( 'Email Log', 'buddyclients' ),
+                'title' => __( 'Email Log', 'buddyclients-free' ),
                 'description' => sprintf(
                     /* translators: %s: URL to view the email log */
                     '%s <a href="%s">%s</a>',
-                    __( 'Email log settings.', 'buddyclients' ),
+                    __( 'Email log settings.', 'buddyclients-free' ),
                     esc_url( admin_url( 'admin.php?page=buddyc-email-log' ) ),
-                    __( 'View the email log.', 'buddyclients' )
+                    __( 'View the email log.', 'buddyclients-free' )
                 ),
                 'fields' => [
                     'email_log_time' => [
-                        'label' => __( 'Email Log Time', 'buddyclients' ),
+                        'label' => __( 'Email Log Time', 'buddyclients-free' ),
                         'type' => 'dropdown',
                         'default' => '182',
                         'options' => [
-                            '30'  => __( '30 Days', 'buddyclients' ),
-                            '90'  => __( '90 Days', 'buddyclients' ),
-                            '182' => __( '6 Months', 'buddyclients' ),
-                            '365' => __( '1 Year', 'buddyclients' ),
-                            'always' => __( 'Forever', 'buddyclients' )
+                            '30'  => __( '30 Days', 'buddyclients-free' ),
+                            '90'  => __( '90 Days', 'buddyclients-free' ),
+                            '182' => __( '6 Months', 'buddyclients-free' ),
+                            '365' => __( '1 Year', 'buddyclients-free' ),
+                            'always' => __( 'Forever', 'buddyclients-free' )
                         ],
-                        'description' => __( 'Email log records older than the selected timeframe will be deleted.', 'buddyclients' ),
+                        'description' => __( 'Email log records older than the selected timeframe will be deleted.', 'buddyclients-free' ),
                     ],
                 ],
             ]
@@ -161,7 +161,7 @@ class SettingsEmail {
         return sprintf(
             '%1$s <span class="buddyc-text-bold"><span class="buddyc-text-red">*</span> %2$s</span>',
             esc_html( $description ),
-            esc_html( __( 'Critical to plugin function', 'buddyclients' ) )
+            esc_html( __( 'Critical to plugin function', 'buddyclients-free' ) )
         );
     }
 

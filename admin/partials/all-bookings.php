@@ -19,13 +19,13 @@ function buddyc_dashboard_content() {
     
     // Define headers
     $headers = [
-        __( 'Services', 'buddyclients' ),
-        __( 'Date', 'buddyclients' ),
-        __( 'Status', 'buddyclients' ),
-        __( 'Client', 'buddyclients' ),
-        __( 'Project', 'buddyclients' ),
-        __( 'Total Fee', 'buddyclients' ),
-        __( 'Actions', 'buddyclients' ),
+        __( 'Services', 'buddyclients-free' ),
+        __( 'Date', 'buddyclients-free' ),
+        __( 'Status', 'buddyclients-free' ),
+        __( 'Client', 'buddyclients-free' ),
+        __( 'Project', 'buddyclients-free' ),
+        __( 'Total Fee', 'buddyclients-free' ),
+        __( 'Actions', 'buddyclients-free' ),
     ];
     
     // Define columns
@@ -52,14 +52,14 @@ function buddyc_dashboard_content() {
         'classes'   => $classes,
         'columns'   => $columns,
         'items'     => $booking_intents,
-        'title'     => __( 'Bookings', 'buddyclients' ),
+        'title'     => __( 'Bookings', 'buddyclients-free' ),
         'filters'   => [
             'status'    => [
-                'label'     => __( 'Status', 'buddyclients' ),
+                'label'     => __( 'Status', 'buddyclients-free' ),
                 'property'  =>  'status',
                 'options'   => [
-                    'succeeded'   => __( 'Succeeded', 'buddyclients' ),
-                    'incomplete'  => __( 'Incomplete', 'buddyclients' ),
+                    'succeeded'   => __( 'Succeeded', 'buddyclients-free' ),
+                    'incomplete'  => __( 'Incomplete', 'buddyclients-free' ),
                 ],
                 'default'   => 'succeeded'
             ]

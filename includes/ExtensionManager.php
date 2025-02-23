@@ -61,28 +61,28 @@ class ExtensionManager {
                 'required_class'    => BookedServiceList::class,
                 'content_callback'  => [new BookedServiceList, 'build'],
                 'slug'              => 'services',
-                'name'              => __( 'Project Services', 'buddyclients' ),
-                'title'             => __( 'Project Services', 'buddyclients' ),
+                'name'              => __( 'Project Services', 'buddyclients-free' ),
+                'title'             => __( 'Project Services', 'buddyclients-free' ),
                 'private'           => true,
                 'nav_item_position' => 200,
                 'enable_nav_item'   => true,
                 'enable_nav_item'   => true,
                 'screens' => [
-                    'edit' => ['name'      => __( 'Project Services', 'buddyclients' )],
+                    'edit' => ['name'      => __( 'Project Services', 'buddyclients-free' )],
                     'create'        => ['position' => 0],
                 ],
             ],
             'test'  => [
                 'content_callback'  => [self::class, 'testing'],
                 'slug'              => 'test',
-                'name'              => __( 'Test', 'buddyclients' ),
-                'title'             => __( 'Test', 'buddyclients' ),
+                'name'              => __( 'Test', 'buddyclients-free' ),
+                'title'             => __( 'Test', 'buddyclients-free' ),
                 'private'           => true,
                 'nav_item_position' => 200,
                 'enable_nav_item'   => true,
                 'enable_nav_item'   => true,
                 'screens' => [
-                    'edit' => ['name'      => __( 'Test', 'buddyclients' )],
+                    'edit' => ['name'      => __( 'Test', 'buddyclients-free' )],
                     'create'        => ['position' => 0],
                 ],
             ]
@@ -174,8 +174,8 @@ class ExtensionManager {
             'type'              => 'profile',
             'content_callback'  => [new BookedServiceList, 'build'],
             'slug'              => 'services',
-            'name'              => __( 'Services', 'buddyclients' ),
-            'title'             => __( 'My Services', 'buddyclients' ),
+            'name'              => __( 'Services', 'buddyclients-free' ),
+            'title'             => __( 'My Services', 'buddyclients-free' ),
             'private'           => true
         ];
     }
@@ -190,8 +190,8 @@ class ExtensionManager {
             'type'              => 'profile',
             'content_callback'  => [new AffiliateProfile, 'build'],
             'slug'              => 'affiliate',
-            'name'              => __( 'Affiliate Program', 'buddyclients' ),
-            'title'             => __( 'Affiliate Program', 'buddyclients' ),
+            'name'              => __( 'Affiliate Program', 'buddyclients-free' ),
+            'title'             => __( 'Affiliate Program', 'buddyclients-free' ),
             'private'           => true
         ];
     }
@@ -206,8 +206,8 @@ class ExtensionManager {
             'type'              => 'profile',
             'content_callback'  => [new AvailabilityProfile, 'build'],
             'slug'              => 'availability',
-            'name'              => __( 'Availability', 'buddyclients' ),
-            'title'             => __( 'Availability', 'buddyclients' ),
+            'name'              => __( 'Availability', 'buddyclients-free' ),
+            'title'             => __( 'Availability', 'buddyclients-free' ),
             'private'           => true,
             'member_type'       => 'team'
         ];
@@ -223,8 +223,8 @@ class ExtensionManager {
             'type'              => 'profile',
             'content_callback'  => [new LegalForm( 'team' ), 'echo_form'],
             'slug'              => 'team',
-            'name'              => __( 'Team Agreement', 'buddyclients' ),
-            'title'             => __( 'Team Agreement', 'buddyclients' ),
+            'name'              => __( 'Team Agreement', 'buddyclients-free' ),
+            'title'             => __( 'Team Agreement', 'buddyclients-free' ),
             'private'           => true,
             'member_type'       => 'team'
         ];
@@ -240,8 +240,8 @@ class ExtensionManager {
             'type'              => 'profile',
             'content_callback'  => [new SalesProfile, 'build'],
             'slug'              => 'buddyc-sales',
-            'name'              => __( 'Sales', 'buddyclients' ),
-            'title'             => __( 'Sales Commission', 'buddyclients' ),
+            'name'              => __( 'Sales', 'buddyclients-free' ),
+            'title'             => __( 'Sales Commission', 'buddyclients-free' ),
             'private'           => true,
             'member_type'       => 'sales'
         ];
@@ -257,8 +257,8 @@ class ExtensionManager {
             'type'              => 'settings',
             'content_callback'  => [new UserFilesForm, 'build'],
             'slug'              => 'buddyc-files',
-            'name'              => __( 'Files', 'buddyclients' ),
-            'title'             => __( 'Manage Files', 'buddyclients' ),
+            'name'              => __( 'Files', 'buddyclients-free' ),
+            'title'             => __( 'Manage Files', 'buddyclients-free' ),
             'private'           => true
         ];
     }
@@ -273,14 +273,14 @@ class ExtensionManager {
             'type'              => 'group',
             'content_callback'  => [new BookedServiceList, 'build'],
             'slug'              => 'services',
-            'name'              => __( 'Project Services', 'buddyclients' ),
-            'title'             => __( 'Project Services', 'buddyclients' ),
+            'name'              => __( 'Project Services', 'buddyclients-free' ),
+            'title'             => __( 'Project Services', 'buddyclients-free' ),
             'private'           => true,
             'nav_item_position' => 200,
             'enable_nav_item'   => true,
             'enable_nav_item'   => true,
             'screens' => [
-                'edit' => ['name'      => __( 'Project Services', 'buddyclients' )],
+                'edit' => ['name'      => __( 'Project Services', 'buddyclients-free' )],
                 'create'        => ['position' => 0],
             ],
         ];

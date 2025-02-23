@@ -49,11 +49,11 @@ function buddyc_user_list() {
     
     // Define headers
     $headers = [
-        __( 'User', 'buddyclients' ),
-        __( 'Date Registered', 'buddyclients' ),
-        __( 'Email', 'buddyclients' ),
-        __( 'Type', 'buddyclients' ),
-        __( 'Agreements', 'buddyclients' )
+        __( 'User', 'buddyclients-free' ),
+        __( 'Date Registered', 'buddyclients-free' ),
+        __( 'Email', 'buddyclients-free' ),
+        __( 'Type', 'buddyclients-free' ),
+        __( 'Agreements', 'buddyclients-free' )
     ];
     
     // Define columns
@@ -68,11 +68,11 @@ function buddyc_user_list() {
     // Define filters
     $filters = [
         'type'    => [
-            'label'     => __( 'Type', 'buddyclients' ),
+            'label'     => __( 'Type', 'buddyclients-free' ),
             'property'  => 'type',
             'options'   => [
-                'team'   => __( 'Team', 'buddyclients' ),
-                'client' => __( 'Client', 'buddyclients' ),
+                'team'   => __( 'Team', 'buddyclients-free' ),
+                'client' => __( 'Client', 'buddyclients-free' ),
             ],
             'default'   => 'team'
         ]
@@ -83,7 +83,7 @@ function buddyc_user_list() {
         'headings'          => $headers,
         'columns'           => $columns,
         'items'             => $users_array,
-        'title'             => __( 'Users', 'buddyclients' ),
+        'title'             => __( 'Users', 'buddyclients-free' ),
         'items_per_page'    => 20,
         'filters'           => $filters
     ];

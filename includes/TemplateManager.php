@@ -191,7 +191,7 @@ class TemplateManager {
             $posts = array(
                 (object) array(
                     'post_content' => $content,
-                    //'post_title'   => esc_html__( 'Services', 'buddyclients' ),
+                    //'post_title'   => esc_html__( 'Services', 'buddyclients-free' ),
                     'ID'           => 0, // Optional, you can provide a dummy ID for the container
                 )
             );

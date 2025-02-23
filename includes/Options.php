@@ -239,7 +239,7 @@ class Options {
         
         // Add flat option to rate type
         if ($post_type === 'buddyc_rate_type') {
-            $options['flat'] = __( 'Flat', 'buddyclients' );
+            $options['flat'] = __( 'Flat', 'buddyclients-free' );
         }
         
         // Get posts
@@ -261,7 +261,7 @@ class Options {
                 $exp_timestamp = strtotime($expiration);
                 $curr_timestamp = time();
                 if ($curr_timestamp > $exp_timestamp) {
-                    $expired = __( ' - Expired', 'buddyclients' );
+                    $expired = __( ' - Expired', 'buddyclients-free' );
                 }
             }
             
@@ -381,10 +381,10 @@ class Options {
      */
     private function payment_methods() {
         return [
-            'ach_transfer'      => __( 'ACH Transfer', 'buddyclients' ),
-            'bank_transfer'     => __( 'Bank Transfer', 'buddyclients' ),
-            'digital_check'     => __( 'Digital Check', 'buddyclients' ),
-            'physical_check'    => __( 'Physical Check', 'buddyclients' ),
+            'ach_transfer'      => __( 'ACH Transfer', 'buddyclients-free' ),
+            'bank_transfer'     => __( 'Bank Transfer', 'buddyclients-free' ),
+            'digital_check'     => __( 'Digital Check', 'buddyclients-free' ),
+            'physical_check'    => __( 'Physical Check', 'buddyclients-free' ),
             'paypal'            => 'PayPal',
             'stripe'            => 'Stripe',
             'cash_app'          => 'Cash App',

@@ -54,7 +54,7 @@ class AdminPageManager {
             'general' => [
                 'key' => 'general',
                 'settings' => true,
-                'title' => __('Settings', 'buddyclients'),
+                'title' => __('Settings', 'buddyclients-free'),
                 'parent_slug' => 'buddyc-dashboard',
                 'buddyc_menu_order' => 26,
                 'group' => 'settings'
@@ -70,7 +70,7 @@ class AdminPageManager {
             'components' => [
                 'key' => 'components',
                 'settings' => true,
-                'title' => __('Components', 'buddyclients'),
+                'title' => __('Components', 'buddyclients-free'),
                 'parent_slug' => null,
             ],
             'stripe' => [
@@ -84,46 +84,46 @@ class AdminPageManager {
             'affiliate' => [
                 'key' => 'affiliate',
                 'settings' => true,
-                'title' => __('Affiliate Program', 'buddyclients'),
+                'title' => __('Affiliate Program', 'buddyclients-free'),
                 'parent_slug' => null,
                 'required_component' => 'Affiliate'
             ],
             'booking' => [
                 'key' => 'booking',
                 'settings' => true,
-                'title' => __('Bookings', 'buddyclients'),
+                'title' => __('Bookings', 'buddyclients-free'),
                 'parent_slug' => null,
             ],
             'sales' => [
                 'key' => 'sales',
                 'settings' => true,
-                'title' => __('Sales', 'buddyclients'),
+                'title' => __('Sales', 'buddyclients-free'),
                 'parent_slug' => null,
                 'required_component' => 'Sales'
             ],
             'help' => [
                 'key' => 'help',
                 'settings' => true,
-                'title' => __('Contact & Leads', 'buddyclients'),
+                'title' => __('Contact & Leads', 'buddyclients-free'),
                 'parent_slug' => null,
             ],
             'pages' => [
                 'key' => 'pages',
                 'settings' => true,
-                'title' => __('Pages', 'buddyclients'),
+                'title' => __('Pages', 'buddyclients-free'),
                 'parent_slug' => null,
             ],
             'legal' => [
                 'key' => 'legal',
                 'settings' => true,
-                'title' => __('Legal', 'buddyclients'),
+                'title' => __('Legal', 'buddyclients-free'),
                 'parent_slug' => null,
                 'required_component' => 'Legal'
             ],
             'email' => [
                 'key' => 'email',
                 'settings' => true,
-                'title' => __('Emails', 'buddyclients'),
+                'title' => __('Emails', 'buddyclients-free'),
                 'parent_slug' => null,
                 'required_class' => 'BuddyClients\Components\Email\EmailTemplateManager',
                 'required_component' => 'Email',
@@ -131,13 +131,13 @@ class AdminPageManager {
             'integrations' => [
                 'key' => 'integrations',
                 'settings' => true,
-                'title' => __('Integrations', 'buddyclients'),
+                'title' => __('Integrations', 'buddyclients-free'),
                 'parent_slug' => null,
             ],
             'license' => [
                 'key' => 'license',
                 'settings' => true,
-                'title' => __('License Keys', 'buddyclients'),
+                'title' => __('License Keys', 'buddyclients-free'),
                 'parent_slug' => 'buddyc-dashboard',
                 'buddyc_menu_order' => 30,
                 'group' => 'settings'
@@ -146,7 +146,7 @@ class AdminPageManager {
             // Other Pages
             'email_log' => [
                 'key' => 'email-log',
-                'title' => __('Email Log', 'buddyclients'),
+                'title' => __('Email Log', 'buddyclients-free'),
                 'settings' => false,
                 'parent_slug' => null,
                 'callable' => 'buddyc_email_log_content',
@@ -154,21 +154,21 @@ class AdminPageManager {
             ],
             'bookings_dashboard' => [
                 'key' => 'bookings-dashboard',
-                'title' => __('Bookings Dashboard', 'buddyclients'),
+                'title' => __('Bookings Dashboard', 'buddyclients-free'),
                 'settings' => false,
                 'parent_slug' => null,
                 'callable' => 'buddyc_bookings_dashboard'
             ],
             'payments' => [
                 'key' => 'payments',
-                'title' => __('Payments', 'buddyclients'),
+                'title' => __('Payments', 'buddyclients-free'),
                 'settings' => false,
                 'parent_slug' => null,
                 'callable' => 'buddyc_payments_list'
             ],
             'users' => [
                 'key' => 'users',
-                'title' => __('Users', 'buddyclients'),
+                'title' => __('Users', 'buddyclients-free'),
                 'settings' => false,
                 'parent_slug' => null,
                 'callback' => 'buddyc_user_list',
@@ -176,7 +176,7 @@ class AdminPageManager {
             ],
             'leads' => [
                 'key' => 'leads',
-                'title' => __('Leads', 'buddyclients'),
+                'title' => __('Leads', 'buddyclients-free'),
                 'settings' => false,
                 'parent_slug' => null,
                 'callback' => 'buddyc_leads_list',
@@ -184,14 +184,14 @@ class AdminPageManager {
             ],
             'booked_services' => [
                 'key' => 'booked-services',
-                'title' => __('Booked Services', 'buddyclients'),
+                'title' => __('Booked Services', 'buddyclients-free'),
                 'settings' => false,
                 'parent_slug' => null,
                 'callable' => 'buddyc_booked_services_table'
             ],
             'legal_agreements' => [
                 'key' => 'legal-agreements',
-                'title' => __('Legal Agreements', 'buddyclients'),
+                'title' => __('Legal Agreements', 'buddyclients-free'),
                 'settings' => false,
                 'parent_slug' => null,
                 'callable' => 'buddyc_legal_agreements_admin',
@@ -199,7 +199,7 @@ class AdminPageManager {
             ],
             'user_agreements' => [
                 'key' => 'user-agreements',
-                'title' => __('Legal', 'buddyclients'),
+                'title' => __('Legal', 'buddyclients-free'),
                 'settings' => false,
                 'parent_slug' => 'buddyc-dashboard',
                 'callable' => 'buddyc_user_agreements_table',
@@ -208,7 +208,7 @@ class AdminPageManager {
             ],
             'upgrade' => [
                 'key' => 'upgrade',
-                'title' => __('Upgrade BuddyClients', 'buddyclients'),
+                'title' => __('Upgrade BuddyClients', 'buddyclients-free'),
                 'settings' => false,
                 'parent_slug' => null,
                 'callable' => ['buddyc_upgrade_link', [true]]
