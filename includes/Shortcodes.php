@@ -38,7 +38,7 @@ class Shortcodes {
      * 
      * @since 1.0.25
      */
-    private static function shortcodes_data() {
+    public static function shortcodes_data() {
         $data = [
             'booking' => [
                 'shortcode' => 'buddyc_booking_form',

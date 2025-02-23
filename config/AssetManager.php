@@ -240,7 +240,7 @@ class AssetManager {
 		$is_admin_file = strpos( $file_name, 'admin' ) !== false;
 
 		// Check whether we're in the admin dir
-		$is_admin_dir = strpos( $this->dir_path, 'buddyclients/admin/assets' );
+		$is_admin_dir = strpos( $this->dir_path, '/admin/assets/' );
 
 		// Admin file on front end
 		if ( ! $this->admin && ( $is_admin_file || $is_admin_dir ) ) {

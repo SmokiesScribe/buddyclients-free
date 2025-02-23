@@ -1,6 +1,6 @@
 <?php
 if ( ! defined( 'ABSPATH' ) ) exit; // Exit if accessed directly
-use BuddyClients\Includes\Shortcodes;
+
 /**
  * Enqueues the Google reCAPTCHA script.
  * 
@@ -15,7 +15,7 @@ function buddyc_enqueue_recaptcha_script() {
     }
 
     // Check if popup contact form is enabled
-    $global_enabled = buddyc_global_contact_enabled();
+    $global_enabled = function_exists( 'buddyc_global_contact_enabled' ) ? buddyc_global_contact_enabled() : false;
 
     // Look for shortcode if popup not enabled
     if ( ! $global_enabled ) {
@@ -24,10 +24,10 @@ function buddyc_enqueue_recaptcha_script() {
         $has_shortcode = false;
 
         // Get plugins shortcodes
-        $shortcodes = Shortcodes::shortcodes();
+        $shortcodes = buddyc_shortcodes_data();
 
         // Loop through shortcodes
-        foreach ( $shortcodes as $shortcode => $callable ) {
+        foreach ( $shortcodes as $shortcode => $data ) {
             // Get page content
             $content = get_post()->post_content;
             // Check if shortcode exists on page

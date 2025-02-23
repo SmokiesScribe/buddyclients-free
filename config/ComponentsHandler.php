@@ -105,7 +105,7 @@ class ComponentsHandler {
         if ( $prev_components !== $components ) {
 
             // Update option
-            set_option( '_buddyc_available_components', $components );
+            update_option( '_buddyc_available_components', $components );
 
             /**
              * Fires when available components are changed.
