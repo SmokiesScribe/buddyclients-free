@@ -17,7 +17,7 @@ class SettingsEmail {
      */
     public static function defaults() {
         return [
-            'send_notifications'    => self::email_options( true ),
+            'send_notifications'    => self::get_critical(),
             'from_email'            => get_option('admin_email'),
             'from_name'             => get_option('blogname'),
             'notification_email'    => get_option('admin_email'),
@@ -140,6 +140,22 @@ class SettingsEmail {
     }
 
     /**
+     * Retrieves the keys for the critical emails.
+     * 
+     * @since 1.0.27
+     */
+    private static function get_critical() {
+        $critical_emails = [];
+        $templates = EmailTemplateManager::templates();
+        foreach ( $templates as $key => $data ) {
+            if ( isset($data['critical']) && $data['critical'] ) {
+                $critical_emails[$key] = $key;
+            }
+        }
+        return $critical_emails;
+    }
+
+    /**
      * Builds the array of descriptions.
      * 
      * @since 1.0.25
@@ -171,5 +187,4 @@ class SettingsEmail {
             esc_html( __( 'Critical to plugin function', 'buddyclients-free' ) )
         );
     }
-
 }
