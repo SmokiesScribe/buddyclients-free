@@ -356,6 +356,7 @@ class AssetManager {
 			case 'search':
 			case 'create-page':
 			case 'admin-create-legal':
+			case 'dismiss-admin';
 				return [];
 		}
 	}

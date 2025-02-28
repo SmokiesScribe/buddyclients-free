@@ -23,3 +23,49 @@ use BuddyClients\Admin\AdminNotice;
 function buddyc_admin_notice( $args ) {
     new AdminNotice( $args );
 }
+
+/**
+ * Builds the ID for the admin notice.
+ * 
+ * @since 1.0.25
+ * 
+ * @param   string  $key    The unique key for the admin notice.
+ */
+function buddyc_admin_notice_id( $key ) {
+    return AdminNotice::build_id( $key );
+}
+
+/**
+ * Checks whether an admin notice is dimissed.
+ * 
+ * @since 1.0.27
+ * 
+ * @param   string  $key  The key of the notice.
+ */
+function buddyc_admin_notice_dismissed( $key ) {
+    return AdminNotice::dismissed( $key );
+}
+
+/**
+ * Dismisses an admin notice.
+ * 
+ * @since 1.0.27
+ */
+function buddyc_dismiss_admin_notice() {
+
+    // Log the nonce being sent in the AJAX request
+    $nonce = isset( $_POST['nonce'] ) ? trim( sanitize_text_field( wp_unslash( $_POST['nonce'] ) ) ) : null;
+    $nonce_action = isset( $_POST['nonceAction'] ) ? trim( sanitize_text_field( wp_unslash( $_POST['nonceAction'] ) ) ) : null;
+
+    // Verify nonce
+    if ( ! wp_verify_nonce( $nonce, $nonce_action ) ) {
+        return;
+    }
+
+    // Get the admin notice id
+    $notice_id = isset( $_POST['noticeId'] ) ? trim( sanitize_text_field( wp_unslash( $_POST['noticeId'] ) ) ) : null;
+
+    // Update option
+    AdminNotice::dismiss( $notice_id );
+}
+add_action('wp_ajax_buddyc_dismiss_admin_notice', 'buddyc_dismiss_admin_notice'); // For logged-in users

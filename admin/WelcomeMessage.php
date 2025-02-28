@@ -17,13 +17,6 @@ class WelcomeMessage {
     private $free;
 
     /**
-     * The name of the dismissed transient.
-     * 
-     * @var string
-     */
-    private $dismissed_trans = 'buddyc_welcome_message_dismissed';
-
-    /**
      * Constructor method.
      * 
      * @since 1.0.25
@@ -60,7 +53,8 @@ class WelcomeMessage {
      * @since 1.0.25
      */
     private function dismissed() {
-        return get_transient( $this->dismissed_trans, false );
+        $key = $this->build_key();
+        return buddyc_admin_notice_dismissed( $key );
     }
 
     /**
@@ -71,6 +65,7 @@ class WelcomeMessage {
     private function output_notice() {
         // Output the admin notice
         $args = [
+            'key'                => $this->build_key(),
             'message'            => $this->content(),
             'dismissable'        => 'true',
             'color'              => 'green',
@@ -79,6 +74,25 @@ class WelcomeMessage {
             'display'            => ['dashboard']
         ];
         buddyc_admin_notice( $args );
+    }
+
+    /**
+     * Builds the key for the admin notice.
+     * 
+     * @since 1.0.27
+     */
+    private function build_key() {
+        // Initialize
+        $plugin_name = 'buddyclients-free';
+
+        // Format plugin name
+        if ( defined( 'BUDDYC_PLUGIN_NAME' ) ) {
+            $plugin_name = str_replace( ' ', '_', strtolower( BUDDYC_PLUGIN_NAME ) );
+        }
+        return sprintf(
+            'welcome_%s',
+            $plugin_name
+        );
     }
 
     /**
@@ -340,21 +354,10 @@ class WelcomeMessage {
      * @since 1.0.25
      */
     private function dismiss_btn() {
-        $content = '<div class="buddyc-dismiss-welcome-btn-container">';
-        $content .= '<a class="buddyc-dismiss-welcome-btn" href="' . esc_url( admin_url( 'admin-post.php?action=buddyc_dismiss_welcome_message' ) ) . '">';
+        $content = '<div class="buddyc-dismiss-admin-btn-container">';
+        $content .= '<a class="buddyc-dismiss-admin-btn">';
         $content .= esc_html__( 'Dismiss this message', 'buddyclients-free' ) . '</a>';
         $content .= '</div>';
         return $content;
-    }
-
-    /**
-     * Dismisses the welcome notice.
-     * 
-     * @since 1.0.25
-     */
-    public function dismiss() {
-        set_transient( $this->dismissed_trans, true, 7 * DAY_IN_SECONDS ); // 7 days
-        wp_redirect( wp_get_referer() ); // Redirect back to the referring page
-        exit;
     }
 }

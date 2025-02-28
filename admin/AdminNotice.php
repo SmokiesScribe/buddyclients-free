@@ -75,6 +75,13 @@ class AdminNotice {
     private $priority;
 
     /**
+     * The ID of the admin notice.
+     * 
+     * @var string
+     */
+    private $ID;
+
+    /**
      * Constructor method.
      * 
      * @since 0.1.0
@@ -82,6 +89,7 @@ class AdminNotice {
      * @param   array   $args {
      *     An array of arguments for building the admin notice.
      * 
+     *     @string      $key                  The unique key for the notice.
      *     @string      $repair_link          The link to the repair page.
      *     @string      $repair_link_text     Optional. The link text.
      *                                        Defaults to 'Repair'.
@@ -100,6 +108,7 @@ class AdminNotice {
      */
     public function __construct( $args ) {
         $this->message = $args['message'] ?? null;
+        $this->ID = self::build_id( $args['key'] ?? null );
 
         // Exit if no message
         if ( ! $this->message ) {
@@ -258,17 +267,18 @@ class AdminNotice {
 
         // Build the notice
         $notice = sprintf(
-            '<div class="%1$s">
+            '<div class="%1$s" id="%2$s">
                 <span class="dashicons dashicons-buddyclients-darkk buddyc-admin-notice-bc-icon"></span>
                 <div class="buddyc-admin-notice-content">
-                    <span class="buddyc-admin-notice-icon">%2$s</span>
+                    <span class="buddyc-admin-notice-icon">%3$s</span>
                     <div class="buddyc-admin-notice-message">
-                        %3$s
-                        <div class="buddyc-admin-notice-repair">%4$s</div>
+                        %4$s
+                        <div class="buddyc-admin-notice-repair">%5$s</div>
                     </div>
                 </div>
             </div>',
             $classes,
+            $this->ID,
             $this->build_icon(),
             $this->message,
             $repair_link
@@ -350,13 +360,28 @@ class AdminNotice {
     }
 
     /**
+     * Builds the ID for the admin notice.
+     * 
+     * @since 1.0.25
+     * 
+     * @param   string  $key    The unique key for the admin notice.
+     */
+    public static function build_id( $key ) {
+        if ( empty( $key ) ) return '';
+        return sprintf(
+            'buddyc_admin_notice_%s',
+            $key
+        );
+    }
+
+    /**
      * Defines the allowed html.
      * 
      * @since 1.0.21
      */
     private static function allowed_html() {
         return [
-            'div'       => ['class' => true],
+            'div'       => ['class' => true, 'id' => true],
             'p'         => [],
             'a'         => ['href' => true, 'class' => true, 'target' => []],
             'i'         => ['class' => []],
@@ -440,5 +465,28 @@ class AdminNotice {
         ];
         $class_type = $classes[$color] ?? 'info';
         return 'notice-' . $class_type;
+    }
+
+    /**
+     * Dismisses an admin notice.
+     * 
+     * @since 1.0.27
+     * 
+     * @param   string  $notice_id  The ID of the notice to dismiss.
+     */
+    public static function dismiss( $notice_id ) {
+        update_option( $notice_id . '_dismissed', true );
+    }
+
+    /**
+     * Checks whether an admin notice is dimissed.
+     * 
+     * @since 1.0.27
+     * 
+     * @param   string  $key  The key of the notice.
+     */
+    public static function dismissed( $key ) {
+        $notice_id = self::build_id( $key );
+        return get_option( $notice_id . '_dismissed', true );
     }
 }

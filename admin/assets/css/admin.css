@@ -264,8 +264,19 @@ ul.wp-submenu.wp-submenu-wrap li a[href="buddyc-separator"] {
 .buddyc-admin-notice {
     background: #fff;
     border-radius: 8px;
-    position:relative;
+    position: relative;
+    transition: opacity 0.5s ease-out, max-height 0.5s ease-out, margin 0.5s ease-out, padding 0.5s ease-out;
+    max-height: 600px; /* Adjust this based on expected notice height */
+    overflow: hidden;
 }
+
+.buddyc-admin-notice.dismissed {
+    opacity: 0;
+    max-height: 0;
+    margin: 0;
+    padding: 0;
+}
+
 
 /* Container styles */
 .buddyc-admin-notice-content {
@@ -375,17 +386,18 @@ ul.wp-submenu.wp-submenu-wrap li a[href="buddyc-separator"] {
 }
 
 /* Dismiss button */
-.buddyc-dismiss-welcome-btn-container {
+.buddyc-dismiss-admin-btn-container {
     margin: 10px 0 0;
 }
-.buddyc-dismiss-welcome-btn {
+.buddyc-dismiss-admin-btn {
     color: #fff;
     background-color: #e74c3c;
     padding: 0.5em 1em;    
     text-decoration: none;
     border-radius: 5px;
+    cursor: pointer;
 }
-.buddyc-dismiss-welcome-btn:hover {
+.buddyc-dismiss-admin-btn:hover {
     color: #fff;
     background-color: #cd5043;
     text-decoration: none;
