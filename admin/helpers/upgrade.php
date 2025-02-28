@@ -1,5 +1,31 @@
 <?php
 if ( ! defined( 'ABSPATH' ) ) exit; // Exit if accessed directly
+use BuddyClients\Admin\UpgradePage;
+
+/**
+ * Initializes the upgrade page.
+ * 
+ * @since 1.0.27
+ */
+function buddyc_init_upgrade() {
+    if ( class_exists( UpgradePage::class ) ) {
+        UpgradePage::get_instance();
+    }
+}
+add_action( 'init', 'buddyc_init_upgrade' );
+
+/**
+ * Generates a url to the BuddyClients pricing page.
+ * 
+ * @since 0.1.0
+ * @since 1.0.27 Use constant.
+ * 
+ * @ignore
+ */
+function buddyc_upgrade_url() {
+    return trailingslashit( BUDDYC_URL ) . 'pricing';
+}
+
 /**
  * Generates a url to the BuddyClients website.
  * 
@@ -13,17 +39,6 @@ function buddyc_site_url( $path = null ) {
     $url = 'https://buddyclients.com';
     
     return $path ? $url . $path : $url;
-}
-
-/**
- * Generates a url to the BuddyClients pricing page.
- * 
- * @since 0.1.0
- * 
- * @ignore
- */
-function buddyc_upgrade_url() {
-    return buddyc_site_url('/pricing');
 }
 
 /**

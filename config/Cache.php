@@ -17,6 +17,16 @@ class Cache {
     private static $prefix = '_buddyc_cache_';
 
     /**
+     * Builds the cache key from the key and group names.
+     * 
+     * @since 1.0.27
+     */
+    private static function build_cache_key( $key, $group ) {
+        $parts = [self::$prefix, $key, $group];
+        return implode( '_', $parts );
+    }
+
+    /**
      * Retrieves a cached value from the preferred caching method.
      * 
      * @since 1.0.27
@@ -28,7 +38,7 @@ class Cache {
      * @return mixed Cached value or false if not found.
      */
     public static function get( $key, $group = 'default', $type = 'wp_cache' ) {
-        $key = self::$prefix . $key;
+        $key = self::build_cache_key( $key, $group );
 
         switch ( $type ) {
             case 'wp_cache':
@@ -56,7 +66,7 @@ class Cache {
      * @return bool True on success, false on failure.
      */
     public static function set( $key, $value, $expires = HOUR_IN_SECONDS, $group = 'default', $type = 'wp_cache' ) {
-        $key = self::$prefix . $key;
+        $key = self::build_cache_key( $key, $group );
 
         switch ( $type ) {
             case 'wp_cache':
@@ -82,7 +92,7 @@ class Cache {
      * @return bool True on success, false on failure.
      */
     public static function delete( $key, $group = 'default', $type = 'wp_cache' ) {
-        $key = self::$prefix . $key;
+        $key = self::build_cache_key( $key, $group );
 
         switch ( $type ) {
             case 'wp_cache':

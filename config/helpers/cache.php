@@ -31,7 +31,7 @@ function buddyc_cache_get( $key, $group = 'default', $type = 'wp_cache' ) {
  * @return bool True on success, false on failure.
  */
 function buddyc_cache_set( $key, $value, $expires = HOUR_IN_SECONDS, $group = 'default', $type = 'wp_cache' ) {
-    return buddyc_cache_set( $key, $value, $expires, $group, $type );
+    return Cache::set( $key, $value, $expires, $group, $type );
 }
 
 /**
@@ -46,7 +46,7 @@ function buddyc_cache_set( $key, $value, $expires = HOUR_IN_SECONDS, $group = 'd
  * @return bool True on success, false on failure.
  */
 function buddyc_cache_delete( $key, $group = 'default', $type = 'wp_cache' ) {
-    return buddyc_cache_delete( $key, $group, $type );
+    return Cache::delete( $key, $group, $type );
 }
 
 /**

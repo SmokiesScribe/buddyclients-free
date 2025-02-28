@@ -1,0 +1,199 @@
+/* Upgrade Page */
+.buddyc-upgrade-info {
+    width: 100%;
+    max-width: 1200px;
+    margin: 10px auto 100px;
+    padding: 20px;
+    box-sizing: border-box;
+}
+
+.buddyc-upgrade-info h1, 
+.buddyc-upgrade-info h2 {
+    color: #037AAD;
+}
+
+.buddyc-upgrade-info h1 {
+    margin: 50px 0;
+    font-size: 34px;
+    line-height: 50px;
+    font-weight: 300;
+    max-width: 750px;
+}
+
+.buddyc-upgrade-info h2 {
+    margin-top: 40px;
+    font-size: 28px;
+}
+
+.buddyc-upgrade-info h3 {
+    font-size: 24px;
+    line-height: 30px;
+    display: flex;
+    align-items: center; /* Vertically centers the icon and text */
+    gap: 10px; /* Adds spacing between the icon and text */
+}
+
+.buddyc-upgrade-option .buddyc-icon {
+    display: flex; /* Enables flexbox for proper alignment */
+    width: 50px;
+    height: 50px;
+    justify-content: center; /* Centers content horizontally */
+    align-items: center; /* Centers content vertically */
+    flex-shrink: 0; /* Prevents resizing */
+}
+
+.buddyc-upgrade-info p {
+    margin: 20px;
+    font-size: 18px;
+}
+
+/* Table Styling */
+.buddyc-upgrade-info table {
+    width: 100%;
+    border-collapse: collapse;
+    margin: 20px 0;
+}
+
+.buddyc-upgrade-info th, 
+.buddyc-upgrade-info td {
+    border: 1px solid #ddd;
+    padding: 12px;
+    text-align: left;
+}
+
+.buddyc-upgrade-info th {
+    background-color: #f1f1f1;
+}
+
+/* Upgrade Options - Use CSS Grid for Equal Height */
+.buddyc-upgrade-options {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+    gap: 20px;
+}
+
+/* Ensure all upgrade options have the same height */
+.buddyc-upgrade-info .buddyc-upgrade-option {
+    border-radius: 15px;
+    border: solid 1px #e7e9ec;
+    background-color: #ffffff;
+    padding: 25px;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    position: relative;
+    transition: box-shadow 0.3s ease-in-out;
+    min-height: 100%; /* Make sure all items stretch to the tallest one */
+}
+.buddyc-upgrade-info .buddyc-upgrade-option:hover {
+    box-shadow: 4px 4px 10px rgba(0, 0, 0, 0.1), 
+    -2px -2px 5px rgba(0, 0, 0, 0.05);
+}
+
+/* Inner container to push content and button apart */
+.buddyc-upgrade-option-inner {
+    display: flex;
+    flex-direction: column;
+    flex-grow: 1; /* Allows it to take up all available space */
+}
+
+/* Ensure content inside stretches */
+.buddyc-upgrade-option-content {
+    flex-grow: 1;
+}
+
+/* Buttons container - left alignment */
+.buddyc-upgrade-btns {
+    display: flex;
+    justify-content: flex-start; /* Align buttons to the left */
+    align-items: center;
+    gap: 15px; /* Adds space between buttons */
+    max-width: 100%;
+    flex-wrap: wrap; /* Allows wrapping on smaller screens */
+    margin: 10px 10px 30px 20px;
+}
+
+/* Keep the button at the bottom */
+.buddyc-upgrade-info .buddyc-upgrade-btn {
+    background-color: #037AAD;
+    color: white;
+    padding: 11px 20px;
+    text-align: center;
+    text-decoration: none;
+    border-radius: 5px;
+    transition: background-color 0.3s ease;
+    font-size: 16px;
+    font-weight: 500;
+}
+
+.buddyc-upgrade-info .buddyc-upgrade-btn:hover {
+    background-color: #005177;
+}
+
+.buddyc-upgrade-btn i {
+    margin-left: 10px;
+}
+
+.buddyc-active-label {
+    border: 1px solid var(--buddyclients-brand-green);
+    color: var(--buddyclients-brand-green);
+    padding: 10px 20px;
+    border-radius: 5px;
+    font-size: 16px;
+    font-weight: 500;
+}
+
+/* Responsive Fix */
+@media screen and (max-width: 1024px) {
+    .buddyc-upgrade-options {
+        grid-template-columns: 1fr;
+    }
+}
+
+/* Feature List */
+.buddyc-upgrade-info ul {
+    text-align: left;
+    margin: 20px;
+    margin-top: 30px;
+    list-style: none;
+    padding-left: 0;
+}
+
+.buddyc-upgrade-info li {
+    margin-bottom: 10px;
+    font-size: 16px;
+    display: flex;
+    align-items: center;
+    text-transform: capitalize;
+    font-weight: 500;
+}
+
+.buddyc-upgrade-info .feature-check {
+    margin-right: 10px;
+    color: #037AAD;
+    font-size: 18px;
+}
+
+/* Mobile Responsive */
+@media screen and (max-width: 1024px) {
+
+    .buddyc-upgrade-options {
+        flex-direction: column;
+        align-items: center;
+    }
+
+    .buddyc-upgrade-info .buddyc-upgrade-option {
+        width: 90%;
+        margin: auto;
+    }
+
+    .buddyc-upgrade-option-content {
+        max-width: 500px;
+        margin: auto;
+    }
+
+    .buddyc-upgrade-info .buy-now {
+        font-size: 18px;
+        padding: 14px;
+    }
+}
