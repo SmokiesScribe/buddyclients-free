@@ -487,6 +487,6 @@ class AdminNotice {
      */
     public static function dismissed( $key ) {
         $notice_id = self::build_id( $key );
-        return get_option( $notice_id . '_dismissed', true );
+        return get_option( $notice_id . '_dismissed' );
     }
 }

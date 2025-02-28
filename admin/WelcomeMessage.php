@@ -83,7 +83,7 @@ class WelcomeMessage {
      */
     private function build_key() {
         // Initialize
-        $plugin_name = 'buddyclients-free';
+        $plugin_name = 'buddyclients';
 
         // Format plugin name
         if ( defined( 'BUDDYC_PLUGIN_NAME' ) ) {
