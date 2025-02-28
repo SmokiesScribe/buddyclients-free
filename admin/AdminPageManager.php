@@ -106,6 +106,7 @@ class AdminPageManager {
                 'settings' => true,
                 'title' => __('Contact & Leads', 'buddyclients-free'),
                 'parent_slug' => null,
+                'required_component' => 'Contact'
             ],
             'pages' => [
                 'key' => 'pages',
