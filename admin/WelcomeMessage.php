@@ -39,9 +39,7 @@ class WelcomeMessage {
      * @since 1.0.25
      */
     private function define_hooks() {
-        add_action( 'buddyc_version_switch', [$this, 'handle_upgrade'], 10, 1 );
         add_action( 'admin_init', [$this, 'build'] );
-        add_action( 'admin_post_buddyc_dismiss_welcome_message', [$this, 'dismiss'] );
     }
 
     /**
@@ -347,21 +345,6 @@ class WelcomeMessage {
         $content .= esc_html__( 'Dismiss this message', 'buddyclients-free' ) . '</a>';
         $content .= '</div>';
         return $content;
-    }
-
-    /**
-     * Sets the transient when the plugin is upgraded from free to regular.
-     * 
-     * @since 1.0.25
-     * 
-     * @param   string  $new_version    The name of the new version.
-     */
-    public function handle_upgrade( $new_version ) {
-        // Make sure we're not switching to the regular version
-        if ( $new_version === 'buddyclients-free' ) {            
-            // Remove dismissed transient
-            delete_transient( $this->dismissed_trans );
-        }
     }
 
     /**
