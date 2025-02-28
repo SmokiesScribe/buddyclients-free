@@ -263,7 +263,7 @@ class Options {
                 if ( $curr_timestamp > $exp_timestamp ) {
                     $expired = sprintf(
                         ' - %s',
-                        __( 'Expired', 'buddyclients' )
+                        __( 'Expired', 'buddyclients-free' )
                     );
                 }
             }
