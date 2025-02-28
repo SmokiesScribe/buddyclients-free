@@ -54,6 +54,13 @@ Banner URL: /assets/media/banner-772x250/banner.png
 
 == Changelog ==
 
+= 1.0.27 - February 27, 2025 =
+* New Feature! Accept payments in two installments.
+* New Feature! See when all services for a booking have been completed.
+* Improvement: Added caching to improve plugin speed.
+* Improvement: Added scheduler to improve abandoned booking email delivery.
+* Fixed: Allow form submissions when reCAPTCHA is disabled.
+
 = 1.0.26 - February 23, 2025 =
 * Fixed: Bug in email templates.
 

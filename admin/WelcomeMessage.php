@@ -162,10 +162,8 @@ class WelcomeMessage {
      * @since 1.0.25
      */
     private function link_list() {
-        // Initialize
-        $content = '<ul>';
 
-        // Build premium items
+        // Build all items
         $items = [
             'user_guides' => [
                 'icon'          => 'key',
@@ -173,7 +171,7 @@ class WelcomeMessage {
                 'target'        => '_blank',
                 'link_text'     => __( 'Enter your license key', 'buddyclients-free' ),
                 'follow_text'   => __( 'to activate premium features', 'buddyclients-free' ),
-                'free'          => true,
+                'free'          => false,
                 'regular'       => true,
             ],
             'add_website' => [
@@ -182,7 +180,7 @@ class WelcomeMessage {
                 'target'        => '_blank',
                 'link_text'     => __( 'Add this website', 'buddyclients-free' ),
                 'follow_text'   => __( 'to your BuddyClients account', 'buddyclients-free' ),
-                'free'          => true,
+                'free'          => false,
                 'regular'       => true,
             ],
             'update_components' => [
@@ -200,7 +198,7 @@ class WelcomeMessage {
                 'target'        => false,
                 'link_text'     => __( 'Explore user guides', 'buddyclients-free' ),
                 'follow_text'   => __( 'to get the most out of BuddyClients', 'buddyclients-free' ),
-                'free'          => false,
+                'free'          => true,
                 'regular'       => true,
             ],
             'upgrade' => [
@@ -213,6 +211,9 @@ class WelcomeMessage {
                 'regular'       => false,
             ],
         ];
+
+        // Initialize
+        $content = '<ul>';
 
         // Build items based on plugin type
         $filtered_items = [];
@@ -357,7 +358,7 @@ class WelcomeMessage {
      */
     public function handle_upgrade( $new_version ) {
         // Make sure we're not switching to the regular version
-        if ( $new_version === 'BuddyClients' ) {            
+        if ( $new_version === 'buddyclients-free' ) {            
             // Remove dismissed transient
             delete_transient( $this->dismissed_trans );
         }

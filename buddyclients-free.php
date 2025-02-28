@@ -5,7 +5,7 @@
  * Description: BuddyClients is a flexible and comprehensive platform for any service-based business. Compatible with BuddyPress and BuddyBoss.
  * Author:      Victoria Griffin
  * Author URI:  https://victoriagriffin.com/
- * Version:     1.0.26
+ * Version:     1.0.27
  * Text Domain: buddyclients-free
  * Domain Path: /languages/
  * License:     GPL-2.0-or-later
