@@ -390,3 +390,8 @@ ul.wp-submenu.wp-submenu-wrap li a[href="buddyc-separator"] {
     background-color: #cd5043;
     text-decoration: none;
 }
+
+/* Table filter */
+.buddyc-admin-filter-select {
+    margin: 0 10px;
+}

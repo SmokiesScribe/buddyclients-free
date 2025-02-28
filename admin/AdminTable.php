@@ -648,9 +648,7 @@ class AdminTable {
      * 
      * @since 0.1.0
      */
-    protected function filter_forms() {
-        ob_start();
-        
+    protected function filter_forms() {        
         // Initialize flag
         $visible_filters = false;
         
@@ -659,11 +657,11 @@ class AdminTable {
             return;
         }
         
-        // Start building the filter form
-        echo '<form method="POST">';
+        // Initialize and open form
+        $content = '<form method="POST">';
 
         // Nonce field
-        wp_nonce_field( 'buddyc_filter_nonce_action', 'buddyc_filter_nonce' );
+        $content .= wp_nonce_field( 'buddyc_filter_nonce_action', 'buddyc_filter_nonce', true, false );
         
         // Loop through the filters
         foreach ( $this->filters as $key => $data ) {
@@ -677,26 +675,43 @@ class AdminTable {
             $visible_filters = true;
             
             // Build the filter name
-            $name = $key . '_filter';
+            $name = sprintf(
+                '%s_filter',
+                $key
+            );
 
             // Get the current filter value
             $curr_value = buddyc_get_param( $name );
             
             // Filter label
-            echo '<label for="' . esc_attr( $name ) . '">';
-            echo esc_html__( 'Filter by', 'buddyclients-free') . ' ' . esc_html( $data['label'] ) . ': ';
-            echo '</label>';
+            $content .= sprintf(
+                '<label for="%1$s">%2$s</label>',
+                esc_attr( $name ),
+                sprintf(
+                    '%1$s %2$s:',
+                    __( 'Filter by', 'buddyclients-free'),
+                    $data['label'] ?? ''
+                )
+            );
             
             // Build the dropdown
-            echo '<select name="' .  esc_attr( $name ) . '" id="' . esc_attr( $name ) . '">';
+            $content .= sprintf(
+                '<select name="%s" class="buddyc-admin-filter-select">',
+                esc_attr( $name )
+            );
             
             // Loop through the options
             foreach ( $data['options'] as $option_key => $option_label ) {
-                echo '<option value="' . esc_attr( $option_key ) . '"' . ( $curr_value == $option_key ? ' selected' : '' ) . '>' . esc_html( $option_label ) . '</option>';
+                $content .= sprintf(
+                    '<option value="%1$s"%2$s>%3$s</option>',
+                    esc_attr( $option_key ),
+                    $curr_value == $option_key ? ' selected' : '',
+                    esc_html( $option_label )
+                );
             }
         
             // Close the dropdown
-            echo '</select>';
+            $content .= '</select>';
         }
         
         // Check flag
@@ -705,17 +720,17 @@ class AdminTable {
         }
         
         // Submission verification field
-        echo '<input type="hidden" name="buddyc_admin_filter_key" value="' . esc_attr( $this->key ) . '">';
+        $content .= '<input type="hidden" name="buddyc_admin_filter_key" value="' . esc_attr( $this->key ) . '">';
         
         // Submit button
-        echo '<button type="submit" class="button action" name="' . esc_attr( $this->key ) . '_filter_submit">';
-        echo esc_html__( 'Filter', 'buddyclients-free' );
-        echo '</button>';
+        $content .= '<button type="submit" class="button action" name="' . esc_attr( $this->key ) . '_filter_submit">';
+        $content .= __( 'Filter', 'buddyclients-free' );
+        $content .= '</button>';
         
         // Close the form
-        echo '</form>';
+        $content .= '</form>';
         
-        return ob_get_clean();
+        return $content;
     }
 
     

@@ -66,9 +66,9 @@ jQuery(document).ready(function() {
 
     // Checkout classes
     const classNames = {
-        detailsContainer: 'checkout-details-container',
-        loadingIndicator: 'checkout-loading-indicator',
-        table: 'checkout-table',
+        detailsContainer: 'buddyc-checkout-details-container',
+        loadingIndicator: 'buddyc-checkout-loading-indicator',
+        table: 'buddyc-checkout-table',
         totalFee: 'buddyc-checkout-total-fee',
         formGroup: 'buddyc-form-group-container',
         projectDisplay: 'buddyc-checkout-project',
@@ -346,8 +346,8 @@ jQuery(document).ready(function() {
         }
 
         // Valid and selected services exist
-        if ( selectedServices.length > 0 ) {            
-
+        if ( selectedServices.length > 0 ) {   
+            
             // Fetch line items data
             const lineItemsData = buddycGetLineItemsData( selectedServices );
 
@@ -365,7 +365,7 @@ jQuery(document).ready(function() {
                     try {
                         const lineItems = JSON.parse(response);
                         if (lineItems) {
-                            buddycUpdateLineItemsTable( lineItems );
+                            buddycUpdateLineItemsTable(lineItems);
                         }
                     } catch (error) {
                         console.error('Error parsing response JSON:', error);

@@ -408,18 +408,50 @@ class BookedService {
                 $booked_service->complete_date = $curr_time;
                 $updated = self::$object_handler->update_object_properties( $ID, ['status' => $new_status, 'complete_date' => $curr_time] );
             }
+
+            // Check if all booked services for the booking intent are complete
+            self::check_booking_status( $booked_service->booking_intent_id );
             
             /**
              * Fires on transition to new BookedService status.
              * 
              * @since 0.1.0
              * 
-             * @param object $booked_service    The BookedService object.
-             * @param string $old_status        The old status.
-             * @param string $new_status        The new status.
+             * @param BookedService The updated BookedService object.
              */
             do_action( 'buddyc_service_status_updated', $updated );
         }
+    }
+
+    /**
+     * Checks whether all BookedServices associated with a BookingIntent are complete.
+     * 
+     * @since 1.0.27
+     * 
+     * @param   int $booking_intent_id  The ID of the BookingIntent.
+     */
+    public static function check_booking_status( $booking_intent_id ) {
+        // Get all associated services
+        $booked_services = self::get_services_by_booking_intent( $booking_intent_id );
+
+        // Loop through and check status
+        foreach ( $booked_services as $booked_service ) {
+            // Make sure the status is complete
+            if ( $booked_service->status !== 'complete' ) {
+                // Call function to mark BookingIntent as services not complete
+                buddyc_booking_intent_services_complete( $booking_intent_id, $services_complete = false );
+                return;
+            }
+        }
+
+        /**
+         * Fires on completion of all services attached to a BookingIntent.
+         * 
+         * @since 1.0.27
+         * 
+         * @param int   $booking_intent_id The ID of the BookingIntent.
+         */
+        do_action( 'buddyc_all_booking_services_complete', $booking_intent_id );
     }
     
     /**
@@ -468,7 +500,7 @@ class BookedService {
         self::init_object_handler();
         
         // Retrieve Booked Services
-        return self::$object_handler->get_objects_by_property( 'booking_intent_id', $booking_intent_id );
+        return self::get_services_by( 'booking_intent_id', $booking_intent_id );
     }
     
     /**

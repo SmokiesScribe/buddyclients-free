@@ -92,6 +92,9 @@ class SuccessfulBooking {
 
         // Update BookingIntent object
         BookingIntent::update_booking_intent_object( $this->booking_intent->ID, $this->booking_intent );
+
+        // Update BookingPayment objects
+        BookingIntent::update_booking_payments( $this->booking_intent->ID, 'booking_intent_status', $status );
         
         /**
          * Fires on a successful booking.

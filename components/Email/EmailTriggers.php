@@ -46,8 +46,9 @@ class EmailTriggers {
             'buddyc_payment_paid'              => [self::class, 'payment_paid_email'],
             'buddyc_new_testimonial'           => [self::class, 'new_testimonial_email'],
             'buddyc_new_affiliate'             => [self::class, 'new_affiliate_email'],
-            'availability_reminder'        => [self::class, 'availability_reminder_email'],
+            'availability_reminder'            => [self::class, 'availability_reminder_email'],
             'buddyc_booking_form_submission'   => [self::class, 'assisted_booking_email'],
+            'buddyc_service_status_complete'   => [self::class, 'booking_complete_email'],
         ];
         
         /**
@@ -90,6 +91,65 @@ class EmailTriggers {
             new Email( $key, $email_args );
         }
     }
+
+    /**
+     * Sends an email when all services from a BookingIntent are completed.
+     * 
+     * @since 1.0.27
+     * 
+     * @param   BookedService   $booked_service The last updated BookedService object.
+     */
+    public static function booking_complete_email( $booked_service ) {
+
+        // Get booking intent id
+        $booking_intent_id = $booked_service->booking_intent_id;
+        $booking_intent = buddyc_get_booking_intent( $booking_intent_id );
+        $service_names = $booking_intent->service_names;
+        $booking_date = gm_date( 'F j, Y', strtotime( $booking_intent->created_at ) );
+
+        // Build the payment notices
+        $payment_strings = [];
+        $data = buddyc_get_unpaid_payment_data( $booking_intent_id );
+        if ( ! empty( $data ) ) {
+            foreach ( $data as $payment_id => $payment_data ) {
+
+                $label = $payment_data['type_label'] ?? '';
+                $amount = sprintf(
+                    '$%s',
+                    $payment_data['amount'] ?? 0
+                );
+                $pay_link = sprintf(
+                    '<a href="1$s">2$s</a>',
+                    $payment_data['pay_link'] ?? '',
+                    __( 'Pay Online' )
+                );
+
+                $payment_strings[] = sprintf(
+                    '%1$s: %2$s - %3$s',
+                    $label,
+                    $amount,
+                    $pay_link,
+                );
+            }
+        }
+
+        // Implode to string
+        $payment_notice = implode( '<br>', $payment_strings );
+        
+        // Define email args
+        $args = [
+            'to_email'      => $booking_intent->client_email,
+            'client_name'   => bp_core_get_user_displayname( $booking_intent->client_id ),
+            'project_id'    => $booking_intent->project_id,
+            'service_names' => $service_names,
+            'payment_info'  => $payment_notice,
+            'booking_date'  => $booking_date,
+            'project_name'  => bp_get_group_name( groups_get_group( $booking_intent->project_id ) ),
+        ];
+        
+        // Send the email
+        new Email( $key, $email_args );
+    }
     
     /**
      * Sends email on cancellation request.
@@ -130,7 +190,7 @@ class EmailTriggers {
             'service_name'          => $booked_service->name,
             'project_id'            => $booked_service->project_id,
             'project_name'          => bp_get_group_name( groups_get_group( $booked_service->project_id ) ),
-            'service_status'        => $booked_service->status,
+            'service_status'        => str_replace( '_', ' ', $booked_service->status ),
             'project_link'          => bp_get_group_permalink( groups_get_group( $booked_service->project_id ) ),
         ];
         new Email( 'service_status', $args );
@@ -201,15 +261,20 @@ class EmailTriggers {
      * 
      * @since 0.1.0
      * 
-     * @param object $booking_intent    The BookingIntent object.
+     * @param   array   $args {
+     *     @type   object  $booking_intent    The BookingIntent object.
+     *     @type   int     $payment_id        The ID of the BookingPayment.
+     * }
      */
-    public static function assisted_booking_email( $booking_intent ) {
+    public static function assisted_booking_email( $args ) {
+        $booking_intent = $args[0];
+        $payment_id = $args[1];
         // Check if a sales id exists and the booking was not previously paid
         if ( $booking_intent->sales_id && ! $booking_intent->previously_paid ) {
             // Email the client
             $args = [
                 'to_email'              => $booking_intent->client_email,
-                'sales_checkout_link'   => $booking_intent->build_checkout_link()
+                'sales_checkout_link'   => buddyc_build_pay_link( $payment_id, $booking_intent->ID )
             ];
             new Email( 'sales_sub', $args );
         }

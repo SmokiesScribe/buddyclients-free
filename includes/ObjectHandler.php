@@ -66,11 +66,10 @@ class ObjectHandler {
     public function new_object( $object ) {
         // Insert blank record to get ID
         $object->ID = $this->database->insert_record();
-        
-        // Get created at time
-        if ( property_exists( $object, 'created_at' ) && $object->created_at ) {
-            $record = $this->database->get_record_by_id( $object->ID );
-            $object->created_at = $record->created_at;
+
+        // Set created_at only if it exists and is not already set
+        if ( property_exists( $object, 'created_at' ) && empty( $object->created_at ) ) {
+            $object->created_at = current_time( 'mysql' );
         }
         
         // Update the database record
@@ -228,7 +227,6 @@ class ObjectHandler {
      * Retrieves all objects of a specified class by a property.
      * 
      * @since 0.1.0
-     * @updated 0.3.4
      * 
      * @param   string      $property       The property name to filter by.
      * @param   mixed       $value          The property value to filter by.
@@ -253,6 +251,30 @@ class ObjectHandler {
         } else {
             // Filter all objects
             $objects = $this->filter_objects( $property, $value );
+        }
+        return $objects;
+    }
+
+    /**
+     * Retrieves multiple objects by ID.
+     * 
+     * @since 1.0.27
+     * 
+     * @param   array   $object_ids       An array of IDs of the objects to retrieve.
+     * @return  array   An array of retrieved objects on success, empty array on failure.
+     */
+    public function get_objects_by_ids( $object_ids ) {
+        
+        // Initialize array
+        $objects = [];
+        
+        // Try to get all records by the property
+        $records = $this->database->get_records_by_ids( $object_ids );
+        
+        // Check if records were found
+        if ( $records ) {
+            // Get objects from records
+            $objects = $this->extract_objects( $records );
         }
         return $objects;
     }
@@ -322,50 +344,80 @@ class ObjectHandler {
         });
         return $objects;
     }
-    
+
     /**
      * Updates an object.
      * 
      * @since 0.1.0
-     * @updated 0.3.4
-     * 
-     * @param   int     $ID     The ID of the object to update.
-     * @param   object  $object The updated object.
+     * @since 1.0.27 Use prepare_update_data to format data.
+     *
+     * @param int $ID The ID of the object to update.
+     * @param object $object The updated object.
+     * @return bool True on success, false on failure.
      */
     public function update_object( $ID, $object ) {
-        
-        // Extract the properties of the object
-        $object_data = (array) $object;
+        $data = $this->prepare_update_data( $object );
+        if ( ! $data ) {
+            return false;
+        }
 
-        // Get the existing record
-        $record = $this->database->get_record_by_id( $object->ID );
+        return $this->database->update_record( strval( $ID ), $data );
+    }
 
-        // Extract record columns
-        $columns = $record ? get_object_vars( $record ) : [];
-        
-        // Initialize data with object stored in class name column
-        $data = [];
-        $data[$this->class_name] = serialize( $object );
-        
-        // Iterate over the object properties
-        foreach ($object_data as $property_name => $property_value) {
-            
-            // Check if the property exists as a column in the database table
-            if ( in_array( $property_name, $columns ) ) {
-                
-                // If the property value is an array, serialize it
-                if ( is_array( $property_value ) ) {
-                    $property_value = serialize( $property_value );
-                }
-                
-                // If it exists, add it to the data array
-                $data[$property_name] = $property_value;
+    /**
+     * Updates multiple objects in the database.
+     *
+     * @param array $objects An array of objects to be updated.
+     * @return bool True on success, false on failure of any record.
+     */
+    public function update_objects( $objects ) {
+        if ( empty( $objects ) || ! is_array( $objects ) ) {
+            return false;
+        }
+
+        $records_data = [];
+        foreach ( $objects as $object ) {
+            $data = $this->prepare_update_data( $object );
+            if ( $data ) {
+                $records_data[$object->ID] = $data;
             }
         }
-        
-        // Update the record in the database
-        $this->database->update_record( strval( $ID ), $data );
+        // Update multiple records
+        return $this->database->update_records( $records_data );
     }
+
+    /**
+     * Prepares object data to send to the DatabaseManager.
+     * Removes the ID.
+     * 
+     * @since 1.0.27
+     * 
+     * @param   object  $object The object to prepare.
+     * @return  array   An array of prepared data.
+     */
+    private function prepare_update_data( $object ) {
+        if ( ! isset( $object->ID ) ) {
+            return false; // Ensure the object has an ID
+        }
+    
+        // Get the existing record
+        $record = $this->database->get_record_by_id( $object->ID );
+        $columns = $record ? get_object_vars( $record ) : [];
+    
+        // Initialize data with serialized object stored in the class name column
+        $data = [
+            $this->class_name => serialize( $object ),
+        ];
+    
+        // Convert object properties
+        foreach ( (array) $object as $property_name => $property_value ) {
+            if ( in_array( $property_name, array_keys( $columns ) ) ) {
+                $data[$property_name] = is_array( $property_value ) ? serialize( $property_value ) : $property_value;
+            }
+        }
+    
+        return $data; // ID is removed here
+    }    
     
     /**
      * Updates an object property.
@@ -374,30 +426,53 @@ class ObjectHandler {
      * 
      * @param   int     $ID         The ID of the object to update.
      * @param   string  $data       Array of new property values keyed by property name.
-     * @return  array   Array of bool values keyed by property, indicating whether the property value was changed.
+     * @return  object|bool The updated object on success, false on failure.
      */
     public function update_object_properties( $ID, $data ) {
-        
         // Get object by ID
         $object = $this->get_object( $ID );
-        
+    
         if ( ! $object ) {
             return;
         }
-        
+    
         // Loop through properties to update
         foreach ( $data as $property => $value ) {
-            
-            // Update the object property
             $object->{$property} = $value;
         }
-        
+    
         // Update record in database
-        $this->update_object( $ID, $object );
-        
+        $updated = $this->update_object( $ID, $object );
+    
         // Return updated object
-        return $object;
+        return $updated ? $object : false;
     }
+
+    /**
+     * Updates properties for multiple objects.
+     * 
+     * @since 1.0.27
+     * 
+     * @param   array   $IDs        The IDs of the objects to update.
+     * @param   string  $data       Array of new property values keyed by property name.
+     * @return  array|bool An array of updated objects on success, false on failure of any object.
+     */
+    public function update_objects_properties( $IDs, $data ) {
+        // Initialize
+        $objects = [];
+        $success = true;
+
+        // Loop through ids and update
+        foreach ( $IDs as $ID ) {
+            $object = $this->update_object_properties( $ID, $data );
+            if ( $object ) {
+                $objects[$ID] = $object;
+            } else {
+                $success = false;
+            }
+        }
+        return $success ? $objects : false;
+    }    
     
     /**
      * Removes an array of objects from the database.

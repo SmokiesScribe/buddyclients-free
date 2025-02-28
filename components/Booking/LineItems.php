@@ -2,14 +2,6 @@
 namespace BuddyClients\Components\Booking;
 if ( ! defined( 'ABSPATH' ) ) exit; // Exit if accessed directly
 
-use BuddyClients\Components\Service\{
-    Service,
-    RateType,
-    Adjustment,
-    AdjustmentOption,
-    ServiceCache
-};
-
 /**
  * Generates a line item for a single service.
  * 
@@ -60,7 +52,15 @@ class LineItems {
      * 
      * @since 0.1.0
      * 
-     * @param Service
+     * @param   array   $args {
+     *     An array of args passed from the booking form.
+     * 
+     *     @type    int     $service_id         The ID of the Service post.
+     *     @type    array   $adjustment_options An array of selected Adjustment IDs.
+     *     @type    int     $rate_count         The number from the applicable fee number field (words, hours, etc).
+     *     @type    int     $team_id            The ID of the team member to assign to the service.
+     *     @type    int     $team_member_role   The ID of the Role of the team member.
+     * }
      */
     public function __construct( $args ) {
         $this->service_id       = $args['service_id'];

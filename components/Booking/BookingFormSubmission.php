@@ -37,9 +37,11 @@ class BookingFormSubmission {
         
         // Create booking intent
         $booking_intent = new BookingIntent( $post_data, $files_data );
+        $payment_id = $booking_intent->payment_ids[0] ?? null;
         
         // Store in session
         $_SESSION['booking_id'] = $booking_intent->ID;
+        $_SESSION['payment_id'] = $payment_id;
         
         /**
          * Fires on Booking Form submission.
@@ -49,8 +51,9 @@ class BookingFormSubmission {
          * @since 0.1.0
          * 
          * @param   object  $booking_intent     The created BookingIntent.
+         * @param   int     $payment_id         The first BookingPayment ID.
          */
-         do_action( 'buddyc_booking_form_submission', $booking_intent );
+         do_action( 'buddyc_booking_form_submission', [$booking_intent, $payment_id] );
         
         // Retrieve the checkout page url
         $checkout_url = buddyc_get_page_link( 'checkout_page' );

@@ -121,4 +121,86 @@ class Shortcodes {
         
         return null; // Return null if no valid callable can be constructed.
     }
+
+    /**
+     * Formats a shortcode with brackets.
+     * 
+     * @since 1.0.27
+     * 
+     * @param   string  $shortcode  The shortcode to format with brackets.
+     */
+    private static function format_shortcode( $shortcode ) {
+        return sprintf(
+            '[%s]',
+            $shortcode
+        );
+    }
+
+    /**
+     * Retrieves the shortcode by key.
+     * 
+     * @since 1.0.27
+     * 
+     * @param   string  $key    The shortcode key.
+     */
+    public static function get_shortcode( $key ) {
+        $shortcodes_data = self::shortcodes_data();
+        if ( isset( $shortcodes_data[$key] ) ) {
+            return self::format_shortcode( $shortcodes_data[$key]['shortcode'] );
+        }
+    }
+
+    /**
+     * Retrieves all shortcodes.
+     * 
+     * @since 1.0.27
+     */
+    public static function get_all_shortcodes() {
+        $shortcodes_data = self::shortcodes_data();
+        $shortcodes = [];
+        foreach ( $shortcodes_data as $key => $data ) {
+            if ( isset( $data['shortcode'] ) ) {
+                $shortcodes[] = self::format_shortcode( $data['shortcode'] );
+            }
+        }
+        return $shortcodes;
+    }
+
+    /**
+     * Checks whether a shortcode is present in the page content.
+     * 
+     * @since 1.0.27
+     * 
+     * @param   string  $shortcode_key  The shortcode key.
+     */
+    public static function shortcode_exists( $shortcode_key ) {
+        $page_content = get_the_content();
+        if ( empty( $page_content ) ) return false;
+        
+        $shortcode = self::get_shortcode( $shortcode_key );
+        return strpos( $shortcode, $page_content ) !== false;
+    }
+
+    /**
+     * Checks whether any plugin shortcode is present in the page content.
+     * 
+     * @since 1.0.27
+     */
+    public static function any_shortcode_exists() {
+        $page_content = get_the_content();
+        if ( empty( $page_content ) ) return false;
+
+        // GEt all shortcodes
+        $shortcodes = self::get_all_shortcodes();
+
+        // Check for each shortcode
+        foreach ( $shortcodes as $shortcode ) {
+            if ( strpos( $shortcode, $page_content ) !== false ) {
+                // Return true on first shortcode found
+                return true;
+            }
+        }
+        // No shortcodes found
+        return false;
+    }
 }

@@ -30,8 +30,7 @@ class ServiceStatusSubmission {
      * 
      * @since 0.1.0
      */
-    private function update_status( $post_data ) {
-        
+    private function update_status( $post_data ) {        
         // Get variables
         $new_status = $post_data['update_status'];
         $booked_service_id = $post_data['booked_service_id'];

@@ -646,8 +646,8 @@ class FormField {
         // Initialize
         $data_atts = '';
 
-        // Check if reCAPTCHA is enabled
-        if ( buddyc_recaptcha_enabled() ) {
+        // Check if reCAPTCHA is enabled - and not admin area
+        if ( buddyc_recaptcha_enabled() && ! is_admin() ) {
             $site_key = buddyc_recaptcha_site_key();
             if ( ! $this->manual_recaptcha ) {
                 $this->field_classes .= empty( $this->field_classes ) ? 'g-recaptcha' : ' g-recaptcha';

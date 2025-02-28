@@ -3,8 +3,6 @@ if ( ! defined( 'ABSPATH' ) ) exit; // Exit if accessed directly
 use BuddyClients\Components\Booking\BookingIntent;
 use BuddyClients\Admin\AdminTable;
 
-use BuddyClients\Components\Booking\SuccessfulBooking; // TEMPORARY
-
 /**
  * Callback to display all BookingIntents.
  * 
@@ -14,14 +12,13 @@ function buddyc_dashboard_content() {
     
     // Get all booking intents
     $booking_intents = BookingIntent::get_all_booking_intents();
-
-    new SuccessfulBooking($booking_intents[0]->ID);
-    
+        
     // Define headers
     $headers = [
         __( 'Services', 'buddyclients-free' ),
         __( 'Date', 'buddyclients-free' ),
         __( 'Status', 'buddyclients-free' ),
+        __( 'Services', 'buddyclients-free' ),
         __( 'Client', 'buddyclients-free' ),
         __( 'Project', 'buddyclients-free' ),
         __( 'Total Fee', 'buddyclients-free' ),
@@ -33,6 +30,7 @@ function buddyc_dashboard_content() {
         'services'              => ['service_names' => 'service_names_link'],
         'date'                  => ['created_at' => 'date_time'],
         'status'                => ['status' => 'booking_intent_status'],
+        'services_complete'     => ['services_complete' => 'services_complete_status'],
         'client_id'             => ['client_id' => 'booking_user_link_email'],
         'project_id'            => ['project_id' => 'group_link'],
         'total_fee'             => ['total_fee' => 'usd'],

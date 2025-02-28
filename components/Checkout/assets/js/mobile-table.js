@@ -7,8 +7,8 @@
  */
 document.addEventListener("DOMContentLoaded", function() {
     
-    const mobileButton = document.getElementById('checkout-mobile-button');
-    const tableContainer = document.querySelector('.checkout-details-container');
+    const mobileButton = document.getElementById('buddyc-checkout-mobile-button');
+    const tableContainer = document.querySelector('.buddyc-checkout-details-container');
     
     function buddycUpdateTableVisibility() {
         const createAccountForm = document.getElementById('buddyc-create-account-form');

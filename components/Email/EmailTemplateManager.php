@@ -51,6 +51,26 @@ class EmailTemplateManager {
                 ],
                 'description'   => __( 'Notifies the client when the status of their service changes.', 'buddyclients-free' )
             ],
+            'booking_services_complete' => [
+                'label'         => __('All Booking Services Complete', 'buddyclients-free'),
+                'subject'       => __( 'Your services are complete' ),
+                'content'       => [
+                    sprintf(
+                        /* translators: %1$s: the names of the services; %2$s: the project name; %3$s: the service status; %4$s: the link to view the project */
+                        __('All services booked on %1$s for %2$s have been completed: %3$s.', 'buddyclients-free' ),
+                        '{{booking_date}}',
+                        '{{project_name}}',
+                        '{{service_names}}',
+                    ),
+                    '{{payment_info}}',
+                    sprintf(
+                        /* translators: %s: the site name */
+                        __('Thank you for choosing %s!', 'buddyclients-free'),
+                        '{{site_name}}'
+                    ),
+                ],
+                'description'   => __( 'Sends an email to the client when all services for a single booking have been completed. Includes a link to pay any unpaid fees, including final payments if deposits are enabled.', 'buddyclients-free' )
+            ],
             'updated_brief' => [
                 'label'         => __('Project Brief Updated', 'buddyclients-free'),
                 'subject'       => sprintf(

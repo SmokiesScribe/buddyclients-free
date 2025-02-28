@@ -23,6 +23,10 @@ class SettingsBooking {
             'lock_team'             => 'lock',
             'skip_payment'          => 'no',
             'enable_projects'       => 'yes',
+            'enable_deposits'       => 'disable',
+            'deposit_percentage'    => 0,
+            'deposit_flat'          => 0,
+            'abandoned_timeout'     => 15
         ];
     }
     
@@ -35,7 +39,7 @@ class SettingsBooking {
         return [
             'booking' => [
                 'title' => __('Bookings', 'buddyclients-free'),
-                'description' => __('General booking settings.', 'buddyclients-free'),
+                'description' => __('Determine the parameters for new bookings. Enable manual bookings in Sales settings.', 'buddyclients-free'),
                 'fields' => [
                     'accept_bookings' => [
                         'label' => __('Accept Bookings', 'buddyclients-free'),
@@ -67,6 +71,42 @@ class SettingsBooking {
                     ],
                 ],
             ],
+            'payments' => [
+                'title' => __('Payment Structure', 'buddyclients-free'),
+                'description' => __('Determine whether to require a deposit or the full fee up front when clients book services. If a deposit is charged, clients will receive an email to pay the remainder of the fee on completion of all services. Ensure the "Final Payment" email is enabled in Email settings.', 'buddyclients-free'),
+                'fields' => [
+                    'enable_deposits' => [
+                        'label' => __('Enable Deposits', 'buddyclients-free'),
+                        'type' => 'dropdown',
+                        'options' => [
+                            'enable' => __('Enable - Require partial fee up front', 'buddyclients-free'),
+                            'disable' => __('Disable - Require full fee up front', 'buddyclients-free'),
+                        ],
+                        'description' => __('If deposits are enabled, clients will be charged the deposit percentage specified below on checkout.', 'buddyclients-free'),
+                    ],
+                    'deposit_percentage' => [
+                        'label' => __('Deposit Percentage', 'buddyclients-free'),
+                        'type' => 'number',
+                        'description' => __('Set the percentage of the full fee clients are charged up front. The remaining percentage will be billed on completion of services.', 'buddyclients-free'),
+                    ],
+                    'deposit_flat' => [
+                        'label' => __('Deposit Flat', 'buddyclients-free'),
+                        'type' => 'number',
+                        'description' => __('Enter a flat fee to require up front. If both a percentage and flat fee are specified, the sum of the two will be charged on booking. If the deposit amount is greater than the full fee, the deposit will be reduced to the value of the full fee.', 'buddyclients-free'),
+                    ],
+                ],
+            ],
+            'abandoned_bookings' => [
+                'title' => __('Abandoned Booking Email', 'buddyclients-free'),
+                'description' => __('Send emails to users who begin booking services but exit before submitting payment. Note that the Abandoned Booking email must be enabled in Email settings.', 'buddyclients-free'),
+                'fields' => [
+                    'abandoned_timeout' => [
+                        'label' => __('Timeout (minutes)', 'buddyclients-free'),
+                        'type' => 'number',
+                        'description' => __('How many minutes after beginning a booking should the abandoned booking email be sent?', 'buddyclients-free'),
+                    ],
+                ],
+            ],
             'freelancer_mode' => [
                 'title' => __('Freelancer Mode', 'buddyclients-free'),
                 'description' => __('Turn on Freelancer Mode to assign all services to one person. Team member payments will be disabled.', 'buddyclients-free'),
@@ -81,7 +121,7 @@ class SettingsBooking {
             ],
             'team' => [
                 'title' => __('Team', 'buddyclients-free'),
-                'description' => '',
+                'description' => __( 'Set the rules for team member selection on the booking form. Team members will also be filtered by their Filter Field selections.', 'buddyclients-free' ),
                 'fields' => [
                     'lock_team' => [
                         'label' => __('Lock Team Members', 'buddyclients-free'),
@@ -90,10 +130,19 @@ class SettingsBooking {
                             'lock' => __('Lock', 'buddyclients-free'),
                             'unlock' => __('Unlock', 'buddyclients-free'),
                         ],
-                        'description' => __('Lock team members to require future services for each project to use the same team member for each role.', 'buddyclients-free'),
+                        'description' => __('Lock team members to require future services for each project to use the same team member for each role. When locked, the team member of each role will automatically be assigned when new services are booked for the same project. When unlocked, clients will be able to select new team members on subsequent bookings for the same project.', 'buddyclients-free'),
+                    ],
+                    'require_agreement' => [
+                        'label' => __( 'Require Active Team Member Agreement', 'buddyclients-free' ),
+                        'type' => 'dropdown',
+                        'options' => [
+                            'yes' => __( 'Yes - Require agreement', 'buddyclients-free' ),
+                            'no' => __( 'No - Do not require agreement', 'buddyclients-free' ),
+                        ],
+                        'description' => __( 'Should team members without active agreements be disallowed from accepting new projects? This setting only applies if the Legal component is enabled and a team member agreement exists.', 'buddyclients-free' ),
                     ],
                 ],
-            ],
+            ]
         ];
     }
 

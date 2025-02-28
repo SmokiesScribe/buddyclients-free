@@ -2,9 +2,6 @@
 namespace BuddyClients\Components\Checkout;
 if ( ! defined( 'ABSPATH' ) ) exit; // Exit if accessed directly
 
-use BuddyClients\Components\Booking\SuccessfulBooking;
-use BuddyClients\Components\Booking\BookingIntent;
-
 /**
  * Handles checkout for paid services when Stripe is not enabled.
  * 
@@ -31,7 +28,7 @@ class SkipPaymentCheckout {
         $this->booking_intent_id = $post_data['booking_intent_id'];
 
         // Successful booking
-        new SuccessfulBooking( $this->booking_intent_id, $status = 'unpaid' );
+        buddyc_booking_success( $this->booking_intent_id, $status = 'unpaid' );
 
         /**
          * Fires on submission of a booking that requires payment.

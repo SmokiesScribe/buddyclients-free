@@ -3,8 +3,8 @@ Contributors: victoriagrif7
 Tags: buddypress-integration, service-business, business-tools, team-management, client-management
 Requires at least: 4.9.1
 Tested up to: 6.7.1
-Requires PHP: 7.2
-Stable tag: 1.0.26
+Requires PHP: 8.0
+Stable tag: 1.0.27
 License: GPL-2.0-or-later
 License URI: https://www.gnu.org/licenses/gpl-2.0.html
 

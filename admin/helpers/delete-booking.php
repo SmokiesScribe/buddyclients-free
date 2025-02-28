@@ -66,4 +66,4 @@ function buddyc_booking_action_success() {
         }
     }
 }
-add_action( 'admin_init', 'buddyc_booking_action_success' );
+//add_action( 'admin_init', 'buddyc_booking_action_success' );

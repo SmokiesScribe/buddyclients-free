@@ -27,9 +27,10 @@ class Nav {
         $tabs = [
             'dashboard' => [
                 __( 'All Bookings', 'buddyclients-free' )        => ['page'  => 'buddyc-dashboard'],
-                ''                                          => ['page'  => 'buddyc-booked-services'],
+                'booked_services'                           => ['page'  => 'buddyc-booked-services'],
                 __( 'Overview', 'buddyclients-free' )            => ['page'  => 'buddyc-bookings-dashboard'],
-                __( 'Payments', 'buddyclients-free' )            => ['page'  => 'buddyc-payments'],
+                __( 'Client Payments', 'buddyclients-free' )     => ['page'  => 'buddyc-booking-payments'],
+                __( 'Outgoing Payments', 'buddyclients-free' )   => ['page'  => 'buddyc-payments'],
                 __( 'Users', 'buddyclients-free' )               => ['page'  => 'buddyc-users'],
                 __( 'Leads', 'buddyclients-free' )               => ['page'  => 'buddyc-leads'],
             ],
@@ -123,7 +124,20 @@ class Nav {
         add_action('buddyc_admin', [self::class, 'open_menu'], 10, 1 );
         add_action('buddyc_admin', [self::class, 'active_submenu'], 10, 1 );
     }
+
+    /**
+     * Defines the tabs that should be hidden.
+     * 
+     * @since 1.0.27
+     */
+    private static function hidden_tabs() {
+        return [
+            'booking_payments',
+            'booked_services'
+        ];
+    }
         
+
     /**
      * Displays navigation tabs.
      *
@@ -165,8 +179,8 @@ class Nav {
             // Loop through all tabs in the active tab group
             foreach ($tabs_array[$group] as $tab_label => $tab_data) {
                 
-                // Skip tabs with no label
-                if (!$tab_label) {
+                // Skip hidden tabs
+                if ( ! $tab_label || in_array( $tab_label, self::hidden_tabs() ) ) {
                     continue;
                 }
                 

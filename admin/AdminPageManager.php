@@ -189,6 +189,13 @@ class AdminPageManager {
                 'parent_slug' => null,
                 'callable' => 'buddyc_booked_services_table'
             ],
+            'booking_payments' => [
+                'key' => 'booking-payments',
+                'title' => __('Booking Payments', 'buddyclients-free'),
+                'settings' => false,
+                'parent_slug' => null,
+                'callable' => 'buddyc_booking_payments_table'
+            ],
             'legal_agreements' => [
                 'key' => 'legal-agreements',
                 'title' => __('Legal Agreements', 'buddyclients-free'),

@@ -1,5 +1,5 @@
 /** Mobile button **/
-#checkout-mobile-button {
+#buddyc-checkout-mobile-button {
     display: none;
 }
 
@@ -21,7 +21,7 @@
     margin: 20px;
 }
 
-.checkout-details-container {
+.buddyc-checkout-details-container {
     position: sticky;
     top: 150px;
     width: 100%;
@@ -36,12 +36,12 @@
         margin: 0; /* Remove margin on mobile */
     }
     
-    .checkout-fee-column {
+    .buddyc-checkout-fee-column {
         position: fixed;
         max-width: 95%;
     }
 
-    .checkout-details-container {
+    .buddyc-checkout-details-container {
         position: fixed;
         top: 200px;
         left: 50%;
@@ -56,13 +56,13 @@
         visibility: hidden; /* Initially hidden */
     }
 
-    .checkout-details-container.active {
+    .buddyc-checkout-details-container.active {
         opacity: 1;
         visibility: visible;
     }
     
     /** Mobile button **/
-    #checkout-mobile-button {
+    #buddyc-checkout-mobile-button {
         display: block;
         position: fixed;
         top: 150px; /* Adjust as needed */
@@ -82,7 +82,7 @@
     }
     
     /* Hover effect */
-    #checkout-mobile-button:hover {
+    #buddyc-checkout-mobile-button:hover {
         background-color: #D4D6D8; /* Darker background on hover */
     }
 }
@@ -91,14 +91,14 @@
     z-index: 0 !important;
 }
 
-.checkout-table {
+.buddyc-checkout-table {
     border-collapse: collapse;
     width: 100%;
     border: none;
     z-index: 999;
 }
 
-.checkout-unit-label {
+.buddyc-checkout-unit-label {
     color: gray;
 }
 
@@ -107,19 +107,19 @@
     margin: 10px;
 }
 
-.checkout-table tfoot {
+.buddyc-checkout-table tfoot {
     margin-top: 50px !important;
 }
 
-.checkout-table th,
-.checkout-table td {
+.buddyc-checkout-table th,
+.buddyc-checkout-table td {
     border: none; /* Set the border to a light gray color */
     padding: 15px 8px;
     text-align: left;
 }
 
-.checkout-table tfoot th,
-.checkout-table tfoot td {
+.buddyc-checkout-table tfoot th,
+.buddyc-checkout-table tfoot td {
     color: #000;
 }
 #buddyc-checkout-total {

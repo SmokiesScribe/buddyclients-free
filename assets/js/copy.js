@@ -53,7 +53,22 @@ function buddycShowCopySuccess(element) {
     var parent = element.closest('div');
     var successDiv = parent.querySelector('.buddyc-copy-success');
 
+    // Show the feedback
+    successDiv.classList.add('show');
+
+    // Hide feedback after 2 seconds
+    setTimeout(function() {
+        successDiv.classList.remove('show');
+    }, 2000);
+
+    if ( successDiv.classList.contains('check') ) {
+        var message = '✔️';
+    } else {
+        var message = 'Copied!';
+    }
+    
+
     if (successDiv) {
-        successDiv.textContent = 'Copied!';
+        successDiv.textContent = message;
     }
 }

@@ -6,7 +6,7 @@ use BuddyClients\Components\Booking\LineItems;
  * 
  * @since 0.1.0
  */
-function buddyc_create_line_item() {    
+function buddyc_create_line_item() {
 
     // Log the nonce being sent in the AJAX request
     $nonce = isset( $_POST['nonce'] ) ? trim( sanitize_text_field( wp_unslash( $_POST['nonce'] ) ) ) : null;

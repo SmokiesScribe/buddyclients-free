@@ -108,6 +108,28 @@ class AdminTableItem extends AdminTable {
     }
 
     /**
+     * Outputs a link to client payments details. 
+     * 
+     * @since 1.0.27
+     * 
+     * @param   int     $booking_intent_id      The ID of the BookingIntent.
+     * @param   array   $payment_ids            An array of BookingPayment IDs.
+     */
+    protected static function payments_link( $booking_intent_id, $payment_ids ) {
+        if ( empty( $payment_ids ) ) return;
+        $url = buddyc_add_params([
+            'page'  => 'buddyc-booking-payments',
+            'booking_intent_filter' => $booking_intent_id
+        ]);
+        return sprintf(
+            '<a href="%1$s" title="%2$s">%3$s</a>',
+            esc_url( $url ),
+            __( 'View Payments', 'buddyclients-free' ),
+            '<i class="fa-solid fa-credit-card"></i>'
+        );
+    }
+
+    /**
      * Outputs a link to a Stripe transaction.
      * 
      * @since 1.0.21
@@ -375,6 +397,52 @@ class AdminTableItem extends AdminTable {
         $values = ['team_id' => $value, 'booked_service_id' => $item_id];
         return ( new ReassignForm )->build( $values );
     }
+
+    /**
+     * Outputs an icon for the services_complete property of a BookingIntent.
+     * 
+     * @since 1.0.27
+     */
+    protected static function services_complete_status( $property, $value ) {
+        return $value ? self::icons( $property, 'complete' ) : self::icons( $property, 'in_progress' );
+    }
+
+    /**
+     * Generates the info for a BookingPayment status.
+     * 
+     * @since 1.0.27
+     */
+    protected static function booking_payment_status( $property, $value ) {
+        $payment_id = $value;
+        $payment = buddyc_get_booking_payment( $payment_id );
+        $status = $payment->status;
+
+        // Build icon
+        $icon = self::icons( 'status', $status );
+
+        // Icon only if paid
+        if ( $status === 'paid' ) {
+            return $icon;
+        }
+
+        // Get due info
+        $due = $payment->due;
+        $due_at = self::date_time( 'due_at', $payment->due_at );
+
+        // Build note if due
+        $due_note = $due ? sprintf(
+            '%1$s: %2$s',
+            __( 'Due since', 'buddyclients-free' ),
+            $due_at
+        ) : '';
+
+        // Return icon and due date
+        return sprintf(
+            '%1$s<div>%2$s</div>',
+            $icon,
+            $due_note
+        );
+    }
     
      /**
      * Generates icon with value.
@@ -406,7 +474,7 @@ class AdminTableItem extends AdminTable {
      * @since 1.0.20
      */
     protected static function booking_intent_status( $property, $value, $item_id ) {
-        $icon = self::icons( $property, $value );
+        return self::icons( $property, $value );
         $update = self::update_booking_intent_status( $property, $value, $item_id );
         return '<span class="buddyc-admin-booking-status">' . $icon . $update . '</span>';        
     }
@@ -417,31 +485,50 @@ class AdminTableItem extends AdminTable {
      * @since 1.0.20
      */
     protected static function update_booking_intent_status( $property, $value, $item_id ) {
-        $values = [
-            'unpaid'    => 'succeeded',
-            'succeeded' => 'unpaid'
-        ];
 
-        if ( ! isset( $values[$value] ) ) {
-            return '';
-        }
+        // Set options based on current status
+        switch ( $value ) {
+        case 'unpaid':
+            $new_status = 'succeeded';
+            $new_status_label = __( 'Succeeded', 'buddyclients-free' );
+            $icon_class = 'fa-solid fa-check-to-slot';
+            $title = __( 'Succeed Booking', 'buddyclients-free' );
+            break;
+        case 'succeeded':
+            $new_status = 'unpaid';
+            $new_status_label = __( 'Unpaid', 'buddyclients-free' );
+            $icon_class = 'fa-solid fa-circle-xmark';
+            $title = __( 'Unsucceed Booking', 'buddyclients-free' );
+            break;
+        default:
+            // Exit if status does not match options
+            return;
+    }
 
-        // Build update url
-        $update_url = admin_url( 'admin.php?page=buddyc-dashboard&action=update_booking&booking_id=' . $item_id . '&booking_property=status&booking_value=' . $values[$value] );
+    $url = buddyc_add_params([
+        'action' => 'update_booking',
+        'booking_id' => $item_id,
+        'booking_property' => 'status',
+        'booking_value' => $new_status
+    ]);
 
-        // Define confirmation message
-        $message = sprintf(
-            /* translators: %s: the new status */
-            __( 'Are you sure you want to update this booking to %s?', 'buddyclients-free' ),
-            strtoupper( $values[$value] )
-        );
+    // Define confirmation message
+    $message = sprintf(
+        /* translators: %s: the new status (Paid or Unpaid) */
+        __( 'Are you sure you want to mark this as %s?', 'buddyclients-free' ),
+        $new_status_label
+    );
 
-        // Output button
-        $title = __( 'Edit status', 'buddyclients-free' );
-        $edit_icon = buddyc_icon( 'edit' );
-        $update_button = '<span class="buddyc-update-booking-icon"><a href="#" title="' . $title . '" onclick="return buddycConfirmAction(\'' . esc_url( $update_url ) . '\', \'' . esc_js( $message ) . '\');">' . $edit_icon . '</a></span>';
+    // Output button
+    $button = sprintf(
+        '<span class="buddyc-update-booking-icon"><a href="#" title="%1$s" onclick="return buddycConfirmAction(\'%2$s\', \'%3$s\');"><i class="%4$s"></i></a></span>',
+        $title,
+        esc_url( $url ),
+        esc_js( $message ),
+        $icon_class
+    );
 
-        return $update_button;     
+    return $button;
     }
     
     /**
@@ -482,6 +569,61 @@ class AdminTableItem extends AdminTable {
     }
 
     /**
+     * Generates a button to manually record a booking payment.
+     * 
+     * @since 1.0.27
+     * 
+     * @param   string  $property   The name of the property
+     * @param   int     $payment_id The ID of the BookingPayment.
+     * @param   string  $status     The current status of the BookingPayment.
+     */
+    protected static function record_booking_payment( $property, $payment_id, $status ) {
+        // Set options based on current status
+        switch ( $status ) {
+            case 'unpaid':
+                $new_status = 'paid';
+                $new_status_label = __( 'Paid', 'buddyclients-free' );
+                $icon_class = 'fa-solid fa-check-to-slot';
+                $title = __( 'Record Payment', 'buddyclients-free' );
+                break;
+            case 'paid':
+                $new_status = 'unpaid';
+                $new_status_label = __( 'Unpaid', 'buddyclients-free' );
+                $icon_class = 'fa-solid fa-circle-xmark';
+                $title = __( 'Remove Payment', 'buddyclients-free' );
+                break;
+            default:
+                // Exit if status does not match options
+                return;
+        }
+
+        $url = buddyc_add_params([
+            'action' => 'update_booking_payment',
+            'booking_payment_id' => $payment_id,
+            'property' => 'status',
+            'value' => $new_status
+        ]);
+
+        // Define confirmation message
+        $message = sprintf(
+            /* translators: %s: the new status (Paid or Unpaid) */
+            __( 'Are you sure you want to mark this as %s?', 'buddyclients-free' ),
+            $new_status_label
+        );
+
+        // Output button
+        $button = sprintf(
+            '<span class="buddyc-update-booking-icon"><a href="#" title="%1$s" onclick="return buddycConfirmAction(\'%2$s\', \'%3$s\');"><i class="%4$s"></i></a></span>',
+            $title,
+            esc_url( $url ),
+            esc_js( $message ),
+            $icon_class
+        );
+
+        return $button;
+    }
+
+    /**
      * Outputs buttons for all booking intentactions.
      * 
      * @since 0.2.21
@@ -506,10 +648,17 @@ class AdminTableItem extends AdminTable {
             $buttons['pdf'] = $pdf_download;
         }
 
-        // Stripe transaction
-        $stripe_payment_id = $booking_intent->payment_intent_id;
-        $external = $stripe_payment_id ? self::stripe_transaction_link( 'payment_intent_id', $stripe_payment_id, $item_id ) : '';
-        $buttons['stripe'] = $external;
+        // View Payments
+        if ( $booking_intent->status === 'succeeded' ) {
+            $view_payments = self::payments_link( $booking_intent->ID, $booking_intent->payment_ids );
+        } else {
+            $view_payments = '';
+        }
+        $buttons['payments'] = $view_payments;
+
+        // Update status
+        $update_status = self::update_booking_intent_status( 'status', $booking_intent->status, $booking_intent->ID );
+        $buttons['update'] = $update_status;
 
         // Delete
         $delete = self::delete( $property, $value );
@@ -525,6 +674,140 @@ class AdminTableItem extends AdminTable {
 
         return '<div class="buddyc-admin-booking-actions">' . $actions . '</div>';
     }
+
+    /**
+     * Outputs buttons for all BookingPayment intentactions.
+     * 
+     * @since 1.0.27
+     */
+    protected static function booking_payment_actions( $property, $value, $item_id ) {
+        // Initialize
+        $buttons = [];
+
+        // Get BookingPayment
+        $payment = buddyc_get_booking_payment( $item_id );
+
+        // Manually record payment
+        $record_payment = self::record_booking_payment( $property, $value, $payment->status );
+        $buttons['update'] = $record_payment;
+
+        // Copy pay link
+        $pay_link = self::booking_pay_link( $payment->ID );
+        $buttons['pay_link'] = $pay_link;
+
+        // Download PDF receipt
+        $receipt_icon = '<i class="fa-solid fa-receipt"></i>';
+        $receipt_url = $payment->receipt_url;
+        $title = __( 'View receipt', 'buddyclients-free' );
+        $receipt_link = ! empty( $receipt_url ) ? '<a href="' . $receipt_url . '" title="' . $title . '" target="_blank">' . $receipt_icon . '</a>' : '';
+        $buttons['receipt'] = $receipt_link;
+
+        // Stripe transaction
+        $stripe_payment_id = $payment->payment_intent_id;
+        $external = $stripe_payment_id ? self::stripe_transaction_link( 'payment_intent_id', $stripe_payment_id, $item_id ) : '';
+        $buttons['stripe'] = $external;
+
+        // Add styling
+        $styled_actions = [];
+        foreach ( $buttons as $button ) {
+            $styled_actions[] = '<span class="buddyc-admin-booking-action">' . $button . '</span>';
+        }
+
+        $actions = implode( ' ', $styled_actions );
+
+        return '<div class="buddyc-admin-booking-actions">' . $actions . '</div>';
+    }
+
+    /**
+     * Formats the Stripe payment method property.
+     * 
+     * @since 1.0.27
+     */
+    protected static function payment_method( $property, $value ) {
+        $payment_methods = [
+            'acss_debit'       => __( 'Pre-authorized debit (Canada)', 'buddyclients-free' ),
+            'affirm'          => __( 'Affirm (Buy Now, Pay Later)', 'buddyclients-free' ),
+            'afterpay_clearpay' => __( 'Afterpay / Clearpay (Buy Now, Pay Later)', 'buddyclients-free' ),
+            'alipay'          => __( 'Alipay (Digital Wallet - China)', 'buddyclients-free' ),
+            'alma'            => __( 'Alma (Buy Now, Pay Later - Installments)', 'buddyclients-free' ),
+            'amazon_pay'      => __( 'Amazon Pay (Wallet)', 'buddyclients-free' ),
+            'au_becs_debit'   => __( 'BECS Direct Debit (Australia)', 'buddyclients-free' ),
+            'bacs_debit'      => __( 'Bacs Direct Debit (UK)', 'buddyclients-free' ),
+            'bancontact'      => __( 'Bancontact (Bank Redirect - Belgium)', 'buddyclients-free' ),
+            'blik'            => __( 'BLIK (Single-use Payment - Poland)', 'buddyclients-free' ),
+            'boleto'          => __( 'Boleto (Voucher-based - Brazil)', 'buddyclients-free' ),
+            'card'            => __( 'Credit / Debit Card', 'buddyclients-free' ),
+            'card_present'    => __( 'Stripe Terminal (In-person Card Payment)', 'buddyclients-free' ),
+            'cashapp'         => __( 'Cash App Pay', 'buddyclients-free' ),
+            'customer_balance' => __( 'Customer Balance Payment', 'buddyclients-free' ),
+            'eps'             => __( 'EPS (Bank Redirect - Austria)', 'buddyclients-free' ),
+            'fpx'             => __( 'FPX (Bank Redirect - Malaysia)', 'buddyclients-free' ),
+            'giropay'         => __( 'giropay (Bank Redirect - Germany)', 'buddyclients-free' ),
+            'grabpay'         => __( 'GrabPay (Digital Wallet - Southeast Asia)', 'buddyclients-free' ),
+            'ideal'           => __( 'iDEAL (Bank Redirect - Netherlands)', 'buddyclients-free' ),
+            'interac_present' => __( 'Interac (In-person Debit - Canada)', 'buddyclients-free' ),
+            'kakao_pay'       => __( 'Kakao Pay (Digital Wallet - South Korea)', 'buddyclients-free' ),
+            'klarna'          => __( 'Klarna (Buy Now, Pay Later)', 'buddyclients-free' ),
+            'konbini'         => __( 'Konbini (Cash-based Voucher - Japan)', 'buddyclients-free' ),
+            'kr_card'         => __( 'Korean Credit/Debit Card', 'buddyclients-free' ),
+            'link'            => __( 'Link (Saved Payment Details)', 'buddyclients-free' ),
+            'mobilepay'       => __( 'MobilePay (Nordic Wallet)', 'buddyclients-free' ),
+            'multibanco'      => __( 'Multibanco (Voucher Payment)', 'buddyclients-free' ),
+            'naver_pay'       => __( 'Naver Pay (Digital Wallet - South Korea)', 'buddyclients-free' ),
+            'oxxo'            => __( 'OXXO (Cash-based Voucher - Mexico)', 'buddyclients-free' ),
+            'p24'             => __( 'Przelewy24 (Bank Redirect - Poland)', 'buddyclients-free' ),
+            'pay_by_bank'     => __( 'Pay By Bank (Open Banking - UK)', 'buddyclients-free' ),
+            'payco'           => __( 'PAYCO (Digital Wallet - South Korea)', 'buddyclients-free' ),
+            'paynow'          => __( 'PayNow (QR Code Payment - Singapore)', 'buddyclients-free' ),
+            'paypal'          => __( 'PayPal (Online Wallet)', 'buddyclients-free' ),
+            'pix'             => __( 'Pix (Instant Bank Transfer - Brazil)', 'buddyclients-free' ),
+            'promptpay'       => __( 'PromptPay (Instant Funds Transfer - Thailand)', 'buddyclients-free' ),
+            'revolut_pay'     => __( 'Revolut Pay (Digital Wallet - UK)', 'buddyclients-free' ),
+            'samsung_pay'     => __( 'Samsung Pay (Digital Wallet - South Korea)', 'buddyclients-free' ),
+            'sepa_debit'      => __( 'SEPA Direct Debit (Euro Payments Area)', 'buddyclients-free' ),
+            'sofort'          => __( 'Sofort (Bank Redirect - Europe)', 'buddyclients-free' ),
+            'swish'           => __( 'Swish (Wallet - Sweden)', 'buddyclients-free' ),
+            'twint'           => __( 'TWINT (Payment Method)', 'buddyclients-free' ),
+            'us_bank_account' => __( 'ACH Direct Debit (US Bank Accounts)', 'buddyclients-free' ),
+            'wechat_pay'      => __( 'WeChat Pay (Digital Wallet - China)', 'buddyclients-free' ),
+            'zip'             => __( 'Zip (Buy Now, Pay Later)', 'buddyclients-free' ),
+            'manually_recorded'=> __('Manually Recorded', 'buddyclients-free')
+        ];
+        return $payment_methods[$value] ?? self::uc_format( $value );
+    }
+
+    /**
+     * Outputs a button to copy the link to pay a BookingPayment.
+     * 
+     * @since 1.0.27
+     * 
+     * @param   string  $payment_id   The ID of the BookingPayment object.
+     */
+    protected static function booking_pay_link( $payment_id ) {
+        if ( ! $payment_id ) {
+            return;
+        }
+        
+        $url_to_copy = buddyc_build_pay_link( $payment_id );
+        if ( ! empty( $url_to_copy ) ) {
+            $field_id = 'buddyc-pay-link-copy-' . $payment_id;
+            $title = __( 'Copy pay link', 'buddyclients-free' );
+            
+            // Output the HTML directly
+            return sprintf(
+                '<div>
+                    <p><span id="%1$s" class="buddyc-hidden">%2$s</span></p>
+                    <a onclick="buddycCopyToClipboard(\'%1$s\')" class="buddyc-pointer" title="%3$s">
+                        <i class="fa-solid fa-copy"></i>
+                    </a>
+                    <div class="buddyc-copy-success">Copied!</div>
+                </div>',
+                esc_attr( $field_id ),
+                esc_html( $url_to_copy ),
+                esc_attr( $title )
+            );
+        }
+    }    
     
     /**
      * Generates a date range.
@@ -554,7 +837,7 @@ class AdminTableItem extends AdminTable {
             <?php echo esc_html( $value ) ?>
             </span></p>
             <button onclick="buddycCopyToClipboard('<?php echo esc_attr( $field_id ) ?>')" type="button" class="button button-secondary">Copy Memo</button>
-            <div class="buddyc-copy-success"></div>
+            <div class="buddyc-copy-success">Memo Copied!</div>
         </div>
         <?php
 

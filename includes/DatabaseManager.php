@@ -86,11 +86,21 @@ class DatabaseManager {
                 'project_id'     => 'VARCHAR(255)',
                 'created_at'     => 'DATETIME NOT NULL DEFAULT CURRENT_TIMESTAMP',
             ],
+            'BookingPayment' => [
+                'ID'                    => 'INT(11) NOT NULL AUTO_INCREMENT PRIMARY KEY',
+                'BookingPayment'        => 'TEXT',
+                'booking_intent_id'     => 'VARCHAR(255)',
+                'booking_intent_status' => 'VARCHAR(255)',
+                'status'                => 'VARCHAR(255)',
+                'amount'                => 'VARCHAR(255)',
+                'amount_received'       => 'VARCHAR(255)',
+                'created_at'            => 'DATETIME NOT NULL DEFAULT CURRENT_TIMESTAMP',
+            ],
             'BookedService' => [
                 'ID'                => 'INT(11) NOT NULL AUTO_INCREMENT PRIMARY KEY',
                 'BookedService'     => 'TEXT',
-                'booking_intent_id' => 'INT',
-                'service_id'        => 'INT',
+                'booking_intent_id' => 'VARCHAR(255)',
+                'service_id'        => 'VARCHAR(255)',
                 'team_id'           => 'VARCHAR(255)',
                 'client_id'         => 'VARCHAR(255)',
                 'created_at'        => 'DATETIME NOT NULL DEFAULT CURRENT_TIMESTAMP',
@@ -546,7 +556,6 @@ class DatabaseManager {
      */
     public function update_record( $record_id, $data ) {
         if ( ! $this->valid ) return;
-
         global $wpdb;
 
         $updated = $wpdb->update( $this->table_name, $data, array( 'ID' => $record_id ) );
@@ -558,6 +567,28 @@ class DatabaseManager {
         
         return $updated;
     }
+
+
+    /**
+     * Updates multiple records.
+     * 
+     * @since 1.0.25
+     * 
+     * @param array $records Associative array of IDs and record data.
+     * @return bool True on success, false on failure of any record.
+     */
+    public function update_records( $records ) {
+        // Initialize flag
+        $success = true;
+
+        // Loop through and update records
+        foreach ( $records as $record_id => $record_data ) {
+            $updated = $this->update_record( $record_id, $record_data );
+            // Update flag on failure
+            if ( ! $updated ) $success = false;
+        }
+        return $success;
+    }    
 
     /**
      * Retrieves all records from the custom table.
@@ -803,6 +834,61 @@ class DatabaseManager {
         wp_cache_set( $cache_key, $results, '', 3600 );
 
         // Return results    
+        return $results;
+    }
+
+    /**
+     * Retrieves multiple records by their IDs.
+     *
+     * @since 1.0.27
+     *
+     * @param array $record_ids An array of record IDs to fetch.
+     *
+     * @return array|null The records matching the IDs or null if not found.
+     */
+    public function get_records_by_ids( $record_ids ) {
+        if ( ! $this->valid || empty( $record_ids ) || ! is_array( $record_ids ) ) {
+            return null;
+        }
+
+        global $wpdb;
+
+        // Sanitize and ensure IDs are integers
+        $record_ids = array_map( 'intval', array_filter( $record_ids ) );
+
+        if ( empty( $record_ids ) ) {
+            return null;
+        }
+
+        // Create cache key
+        $cache_key = $this->create_cache_key( 'records_by_ids', $record_ids );
+
+        // Try to get data from cache
+        $cached_records = wp_cache_get( $cache_key );
+
+        if ( $cached_records !== false ) {
+            return $cached_records;
+        }
+
+        // Ensure IDs are integers
+        $record_ids = array_map( 'intval', $record_ids );
+
+        // Prepare SQL query
+        $query = $wpdb->prepare(
+            "SELECT * FROM {$this->table_name} WHERE ID IN (" . implode( ',', array_fill( 0, count( $record_ids ), '%d' ) ) . ")",
+            ...$record_ids
+        );
+
+        // Execute the query
+        $results = $wpdb->get_results( $query );
+
+        if ( empty( $results ) ) {
+            return null;
+        }
+
+        // Cache the results for 1 hour
+        wp_cache_set( $cache_key, $results, '', 3600 );
+
         return $results;
     }
 

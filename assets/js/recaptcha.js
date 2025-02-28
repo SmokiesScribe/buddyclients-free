@@ -39,6 +39,13 @@ function buddycRecaptchaSubmit( event, manual = false ) {
 function buddycValidateRecaptcha( event ) {
     // Initialize a promise that will resolve if reCAPTCHA validation passes
     return new Promise(function(resolve, reject) {
+
+        // Handle reCAPTCHA disabled
+        if ( typeof grecaptcha === "undefined" ) {
+            resolve(true); // Allow form submission if reCAPTCHA is missing
+            return;
+        }
+
         // Ensure reCAPTCHA is ready before executing
         grecaptcha.ready(function() {
             grecaptcha.execute(recaptchaData.siteKey, {action: 'submit'}).then(function(token) {

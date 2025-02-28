@@ -13,29 +13,15 @@ function buddyc_enqueue_recaptcha_script() {
     if ( ! $enabled ) {
         return;
     }
-
+    
     // Check if popup contact form is enabled
     $global_enabled = function_exists( 'buddyc_global_contact_enabled' ) ? buddyc_global_contact_enabled() : false;
 
     // Look for shortcode if popup not enabled
     if ( ! $global_enabled ) {
 
-        // Initialize flag
-        $has_shortcode = false;
-
-        // Get plugins shortcodes
-        $shortcodes = buddyc_shortcodes_data();
-
-        // Loop through shortcodes
-        foreach ( $shortcodes as $shortcode => $data ) {
-            // Get page content
-            $content = get_post()->post_content;
-            // Check if shortcode exists on page
-            if ( has_shortcode( $content, $shortcode ) ) {
-                $has_shortcode = true;
-                break;
-            }
-        }
+        // Check if any shortcode exists on the page
+        $has_shortcode = buddyc_any_shortcode_exists();
 
         // No shortcode exists on page
         if ( ! $has_shortcode ) {

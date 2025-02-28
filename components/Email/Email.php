@@ -137,7 +137,7 @@ class Email {
         $this->to_user_id = $this->to_user_id( $args );
         
         // Build message from BuddyBoss template if available
-        if (function_exists('bp_email_core_wp_get_template')) {
+        if ( function_exists('bp_email_core_wp_get_template' ) ) {
             $message = bp_email_core_wp_get_template( $this->content,  $this->to_user_id );
         } else {
             $message = $this->content;
@@ -259,12 +259,18 @@ class Email {
      * @since 0.1.0
      */
     private function get_content( $args ) {
-        $templates_array = get_option('buddyc_email_templates', array());
-        $template_id = isset($templates_array[$this->key]) ? $templates_array[$this->key] : false;
+        $templates_array = get_option( 'buddyc_email_templates', [] );
+        $template_id = isset( $templates_array[$this->key] ) ? $templates_array[$this->key] : false;
         
         if ( $template_id ) {
-            $this->content = $this->replace_var( 'post_content', $template_id, $args );
-            $this->subject = $this->replace_var( 'post_title', $template_id, $args );
+
+            // Get content
+            $content = get_post_field( 'post_content', $template_id );
+            $this->content = $this->replace_var( $content, $args );
+
+            // Get subject
+            $subject = get_post_meta( $template_id, '_buddyc_email_subject', true );
+            $this->subject = $this->replace_var( $subject, $args );
         }
     }
     
@@ -272,6 +278,7 @@ class Email {
      * Maps the variables.
      * 
      * @since 0.1.0
+     * @todo
      *
      * @param   array   $args   Array of args from constructor.
      */
@@ -312,13 +319,12 @@ class Email {
      * 
      * @since 0.1.0
      * 
-     * @param   array   $args   Array of args from constructor.
+     * @param   string  $content    The content to modify.
+     * @param   array   $args       Array of args from constructor.
+     * @return  string  The content with placeholders replaced.
      */
-    private function replace_var( $post_field, $template_id, $args ) {
+    private function replace_var( $content, $args ) {
         $key = $this->key;
-        
-        // Get content from template
-        $content = get_post_field( $post_field, $template_id );
         
         // Define constant variables
         $constants = $this->constant_variables();

@@ -122,7 +122,6 @@ class ServiceHandler {
      * @since 0.1.0
      */
     public function validate_service( $post_id ) {
-        error_log('Validating service ' . $post_id );
         // Service
         if ( get_post_type( $post_id ) === 'buddyc_service' ) {
             $service = new Service( $post_id );
@@ -141,7 +140,6 @@ class ServiceHandler {
      * @since 0.1.0
      */
     public function validate_all_services() {
-        error_log('Validating all services');
         // Get all service posts
         $query = new PostQuery( 'buddyc_service' );
         $posts = $query->posts;

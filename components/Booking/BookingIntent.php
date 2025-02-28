@@ -34,13 +34,6 @@ class BookingIntent {
     public $class = 'BookingIntent';
     
     /**
-     * The ID of the PaymentIntent.
-     * 
-     * @var int
-     */
-    public $payment_intent_id;
-    
-    /**
      * The current status.
      * Accepts 'incomplete' and 'succeeded'.
      * 
@@ -49,7 +42,7 @@ class BookingIntent {
     public $status;
     
     /**
-     * Timestamp of creation..
+     * Timestamp of creation.
      * 
      * @var string
      */
@@ -120,13 +113,6 @@ class BookingIntent {
     public $line_items;
     
     /**
-     * Checkout link.
-     * 
-     * @var string
-     */
-    public $checkout_link;
-    
-    /**
      * The net fee.
      * 
      * @var float
@@ -160,6 +146,20 @@ class BookingIntent {
      * @var string
      */
     public $terms_pdf;
+
+    /**
+     * An IDs of the BookingPayment objects.
+     * 
+     * @var array
+     */
+    public $payment_ids;
+
+    /**
+     * Whether all services for the BookingIntent are complete.
+     * 
+     * @var bool
+     */
+    public $services_complete = false;
     
     /**
      * Constructor method.
@@ -175,6 +175,7 @@ class BookingIntent {
         
         // Default status to incomplete
         $this->status = $this->status ?? 'incomplete';
+        $this->created_at = current_time( 'mysql' );
         
         // Get form submission data
         $this->post = $post;
@@ -196,6 +197,12 @@ class BookingIntent {
         
         // Add object to database
         $this->ID = self::$object_handler->new_object( $this );
+
+        // Create client payment objects
+        $this->payment_ids = $this->create_booking_payments();
+
+        // Update the Database with payment ids
+        self::$object_handler->update_object( $this->ID, $this );
 
         /**
          * Fires when user ID passed to checkout.
@@ -220,6 +227,30 @@ class BookingIntent {
         if ( ! self::$object_handler ) {
             self::$object_handler = buddyc_object_handler( __CLASS__ );
         }
+    }
+
+    /**
+     * Creates the BookingPayment objects.
+     * 
+     * @since 1.0.27
+     */
+    private function create_booking_payments() {
+        // Initialize
+        $payment_ids = [];
+
+        // Check deposit setting
+        $deposits_enabled = buddyc_deposits_enabled();
+
+        // Create deposit if enabled
+        if ( $deposits_enabled ) {
+            $payment_ids[] = buddyc_new_booking_payment_id( $this, 'deposit' );
+        }
+
+        // Always create final payment
+        $payment_ids[] = buddyc_new_booking_payment_id( $this, 'final' );
+
+        // Return array
+        return $payment_ids;
     }
     
     /**
@@ -265,8 +296,6 @@ class BookingIntent {
         $this->service_names        = $this->service_names();
         $this->sales_id             = $this->post['sales-id'] ?? null;
         $this->previously_paid      = isset( $this->post['previously-paid'] ) && $this->post['previously-paid'] === 'paid';
-        $this->checkout_link        = null;
-        $this->payment_intent_id    = 0;
         $this->terms_version        = isset( $this->post['terms-checkbox'] ) ? $this->post['terms-checkbox'][0] : null;
         $this->terms_pdf            = $this->generate_terms_pdf( $this->terms_version );
         
@@ -413,21 +442,6 @@ class BookingIntent {
     }
     
     /**
-     * Builds the checkout link.
-     * 
-     * @since 0.1.0
-     */
-    public function build_checkout_link() {
-        
-        // Get checkout page id
-        $checkout_page = buddyc_get_setting('pages', 'checkout_page');
-        $checkout_url = get_permalink($checkout_page);
-        
-        // Build checkout link
-        return $checkout_url . '?booking_id=' . $this->ID;
-    }
-    
-    /**
      * Creates string of service names.
      * 
      * @since 0.1.0
@@ -446,19 +460,41 @@ class BookingIntent {
      * @since 0.1.0
      */
     private function schedule_abandoned_booking_check() {
-        // Define timeout timestamp (current time + timeout period)
-        $timeout_timestamp = strtotime( "+10 minutes", current_time( 'timestamp' ) );
-    
-        // Schedule event to check abandoned bookings after timeout
-        wp_schedule_single_event( $timeout_timestamp, 'buddyc_check_abandoned_booking', array( $this->ID ) );
+        $timeout_setting = buddyc_get_setting( 'booking', 'abandoned_timeout' ); // in minutes
+        $timeout_seconds = (float) $timeout_setting * 60;
+        $timeout = time() + $timeout_seconds;
         
-        // Define the callback directly
-        add_action('buddyc_check_abandoned_booking', function( $booking_intent_id ) {
-            // Check if the status is succeeded
-            if ( $this->status !== 'succeeded' ) {
-                new AbandonedBooking( $booking_intent_id );
-            }
-        }, 10, 1);
+        buddyc_schedule([
+            'event_key'     => 'abandoned_booking',
+            'timeout'       => $timeout,
+            'args'          => [$this->ID],
+            'identifier'    => $this->ID
+        ]);
+    }
+
+    /**
+     * Checks if the booking was abandoned.
+     * 
+     * @since 1.0.27
+     * 
+     * @param   int $booking_intent_id  The ID of the BookingIntent.
+     */
+    public static function abandoned_booking_check( $booking_intent_id ) {
+        // Get the BookingIntent
+        $booking_intent = self::get_booking_intent( $booking_intent_id );
+
+        // Exit if the BookingIntent succeeded
+        if ( $booking_intent->status !== 'succeeded' ) {
+            
+            /**
+             * Fires on an incomplete booking attempt.
+             * 
+             * @since 0.1.0
+             * 
+             * @param   object  $booking_intent   The BookingIntent object.
+             */
+            do_action( 'buddyc_abandoned_booking', $booking_intent );
+        }
     }
     
     /**
@@ -528,22 +564,6 @@ class BookingIntent {
     }
     
     /**
-     * Retrieves PaymentIntent ID.
-     * 
-     * @since 0.1.0
-     * 
-     * @param int $ID The BookingIntent ID.
-     */
-    public static function get_payment_intent_id( $ID ) {
-        
-        // Retrieve booking intent
-        $booking_intent = self::get_booking_intent( $ID );
-        
-        // Return project id
-        return $booking_intent->payment_intent_id ?? 0;
-    }
-    
-    /**
      * Retrieves client ID.
      * 
      * @since 0.1.0
@@ -557,6 +577,38 @@ class BookingIntent {
         
         // Return project id
         return $booking_intent->client_id;
+    }
+
+    /**
+     * Retrieves the status of the BookingIntent.
+     * 
+     * @since 1.0.27
+     * 
+     * @param int $ID The ID of the BookingIntent.
+     */
+    public static function get_status( $ID ) {
+        
+        // Retrieve booking intent
+        $booking_intent = self::get_booking_intent( $ID );
+        
+        // Return project id
+        return $booking_intent->status;
+    }
+
+    /**
+     * Retrieves the associated BookingPayment IDs.
+     * 
+     * @since 1.0.27
+     * 
+     * @param int $ID The BookingIntent ID.
+     */
+    public static function get_payment_ids( $ID ) {
+        
+        // Retrieve booking intent
+        $booking_intent = self::get_booking_intent( $ID );
+        
+        // Return project id
+        return $booking_intent->payment_ids ?? [];
     }
     
     /**
@@ -578,6 +630,11 @@ class BookingIntent {
         
         // Update status
         $booking_intent = self::update_booking_intent( $ID, 'status', $new_status );
+
+        // Update status in associated payments
+        if ( ! empty( $booking_intent->payment_ids ) ) {
+            buddyc_update_booking_payments( $booking_intent->payment_ids, 'booking_intent_status', $new_status );
+        }
         
         // Check if we transitioned to succeeded
         if ( $old_status !== $new_status && $new_status === 'succeeded' ) {
@@ -620,6 +677,7 @@ class BookingIntent {
      * @param   int     $ID         The BookingIntent ID.
      * @param   string  $property   The property to update.
      * @param   mixed   $value      The new value for the property.
+     * @return  BookingIntent   The updated BookingIntent object.
      */
     public static function update_booking_intent( $ID, $property, $value ) {
         // Initialize object handler
@@ -657,35 +715,46 @@ class BookingIntent {
      * @since 0.1.0
      * 
      * @param   int     $ID         The BookingIntent ID.
-     * @param   string  $new_status The status to update to.
+     * @param   string  $project_id The new project.
      */
     public static function update_project_id( $ID, $project_id ) {
         return self::update_booking_intent( $ID, 'project_id', $project_id );
     }
     
     /**
-     * Updates PaymentIntent id.
+     * Updates the client id property of the BookingIntent.
      * 
      * @since 0.1.0
-     * 
-     * @param   int     $ID         The ID of the BookingIntent.
-     * @param   string  $new_status The ID of the PaymentIntent.
-     */
-    public static function update_payment_intent_id( $ID, $payment_intent_id ) {
-        return self::update_booking_intent( $ID, 'payment_intent_id', $payment_intent_id );
-    }
-    
-    /**
-     * Updates client id.
-     * 
-     * @since 0.1.0
+     * @since 1.0.27 Also updates the client id in the associated BookingPayment objects.
      * 
      * @param   int     $ID         The BookingIntent ID.
      * @param   int     $client_id  The new client ID.
      * @return  bool                True on success. False on failure.
      */
     public static function update_client_id( $ID, $client_id ) {
+        self::update_booking_payments( $ID, 'client_id', $client_id ); // @TODO
         return self::update_booking_intent( $ID, 'client_id', $client_id );
+    }
+
+    /**
+     * Updates a property of all BookingPayment objects associated with a BookingIntent.
+     * 
+     * @since 1.0.27
+     * 
+     * @param   int     $ID         The BookingIntent ID.
+     * @param   string  $property   The BookingPayment property to update.
+     * @param   mixed   $value      The new value for the property.
+     */
+    public static function update_booking_payments( $ID, $property, $value ) {
+        // Get the BookingPayment IDs for the BookingIntent
+        $booking_intent = self::get_booking_intent( $ID );
+        $payment_ids = $booking_intent?->payment_ids ?? [];
+
+        // Make sure payments exist
+        if ( ! empty( $payment_ids ) ) {
+            // Batch update all payments
+            buddyc_update_booking_payments( $payment_ids, $property, $value );
+        }
     }
     
     /**
@@ -725,6 +794,23 @@ class BookingIntent {
         // Update object
         return self::update_booking_intent( $ID, 'net_fee', $net_fee );
     }
+
+    /**
+     * Updates the services complete flag.
+     * 
+     * @since 1.0.27
+     * 
+     * @param   int     $ID                 The BookingIntent ID.
+     * @param   bool    $services_complete  Whether all services are complete.
+     * @return  BookingIntent   The updated BookingIntent object.
+     */
+    public static function update_services_complete( $ID, $services_complete ) {
+        // Update property
+        $booking_intent = self::update_booking_intent( $ID, 'services_complete', $services_complete );
+
+        // Make BookingPayments due
+        buddyc_booking_payments_due( $ID, $services_complete );
+    }
     
     /**
      * Deletes the Booking Intent.
@@ -746,6 +832,9 @@ class BookingIntent {
         
         // Delete associated services
         buddyc_delete_booking_intent_booked_services( $booking_intent_id );
+
+        // Delete associated client payments
+        buddyc_delete_booking_intent_booking_payments( $booking_intent_id );
         
         // Delete object
         return self::$object_handler->delete_object( $booking_intent_id );

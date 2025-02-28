@@ -84,9 +84,7 @@ class Confirmation {
      * 
      * @since 0.1.0
      */
-    public function __construct() {
-        @session_start();
-        
+    public function __construct() {        
         // Retrieve the booking intent from the session data
         $this->get_booking_intent();
         

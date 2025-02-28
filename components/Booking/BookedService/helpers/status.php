@@ -39,3 +39,16 @@ function buddyc_payment_eligible( $payment_id, $cancellation_window, $time_sched
     }
 }
 add_action('buddyc_payment_eligible', 'buddyc_payment_eligible', 10, 3);
+
+/**
+ * Checks if all services for a booking intent are complete.
+ * 
+ * @since 1.0.27
+ * 
+ * @param   BookedService   $booked_service The last updated BookedService object.
+ */
+function buddyc_check_booking_status( $booked_service ) {
+    $booking_intent_id = $booked_service->ID;
+
+}
+add_action( 'buddyc_service_status_complete', 'buddyc_check_booking_status', 10, 1 );

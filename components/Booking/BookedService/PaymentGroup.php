@@ -104,9 +104,6 @@ class PaymentGroup {
             // Build the new Referral
             $referral = buddyc_referral( $this->booking_intent );
 
-            error_log("Printing referral");
-            error_log(print_r($referral, true));
-
             // Make sure commission exists
             if ( $referral->commission_amount > 0 ) {
                 // Create the affiliate payment
@@ -178,7 +175,7 @@ class PaymentGroup {
         // Retrieve the booked service if it exists
         if ( $booked_service_id ) {
             $booked_service = BookedService::get_booked_service( $booked_service_id );
-            $args['service_name'] = $booked_service->name;
+            $args['service_name'] = $booked_service?->name;
         }
         
         // Create new Payment and add to array

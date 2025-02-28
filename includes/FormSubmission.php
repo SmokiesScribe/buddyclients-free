@@ -237,6 +237,8 @@ class FormSubmission {
      * @since 0.1.0
      */
     private function is_spam() {
+        if ( is_admin() ) return false;
+        
         if ( wp_verify_nonce( $this->nonce_value, $this->form_key ) ) {
             // Check for honeypot submission
             if ( isset( $_POST['website'] ) && ! empty( $_POST['website'] ) ) {

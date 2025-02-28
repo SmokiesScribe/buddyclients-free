@@ -1,10 +1,8 @@
 <?php
 namespace BuddyClients\Components\Checkout;
 if ( ! defined( 'ABSPATH' ) ) exit; // Exit if accessed directly
-
 use BuddyClients\Components\Booking\BookingIntent;
-use BuddyEvents\Includes\Registration\RegistrationIntent;
-use BuddyEvents\Includes\Sponsor\SponsorIntent;
+use BuddyClients\Components\Booking\BookingPayment;
 
 /**
  * Fetches intents for checkout and confirmation.
@@ -21,11 +19,25 @@ class IntentHandler {
     public $intent;
 
     /**
-     * The ID of the intent.
+     * The BookingPayment object.
+     * 
+     * @var object
+     */
+    public $payment;
+
+    /**
+     * The ID of the BookingIntent.
      * 
      * @var int
      */
     public $intent_id;
+
+    /**
+     * The ID of the BookingPayment.
+     * 
+     * @var int
+     */
+    public $payment_id;
 
     /**
      * The type of intent.
@@ -48,115 +60,194 @@ class IntentHandler {
      * @since 1.0.15
      */
     public function __construct() {
-        $this->fetch_intent_info();
-        $this->fetch_intent();
+        $this->fetch_intent_data();
     }
 
     /**
-     * Fetches the intent object.
+     * Fetches the intent info and object.
      * 
-     * @since 1.0.15
+     * @since 1.0.27
      */
-    private function fetch_intent() {
-        // Make sure intent class exists
-        if ( $this->intent_class && class_exists( $this->intent_class ) ) {
-            // Get intent object by type
-            switch ( $this->intent_type ) {
-                case 'booking':
-                    $this->intent = BookingIntent::get_booking_intent( $this->intent_id );
-                    break;
-                case 'registration':
-                    $this->intent = RegistrationIntent::get_registration_intent( $this->intent_id );
-                    break;
-                case 'sponsor':
-                    $this->intent = Sponsor_intent::get_sponsor_intent( $this->intent_id );
-                    break;
-            }
-        }
+    private function fetch_intent_data() {
+        $this->intent_type = 'booking';
+        $this->intent_class = BookingIntent::class;
+
+        // Get booking and payment intent ids
+        $this->intent_id = self::fetch_id( 'intent' );
+        $this->payment_id = self::fetch_id( 'payment' );
+
+        // Get the intent object
+        $this->intent = self::fetch_object( $this->intent_id, 'intent' );
+        $this->payment = self::fetch_object( $this->payment_id, 'payment' );
     }
 
     /**
-     * Fetches the intent id.
+     * Defines the cache key.
+     * 
+     * @since 1.0.27
+     * 
+     * @param   string  $object_type    The type of object or id being stored ('intent' or 'payment').
+     * @param   string  $data_type      The type of data being stored ('object' or 'id').
+     * @param   int     $intent_id      The ID of the object.
+     */
+    private static function cache_key( $object_type, $data_type, $intent_id ) {
+        return sprintf(
+            '_buddyc_intent_cache_%1$s_%2$s_%3$s',
+            $object_type,
+            $data_type,
+            $intent_id
+        );
+    }
+
+    /**
+     * Stores an item in the cache.
+     * 
+     * @since 1.0.27
+     * 
+     * @param   mixed   $value          The value to cache.
+     * @param   string  $object_type    The type of object or id being stored ('intent' or 'payment').
+     * @param   string  $data_type      The type of data being stored ('object' or 'id').
+     * @param   int     $intent_id      Optional. The ID of the object.
+     */
+    private static function set_cache( $value, $object_type, $data_type, $intent_id = null ) {
+        $cache_key = self::cache_key( $object_type, $data_type, $intent_id );
+        wp_cache_set( $cache_key, $value, 'buddyclients-free', 3600 );
+    }
+
+    /**
+     * Retrieves an item from the cache.
+     * 
+     * @since 1.0.27
+     * 
+     * @param   string  $object_type    The type of object or id being stored ('intent' or 'payment').
+     * @param   string  $data_type      The type of data being stored ('object' or 'id').
+     * @param   int     $intent_id      Optional. The ID of the object.
+     */
+    private static function get_cached( $object_type, $data_type, $intent_id = null ) {
+        $cache_key = self::cache_key( $object_type, $data_type, $intent_id );
+        return wp_cache_get( $cache_key, 'buddyclients-free' );
+    }
+
+    /**
+     * Fetches the intent id and payment id.
      * 
      * Sets variables based on the intent type.
      * 
      * @since 1.0.15
+     * 
+     * @param   string  $type   The type of ID ('intent' or 'payment').
      */
-    private function fetch_intent_info() {
-        // Fetch all ids
-        $url_ids = $this->fetch_url_intent_ids();
-        $session_ids = $this->fetch_session_intent_ids();
+    private function fetch_id( $object_type ) {
 
-        // Check url params then session
-        $booking_id = $url_ids['booking_id'] ?? $session_ids['booking_id'] ?? null;
-        $registration_id = $url_ids['registration_id'] ?? $session_ids['registration_id'] ?? null;
-        $sponsor_id = $url_ids['sponsor_id'] ?? $session_ids['sponsor_id'] ?? null;
+        // Check transient
+        $cached = self::get_cached( $object_type, 'id' );
+        if ( $cached ) return $cached;
 
-        // Booking
-        if ( $booking_id ) {
-            $this->intent_id = $booking_id;
-            $this->intent_type = 'booking';
-            $this->intent_class = BookingIntent::class;
-        
-        // Registration
-        } else if ( $registration_id ) {
-            $this->intent_id = $registration_id;
-            $this->intent_type = 'registration';
-            $this->intent_class = RegistrationIntent::class;
-        
-        // Sponsor
-        } else if ( $sponsor_id ) {
-            $this->intent_id = $sponsor_id;
-            $this->intent_type = 'sponsor';
-            $this->intent_class = SponsorIntent::class;
+        // Check url param
+        $id = $this->get_url_id( $object_type );
+
+        // Check session if necessary
+        if ( empty( $id ) ) {
+            $id = $this->get_session_id( $object_type );
         }
+
+        // Check if the id was found
+        if ( ! empty( $id ) ) {
+
+            // Set the cache
+            self::set_cache( $id, $object_type, 'id' );
+
+            // Return the id
+            return $id;
+        }
+    }
+
+    /**
+     * Fetches the intent object from the database.
+     * 
+     * @since 1.0.15
+     * 
+     * @param   int     $intent_id  The ID of the intent.
+     * @param   string  $type       The type of obejct ('intent' or 'payment').
+     */
+    public static function fetch_object( $intent_id, $type ) {
+        if ( ! $intent_id ) return;
+
+        // Check transient
+        $cached = self::get_cached( $type, 'object', $intent_id );
+        if ( $cached ) return $cached;
+
+        // Get class
+        $class = match ( $type ) {
+            'intent'    => BookingIntent::class,
+            'payment'   => BookingPayment::class,
+            default     => null
+        };
+
+        // Make sure intent class exists
+        if ( $class && class_exists( $class ) ) {
+
+            // Get intent by type
+            $intent = match ( $type ) {
+                'intent'    => BookingIntent::get_booking_intent( $intent_id ),
+                'payment'   => BookingPayment::get_payment( $intent_id ),
+                default     => null
+            };
+
+            // Set cache
+            self::set_cache( $intent, $type, 'object', $intent_id );
+
+            // Return object
+            return $intent;
+        }
+    }
+
+    /**
+     * Defines the url and session param key.
+     * 
+     * @since 1.0.27
+     * 
+     * @param   string  $object_type    The type of object whose ID we're fetching ('intent' or 'payment').
+     */
+    private static function param_key( $object_type ) {
+        return match ( $object_type ) {
+            'intent'    => 'booking_id',
+            'payment'   => 'payment_id',
+            default     => null
+        };
     }
 
     /**
      * Fetches the intent id from the url param.
      * 
      * @since 1.0.15
+     * 
+     * @param   string  $object_type    The type of object whose ID we're fetching ('intent' or 'payment').
      */
-    private function fetch_url_intent_ids() {
-        return [
-            'booking_id'        => buddyc_get_param( 'booking_id' ),
-            'registration_id'   => buddyc_get_param( 'registration_id' ),
-            'sponsor_id'        => buddyc_get_param( 'sponsor_id' )
-        ];
+    private function get_url_id( $object_type ) {
+
+        // Define url param
+        $param = self::param_key( $object_type );
+        if ( ! $param ) return;
+
+        // Get the param value
+        return buddyc_get_param( $param );
     }
 
     /**
-     * Fetches the intent id from the session data.
+     * Fetches the intent id from the session param.
      * 
      * @since 1.0.15
-     */
-    private function fetch_session_intent_ids() {
-        return [
-            'booking_id'      => isset( $_SESSION['booking_id'] ) ? absint( wp_unslash( $_SESSION['booking_id'] ) ) : null,
-            'registration_id' => isset( $_SESSION['registration_id'] ) ? absint( wp_unslash( $_SESSION['registration_id'] ) ) : null,
-            'sponsor_id'      => isset( $_SESSION['sponsor_id'] ) ? absint( wp_unslash( $_SESSION['sponsor_id'] ) ) : null
-        ];
-    }
-
-    /**
-     * Fetches an intent by ID and type.
      * 
-     * @since 1.0.17
+     * @param   string  $object_type    The type of object whose ID we're fetching ('intent' or 'payment').
      */
-    public static function get_intent( $intent_id, $intent_type ) {
-        $intent = null;
-        switch ( $intent_type ) {
-            case 'booking':
-                $intent = BookingIntent::get_booking_intent( $intent_id );
-                break;
-            case 'registration':
-                $intent = RegistrationIntent::get_registration_intent( $intent_id );
-                break;
-            case 'sponsor':
-                $intent = SponsorIntent::get_sponsor_intent( $intent_id );
-                break;
-        }
-        return $intent;
-    }
+    private function get_session_id( $object_type ) {
 
+        // Define session param
+        $param = self::param_key( $object_type );
+        if ( ! $param ) return;
+
+        // Retrieve and sanitize the session data
+        return isset( $_SESSION[$param] ) ? absint( wp_unslash( $_SESSION[$param] ) ) : null;
+    }
 }

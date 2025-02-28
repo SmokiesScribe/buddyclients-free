@@ -47,7 +47,7 @@ function buddyc_email_log_admin_notice() {
     // Get the current screen
     $screen = get_current_screen();
     
-    if ( $screen && $screen->id === 'admin_page_buddyc-email-log' ) {
+    if ( $screen && $screen->id === 'hidden-menu_page_buddyc-email-log' ) {
         
         // Get current setting
         $email_setting = buddyc_get_setting( 'email', 'email_log_time');

@@ -825,7 +825,7 @@ class BookingForm {
                 ];
 
                 // Check whether to require legal agreement
-                $require_agreement = buddyc_get_setting( 'legal', 'require_agreement' ) == 'yes';
+                $require_agreement = buddyc_get_setting( 'booking', 'require_agreement' ) == 'yes';
                         
                 // Loop through team members
                 foreach ( $team_members['users'] as $team_member ) {
@@ -851,9 +851,9 @@ class BookingForm {
                         $availability = function_exists( 'buddyc_get_availability' ) ? buddyc_get_availability( $team_member->ID ) : '';
                         $availability_message = $availability ? sprintf(
                             ' - %s',
-                            __( 'Available', 'buddyclients' )
+                            __( 'Available', 'buddyclients-free' )
                         ) : '';
-                                                    
+                            
                         $team_options[$role->ID . '-' . $team_member->ID] = [
                             'label'     => $team_member->display_name . $availability_message,
                             'value'     => $team_member->ID,
@@ -899,15 +899,17 @@ class BookingForm {
         $service_agreement_id = '';
         $option_label = __( 'I confirm that the information above is correct.', 'buddyclients-free' );
         
-        // Check for service agreement
-        $service_agreement_id = buddyc_get_setting('legal', 'client_legal_version');
-        
-        if ( $service_agreement_id ) {
-            $option_label = sprintf(
-                /* translators: %s: the terms being agreed to (e.g. service terms) */
-                __( 'I agree to the %s.', 'buddyclients-free' ),
-                buddyc_help_link( $service_agreement_id, __( 'service terms', 'buddyclients-free' ) )
-            );
+        if ( function_exists( 'buddyc_legal_get_current_version' ) ) {
+            // Check for service agreement
+            $service_agreement_id = buddyc_legal_get_current_version( 'client' );
+            
+            if ( $service_agreement_id ) {
+                $option_label = sprintf(
+                    /* translators: %s: the terms being agreed to (e.g. service terms) */
+                    __( 'I agree to the %s.', 'buddyclients-free' ),
+                    buddyc_help_link( $service_agreement_id, __( 'service terms', 'buddyclients-free' ) )
+                );
+            }
         }
             
         // Build field
