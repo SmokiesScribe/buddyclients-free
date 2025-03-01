@@ -6,8 +6,6 @@
 document.addEventListener("DOMContentLoaded", function () {
     const dismissButtons = document.querySelectorAll(".buddyc-dismiss-admin-btn");
 
-    console.log(dismissButtons);
-
     dismissButtons.forEach(button => {
         const notice = button.closest(".notice");
         if ( ! notice ) return;
