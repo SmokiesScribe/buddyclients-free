@@ -3,7 +3,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: BuddyClients Free\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2025-02-23 04:23+0000\n"
+"POT-Creation-Date: 2025-03-01 00:43+0000\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: \n"
@@ -24,10 +24,6 @@ msgstr ""
 msgid " per "
 msgstr ""
 
-#: admin/AdminColumns.php:640
-msgid "%"
-msgstr ""
-
 #. %1$d: the number of the current page being displayed; %2$d: the total number of pages
 #: admin/AdminTable.php:339
 #, php-format
@@ -35,13 +31,13 @@ msgid "%1$d of %2$d"
 msgstr ""
 
 #. %1$s: the name of the client; %2$s: the email address of the client
-#: components/Checkout/Checkout.php:253
+#: components/Checkout/Checkout.php:280
 #, php-format
 msgid "%1$s has been notified at %2$s."
 msgstr ""
 
 #. %1$s: the name of the client; %2$s: the name of the service; %3$s: the link to the project
-#: components/Email/EmailTemplateManager.php:281
+#: components/Email/EmailTemplateManager.php:301
 #, php-format
 msgid "%1$s has requested to cancel %2$s for %3$s."
 msgstr ""
@@ -72,7 +68,7 @@ msgid "%s Brief"
 msgstr ""
 
 #. %s: the name of the site
-#: components/Email/EmailTemplateManager.php:300
+#: components/Email/EmailTemplateManager.php:320
 #, php-format
 msgid "%s Contact Form"
 msgstr ""
@@ -119,20 +115,20 @@ msgid ""
 "available."
 msgstr ""
 
-#: components/Email/EmailTemplateManager.php:255
+#: components/Email/EmailTemplateManager.php:275
 msgid "<strong>New Lead from {{site_name}}</strong>"
 msgstr ""
 
-#: components/Email/EmailTemplateManager.php:344
+#: components/Email/EmailTemplateManager.php:364
 msgid "<strong>Your Submitted Info:</strong>"
 msgstr ""
 
-#: components/Email/EmailTemplateManager.php:182
+#: components/Email/EmailTemplateManager.php:202
 msgid "<strong>Your Submitted Information:</strong>"
 msgstr ""
 
 #. %1$s: the client name; %2$s: the service name; %3$s: additional details
-#: components/Email/EmailTemplateManager.php:159
+#: components/Email/EmailTemplateManager.php:179
 #, php-format
 msgid "A new booking has been confirmed. %1$s successfully booked %2$s. %3$s"
 msgstr ""
@@ -141,8 +137,12 @@ msgstr ""
 msgid "Abandoned"
 msgstr ""
 
-#: components/Email/EmailTemplateManager.php:115
+#: components/Email/EmailTemplateManager.php:135
 msgid "Abandoned Booking"
+msgstr ""
+
+#: components/Booking/SettingsBooking.php:100
+msgid "Abandoned Booking Email"
 msgstr ""
 
 #: admin/SettingsGeneral.php:50
@@ -153,7 +153,7 @@ msgstr ""
 msgid "Accept and display testimonials from clients."
 msgstr ""
 
-#: components/Booking/SettingsBooking.php:41
+#: components/Booking/SettingsBooking.php:45
 msgid "Accept Bookings"
 msgstr ""
 
@@ -170,30 +170,35 @@ msgid "Accepted File Types"
 msgstr ""
 
 #. %s: the url of the site
-#: components/Booking/BookingIntent.php:403
+#: components/Booking/BookingIntent.php:432
 #, php-format
 msgid "Accepted via checkbox on %s"
 msgstr ""
 
 #. %s: the link to the project
-#: components/Email/EmailTemplateManager.php:107
+#: components/Email/EmailTemplateManager.php:127
 #, php-format
 msgid "Access the project: %s"
 msgstr ""
 
-#: admin/WelcomeMessage.php:294 admin/PluginLinks.php:61
+#: admin/WelcomeMessage.php:307 admin/PluginLinks.php:63
 msgid "Account"
+msgstr ""
+
+#: admin/AdminTableItem.php:771
+msgid "ACH Direct Debit (US Bank Accounts)"
 msgstr ""
 
 #: includes/Options.php:387
 msgid "ACH Transfer"
 msgstr ""
 
-#: admin/partials/all-bookings.php:28
+#: admin/partials/booking-payments.php:26 admin/partials/all-bookings.php:25
 msgid "Actions"
 msgstr ""
 
-#: admin/AdminTableItem.php:746 admin/partials/leads.php:43
+#: admin/AdminTableItem.php:1029 admin/UpgradePage.php:376
+#: admin/partials/leads.php:43
 msgid "Active"
 msgstr ""
 
@@ -216,7 +221,7 @@ msgstr ""
 msgid "Add Option"
 msgstr ""
 
-#: admin/WelcomeMessage.php:183
+#: admin/WelcomeMessage.php:193
 msgid "Add this website"
 msgstr ""
 
@@ -228,7 +233,7 @@ msgstr ""
 msgid "Adjust global buddyclients styles to match your brand."
 msgstr ""
 
-#: admin/helpers/free.php:76
+#: admin/UpgradePage.php:193
 msgid "Adjust prices dynamically"
 msgstr ""
 
@@ -236,7 +241,7 @@ msgstr ""
 msgid "Adjust the plugin styles to match your brand."
 msgstr ""
 
-#: admin/Nav.php:60
+#: admin/Nav.php:61
 msgid "Adjustment Fields"
 msgstr ""
 
@@ -258,17 +263,17 @@ msgstr ""
 msgid "Admin Email Notifications"
 msgstr ""
 
-#: admin/Nav.php:51 admin/AdminTableItem.php:247
+#: admin/Nav.php:52 admin/AdminTableItem.php:269
 #: includes/helpers/components.php:43 admin/partials/payments.php:55
 #: admin/partials/user-agreements.php:48
 msgid "Affiliate"
 msgstr ""
 
-#: includes/AlertManager.php:129
+#: includes/AlertManager.php:130
 msgid "affiliate"
 msgstr ""
 
-#: admin/Nav.php:66
+#: admin/Nav.php:67
 msgid "Affiliate Payments"
 msgstr ""
 
@@ -277,29 +282,53 @@ msgstr ""
 msgid "Affiliate Program"
 msgstr ""
 
-#: admin/helpers/free.php:86
+#: admin/UpgradePage.php:203
 msgid "Affiliate program"
 msgstr ""
 
-#: admin/Nav.php:80
+#: admin/Nav.php:81
 msgid "Affiliates"
+msgstr ""
+
+#: admin/AdminTableItem.php:729
+msgid "Affirm (Buy Now, Pay Later)"
+msgstr ""
+
+#: admin/AdminTableItem.php:730
+msgid "Afterpay / Clearpay (Buy Now, Pay Later)"
 msgstr ""
 
 #: admin/partials/user-list.php:56
 msgid "Agreements"
 msgstr ""
 
-#: admin/partials/booked-services.php:53 admin/partials/leads.php:42
-#: admin/partials/payments.php:53 admin/partials/payments.php:64
-#: admin/partials/user-agreements.php:47 admin/partials/user-agreements.php:85
+#: admin/AdminTableItem.php:731
+msgid "Alipay (Digital Wallet - China)"
+msgstr ""
+
+#: admin/partials/booking-payments.php:53
+#: admin/partials/booking-payments.php:63 admin/partials/booked-services.php:53
+#: admin/partials/leads.php:42 admin/partials/payments.php:53
+#: admin/partials/payments.php:64 admin/partials/user-agreements.php:47
+#: admin/partials/user-agreements.php:85
 msgid "All"
+msgstr ""
+
+#: components/Email/EmailTemplateManager.php:55
+msgid "All Booking Services Complete"
 msgstr ""
 
 #: admin/Nav.php:29
 msgid "All Bookings"
 msgstr ""
 
-#: components/Booking/SettingsBooking.php:78
+#. %1$s: the names of the services; %2$s: the project name; %3$s: the service status; %4$s: the link to view the project
+#: components/Email/EmailTemplateManager.php:60
+#, php-format
+msgid "All services booked on %1$s for %2$s have been completed: %3$s."
+msgstr ""
+
+#: components/Booking/SettingsBooking.php:118
 msgid ""
 "All services will be assigned to this person. This overrides all other "
 "assigned team member settings."
@@ -339,23 +368,36 @@ msgstr ""
 msgid "Allow users to earn commission for referring clients."
 msgstr ""
 
-#: admin/partials/payments.php:22
+#: admin/AdminTableItem.php:732
+msgid "Alma (Buy Now, Pay Later - Installments)"
+msgstr ""
+
+#: admin/AdminTableItem.php:733
+msgid "Amazon Pay (Wallet)"
+msgstr ""
+
+#. Stripe sends an id
+#: admin/partials/booking-payments.php:23 admin/partials/payments.php:22
 msgid "Amount"
 msgstr ""
 
-#: components/Booking/SettingsBooking.php:47
+#: admin/partials/booking-payments.php:24
+msgid "Amount Received"
+msgstr ""
+
+#: components/Booking/SettingsBooking.php:51
 msgid "Are you currently accepting bookings?"
 msgstr ""
 
-#: admin/AdminTableItem.php:475
+#: admin/AdminTableItem.php:562
 msgid ""
 "Are you sure you want to delete this booking? This action cannot be undone."
 msgstr ""
 
-#. %s: the new status
-#: admin/AdminTableItem.php:435
+#. %s: the new status (Paid or Unpaid)
+#: admin/AdminTableItem.php:518 admin/AdminTableItem.php:610
 #, php-format
-msgid "Are you sure you want to update this booking to %s?"
+msgid "Are you sure you want to mark this as %s?"
 msgstr ""
 
 #: admin/MetaManager.php:317 admin/MetaManager.php:1092
@@ -382,8 +424,12 @@ msgstr ""
 msgid "Availability"
 msgstr ""
 
+#: components/Booking/BookingForm.php:854
+msgid "Available"
+msgstr ""
+
 #. Meta box ID
-#: components/Email/EmailTemplateManager.php:487
+#: components/Email/EmailTemplateManager.php:507
 msgid "Available Placeholders"
 msgstr ""
 
@@ -391,23 +437,43 @@ msgstr ""
 msgid "Average Booking Value"
 msgstr ""
 
+#: admin/AdminTableItem.php:735
+msgid "Bacs Direct Debit (UK)"
+msgstr ""
+
+#: admin/AdminTableItem.php:736
+msgid "Bancontact (Bank Redirect - Belgium)"
+msgstr ""
+
 #: includes/Options.php:388
 msgid "Bank Transfer"
+msgstr ""
+
+#: admin/AdminTableItem.php:734
+msgid "BECS Direct Debit (Australia)"
+msgstr ""
+
+#: admin/AdminTableItem.php:737
+msgid "BLIK (Single-use Payment - Poland)"
 msgstr ""
 
 #: includes/FormField.php:471
 msgid "bold italic underline | undo redo"
 msgstr ""
 
+#: admin/AdminTableItem.php:738
+msgid "Boleto (Voucher-based - Brazil)"
+msgstr ""
+
 #: components/Service/ServicePost.php:107
 msgid "Book Now"
 msgstr ""
 
-#: components/Checkout/Checkout.php:284
+#: components/Checkout/Checkout.php:311
 msgid "Book services here."
 msgstr ""
 
-#: admin/AdminPageManager.php:187
+#: admin/AdminPageManager.php:188
 msgid "Booked Services"
 msgstr ""
 
@@ -415,8 +481,16 @@ msgstr ""
 msgid "Booking"
 msgstr ""
 
-#: components/Email/EmailTemplateManager.php:86
+#: components/Email/EmailTemplateManager.php:106
 msgid "booking form"
+msgstr ""
+
+#: admin/partials/booking-payments.php:70
+msgid "Booking Intent"
+msgstr ""
+
+#: admin/AdminPageManager.php:195 admin/partials/booking-payments.php:47
+msgid "Booking Payments"
 msgstr ""
 
 #: admin/AdminDashboard.php:763
@@ -427,13 +501,13 @@ msgstr ""
 msgid "Booking Success Over Time"
 msgstr ""
 
-#: admin/Nav.php:46 admin/AdminPageManager.php:94
-#: admin/partials/booked-services.php:47 admin/partials/all-bookings.php:55
-#: components/Booking/SettingsBooking.php:37
+#: admin/Nav.php:47 admin/AdminPageManager.php:94
+#: admin/partials/booked-services.php:47 admin/partials/all-bookings.php:53
+#: components/Booking/SettingsBooking.php:41
 msgid "Bookings"
 msgstr ""
 
-#: admin/AdminPageManager.php:157
+#: admin/AdminPageManager.php:158
 msgid "Bookings Dashboard"
 msgstr ""
 
@@ -446,7 +520,7 @@ msgstr ""
 msgid "Brief Field"
 msgstr ""
 
-#: admin/Nav.php:72 admin/PostTypeManager.php:172
+#: admin/Nav.php:73 admin/PostTypeManager.php:172
 msgid "Brief Fields"
 msgstr ""
 
@@ -454,18 +528,18 @@ msgstr ""
 msgid "Brief Type"
 msgstr ""
 
-#: admin/MetaManager.php:955 admin/Nav.php:71 admin/TaxManager.php:51
+#: admin/MetaManager.php:955 admin/Nav.php:72 admin/TaxManager.php:51
 #: admin/AdminColumns.php:54 admin/AdminColumns.php:117
 msgid "Brief Types"
 msgstr ""
 
 #. %s: the name of the project
-#: components/Email/EmailTemplateManager.php:58
+#: components/Email/EmailTemplateManager.php:78
 #, php-format
 msgid "Brief updated for %s"
 msgstr ""
 
-#: includes/SinglePost.php:293 admin/Nav.php:70 admin/PostTypeManager.php:157
+#: includes/SinglePost.php:293 admin/Nav.php:71 admin/PostTypeManager.php:157
 msgid "Briefs"
 msgstr ""
 
@@ -495,12 +569,12 @@ msgstr ""
 msgid "BuddyPress is missing."
 msgstr ""
 
-#: admin/helpers/free.php:82
+#: admin/UpgradePage.php:199
 msgid "Business"
 msgstr ""
 
 #. %s: the policies the user is agreeing to (e.g. privacy policy and service terms)
-#: components/Checkout/Checkout.php:459
+#: components/Checkout/Checkout.php:481
 #, php-format
 msgid "By creating an account, you agree to the %s."
 msgstr ""
@@ -523,11 +597,11 @@ msgstr ""
 msgid "Cancellation reason..."
 msgstr ""
 
-#: components/Email/EmailTemplateManager.php:277
+#: components/Email/EmailTemplateManager.php:297
 msgid "Cancellation Request"
 msgstr ""
 
-#: components/Email/EmailTemplateManager.php:276
+#: components/Email/EmailTemplateManager.php:296
 msgid "Cancellation Request Admin Notification"
 msgstr ""
 
@@ -537,8 +611,12 @@ msgstr ""
 msgid "Cancellation Requested"
 msgstr ""
 
-#: components/Booking/SettingsBooking.php:59
+#: components/Booking/SettingsBooking.php:63
 msgid "Cancellation Window"
+msgstr ""
+
+#: admin/AdminTableItem.php:741
+msgid "Cash App Pay"
 msgstr ""
 
 #: admin/partials/email-log.php:72
@@ -567,7 +645,7 @@ msgstr ""
 msgid "Checkout"
 msgstr ""
 
-#: components/Booking/BookingFormSubmission.php:61
+#: components/Booking/BookingFormSubmission.php:64
 msgid "Checkout is unavailable at this time."
 msgstr ""
 
@@ -605,12 +683,12 @@ msgstr ""
 msgid "Click Here"
 msgstr ""
 
-#: components/Email/EmailTemplateManager.php:147
 #: components/Email/EmailTemplateManager.php:167
+#: components/Email/EmailTemplateManager.php:187
 msgid "Click here"
 msgstr ""
 
-#: components/Email/EmailTemplateManager.php:332
+#: components/Email/EmailTemplateManager.php:352
 msgid "Click here to finalize your booking."
 msgstr ""
 
@@ -627,9 +705,9 @@ msgid ""
 msgstr ""
 
 #: admin/MetaManager.php:1060 admin/AdminColumns.php:75
-#: admin/AdminColumns.php:126 admin/partials/user-list.php:75
-#: admin/partials/booked-services.php:21 admin/partials/user-agreements.php:50
-#: admin/partials/all-bookings.php:25
+#: admin/AdminColumns.php:126 admin/partials/booking-payments.php:18
+#: admin/partials/user-list.php:75 admin/partials/booked-services.php:21
+#: admin/partials/user-agreements.php:50 admin/partials/all-bookings.php:22
 #: components/Booking/BookedService/BookedServiceList.php:85
 #: components/Booking/BookedService/BookedServiceList.php:104
 #: components/Booking/BookedService/BookedServiceList.php:244
@@ -642,11 +720,15 @@ msgstr ""
 msgid "Client Fee"
 msgstr ""
 
+#: admin/Nav.php:32
+msgid "Client Payments"
+msgstr ""
+
 #: admin/AdminColumns.php:60 admin/AdminColumns.php:78
 msgid "Client Rate"
 msgstr ""
 
-#: admin/helpers/free.php:87
+#: admin/UpgradePage.php:204
 msgid "Client testimonials"
 msgstr ""
 
@@ -658,7 +740,7 @@ msgstr ""
 msgid "Cloning this class is not allowed."
 msgstr ""
 
-#: components/Booking/SettingsBooking.php:45
+#: components/Booking/SettingsBooking.php:49
 msgid "Closed"
 msgstr ""
 
@@ -676,22 +758,22 @@ msgstr ""
 msgid "Complete "
 msgstr ""
 
-#: components/Checkout/Checkout.php:543 components/Checkout/Checkout.php:561
+#: components/Checkout/Checkout.php:558 components/Checkout/Checkout.php:576
 msgid "Complete Checkout"
 msgstr ""
 
-#: components/Checkout/Confirmation.php:335
+#: components/Checkout/Confirmation.php:333
 msgid "Complete the briefs for "
 msgstr ""
 
 #. %1$s: url to complete agreement; %2$s: the type of agreement (e.g. affiliate or team)
-#: includes/AlertManager.php:155
+#: includes/AlertManager.php:156
 #, php-format
 msgid "Complete your <a href=\"%1$s\">%2$s agreement</a>."
 msgstr ""
 
 #. %1$s: url to complete agreement; %2$s: the type of agreement (e.g. affiliate or team)
-#: includes/AlertManager.php:146
+#: includes/AlertManager.php:147
 #, php-format
 msgid "Complete your <a href=\"%1$s\">new %2$s agreement</a>."
 msgstr ""
@@ -700,12 +782,12 @@ msgstr ""
 msgid "Completed"
 msgstr ""
 
-#: admin/Nav.php:44 admin/SettingsComponents.php:32
+#: admin/Nav.php:45 admin/SettingsComponents.php:32
 #: admin/SettingsComponents.php:36 admin/AdminPageManager.php:73
 msgid "Components"
 msgstr ""
 
-#: components/Checkout/Checkout.php:333
+#: components/Checkout/Checkout.php:367
 msgid "Confirm Your Booking"
 msgstr ""
 
@@ -714,7 +796,7 @@ msgid "Confirmation does not match. Files not deleted."
 msgstr ""
 
 #. %s: the name of the plugin (BuddyClients)
-#: admin/WelcomeMessage.php:143
+#: admin/WelcomeMessage.php:155
 #, php-format
 msgid ""
 "Congratulations on upgrading to %s! We're excited to have you using the full "
@@ -727,7 +809,7 @@ msgid ""
 "Connect your Stripe account to BuddyClients in order to accept payments."
 msgstr ""
 
-#: admin/Nav.php:52 includes/helpers/components.php:45
+#: admin/Nav.php:53 includes/helpers/components.php:45
 msgid "Contact"
 msgstr ""
 
@@ -746,24 +828,28 @@ msgstr ""
 msgid "Contact & Leads"
 msgstr ""
 
-#: admin/helpers/free.php:90
+#: admin/UpgradePage.php:207
 msgid "Contact form"
 msgstr ""
 
-#: components/Email/EmailTemplateManager.php:297
+#: components/Email/EmailTemplateManager.php:317
 msgid "Contact Form Admin Notification"
 msgstr ""
 
-#: components/Email/EmailTemplateManager.php:174
+#: components/Email/EmailTemplateManager.php:194
 msgid "Contact Form User Confirmation"
 msgstr ""
 
-#: components/Checkout/Confirmation.php:376
+#: components/Checkout/Confirmation.php:374
 msgid "contact us"
 msgstr ""
 
 #: admin/AdminDashboard.php:715
 msgid "Conversion Rate"
+msgstr ""
+
+#: admin/AdminTableItem.php:794
+msgid "Copy pay link"
 msgstr ""
 
 #: admin/AdminDashboard.php:450
@@ -818,7 +904,7 @@ msgstr ""
 msgid "Create Page"
 msgstr ""
 
-#: components/Checkout/Checkout.php:404
+#: components/Checkout/Checkout.php:438
 msgid "Create password"
 msgstr ""
 
@@ -832,7 +918,15 @@ msgid ""
 "booking form."
 msgstr ""
 
-#: components/Email/SettingsEmail.php:176
+#: admin/partials/booking-payments.php:19
+msgid "Created"
+msgstr ""
+
+#: admin/AdminTableItem.php:739
+msgid "Credit / Debit Card"
+msgstr ""
+
+#: components/Email/SettingsEmail.php:187
 msgid "Critical to plugin function"
 msgstr ""
 
@@ -858,12 +952,16 @@ msgstr ""
 msgid "Custom Quote"
 msgstr ""
 
-#: admin/Nav.php:86 admin/PostTypeManager.php:211
+#: admin/Nav.php:87 admin/PostTypeManager.php:211
 msgid "Custom Quotes"
 msgstr ""
 
-#: admin/helpers/free.php:88
+#: admin/UpgradePage.php:205
 msgid "Custom quotes"
+msgstr ""
+
+#: admin/AdminTableItem.php:742
+msgid "Customer Balance Payment"
 msgstr ""
 
 #: admin/AdminInfo.php:251
@@ -890,7 +988,7 @@ msgid "Dashboard"
 msgstr ""
 
 #: admin/partials/booked-services.php:19 admin/partials/leads.php:21
-#: admin/partials/user-agreements.php:20 admin/partials/all-bookings.php:23
+#: admin/partials/user-agreements.php:20 admin/partials/all-bookings.php:19
 #: components/Booking/BookedService/BookedServiceList.php:80
 #: components/Booking/BookedService/BookedServiceList.php:92
 #: components/Booking/BookedService/BookedServiceList.php:102
@@ -900,6 +998,10 @@ msgstr ""
 
 #: admin/partials/payments.php:19
 msgid "Date Created"
+msgstr ""
+
+#: admin/partials/booking-payments.php:25
+msgid "Date Paid"
 msgstr ""
 
 #: admin/AdminDashboard.php:385
@@ -937,12 +1039,25 @@ msgid ""
 "form."
 msgstr ""
 
-#: admin/AdminTableItem.php:478
+#: admin/AdminTableItem.php:565
 msgid "Delete booking"
 msgstr ""
 
 #: includes/UserFilesForm.php:222
 msgid "Delete Files"
+msgstr ""
+
+#: admin/partials/booking-payments.php:64
+#: components/Booking/BookingPayment.php:288
+msgid "Deposit"
+msgstr ""
+
+#: components/Booking/SettingsBooking.php:93
+msgid "Deposit Flat"
+msgstr ""
+
+#: components/Booking/SettingsBooking.php:88
+msgid "Deposit Percentage"
 msgstr ""
 
 #: admin/MetaManager.php:536 admin/MetaManager.php:622
@@ -961,6 +1076,20 @@ msgid ""
 "block valid submissions."
 msgstr ""
 
+#: components/Booking/SettingsBooking.php:42
+msgid ""
+"Determine the parameters for new bookings. Enable manual bookings in Sales "
+"settings."
+msgstr ""
+
+#: components/Booking/SettingsBooking.php:76
+msgid ""
+"Determine whether to require a deposit or the full fee up front when clients "
+"book services. If a deposit is charged, clients will receive an email to pay "
+"the remainder of the fee on completion of all services. Ensure the \"Final "
+"Payment\" email is enabled in Email settings."
+msgstr ""
+
 #: includes/Options.php:389
 msgid "Digital Check"
 msgstr ""
@@ -968,6 +1097,10 @@ msgstr ""
 #: admin/SettingsIntegrations.php:44 admin/SettingsGeneral.php:121
 #: admin/SettingsGeneral.php:145
 msgid "Disable"
+msgstr ""
+
+#: components/Booking/SettingsBooking.php:83
+msgid "Disable - Require full fee up front"
 msgstr ""
 
 #: admin/AdminInfo.php:73
@@ -982,7 +1115,7 @@ msgstr ""
 msgid "Disabling starred emails may impact plugin functionality."
 msgstr ""
 
-#: admin/WelcomeMessage.php:346
+#: admin/WelcomeMessage.php:359
 msgid "Dismiss this message"
 msgstr ""
 
@@ -1012,7 +1145,7 @@ msgstr ""
 msgid "Download File: "
 msgstr ""
 
-#: includes/PDF.php:542 includes/PDF.php:564 admin/AdminTableItem.php:199
+#: includes/PDF.php:542 includes/PDF.php:564 admin/AdminTableItem.php:221
 #: admin/partials/user-agreements.php:23
 msgid "Download PDF"
 msgstr ""
@@ -1024,6 +1157,14 @@ msgstr ""
 #: admin/MetaManager.php:464 admin/MetaManager.php:650
 #: admin/MetaManager.php:973
 msgid "Dropdown"
+msgstr ""
+
+#: admin/AdminTableItem.php:435
+msgid "Due since"
+msgstr ""
+
+#: components/Checkout/CheckoutTable.php:200
+msgid "Due Today"
 msgstr ""
 
 #: admin/MetaManager.php:625
@@ -1111,7 +1252,7 @@ msgstr ""
 msgid "Edit service status"
 msgstr ""
 
-#: admin/AdminTableItem.php:440 admin/AdminTableItem.php:772
+#: admin/AdminTableItem.php:1055
 msgid "Edit status"
 msgstr ""
 
@@ -1135,7 +1276,7 @@ msgstr ""
 msgid "Email"
 msgstr ""
 
-#: admin/Nav.php:76 admin/AdminPageManager.php:149
+#: admin/Nav.php:77 admin/AdminPageManager.php:150
 #: admin/partials/email-log.php:32 components/Email/SettingsEmail.php:79
 msgid "Email Log"
 msgstr ""
@@ -1169,7 +1310,7 @@ msgstr ""
 msgid "Email Template"
 msgstr ""
 
-#: admin/Nav.php:75 admin/PostTypeManager.php:143
+#: admin/Nav.php:76 admin/PostTypeManager.php:143
 msgid "Email Templates"
 msgstr ""
 
@@ -1179,14 +1320,14 @@ msgstr ""
 
 #. %1$s: the user email
 #. %1$s: the lead email
-#: components/Email/EmailTemplateManager.php:190
-#: components/Email/EmailTemplateManager.php:263
-#: components/Email/EmailTemplateManager.php:352
+#: components/Email/EmailTemplateManager.php:210
+#: components/Email/EmailTemplateManager.php:283
+#: components/Email/EmailTemplateManager.php:372
 #, php-format
 msgid "Email: %1$s"
 msgstr ""
 
-#: admin/Nav.php:49 admin/AdminPageManager.php:126
+#: admin/Nav.php:50 admin/AdminPageManager.php:127
 #: admin/PostTypeManager.php:144
 msgid "Emails"
 msgstr ""
@@ -1198,7 +1339,7 @@ msgid "Emails are currently stored %s."
 msgstr ""
 
 #. %1$s: the name of the client; %2$s: the email address of the client
-#: components/Checkout/Checkout.php:262
+#: components/Checkout/Checkout.php:289
 #, php-format
 msgid "Emails are not enabled. %1$s has NOT been notified at %2$s."
 msgstr ""
@@ -1208,12 +1349,20 @@ msgstr ""
 msgid "Enable"
 msgstr ""
 
+#: components/Booking/SettingsBooking.php:82
+msgid "Enable - Require partial fee up front"
+msgstr ""
+
 #: admin/SettingsComponents.php:33
 msgid "Enable BuddyClients components."
 msgstr ""
 
 #: admin/SettingsGeneral.php:117
 msgid "Enable CTA Button"
+msgstr ""
+
+#: components/Booking/SettingsBooking.php:79
+msgid "Enable Deposits"
 msgstr ""
 
 #: components/Email/SettingsEmail.php:35 components/Email/SettingsEmail.php:39
@@ -1254,6 +1403,14 @@ msgid ""
 "fields."
 msgstr ""
 
+#: components/Booking/SettingsBooking.php:95
+msgid ""
+"Enter a flat fee to require up front. If both a percentage and flat fee are "
+"specified, the sum of the two will be charged on booking. If the deposit "
+"amount is greater than the full fee, the deposit will be reduced to the "
+"value of the full fee."
+msgstr ""
+
 #: admin/MetaManager.php:1227
 msgid "Enter a name here to override the author info."
 msgstr ""
@@ -1270,7 +1427,7 @@ msgstr ""
 msgid "Enter the subject for the email."
 msgstr ""
 
-#: admin/WelcomeMessage.php:174
+#: admin/WelcomeMessage.php:184
 msgid "Enter your license key"
 msgstr ""
 
@@ -1280,6 +1437,10 @@ msgstr ""
 
 #: admin/SettingsIntegrations.php:52
 msgid "Enter your site key."
+msgstr ""
+
+#: admin/AdminTableItem.php:743
+msgid "EPS (Bank Redirect - Austria)"
 msgstr ""
 
 #. %s: post title
@@ -1292,7 +1453,7 @@ msgstr ""
 msgid "Error creating user: "
 msgstr ""
 
-#: admin/helpers/free.php:71
+#: admin/UpgradePage.php:188
 msgid "Essential"
 msgstr ""
 
@@ -1302,11 +1463,11 @@ msgid ""
 "timeframe."
 msgstr ""
 
-#: admin/helpers/free.php:85
+#: admin/UpgradePage.php:202
 msgid "Everything in Essential"
 msgstr ""
 
-#: admin/helpers/free.php:74
+#: admin/UpgradePage.php:191
 msgid "Everything in Free"
 msgstr ""
 
@@ -1318,15 +1479,19 @@ msgstr ""
 msgid "Exclude"
 msgstr ""
 
-#: admin/WelcomeMessage.php:201
+#: includes/Options.php:266
+msgid "Expired"
+msgstr ""
+
+#: admin/WelcomeMessage.php:211
 msgid "Explore user guides"
 msgstr ""
 
-#: admin/AdminTableItem.php:246
+#: admin/AdminTableItem.php:268
 msgid "Faculty"
 msgstr ""
 
-#: admin/AdminTableItem.php:640
+#: admin/AdminTableItem.php:923
 msgid "Failed"
 msgstr ""
 
@@ -1380,7 +1545,7 @@ msgstr ""
 msgid "File Upload Type"
 msgstr ""
 
-#: admin/Nav.php:62 admin/PostTypeManager.php:253
+#: admin/Nav.php:63 admin/PostTypeManager.php:253
 msgid "File Upload Types"
 msgstr ""
 
@@ -1397,11 +1562,11 @@ msgstr ""
 msgid "Files"
 msgstr ""
 
-#: admin/AdminDashboard.php:405 admin/AdminTable.php:712
+#: admin/AdminDashboard.php:405 admin/AdminTable.php:727
 msgid "Filter"
 msgstr ""
 
-#: admin/AdminTable.php:687
+#: admin/AdminTable.php:692
 msgid "Filter by"
 msgstr ""
 
@@ -1409,12 +1574,17 @@ msgstr ""
 msgid "Filter Field"
 msgstr ""
 
-#: admin/Nav.php:61 admin/PostTypeManager.php:240
+#: admin/Nav.php:62 admin/PostTypeManager.php:240
 msgid "Filter Fields"
 msgstr ""
 
-#: admin/helpers/free.php:77
+#: admin/UpgradePage.php:194
 msgid "Filter team by preferences"
+msgstr ""
+
+#: admin/partials/booking-payments.php:65
+#: components/Booking/BookingPayment.php:289
+msgid "Final Payment"
 msgstr ""
 
 #: includes/Options.php:242 components/Service/RateType.php:118
@@ -1425,7 +1595,7 @@ msgstr ""
 msgid "flat"
 msgstr ""
 
-#: admin/helpers/free.php:75
+#: admin/UpgradePage.php:192
 msgid "Flexible pricing structures"
 msgstr ""
 
@@ -1466,20 +1636,24 @@ msgstr ""
 msgid "Form Label"
 msgstr ""
 
+#: admin/AdminTableItem.php:744
+msgid "FPX (Bank Redirect - Malaysia)"
+msgstr ""
+
 #: admin/AdminColumns.php:600
 msgid "Free"
 msgstr ""
 
-#: components/Booking/SettingsBooking.php:75
+#: components/Booking/SettingsBooking.php:115
 msgid "Freelancer"
 msgstr ""
 
-#: components/Booking/SettingsBooking.php:71
+#: components/Booking/SettingsBooking.php:111
 msgid "Freelancer Mode"
 msgstr ""
 
 #. %s: the url to disable freelancer mode
-#: admin/helpers/upgrade.php:237
+#: admin/helpers/upgrade.php:252
 #, php-format
 msgid "Freelancer Mode is enabled. <a href=\"%s\">Disable Freelancer Mode</a>."
 msgstr ""
@@ -1493,17 +1667,13 @@ msgid "From Name"
 msgstr ""
 
 #. %1$s: the client name
-#: components/Email/EmailTemplateManager.php:311
+#: components/Email/EmailTemplateManager.php:331
 #, php-format
 msgid "From: %1$s"
 msgstr ""
 
-#: admin/Nav.php:43
+#: admin/Nav.php:44
 msgid "General"
-msgstr ""
-
-#: components/Booking/SettingsBooking.php:38
-msgid "General booking settings."
 msgstr ""
 
 #: admin/AdminInfo.php:122
@@ -1514,7 +1684,7 @@ msgstr ""
 msgid "Get Started"
 msgstr ""
 
-#: admin/WelcomeMessage.php:103
+#: admin/WelcomeMessage.php:115
 msgid "Get Started:"
 msgstr ""
 
@@ -1522,16 +1692,24 @@ msgstr ""
 msgid "GIF"
 msgstr ""
 
+#: admin/AdminTableItem.php:745
+msgid "giropay (Bank Redirect - Germany)"
+msgstr ""
+
 #: components/Booking/BookingForm.php:115
 msgid "Go to Checkout"
 msgstr ""
 
-#: components/Email/EmailTemplateManager.php:67
+#: components/Email/EmailTemplateManager.php:87
 msgid "Go to project briefs."
 msgstr ""
 
-#: components/Email/EmailTemplateManager.php:108
+#: components/Email/EmailTemplateManager.php:128
 msgid "Go to the project"
+msgstr ""
+
+#: admin/AdminTableItem.php:746
+msgid "GrabPay (Digital Wallet - Southeast Asia)"
 msgstr ""
 
 #: buddyclients-free.php:168
@@ -1539,7 +1717,11 @@ msgid ""
 "Groups must be enabled for the BuddyClients Platform to function properly."
 msgstr ""
 
-#: admin/helpers/free.php:83
+#: admin/UpgradePage.php:253
+msgid "grow your business"
+msgstr ""
+
+#: admin/UpgradePage.php:200
 msgid "Grow your service-based business with premium tools."
 msgstr ""
 
@@ -1548,7 +1730,7 @@ msgid "Handle how you receive admin notifications."
 msgstr ""
 
 #. %1$s: the login url, %2$s: html linking to the privacy policy and/or service terms
-#: components/Checkout/Checkout.php:386
+#: components/Checkout/Checkout.php:420
 #, php-format
 msgid "Have an account? <a href=\"%1$s\">Log in here</a><br>%2$s"
 msgstr ""
@@ -1600,12 +1782,18 @@ msgstr ""
 msgid "Hours"
 msgstr ""
 
-#: components/Booking/SettingsBooking.php:61
+#: components/Booking/SettingsBooking.php:65
 msgid "How many days do clients have to cancel bookings?"
 msgstr ""
 
 #: config/Activator.php:102
 msgid "How many hours would you like to book?"
+msgstr ""
+
+#: components/Booking/SettingsBooking.php:106
+msgid ""
+"How many minutes after beginning a booking should the abandoned booking "
+"email be sent?"
 msgstr ""
 
 #. URI of the plugin
@@ -1618,13 +1806,23 @@ msgstr ""
 
 #. %s: the terms being agreed to (e.g. service terms)
 #. %s: the html linking to the service terms
-#: components/Booking/BookingForm.php:908 components/Checkout/Checkout.php:520
+#: components/Booking/BookingForm.php:909 components/Checkout/Checkout.php:534
 #, php-format
 msgid "I agree to the %s."
 msgstr ""
 
 #: components/Booking/BookingForm.php:900
 msgid "I confirm that the information above is correct."
+msgstr ""
+
+#: admin/AdminTableItem.php:747
+msgid "iDEAL (Bank Redirect - Netherlands)"
+msgstr ""
+
+#: components/Booking/SettingsBooking.php:85
+msgid ""
+"If deposits are enabled, clients will be charged the deposit percentage "
+"specified below on checkout."
 msgstr ""
 
 #: admin/AdminInfo.php:139
@@ -1645,7 +1843,7 @@ msgid ""
 "the BuddyClients interface and assigns all services to you."
 msgstr ""
 
-#: components/Checkout/Confirmation.php:376
+#: components/Checkout/Confirmation.php:374
 msgid "If you continue to have issues, please <a href=\""
 msgstr ""
 
@@ -1678,7 +1876,7 @@ msgstr ""
 msgid "Include Any"
 msgstr ""
 
-#: admin/partials/all-bookings.php:62
+#: admin/partials/all-bookings.php:60
 msgid "Incomplete"
 msgstr ""
 
@@ -1700,8 +1898,12 @@ msgstr ""
 msgid "Instructions for users on booking form."
 msgstr ""
 
-#: admin/Nav.php:53 admin/AdminPageManager.php:134
+#: admin/Nav.php:54 admin/AdminPageManager.php:135
 msgid "Integrations"
+msgstr ""
+
+#: admin/AdminTableItem.php:748
+msgid "Interac (In-person Debit - Canada)"
 msgstr ""
 
 #: admin/partials/leads.php:22
@@ -1709,8 +1911,8 @@ msgid "Interests"
 msgstr ""
 
 #. %1$s: the lead interest
-#: components/Email/EmailTemplateManager.php:268
-#: components/Email/EmailTemplateManager.php:357
+#: components/Email/EmailTemplateManager.php:288
+#: components/Email/EmailTemplateManager.php:377
 #, php-format
 msgid "Interests: %1$s"
 msgstr ""
@@ -1731,6 +1933,22 @@ msgstr ""
 
 #: admin/MetaManager.php:868 admin/MetaManager.php:1013
 msgid "JPG Image"
+msgstr ""
+
+#: admin/AdminTableItem.php:749
+msgid "Kakao Pay (Digital Wallet - South Korea)"
+msgstr ""
+
+#: admin/AdminTableItem.php:750
+msgid "Klarna (Buy Now, Pay Later)"
+msgstr ""
+
+#: admin/AdminTableItem.php:751
+msgid "Konbini (Cash-based Voucher - Japan)"
+msgstr ""
+
+#: admin/AdminTableItem.php:752
+msgid "Korean Credit/Debit Card"
 msgstr ""
 
 #: admin/MetaManager.php:663 admin/MetaManager.php:721
@@ -1757,11 +1975,11 @@ msgstr ""
 msgid "Last Updated: %s"
 msgstr ""
 
-#: components/Email/EmailTemplateManager.php:340
+#: components/Email/EmailTemplateManager.php:360
 msgid "Lead Auto Response"
 msgstr ""
 
-#: admin/Nav.php:34 admin/AdminPageManager.php:179 admin/partials/leads.php:55
+#: admin/Nav.php:35 admin/AdminPageManager.php:180 admin/partials/leads.php:55
 msgid "Leads"
 msgstr ""
 
@@ -1769,7 +1987,7 @@ msgstr ""
 msgid "Learn how to create reCAPTCHA keys."
 msgstr ""
 
-#: includes/helpers/template-parts.php:22 admin/helpers/free.php:115
+#: admin/UpgradePage.php:383 includes/helpers/template-parts.php:22
 msgid "Learn More"
 msgstr ""
 
@@ -1777,8 +1995,8 @@ msgstr ""
 msgid "Least sensitive"
 msgstr ""
 
-#: admin/Nav.php:50 admin/AdminPageManager.php:119
-#: admin/AdminPageManager.php:202 includes/helpers/components.php:46
+#: admin/Nav.php:51 admin/AdminPageManager.php:120
+#: admin/AdminPageManager.php:210 includes/helpers/components.php:46
 msgid "Legal"
 msgstr ""
 
@@ -1786,12 +2004,12 @@ msgstr ""
 msgid "Legal Agreement"
 msgstr ""
 
-#: admin/Nav.php:38 admin/AdminPageManager.php:194
+#: admin/Nav.php:39 admin/AdminPageManager.php:202
 #: admin/PostTypeManager.php:185
 msgid "Legal Agreements"
 msgstr ""
 
-#: admin/helpers/free.php:91
+#: admin/UpgradePage.php:208
 msgid "Legal agreements"
 msgstr ""
 
@@ -1803,7 +2021,7 @@ msgstr ""
 msgid "Legal Modification"
 msgstr ""
 
-#: admin/Nav.php:39
+#: admin/Nav.php:40
 msgid "Legal Modifications"
 msgstr ""
 
@@ -1815,11 +2033,11 @@ msgstr ""
 msgid "Legal Type"
 msgstr ""
 
-#: admin/Nav.php:89
+#: admin/Nav.php:90
 msgid "License Key"
 msgstr ""
 
-#: admin/AdminPageManager.php:140
+#: admin/AdminPageManager.php:141
 msgid "License Keys"
 msgstr ""
 
@@ -1829,47 +2047,54 @@ msgid ""
 "while first-sale commission applies only to the client's first booking."
 msgstr ""
 
-#: admin/helpers/free.php:89
+#: admin/AdminTableItem.php:753
+msgid "Link (Saved Payment Details)"
+msgstr ""
+
+#: admin/UpgradePage.php:206
 msgid "Live search help docs"
 msgstr ""
 
-#: components/Booking/SettingsBooking.php:90
+#: components/Booking/SettingsBooking.php:130
 msgid "Lock"
 msgstr ""
 
-#: components/Booking/SettingsBooking.php:87
+#: components/Booking/SettingsBooking.php:127
 msgid "Lock Team Members"
 msgstr ""
 
-#: components/Booking/SettingsBooking.php:93
+#: components/Booking/SettingsBooking.php:133
 msgid ""
 "Lock team members to require future services for each project to use the "
-"same team member for each role."
+"same team member for each role. When locked, the team member of each role "
+"will automatically be assigned when new services are booked for the same "
+"project. When unlocked, clients will be able to select new team members on "
+"subsequent bookings for the same project."
 msgstr ""
 
-#: components/Email/EmailTemplateManager.php:245
+#: components/Email/EmailTemplateManager.php:265
 #, php-format
 msgid "Log in to %2$s"
 msgstr ""
 
-#: components/Checkout/Confirmation.php:351
+#: components/Checkout/Confirmation.php:349
 msgid "Log In to View Your Projects"
 msgstr ""
 
 #. %s: the site name
-#: components/Email/EmailTemplateManager.php:120
+#: components/Email/EmailTemplateManager.php:140
 #, php-format
 msgid ""
 "Looks like you didn’t finish booking your services with %s. If you have "
 "questions, please respond to this email."
 msgstr ""
 
-#: admin/AdminTableItem.php:754 admin/partials/leads.php:45
+#: admin/AdminTableItem.php:1037 admin/partials/leads.php:45
 msgid "Lost"
 msgstr ""
 
 #. %1$s: the gear icon html; %2$s: the url to access a BuddyClients account
-#: admin/helpers/upgrade.php:136
+#: admin/helpers/upgrade.php:151
 #, php-format
 msgid ""
 "Manage <a href=\"%2$s\" target=\"_blank\">your BuddyClients subscription</a>."
@@ -1883,7 +2108,7 @@ msgstr ""
 msgid "Manage legal agreements for clients, team members, and affiliates."
 msgstr ""
 
-#: admin/helpers/free.php:78
+#: admin/UpgradePage.php:195
 msgid "Manage team payments"
 msgstr ""
 
@@ -1912,8 +2137,12 @@ msgstr ""
 msgid "Manage your %s."
 msgstr ""
 
-#: admin/helpers/free.php:94
+#: admin/UpgradePage.php:211
 msgid "Manual and assisted bookings"
+msgstr ""
+
+#: admin/AdminTableItem.php:774
+msgid "Manually Recorded"
 msgstr ""
 
 #: admin/MetaManager.php:550
@@ -1926,8 +2155,8 @@ msgstr ""
 
 #. %1$s: the message
 #. %1$s: the message content
-#: components/Email/EmailTemplateManager.php:195
-#: components/Email/EmailTemplateManager.php:306
+#: components/Email/EmailTemplateManager.php:215
+#: components/Email/EmailTemplateManager.php:326
 #, php-format
 msgid "Message: %1$s"
 msgstr ""
@@ -1948,8 +2177,12 @@ msgstr ""
 msgid "Minimum"
 msgstr ""
 
-#: components/Booking/SettingsBooking.php:64
+#: components/Booking/SettingsBooking.php:68
 msgid "Minimum Fee"
+msgstr ""
+
+#: admin/AdminTableItem.php:754
+msgid "MobilePay (Nordic Wallet)"
 msgstr ""
 
 #: admin/AdminInfo.php:247
@@ -1970,6 +2203,10 @@ msgstr ""
 
 #: admin/MetaManager.php:874 admin/MetaManager.php:1019
 msgid "MP3 Audio"
+msgstr ""
+
+#: admin/AdminTableItem.php:755
+msgid "Multibanco (Voucher Payment)"
 msgstr ""
 
 #: admin/MetaManager.php:881 admin/MetaManager.php:999
@@ -1998,14 +2235,18 @@ msgstr ""
 
 #. %1$s: the client name
 #. %1$s: the lead name
-#: components/Email/EmailTemplateManager.php:185
-#: components/Email/EmailTemplateManager.php:258
-#: components/Email/EmailTemplateManager.php:347
+#: components/Email/EmailTemplateManager.php:205
+#: components/Email/EmailTemplateManager.php:278
+#: components/Email/EmailTemplateManager.php:367
 #, php-format
 msgid "Name: %1$s"
 msgstr ""
 
-#: components/Email/EmailTemplateManager.php:116
+#: admin/AdminTableItem.php:756
+msgid "Naver Pay (Digital Wallet - South Korea)"
+msgstr ""
+
+#: components/Email/EmailTemplateManager.php:136
 msgid "Need some help?"
 msgstr ""
 
@@ -2020,43 +2261,43 @@ msgstr ""
 msgid "New %s"
 msgstr ""
 
-#: components/Email/EmailTemplateManager.php:221
+#: components/Email/EmailTemplateManager.php:241
 msgid "New Affiliate"
 msgstr ""
 
 #. %s: the name of the service
-#: components/Email/EmailTemplateManager.php:100
+#: components/Email/EmailTemplateManager.php:120
 #, php-format
 msgid "New Assignment: %s"
 msgstr ""
 
-#: components/Email/EmailTemplateManager.php:154
+#: components/Email/EmailTemplateManager.php:174
 msgid "New Booking Admin Notification"
 msgstr ""
 
-#: components/Email/EmailTemplateManager.php:74
+#: components/Email/EmailTemplateManager.php:94
 msgid "New Custom Quote"
 msgstr ""
 
-#: components/Email/EmailTemplateManager.php:75
+#: components/Email/EmailTemplateManager.php:95
 msgid "New custom quote"
 msgstr ""
 
-#: components/Email/EmailTemplateManager.php:252
-#: components/Email/EmailTemplateManager.php:253
+#: components/Email/EmailTemplateManager.php:272
+#: components/Email/EmailTemplateManager.php:273
 msgid "New Lead"
 msgstr ""
 
-#: components/Email/EmailTemplateManager.php:97
+#: components/Email/EmailTemplateManager.php:117
 msgid "New Team Member Assignment"
 msgstr ""
 
-#: components/Email/EmailTemplateManager.php:203
+#: components/Email/EmailTemplateManager.php:223
 msgid "New Testimonial Submission"
 msgstr ""
 
 #. %1$s: the site name
-#: components/Email/EmailTemplateManager.php:206
+#: components/Email/EmailTemplateManager.php:226
 #, php-format
 msgid "New Testimonial Submission on %1$s"
 msgstr ""
@@ -2067,7 +2308,7 @@ msgstr ""
 
 #: admin/MetaManager.php:885 admin/MetaManager.php:895
 #: admin/MetaManager.php:1003 admin/SettingsGeneral.php:93
-#: components/Booking/SettingsBooking.php:53
+#: components/Booking/SettingsBooking.php:57
 msgid "No"
 msgstr ""
 
@@ -2095,6 +2336,10 @@ msgstr ""
 msgid "No (dropdown field)"
 msgstr ""
 
+#: components/Booking/SettingsBooking.php:140
+msgid "No - Do not require agreement"
+msgstr ""
+
 #: components/Brief/GroupBriefs.php:80
 msgid "No briefs available."
 msgstr ""
@@ -2111,7 +2356,7 @@ msgstr ""
 msgid "No items found"
 msgstr ""
 
-#: components/Email/EmailTemplateManager.php:522
+#: components/Email/EmailTemplateManager.php:542
 msgid "No placeholders available for this template."
 msgstr ""
 
@@ -2123,7 +2368,7 @@ msgstr ""
 msgid "Not available."
 msgstr ""
 
-#: components/Booking/SettingsBooking.php:66
+#: components/Booking/SettingsBooking.php:70
 msgid "Note that paid bookings of less than $1 will fail."
 msgstr ""
 
@@ -2135,21 +2380,21 @@ msgstr ""
 msgid "Notifications will be sent to users from this email address."
 msgstr ""
 
-#: components/Email/EmailTemplateManager.php:151
+#: components/Email/EmailTemplateManager.php:171
 msgid ""
 "Notifies a team member or affiliate when the status of their payment changes."
 msgstr ""
 
-#: components/Email/EmailTemplateManager.php:249
+#: components/Email/EmailTemplateManager.php:269
 msgid ""
 "Notifies a team member when their set availability date is about to expire."
 msgstr ""
 
-#: components/Email/EmailTemplateManager.php:112
+#: components/Email/EmailTemplateManager.php:132
 msgid "Notifies a team member when they have a new assignment."
 msgstr ""
 
-#: components/Email/EmailTemplateManager.php:71
+#: components/Email/EmailTemplateManager.php:91
 msgid "Notifies team members when a brief is updated."
 msgstr ""
 
@@ -2157,29 +2402,29 @@ msgstr ""
 msgid "Notifies the client when the status of their service changes."
 msgstr ""
 
-#: components/Email/EmailTemplateManager.php:94
+#: components/Email/EmailTemplateManager.php:114
 msgid "Notifies the client when they have a new custom quote available."
 msgstr ""
 
-#: components/Email/EmailTemplateManager.php:272
+#: components/Email/EmailTemplateManager.php:292
 msgid ""
 "Notifies the site admin of a new submission to the lead generation form."
 msgstr ""
 
-#: components/Email/EmailTemplateManager.php:293
+#: components/Email/EmailTemplateManager.php:313
 msgid ""
 "Notifies the site admin when a client requests the cancellation of a service."
 msgstr ""
 
-#: components/Email/EmailTemplateManager.php:171
+#: components/Email/EmailTemplateManager.php:191
 msgid "Notifies the site admin when a new booking is completed."
 msgstr ""
 
-#: components/Email/EmailTemplateManager.php:321
+#: components/Email/EmailTemplateManager.php:341
 msgid "Notifies the site admin when the contact form is submitted."
 msgstr ""
 
-#: components/Booking/SettingsBooking.php:106
+#: components/Booking/SettingsBooking.php:155
 msgid "OFF"
 msgstr ""
 
@@ -2201,7 +2446,7 @@ msgid ""
 "required response from the client will be visible on the booking form."
 msgstr ""
 
-#: components/Booking/SettingsBooking.php:44
+#: components/Booking/SettingsBooking.php:48
 msgid "Open"
 msgstr ""
 
@@ -2233,15 +2478,24 @@ msgstr ""
 msgid "Order"
 msgstr ""
 
+#: admin/Nav.php:33
+msgid "Outgoing Payments"
+msgstr ""
+
 #: admin/Nav.php:31
 msgid "Overview"
 msgstr ""
 
-#: admin/Nav.php:45 admin/AdminPageManager.php:113
+#: admin/AdminTableItem.php:757
+msgid "OXXO (Cash-based Voucher - Mexico)"
+msgstr ""
+
+#: admin/Nav.php:46 admin/AdminPageManager.php:114
 msgid "Pages"
 msgstr ""
 
-#: admin/Metaboxes.php:593 admin/AdminTableItem.php:634
+#: admin/Metaboxes.php:593 admin/AdminTableItem.php:585
+#: admin/AdminTableItem.php:917 admin/partials/booking-payments.php:54
 #: admin/partials/payments.php:67
 #: components/Booking/BookedService/BookedServiceList.php:408
 #: components/Booking/BookedService/PaymentStatusForm.php:67
@@ -2277,11 +2531,19 @@ msgstr ""
 msgid "Password must include at least one uppercase letter."
 msgstr ""
 
+#: admin/AdminTableItem.php:759
+msgid "Pay By Bank (Open Banking - UK)"
+msgstr ""
+
+#: admin/AdminTableItem.php:760
+msgid "PAYCO (Digital Wallet - South Korea)"
+msgstr ""
+
 #: admin/partials/payments.php:18
 msgid "Payee"
 msgstr ""
 
-#: admin/partials/payments.php:23
+#: admin/partials/booking-payments.php:22 admin/partials/payments.php:23
 msgid "Payment Method"
 msgstr ""
 
@@ -2290,18 +2552,29 @@ msgstr ""
 msgid "Payment Status"
 msgstr ""
 
-#: components/Email/EmailTemplateManager.php:133
-#: components/Email/EmailTemplateManager.php:134
+#: components/Email/EmailTemplateManager.php:153
+#: components/Email/EmailTemplateManager.php:154
 msgid "Payment Status Updated"
 msgstr ""
 
-#: admin/Nav.php:32 admin/AdminPageManager.php:164
-#: admin/partials/payments.php:47
+#: components/Booking/SettingsBooking.php:75
+msgid "Payment Structure"
+msgstr ""
+
+#: admin/AdminPageManager.php:165 admin/partials/payments.php:47
 msgid "Payments"
 msgstr ""
 
-#: components/Checkout/Checkout.php:590
+#: components/Checkout/Checkout.php:605
 msgid "Payments are not enabled on this website. "
+msgstr ""
+
+#: admin/AdminTableItem.php:761
+msgid "PayNow (QR Code Payment - Singapore)"
+msgstr ""
+
+#: admin/AdminTableItem.php:762
+msgid "PayPal (Online Wallet)"
 msgstr ""
 
 #: admin/MetaManager.php:867 admin/MetaManager.php:1012
@@ -2320,7 +2593,7 @@ msgstr ""
 msgid "PDF generation failed: %s"
 msgstr ""
 
-#: admin/Metaboxes.php:591 admin/AdminTableItem.php:637
+#: admin/Metaboxes.php:591 admin/AdminTableItem.php:920
 #: admin/partials/booked-services.php:54 admin/partials/payments.php:65
 #: components/Booking/BookedService/ServiceStatusForm.php:118
 #: components/Booking/BookedService/BookedServiceList.php:402
@@ -2350,8 +2623,12 @@ msgstr ""
 msgid "Physical Check"
 msgstr ""
 
+#: admin/AdminTableItem.php:763
+msgid "Pix (Instant Bank Transfer - Brazil)"
+msgstr ""
+
 #. %s: the contact us link
-#: components/Booking/BookingFormSubmission.php:67
+#: components/Booking/BookingFormSubmission.php:70
 #, php-format
 msgid "Please %s for assistance"
 msgstr ""
@@ -2378,27 +2655,27 @@ msgstr ""
 msgid "Please be cautious when deleting bookings. They cannot be recovered."
 msgstr ""
 
-#: components/Email/EmailTemplateManager.php:334
+#: components/Email/EmailTemplateManager.php:354
 msgid "Please complete the checkout process to confirm your booking."
 msgstr ""
 
-#: components/Email/EmailTemplateManager.php:291
+#: components/Email/EmailTemplateManager.php:311
 msgid "Please review the cancellation request and take appropriate action."
 msgstr ""
 
-#: components/Email/EmailTemplateManager.php:319
+#: components/Email/EmailTemplateManager.php:339
 msgid "Please review the contact form submission and respond accordingly."
 msgstr ""
 
-#: includes/FormSubmission.php:264
+#: includes/FormSubmission.php:266
 msgid "Please try again later."
 msgstr ""
 
-#: components/Email/EmailTemplateManager.php:247
+#: components/Email/EmailTemplateManager.php:267
 msgid "Please update your availability as soon as possible."
 msgstr ""
 
-#: components/Checkout/Checkout.php:334
+#: components/Checkout/Checkout.php:368
 msgid ""
 "Please use the button below to confirm. We will be in touch to arrange "
 "payment."
@@ -2423,6 +2700,10 @@ msgstr ""
 msgid "posts"
 msgstr ""
 
+#: admin/AdminTableItem.php:728
+msgid "Pre-authorized debit (Canada)"
+msgstr ""
+
 #: admin/helpers/brief-preview.php:15 admin/helpers/brief-preview.php:43
 msgid "Preview"
 msgstr ""
@@ -2441,13 +2722,13 @@ msgstr ""
 msgid "Primary Color"
 msgstr ""
 
-#: components/Checkout/Checkout.php:448
+#: components/Checkout/Checkout.php:470
 msgid "privacy policy"
 msgstr ""
 
 #: admin/MetaManager.php:788 admin/MetaManager.php:919
 #: admin/MetaManager.php:1066 admin/AdminColumns.php:50
-#: admin/partials/booked-services.php:23 admin/partials/all-bookings.php:26
+#: admin/partials/booked-services.php:23 admin/partials/all-bookings.php:23
 #: components/Booking/BookedService/BookedServiceList.php:82
 #: components/Booking/BookedService/BookedServiceList.php:95
 #: components/Booking/BookedService/BookedServiceList.php:105
@@ -2459,7 +2740,7 @@ msgstr ""
 msgid "project"
 msgstr ""
 
-#: components/Email/EmailTemplateManager.php:55
+#: components/Email/EmailTemplateManager.php:75
 msgid "Project Brief Updated"
 msgstr ""
 
@@ -2486,11 +2767,19 @@ msgstr ""
 msgid "Projects"
 msgstr ""
 
+#: admin/AdminTableItem.php:764
+msgid "PromptPay (Instant Funds Transfer - Thailand)"
+msgstr ""
+
 #: admin/SettingsIntegrations.php:35
 msgid "Protect your website against spam with Google reCAPTCHA."
 msgstr ""
 
-#: admin/WelcomeMessage.php:332
+#: admin/AdminTableItem.php:758
+msgid "Przelewy24 (Bank Redirect - Poland)"
+msgstr ""
+
+#: admin/WelcomeMessage.php:345
 msgid "Quick Links:"
 msgstr ""
 
@@ -2515,7 +2804,7 @@ msgstr ""
 msgid "Rate Type"
 msgstr ""
 
-#: admin/Nav.php:58 admin/PostTypeManager.php:107
+#: admin/Nav.php:59 admin/PostTypeManager.php:107
 msgid "Rate Types"
 msgstr ""
 
@@ -2534,12 +2823,12 @@ msgstr ""
 msgid "Read to Get Started?"
 msgstr ""
 
-#: components/Email/EmailTemplateManager.php:326
+#: components/Email/EmailTemplateManager.php:346
 msgid "Ready for Checkout"
 msgstr ""
 
 #. %1$s: the cancellation reason
-#: components/Email/EmailTemplateManager.php:288
+#: components/Email/EmailTemplateManager.php:308
 #, php-format
 msgid "Reason: %1$s"
 msgstr ""
@@ -2557,6 +2846,10 @@ msgstr ""
 msgid "reCAPTCHA Threshold"
 msgstr ""
 
+#: admin/AdminTableItem.php:587
+msgid "Record Payment"
+msgstr ""
+
 #: config/ReferencePosts.php:33
 msgid "Reference"
 msgstr ""
@@ -2570,6 +2863,10 @@ msgid ""
 "Refine which team members are available to clients based on these fields."
 msgstr ""
 
+#: admin/AdminTableItem.php:593
+msgid "Remove Payment"
+msgstr ""
+
 #: admin/AdminInfo.php:122
 msgid ""
 "Remove these messages by changing the \"Admin Info Messages\" setting below "
@@ -2581,7 +2878,7 @@ msgid "Repair"
 msgstr ""
 
 #. %1$s: the reply-to address
-#: components/Email/EmailTemplateManager.php:316
+#: components/Email/EmailTemplateManager.php:336
 #, php-format
 msgid "Reply To: %1$s"
 msgstr ""
@@ -2598,6 +2895,10 @@ msgstr ""
 msgid "Request service cancellation"
 msgstr ""
 
+#: components/Booking/SettingsBooking.php:136
+msgid "Require Active Team Member Agreement"
+msgstr ""
+
 #: admin/MetaManager.php:891
 msgid "Required"
 msgstr ""
@@ -2606,7 +2907,7 @@ msgstr ""
 msgid "Required Services"
 msgstr ""
 
-#: components/Checkout/Confirmation.php:372
+#: components/Checkout/Confirmation.php:370
 msgid "Return to Checkout"
 msgstr ""
 
@@ -2614,13 +2915,17 @@ msgstr ""
 msgid "Revenue Over Time"
 msgstr ""
 
-#: includes/ExtensionManager.php:243 admin/Nav.php:48
+#: admin/AdminTableItem.php:765
+msgid "Revolut Pay (Digital Wallet - UK)"
+msgstr ""
+
+#: includes/ExtensionManager.php:243 admin/Nav.php:49
 #: admin/AdminPageManager.php:100 includes/helpers/components.php:48
 #: admin/partials/payments.php:56
 msgid "Sales"
 msgstr ""
 
-#: includes/AlertManager.php:131
+#: includes/AlertManager.php:132
 msgid "sales"
 msgstr ""
 
@@ -2628,16 +2933,20 @@ msgstr ""
 msgid "Sales Commission"
 msgstr ""
 
-#: admin/Nav.php:67
+#: admin/Nav.php:68
 msgid "Sales Payments"
 msgstr ""
 
-#: components/Email/EmailTemplateManager.php:325
+#: components/Email/EmailTemplateManager.php:345
 msgid "Sales Team Booking"
 msgstr ""
 
-#: admin/helpers/free.php:93
+#: admin/UpgradePage.php:210
 msgid "Sales team commission"
+msgstr ""
+
+#: admin/AdminTableItem.php:766
+msgid "Samsung Pay (Digital Wallet - South Korea)"
 msgstr ""
 
 #: admin/SettingsPage.php:164
@@ -2802,7 +3111,7 @@ msgstr ""
 msgid "Select the users to apply this to."
 msgstr ""
 
-#: components/Booking/SettingsBooking.php:56
+#: components/Booking/SettingsBooking.php:60
 msgid ""
 "Select this to skip the payment and make every submitted booking successful."
 msgstr ""
@@ -2841,7 +3150,7 @@ msgstr ""
 msgid "Select your %s."
 msgstr ""
 
-#: admin/helpers/free.php:72
+#: admin/UpgradePage.php:189
 msgid "Sell services and manage clients' projects in one place."
 msgstr ""
 
@@ -2849,33 +3158,51 @@ msgstr ""
 msgid "Send email notifications to clients, team members, and admins."
 msgstr ""
 
-#: components/Email/EmailTemplateManager.php:200
+#: components/Booking/SettingsBooking.php:101
+msgid ""
+"Send emails to users who begin booking services but exit before submitting "
+"payment. Note that the Abandoned Booking email must be enabled in Email "
+"settings."
+msgstr ""
+
+#: components/Email/EmailTemplateManager.php:220
 msgid "Sends a confirmation message after a user submits the contact form."
 msgstr ""
 
-#: components/Email/EmailTemplateManager.php:218
+#: components/Email/EmailTemplateManager.php:238
 msgid "Sends a confirmation message when a user submits a testimonial."
 msgstr ""
 
-#: components/Email/EmailTemplateManager.php:336
+#: components/Email/EmailTemplateManager.php:356
 msgid ""
 "Sends a message with a link to submit payment when a booking is created "
 "manually by the sales team or site admin."
 msgstr ""
 
-#: components/Email/EmailTemplateManager.php:236
+#: components/Email/EmailTemplateManager.php:256
 msgid "Sends a welcome message when a user joins the affiliate program."
 msgstr ""
 
-#: components/Email/EmailTemplateManager.php:362
+#: components/Email/EmailTemplateManager.php:382
 msgid ""
 "Sends an auto-response to the user when they submit the lead generation form."
 msgstr ""
 
-#: components/Email/EmailTemplateManager.php:130
+#: components/Email/EmailTemplateManager.php:150
 msgid ""
 "Sends an email to convert users who have abandoned bookings before "
 "submitting payment."
+msgstr ""
+
+#: components/Email/EmailTemplateManager.php:72
+msgid ""
+"Sends an email to the client when all services for a single booking have "
+"been completed. Includes a link to pay any unpaid fees, including final "
+"payments if deposits are enabled."
+msgstr ""
+
+#: admin/AdminTableItem.php:767
+msgid "SEPA Direct Debit (Euro Payments Area)"
 msgstr ""
 
 #: admin/MetaManager.php:789 admin/PostTypeManager.php:80
@@ -2895,7 +3222,7 @@ msgstr ""
 msgid "Service Status Updated"
 msgstr ""
 
-#: components/Booking/BookingForm.php:909 components/Checkout/Checkout.php:521
+#: components/Booking/BookingForm.php:910 components/Checkout/Checkout.php:535
 msgid "service terms"
 msgstr ""
 
@@ -2907,27 +3234,39 @@ msgstr ""
 msgid "Service Type is required."
 msgstr ""
 
-#: admin/Nav.php:57 admin/PostTypeManager.php:119
+#: admin/Nav.php:58 admin/PostTypeManager.php:119
 msgid "Service Types"
 msgstr ""
 
 #: includes/ExtensionManager.php:177 includes/SinglePost.php:256
-#: admin/Nav.php:56 admin/PostTypeManager.php:81
-#: admin/partials/all-bookings.php:22
+#: admin/Nav.php:57 admin/PostTypeManager.php:81
+#: admin/partials/all-bookings.php:18 admin/partials/all-bookings.php:21
 msgid "Services"
 msgstr ""
 
-#: admin/AdminTableItem.php:324
+#: admin/AdminTableItem.php:346
 msgid "Sessions"
 msgstr ""
 
-#: admin/Nav.php:40 admin/WelcomeMessage.php:280 admin/AdminPageManager.php:57
-#: admin/PluginLinks.php:51
+#: components/Booking/SettingsBooking.php:90
+msgid ""
+"Set the percentage of the full fee clients are charged up front. The "
+"remaining percentage will be billed on completion of services."
+msgstr ""
+
+#: components/Booking/SettingsBooking.php:124
+msgid ""
+"Set the rules for team member selection on the booking form. Team members "
+"will also be filtered by their Filter Field selections."
+msgstr ""
+
+#: admin/Nav.php:41 admin/WelcomeMessage.php:293 admin/AdminPageManager.php:57
+#: admin/PluginLinks.php:53
 msgid "Settings"
 msgstr ""
 
 #. %1$s: the affiliate link
-#: components/Email/EmailTemplateManager.php:231
+#: components/Email/EmailTemplateManager.php:251
 #, php-format
 msgid "Share your unique affiliate link to begin earning commission: %1$s"
 msgstr ""
@@ -2938,6 +3277,13 @@ msgstr ""
 
 #: admin/SettingsGeneral.php:87
 msgid "Should team members be allowed to select their own roles?"
+msgstr ""
+
+#: components/Booking/SettingsBooking.php:142
+msgid ""
+"Should team members without active agreements be disallowed from accepting "
+"new projects? This setting only applies if the Legal component is enabled "
+"and a team member agreement exists."
 msgstr ""
 
 #: admin/MetaManager.php:1000
@@ -2961,7 +3307,7 @@ msgstr ""
 msgid "Site Key"
 msgstr ""
 
-#: components/Booking/SettingsBooking.php:50
+#: components/Booking/SettingsBooking.php:54
 msgid "Skip Payment"
 msgstr ""
 
@@ -2969,7 +3315,11 @@ msgstr ""
 msgid "Social groups are disabled."
 msgstr ""
 
-#: admin/AdminTableItem.php:758
+#: admin/AdminTableItem.php:768
+msgid "Sofort (Bank Redirect - Europe)"
+msgstr ""
+
+#: admin/AdminTableItem.php:1041
 msgid "Spam"
 msgstr ""
 
@@ -2991,11 +3341,12 @@ msgstr ""
 msgid "Starting At"
 msgstr ""
 
-#: admin/AdminDashboard.php:449 admin/partials/booked-services.php:20
+#: admin/AdminDashboard.php:449 admin/partials/booking-payments.php:20
+#: admin/partials/booking-payments.php:50 admin/partials/booked-services.php:20
 #: admin/partials/booked-services.php:50 admin/partials/leads.php:20
 #: admin/partials/leads.php:39 admin/partials/payments.php:20
 #: admin/partials/payments.php:61 admin/partials/user-agreements.php:21
-#: admin/partials/all-bookings.php:24 admin/partials/all-bookings.php:58
+#: admin/partials/all-bookings.php:20 admin/partials/all-bookings.php:56
 #: components/Booking/BookedService/BookedServiceList.php:87
 #: components/Booking/BookedService/BookedServiceList.php:97
 #: components/Booking/BookedService/BookedServiceList.php:107
@@ -3005,6 +3356,10 @@ msgstr ""
 
 #: includes/helpers/components.php:42
 msgid "Stripe"
+msgstr ""
+
+#: admin/AdminTableItem.php:740
+msgid "Stripe Terminal (In-person Card Payment)"
 msgstr ""
 
 #: admin/SettingsGeneral.php:40
@@ -3023,18 +3378,26 @@ msgstr ""
 msgid "subtract"
 msgstr ""
 
-#: admin/partials/all-bookings.php:61
+#: admin/AdminTableItem.php:495
+msgid "Succeed Booking"
+msgstr ""
+
+#: admin/AdminTableItem.php:493 admin/partials/all-bookings.php:59
 msgid "Succeeded"
 msgstr ""
 
-#: components/Checkout/Confirmation.php:240
-#: components/Checkout/Confirmation.php:270
-#: components/Checkout/Confirmation.php:354
+#: components/Checkout/Confirmation.php:238
+#: components/Checkout/Confirmation.php:268
+#: components/Checkout/Confirmation.php:352
 msgid "Success!"
 msgstr ""
 
-#: admin/WelcomeMessage.php:301
+#: admin/WelcomeMessage.php:314
 msgid "Support"
+msgstr ""
+
+#: admin/AdminTableItem.php:769
+msgid "Swish (Wallet - Sweden)"
 msgstr ""
 
 #: admin/TaxManager.php:59
@@ -3045,10 +3408,10 @@ msgstr ""
 msgid "Tags"
 msgstr ""
 
-#: admin/Nav.php:79 admin/AdminTableItem.php:245
+#: admin/Nav.php:80 admin/AdminTableItem.php:267
 #: admin/partials/user-list.php:74 admin/partials/payments.php:54
 #: admin/partials/user-agreements.php:49
-#: components/Booking/SettingsBooking.php:83
+#: components/Booking/SettingsBooking.php:123
 msgid "Team"
 msgstr ""
 
@@ -3062,7 +3425,7 @@ msgid ""
 "submitted."
 msgstr ""
 
-#: components/Booking/SettingsBooking.php:61
+#: components/Booking/SettingsBooking.php:65
 msgid ""
 "Team and commission payments will be marked as \"eligible\" after this "
 "timeframe."
@@ -3072,7 +3435,7 @@ msgstr ""
 msgid "Team Availability"
 msgstr ""
 
-#: admin/helpers/free.php:92
+#: admin/UpgradePage.php:209
 msgid "Team availability"
 msgstr ""
 
@@ -3090,7 +3453,7 @@ msgstr ""
 msgid "Team Member"
 msgstr ""
 
-#: includes/AlertManager.php:130
+#: includes/AlertManager.php:131
 msgid "team member"
 msgstr ""
 
@@ -3131,11 +3494,11 @@ msgstr ""
 msgid "Team Payment Methods"
 msgstr ""
 
-#: admin/Nav.php:65
+#: admin/Nav.php:66
 msgid "Team Payments"
 msgstr ""
 
-#: admin/Nav.php:59
+#: admin/Nav.php:60
 msgid "Team Roles"
 msgstr ""
 
@@ -3162,7 +3525,7 @@ msgstr ""
 msgid "Test"
 msgstr ""
 
-#: components/Checkout/Checkout.php:202
+#: components/Checkout/Checkout.php:230
 msgid "Test Mode"
 msgstr ""
 
@@ -3180,7 +3543,7 @@ msgid ""
 "Publish a draft to display it on your testimonials page."
 msgstr ""
 
-#: includes/SinglePost.php:260 admin/Nav.php:83 admin/PostTypeManager.php:226
+#: includes/SinglePost.php:260 admin/Nav.php:84 admin/PostTypeManager.php:226
 msgid "Testimonials"
 msgstr ""
 
@@ -3194,71 +3557,72 @@ msgstr ""
 
 #. %s: the site name
 #: components/Email/EmailTemplateManager.php:48
-#: components/Email/EmailTemplateManager.php:126
+#: components/Email/EmailTemplateManager.php:68
+#: components/Email/EmailTemplateManager.php:146
 #, php-format
 msgid "Thank you for choosing %s!"
 msgstr ""
 
 #. %1$s: the site name
-#: components/Email/EmailTemplateManager.php:177
+#: components/Email/EmailTemplateManager.php:197
 #, php-format
 msgid "Thank you for contacting %1$s"
 msgstr ""
 
-#: components/Email/EmailTemplateManager.php:341
+#: components/Email/EmailTemplateManager.php:361
 msgid "Thank you for contacting {{site_name}}"
 msgstr ""
 
-#: components/Email/EmailTemplateManager.php:343
+#: components/Email/EmailTemplateManager.php:363
 msgid ""
 "Thank you for contacting {{site_name}}. We would love to hear more about "
 "your project."
 msgstr ""
 
-#: components/Email/EmailTemplateManager.php:198
+#: components/Email/EmailTemplateManager.php:218
 msgid "Thank you for reaching out to us!"
 msgstr ""
 
 #. %s: the name of the site
-#: components/Email/EmailTemplateManager.php:90
+#: components/Email/EmailTemplateManager.php:110
 #, php-format
 msgid "Thank you for using %s!"
 msgstr ""
 
-#: components/Email/EmailTemplateManager.php:69
+#: components/Email/EmailTemplateManager.php:89
 msgid "Thank you for using {{site_name}}!"
 msgstr ""
 
-#: components/Email/EmailTemplateManager.php:169
+#: components/Email/EmailTemplateManager.php:189
 msgid "Thank you for your attention!"
 msgstr ""
 
-#: components/Email/EmailTemplateManager.php:149
+#: components/Email/EmailTemplateManager.php:169
 msgid "Thank you for your business!"
 msgstr ""
 
-#: components/Email/EmailTemplateManager.php:110
+#: components/Email/EmailTemplateManager.php:130
 msgid "Thank you for your continued contribution to the team!"
 msgstr ""
 
-#: components/Email/EmailTemplateManager.php:216
+#: components/Email/EmailTemplateManager.php:236
 msgid "Thank you for your continued support!"
 msgstr ""
 
 #. %1$s: the type of brief; %2$s: the project name; %3$s: the link to the project briefs page
-#: components/Email/EmailTemplateManager.php:64
+#: components/Email/EmailTemplateManager.php:84
 #, php-format
 msgid "The %1$s for %2$s has been updated. %3$s"
 msgstr ""
 
 #. %1$s: the toggle off icon html; %2$s: the component name (e.g. Booking or Stripe); %3$s: the url to enable plugin components
-#: admin/helpers/upgrade.php:173
+#: admin/helpers/upgrade.php:188
 #, php-format
 msgid ""
 "The %2$s component is disabled. <a href=\"%3$s\">Enable the component</a>."
 msgstr ""
 
-#: components/Checkout/Checkout.php:244
+#: components/Checkout/Checkout.php:271
 msgid "The booking has been created!"
 msgstr ""
 
@@ -3272,11 +3636,11 @@ msgid ""
 "to the Booking Page."
 msgstr ""
 
-#: components/Checkout/Checkout.php:242
+#: components/Checkout/Checkout.php:269
 msgid "The client"
 msgstr ""
 
-#: components/Checkout/Checkout.php:270
+#: components/Checkout/Checkout.php:297
 msgid "The client can check out at the following link."
 msgstr ""
 
@@ -3312,7 +3676,7 @@ msgid "The status of your %1$s for %2$s is now %3$s. %4$s"
 msgstr ""
 
 #. %1$s: the service name; %2$s: the project name; %3$s: the payment status; %4$s: additional payment details
-#: components/Email/EmailTemplateManager.php:138
+#: components/Email/EmailTemplateManager.php:158
 #, php-format
 msgid "The status of your payment for %1$s for %2$s is now %3$s. %4$s"
 msgstr ""
@@ -3371,23 +3735,27 @@ msgstr ""
 msgid "This simplifies the process of expanding your team and services."
 msgstr ""
 
-#: admin/WelcomeMessage.php:211
+#: components/Booking/SettingsBooking.php:104
+msgid "Timeout (minutes)"
+msgstr ""
+
+#: admin/WelcomeMessage.php:221
 msgid "to accept payments and enable premium features."
 msgstr ""
 
-#: admin/WelcomeMessage.php:175
+#: admin/WelcomeMessage.php:185
 msgid "to activate premium features"
 msgstr ""
 
-#: admin/WelcomeMessage.php:193
+#: admin/WelcomeMessage.php:203
 msgid "to ensure all features are enabled"
 msgstr ""
 
-#: admin/WelcomeMessage.php:202
+#: admin/WelcomeMessage.php:212
 msgid "to get the most out of BuddyClients"
 msgstr ""
 
-#: components/Checkout/Confirmation.php:335
+#: components/Checkout/Confirmation.php:333
 msgid "to make sure your team has all the information they need."
 msgstr ""
 
@@ -3404,7 +3772,7 @@ msgid ""
 "your services."
 msgstr ""
 
-#: admin/WelcomeMessage.php:184
+#: admin/WelcomeMessage.php:194
 msgid "to your BuddyClients account"
 msgstr ""
 
@@ -3416,21 +3784,26 @@ msgstr ""
 msgid "Total"
 msgstr ""
 
-#: admin/partials/all-bookings.php:27
+#: admin/partials/all-bookings.php:24
 msgid "Total Fee"
 msgstr ""
 
-#: components/Checkout/CheckoutTable.php:93
+#: components/Checkout/CheckoutTable.php:189
 msgid "Total:"
 msgstr ""
 
-#: components/Booking/SettingsBooking.php:72
+#: components/Booking/SettingsBooking.php:112
 msgid ""
 "Turn on Freelancer Mode to assign all services to one person. Team member "
 "payments will be disabled."
 msgstr ""
 
-#: admin/TaxManager.php:68 admin/partials/user-list.php:55
+#: admin/AdminTableItem.php:770
+msgid "TWINT (Payment Method)"
+msgstr ""
+
+#: admin/TaxManager.php:68 admin/partials/booking-payments.php:21
+#: admin/partials/booking-payments.php:60 admin/partials/user-list.php:55
 #: admin/partials/user-list.php:71 admin/partials/payments.php:21
 #: admin/partials/payments.php:50 admin/partials/user-agreements.php:19
 #: admin/partials/user-agreements.php:44
@@ -3455,11 +3828,11 @@ msgstr ""
 msgid "Types"
 msgstr ""
 
-#: components/Checkout/Confirmation.php:379
+#: components/Checkout/Confirmation.php:377
 msgid "Uh oh!"
 msgstr ""
 
-#: includes/FormSubmission.php:263
+#: includes/FormSubmission.php:265
 msgid "Uh oh, something went wrong."
 msgstr ""
 
@@ -3472,23 +3845,32 @@ msgstr ""
 msgid "Unavailable: %s"
 msgstr ""
 
-#: components/Booking/SettingsBooking.php:91
+#: components/Booking/SettingsBooking.php:131
 msgid "Unlock"
+msgstr ""
+
+#: admin/AdminTableItem.php:499 admin/AdminTableItem.php:591
+#: admin/partials/booking-payments.php:55
+msgid "Unpaid"
 msgstr ""
 
 #: admin/MetaManager.php:81
 msgid "Unserializing instances of this class is not allowed."
 msgstr ""
 
+#: admin/AdminTableItem.php:501
+msgid "Unsucceed Booking"
+msgstr ""
+
 #: components/Booking/BookedService/PaymentStatusForm.php:35
 msgid "Update"
 msgstr ""
 
-#: components/Email/EmailTemplateManager.php:239
+#: components/Email/EmailTemplateManager.php:259
 msgid "Update Availability Reminder"
 msgstr ""
 
-#: admin/WelcomeMessage.php:192
+#: admin/WelcomeMessage.php:202
 msgid "Update components"
 msgstr ""
 
@@ -3507,7 +3889,7 @@ msgid ""
 "email addresses."
 msgstr ""
 
-#: components/Email/EmailTemplateManager.php:240
+#: components/Email/EmailTemplateManager.php:260
 msgid "Update Your Availability"
 msgstr ""
 
@@ -3519,25 +3901,23 @@ msgstr ""
 msgid "Update your legal agreements"
 msgstr ""
 
-#: admin/WelcomeMessage.php:308 admin/PluginLinks.php:93
-#: admin/helpers/free.php:16 admin/helpers/free.php:37
+#: admin/WelcomeMessage.php:321 admin/PluginLinks.php:98
+#: admin/UpgradePage.php:147 admin/UpgradePage.php:175
 msgid "Upgrade"
 msgstr ""
 
-#: admin/WelcomeMessage.php:210 admin/AdminPageManager.php:211
+#: admin/WelcomeMessage.php:220 admin/AdminPageManager.php:219
 msgid "Upgrade BuddyClients"
 msgstr ""
 
-#. %1$s: the opening <strong> tag, %2$s: the closing </strong> tag
-#: admin/helpers/free.php:59
+#. %s: "grow your business" in bold
+#: admin/UpgradePage.php:250
 #, php-format
-msgid ""
-"Upgrade BuddyClients to accept payments, manage projects, and %1$sgrow your "
-"business%2$s."
+msgid "Upgrade BuddyClients to accept payments, manage projects, and %s."
 msgstr ""
 
 #. %1$s: the rocket icon html; %2$s: the url to upgrade the plugin
-#: admin/helpers/upgrade.php:91
+#: admin/helpers/upgrade.php:106
 #, php-format
 msgid ""
 "Upgrade to <a href=\"%2$s\" target=\"_blank\">BuddyClients Essential or "
@@ -3573,13 +3953,9 @@ msgid ""
 msgstr ""
 
 #. %s: the card number
-#: components/Checkout/Checkout.php:208
+#: components/Checkout/Checkout.php:236
 #, php-format
 msgid "Use card number %s to simulate a successful payment."
-msgstr ""
-
-#: components/Checkout/Checkout.php:212
-msgid "Use card number 4242 4242 4242 4242 to simulate a successful payment."
 msgstr ""
 
 #: admin/AdminInfo.php:115
@@ -3588,7 +3964,7 @@ msgid ""
 "affiliates."
 msgstr ""
 
-#: components/Booking/SettingsBooking.php:56
+#: components/Booking/SettingsBooking.php:60
 msgid "Use this setting if you process payments elsewhere."
 msgstr ""
 
@@ -3597,11 +3973,11 @@ msgstr ""
 msgid "User"
 msgstr ""
 
-#: admin/Nav.php:37 admin/partials/user-agreements.php:41
+#: admin/Nav.php:38 admin/partials/user-agreements.php:41
 msgid "User Agreements"
 msgstr ""
 
-#: admin/WelcomeMessage.php:287 admin/PluginLinks.php:56
+#: admin/WelcomeMessage.php:300 admin/PluginLinks.php:58
 msgid "User Guides"
 msgstr ""
 
@@ -3613,7 +3989,7 @@ msgstr ""
 msgid "User Types and Permissions"
 msgstr ""
 
-#: admin/Nav.php:33 admin/AdminPageManager.php:171
+#: admin/Nav.php:34 admin/AdminPageManager.php:172
 #: admin/partials/user-list.php:86
 msgid "Users"
 msgstr ""
@@ -3647,7 +4023,7 @@ msgstr ""
 msgid "Video"
 msgstr ""
 
-#: admin/AdminTableItem.php:652
+#: admin/AdminTableItem.php:935
 msgid "View"
 msgstr ""
 
@@ -3669,7 +4045,7 @@ msgid "View Active %s"
 msgstr ""
 
 #. %1$s: the link to admin bookings
-#: components/Email/EmailTemplateManager.php:166
+#: components/Email/EmailTemplateManager.php:186
 #, php-format
 msgid "View all bookings: %1$s"
 msgstr ""
@@ -3678,7 +4054,7 @@ msgstr ""
 msgid "View all files associated with services and bookings here."
 msgstr ""
 
-#: components/Email/EmailTemplateManager.php:214
+#: components/Email/EmailTemplateManager.php:234
 msgid "View all submissions."
 msgstr ""
 
@@ -3690,7 +4066,15 @@ msgstr ""
 msgid "View Page"
 msgstr ""
 
-#: components/Checkout/CheckoutTable.php:50
+#: admin/AdminTableItem.php:127
+msgid "View Payments"
+msgstr ""
+
+#: admin/AdminTableItem.php:701
+msgid "View receipt"
+msgstr ""
+
+#: components/Checkout/CheckoutTable.php:108
 msgid "View Summary"
 msgstr ""
 
@@ -3699,13 +4083,13 @@ msgid "View the email log."
 msgstr ""
 
 #. %1$s: the link to view the project
-#: components/Email/EmailTemplateManager.php:146
+#: components/Email/EmailTemplateManager.php:166
 #, php-format
 msgid "View the project: %1$s"
 msgstr ""
 
 #. %s: Stripe, the name of the payment processor
-#: admin/AdminTableItem.php:121
+#: admin/AdminTableItem.php:143
 #, php-format
 msgid "View transaction on %s"
 msgstr ""
@@ -3714,19 +4098,19 @@ msgstr ""
 msgid "View Your Brief Submission"
 msgstr ""
 
-#: components/Checkout/Confirmation.php:340
+#: components/Checkout/Confirmation.php:338
 msgid "View Your Briefs"
 msgstr ""
 
-#: components/Checkout/Confirmation.php:238
+#: components/Checkout/Confirmation.php:236
 msgid "View Your Event Info"
 msgstr ""
 
-#: components/Checkout/Confirmation.php:214
+#: components/Checkout/Confirmation.php:212
 msgid "View your profile."
 msgstr ""
 
-#: components/Checkout/Confirmation.php:340
+#: components/Checkout/Confirmation.php:338
 msgid "View Your Project"
 msgstr ""
 
@@ -3734,11 +4118,11 @@ msgstr ""
 msgid "View your project."
 msgstr ""
 
-#: components/Checkout/Confirmation.php:346
+#: components/Checkout/Confirmation.php:344
 msgid "View Your Projects"
 msgstr ""
 
-#: components/Checkout/Confirmation.php:268
+#: components/Checkout/Confirmation.php:266
 msgid "View Your Sponsorships"
 msgstr ""
 
@@ -3751,50 +4135,54 @@ msgstr ""
 msgid "We are not currently accepting new bookings."
 msgstr ""
 
-#: components/Email/EmailTemplateManager.php:181
+#: components/Email/EmailTemplateManager.php:201
 msgid "We have received your message and will be in touch as soon as possible."
 msgstr ""
 
-#: components/Checkout/Confirmation.php:324
+#: components/Checkout/Confirmation.php:322
 msgid "We will be in touch to arrange payment."
 msgstr ""
 
-#: components/Email/EmailTemplateManager.php:360
+#: components/Email/EmailTemplateManager.php:380
 msgid ""
 "We will get back to you as soon as possible to discuss your project further."
 msgstr ""
 
-#: components/Checkout/Confirmation.php:264
+#: components/Checkout/Confirmation.php:262
 msgid "We will review your information and be in touch with any questions."
 msgstr ""
 
-#: admin/WelcomeMessage.php:149
+#: admin/WelcomeMessage.php:161
 msgid "We're excited to help you grow your business."
 msgstr ""
 
-#: components/Checkout/Checkout.php:451
+#: components/Checkout/Checkout.php:473
 msgid "website terms"
 msgstr ""
 
+#: admin/AdminTableItem.php:772
+msgid "WeChat Pay (Digital Wallet - China)"
+msgstr ""
+
 #. %1$s: the site name
-#: components/Email/EmailTemplateManager.php:226
+#: components/Email/EmailTemplateManager.php:246
 #, php-format
 msgid "Welcome to %1$s’s affiliate program!"
 msgstr ""
 
-#: admin/WelcomeMessage.php:127
+#: admin/WelcomeMessage.php:139
 msgid "Welcome to BuddyClients!"
 msgstr ""
 
-#: components/Email/EmailTemplateManager.php:222
+#: components/Email/EmailTemplateManager.php:242
 msgid "Welcome to the Affiliate Program!"
 msgstr ""
 
-#: components/Email/EmailTemplateManager.php:234
+#: components/Email/EmailTemplateManager.php:254
 msgid "We’re excited to have you with us!"
 msgstr ""
 
-#: components/Email/EmailTemplateManager.php:123
+#: components/Email/EmailTemplateManager.php:143
 msgid "We’re here to help!"
 msgstr ""
 
@@ -3802,7 +4190,7 @@ msgstr ""
 msgid "What is the full word count?"
 msgstr ""
 
-#: components/Booking/SettingsBooking.php:66
+#: components/Booking/SettingsBooking.php:70
 msgid "What is the minimum dollar amount per booking?"
 msgstr ""
 
@@ -3816,7 +4204,7 @@ msgid ""
 "Ex: 50"
 msgstr ""
 
-#: components/Checkout/Confirmation.php:335
+#: components/Checkout/Confirmation.php:333
 msgid "What's next?"
 msgstr ""
 
@@ -3848,11 +4236,11 @@ msgid ""
 "Which service(s) must be booked or selected before this one is available?"
 msgstr ""
 
-#: admin/AdminTableItem.php:750 admin/partials/leads.php:44
+#: admin/AdminTableItem.php:1033 admin/partials/leads.php:44
 msgid "Won"
 msgstr ""
 
-#: components/Email/EmailTemplateManager.php:155
+#: components/Email/EmailTemplateManager.php:175
 msgid "Woo hoo! New Booking"
 msgstr ""
 
@@ -3868,7 +4256,7 @@ msgstr ""
 msgid "Xprofile Field"
 msgstr ""
 
-#: components/Checkout/Checkout.php:320
+#: components/Checkout/Checkout.php:351
 msgid "Yay! Your services are free."
 msgstr ""
 
@@ -3882,12 +4270,16 @@ msgstr ""
 
 #: admin/MetaManager.php:886 admin/MetaManager.php:896
 #: admin/MetaManager.php:1004 admin/SettingsGeneral.php:94
-#: components/Booking/SettingsBooking.php:54
+#: components/Booking/SettingsBooking.php:58
 msgid "Yes"
 msgstr ""
 
 #: admin/MetaManager.php:573
 msgid "Yes (checkbox field)"
+msgstr ""
+
+#: components/Booking/SettingsBooking.php:139
+msgid "Yes - Require agreement"
 msgstr ""
 
 #: admin/AdminDashboard.php:434
@@ -3907,12 +4299,12 @@ msgid ""
 msgstr ""
 
 #. %1$s: the link to the booking form
-#: components/Email/EmailTemplateManager.php:85
+#: components/Email/EmailTemplateManager.php:105
 #, php-format
 msgid "You can book this service anytime using the %1$s."
 msgstr ""
 
-#: components/Email/EmailTemplateManager.php:142
+#: components/Email/EmailTemplateManager.php:162
 msgid "You can check the status and more details on your project."
 msgstr ""
 
@@ -3922,7 +4314,7 @@ msgstr ""
 msgid "You can download PDF versions of these agreements from the %s."
 msgstr ""
 
-#: components/Email/EmailTemplateManager.php:162
+#: components/Email/EmailTemplateManager.php:182
 msgid "You can view more details and manage bookings in the admin area."
 msgstr ""
 
@@ -3934,18 +4326,24 @@ msgstr ""
 msgid "You do not have permission to view this brief."
 msgstr ""
 
-#: components/Email/EmailTemplateManager.php:104
+#: components/Checkout/Checkout.php:353
+msgid ""
+"You do not owe anything today! The full fee will be due on completion of "
+"services."
+msgstr ""
+
+#: components/Email/EmailTemplateManager.php:124
 msgid "You have a new assignment!"
 msgstr ""
 
 #. %1$s: the service name; %2$s: the quote expiration date
-#: components/Email/EmailTemplateManager.php:79
+#: components/Email/EmailTemplateManager.php:99
 #, php-format
 msgid "You have a new custom quote available: %1$s. This quote expires %2$s."
 msgstr ""
 
 #. %1$s: the client name; %2$s: the link to admin testimonials
-#: components/Email/EmailTemplateManager.php:212
+#: components/Email/EmailTemplateManager.php:232
 #, php-format
 msgid "You have received a new testimonial submission from %1$s. %2$s"
 msgstr ""
@@ -3957,7 +4355,7 @@ msgid "Your %1$s is %2$s"
 msgstr ""
 
 #. %1$s: the link to availability page; %2$s: the site name
-#: components/Email/EmailTemplateManager.php:244
+#: components/Email/EmailTemplateManager.php:264
 #, php-format
 msgid "Your availability date is expiring. %1$s"
 msgstr ""
@@ -3969,7 +4367,7 @@ msgid ""
 "Your availability has expired. <a href=\"%s\">Update your availability.</a>"
 msgstr ""
 
-#: components/Checkout/Checkout.php:397
+#: components/Checkout/Checkout.php:431
 msgid "Your email"
 msgstr ""
 
@@ -3977,43 +4375,47 @@ msgstr ""
 msgid "Your Files"
 msgstr ""
 
-#: components/Checkout/Confirmation.php:369
+#: components/Checkout/Confirmation.php:367
 msgid "Your payment failed."
 msgstr ""
 
-#: components/Checkout/Confirmation.php:234
+#: components/Checkout/Confirmation.php:232
 msgid ""
 "Your payment has been processed, and your registration has been confirmed."
 msgstr ""
 
-#: components/Checkout/Confirmation.php:326
+#: components/Checkout/Confirmation.php:324
 msgid "Your payment has been processed, and your services have been booked."
 msgstr ""
 
-#: components/Checkout/Confirmation.php:262
+#: components/Checkout/Confirmation.php:260
 msgid ""
 "Your payment has been processed, and your sponsorship purchase has been "
 "confirmed."
 msgstr ""
 
-#: components/Checkout/Confirmation.php:234
+#: components/Checkout/Confirmation.php:232
 msgid "Your registration has been confirmed."
 msgstr ""
 
 #. %1$s: the site name; %2$s: the link to finalize booking
-#: components/Email/EmailTemplateManager.php:330
+#: components/Email/EmailTemplateManager.php:350
 #, php-format
 msgid "Your services from %1$s are ready! %2$s"
 msgstr ""
 
-#: components/Checkout/Confirmation.php:322
+#: components/Checkout/Confirmation.php:320
 msgid "Your services have been booked."
 msgstr ""
 
-#: components/Checkout/Confirmation.php:261
+#: components/Checkout/Confirmation.php:259
 msgid "Your sponsorship purchase has been confirmed."
 msgstr ""
 
 #: admin/MetaManager.php:876 admin/MetaManager.php:1021
 msgid "ZIP"
+msgstr ""
+
+#: admin/AdminTableItem.php:773
+msgid "Zip (Buy Now, Pay Later)"
 msgstr ""
