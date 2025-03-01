@@ -636,8 +636,8 @@ class AdminColumns {
      * @param mixed $value The value of the meta field.
      */
     private function percentage_column( $value ) {
-        if ( ! buddyc_freelancer_mode() ) {
-            return $value !== '' ? $value . __( '%', 'buddyclients-free' ) : $value;
+        if ( ! buddyc_freelancer_mode() && ! empty( $value ) ) {
+            return sprintf( '%s%', $value );
         }
     }
     
