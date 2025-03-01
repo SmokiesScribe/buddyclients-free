@@ -106,8 +106,10 @@ class UpgradePage {
      * @since 1.0.27
      */
     private static function highest() {
-        return end( self::product_keys() );
+        $product_keys = self::product_keys();
+        return end( $product_keys );
     }
+    
 
     /**
      * Retrieves all subscription levels above the current product key.

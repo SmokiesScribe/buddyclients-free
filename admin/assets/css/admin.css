@@ -389,7 +389,7 @@ ul.wp-submenu.wp-submenu-wrap li a[href="buddyc-separator"] {
 .buddyc-dismiss-admin-btn-container {
     margin: 10px 0 0;
 }
-.buddyc-dismiss-admin-btn {
+.buddyc-dismiss-admin-btn:not( .buddyc-repair-link-disable-tips ) {
     color: #fff;
     background-color: #e74c3c;
     padding: 0.5em 1em;    
@@ -397,7 +397,7 @@ ul.wp-submenu.wp-submenu-wrap li a[href="buddyc-separator"] {
     border-radius: 5px;
     cursor: pointer;
 }
-.buddyc-dismiss-admin-btn:hover {
+.buddyc-dismiss-admin-btn:not(.buddyc-repair-link-disable-tips):hover {
     color: #fff;
     background-color: #cd5043;
     text-decoration: none;

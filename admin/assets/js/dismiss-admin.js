@@ -6,6 +6,8 @@
 document.addEventListener("DOMContentLoaded", function () {
     const dismissButtons = document.querySelectorAll(".buddyc-dismiss-admin-btn");
 
+    console.log(dismissButtons);
+
     dismissButtons.forEach(button => {
         const notice = button.closest(".notice");
         if ( ! notice ) return;
@@ -21,10 +23,18 @@ document.addEventListener("DOMContentLoaded", function () {
             setTimeout(() => {
                 notice.style.display = "none";
             }, 500);
+
+            // Standard action
+            let ajaxAction = 'buddyc_dismiss_admin_notice';
+
+            // Admin tips action
+            if ( noticeId === 'buddyc_admin_notice_admin_info' ) {
+                ajaxAction = 'buddyc_dismiss_admin_tips';
+            }
             
             // Send to server to update option
             jQuery.post(ajaxurl, {
-                action: 'buddyc_dismiss_admin_notice',
+                action: ajaxAction,
                 noticeId: noticeId,
                 nonce: dismissAdminData.nonce,
                 nonceAction: dismissAdminData.nonceAction,

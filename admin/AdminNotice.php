@@ -420,9 +420,26 @@ class AdminNotice {
                 
                 // Check if the link is external
                 $is_external = $link_host && $link_host !== $current_site;
+
+                // Build class
+                $class = sprintf(
+                    'buddyc-repair-link-%s',
+                    strtolower( str_replace( ' ', '-', $repair_link_text ) )
+                );
+
+                // Add class for admin info
+                if ( $class === 'buddyc-repair-link-disable-tips' ) {
+                    $class .= ' buddyc-dismiss-admin-btn';
+                }
                 
                 // Build the anchor tag
-                $formatted_links[] = '<a href="' . esc_url( $repair_link ) . '"' . ($is_external ? ' target="_blank" rel="noopener noreferrer"' : '') . '>' . esc_html( $repair_link_text ) . '</a>';
+                $formatted_links[] = sprintf(
+                    '<a href="%1$s" class="%2$s"%3$s>%4$s</a>',
+                    esc_url( $repair_link ),
+                    esc_attr( $class ),
+                    $is_external ? ' target="_blank" rel="noopener noreferrer"' : '',
+                    esc_html( $repair_link_text )
+                );
             }
         }
         

@@ -68,6 +68,7 @@ class AdminInfo {
             
             // Define notice args
             $notice_args = [
+                'key'               => 'admin_info',
                 'repair_link'       => ['/admin.php?page=buddyc-general-settings', 'https://buddyclients.com/help'],
                 'dismissable'       => true,
                 'repair_link_text'  => [__( 'Disable tips', 'buddyclients-free' ), __( 'Help docs', 'buddyclients-free' )],
@@ -355,5 +356,14 @@ class AdminInfo {
         ];
 
         return $required_components[$key] ?? null;
+    }
+
+    /**
+     * Updates the setting to dismiss admin tips.
+     * 
+     * @since 1.0.27
+     */
+    public static function dismiss() {
+        buddyc_update_setting('general', 'admin_info', 'disable' );
     }
 }
