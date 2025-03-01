@@ -54,7 +54,7 @@ class UpgradePage {
      * @since 1.0.25
      */
     public function __clone() {
-        _doing_it_wrong( __FUNCTION__, 'Cloning LicenseHandler is not allowed.', BUDDYC_PLUGIN_VERSION );
+        _doing_it_wrong( __FUNCTION__, 'Cloning LicenseHandler is not allowed.', esc_html( (string) BUDDYC_PLUGIN_VERSION ) );
     }
 
     /**

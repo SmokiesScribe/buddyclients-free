@@ -52,8 +52,8 @@ add_action( 'admin_init', 'buddyc_handle_booking_action' );
  */
 function buddyc_booking_action_success() {
     $messages = [
-        'booking_deleted' => [ 'true' => __( 'Booking deleted!' ), 'false' => __( 'Error: Booking not deleted.' ) ],
-        'booking_updated' => [ 'true' => __( 'Booking updated!' ), 'false' => __( 'Error: Booking not updated.' ) ],
+        'booking_deleted' => [ 'true' => __( 'Booking deleted!', 'buddyclients-free' ), 'false' => __( 'Error: Booking not deleted.', 'buddyclients-free' ) ],
+        'booking_updated' => [ 'true' => __( 'Booking updated!', 'buddyclients-free' ), 'false' => __( 'Error: Booking not updated.', 'buddyclients-free' ) ],
     ];
     
     foreach ( $messages as $param => $texts ) {

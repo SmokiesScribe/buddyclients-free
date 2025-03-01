@@ -121,7 +121,7 @@ class EmailTriggers {
                 $pay_link = sprintf(
                     '<a href="1$s">2$s</a>',
                     $payment_data['pay_link'] ?? '',
-                    __( 'Pay Online' )
+                    __( 'Pay Online', 'buddyclients-free' )
                 );
 
                 $payment_strings[] = sprintf(

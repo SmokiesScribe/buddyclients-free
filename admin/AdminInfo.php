@@ -241,8 +241,8 @@ class AdminInfo {
             // Legal
             'user agreements'       => [
                 __( 'Team and affiliate agreements will appear here after they are signed and submitted.', 'buddyclients-free' ),
-                /* translators: %1$s: the link to the legal settings; %2$s: the link to add legal modifications */
                 sprintf(
+                    /* translators: %1$s: the link to the legal settings; %2$s: the link to add legal modifications */
                     __( 'Manage your %1$s. Customize agreements for specific users by adding %2$s.', 'buddyclients-free' ),
                     self::link( __( 'legal agreements', 'buddyclients-free' ), admin_url('admin.php?page=buddyc-legal-agreements' ) ),
                     self::link( __( 'modifications', 'buddyclients-free' ), admin_url('edit.php?post_type=buddyc_legal_mod' ) )

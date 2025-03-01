@@ -69,7 +69,7 @@ class MetaManager {
      * @since 1.0.25
      */
     public function __clone() {
-        _doing_it_wrong( __FUNCTION__, esc_html__( 'Cloning this class is not allowed.', 'buddyclients-free' ), BUDDYC_PLUGIN_VERSION );
+        _doing_it_wrong( __FUNCTION__, esc_html__( 'Cloning this class is not allowed.', 'buddyclients-free' ), esc_html( (string) BUDDYC_PLUGIN_VERSION ) );
     }
 
     /**
@@ -78,7 +78,7 @@ class MetaManager {
      * @since 1.0.25
      */
     public function __wakeup() {
-        _doing_it_wrong( __FUNCTION__, esc_html__( 'Unserializing instances of this class is not allowed.', 'buddyclients-free' ), BUDDYC_PLUGIN_VERSION );
+        _doing_it_wrong( __FUNCTION__, esc_html__( 'Unserializing instances of this class is not allowed.', 'buddyclients-free' ), esc_html( (string) BUDDYC_PLUGIN_VERSION ) );
     }
 
     /**

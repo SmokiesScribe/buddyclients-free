@@ -127,7 +127,7 @@ function buddyc_missing_bp_notice_free() {
 				printf(
 					wp_kses(
 						/* translators: %s: link to BuddyPress installation */
-						__( 'Install %s or %s.', 'buddyclients-free' ),
+						__( 'Install %1$s or %2$s.', 'buddyclients-free' ),
 						$allowed_html
 					),
 					sprintf( '<a href="%s">BuddyPress</a>', esc_url( $bp_install ) ),

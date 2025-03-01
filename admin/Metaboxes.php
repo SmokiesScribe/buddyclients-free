@@ -687,8 +687,12 @@ class Metaboxes {
             $display = $title ?: $name ?: $field_value;
 
             $field .= sprintf(
-                '<p class="buddyc-meta-unavailable">' . __('Unavailable: %s', 'buddyclients-free') . '</p>',
-                esc_html( $display )
+                '<p class="buddyc-meta-unavailable">%s</p>',
+                sprintf(
+                    /* translators: %s: the name of the unavailable field */
+                    __('Unavailable: %s', 'buddyclients-free'),
+                    esc_html( $display )
+                )
             );
         }
 

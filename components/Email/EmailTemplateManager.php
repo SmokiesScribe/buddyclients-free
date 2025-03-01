@@ -53,7 +53,7 @@ class EmailTemplateManager {
             ],
             'booking_services_complete' => [
                 'label'         => __('All Booking Services Complete', 'buddyclients-free'),
-                'subject'       => __( 'Your services are complete' ),
+                'subject'       => __( 'Your services are complete', 'buddyclients-free' ),
                 'content'       => [
                     sprintf(
                         /* translators: %1$s: the names of the services; %2$s: the project name; %3$s: the service status; %4$s: the link to view the project */
@@ -199,7 +199,7 @@ class EmailTemplateManager {
                 ),
                 'content'       => [
                     __( 'We have received your message and will be in touch as soon as possible.', 'buddyclients-free' ),
-                    __( '<strong>Your Submitted Information:</strong>', 'buddyclients-free' ),
+                    '<strong>' . __( 'Your Submitted Information:', 'buddyclients-free' ) . '</strong>',
                     sprintf(
                         /* translators: %1$s: the client name */
                         __('Name: %1$s', 'buddyclients-free'),
@@ -262,7 +262,7 @@ class EmailTemplateManager {
                     sprintf(
                         /* translators: %1$s: the link to availability page; %2$s: the site name */
                         __('Your availability date is expiring. %1$s', 'buddyclients-free'),
-                        self::link('{{availability_link}}', __('Log in to %2$s', 'buddyclients-free'))
+                        self::link('{{availability_link}}', __('Log in to update.', 'buddyclients-free'))
                     ),
                     __( 'Please update your availability as soon as possible.', 'buddyclients-free' ),
                 ],
@@ -272,7 +272,7 @@ class EmailTemplateManager {
                 'label'         => __('New Lead', 'buddyclients-free'),
                 'subject'       => __('New Lead', 'buddyclients-free'),
                 'content'       => [
-                    __( '<strong>New Lead from {{site_name}}</strong>', 'buddyclients-free' ),
+                    '<strong>' . __( 'New Lead from {{site_name}}', 'buddyclients-free' ) . '</strong>',
                     sprintf(
                         /* translators: %1$s: the lead name */
                         __('Name: %1$s', 'buddyclients-free'),
@@ -361,7 +361,7 @@ class EmailTemplateManager {
                 'subject'       => __('Thank you for contacting {{site_name}}', 'buddyclients-free'),
                 'content'       => [
                     __( 'Thank you for contacting {{site_name}}. We would love to hear more about your project.', 'buddyclients-free' ),
-                    __( '<strong>Your Submitted Info:</strong>', 'buddyclients-free' ),
+                    '<strong>' . __( 'Your Submitted Info:', 'buddyclients-free' ) . '</strong>',
                     sprintf(
                         /* translators: %1$s: the lead name */
                         __('Name: %1$s', 'buddyclients-free'),

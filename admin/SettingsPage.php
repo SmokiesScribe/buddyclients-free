@@ -354,7 +354,7 @@ class SettingsPage {
                             <td>
                                 <p class="description">
                                     <?php echo $required ? 'Required. ' : ''; ?>
-                                    <?php echo isset($field_data['descriptions'][$option_key]) ? $field_data['descriptions'][$option_key] : ''; ?>
+                                    <?php echo isset($field_data['descriptions'][$option_key]) ? wp_kses_post( $field_data['descriptions'][$option_key] ) : ''; ?>
                                 </p>
                             </td>
                         </tr>

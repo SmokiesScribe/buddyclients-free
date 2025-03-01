@@ -105,7 +105,7 @@ class SettingsGeneral {
                         'label' => __( 'Team Payment Methods', 'buddyclients-free' ),
                         'type' => 'checkboxes',
                         'options' => buddyc_options( 'payment_methods' ),
-                        'description' => __( 'Team members can choose their preferred payment method.' ),
+                        'description' => __( 'Team members can choose their preferred payment method.', 'buddyclients-free' ),
                     ],
                 ]
             ],
