@@ -13,6 +13,15 @@ function buddyc_get_booking_intent( $booking_intent_id ) {
 }
 
 /**
+ * Retrieves all BookingIntent objects.
+ * 
+ * @since 1.0.28
+ */
+function buddyc_get_all_booking_intents() {
+    return BookingIntent::get_all_booking_intents();
+}
+
+/**
  * Updates a BookingIntent object.
  * 
  * @since 0.2.6

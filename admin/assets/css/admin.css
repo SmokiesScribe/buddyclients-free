@@ -196,13 +196,17 @@ table.buddyc-postbox-table {
     height: 50px;
 }
 
-.buddyc-checkbox-table td:first-child {
-    width: 30%;
-    border-right: none;
+.buddyc-checkbox-table td.buddyc-checkbox-column {
+    width: 40px; /* Ensures space for the checkbox */
+    text-align: center;
 }
 
 .buddyc-checkbox-table td:not(:first-child) {
     border-left: none;
+}
+
+.buddyc-checkbox-table td:not(:last-child) {
+    border-right: none;
 }
 
 /* Style selected row */

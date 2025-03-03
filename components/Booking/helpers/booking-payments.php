@@ -127,6 +127,16 @@ function buddyc_get_payment_booking_status( $payment_id ) {
 }
 
 /**
+ * Retrieves all active BookingPayment objects.
+ * Active BookingPayment objects are attached to a succeeded BookingIntent.
+ * 
+ * @since 1.0.28
+ */
+function buddyc_get_all_active_payments() {
+    return BookingPayment::get_all_active_payments();
+}
+
+/**
  * Deletes all BookingPayment objects associated with a BookingIntent.
  * 
  * @since 1.0.27

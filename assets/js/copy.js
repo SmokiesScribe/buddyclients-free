@@ -1,74 +1,125 @@
 /**
- * Handles copy to clipboard clicks.
+ * Attaches copy-to-clipboard event listeners to elements with the class "buddyc-copy-to-clipboard".
+ *
+ * @since 1.0.0
+ */
+document.addEventListener( "DOMContentLoaded", function () {
+
+    // Get all elements with the copy-to-clipboard functionality
+    const copyContainers = document.querySelectorAll( ".buddyc-copy-to-clipboard" );
+
+    if ( copyContainers.length === 0 ) return;
+
+    // Loop through elements and add event listeners
+    copyContainers.forEach( copyContainer => {
+
+        const button  = copyContainer.querySelector( ".copy-to-clipboard-icon" );
+        const content = copyContainer.querySelector( ".buddyc-copy-content" );
+
+        if ( ! button || ! content ) return;
+
+        // Determine the text to copy (input value or inner text)
+        const value = content.value !== undefined ? content.value : content.innerText;
+
+        copyContainer.addEventListener( "click", function ( event ) {
+            buddycCopyToClipboard( event, value, copyContainer );
+        });
+
+    });
+
+});
+
+/**
+ * Handles copy-to-clipboard clicks.
  * 
  * @since 0.1.0
+ * 
+ * @param {MouseEvent} event       The click event.
+ * @param {string}     value       The text to copy.
+ * @param {HTMLElement} linkElement The element that triggered the copy action.
  */
-function buddycCopyToClipboard(elementId) {
-    var linkElement = document.getElementById(elementId);
-    if (!linkElement) {
-        console.error('Element not found:', elementId);
-        return;
-    }
+function buddycCopyToClipboard( event, value, linkElement ) {
 
-    var textToCopy = linkElement.innerText.trim();
+    if ( ! value ) return;
 
-    if (navigator.clipboard && navigator.clipboard.writeText) {
+    var textToCopy = value.trim();
+
+    if ( navigator.clipboard && navigator.clipboard.writeText ) {
+
         // Modern Clipboard API
-        navigator.clipboard.writeText(textToCopy).then(() => {
-            buddycShowCopySuccess(linkElement);
-        }).catch(err => {
-            console.error('Clipboard API failed:', err);
+        navigator.clipboard.writeText( textToCopy ).then( () => {
+            buddycShowCopySuccess( event );
+        }).catch( err => {
+            console.error( "Clipboard API failed:", err );
         });
+
     } else {
         // Fallback for older browsers
-        buddycFallbackCopyText(textToCopy, linkElement);
+        buddycFallbackCopyText( event, textToCopy, linkElement );
     }
+
 }
 
 /**
  * Fallback method for copying text (uses document.execCommand).
+ * 
+ * @since 0.1.0
+ * 
+ * @param {MouseEvent} event   The click event.
+ * @param {string}     text    The text to copy.
+ * @param {HTMLElement} element The element that triggered the copy action.
  */
-function buddycFallbackCopyText(text, element) {
-    var tempInput = document.createElement('textarea');
+function buddycFallbackCopyText( event, text, element ) {
+
+    var tempInput = document.createElement( "textarea" );
     tempInput.value = text;
-    document.body.appendChild(tempInput);
+    document.body.appendChild( tempInput );
     tempInput.select();
 
     try {
-        document.execCommand('copy');
-        buddycShowCopySuccess(element);
-    } catch (err) {
-        console.error('Fallback copy failed:', err);
+
+        document.execCommand( "copy" );
+        buddycShowCopySuccess( event );
+
+    } catch ( err ) {
+        console.error( "Fallback copy failed:", err );
     }
 
-    document.body.removeChild(tempInput);
+    document.body.removeChild( tempInput );
+
 }
 
 /**
- * Displays "Copied" message.
+ * Displays "Copied" message at the exact click position.
+ * 
+ * @since 0.1.0
+ * 
+ * @param {MouseEvent} event The click event.
  */
-function buddycShowCopySuccess(element) {
-    document.querySelectorAll('.buddyc-copy-success').forEach(div => div.textContent = '');
-    
-    var parent = element.closest('div');
-    var successDiv = parent.querySelector('.buddyc-copy-success');
+function buddycShowCopySuccess( event ) {
 
-    // Show the feedback
-    successDiv.classList.add('show');
+    // Clear existing success messages
+    document.querySelectorAll( ".buddyc-copy-success" ).forEach( div => div.remove() );
+
+    // Create the success message element
+    var successDiv = document.createElement( "div" );
+    successDiv.className = "buddyc-copy-success show";
+    successDiv.textContent = "Copied!";
+
+    // Append to the body so we can position it absolutely
+    document.body.appendChild( successDiv );
+
+    // Position the success message at the exact click location
+    successDiv.style.top  = `${event.pageY - 50}px`; // Slightly above the click
+    successDiv.style.left = `${event.pageX}px`;      // At the exact click position
 
     // Hide feedback after 2 seconds
-    setTimeout(function() {
-        successDiv.classList.remove('show');
-    }, 2000);
+    setTimeout( () => {
 
-    if ( successDiv.classList.contains('check') ) {
-        var message = '✔️';
-    } else {
-        var message = 'Copied!';
-    }
-    
+        successDiv.classList.replace( "show", "hide" );
 
-    if (successDiv) {
-        successDiv.textContent = message;
-    }
+        setTimeout( () => successDiv.remove(), 500 ); // Remove from DOM after fade-out
+
+    }, 2000 );
+
 }

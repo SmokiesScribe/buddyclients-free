@@ -36,3 +36,21 @@ function buddyc_delete_booking_intent_booked_services( $booking_intent_id ) {
 function buddyc_get_booked_services_by( $property, $value ) {
     return BookedService::get_services_by( $property, $value );
 }
+
+/**
+ * Retrieves all BookedService objects.
+ * 
+ * @since 1.0.28
+ */
+function buddyc_get_all_booked_services() {
+    return BookedService::get_all_services();
+}
+
+/**
+ * Retrieves all Payment objects.
+ * 
+ * @since 1.0.28
+ */
+function buddyc_get_all_payments() {
+    return Payment::get_all_payments();
+}

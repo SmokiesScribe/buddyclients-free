@@ -44,26 +44,3 @@ function buddyc_handle_booking_action() {
     }
 }
 add_action( 'admin_init', 'buddyc_handle_booking_action' );
-
-/**
- * Outputs success messages for booking actions.
- * 
- * @since 1.0.17
- */
-function buddyc_booking_action_success() {
-    $messages = [
-        'booking_deleted' => [ 'true' => __( 'Booking deleted!', 'buddyclients-free' ), 'false' => __( 'Error: Booking not deleted.', 'buddyclients-free' ) ],
-        'booking_updated' => [ 'true' => __( 'Booking updated!', 'buddyclients-free' ), 'false' => __( 'Error: Booking not updated.', 'buddyclients-free' ) ],
-    ];
-    
-    foreach ( $messages as $param => $texts ) {
-        // Check for param
-        $status = buddyc_get_param( $param );
-
-        // Output alert
-        if ( isset( $texts[ $status ] ) ) {
-            buddyc_js_alert( $texts[ $status ], true );
-        }
-    }
-}
-//add_action( 'admin_init', 'buddyc_booking_action_success' );

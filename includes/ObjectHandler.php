@@ -213,7 +213,7 @@ class ObjectHandler {
                 $time_difference = $current_timestamp - strtotime( $object->created_at );
                 
                 // Check if the difference is greater than the number of days
-                if ($time_difference > $days * 24 * 60 * 60) {
+                if ($time_difference > (int) $days * 24 * 60 * 60) {
                     
                     // Add to array
                     $expired_objects[] = $object;

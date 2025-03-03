@@ -7,7 +7,6 @@ use BuddyClients\Includes\GroupExtension;
 
 use BuddyClients\Components\Booking\BookedService\BookedServiceList;
 use BuddyClients\Components\Affiliate\AffiliateProfile;
-use BuddyClients\Components\Legal\Legal;
 use BuddyClients\Components\Legal\LegalForm;
 use BuddyClients\Includes\UserFilesForm;
 use BuddyClients\Components\Sales\SalesProfile;
@@ -38,7 +37,7 @@ class ExtensionManager {
 
         $extensions = [
             'services'          => BookedServiceList::class,
-            'affiliate'         => [AffiliateProfile::class, Legal::class],
+            'affiliate'         => [AffiliateProfile::class, LegalForm::class],
             'availability'      => AvailabilityProfile::class,
             'team_agreement'    => LegalForm::class,
             'sales'             => SalesProfile::class,

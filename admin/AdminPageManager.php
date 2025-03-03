@@ -150,7 +150,8 @@ class AdminPageManager {
                 'title' => __('Email Log', 'buddyclients-free'),
                 'settings' => false,
                 'parent_slug' => null,
-                'callable' => 'buddyc_email_log_content',
+                'callable' => 'buddyc_admin_table',
+                'callback_args' => 'email_log',
                 'required_class' => 'BuddyClients\Components\Email\EmailTemplateManager'
             ],
             'bookings_dashboard' => [
@@ -158,44 +159,48 @@ class AdminPageManager {
                 'title' => __('Bookings Dashboard', 'buddyclients-free'),
                 'settings' => false,
                 'parent_slug' => null,
-                'callable' => 'buddyc_bookings_dashboard'
+                'callable' => 'buddyc_admin_table',
+                'callback_args' => 'booking_intents',
             ],
             'payments' => [
                 'key' => 'payments',
                 'title' => __('Payments', 'buddyclients-free'),
                 'settings' => false,
                 'parent_slug' => null,
-                'callable' => 'buddyc_payments_list'
+                'callable' => 'buddyc_admin_table',
+                'callback_args' => 'payments',
             ],
             'users' => [
                 'key' => 'users',
                 'title' => __('Users', 'buddyclients-free'),
                 'settings' => false,
                 'parent_slug' => null,
-                'callback' => 'buddyc_user_list',
-                'callable' => 'buddyc_user_list'
+                'callable' => 'buddyc_admin_table',
+                'callback_args' => 'user_list',
             ],
             'leads' => [
                 'key' => 'leads',
                 'title' => __('Leads', 'buddyclients-free'),
                 'settings' => false,
                 'parent_slug' => null,
-                'callback' => 'buddyc_leads_list',
-                'callable' => 'buddyc_leads_list'
+                'callable' => 'buddyc_admin_table',
+                'callback_args' => 'leads',
             ],
             'booked_services' => [
                 'key' => 'booked-services',
                 'title' => __('Booked Services', 'buddyclients-free'),
                 'settings' => false,
                 'parent_slug' => null,
-                'callable' => 'buddyc_booked_services_table'
+                'callable' => 'buddyc_admin_table',
+                'callback_args' => 'booked_services'
             ],
             'booking_payments' => [
                 'key' => 'booking-payments',
                 'title' => __('Booking Payments', 'buddyclients-free'),
                 'settings' => false,
                 'parent_slug' => null,
-                'callable' => 'buddyc_booking_payments_table'
+                'callable' => 'buddyc_admin_table',
+                'callback_args' => 'booking_payments'
             ],
             'legal_agreements' => [
                 'key' => 'legal-agreements',
@@ -210,7 +215,8 @@ class AdminPageManager {
                 'title' => __('Legal', 'buddyclients-free'),
                 'settings' => false,
                 'parent_slug' => 'buddyc-dashboard',
-                'callable' => 'buddyc_user_agreements_table',
+                'callable' => 'buddyc_admin_table',
+                'callback_args' => 'user_agreements',
                 'buddyc_menu_order' => 8,
                 'required_component' => 'Legal'
             ],

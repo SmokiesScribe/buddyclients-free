@@ -36,15 +36,28 @@ function buddyc_create_plugin_page() {
             'success' => false, 
             'error_message' => $error_message
         ]);
-    }  
+    }
     
     // Check if page was created
     if ( $plugin_page->post_id ) {
+
+        // Check where to redirect
+        $redirect_url = null;
+        if ( isset( $_POST['args'], $_POST['args']['redirect'] ) ) {
+            $redirect = sanitize_text_field( wp_unslash( $_POST['args']['redirect'] ) );
+            $redirect_url = match ( $redirect ) {
+                'edit'      => $plugin_page->edit_post_url,
+                'view'      => $plugin_page->permalink,
+                default     => null
+            };
+        }
+
         echo wp_json_encode( [
             'success' => true, 
             'edit_post_url' => $plugin_page->edit_post_url, 
-            'permalink' => $plugin_page->permalink, 
-            'new_page_id' => $plugin_page->post_id
+            'permalink'     => $plugin_page->permalink, 
+            'new_page_id'   => $plugin_page->post_id,
+            'redirect_url'  => $redirect_url
         ]);
         wp_die();
         

@@ -1,0 +1,42 @@
+/* Copy Paste Field */
+
+/* Copy container */
+.buddyc-copy-to-clipboard {
+    display: inline-block;
+    width: auto;
+    white-space: nowrap;
+    max-width: 90%;
+}
+
+/* Input */
+.buddyc-copy-to-clipboard input {
+    cursor: copy;
+    max-width: 90%;
+}
+
+/* Copy icon */
+.bb-icon-copy {
+    font-size: 22px;
+}
+.bb-icon-copy:hover {
+    color: gray;
+    cursor: pointer;
+}
+
+/* Copy success (aligned with js) */
+.buddyc-copy-success {
+    position: absolute;
+    background-color: #4CAF50;
+    color: white;
+    padding: 10px;
+    border-radius: 5px;
+    opacity: 0;
+    transition: opacity 0.5s ease;
+    transform: translateX(-50%);
+    font-size: 14px;
+    z-index: 9999; /* Ensure it's visible above other content */
+}
+
+.buddyc-copy-success.show {
+    opacity: 1;
+}

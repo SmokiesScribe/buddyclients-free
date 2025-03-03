@@ -29,7 +29,7 @@ function buddyc_is_team( $user_id = null ) {
     // Get setting
     $team_types = buddyc_get_setting('general', 'team_types');
     
-    if ( ! $team_types || empty( $team_types ) ) {
+    if ( ! $team_types || ! is_array( $team_types ) || empty( $team_types ) ) {
         return false;
     }
 

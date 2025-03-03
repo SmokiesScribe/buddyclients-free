@@ -1,7 +1,6 @@
 <?php
 namespace BuddyClients\Admin;
 if ( ! defined( 'ABSPATH' ) ) exit; // Exit if accessed directly
-
 use BuddyClients\Admin\Settings;
 
 /**
@@ -132,20 +131,20 @@ class SettingsPage {
      */
     public function sanitize_settings( $input ) {
 
-        // Loop through settings fields and ensure checkboxes are set to an empty array if no value is submitted
+        // Loop through settings sections
         foreach ( $this->data as $section_key => $section_data ) {
 
+            // Loop through fields
             foreach ( $section_data['fields'] as $field_id => $field_data ) {
 
+                // Set checkbox fields to empty array if no value submitted
                 if ( $field_data['type'] === 'checkboxes' ) {
-
                     if ( ! isset( $input[ $field_id ] ) ) {
                         $input[ $field_id ] = [];
                     }
                 }
             }
         }
-
         return $input;
     }
 
@@ -171,8 +170,11 @@ class SettingsPage {
      * Renders the settings content.
      * 
      * @since 0.1.0
+     * 
+     * @return  void    Echoes the content.
      */
      public function section_callback() {
+
         /**
          * Fires at the top of every BuddyClients settings page.
          *
@@ -183,16 +185,18 @@ class SettingsPage {
         do_action('buddyc_before_settings', $this->key);
         
         // Make sure we have an array of settings data
-        if (is_array($this->data)) {
+        if ( is_array( $this->data )) {
+
             // Loop through settings data
-            foreach ($this->data as $section_key => $section_data) {
-                // Output section header
-                $section_header = $this->section_group( $section_key, $section_data ) ?? '';
-                echo wp_kses_post( $section_header );
+            foreach ( $this->data as $section_key => $section_data ) {
+                // Output the group
+                $section_group = $this->section_group( $section_key, $section_data ) ?? '';
+                $allowed_html = self::allowed_html();
+                echo wp_kses( $section_group, $allowed_html );
             }
         // No settings data available
         } else {
-            echo wp_kses_post( __('Not available.', 'buddyclients-free') );
+            echo esc_html__( 'Not available.', 'buddyclients-free' );
         }
     }
     
@@ -200,198 +204,312 @@ class SettingsPage {
      * Displays section group.
      * 
      * @since 0.1.0
+     * 
+     * @param   string  $section_key    The key for the settings group section. 
+     * @param   array   $section_data   The array of data for the settings group section.
+     * @return  string  The section group content.
      */
-     public function section_group(string $section_key, $section_data) {
-        ?>
-        <div class="buddyclients-settings-section">
-            <div class="buddyclients-settings-section-title-wrap">
-                <h2 class="buddyclients-settings-section-title"><?php echo esc_html($section_data['title'] ?? ''); ?></h2>
-                <p class="description"><?php echo wp_kses_post( $section_data['description'] ); ?></p>
-                <hr class="buddyclients-settings-section-title-divider">
-            </div>
-            
-            <?php $this->section_group_field($section_key, $section_data); ?>
-            
-        </div>
-        <?php
+     public function section_group( string $section_key, $section_data ) {
+        return sprintf(
+            '<div class="buddyclients-settings-section">
+                <div class="buddyclients-settings-section-title-wrap">
+                    <h2 class="buddyclients-settings-section-title">%1$s</h2>
+                    <p class="description">%2$s</p>
+                    <hr class="buddyclients-settings-section-title-divider">
+                </div>  
+                %3$s
+            </div>',
+            esc_html( $section_data['title'] ?? '' ),
+            $section_data['description'] ?? '',
+            $this->section_group_field( $section_key, $section_data )
+        );
     }
 
     /**
      * Displays individual field.
      * 
      * @since 0.1.0
+     * 
+     * @param   string  $section_key    The key for the settings group field. 
+     * @param   array   $section_data   The array of data for the settings group field.
+     * @return  string  The section field content.
      */
-    public function section_group_field($section_key, $section_data) {
-        // Initialize output
-        $output = '';
+    public function section_group_field( $section_key, $section_data ) {
 
-        // Loop thorugh section fields
-        foreach ( $section_data['fields'] as $field_id => $field_data ) {
-            
-            // Define field info
-            $type = $field_data['type'];
-            $settings_key = $this->key;
-            
-            // Get current field value
-            $value = buddyc_get_setting( $settings_key, $field_id );
-            
-            // Define output by field type
-            switch ( $type ) {
-                case 'display':
-                    $output .= $this->display($type, $field_id, $field_data, $value);
-                    break;
-                case 'checkboxes':
-                    $output .= $this->checkbox_field($type, $field_id, $field_data, $value);
-                    break;
-                case 'checkbox_table':
-                    $output .= $this->checkbox_table($type, $field_id, $field_data, $value);
-                    break;
-                case 'dropdown':
-                    $output .= $this->select_field($type, $field_id, $field_data, $value);
-                    break;
-                case 'text':
-                case 'number':
-                case 'date':
-                case 'email':
-                    $output .= $this->input_field($type, $field_id, $field_data, $value);
-                    break;
-                case 'stripe_input':
-                    $output .= $this->stripe_input_field($type, $field_id, $field_data, $value);
-                    break;
-                case 'stripe_dropdown':
-                    $output .= $this->stripe_select_field($type, $field_id, $field_data, $value);
-                    break;
-                case 'hidden':
-                    $output .= $this->hidden_field($type, $field_id, $field_data, $value);
-                    break;
-                case 'color':
-                    $output .= $this->color_field($field_id, $field_data, $value);
-                    break;
-                case 'page':
-                    $output .= $this->select_field($type, $field_id, $field_data, $value);
-                    break;
-                case 'legal':
-                    $output .= $this->legal_field($type, $field_id, $field_data, $value);
-                    break;
-                case 'copy':
-                    $output .= $this->copy_field($type, $field_id, $field_data);
-                    break;
-                default:
-                    $output .= $this->input_field('text', $field_id, $field_data, $value);
-                    break;
+        // Initialize
+        $content = '';
+
+        if ( isset( $section_data['fields'] ) || is_array( $section_data['fields'] ) ) {
+
+            // Loop through section fields
+            foreach ( $section_data['fields'] as $field_id => $field_data ) {
+                
+                // Define field info
+                $type = $field_data['type'] ?? 'text';
+                
+                // Get current field value
+                $value = buddyc_get_setting( $this->key, $field_id );
+
+                // Build field name from settings group name and field id
+                $field_name = sprintf( '%1$s[%2$s]', $this->name, $field_id );
+                
+                // Define output by field type
+                $content .= match ( $type ) {
+                    'display'       => $this->display( $type, $field_id, $field_name, $field_data, $value ),
+                    'checkboxes'    => $this->checkbox_field( $type, $field_id, $field_name, $field_data, $value ),
+                    'checkbox_table'=> $this->checkbox_table( $type, $field_id, $field_name, $field_data, $value ),
+                    'dropdown', 'stripe_dropdown'      => $this->select_field( $type, $field_id, $field_name, $field_data, $value ),
+                    'text', 'number', 'date', 'email', 'stripe_input'   => $this->input_field( $type, $field_id, $field_name, $field_data, $value ),
+                    'hidden'        => $this->hidden_field( $type, $field_id, $field_name, $field_data, $value ),
+                    'color'         => $this->color_field( $field_id, $field_name, $field_data, $value ),
+                    'page'          => $this->select_field( $type, $field_id, $field_name, $field_data, $value ),
+                    'legal'         => $this->legal_field( $type, $field_id, $field_name, $field_data, $value ),
+                    'copy'          => $this->copy_field( $type, $field_id, $field_name, $field_data ),
+                    default         => $this->input_field( 'text', $field_id, $field_name, $field_data, $value )
+                };
             }
         }
-        // Echo output
-        echo wp_kses_post( $output );
+        return $content;
     }
     
     /**
      * Displays content directly.
      *
      * @since 0.1.0
+     * 
+     * @param   string  $type       The type of field to output. 
+     * @param   string  $field_id   The ID of the field.
+     * @param   string  $field_name The name of the field as array access.
+     * @param   array   $field_data The array of data used to build the field.
+     * @param   mixed   $value      The current value of the field.
+     * @return  string  The field html.
      */
-    public function display($type, $field_id, $field_data, $value) {
-        ?>
-        <div class="buddyclients-admin-field">
-            <label for="<?php echo esc_attr( $this->name . '[' . $field_id . ']' ); ?>">
-                <?php echo esc_html( $field_data['label'] ); ?>
-            </label>
-            <div class="buddyclients-admin-field-input-wrap">
-                <?php echo wp_kses_post($field_data['content']); ?>
-                <p class="description"><?php echo wp_kses_post( $field_data['description'] ); ?></p>
-            </div>
-        </div>
-        <?php
+    public function display( $type, $field_id, $field_name, $field_data, $value ) {
+        return sprintf(
+            '<div class="buddyclients-admin-field">
+                <label for="%1$s">
+                    %2$s
+                </label>
+                <div class="buddyclients-admin-field-input-wrap">
+                    %3$s
+                    <p class="description">%4$s</p>
+                </div>
+            </div>',
+            esc_attr( $field_name ),
+            esc_html( $field_data['label'] ),
+            $field_data['content'] ?? '',
+            $field_data['description'] ?? ''
+        );
     }
     
     /**
      * Renders a checkbox field.
      *
      * @since 0.1.0
+     * 
+     * @param   string  $type       The type of field to output. 
+     * @param   string  $field_id   The ID of the field.
+     * @param   string  $field_name The name of the field as array access.
+     * @param   array   $field_data The array of data used to build the field.
+     * @param   mixed   $value      The current value of the field.
+     * @return  string  The field html.
      */
-    public function checkbox_field($type, $field_id, $field_data, $value) {
-        ?>
-        <div class="buddyclients-admin-field">
-            <label for="<?php echo esc_attr($this->name . '[' . $field_id . ']'); ?>">
-                <?php echo esc_html($field_data['label']); ?>
-            </label>
-            <div class="buddyclients-admin-field-input-wrap">
-                <?php foreach ($field_data['options'] as $option_key => $option_label) : 
-                    $checked = is_array($value) && in_array($option_key, $value) ? 'checked' : ''; ?>
-                    <label>
-                        <input type="checkbox" name="<?php echo esc_attr($this->name . '[' . $field_id . '][]'); ?>" 
-                               value="<?php echo esc_attr($option_key); ?>" <?php echo esc_attr( $checked ); ?>>
-                        <?php echo wp_kses_post( $option_label ); ?>
-                    </label><br>
-                <?php endforeach; ?>
-                <p class="description"><?php echo wp_kses_post( $field_data['description'] ); ?></p>
-            </div>
-        </div>
-        <?php
+    public function checkbox_field( $type, $field_id, $field_name, $field_data, $value ) {
+        return sprintf(
+            '<div class="buddyclients-admin-field">
+                <label for="%1$s">
+                    %2$s
+                </label>
+                <div class="buddyclients-admin-field-input-wrap">
+                    %3$s
+                    <p class="description">%4$s</p>
+                </div>
+            </div>',
+            esc_attr( $field_name ),
+            esc_html( $field_data['label'] ),
+            $this->checkbox_options( $field_name, $field_data, $value ),
+            $field_data['description'] ?? ''
+        );
     }
-    
+
+    /**
+     * Renders all options for a checkbox field.
+     *
+     * @since 1.0.27
+     * 
+     * @param   string  $field_name The name of the field as array access.
+     * @param   array   $field_data The array of data used to build the field.
+     * @param   mixed   $value      The current value of the field.
+     * @return  string  The option html.
+     */
+    private function checkbox_options( $field_name, $field_data, $value ) {
+        if ( empty( $field_data['options'] ) || ! is_array( $field_data['options'] ) ) return;
+
+        // Append array indicator to field name
+        $field_name = $field_name . '[]';
+
+        // Initialize
+        $content = '';
+
+        // Loop through options
+        foreach ( $field_data['options'] as $option_key => $option_label ) {
+
+            // Check if current value
+            $checked = is_array( $value ) && in_array( $option_key, $value ) ? 'checked' : '';
+
+            // Add option html to content
+            $content .= sprintf(
+                '<label>
+                    <input type="checkbox" name="%1$s" 
+                        value="%2$s" %3$s>
+                        %4$s
+                </label><br>',
+                esc_attr( $field_name ),
+                esc_attr( $option_key ),
+                esc_attr( $checked ),
+                wp_kses_post( $option_label )
+            );
+        }
+        return $content;
+    }
+
     /**
      * Renders a checkbox field as a table.
      *
      * @since 0.1.0
+     * 
+     * @param   string  $type       The type of field to output. 
+     * @param   string  $field_id   The ID of the field.
+     * @param   string  $field_name The name of the field as array access.
+     * @param   array   $field_data The array of data used to build the field.
+     * @param   mixed   $value      The current value of the field.
+     * @return  string  The field html.
      */
-    public function checkbox_table($type, $field_id, $field_data, $value) {
-        ?>
-        <div class="buddyclients-admin-field">
-            <table class="buddyc-checkbox-table">
-                <tbody>
-                    <?php foreach ($field_data['options'] as $option_key => $option_label) : 
-                        $required = in_array($option_key, ( $field_data['required_options'] ?? [] ));
-                        $checked = is_array($value) && in_array($option_key, $value) || $required ? 'checked' : ''; ?>
-                        <tr class="<?php echo $checked ? 'checked' : ''; ?> <?php echo $required ? 'required' : ''; ?>">
-                            <td>
-                                <label>
-                                    <input type="checkbox" name="<?php echo esc_attr($this->name . '[' . $field_id . '][]'); ?>" 
-                                           value="<?php echo esc_attr($option_key); ?>" <?php echo esc_attr($checked); ?>>
-                                    <?php echo esc_html($option_label); ?>
-                                </label>
-                            </td>
-                            <td>
-                                <p class="description">
-                                    <?php echo $required ? 'Required. ' : ''; ?>
-                                    <?php echo isset($field_data['descriptions'][$option_key]) ? wp_kses_post( $field_data['descriptions'][$option_key] ) : ''; ?>
-                                </p>
-                            </td>
-                        </tr>
-                    <?php endforeach; ?>
-                </tbody>
-            </table>
-        </div>
-        <?php
+    public function checkbox_table( $type, $field_id, $field_name, $field_data, $value ) {
+        // Append array indicator to field name
+        $field_name = $field_name . '[]';
+    
+        return sprintf(
+            '<div class="buddyclients-admin-field">
+                <button type="button" class="buddyc-select-all" data-target="%1$s">Select All</button>
+                <table class="buddyc-checkbox-table">
+                    <tbody>
+                        %2$s
+                    </tbody>
+                </table>
+            </div>',
+            esc_attr( $field_name ), // Target field for select all
+            $this->checkbox_table_rows( $field_id, $field_name, $field_data, $value )
+        );
+    }    
+
+    /**
+     * Generates the table rows for a checkbox table field.
+     *
+     * @since 1.0.27
+     * 
+     * @param   string  $field_id   The ID of the field.
+     * @param   string  $field_name The name of the field as array access.
+     * @param   array   $field_data The array of data used to build the field.
+     * @param   mixed   $value      The current value of the field.
+     * @return  string  The rows html.
+     */
+    private function checkbox_table_rows( $field_id, $field_name, $field_data, $value ) {
+        if ( empty( $field_data['options'] ) || ! is_array( $field_data['options'] ) ) return '';
+
+        $content = '';
+
+        foreach ( $field_data['options'] as $option_key => $option_label ) {
+            $required = in_array( $option_key, ( $field_data['required_options'] ?? [] ) );
+            $checked  = is_array( $value ) && in_array( $option_key, $value ) || $required ? 'checked' : '';
+            $checkbox_id = $field_id . '_' . $option_key;
+
+            $content .= sprintf(
+                '<tr class="%1$s">
+                    <td class="buddyc-checkbox-column">
+                        <input type="checkbox" id="%2$s" name="%3$s" value="%4$s" %5$s>
+                    </td>
+                    <td>
+                        <label for="%2$s">%6$s</label>
+                    </td>
+                    <td>
+                        <p class="description">
+                            %7$s
+                            %8$s
+                        </p>
+                    </td>
+                </tr>',
+                esc_attr( trim( ($checked ? 'checked ' : '') . ($required ? 'required' : '') ) ),
+                esc_attr( $checkbox_id ),
+                esc_attr( $field_name ),
+                esc_attr( $option_key ),
+                esc_attr( $checked ),
+                esc_html( $option_label ) ?? '',
+                $required ? esc_html__( 'Required. ', 'buddyclients-free' ) : '',
+                isset( $field_data['descriptions'][$option_key] ) ? wp_kses_post( $field_data['descriptions'][$option_key] ) : ''
+            );
+        }
+
+        return $content;
     }
     
     /**
      * Renders a dropdown field.
      *
      * @since 0.1.0
+     *
+     * @param   string  $type       The type of field to output. 
+     * @param   string  $field_id   The ID of the field.
+     * @param   string  $field_name The name of the field as array access.
+     * @param   array   $field_data The array of data used to build the field.
+     * @param   mixed   $value      The current value of the field.
+     * @return  string  The field html.
      */
-    public function select_field($type, $field_id, $field_data, $value) {
-        ?>
-        <div class="buddyclients-admin-field">
-            <label for="<?php echo esc_attr($this->name . '[' . $field_id . ']'); ?>">
-                <?php echo esc_html($field_data['label']); ?>
-            </label>
-            <div class="buddyclients-admin-field-input-wrap">
-                <select name="<?php echo esc_attr($this->name . '[' . $field_id . ']'); ?>">
-                    <?php foreach ($field_data['options'] as $option_key => $option_label) : 
-                        $selected = ($value == $option_key) ? ' selected' : ''; ?>
-                        <option value="<?php echo esc_attr($option_key); ?>" <?php echo esc_attr($selected); ?>>
-                            <?php echo esc_html($option_label); ?>
-                        </option>
-                    <?php endforeach; ?>
-                </select>
-                <?php if ($type === 'page') {
-                    self::page_button($field_id, $field_data, $value);
-                } ?>
-                <p class="description"><?php echo wp_kses_post( $field_data['description'] ); ?></p>
-            </div>
-        </div>
-        <?php
+    public function select_field( $type, $field_id, $field_name, $field_data, $value ) {
+        $append = match ( $type ) {
+            'stripe_dropdown'   => $this->validate_stripe_icon( 'mode' ),
+            'page'              => self::page_button( $field_id, $field_data, $value ),
+            default             => ''            
+        };
+
+        return sprintf(
+            '<div class="buddyclients-admin-field">
+                <label for="%1$s">%2$s</label>
+                <div class="buddyclients-admin-field-input-wrap">
+                    <select name="%1$s">
+                        %3$s
+                    </select>
+                    %4$s
+                    <p class="description">%5$s</p>
+                </div>
+            </div>',
+            esc_attr( $field_name ),
+            esc_html( $field_data['label'] ),
+            $this->get_select_options( $field_data['options'], $value ),
+            $append,
+            wp_kses_post( $field_data['description'] )
+        );
+    }
+
+    /**
+     * Generates the option elements for a select field.
+     *
+     * @param   array   $options The array of options.
+     * @param   mixed   $value   The selected value.
+     * @return  string  The HTML options.
+     */
+    private function get_select_options( $options, $value ) {
+        $output = '';
+        foreach ( $options as $option_key => $option_label ) {
+            $selected = ( $value == $option_key ) ? ' selected' : '';
+            $output .= sprintf(
+                '<option value="%1$s"%2$s>%3$s</option>',
+                esc_attr( $option_key ),
+                esc_attr( $selected ),
+                esc_html( $option_label )
+            );
+        }
+        return $output;
     }
     
     /**
@@ -399,78 +517,31 @@ class SettingsPage {
      *
      * @since 0.1.0
      *
-     * @param string $type Accepts 'text', 'date', 'number'.
+     * @param   string  $type       The type of the field.
+     * @param   string  $field_id   The ID of the field.
+     * @param   string  $field_name The name of the field as array access.
+     * @param   array   $field_data The array of data used to build the field.
+     * @param   mixed   $value      The current value of the field.
+     * @return  string  The field HTML.
      */
-    public function input_field($type, $field_id, $field_data, $value) {
-        ?>
-        <div class="buddyclients-admin-field">
-            <label for="<?php echo esc_attr($this->name . '[' . $field_id . ']'); ?>">
-                <?php echo esc_html($field_data['label']); ?>
-            </label>
-            <div class="buddyclients-admin-field-input-wrap">
-                <input type="<?php echo esc_attr($type); ?>" 
-                       name="<?php echo esc_attr($this->name . '[' . $field_id . ']'); ?>" 
-                       value="<?php echo esc_attr($value); ?>" />
-                <p class="description"><?php echo wp_kses_post( $field_data['description'] ); ?></p>
-            </div>
-        </div>
-        <?php
-    }
-    
-    /**
-     * Renders a Stripe key input field.
-     *
-     * @since 0.1.0
-     */
-    public function stripe_input_field( $type, $field_id, $field_data, $value ) {
-        $icon = $this->validate_stripe_icon( 'field', $field_data, $value );
-        
-        ?>
-        <div class="buddyclients-admin-field">
-            <label for="<?php echo esc_attr($this->name . '[' . $field_id . ']'); ?>">
-                <?php echo esc_html($field_data['label']); ?>
-            </label>
-            <div class="buddyclients-admin-field-input-wrap">
-                <input type="<?php echo esc_attr($type); ?>" 
-                       name="<?php echo esc_attr($this->name . '[' . $field_id . ']'); ?>" 
-                       value="<?php echo esc_attr($value); ?>" />
-                <?php echo wp_kses_post( $icon ); ?>
-                <p class="description"><?php echo wp_kses_post( $field_data['description'] ); ?></p>
-            </div>
-        </div>
-        <?php
-    }
-    
-    /**
-     * Renders a Stripe dropdown field.
-     *
-     * @since 0.1.0
-     */
-    public function stripe_select_field($type, $field_id, $field_data, $value) {
-        $icon = $this->validate_stripe_icon( 'mode' );
-        
-        ?>
-        <div class="buddyclients-admin-field">
-            <label for="<?php echo esc_attr($this->name . '[' . $field_id . ']'); ?>">
-                <?php echo esc_html($field_data['label']); ?>
-            </label>
-            <div class="buddyclients-admin-field-input-wrap">
-                <select name="<?php echo esc_attr($this->name . '[' . $field_id . ']'); ?>">
-                    <?php foreach ($field_data['options'] as $option_key => $option_label) : 
-                        $selected = ($value == $option_key) ? ' selected' : ''; ?>
-                        <option value="<?php echo esc_attr($option_key); ?>" <?php echo esc_attr( $selected ); ?>>
-                            <?php echo esc_html($option_label); ?>
-                        </option>
-                    <?php endforeach; ?>
-                </select>
-                <?php echo wp_kses_post( $icon ); ?>
-                <?php if ($type === 'page') {
-                    self::page_button($field_id, $field_data, $value);
-                } ?>
-                <p class="description"><?php echo wp_kses_post( $field_data['description'] ); ?></p>
-            </div>
-        </div>
-        <?php
+    public function input_field( $type, $field_id, $field_name, $field_data, $value ) {
+        $icon = $type === 'stripe_input' ? $this->validate_stripe_icon( 'field', $field_data, $value ) : '';
+        return sprintf(
+            '<div class="buddyclients-admin-field">
+                <label for="%1$s">%2$s</label>
+                <div class="buddyclients-admin-field-input-wrap">
+                    <input type="%3$s" name="%1$s" value="%4$s" />
+                    %5$s
+                    <p class="description">%6$s</p>
+                </div>
+            </div>',
+            esc_attr( $field_name ),
+            esc_html( $field_data['label'] ?? '' ),
+            esc_attr( $type ),
+            esc_attr( $value ),
+            $icon,
+            wp_kses_post( $field_data['description']?? '' )
+        );
     }
 
     /**
@@ -481,6 +552,7 @@ class SettingsPage {
      * @param   string  $type           The type of validation.
      *                                  Accepts 'mode' and 'field'.
      * @param   array   $field_data     The data for field validation.
+     * @param   string  $value          Optional. The value of the key to check.
      * 
      * @return  string  Icon html or empty string.
      */
@@ -508,250 +580,273 @@ class SettingsPage {
         }
         return $icon;
     }
-    
+
     /**
      * Renders a hidden field.
      *
      * @since 0.1.0
+     *
+     * @param   string  $type       The type of the field.
+     * @param   string  $field_id   The ID of the field.
+     * @param   string  $field_name The name of the field as array access.
+     * @param   array   $field_data The array of data used to build the field.
+     * @param   mixed   $value      The current value of the field.
+     * @return  string  The field HTML.
      */
-    public function hidden_field($type, $field_id, $field_data, $value) {
-        ?>
-        <input type="hidden" name="<?php echo esc_attr($this->name . '[' . $field_id . ']'); ?>" value="<?php echo esc_attr($value); ?>" />
-        <?php
+    public function hidden_field( $type, $field_id, $field_name, $field_data, $value ) {
+        return sprintf(
+            '<input type="hidden" name="%1$s" value=" %2$s " />',
+            esc_attr( $field_name ),
+            esc_attr( $value )
+        );
     }
-    
+
     /**
      * Renders a color input field.
      *
      * @since 0.1.0
+     *
+     * @param   string  $type       The type of the field.
+     * @param   string  $field_id   The ID of the field.
+     * @param   string  $field_name The name of the field as array access.
+     * @param   array   $field_data The array of data used to build the field.
+     * @param   mixed   $value      The current value of the field.
+     * @return  string  The field HTML.
      */
-    public function color_field($field_id, $field_data, $value) {
-        ?>
-        <div class="buddyclients-admin-field">
-            <label for="<?php echo esc_attr($this->name . '[' . $field_id . ']'); ?>">
-                <?php echo esc_html($field_data['label']); ?>
-            </label>
-            <div class="buddyclients-admin-field-input-wrap">
-                <input type="color" name="<?php echo esc_attr($this->name . '[' . $field_id . ']'); ?>" 
-                       value="<?php echo esc_attr($value); ?>" class="color-field" />
-                <p class="description"><?php echo wp_kses_post( $field_data['description'] ); ?></p>
-            </div>
-        </div>
-        <?php
+    public function color_field( $field_id, $field_name, $field_data, $value ) {
+        return sprintf(
+            '<div class="buddyclients-admin-field">
+                <label for="%1$s">%2$s</label>
+                <div class="buddyclients-admin-field-input-wrap">
+                    <input type="color" name="%1$s" value="%3$s" class="color-field" />
+                    <p class="description">%4$s</p>
+                </div>
+            </div>',
+            esc_attr( $field_name ),
+            esc_html( $field_data['label'] ?? '' ),
+            esc_attr( $value ),
+            wp_kses_post( $field_data['description'] )
+        );
     }
 
     /**
-     * Renders a page dropdown field.
+     * Renders the view and edit buttons  page dropdown field.
      * 
      * @since 0.1.0
+     * 
+     * @param   string  $field_id   The ID of the field.
+     * @param   array   $field_data The array of data used to build the field.
+     * @param   mixed   $value      The current value of the field.
+     * @return  string  The page buttons HTML.
      */
-    public function page_button($field_id, $field_data, $value) {
+    public function page_button( $field_id, $field_data, $value ) {
         
         // Check if page is selected and published
-        if ($value && get_post_status($value) === 'publish') {
+        if ( $value && get_post_status( $value ) === 'publish') {
             
             // Get page permalink
-            $selected_page_permalink = ($value) ? get_permalink($value) : '#';
+            $selected_page_permalink = ! empty( $value ) ? get_permalink( $value ) : '#';
             
             // Create view page button
-            $button = '<a href="' . esc_url($selected_page_permalink) . '" target="_blank"><button type="button" class="button button-secondary">' . __('View Page', 'buddyclients-free') . '</button></a>';
-        } else {
-            
-            // Show create button
-            $button = '<button onclick="buddycCreateNewPage({
-                page_key: \'' . esc_js($field_id) . '\',
-                settings_key: \'' . esc_js('pages') . '\',
-                post_title: \'' . esc_js($field_data['post_title']) . '\',
-                post_content: \'' . esc_js($field_data['post_content']) . '\',
-                post_type: \'' . esc_js('page') . '\',
-                post_status: \'' . esc_js('publish') . '\'
-            });" type="button" class="button button-secondary">' . __('Create Page', 'buddyclients-free') . '</button>';
-        }
+            $button = sprintf(
+                '<a href="%1$s" target="_blank"><button type="button" class="button button-secondary">%2$s</button></a>',
+                esc_url( $selected_page_permalink ),
+                esc_html__( 'View Page', 'buddyclients-free' )
+            );
 
-        // Escape the entire button HTML
-        echo wp_kses( $button, [
-            'button' => [
-                'onclick' => [],
-                'type'    => [],
-                'class'   => []
-            ],
-            'a' => [
-                'href' => [],
-                'target' => [],
-                'class' => [],
-                'rel' => []
-            ],
-        ]);
-    }
-    
-    /**
-     * Displays legal page field.
-     * 
-     * @since 0.1.0
-     */
-    public function legal_field($type, $field_id, $field_data, $value) {
-        
-        // Initialize
-        $output = '';
-        $view_button = '';
-        $create_button = '';
-        $edit_button = '';
-    
-        // Check if post exists
-        $post = get_post($value);
-        
-        // If post exists, show view button
-        if ( $post ) {
-            $view_button = $post ? 
-            '<a href="' . get_permalink($value) . '" target="_blank">
-                <button type="button" class="button button-primary">' . 
-                    /* translators: %s: label of the field */
-                    sprintf( esc_html__('View Active %s', 'buddyclients-free'), $field_data['label'] ) . 
-                '</button>
-            </a>' : '';
-        }
-        
-        // Continue editing button
-        $draft_id = buddyc_get_setting('legal', $field_id . '_draft');
-        if ( $draft_id ) {
-            $edit_button = '<a href="' . get_edit_post_link($draft_id) . '">
-                <button type="button" class="button button-secondary">' . 
-                    /* translators: %s: label of the field */
-                    sprintf( esc_html__('Edit %s Draft', 'buddyclients-free'), $field_data['label'] ) . 
-                '</button>
-            </a>';
+        // Create button
         } else {
-            // Generate a nonce
-            $create_nonce = wp_create_nonce( 'buddyc_create_new_page_nonce' );
-            
-            // Build create page button
-            $create_button = '<button onclick="buddycCreateNewPage({
-                page_key: \'' . esc_js($field_id) . '\',
-                settings_key: \'' . esc_js('legal') . '\',
-                post_title: \'' . esc_js($field_data['label']) . '\',
-                post_content: \'\',
-                post_type: \'' . esc_js('buddyc_legal') . '\',
-                post_status: \'' . esc_js('draft') . '\',
-                nonce: \'' . esc_js($create_nonce) . '\'
-            });" type="button" class="button button-secondary">' . 
-                /* translators: %s: label of the field */
-                sprintf( esc_html__('Create New %s', 'buddyclients-free'), esc_html($field_data['label'])) . 
-            '</button>';
-        }
-        
-        // Get previous version and deadline
-        $version_trans_message = '';
-        $prev_version = buddyc_get_setting('legal', $field_id . '_prev');
-        if ( $prev_version ) {
-            $curr_time = current_time('mysql');
-            $publish_date = get_post_field('post_date', $value);
-            $deadline_setting = buddyc_get_setting('legal', 'legal_deadline');
-            if ($deadline_setting !== '') {
-                $deadline = gmdate('Y-m-d H:i:s', strtotime($publish_date . ' +' . $deadline_setting . ' days'));
-                // Get the current date and time
-                $current_datetime = gmdate('Y-m-d H:i:s');
-                
-                // Compare the deadline with the current date and time
-                if ($deadline > $current_datetime) {
-                    $human_readable_deadline = gmdate('F j, Y, g:i a', strtotime($deadline));
-                    $version_trans_message = sprintf(
-                        /* translators: %s: human-readable deadline */
-                        /* translators: %s: label of the field */
-                        esc_html__('Users have until %1$s to accept the new %2$s.', 'buddyclients-free'),
-                        $human_readable_deadline,
-                        $field_data['label']
-                    );
-                }
-    
-            } else {
-                $version_trans_message = sprintf(
-                    /* translators: %s: label of the field */
-                    esc_html__('Users have forever to accept the new %s.', 'buddyclients-free'),
-                    $field_data['label']
+
+            // Define redirect option based on post content
+            $is_shortcode = self::is_shortcode( $field_data['post_content'] ?? '');
+            $redirect = $is_shortcode ? null : 'edit';
+
+            $atts = [
+                'page_key'      => $field_id,
+                'settings_key'  => 'pages',
+                'post_title'    => $field_data['post_title'] ?? '',
+                'post_content'  => $field_data['post_content'] ?? '',
+                'post_type'     => 'page',
+                'post_status'   => 'publish',
+                'redirect'      => $redirect
+            ];            
+
+            // Build data atts string
+            $data_atts = '';
+            foreach ( $atts as $key => $value ) {
+                $data_atts .= sprintf(
+                    ' data-%s="%s"',
+                    str_replace( '_', '-', esc_attr( $key ) ),
+                    esc_attr( $value )
                 );
             }
-        }
-        
-        // Build output
-        $output .= '<div class="buddyclients-admin-field">';
-        $output .= '<label for="' . esc_attr($this->name . '[' . $field_id . ']') . '">' . esc_html($field_data['label']) . '</label>';
-        $output .= '<div class="buddyclients-admin-field-input-wrap">';
-        $output .= '<input type="hidden" name="' . esc_attr($this->name . '[' . $field_id . ']') . '" value="' . esc_attr($value) . '">';
-    
-        $output .= $view_button;
-        $output .= $create_button;
-        $output .= $edit_button;
-        $output .= '<br>' . esc_html($version_trans_message);
-        
-        $output .= '</div>';
-        $output .= '</div>';
             
-        // Escape the entire output with allowed tags
-        $allowed_html = [
-            'div' => [
-                'class' => [],
-                'style' => []
-            ],
-            'label' => [
-                'for' => []
-            ],
-            'input' => [
-                'type' => [],
-                'name' => [],
-                'value' => [],
-                'class' => []
-            ],
-            'a' => [
-                'href' => [],
-                'target' => []
-            ],
-            'button' => [
-                'type' => [],
-                'class' => [],
-                'style' => [],
-                'onclick' => []
-            ],
-            'br' => []
-        ];
+            // Show create button
+            $button = sprintf(
+                '<button type="button" class="button button-secondary buddyc-create-page-btn"%1$s>%2$s</button>',
+                $data_atts,
+                __( 'Create Page', 'buddyclients-free' )
+            );
+        }
 
-        // Output escaped HTML
-        echo wp_kses( $output, $allowed_html );
+        // Return the button html
+        return $button;
+    }
+
+    /**
+     * Checks whether a string contains only a shortcode.
+     * 
+     * @since 1.0.27
+     * 
+     * @param   string  $content    The string to check.
+     * @return  bool    True if the string is a shortcode only, false if it contains other content.
+     */
+    private static function is_shortcode( $content ) {
+        if ( ! is_string( $content ) ) {
+            return false;
+        }    
+        // Trim whitespace and check if the entire content is a single shortcode
+        return (bool) preg_match( '/^\s*\[[a-zA-Z0-9_]+[^\]]*\]\s*$/', trim( $content ) );
     }
     
     /**
      * Displays copy-to-clipboard text.
      * 
      * @since 0.1.0
+     * 
+     * @param   string  $type       The type of the field.
+     * @param   string  $field_id   The ID of the field.
+     * @param   string  $field_name The name of the field as array access.
+     * @param   array   $field_data The array of data used to build the field.
+     * @param   mixed   $value      The current value of the field.
+     * @return  string  The field HTML.
      */
-    public function copy_field($type, $field_id, $field_data) {
-        $allowed_html = [
-            'div' => [
-                'class' => [],
+    public function copy_field( $type, $field_id,  $field_name, $field_data ) {
+        return sprintf(
+            '<div class="buddyclients-admin-field">
+                <label for="%1$s">%2$s</label>
+                <div class="buddyclients-admin-field-input-wrap">
+                    %3$s
+                    <p class="description">%4$s</p>
+                </div>
+            </div>',
+            $field_name,
+            $field_data['label'] ?? '',
+            buddyc_copy_to_clipboard( $field_data['content'] ?? '', true ),
+            $field_data['description'] ?? ''
+        );
+    }
+
+    /**
+     * Defines the allowed html.
+     * 
+     * @since 1.0.27
+     */
+    private static function allowed_html() {
+        return [
+            'a' => [
+                'href'   => true,
+                'title'  => true,
+                'target' => true,
+                'rel'    => true,
             ],
+            'b' => [],
+            'strong' => [],
+            'i' => ['class' => true],
+            'em' => [],
+            'u' => [],
+            'span' => [
+                'class' => true,
+                'style' => true,
+            ],
+            'br' => [],
             'p' => [
-                'id' => [],
-                'class' => [],
+                'id'    => true,
+                'class' => true,
+                'style' => true,
+            ],
+            'div' => [
+                'class' => true,
+                'style' => true,
+                'id'    => true,
+            ],
+            'h2' => [
+                'class' => true,
+            ],
+            'hr' => [
+                'class' => true,
+            ],
+            'label' => [
+                'for' => true,
             ],
             'input' => [
-                'type' => [],
-                'value' => [],
-                'size' => [],
-                'readonly' => [],
-                'class' => [],
+                'type'        => true,
+                'name'        => true,
+                'value'       => true,
+                'id'          => true,
+                'class'       => true,
+                'placeholder' => true,
+                'checked'     => true,
+                'disabled'    => true,
+                'size'        => true,
+                'readonly'    => true
             ],
-            'span' => [
-                'class' => [],
-                'onclick' => [],
+            'select' => [
+                'name'  => true,
+                'id'    => true,
+                'class' => true,
+            ],
+            'option' => [
+                'value'    => true,
+                'selected' => true,
+            ],
+            'textarea' => [
+                'name'  => true,
+                'id'    => true,
+                'class' => true,
+                'rows'  => true,
+                'cols'  => true,
+            ],
+            'button' => [
+                'type'          => true,
+                'class'         => true,
+                'id'            => true,
+                'data-page-key'      => true,
+                'data-settings-key'  => true,
+                'data-post-title'    => true,
+                'data-post-content'  => true,
+                'data-post-type'     => true,
+                'data-post-status'   => true,
+                'data-redirect'      => true,
+                'data-target'        => true
+            ],
+            'fieldset' => [
+                'class' => true,
+                'id'    => true,
+            ],
+            'legend' => [],
+            'table' => [
+                'class' => true,
+            ],
+            'thead' => [],
+            'tbody' => [],
+            'tfoot' => [],
+            'tr' => [
+                'class' => true,
+            ],
+            'th' => [
+                'scope'   => true,
+                'colspan' => true,
+                'rowspan' => true,
+            ],
+            'td' => [
+                'class'   => true,
+                'colspan' => true,
+                'rowspan' => true,
+            ],
+            'hr' => [
+                'class' => true,
             ],
         ];
-        ?>
-        <div class="buddyclients-admin-field">
-            <label for="<?php echo esc_attr($this->name . '[' . $field_id . ']'); ?>"><?php echo wp_kses( $field_data['label'], $allowed_html ); ?></label>
-            <div class="buddyclients-admin-field-input-wrap">
-                <?php echo wp_kses( buddyc_copy_to_clipboard($field_data['content'], $field_id), $allowed_html ); ?>
-                <p class="description"><?php echo esc_html( $field_data['description'] ); ?></p>
-            </div>
-        </div>
-        <?php
-    }
+    }      
 }

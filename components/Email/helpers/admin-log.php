@@ -1,41 +1,5 @@
 <?php
 if ( ! defined( 'ABSPATH' ) ) exit; // Exit if accessed directly
-use BuddyClients\Admin\AdminTable;
-
-/**
- * Callback to display email log content.
- * 
- * @since 0.1.0
- */
-function buddyc_email_log_content() {
-    
-    // Get all Email objects    
-    $emails = function_exists( 'buddyc_get_all_emails' ) ? buddyc_get_all_emails() : [];
-    
-    // Define headers
-    $headers = [
-        __( 'Details', 'buddyclients-free' ),
-        __( 'Email', 'buddyclients-free' )
-    ];
-    
-    // Define columns
-    $columns = [
-        'details'       => ['ID' => 'email_details'],
-        'content'       => ['content' => 'direct']
-    ];
-    
-    $args = [
-        'key'           => 'emails',
-        'headings'      => $headers,
-        'columns'       => $columns,
-        'items'         => $emails,
-        'title'         => __( 'Email Log', 'buddyclients-free' ),
-    ];
-    
-    new AdminTable( $args );
-    
-    return;
-}
 
 /**
  * Generates an admin notice for the email log.

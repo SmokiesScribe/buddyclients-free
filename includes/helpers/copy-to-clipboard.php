@@ -5,20 +5,30 @@ if ( ! defined( 'ABSPATH' ) ) exit; // Exit if accessed directly
  * Generates a copy to clipboard field.
  * 
  * @since 0.1.0
+ * 
+ * @param   string  $content    The content to copy.
+ * @param   bool    $input      Optional. Whether to generate an input field.
+ *                              Defaults to true.
  */
-function buddyc_copy_to_clipboard( $content, $field_id ) {
-    ob_start();
-    ?>
-    
-    <div class="copy-affiliate-link-container">
-        <div>
-            <p class="buddyc-copy-reference" id="<?php echo esc_attr( $field_id ) ?>"><?php echo esc_html( $content ) ?></p>
-            <input class="buddyc-copy-input" type="text" value="<?php echo esc_html( $content ) ?>" size="<?php echo esc_html( strlen( $content ) ) ?>" readonly>
-            <span class="bb-icon-copy copy-to-clipboard-icon" onclick="buddycCopyToClipboard('<?php echo esc_attr( $field_id ) ?>')"></span>
-            <div class="buddyc-copy-success" ></div>
-        </div>
-    </div>
-    
-    <?php
-    return ob_get_clean();
+function buddyc_copy_to_clipboard( $content, $input = true ) {
+
+    $field = $input ?
+        sprintf(
+            '<input class="buddyc-copy-content" type="text" value="%1$s" size="%2$d" readonly>',
+            esc_html( $content ),
+            strlen( $content ) // size to content
+        ) :
+        sprintf(
+            '<span class="buddyc-copy-content">%1$s</span>',
+            esc_html( $content ),
+        );
+
+
+    return sprintf(
+        '<div class="buddyc-copy-to-clipboard">
+            %1$s
+            <span class="bb-icon-copy copy-to-clipboard-icon"></span>
+        </div>',
+        $field
+    );    
 }

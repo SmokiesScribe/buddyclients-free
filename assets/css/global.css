@@ -271,29 +271,7 @@
 .buddyc-subnav {
     margin-right: 20px;
 }
-/* Copy Paste Field */
-.bb-icon-copy {
-    font-size: 22px;
-}
-.bb-icon-copy:hover {
-    color: gray;
-    cursor: pointer;
-}
-.buddyc-copy-success {
-    font-size: 14px;
-    font-weight: 500;
-    margin: 10px
-}
-.buddyc-copy-reference {
-    display: none;
-}
-.buddyc-copy-input {
-    max-width: 100%;
-}
-.buddyc-copy-success {
-    margin: 10px;
-    font-weight: 500;
-}
+
 /* Archive */
 .archive-title-container {
     margin-top: 30px;
@@ -505,22 +483,19 @@
     float: right;
 }
 
-/* Copy success */
-.buddyc-copy-success {
-    position: fixed;
-    top: 50px; /* Distance from the top of the window */
-    left: 50%; /* Horizontally center */
-    transform: translateX(-50%); /* Align it exactly at the center */
-    background-color: #4CAF50;
-    color: white;
-    padding: 10px;
-    border-radius: 5px;
-    opacity: 0;
-    transition: opacity 0.5s ease;
+/* Select all checkboxes button */
+.buddyc-select-all {
+    background-color: var(--buddyclients-brand-blue);
+    color: #ffffff;
+    border: none;
+    padding: 8px 12px;
     font-size: 14px;
-    z-index: 9999; /* Ensure it's visible above other content */
+    cursor: pointer;
+    border-radius: 4px;
+    margin-bottom: 10px;
+    transition: background 0.3s ease-in-out;
 }
 
-.buddyc-copy-success.show {
-    opacity: 1;
+.buddyc-select-all:hover {
+    background-color: var(--buddyclients-brand-blue-hover);
 }
