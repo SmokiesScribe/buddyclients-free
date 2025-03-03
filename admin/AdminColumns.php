@@ -637,7 +637,7 @@ class AdminColumns {
      */
     private function percentage_column( $value ) {
         if ( ! buddyc_freelancer_mode() && ! empty( $value ) ) {
-            return sprintf( '%s%', $value );
+            return sprintf( '%s%%', $value );
         }
     }
     
