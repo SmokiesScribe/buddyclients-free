@@ -409,58 +409,54 @@ class DatabaseManager {
      */
     private function update_table_structure( $differences ) {
         global $wpdb;
-        
+    
         // Retrieve existing records
         $existing_records = $this->get_all_records();
-
+    
         // Ensure differences are not empty
         if ( empty( $differences ) ) {
-            // No differences, successful
-            return true;
+            return true; // No differences, successful
         }
-
+    
         // Prepare to track changes
         $alter_queries = [];
-
+    
         // Loop through differences and prepare ALTER statements
         foreach ( $differences as $action => $columns ) {
             foreach ( $columns as $column => $type ) {
                 $column = sanitize_key( $column ); // Sanitize column name
+                $type = esc_sql( $type ); // Escape SQL type
+    
                 if ( $action === 'add' ) {
-                    // Column is missing, prepare to add it
                     $alter_queries[] = "ADD `$column` $type";
                 } else if ( $action === 'modify' ) {
-                    // Column type has changed, prepare to modify it
                     $alter_queries[] = "MODIFY `$column` $type";
                 } else if ( $action === 'remove' ) {
                     // Ignore
                 }
             }
         }
-
+    
         // Execute ALTER TABLE queries if there are changes
         if ( ! empty( $alter_queries ) ) {
-
-            $queries_string = esc_sql( implode( ", ", $alter_queries ) );
-            
-            $result = $wpdb->query( $wpdb->prepare(
-                "ALTER TABLE %i {$queries_string}",
-                $this->table_name
-                ) );
-
+            $table_name = esc_sql( $this->table_name ); // Escape table name
+            $queries_string = implode( ", ", $alter_queries ); 
+    
+            // Safe execution without using prepare()
+            $sql = "ALTER TABLE `$table_name` $queries_string";
+            $result = $wpdb->query( $sql ); // Directly execute
+    
             // Check if the query was successful
             if ( $result === false ) {
-                // Log error for debugging
                 return false; // Failure to update the table
             }
         }
-
+    
         // Invalidate cache if successful
         $this->invalidate_cache( true );
-
-        // Return true if no issues were encountered
+    
         return true;
-    }
+    }     
 
     /**
      * Creates the custom table.
@@ -601,16 +597,24 @@ class DatabaseManager {
      */
     public function get_all_records( $order_key = null, $order = null ) {
         if ( ! $this->valid ) return;
-
+    
         global $wpdb;
-
+    
         // Default to newest first
         $order_key = $order_key ?? 'created_at';
-        $order = $order ?? 'DESC';
-
+        $order = strtoupper( $order ?? 'DESC' );
+    
+        // Validate order direction
+        $order = in_array( $order, ['ASC', 'DESC'], true ) ? $order : 'DESC';
+    
+        // Validate column name by checking if it exists
+        if ( ! $this->column_exists( $order_key ) ) {
+            $order_key = 'created_at'; // Default column
+        }
+    
         // Create a unique cache key based on order key and order
         $cache_key = $this->create_cache_key( 'all_records', [$order_key, $order] );
-
+    
         // Try to get data from cache
         $cached_records = wp_cache_get( $cache_key );
     
@@ -618,28 +622,22 @@ class DatabaseManager {
         if ( $cached_records !== false ) {
             return $cached_records;
         }
-        
-        // Prepare and process the query
-        $table_name = esc_sql($this->table_name);
-        
-        // Build orderby
-        if ( $this->column_exists( $order_key ) ) {
-            $orderby = $order_key && $order ? 'ORDER BY ' . $order_key . ' ' . $order : '';
-        } else {
-            $orderby = '';
-        }
-
+    
+        // Escape table name safely
+        $table_name = esc_sql( $this->table_name );
+    
+        // Safe order by clause
+        $orderby = "ORDER BY `$order_key` $order";
+    
         // Query database
-        $records = $wpdb->get_results( $wpdb->prepare(
-            "SELECT * FROM %i {$orderby}",
-            $this->table_name
-            ));
-
+        $query = "SELECT * FROM `$table_name` $orderby";
+        $records = $wpdb->get_results( $query );
+    
         // Cache the results for 1 hour
         wp_cache_set( $cache_key, $records, '', 3600 );
     
         return $records;
-    }
+    }    
 
     /**
      * Checks whether a column exists in the table.
@@ -850,47 +848,50 @@ class DatabaseManager {
         if ( ! $this->valid || empty( $record_ids ) || ! is_array( $record_ids ) ) {
             return null;
         }
-
+    
         global $wpdb;
-
+    
         // Sanitize and ensure IDs are integers
         $record_ids = array_map( 'intval', array_filter( $record_ids ) );
-
+    
         if ( empty( $record_ids ) ) {
             return null;
         }
-
+    
         // Create cache key
         $cache_key = $this->create_cache_key( 'records_by_ids', $record_ids );
-
+    
         // Try to get data from cache
         $cached_records = wp_cache_get( $cache_key );
-
+    
         if ( $cached_records !== false ) {
             return $cached_records;
         }
-
-        // Ensure IDs are integers
-        $record_ids = array_map( 'intval', $record_ids );
-
-        // Prepare SQL query
+    
+        // Escape table name safely
+        $table_name = esc_sql( $this->table_name );
+    
+        // Construct placeholders dynamically
+        $placeholders = implode( ',', array_fill( 0, count( $record_ids ), '%d' ) );
+    
+        // Prepare SQL query correctly
         $query = $wpdb->prepare(
-            "SELECT * FROM {$this->table_name} WHERE ID IN (" . implode( ',', array_fill( 0, count( $record_ids ), '%d' ) ) . ")",
+            "SELECT * FROM `$table_name` WHERE ID IN ($placeholders)",
             ...$record_ids
         );
-
+    
         // Execute the query
         $results = $wpdb->get_results( $query );
-
+    
         if ( empty( $results ) ) {
             return null;
         }
-
+    
         // Cache the results for 1 hour
         wp_cache_set( $cache_key, $results, '', 3600 );
-
+    
         return $results;
-    }
+    }       
 
     /**
      * Deletes a record from the custom table by ID.
