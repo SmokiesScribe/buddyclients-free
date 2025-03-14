@@ -492,7 +492,8 @@ class AdminNotice {
      * @param   string  $notice_id  The ID of the notice to dismiss.
      */
     public static function dismiss( $notice_id ) {
-        update_option( $notice_id . '_dismissed', true );
+        $key = $notice_id . '_dismissed';
+        buddyc_cache_set( $key, true, null, 'admin_notices', 'option' );
     }
 
     /**
@@ -504,6 +505,7 @@ class AdminNotice {
      */
     public static function dismissed( $key ) {
         $notice_id = self::build_id( $key );
-        return get_option( $notice_id . '_dismissed' );
+        $key = $notice_id . '_dismissed';
+        return buddyc_cache_get( $key, 'admin_notices', 'option' );
     }
 }
