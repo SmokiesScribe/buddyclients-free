@@ -6,7 +6,6 @@
 document.addEventListener("DOMContentLoaded", function() {
     const createAccountEmailInput = document.querySelector('input[name="create-account-email"]');
     const bookingIntentIdInput = document.querySelector('input[name="booking-intent-id"]');
-    const registrationIntentIdInput = document.querySelector('input[name="registration-intent-id"]');
     
     // Exit if no email input
     if ( ! createAccountEmailInput ) {
@@ -27,7 +26,6 @@ document.addEventListener("DOMContentLoaded", function() {
                     action: 'buddyc_update_booking_intent_email',
                     email: enteredEmail,
                     booking_intent_id: bookingIntentIdInput.value,
-                    registration_intent_id: registrationIntentIdInput.value,
                     nonce: emailEnteredData.nonce,
                     nonceAction: emailEnteredData.nonceAction
                 },

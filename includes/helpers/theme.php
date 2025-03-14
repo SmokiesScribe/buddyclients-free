@@ -67,9 +67,9 @@ function buddyc_is_wp_theme() {
  * 
  * @since 1.0.21
  */
-function init_template_manager() {
+function buddyc_init_template_manager() {
     if ( class_exists( TemplateManager::class ) ) {
         new TemplateManager;
     }
 }
-init_template_manager();
+buddyc_init_template_manager();

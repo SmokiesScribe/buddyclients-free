@@ -534,8 +534,8 @@ class BookingForm {
             $service_type = buddyc_get_service_cache( 'service_type', $type->ID );
             
             // Get services by type
-            $args = ['meta' => ['service_type' => $service_type->ID]];
-            $services = buddyc_post_query( 'buddyc_service', $args );
+            $service_args = ['meta' => ['service_type' => $service_type->ID]];
+            $services = buddyc_post_query( 'buddyc_service', $service_args );
             
             // Exit if no services have the type
             if ( ! $services ) {
@@ -849,9 +849,10 @@ class BookingForm {
                         || ($role->singular === $user_roles)) {
                             
                         $availability = function_exists( 'buddyc_get_availability' ) ? buddyc_get_availability( $team_member->ID ) : '';
-                        $availability_message = $availability ? sprintf(
-                            ' - %s',
-                            __( 'Available', 'buddyclients-free' )
+                        $availability_message = ! empty( $availability ) ? sprintf(
+                            ' - %1$s %2$s',
+                            __( 'Available', 'buddyclients-free' ),
+                            $availability
                         ) : '';
                             
                         $team_options[$role->ID . '-' . $team_member->ID] = [

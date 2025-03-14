@@ -54,6 +54,9 @@ class Settings {
 
         // Available components change
         add_action( 'buddyc_available_components_updated', [$this, 'clear_cache_components'] );
+
+        // License key updated
+        add_action( 'buddyc_license_updated', [$this, 'clear_cache_license'], 10, 1 );
     }
 
     /**
@@ -213,6 +216,17 @@ class Settings {
      */
     public function clear_cache_components() {
         $this->clear_cache( 'components' );
+    }
+
+    /**
+     * Clears the cache when the license key is updated.
+     * 
+     * @since 1.0.25
+     * 
+     * @param   License $license    The new License object.
+     */
+    public function clear_cache_license( $license ) {
+        $this->clear_cache( 'license' );
     }
 
     /**

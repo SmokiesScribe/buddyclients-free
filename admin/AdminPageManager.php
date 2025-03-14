@@ -159,8 +159,7 @@ class AdminPageManager {
                 'title' => __('Bookings Dashboard', 'buddyclients-free'),
                 'settings' => false,
                 'parent_slug' => null,
-                'callable' => 'buddyc_admin_table',
-                'callback_args' => 'booking_intents',
+                'callable' => 'buddyc_bookings_dashboard',
             ],
             'payments' => [
                 'key' => 'payments',

@@ -43,10 +43,10 @@ jQuery(document).ready(function() {
     // Booking Form prefixes
     const prefixes = {
         rateType: 'fee-number-',
-        adjustment: 'adjustment-option-',
+        adjustmentOption: 'adjustment-option-',
         role: 'role-',
         service: 'service-',
-        adjustment: 'adjustment-'
+        adjustmentField: 'adjustment-'
     };
 
     // Booking Form data att names
@@ -579,7 +579,7 @@ jQuery(document).ready(function() {
             adjustmentArray.forEach( adjustmentId => {
 
                 // Get all adjustment fields for the adjustment id
-                const adjustmentFieldOptions = document.querySelectorAll( prefixes.adjustment + adjustmentId );
+                const adjustmentFieldOptions = document.querySelectorAll( "." + prefixes.adjustmentOption + adjustmentId );
 
                 // Make sure fields were found
                 if ( adjustmentFieldOptions ) {
@@ -1252,7 +1252,7 @@ jQuery(document).ready(function() {
                 // Loop through adjustment ids
                 adjustmentsArray.forEach(adjustmentID => {
                     // Define the adjustmnet field id
-                    const adjustmentFieldName = prefixes.adjustment + adjustmentID;
+                    const adjustmentFieldName = prefixes.adjustmentField + adjustmentID;
 
                     // Get the adjustment field
                     const adjustmentField = document.getElementById( adjustmentFieldName );

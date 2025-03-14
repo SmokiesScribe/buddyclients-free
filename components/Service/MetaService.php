@@ -7,7 +7,7 @@ if ( ! defined( 'ABSPATH' ) ) exit; // Exit if accessed directly
  *
  * @since 1.0.29
  */
-class MetaServiceType {
+class MetaService {
     
    /**
      * Defines the post meta data.

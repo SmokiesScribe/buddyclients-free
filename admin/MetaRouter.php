@@ -22,10 +22,6 @@ use BuddyClients\Components\Email\MetaEmail;
 use BuddyClients\Components\Quote\MetaQuote;
 use BuddyClients\Components\Testimonial\MetaTestimonial;
 
-
-
-
-
 /**
  * Directs to the correct meta class.
  * 

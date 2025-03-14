@@ -722,7 +722,7 @@ class Metaboxes {
             }
 
             $input_id   = sprintf( '%s-%s', $field_id, esc_attr( $option_value ) );
-            $checked    = checked( in_array( $option_value, $field_value ) );
+            $checked    = in_array( $option_value, $field_value ) ? 'checked' : '';
             $field     .= sprintf(
                 '<div class="buddyc-meta-checkbox">
                     <input type="checkbox" id="%1$s" name="%2$s[]" value="%3$s" %4$s>

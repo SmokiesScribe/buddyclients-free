@@ -123,6 +123,10 @@ class Icon {
                 'bb-icon-class' => 'bb-icon-toggle-off bb-icon-l',
                 'fa-icon-class' => 'fa-solid fa-toggle-off',
             ],
+            'toggle_on' => [
+                'bb-icon-class' => 'bb-icon-toggle-on bb-icon-l',
+                'fa-icon-class' => 'fa-solid fa-toggle-on',
+            ],
             'check' => [
                 'bb-icon-class' => 'bb-icon-check bb-icon-rf',
                 'fa-icon-class' => 'fa-solid fa-circle-check',
@@ -152,6 +156,14 @@ class Icon {
                 'bb-icon-class' => 'bb-icon-checkbox bb-icon-l',
                 'fa-icon-class' => 'fa-regular fa-square-checked',
                 'color' => 'green',
+            ],
+            'rocket' => [
+                'bb-icon-class' => 'bb-icon-rocket bb-icon-l',
+                'fa-icon-class' => 'fa-solid fa-rocket',
+            ],
+            'gear' => [
+                'bb-icon-class' => 'bb-icon-cog bb-icon-l',
+                'fa-icon-class' => 'fa-solid fa-gear',
             ],
             'default' => [
                 'bb-icon-class' => 'bb-icon-circle bb-icon-l',

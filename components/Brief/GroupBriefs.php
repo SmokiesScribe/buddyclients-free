@@ -45,13 +45,23 @@ class GroupBriefs {
         // Initialize
         $briefs = [];
         
-        // Get posts
-        $brief_posts = buddyc_post_query( 'buddyc_brief', ['project_id' => $this->group_id] );
+        $brief_posts = get_posts([
+            'post_type'      => 'buddyc_brief',
+            'posts_per_page' => -1, // Retrieve all matching posts
+            'fields'         => 'ids', // Retrieve only the post IDs
+            'meta_query'     => [
+                [
+                    'key'   => 'project_id',
+                    'value' => $group_id,
+                    'compare' => '='
+                ]
+            ]
+        ]);
         
         // Check if posts were found
         if ( $brief_posts ) {
-            foreach ( $brief_posts as $brief_post ) {
-                $briefs[] = new Brief( $brief_post->ID );
+            foreach ( $brief_posts as $post_id ) {
+                $briefs[] = new Brief( $post_id );
             }
         }
         return $briefs;

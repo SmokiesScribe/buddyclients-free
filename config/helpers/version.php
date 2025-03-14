@@ -1,5 +1,15 @@
 <?php
 if ( ! defined( 'ABSPATH' ) ) exit; // Exit if accessed directly
+
+/**
+ * Checks whether the current plugin is the free version.
+ * 
+ * @since 1.0.30
+ */
+function buddyc_is_free() {
+    return defined( 'BUDDYC_PLUGIN_NAME' ) && BUDDYC_PLUGIN_NAME === 'BuddyClients Free';
+}
+
 /**
  * Handles switch between BuddyClients and BuddyClients Free.
  *

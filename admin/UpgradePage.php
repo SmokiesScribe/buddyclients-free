@@ -139,8 +139,10 @@ class UpgradePage {
             return $pages;
         }
         
-        // Remove license page
-        unset( $pages['license'] );
+        // Remove license page in free plugin
+        if ( buddyc_is_free() ) {
+            unset( $pages['license'] );
+        }
     
         // Add upgrade page
         $pages['free_upgrade'] = [
