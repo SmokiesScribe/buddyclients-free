@@ -18,6 +18,22 @@ BuddyClients is a flexible and comprehensive platform for any service-based busi
 - [Source Code on GitHub](https://github.com/SmokiesScribe/buddyclients-free)
 - [Terms of Service](https://buddyclients.com/buddyclients-free-terms/)
 
+== External Services ==
+
+The BuddyClients Free plugin connects to external services to protect forms from spam. These services are optional and disabled by default.
+
+### Google reCAPTCHA Integration (Optional)
+
+If enabled, Google reCAPTCHA is used to protect forms within the plugin from spam and abuse. When reCAPTCHA is active:
+
+- The user’s IP address and browser information are transmitted to Google for validation.
+- Google may set cookies or track user interactions as outlined in their [Privacy Policy](https://policies.google.com/privacy) and [Terms of Service](https://policies.google.com/terms).
+- reCAPTCHA is used only for form security and does not collect additional user data beyond what is required for spam prevention.
+- Users can enable or disable the reCAPTCHA integration through the plugin settings. When disabled, no data is transmitted to Google.
+- The reCAPTCHA integration is disabled by default.
+
+For more details, please review our [Privacy Policy](https://buddyclients.com/privacy).
+
 == Requirements ==
 
 To run BuddyClients, we recommend your host supports:
