@@ -207,7 +207,7 @@ class WelcomeMessage {
             'explore_guides' => [
                 'icon'          => 'circle-info',
                 'url'           => trailingslashit( BUDDYC_URL ) . 'help',
-                'target'        => false,
+                'target'        => '_blank',
                 'link_text'     => __( 'Explore user guides', 'buddyclients-free' ),
                 'follow_text'   => __( 'to get the most out of BuddyClients', 'buddyclients-free' ),
                 'free'          => true,
@@ -216,7 +216,7 @@ class WelcomeMessage {
             'upgrade' => [
                 'icon'          => 'rocket',
                 'url'           => trailingslashit( BUDDYC_URL ) . 'pricing',
-                'target'        => false,
+                'target'        => '_blank',
                 'link_text'     => __( 'Upgrade BuddyClients', 'buddyclients-free' ),
                 'follow_text'   => __( 'to accept payments and enable premium features.', 'buddyclients-free' ),
                 'free'          => true,
