@@ -35,7 +35,6 @@ document.addEventListener("DOMContentLoaded", function () {
                 action: ajaxAction,
                 noticeId: noticeId,
                 nonce: dismissAdminData.nonce,
-                nonceAction: dismissAdminData.nonceAction,
             })
         });
     });

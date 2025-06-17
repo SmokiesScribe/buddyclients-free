@@ -9,15 +9,10 @@ use BuddyClients\Includes\Project;
  * @pararm  int $project_id The ID of the project to retrieve.
  */
 function buddyc_get_project() {
-
-    // Get the nonce from the AJAX request
-    $nonce = isset( $_POST['nonce'] ) ? trim( sanitize_text_field( wp_unslash( $_POST['nonce'] ) ) ) : null;
-    $nonce_action = isset( $_POST['nonceAction'] ) ? trim( sanitize_text_field( wp_unslash( $_POST['nonceAction'] ) ) ) : null;
-
+    
     // Verify nonce
-    if ( ! wp_verify_nonce( $nonce, $nonce_action ) ) {
-        return;
-    }
+    $valid = buddyc_verify_ajax_nonce( 'booking_form' );
+    if ( ! $valid ) return;
     
     // Get project id from javascript post
     $project_id = isset($_POST['project_id']) ? intval(wp_unslash($_POST['project_id'])) : null;

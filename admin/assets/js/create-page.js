@@ -63,7 +63,6 @@ function buddycCreateNewPage( args ) {
         action: 'buddyc_admin_create_new_page',
         args: args,
         nonce: createPageData.nonce,
-        nonceAction: createPageData.nonceAction,
     })
     .done( function( response ) {
         // Parse the JSON response

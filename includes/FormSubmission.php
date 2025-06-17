@@ -10,20 +10,6 @@ if ( ! defined( 'ABSPATH' ) ) exit; // Exit if accessed directly
  * @since 0.1.0
  */
 class FormSubmission {
-
-    /**
-     * The nonce prefix.
-     * 
-     * @var string
-     */
-    private $nonce_prefix = 'buddyclients_';
-
-    /**
-     * The nonce suffix.
-     * 
-     * @var string
-     */
-    private $nonce_suffix = '_nonce';
     
     /**
      * Form key.
@@ -63,18 +49,18 @@ class FormSubmission {
             return;
         }
 
-        // Retrieve nonce info
-        $this->handle_nonce();
-
-        // Exit if nonce not verified
-        if ( ! wp_verify_nonce( $this->nonce_value, $this->form_key ) ) {
-            return;
-        }
-
         // Make sure it's a plugin submission
         if ( ! isset( $_POST['buddyc_submission'] ) ) {
             return;
         }
+
+        // Get form key
+        $this->form_key = $this->get_form_key();
+        if ( ! $this->form_key ) return;
+
+        // Verify nonce
+        $verified = $this->verify_nonce();
+        if ( ! $verified ) return;
         
         // Check for spam
         if ( $this->is_spam() ) {
@@ -87,20 +73,87 @@ class FormSubmission {
     }
 
     /**
+     * Retrieves the form key from the post data. 
+     * 
+     * @since 1.0.32
+     */
+    private function get_form_key(){
+        $field_name = 'buddyc_form_key';
+        if ( isset( $_POST[$field_name] ) ) {
+            return sanitize_text_field( wp_unslash( $_POST[$field_name] ) );
+        }
+    }
+
+    /**
      * Verifies form submission and nonce.
      * 
      * @since 1.0.17
      * 
-     * @return  string|bool  The form key on success, false on failure
+     * @return  bool  True on success, false on failure
      */
-    private function handle_nonce() {
-        // Check for nonce field
-        $this->nonce_field_name = $this->get_nonce_field();
+    private function verify_nonce() {
+
+        // Build nonce field name
+        $nonce_name = $this->build_nonce_name();
         
-        if ( $this->nonce_field_name ) {
-            $this->form_key = $this->extract_form_key( $this->nonce_field_name );
-            $this->nonce_value = $this->get_nonce_value( $this->nonce_field_name ); 
+        // Get nonce value
+        $nonce_value = $this->get_nonce_value( $nonce_name );
+
+        // Verify nonce and return result
+        return wp_verify_nonce( $nonce_value, $this->form_key );
+    }
+
+    /**
+     * Retrieves and sanitizes the nonce value.
+     * 
+     * @since 1.0.17
+     * 
+     * @param   string  nonce_name  The name of the nonce field.
+     */
+    private function get_nonce_value( $nonce_name ) {
+        if ( isset( $_POST[$nonce_name] ) ) {
+            return sanitize_text_field( wp_unslash( $_POST[$nonce_name] ) ); 
         }
+    }
+
+    /**
+     * Builds the nonce field name.
+     * 
+     * @since 1.0.17
+     * @since 1.0.32 Use form key property.
+     */
+    private function build_nonce_name() {
+        return sprintf(
+            'buddyclients_%s_nonce',
+            $this->form_key
+        );
+    }
+
+    /**
+     * Checks for spam submissions.
+     * 
+     * Checks the honeypot field and the reCAPTCHA result.
+     * 
+     * @since 0.1.0
+     * 
+     * @return  bool    True if spam, false if not.
+     */
+    private function is_spam() {
+        // No spam in admin area
+        if ( is_admin() ) return false;
+        
+        // Check for honeypot submission
+        if ( isset( $_POST['website'] ) && ! empty( $_POST['website'] ) ) {
+            return true;
+        }
+
+        // Check reCAPTCHA
+        if ( ! $this->verify_recaptcha() ) {
+            return true;
+        }
+        
+        // Five by five
+        return false;
     }
 
     /**
@@ -121,9 +174,9 @@ class FormSubmission {
         $threshold = buddyc_recaptcha_threshold();
 
         // reCAPTCHA response
-        $recaptcha_response = isset( $_POST['recaptcha_response'] ) ? trim( $_POST['recaptcha_response'] ) : null;
 
         if ( ! $recaptcha_response ) {
+            $recaptcha_response = isset( $_POST['recaptcha_response'] ) ? trim( sanitize_text_field( wp_unslash( $_POST['recaptcha_response'] ) ) ) : null;
             return false; // No response, so reject
         }
         
@@ -156,101 +209,6 @@ class FormSubmission {
             return false; // reCAPTCHA failed
         }
     }
-
-    /**
-     * Retrieves and sanitizes the nonce value.
-     * 
-     * @since 1.0.17
-     */
-    private function get_nonce_value( $nonce_field_name ) {
-        if ( isset( $_POST[$nonce_field_name] ) ) {
-            return sanitize_text_field( wp_unslash( $_POST[$nonce_field_name] ) ); 
-        }
-    }
-
-    /**
-     * Retrieves the nonce field name from post data.
-     * 
-     * @since 1.0.17
-     */
-    private function get_nonce_field() {        
-        foreach ( array_keys( $_POST ) as $key ) {
-            $key = sanitize_text_field( $key );
-            if ( strpos( $key, $this->nonce_prefix ) === 0 && strpos( $key, $this->nonce_suffix ) === strlen( $key ) - strlen( $this->nonce_suffix ) ) {
-                return $key;
-            }
-        }
-    }
-
-    /**
-     * Extracts the form key from the nonce field name
-     * 
-     * @since 1.0.17
-     * 
-     * @param   string  $nonce_field_name   The name of the nonce field.
-     */
-    private function extract_form_key( $nonce_field_name ) {
-        if ( ! empty( $nonce_field_name ) ) {
-            return str_replace( [ $this->nonce_prefix, $this->nonce_suffix ], '', $nonce_field_name );
-        }
-    }
-
-    /**
-     * Verifies the nonce.
-     * 
-     * @since 1.0.17
-     * 
-     * @param   string  $nonce_field_name   The name of the nonce field.
-     * @param   string  $nonce_action       The name of the nonce action.
-     */
-    private function verify_nonce( $nonce_field_name, $nonce_action ) {
-        if ( isset( $_POST[$nonce_field_name] ) ) {
-            // Unslash the nonce value
-            $nonce_value = sanitize_text_field( wp_unslash( $_POST[$nonce_field_name] ) );
-
-            // Sanitize the nonce value
-            $sanitized_nonce = sanitize_text_field( wp_unslash( $_POST[$nonce_field_name] ) );
-
-            // Verify the nonce
-            if ( wp_verify_nonce( $sanitized_nonce, $nonce_action ) ) {
-                return true;
-            } else {
-                return false;
-            }
-        }
-    }
-
-    /**
-     * Builds the nonce field name.
-     * 
-     * @since 1.0.17
-     * 
-     * @param   string  $form_key   The form key.
-     */
-    private function build_nonce_name( $form_key ) {
-        return $this->nonce_prefix . $form_key . $this->nonce_suffix;
-    }
-    
-    /**
-     * Checks for honeypot to filter spam.
-     * 
-     * @since 0.1.0
-     */
-    private function is_spam() {
-        if ( is_admin() ) return false;
-        
-        if ( wp_verify_nonce( $this->nonce_value, $this->form_key ) ) {
-            // Check for honeypot submission
-            if ( isset( $_POST['website'] ) && ! empty( $_POST['website'] ) ) {
-                return true;
-            }
-            // Check reCAPTCHA
-            if ( ! $this->verify_recaptcha() ) {
-                return true;
-            }
-        }
-        return false;
-    }
     
     /**
      * Generates a generic failure message.
@@ -279,19 +237,15 @@ class FormSubmission {
      * @since 0.1.0
      */
     private function handle_submission() {
-        
-        // Check if nonce is set and verified
-        if ( wp_verify_nonce( $this->nonce_value, $this->form_key ) ) {
 
-            // Retrieve callback class
-            if ( isset( $_POST['submission_class'] ) ) {
-                $submission_class = sanitize_text_field( wp_unslash( $_POST['submission_class'] ) );
-                
-                // Make sure the class exists
-                if ( class_exists( $submission_class ) ) {
-                    // New instance
-                    new $submission_class( $_POST, $_FILES );
-                }
+        // Retrieve callback class
+        if ( isset( $_POST['submission_class'] ) ) {
+            $submission_class = sanitize_text_field( wp_unslash( $_POST['submission_class'] ) );
+            
+            // Make sure the class exists
+            if ( class_exists( $submission_class ) ) {
+                // New instance
+                new $submission_class( $_POST, $_FILES );
             }
         }
     }

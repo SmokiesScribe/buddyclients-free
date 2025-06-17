@@ -90,9 +90,8 @@ class Scheduler {
     private function schedule_event() {
         // Check if already scheduled
         $transient = $this->build_transient();
-        $scheduled = get_transient( $transient );
         if ( $scheduled ) return;
-
+        
         // Schedule event
         wp_schedule_single_event( $this->timeout, $this->hook, $this->args );
 
@@ -128,6 +127,10 @@ class Scheduler {
             'abandoned_booking' => [
                 'callback'      => 'buddyc_abandoned_booking_check',
                 'args_count'    => 1
+            ],
+            'payment_eligible' => [
+                'callback'      => 'buddyc_payment_eligible',
+                'args_count'    => 3
             ]
         ];
     }
@@ -158,4 +161,3 @@ class Scheduler {
         );
     }
 }
-    

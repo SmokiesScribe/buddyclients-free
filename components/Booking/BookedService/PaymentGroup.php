@@ -87,7 +87,7 @@ class PaymentGroup {
         
         // Build a Payment for each BookedService
         foreach ( $booked_services as $booked_service ) {
-            $this->create_payment( 'team', $booked_service->team_id, $booked_service->team_fee, $booked_service->ID );
+            $this->create_payment( 'team', $booked_service->team_id, $booked_service->team_fee, $booked_service->name );
         }
     }
     
@@ -153,7 +153,7 @@ class PaymentGroup {
      * 
      * @param   string  $type   The type of Payment to create.
      */
-    private function create_payment( $type, $payee_id, $amount, $booked_service_id = null ) {
+    private function create_payment( $type, $payee_id, $amount, $service_name = null ) {
         
         // Exit if the payment amount is 0
         if ( $amount == 0 ) {
@@ -173,9 +173,8 @@ class PaymentGroup {
         ];
         
         // Retrieve the booked service if it exists
-        if ( $booked_service_id ) {
-            $booked_service = BookedService::get_booked_service( $booked_service_id );
-            $args['service_name'] = $booked_service?->name;
+        if ( $service_name ) {
+            $args['service_name'] = $service_name;
         }
         
         // Create new Payment and add to array

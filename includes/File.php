@@ -61,6 +61,13 @@ class File {
      * @var string
      */
     public $dir_path;
+
+    /**
+     * The directory url.
+     *
+     * @var string
+     */
+    public $dir_url;
     
     /**
      * Full file path.
@@ -161,25 +168,19 @@ class File {
         $this->dir_path = $directory->full_path();
 
         // Build dir url
-        $dir_url = $directory->full_url();
+        $this->dir_url = $directory->full_url();
 
         // Set the upload directory
-        $dir_path = $this->dir_path;
-        add_filter('upload_dir', function() use ( $dir_path, $dir_url ) {
-            return [
-                'path'   => $this->dir_path,
-                'url'    => $dir_url,
-                'subdir' => '',
-                'basedir' => $this->dir_path,
-                'baseurl' => $this->dir_path,
-                'error'  => false,
-            ];
-        });
+        add_filter('upload_dir', [ $this, 'override_upload_dir' ]);
 
         // Use WordPress's wp_handle_upload function
         $uploaded_file = wp_handle_upload($file_info, ['test_form' => false]);
 
         // Reset the upload_dir filter after the upload
+        remove_filter('upload_dir', [ $this, 'override_upload_dir' ]);
+
+
+        // OLD
         $dir_path = $this->dir_path;
         remove_filter('upload_dir', function() use ( $dir_path ) {});
 
@@ -201,6 +202,25 @@ class File {
         // Return File ID
         return $this->ID;
     }
+
+    /**
+     * Overrides the upload directory.
+     * 
+     * @since 1.0.32
+     * 
+     * @param   array   $dirs   The array of directory info to modify.
+     * @return  array   The modified array of directory info.
+     */
+    public function override_upload_dir( $dirs ) {
+        return [
+            'path'    => $this->dir_path,
+            'url'     => $this->dir_url,
+            'subdir'  => '',
+            'basedir' => $this->dir_path,
+            'baseurl' => $this->dir_url,
+            'error'   => false,
+        ];
+    }    
 
     /**
      * Validates the file info.

@@ -53,14 +53,9 @@ function buddyc_admin_notice_dismissed( $key ) {
  */
 function buddyc_dismiss_admin_notice() {
 
-    // Log the nonce being sent in the AJAX request
-    $nonce = isset( $_POST['nonce'] ) ? trim( sanitize_text_field( wp_unslash( $_POST['nonce'] ) ) ) : null;
-    $nonce_action = isset( $_POST['nonceAction'] ) ? trim( sanitize_text_field( wp_unslash( $_POST['nonceAction'] ) ) ) : null;
-
     // Verify nonce
-    if ( ! wp_verify_nonce( $nonce, $nonce_action ) ) {
-        return;
-    }
+    $valid = buddyc_verify_ajax_nonce( 'dismiss_admin' );
+    if ( ! $valid ) return;
 
     // Get the admin notice id
     $notice_id = isset( $_POST['noticeId'] ) ? trim( sanitize_text_field( wp_unslash( $_POST['noticeId'] ) ) ) : null;

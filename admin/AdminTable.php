@@ -4,6 +4,7 @@ if ( ! defined( 'ABSPATH' ) ) exit; // Exit if accessed directly
 
 use stdClass;
 use BuddyClients\Admin\AdminTableItem;
+use BuddyClients\Admin\AdminTableFilter;
 
 /**
  * Generates a single admin table.
@@ -648,89 +649,9 @@ class AdminTable {
      * 
      * @since 0.1.0
      */
-    protected function filter_forms() {        
-        // Initialize flag
-        $visible_filters = false;
-        
-        // Exit if no filters
-        if ( ! $this->filters ) {
-            return;
-        }
-        
-        // Initialize and open form
-        $content = '<form method="POST">';
-
-        // Nonce field
-        $content .= wp_nonce_field( 'buddyc_filter_nonce_action', 'buddyc_filter_nonce', true, false );
-        
-        // Loop through the filters
-        foreach ( $this->filters as $key => $data ) {
-            
-            // Skip if the filter has no options
-            if ( ! isset( $data['options'] ) || empty ( $data['options'] ) ) {
-                continue;
-            }
-            
-            // Update flag
-            $visible_filters = true;
-            
-            // Build the filter name
-            $name = sprintf(
-                '%s_filter',
-                $key
-            );
-
-            // Get the current filter value
-            $curr_value = buddyc_get_param( $name );
-            
-            // Filter label
-            $content .= sprintf(
-                '<label for="%1$s">%2$s</label>',
-                esc_attr( $name ),
-                sprintf(
-                    '%1$s %2$s:',
-                    __( 'Filter by', 'buddyclients-free'),
-                    $data['label'] ?? ''
-                )
-            );
-            
-            // Build the dropdown
-            $content .= sprintf(
-                '<select name="%s" class="buddyc-admin-filter-select">',
-                esc_attr( $name )
-            );
-            
-            // Loop through the options
-            foreach ( $data['options'] as $option_key => $option_label ) {
-                $content .= sprintf(
-                    '<option value="%1$s"%2$s>%3$s</option>',
-                    esc_attr( $option_key ),
-                    $curr_value == $option_key ? ' selected' : '',
-                    esc_html( $option_label )
-                );
-            }
-        
-            // Close the dropdown
-            $content .= '</select>';
-        }
-        
-        // Check flag
-        if ( ! $visible_filters ) {
-            return '';
-        }
-        
-        // Submission verification field
-        $content .= '<input type="hidden" name="buddyc_admin_filter_key" value="' . esc_attr( $this->key ) . '">';
-        
-        // Submit button
-        $content .= '<button type="submit" class="button action" name="' . esc_attr( $this->key ) . '_filter_submit">';
-        $content .= __( 'Filter', 'buddyclients-free' );
-        $content .= '</button>';
-        
-        // Close the form
-        $content .= '</form>';
-        
-        return $content;
+    protected function filter_forms() {
+        $filter_form = new AdminTableFilter( $this->key, $this->filters );
+        return $filter_form->build();
     }
 
     

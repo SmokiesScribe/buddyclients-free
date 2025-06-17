@@ -70,7 +70,7 @@ Banner URL: /assets/media/banner-772x250/banner.png
 
 == Changelog ==
 
-= 1.0.32 - Unreleased =
+= 1.0.32 - June 17, 2025 =
 * Improvement: Centralized upgrade link logic.
 * Fixed: Removed registration code preventing checkout form submission.
 * Fixed: Correctly display availability on booking form.

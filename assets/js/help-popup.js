@@ -36,7 +36,6 @@ document.addEventListener('DOMContentLoaded', function () {
                     url: url,
                     rawContent: rawContent,
                     nonce: helpPopupData.nonce,
-                    nonceAction: helpPopupData.nonceAction,
                     fileName: helpPopupData.fileName,
                 },
                 success: function(data){

@@ -98,6 +98,9 @@ class Form {
                 $form .= $this->add_form_field( $single_args );
             }
         }
+
+        // Form key field
+        $form .= $this->form_key_field();
         
         // Verification field
         $form .= $this->verification_field();
@@ -169,6 +172,25 @@ class Form {
             $form_field = new FormField( $args );
             return $form_field->build();
         }
+    }
+
+    /**
+     * Form key field.
+     * 
+     * Generates a field with the identifying key for the form.
+     *
+     * @since 1.0.32
+     */
+    private function form_key_field() {
+        $args = [
+            'key'           => 'buddyc_form_key',
+            'id'            => $this->key . '_form_key',
+            'type'          => 'hidden',
+            'value'         => $this->key
+        ];
+        
+        // Add the field to the content
+        return ( new FormField( $args ) )->build();
     }
     
     /**

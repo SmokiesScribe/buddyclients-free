@@ -27,7 +27,6 @@ document.addEventListener("DOMContentLoaded", function() {
                     email: enteredEmail,
                     booking_intent_id: bookingIntentIdInput.value,
                     nonce: emailEnteredData.nonce,
-                    nonceAction: emailEnteredData.nonceAction
                 },
                 success: function( response ) {                    
                     if ( response.success ) {

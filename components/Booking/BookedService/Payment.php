@@ -133,7 +133,7 @@ class Payment {
     public function __construct( $ID = null ) {
         $this->ID = $ID ?? null;
         $this->status = $this->status ?? 'pending';
-        $this->created_at = $this->created_at ?? time();
+        $this->created_at = $this->created_at ?? date('Y-m-d H:i:s');
         
         // Initialize object handler
         self::init_object_handler();
@@ -238,11 +238,17 @@ class Payment {
         // Set the scheduled time property
         $this->time_eligible = $scheduled_date;
         
-        // Store payment ID in a variable
-        $payment_id = $this->ID;
-        
-        // Schedule the update_status function
-        wp_schedule_single_event( $scheduled_date, 'buddyc_payment_eligible', [$this->ID, $cancellation_window, current_time('timestamp')] );
+        $args = [
+             'event_key'    => 'payment_eligible',
+             'timeout'      => $scheduled_date,
+             'args'         => [
+                 'payment_id' => $this->ID,
+                 'cancellation_window' => $cancellation_window,
+                 'time_scheduled' => $scheduled_date], // this
+            ];
+         
+        // Schedule the update
+        buddyc_schedule( $args );
     }
     
     /**
@@ -333,11 +339,15 @@ class Payment {
         // Initialize object handler
         self::init_object_handler();
         
+        // Get old payment
+        $old_payment = self::get_payment( $ID );
+        $old_status = $old_payment->status;
+        
         // Update status
         $updated_payment = self::$object_handler->update_object_properties( $ID, ['status' => $new_status] );
         
         // Check if we transitioned to a new status
-        if ( $updated_payment->status === $new_status ) {
+        if ( $old_status !== $new_status ) {
 
             // Check if the new status is succeeded
             if ( $new_status === 'paid' ) {

@@ -298,7 +298,6 @@ class EmailTriggers {
         // Email the payee
         $args = [
             'to_email'              => $booking_intent->client_email,
-            'sales_checkout_link'   => $booking_intent->build_checkout_link()
         ];
         new Email( 'sales_sub', $args );
     }

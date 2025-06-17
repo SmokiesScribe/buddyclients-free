@@ -8,17 +8,14 @@ use BuddyClients\Components\Booking\LineItems;
  */
 function buddyc_create_line_item() {
 
-    // Log the nonce being sent in the AJAX request
-    $nonce = isset( $_POST['nonce'] ) ? trim( sanitize_text_field( wp_unslash( $_POST['nonce'] ) ) ) : null;
-    $nonce_action = isset( $_POST['nonceAction'] ) ? trim( sanitize_text_field( wp_unslash( $_POST['nonceAction'] ) ) ) : null;
-
     // Verify nonce
-    if ( ! wp_verify_nonce( $nonce, $nonce_action ) ) {
-        return;
-    }
+    $valid = buddyc_verify_ajax_nonce( 'booking_form' );
+    if ( ! $valid ) return;
 
-    // Ensure line items data exists and is an array
-    $line_items_data = isset( $_POST['lineItems'] ) ? wp_unslash( $_POST['lineItems'] ) : null;
+    // Sanitize line items
+    $line_items_data = isset( $_POST['lineItems'] ) && is_array( $_POST['lineItems'] )
+        ? array_map( 'buddyc_sanitize_line_item', wp_unslash( $_POST['lineItems'] ) )
+        : null;
 
     // Sanitize data
     if ( is_array( $line_items_data ) ) {
@@ -54,3 +51,23 @@ function buddyc_create_line_item() {
 }
 add_action('wp_ajax_buddyc_create_line_item', 'buddyc_create_line_item'); // For logged-in users
 add_action('wp_ajax_nopriv_buddyc_create_line_item', 'buddyc_create_line_item'); // For logged-out users
+
+/**
+ * Sanitizes a single line item from ajax request.
+ *
+ * @param   array   $item
+ * @return  array|null
+ */
+function buddyc_sanitize_line_item( $item ) {
+    if ( ! is_array( $item ) ) {
+        return null;
+    }
+
+    return [
+        'service_id'         => isset( $item['service_id'] ) ? intval( $item['service_id'] ) : null,
+        'adjustment_options' => isset( $item['adjustments'] ) ? array_map( 'sanitize_text_field', (array) $item['adjustments'] ) : null,
+        'rate_count'         => isset( $item['fee_num'] ) ? intval( $item['fee_num'] ) : null,
+        'team_id'            => isset( $item['team_id'] ) ? intval( $item['team_id'] ) : null,
+        'team_member_role'   => isset( $item['team_member_role'] ) ? intval( $item['team_member_role'] ) : null,
+    ];
+}

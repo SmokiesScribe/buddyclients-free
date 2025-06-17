@@ -358,7 +358,6 @@ jQuery(document).ready(function() {
                 data: {
                     action: 'buddyc_create_line_item',
                     nonce: bookingFormData.nonce,
-                    nonceAction: bookingFormData.nonceAction,
                     lineItems: lineItemsData,
                 },
                 success: function(response) {
@@ -499,9 +498,7 @@ jQuery(document).ready(function() {
             adjustments: adjustmentsData,
             team_id: teamId,
             team_member_role: roleId,
-
             nonce: bookingFormData.nonce,
-            nonceAction: bookingFormData.nonceAction,
         };
 
         return lineItemData;
@@ -866,7 +863,6 @@ jQuery(document).ready(function() {
                 action: 'buddyc_get_project',
                 project_id: projectId,
                 nonce: bookingFormData.nonce,
-                nonceAction: bookingFormData.nonceAction,
             },
             success: function(response) {
                 // Parse the JSON response
@@ -1652,7 +1648,6 @@ jQuery(document).ready(function() {
                     team_id: teamID,
                     filter_values: filterValues,
                     nonce: bookingFormData.nonce,
-                    nonceAction: bookingFormData.nonceAction,
                 },
                 success: function(response) {
                     var match = JSON.parse(response);

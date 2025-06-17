@@ -19,20 +19,15 @@ use BuddyEvents\Includes\Registration\SponsorIntent;
      * @since 0.1.0
      */
     function buddyc_checkout_create_account() {
-        // Ensure the request is from an authenticated user if required
+        // Ensure the request is from an authenticated user
         if ( ! defined( 'DOING_AJAX' ) || ! DOING_AJAX ) {
             wp_send_json_error(__('Invalid request', 'buddyclients-free'));
             wp_die();
         }
 
-        // Log the nonce being sent in the AJAX request
-        $nonce = isset( $_POST['nonce'] ) ? trim( sanitize_text_field( wp_unslash( $_POST['nonce'] ) ) ) : null;
-        $nonce_action = isset( $_POST['nonceAction'] ) ? trim( sanitize_text_field( wp_unslash( $_POST['nonceAction'] ) ) ) : null;
-
         // Verify nonce
-        if ( ! wp_verify_nonce( $nonce, $nonce_action ) ) {
-            return;
-        }
+        $valid = buddyc_verify_ajax_nonce( 'create_account' );
+        if ( ! $valid ) return;
         
         // Make sure all data is present
         if (isset($_POST['username']) && isset($_POST['email']) && isset($_POST['password'])

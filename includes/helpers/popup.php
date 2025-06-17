@@ -10,14 +10,9 @@ use BuddyClients\Includes\Popup;
  */
 function buddyc_get_popup_content() {
 
-    // Log the nonce being sent in the AJAX request
-    $nonce = isset( $_POST['nonce'] ) ? trim( sanitize_text_field( wp_unslash( $_POST['nonce'] ) ) ) : null;
-    $nonce_action = isset( $_POST['nonceAction'] ) ? trim( sanitize_text_field( wp_unslash( $_POST['nonceAction'] ) ) ) : null;
-
     // Verify nonce
-    if ( ! wp_verify_nonce( $nonce, $nonce_action ) ) {
-        return;
-    }
+    $valid = buddyc_verify_ajax_nonce( 'help_popup' );
+    if ( ! $valid ) return;
 
     // Get post ID from ajax
     $post_id = isset( $_POST['postId'] ) ? intval( wp_unslash( $_POST['postId'] ) ) : null;

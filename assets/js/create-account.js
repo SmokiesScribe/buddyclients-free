@@ -38,7 +38,6 @@ function buddycHandleCreateAccount(e, ajaxurl, submitButton) {
         password: document.querySelector('input[name="create-account-password"]').value,
         booking_intent_id: document.querySelector('input[name="booking-intent-id"]').value,
         nonce: createAccountData.nonce,
-        nonceAction: createAccountData.nonceAction,
       },
       success: function (response) {
 

@@ -67,15 +67,27 @@ class Metaboxes {
      * @since 1.0.25
      * 
      * @param   string  $post_type  The post type slug.
-     * @param   string  $category   The metabox category name.
      * @return  string  The name for the nonce field
      */
-    private static function build_nonce_name( $post_type, $category ) {
-        $formatted_category = strtolower( str_replace( ' ', '_', $category ) );
+    private static function build_nonce_name( $post_type ) {
         return sprintf(
-            'buddyc_%1$s_%2$s_meta_nonce',
-            $post_type,
-            $formatted_category
+            'buddyc_meta_nonce_%s',
+            esc_html( $post_type )
+        );
+    }
+
+    /**
+     * Builds the nonce action name.
+     * 
+     * @since 1.0.25
+     * 
+     * @param   string  $post_type  The post type slug.
+     * @return  string  The name for the nonce action.
+     */
+    private static function build_nonce_action( $post_type ) {
+        return sprintf(
+            'buddyc_save_meta_%s',
+            esc_html( $post_type )
         );
     }
     
@@ -183,25 +195,35 @@ class Metaboxes {
         }
 
         // Verify nonce
-        $category = isset( $_POST['buddyc_meta_category'] ) ? sanitize_text_field( wp_unslash( $_POST['buddyc_meta_category'] ) ) : '';
-        $nonce_name = self::build_nonce_name( $this->post_type, $category );
-
-        // Nonce not set
-        if ( ! isset( $_POST[ $nonce_name ] ) ) {
-            return false;
-        }
-
-        // Get nonce value from post                
-        $nonce_value = sanitize_text_field( wp_unslash( $_POST[ $nonce_name ] ) );
-        $nonce_action = 'save_' . $this->post_type . '_meta';
-
-        // Nonce not valid        
-        if ( ! wp_verify_nonce( $nonce_value, $nonce_action ) ) {
+        $verified = $this->verify_nonce( $this->post_type );
+        if ( ! $verified ) {
             return false;
         }
 
         // Five by five
         return true;
+    }
+
+    /**
+     * Verifies the nonce.
+     * 
+     * @since 1.0.32
+     * 
+     * @param   string  $post_type  The post type slug.
+     * @return  bool    True if valid, false if not.
+     */
+    private function verify_nonce( $post_type ) {
+
+        // Build nonce name and action
+        $nonce_name = self::build_nonce_name( $post_type );
+        $nonce_action = self::build_nonce_action( $post_type );
+
+        // Get submitted nonce value
+        if ( ! isset( $_POST[ $nonce_name ] ) ) return false;
+        $nonce_value = sanitize_text_field( wp_unslash( $_POST[ $nonce_name ] ) );
+
+        // Verify       
+        return wp_verify_nonce( $nonce_value, $nonce_action );
     }
     
     /**
@@ -312,16 +334,6 @@ class Metaboxes {
         // Get data passed to callback
         $data = $metabox['args']['data'] ?? null;
         if ( ! $data ) return;
-
-        // Get metabox group
-        $category = $metabox['args']['category'];
-
-        // Generate a nonce field for this meta box
-        $nonce_name = self::build_nonce_name( $this->post_type, $category );
-        $content .= wp_nonce_field( 'save_' . $this->post_type . '_meta', $nonce_name, $referer = true, $display = false );
-
-        // Add hidden category field
-        $content .= '<input type="hidden" name="buddyc_meta_category" value="' . esc_attr( $category ) . '">';
         
         // Get the metabox category description
         $content .= $data['description'] ?? '';
@@ -463,6 +475,16 @@ class Metaboxes {
         // Initialize and open fieldset
         $content = '<fieldset>';
 
+        // Add a single nonce field for the post type
+        $action = sprintf( 'buddyc_output_meta_nonce_%s', $this->post_type );
+        if ( ! did_action( $action ) ) {
+            $nonce_name = self::build_nonce_name( $this->post_type );
+            $nonce_action = self::build_nonce_action( $this->post_type );
+            $content .= wp_nonce_field( $nonce_action, $nonce_name, true, false );
+            do_action( $action );
+        }
+
+        // Define meta
         $meta = $data['meta'] ?? [];
         
         // Loop through fields

@@ -375,7 +375,6 @@ class AssetManager {
 
 			// Build nonce
 			$localization_info['nonce'] = wp_create_nonce( $this->build_nonce_action( $file_name ) );
-			$localization_info['nonceAction'] = $this->build_nonce_action( $file_name );
 			$localization_info['fileName'] = $file_name;
 
 			// Localize and pass data

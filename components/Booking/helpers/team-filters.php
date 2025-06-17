@@ -9,18 +9,13 @@ use BuddyClients\Includes\Projectg;
  * @return  bool    Whether the filters match.
  */
 function buddyc_team_filter_match() {
+
+    // Verify nonce
+    $valid = buddyc_verify_ajax_nonce( 'booking_form' );
+    if ( ! $valid ) return;
     
     // Initialize
     $match = true;
-
-    // Get the nonce from the AJAX request
-    $nonce = isset( $_POST['nonce'] ) ? trim( sanitize_text_field( wp_unslash( $_POST['nonce'] ) ) ) : null;
-    $nonce_action = isset( $_POST['nonceAction'] ) ? trim( sanitize_text_field( wp_unslash( $_POST['nonceAction'] ) ) ) : null;
-
-    // Verify nonce
-    if ( ! wp_verify_nonce( $nonce, $nonce_action ) ) {
-        return;
-    }
     
     // Get data from JavaScript post
     $team_id = isset($_POST['team_id']) ? intval(wp_unslash($_POST['team_id'])) : null;
