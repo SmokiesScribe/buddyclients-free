@@ -105,7 +105,7 @@ class CheckoutTable {
         // Initialize with the mobile button
         $output = sprintf(
             '<div id="buddyc-checkout-mobile-button">%s</div>',
-            __( 'View Summary', 'buddyclients-free' )
+            __( 'View Summary', 'buddyclients-lite' )
         );
         
         // Open table container
@@ -186,7 +186,7 @@ class CheckoutTable {
         $output = '<tfoot>';
         $output .= '<tr><td colspan="2" class="buddyc-checkout-footer-border"></td></tr>';        
         $output .= '<tr>';
-        $output .= '<th class="buddyc-checkout-total-label">' . __( 'Total:', 'buddyclients-free' ) . '</th>';
+        $output .= '<th class="buddyc-checkout-total-label">' . __( 'Total:', 'buddyclients-lite' ) . '</th>';
         $output .= '<td><span class="buddyc-checkout-total-fee">$' . number_format( $this->total_fee, 2 ) . '</span></td>';
         $output .= '</tr>';
 
@@ -197,7 +197,7 @@ class CheckoutTable {
             $output .= sprintf(
                 '<th class="buddyc-checkout-total-label">%1$s %2$s:</th>',
                 $this->payment_type_label,
-                __( 'Due Today', 'buddyclients-free' )
+                __( 'Due Today', 'buddyclients-lite' )
             );
 
             $output .= '<td><span>$' . number_format( $this->total_due, 2 ) . '</span></td>';

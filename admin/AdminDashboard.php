@@ -73,7 +73,7 @@ class AdminDashboard {
         
         // Open wrap
         $content .= '<div class="wrap">';
-        $content .= '<h1>' . __( 'Dashboard', 'buddyclients-free' ) . '</h1>';
+        $content .= '<h1>' . __( 'Dashboard', 'buddyclients-lite' ) . '</h1>';
         
         // Build items
         $content .= $this->filter_form();
@@ -82,7 +82,7 @@ class AdminDashboard {
 
         $content .= $this->overview_table();
         $content .= $this->revenue_chart();
-        $content .= $this->key_metric( __( 'Average Booking Value', 'buddyclients-free' ), 'average_value' );
+        $content .= $this->key_metric( __( 'Average Booking Value', 'buddyclients-lite' ), 'average_value' );
         $content .= $this->charts_row();
 
         // Close content wrap
@@ -178,14 +178,14 @@ class AdminDashboard {
         return [
             'completed' => [
                 'ID'        => 'completed',
-                'status'    => __( 'Completed', 'buddyclients-free' ),
+                'status'    => __( 'Completed', 'buddyclients-lite' ),
                 'count'     => $this->filter_objects( $booking_intents, 'status', 'succeeded' ),
                 'total'     => $this->sum_property( $booking_intents, 'total_fee', 'status', 'succeeded' ),
                 'net'       => $this->sum_property( $booking_intents, 'net_fee', 'status', 'succeeded' ),
             ],
             'abandoned' => [
                 'ID'        => 'abandoned',
-                'status'    => __( 'Abandoned', 'buddyclients-free' ),
+                'status'    => __( 'Abandoned', 'buddyclients-lite' ),
                 'count'     => $this->filter_objects( $booking_intents, 'status', 'incomplete' ),
                 'total'     => $this->sum_property( $booking_intents, 'total_fee', 'status', 'incomplete' ),
                 'net'       => $this->sum_property( $booking_intents, 'net_fee', 'status', 'incomplete' ),
@@ -382,7 +382,7 @@ class AdminDashboard {
         
         // Filter label
         $content .= '<label for="' . $name . '">';
-        $content .= esc_html__( 'Date Range ', 'buddyclients-free');
+        $content .= esc_html__( 'Date Range ', 'buddyclients-lite');
         $content .= '</label>';
         
         // Build the dropdown
@@ -402,7 +402,7 @@ class AdminDashboard {
         
         // Submit button
         $content .= '<button type="submit" class="button action" name="buddyc_overview_filter_submit">';
-        $content .= esc_html__( 'Filter', 'buddyclients-free' );
+        $content .= esc_html__( 'Filter', 'buddyclients-lite' );
         $content .= '</button>';
         
         // Close the form
@@ -418,20 +418,20 @@ class AdminDashboard {
      */
     private function filter_options() {
         return [
-            'year_to_date'      => __( 'Year to Date', 'buddyclients-free' ),
-            'month_to_date'     => __( 'Month to Date', 'buddyclients-free' ),
+            'year_to_date'      => __( 'Year to Date', 'buddyclients-lite' ),
+            'month_to_date'     => __( 'Month to Date', 'buddyclients-lite' ),
             'last_30_days'      => sprintf(
                 /* translators: %s: the number of days (30) */
-                __( 'Last %s Days', 'buddyclients-free' ),
+                __( 'Last %s Days', 'buddyclients-lite' ),
                 '30'
             ),
             'last_365_days'      => sprintf(
                 /* translators: %s: the number of days (30) */
-                __( 'Last %s Days', 'buddyclients-free' ),
+                __( 'Last %s Days', 'buddyclients-lite' ),
                 '365'
             ),
-            'today_only'        => __( 'Today Only', 'buddyclients-free' ),
-            'yesterday_only'    => __( 'Yesterday Only', 'buddyclients-free' ),
+            'today_only'        => __( 'Today Only', 'buddyclients-lite' ),
+            'yesterday_only'    => __( 'Yesterday Only', 'buddyclients-lite' ),
         ];
     }
     
@@ -446,10 +446,10 @@ class AdminDashboard {
         
         // Define column headers for the overview table
         $headers = [
-            __( 'Status', 'buddyclients-free' ),
-            __( 'Count', 'buddyclients-free' ),
-            __( 'Total', 'buddyclients-free' ),
-            __( 'Net', 'buddyclients-free' )
+            __( 'Status', 'buddyclients-lite' ),
+            __( 'Count', 'buddyclients-lite' ),
+            __( 'Total', 'buddyclients-lite' ),
+            __( 'Net', 'buddyclients-lite' )
         ];
         
         // Start building the content
@@ -540,7 +540,7 @@ class AdminDashboard {
             'labels'            => $labels,
             'tooltip_format'    => 'currency',
             'canvas_id'         => 'revenueChart',
-            'title'             => __('Revenue Over Time', 'buddyclients-free')
+            'title'             => __('Revenue Over Time', 'buddyclients-lite')
         ];
         
         // Create and display the chart
@@ -633,7 +633,7 @@ class AdminDashboard {
             'data'              => $data,
             'labels'            => $labels,
             'canvas_id'         => 'abandonmentChart',
-            'title'             => __('Booking Success Over Time', 'buddyclients-free')
+            'title'             => __('Booking Success Over Time', 'buddyclients-lite')
         ];
         
         // Create and display the chart
@@ -712,7 +712,7 @@ class AdminDashboard {
 
         // Add the booking success pie chart and key metric
         $content .= $this->booking_success_pie_chart();
-        $content .= $this->key_metric( __( 'Conversion Rate', 'buddyclients-free' ), 'conversion_rate' );
+        $content .= $this->key_metric( __( 'Conversion Rate', 'buddyclients-lite' ), 'conversion_rate' );
 
         // Abandoned bookings chart
         $content .= $this->abandonment_chart();
@@ -760,7 +760,7 @@ class AdminDashboard {
             'type'              => 'pie',
             'data'              => $chart_data,
             'canvas_id'         => 'bookingStatusBreakdownChart',
-            'title'             => __('Booking Success', 'buddyclients-free')
+            'title'             => __('Booking Success', 'buddyclients-lite')
         ];
         
         $chart = new AdminChart($args);

@@ -34,19 +34,19 @@ function buddyc_component_exists( $component ) {
  */
 function buddyc_components_map() {
     return [
-        'Booking'           => __( 'Booking', 'buddyclients-free' ),
-        'Checkout'          => __( 'Checkout', 'buddyclients-free' ),
-        'Service'           => __( 'Service', 'buddyclients-free' ),
-        'Email'             => __( 'Email', 'buddyclients-free' ),
-        'Brief'             => __( 'Brief', 'buddyclients-free' ),
-        'Stripe'            => __( 'Stripe', 'buddyclients-free' ),
-        'Affiliate'         => __( 'Affiliate', 'buddyclients-free' ),
-        'Availability'      => __( 'Availability', 'buddyclients-free' ),
-        'Contact'           => __( 'Contact', 'buddyclients-free' ),
-        'Legal'             => __( 'Legal', 'buddyclients-free' ),
-        'Quote'             => __( 'Quote', 'buddyclients-free' ),
-        'Sales'             => __( 'Sales', 'buddyclients-free' ),
-        'Testimonial'       => __( 'Testimonial', 'buddyclients-free' ),
+        'Booking'           => __( 'Booking', 'buddyclients-lite' ),
+        'Checkout'          => __( 'Checkout', 'buddyclients-lite' ),
+        'Service'           => __( 'Service', 'buddyclients-lite' ),
+        'Email'             => __( 'Email', 'buddyclients-lite' ),
+        'Brief'             => __( 'Brief', 'buddyclients-lite' ),
+        'Stripe'            => __( 'Stripe', 'buddyclients-lite' ),
+        'Affiliate'         => __( 'Affiliate', 'buddyclients-lite' ),
+        'Availability'      => __( 'Availability', 'buddyclients-lite' ),
+        'Contact'           => __( 'Contact', 'buddyclients-lite' ),
+        'Legal'             => __( 'Legal', 'buddyclients-lite' ),
+        'Quote'             => __( 'Quote', 'buddyclients-lite' ),
+        'Sales'             => __( 'Sales', 'buddyclients-lite' ),
+        'Testimonial'       => __( 'Testimonial', 'buddyclients-lite' ),
     ];
 }
 

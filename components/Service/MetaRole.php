@@ -21,26 +21,26 @@ class MetaRole {
                     'Labels' => [
                         'meta' => [
                             'singular' => [
-                                'label' => __( 'Singular', 'buddyclients-free' ),
+                                'label' => __( 'Singular', 'buddyclients-lite' ),
                                 'description' => '',
                                 'type' => 'text',
-                                'placeholder' => __( 'e.g. Editor', 'buddyclients-free' ),
+                                'placeholder' => __( 'e.g. Editor', 'buddyclients-lite' ),
                             ],
                             'plural' => [
-                                'label' => __( 'Plural', 'buddyclients-free' ),
+                                'label' => __( 'Plural', 'buddyclients-lite' ),
                                 'description' => '',
                                 'type' => 'text',
-                                'placeholder' => __( 'e.g. Editors', 'buddyclients-free' ),
+                                'placeholder' => __( 'e.g. Editors', 'buddyclients-lite' ),
                             ],
                         ],
                     ],
                     'Description' => [
                         'meta' => [
                             'form_description' => [
-                                'label' => __( 'Description', 'buddyclients-free' ),
-                                'description' => __( 'Optional.', 'buddyclients-free' ),
+                                'label' => __( 'Description', 'buddyclients-lite' ),
+                                'description' => __( 'Optional.', 'buddyclients-lite' ),
                                 'type' => 'text',
-                                'placeholder' => __( 'e.g. Does awesome things for clients.', 'buddyclients-free' ),
+                                'placeholder' => __( 'e.g. Does awesome things for clients.', 'buddyclients-lite' ),
                             ],
                         ],
                     ],

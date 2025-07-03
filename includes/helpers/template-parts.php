@@ -19,7 +19,7 @@ if ( ! defined( 'ABSPATH' ) ) exit; // Exit if accessed directly
  *                              Defaults to 'medium'.
  */
 function buddyc_btn( $args ) {
-    $text   = $args['text'] ?? __( 'Learn More', 'buddyclients-free' );
+    $text   = $args['text'] ?? __( 'Learn More', 'buddyclients-lite' );
     $link   = $args['link'] ?? '#';
     $type   = $args['type'] ?? 'primary';
     $size   = $args['size'] ?? 'medium';

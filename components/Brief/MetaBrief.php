@@ -21,10 +21,10 @@ class MetaBrief {
                     'Project' => [
                         'meta' => [
                             'project_id' => [
-                                'label' => __('Project', 'buddyclients-free'),
+                                'label' => __('Project', 'buddyclients-lite'),
                                 'type' => 'dropdown',
                                 'options' => 'projects',
-                                'placeholder' => __('Select Project', 'buddyclients-free'),
+                                'placeholder' => __('Select Project', 'buddyclients-lite'),
                             ],
                         ],
                     ],
@@ -35,7 +35,7 @@ class MetaBrief {
                     'Updated' => [
                         'meta' => [
                             'updated_date' => [
-                                'label' => __('Last Updated', 'buddyclients-free'),
+                                'label' => __('Last Updated', 'buddyclients-lite'),
                                 'type' => 'display_date',
                             ],
                         ],

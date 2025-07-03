@@ -21,8 +21,8 @@ class MetaEmail {
                     'Subject' => [
                         'meta' => [
                             '_buddyc_email_subject' => [
-                                'label' => __('Email Subject', 'buddyclients-free'),
-                                'description' => __('Enter the subject for the email.', 'buddyclients-free'),
+                                'label' => __('Email Subject', 'buddyclients-lite'),
+                                'description' => __('Enter the subject for the email.', 'buddyclients-lite'),
                                 'type' => 'text',
                             ],
                         ],

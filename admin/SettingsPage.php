@@ -160,7 +160,7 @@ class SettingsPage {
             <form method="post" action="options.php">
                 <?php settings_fields( $this->name . '_group' ); ?>
                 <?php do_settings_sections( $this->name ); ?>
-                <?php submit_button( __('Save Settings', 'buddyclients-free') ); ?>
+                <?php submit_button( __('Save Settings', 'buddyclients-lite') ); ?>
             </form>
         </div>
         <?php
@@ -196,7 +196,7 @@ class SettingsPage {
             }
         // No settings data available
         } else {
-            echo esc_html__( 'Not available.', 'buddyclients-free' );
+            echo esc_html__( 'Not available.', 'buddyclients-lite' );
         }
     }
     
@@ -445,7 +445,7 @@ class SettingsPage {
                 esc_attr( $option_key ),
                 esc_attr( $checked ),
                 esc_html( $option_label ) ?? '',
-                $required ? esc_html__( 'Required. ', 'buddyclients-free' ) : '',
+                $required ? esc_html__( 'Required. ', 'buddyclients-lite' ) : '',
                 isset( $field_data['descriptions'][$option_key] ) ? wp_kses_post( $field_data['descriptions'][$option_key] ) : ''
             );
         }
@@ -651,7 +651,7 @@ class SettingsPage {
             $button = sprintf(
                 '<a href="%1$s" target="_blank"><button type="button" class="button button-secondary">%2$s</button></a>',
                 esc_url( $selected_page_permalink ),
-                esc_html__( 'View Page', 'buddyclients-free' )
+                esc_html__( 'View Page', 'buddyclients-lite' )
             );
 
         // Create button
@@ -685,7 +685,7 @@ class SettingsPage {
             $button = sprintf(
                 '<button type="button" class="button button-secondary buddyc-create-page-btn"%1$s>%2$s</button>',
                 $data_atts,
-                __( 'Create Page', 'buddyclients-free' )
+                __( 'Create Page', 'buddyclients-lite' )
             );
         }
 

@@ -4,96 +4,92 @@ msgid ""
 msgstr ""
 "Project-Id-Version: BuddyClients 1.0.0\n"
 "Report-Msgid-Bugs-To: https://wordpress.org/support/plugin/buddyclients\n"
-"Last-Translator: Victoria\n"
-"Language-Team: Spanish (Spain)\n"
+"Last-Translator: \n"
+"Language-Team: Chinese (China)\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"POT-Creation-Date: 2024-09-10T12:39:52+00:00\n"
-"PO-Revision-Date: 2025-03-01 00:43+0000\n"
+"POT-Creation-Date: 2024-09-10T16:08:57+00:00\n"
+"PO-Revision-Date: 2025-07-03 21:06+0000\n"
 "X-Generator: Loco https://localise.biz/\n"
 "X-Domain: buddyclients\n"
-"Language: es_ES\n"
-"Plural-Forms: nplurals=2; plural=n != 1;\n"
-"X-Loco-Version: 2.6.11; wp-6.6.1"
+"Language: zh_CN\n"
+"Plural-Forms: nplurals=1; plural=0;\n"
+"X-Loco-Version: 2.6.11; wp-6.7.2"
 
 #: admin/AdminColumns.php:607
 msgid " flat"
-msgstr " plano"
+msgstr "单位"
 
 #: admin/AdminColumns.php:614
 msgid " per "
-msgstr " por"
+msgstr "论"
 
 #. %1$d: the number of the current page being displayed; %2$d: the total number of pages
 #: admin/AdminTable.php:339
 #, php-format
 msgid "%1$d of %2$d"
-msgstr "%1$d de %2$d"
+msgstr "%1$d of %2$d"
 
 #. %1$s: the name of the client; %2$s: the email address of the client
 #: components/Checkout/Checkout.php:280
 #, php-format
 msgid "%1$s has been notified at %2$s."
-msgstr "%1$s ha sido notificado en %2$s."
+msgstr "%1$s 已在 %2$s 收到通知。"
 
 #. %1$s: the name of the client; %2$s: the name of the service; %3$s: the link to the project
 #: components/Email/EmailTemplateManager.php:301
 #, php-format
 msgid "%1$s has requested to cancel %2$s for %3$s."
-msgstr "%1$s ha solicitado cancelar %2$s para %3$s."
+msgstr "%1$s 请求取消 %2$s 的 %3$s。"
 
 #. %d: number of successful deletions
 #: includes/FinalDeletionSubmission.php:98
 msgid "%d file successfully deleted."
 msgid_plural "%d files successfully deleted."
-msgstr[0] "archivo %d eliminado con éxito."
-msgstr[1] "%d archivos borrados con éxito."
+msgstr[0] "%d 文件已成功删除。"
 
 #. %d: number of failed deletions
 #: includes/FinalDeletionSubmission.php:106
 msgid "%d file was not deleted. Please try again."
 msgid_plural "%d files were not deleted. Please try again."
-msgstr[0] "no se ha eliminado el archivo %d. Por favor, inténtelo de nuevo."
-msgstr[1] "no se han eliminado los archivos %d. Por favor, inténtelo de nuevo."
+msgstr[0] "%d 文件未删除。请重试。"
 
 #. %d: the number of items being displayed
 #: admin/AdminTable.php:321
 msgid "%d items"
-msgstr "%d artículos"
+msgstr "%d 项目"
 
 #. %s: the type of brief (e.g. Design)
 #: components/Brief/GroupBriefs.php:138
 #, php-format
 msgid "%s Brief"
-msgstr "%s Breve"
+msgstr "%s Brief"
 
 #. %s: the name of the site
 #: components/Email/EmailTemplateManager.php:320
 #, php-format
 msgid "%s Contact Form"
-msgstr "%s Formulario de contacto"
+msgstr "%s 联系表格"
 
 #. %s: page type (e.g., 'Service', 'Product')
 #: admin/SettingsPages.php:52
 #, php-format
 #| msgid "%s Pages."
 msgid "%s Pages"
-msgstr "Páginas %s"
+msgstr "%s 页码"
 
 #. %s: the link to the booking settings
 #: admin/AdminInfo.php:110
 #, php-format
 msgid "%s to define how long clients have to request to cancel a service."
-msgstr ""
-"%s para definir cuánto tiempo tienen que solicitar los clientes para "
-"cancelar un servicio."
+msgstr "%s 来定义客户要求取消服务的时间。"
 
 #. %s: link to enable social groups
-#: buddyclients-free.php:170
+#: buddyclients-lite.php:170
 #, php-format
 msgid "<a href=\"%s\">Enable social groups.</a>"
-msgstr "<a href=\"%s\">Activa los grupos sociales.</a>"
+msgstr "<a href=\"%s\">启用社交群组。"
 
 #: config/ReferencePosts.php:83
 msgid ""
@@ -103,12 +99,8 @@ msgid ""
 "displayed, the team member has not specified a date but is still accepting "
 "new projects.</p>"
 msgstr ""
-"<p>El desplegable incluye a los miembros del equipo cuya experiencia se "
-"ajusta a su proyecto.</p><p>La disponibilidad mostrada indica la fecha en la "
-"que el miembro del equipo puede empezar a trabajar si reserva sus servicios "
-"hoy. Si no se muestra ninguna disponibilidad, el miembro del equipo no ha "
-"especificado una fecha pero sigue aceptando nuevos proyectos.</p> <p><strong>"
-"Disponibilidad</strong>"
+"<p>下拉菜单包括适合您的项目的团队成员。</p><p>"
+"显示的可用性表示如果您今天预订服务，团队成员可以开始工作的日期。如果未显示可用性，则表示该团队成员未指定日期，但仍在接受新项目。"
 
 #: admin/MetaManager.php:551
 msgid ""
@@ -124,216 +116,205 @@ msgid ""
 "members whose response includes all of the selected options will be "
 "available."
 msgstr ""
-"<strong>Exacta:</strong> Sólo estarán disponibles los miembros del equipo "
-"cuya respuesta coincida exactamente.\n"
-"                                <br><strong>Excluir:</strong> Sólo estarán "
-"disponibles los miembros del equipo cuya respuesta de perfil no incluya la "
-"respuesta del cliente.\n"
-"                                <br><strong>Incluir cualquiera:</strong> "
-"Sólo estarán disponibles los miembros del equipo cuya respuesta incluya "
-"cualquiera de las opciones seleccionadas.\n"
-"                                <br><strong>Incluir todo:</strong> Sólo "
-"estarán disponibles los miembros del equipo cuya respuesta incluya todas las "
-"opciones seleccionadas."
+"<strong>精确：</strong>只有回复完全匹配的团队成员才可用。\n"
+"                                <br><strong>排除：</strong>"
+"只有其个人资料回复不包括客户回复的团队成员才可用。\n"
+"                                <br><strong>Include Any（包括任何选项）：</strong> "
+"只有回复包括任何选定选项的团队成员才可用。\n"
+"                                <br><strong>全部包括：</strong>"
+"只有回复包括所有选定选项的团队成员才可用。"
 
 #: components/Email/EmailTemplateManager.php:275
 msgid "<strong>New Lead from {{site_name}}</strong>"
-msgstr "<strong>Nueva pista de {{site_name}}</strong>"
+msgstr "<strong>来自 {{site_name}} 的新线索</strong"
 
 #: components/Email/EmailTemplateManager.php:364
 msgid "<strong>Your Submitted Info:</strong>"
-msgstr "<strong>Información enviada:</strong>"
+msgstr "<strong>您提交的信息：</strong"
 
 #: components/Email/EmailTemplateManager.php:202
 msgid "<strong>Your Submitted Information:</strong>"
-msgstr "<strong>Su información enviada:</strong>"
+msgstr "<strong>您提交的信息：</strong"
 
 #. %1$s: the client name; %2$s: the service name; %3$s: additional details
 #: components/Email/EmailTemplateManager.php:179
 #, php-format
 msgid "A new booking has been confirmed. %1$s successfully booked %2$s. %3$s"
-msgstr ""
-"Se ha confirmado una nueva reserva. %1$s ha reservado con éxito %2$s. %3$s"
+msgstr "新预订已确认。%1$s 成功预订了 %2$s。%3$s"
 
 #: admin/AdminDashboard.php:188
 msgid "Abandoned"
-msgstr "Abandonado"
+msgstr "被遗弃"
 
 #: components/Email/EmailTemplateManager.php:135
 msgid "Abandoned Booking"
-msgstr "Reservas abandonadas"
+msgstr "放弃预订"
 
 #: components/Booking/SettingsBooking.php:100
 msgid "Abandoned Booking Email"
-msgstr "Correo electrónico de reserva abandonada"
+msgstr "废弃预订电子邮件"
 
 #: admin/SettingsGeneral.php:50
 msgid "Accent Color"
-msgstr "Color de acento"
+msgstr "点缀色"
 
 #: admin/SettingsComponents.php:92
 msgid "Accept and display testimonials from clients."
-msgstr "Acepte y muestre testimonios de clientes."
+msgstr "接受并展示客户的推荐信。"
 
 #: components/Booking/SettingsBooking.php:45
 msgid "Accept Bookings"
-msgstr "Aceptar reservas"
+msgstr "接受预订"
 
 #: admin/SettingsComponents.php:88
 msgid "Accept messages through a contact page and a floating contact button."
-msgstr ""
-"Acepte mensajes a través de una página de contacto y un botón de contacto "
-"flotante."
+msgstr "通过联系页面和浮动联系按钮接受信息。"
 
 #: admin/SettingsComponents.php:84
 msgid "Accept payments at checkout."
-msgstr "Acepte pagos en la caja."
+msgstr "结账时接受付款。"
 
 #: admin/MetaManager.php:863 admin/MetaManager.php:1008
 msgid "Accepted File Types"
-msgstr "Tipos de archivos aceptados"
+msgstr "接受的文件类型"
 
 #. %s: the url of the site
 #: components/Booking/BookingIntent.php:432
 #, php-format
 msgid "Accepted via checkbox on %s"
-msgstr "Aceptado mediante casilla en %s"
+msgstr "通过 %s 上的复选框接受"
 
 #. %s: the link to the project
 #: components/Email/EmailTemplateManager.php:127
 #, php-format
 msgid "Access the project: %s"
-msgstr "Acceder al proyecto: %s"
+msgstr "访问项目：%s"
 
 #: admin/WelcomeMessage.php:307 admin/PluginLinks.php:63
 msgid "Account"
-msgstr "Cuenta"
+msgstr "账户"
 
 #: admin/AdminTableItem.php:771
 msgid "ACH Direct Debit (US Bank Accounts)"
-msgstr "Débito directo ACH (cuentas bancarias de EE.UU.)"
+msgstr "ACH 直接借记（美国银行账户）"
 
 #: includes/Options.php:387
 msgid "ACH Transfer"
-msgstr "Transferencia ACH"
+msgstr "自动转账"
 
 #: admin/partials/booking-payments.php:26 admin/partials/all-bookings.php:25
 msgid "Actions"
-msgstr "Acciones"
+msgstr "行动"
 
 #: admin/AdminTableItem.php:1029 admin/UpgradePage.php:376
 #: admin/partials/leads.php:43
 msgid "Active"
-msgstr "Activo"
+msgstr "活跃"
 
 #: admin/Metaboxes.php:602
 msgid "add"
-msgstr "añada"
+msgstr "增加"
 
 #: admin/Taxonomy.php:193 admin/PostType.php:99
 msgid "Add New"
-msgstr "Añadir nuevo"
+msgstr "添加新内容"
 
 #. %s: singular name of the item
 #. %s: label of the singular item
 #: admin/Taxonomy.php:195 admin/PostType.php:102
 #, php-format
 msgid "Add New %s"
-msgstr "Añadir nuevo %s"
+msgstr "添加新 %s"
 
 #: admin/MetaManager.php:692
 msgid "Add Option"
-msgstr "Añadir opción"
+msgstr "添加选项"
 
 #: admin/WelcomeMessage.php:193
 msgid "Add this website"
-msgstr "Añadir este sitio web"
+msgstr "添加该网站"
 
 #: includes/AlertManager.php:71
 msgid "Add your availability."
-msgstr "Añada su disponibilidad."
+msgstr "添加您的空闲时间。"
 
 #: admin/SettingsGeneral.php:41
 msgid "Adjust global buddyclients styles to match your brand."
-msgstr ""
-"Ajuste los estilos globales de buddyclients para que coincidan con su marca."
+msgstr "调整全局好友风格，使其与您的品牌相匹配。"
 
 #: admin/UpgradePage.php:193
 msgid "Adjust prices dynamically"
-msgstr "Ajuste los precios de forma dinámica"
+msgstr "动态调整价格"
 
 #: admin/AdminInfo.php:129
 msgid "Adjust the plugin styles to match your brand."
-msgstr "Ajusta los estilos del plugin para que coincidan con tu marca."
+msgstr "调整插件样式，使其与您的品牌相匹配。"
 
 #: admin/Nav.php:61
 msgid "Adjustment Fields"
-msgstr "Campos de ajuste"
+msgstr "调整栏"
 
 #: admin/AdminInfo.php:178
 msgid ""
 "Adjustment fields are excellent for add-ons, customization, and additional "
 "details that impact service pricing."
-msgstr ""
-"Los campos de ajuste son excelentes para los complementos, la "
-"personalización y los detalles adicionales que repercuten en el precio del "
-"servicio."
+msgstr "调整字段非常适用于附加项目、定制和影响服务定价的其他细节。"
 
 #: admin/MetaManager.php:365 admin/MetaManager.php:1140
 msgid "Adjustments"
-msgstr "Ajustes"
+msgstr "调整"
 
 #: admin/SettingsGeneral.php:138 components/Email/Email.php:182
 msgid "Admin"
-msgstr "Admin"
+msgstr "管理员"
 
 #: components/Email/SettingsEmail.php:67
 msgid "Admin Email Notifications"
-msgstr "Notificaciones por correo electrónico"
+msgstr "管理员电子邮件通知"
 
 #: admin/Nav.php:52 admin/AdminTableItem.php:269
 #: includes/helpers/components.php:43 admin/partials/payments.php:55
 #: admin/partials/user-agreements.php:48
 msgid "Affiliate"
-msgstr "Afiliado"
+msgstr "附属机构"
 
 #: includes/AlertManager.php:130
 msgid "affiliate"
-msgstr "afiliado"
+msgstr "附属机构"
 
 #: admin/Nav.php:67
 msgid "Affiliate Payments"
-msgstr "Pagos de afiliados"
+msgstr "联属会员付款"
 
 #: includes/ExtensionManager.php:193 includes/ExtensionManager.php:194
 #: admin/AdminPageManager.php:87
 msgid "Affiliate Program"
-msgstr "Programa de afiliados"
+msgstr "联属会员计划"
 
 #: admin/UpgradePage.php:203
 #| msgid "Affiliate Program"
 msgid "Affiliate program"
-msgstr "Programa de afiliados"
+msgstr "联属会员计划"
 
 #: admin/Nav.php:81
 msgid "Affiliates"
-msgstr "Afiliados"
+msgstr "附属机构"
 
 #: admin/AdminTableItem.php:729
 msgid "Affirm (Buy Now, Pay Later)"
-msgstr "Afirmar (Comprar ahora, pagar después)"
+msgstr "Affirm（立即购买，稍后付款）"
 
 #: admin/AdminTableItem.php:730
 msgid "Afterpay / Clearpay (Buy Now, Pay Later)"
-msgstr "Afterpay / Clearpay (Compre ahora, pague después)"
+msgstr "Afterpay / Clearpay（即买即付）"
 
 #: admin/partials/user-list.php:56
 msgid "Agreements"
-msgstr "Acuerdos"
+msgstr "协议"
 
 #: admin/AdminTableItem.php:731
 msgid "Alipay (Digital Wallet - China)"
-msgstr "Alipay (Billetera digital - China)"
+msgstr "支付宝（数字钱包 - 中国）"
 
 #: admin/partials/booking-payments.php:53
 #: admin/partials/booking-payments.php:63 admin/partials/booked-services.php:53
@@ -341,360 +322,345 @@ msgstr "Alipay (Billetera digital - China)"
 #: admin/partials/payments.php:64 admin/partials/user-agreements.php:47
 #: admin/partials/user-agreements.php:85
 msgid "All"
-msgstr "Todos"
+msgstr "全部"
 
 #: components/Email/EmailTemplateManager.php:55
 msgid "All Booking Services Complete"
-msgstr "Todos los servicios de reserva completos"
+msgstr "所有预订服务完成"
 
 #: admin/Nav.php:29
 msgid "All Bookings"
-msgstr "Todas las reservas"
+msgstr "所有预订"
 
 #. %1$s: the names of the services; %2$s: the project name; %3$s: the service status; %4$s: the link to view the project
 #: components/Email/EmailTemplateManager.php:60
 #, php-format
 msgid "All services booked on %1$s for %2$s have been completed: %3$s."
-msgstr ""
-"Se han completado todos los servicios reservados en %1$s para %2$s: %3$s."
+msgstr "在 %1$s 上为 %2$s 预约的所有服务均已完成： %3$s。"
 
 #: components/Booking/SettingsBooking.php:118
 msgid ""
 "All services will be assigned to this person. This overrides all other "
 "assigned team member settings."
-msgstr ""
-"Todos los servicios se asignarán a esta persona. Esto anula todos los demás "
-"ajustes de miembros de equipo asignados."
+msgstr "所有服务都将分配给此人。这将覆盖所有其他指定团队成员的设置。"
 
 #: admin/AdminInfo.php:218
 msgid "all time"
-msgstr "todo el tiempo"
+msgstr "一直以来"
 
 #: admin/SettingsComponents.php:78
 msgid "Allow clients to book services."
-msgstr "Permitir a los clientes reservar servicios."
+msgstr "允许客户预订服务。"
 
 #: admin/SettingsComponents.php:79
 msgid "Allow clients to check out on your website."
-msgstr "Permita a los clientes pasar por caja en su sitio web."
+msgstr "允许客户在您的网站上结账。"
 
 #: admin/SettingsGeneral.php:90
 msgid "Allow Self-Selection"
-msgstr "Permitir la autoselección"
+msgstr "允许自主选择"
 
 #: admin/SettingsComponents.php:91
 msgid ""
 "Allow team members to create bookings on behalf of clients and earn "
 "commission."
-msgstr ""
-"Permita que los miembros del equipo creen reservas en nombre de los clientes "
-"y ganen comisiones."
+msgstr "允许团队成员代表客户创建预订并赚取佣金。"
 
 #: admin/SettingsGeneral.php:96
 msgid "Allow team members to select their own roles."
-msgstr "Permita que los miembros del equipo seleccionen sus propias funciones."
+msgstr "允许团队成员选择自己的角色。"
 
 #: admin/SettingsGeneral.php:86
 msgid "Allow Team to Self-Select Roles"
-msgstr "Permitir que el equipo seleccione sus propias funciones"
+msgstr "允许团队自主选择角色"
 
 #: admin/SettingsComponents.php:86
 msgid "Allow users to earn commission for referring clients."
-msgstr "Permitir a los usuarios ganar comisiones por remitir clientes."
+msgstr "允许用户通过推荐客户赚取佣金。"
 
 #: admin/AdminTableItem.php:732
 msgid "Alma (Buy Now, Pay Later - Installments)"
-msgstr "Alma (Compre ahora, pague después - A plazos)"
+msgstr "阿尔玛（现购自还--分期付款）"
 
 #: admin/AdminTableItem.php:733
 msgid "Amazon Pay (Wallet)"
-msgstr "Amazon Pay (Billetera)"
+msgstr "亚马逊支付（钱包）"
 
 #. Stripe sends an id
 #: admin/partials/booking-payments.php:23 admin/partials/payments.php:22
 msgid "Amount"
-msgstr "Importe"
+msgstr "金额"
 
 #: admin/partials/booking-payments.php:24
 msgid "Amount Received"
-msgstr "Importe percibido"
+msgstr "收到的金额"
 
 #: components/Booking/SettingsBooking.php:51
 msgid "Are you currently accepting bookings?"
-msgstr "¿Aceptan reservas actualmente?"
+msgstr "目前是否接受预订？"
 
 #: admin/AdminTableItem.php:562
 msgid ""
 "Are you sure you want to delete this booking? This action cannot be undone."
-msgstr ""
-"¿Está seguro de que desea eliminar esta reserva? Esta acción no se puede "
-"deshacer."
+msgstr "您确定要删除此预订吗？此操作无法撤销。"
 
 #. %s: the new status (Paid or Unpaid)
 #: admin/AdminTableItem.php:518 admin/AdminTableItem.php:610
 #, php-format
 msgid "Are you sure you want to mark this as %s?"
-msgstr "¿Estás seguro de que quieres marcar esto como %s?"
+msgstr "您确定要将此标记为 %s？"
 
 #: admin/MetaManager.php:317 admin/MetaManager.php:1092
 msgid "Assigned Team Member"
-msgstr "Miembro del equipo asignado"
+msgstr "指定小组成员"
 
 #: admin/MetaManager.php:784
 msgid "Attach Count To"
-msgstr "Adjuntar recuento a"
+msgstr "将计数附加到"
 
 #: admin/AdminInfo.php:185
 msgid ""
 "Attaching a rate type to the project means the client will enter the number "
 "once, and that figure will be applied to all selected services using that "
 "rate type."
-msgstr ""
-"Adjuntar un tipo de tarifa al proyecto significa que el cliente introducirá "
-"la cifra una vez, y esa cifra se aplicará a todos los servicios "
-"seleccionados que utilicen ese tipo de tarifa."
+msgstr "为项目附加费率类型意味着客户只需输入一次数字，该数字就会应用到使用该费率类型的所有选定服务。"
 
 #: admin/partials/leads.php:23
 msgid "Auto Email"
-msgstr "Auto Email"
+msgstr "自动电子邮件"
 
 #: includes/ExtensionManager.php:209 includes/ExtensionManager.php:210
 #: includes/helpers/components.php:44
 msgid "Availability"
-msgstr "Disponibilidad"
+msgstr "可用性"
 
 #: components/Booking/BookingForm.php:854
 msgid "Available"
-msgstr "Disponible"
+msgstr "可用"
 
 #. Meta box ID
 #: components/Email/EmailTemplateManager.php:507
 msgid "Available Placeholders"
-msgstr "Marcadores de posición disponibles"
+msgstr "可用占位符"
 
 #: admin/AdminDashboard.php:85
 msgid "Average Booking Value"
-msgstr "Valor medio de la reserva"
+msgstr "平均预订价值"
 
 #: admin/AdminTableItem.php:735
 msgid "Bacs Direct Debit (UK)"
-msgstr "Adeudo directo Bacs (Reino Unido)"
+msgstr "Bacs 直接借记（英国）"
 
 #: admin/AdminTableItem.php:736
 msgid "Bancontact (Bank Redirect - Belgium)"
-msgstr "Bancontact (Redirección bancaria - Bélgica)"
+msgstr "Bancontact（银行转接 - 比利时）"
 
 #: includes/Options.php:388
 msgid "Bank Transfer"
-msgstr "Transferencia bancaria"
+msgstr "银行转账"
 
 #: admin/AdminTableItem.php:734
 msgid "BECS Direct Debit (Australia)"
-msgstr "Adeudo directo BECS (Australia)"
+msgstr "BECS 直接借记（澳大利亚）"
 
 #: admin/AdminTableItem.php:737
 msgid "BLIK (Single-use Payment - Poland)"
-msgstr "BLIK (Pago único - Polonia)"
+msgstr "BLIK（一次性付款 - 波兰）"
 
 #: includes/FormField.php:471
 msgid "bold italic underline | undo redo"
-msgstr "negrita cursiva subrayado | deshacer rehacer"
+msgstr "粗体斜体下划线 | 撤销重做"
 
 #: admin/AdminTableItem.php:738
 msgid "Boleto (Voucher-based - Brazil)"
-msgstr "Boleto (basado en vales - Brasil)"
+msgstr "Boleto（凭单式 - 巴西）"
 
 #: components/Service/ServicePost.php:107
 msgid "Book Now"
-msgstr "Reserve ahora"
+msgstr "立即预订"
 
 #: components/Checkout/Checkout.php:311
 msgid "Book services here."
-msgstr "Reserve servicios aquí."
+msgstr "在此预订服务。"
 
 #: admin/AdminPageManager.php:188
 msgid "Booked Services"
-msgstr "Servicios reservados"
+msgstr "预订服务"
 
 #: includes/helpers/components.php:37 admin/partials/booked-services.php:63
 msgid "Booking"
-msgstr "Reservas"
+msgstr "预订"
 
 #: components/Email/EmailTemplateManager.php:106
 msgid "booking form"
-msgstr "formulario de reserva"
+msgstr "预订表"
 
 #: admin/partials/booking-payments.php:70
 msgid "Booking Intent"
-msgstr "Intención de reserva"
+msgstr "预订意向"
 
 #: admin/AdminPageManager.php:195 admin/partials/booking-payments.php:47
 msgid "Booking Payments"
-msgstr "Reserva de pagos"
+msgstr "预订付款"
 
 #: admin/AdminDashboard.php:763
 msgid "Booking Success"
-msgstr "Éxito de reservas"
+msgstr "成功预订"
 
 #: admin/AdminDashboard.php:636
 msgid "Booking Success Over Time"
-msgstr "Éxito de las reservas a lo largo del tiempo"
+msgstr "长期成功预订"
 
 #: admin/Nav.php:47 admin/AdminPageManager.php:94
 #: admin/partials/booked-services.php:47 admin/partials/all-bookings.php:53
 #: components/Booking/SettingsBooking.php:41
 msgid "Bookings"
-msgstr "Reservas"
+msgstr "预订"
 
 #: admin/AdminPageManager.php:158
 msgid "Bookings Dashboard"
-msgstr "Panel de reservas"
+msgstr "预订仪表板"
 
 #: admin/PostTypeManager.php:156 includes/helpers/components.php:41
 #: components/Brief/Brief.php:169
 msgid "Brief"
-msgstr "Breve"
+msgstr "简介"
 
 #: admin/PostTypeManager.php:171
 msgid "Brief Field"
-msgstr "Breve campo"
+msgstr "简要领域"
 
 #: admin/Nav.php:73 admin/PostTypeManager.php:172
 msgid "Brief Fields"
-msgstr "Campos breves"
+msgstr "简要领域"
 
 #: admin/MetaManager.php:384 admin/MetaManager.php:1155 admin/TaxManager.php:50
 msgid "Brief Type"
-msgstr "Tipo breve"
+msgstr "简要类型"
 
 #: admin/MetaManager.php:955 admin/Nav.php:72 admin/TaxManager.php:51
 #: admin/AdminColumns.php:54 admin/AdminColumns.php:117
 msgid "Brief Types"
-msgstr "Tipos breves"
+msgstr "简要类型"
 
 #. %s: the name of the project
 #: components/Email/EmailTemplateManager.php:78
 #, php-format
 msgid "Brief updated for %s"
-msgstr "Resumen actualizado para %s"
+msgstr "为 %s 更新的简介"
 
 #: includes/SinglePost.php:293 admin/Nav.php:71 admin/PostTypeManager.php:157
 msgid "Briefs"
-msgstr "Calzoncillos"
+msgstr "简报"
 
 #: admin/AdminInfo.php:224
 msgid "Briefs are generated automatically when clients book services."
-msgstr ""
-"Los informes se generan automáticamente cuando los clientes reservan "
-"servicios."
+msgstr "当客户预订服务时，会自动生成 Brief。"
 
 #: includes/SinglePost.php:367
 msgid "Briefs are not enabled."
-msgstr "Los breves no están habilitados."
+msgstr "简报未启用。"
 
-#: buddyclients-free.php:69
+#: buddyclients-lite.php:69
 msgid "BuddyClients Error"
-msgstr "Error BuddyClients"
-
-#. Name of the plugin
-#| msgid "BuddyClients Premium"
-msgid "BuddyClients Free"
-msgstr "BuddyClients Gratis"
+msgstr "好友客户错误"
 
 #. Description of the plugin
 msgid ""
 "BuddyClients is a flexible and comprehensive platform for any service-based "
 "business. Compatible with BuddyPress and BuddyBoss."
-msgstr ""
-"BuddyClients es una plataforma flexible y completa para cualquier negocio "
-"basado en servicios. Compatible con BuddyPress y BuddyBoss."
+msgstr "BuddyClients 是一个灵活而全面的平台，适用于任何基于服务的业务。与 BuddyPress 和 BuddyBoss 兼容。"
 
-#: buddyclients-free.php:123
+#. Name of the plugin
+#, fuzzy
+#| msgid "BuddyClients Free"
+msgid "Buddyclients Lite"
+msgstr "BuddyClients 免费"
+
+#: buddyclients-lite.php:123
 msgid "BuddyPress is missing."
-msgstr "Falta BuddyPress."
+msgstr "缺少 BuddyPress。"
 
 #: admin/UpgradePage.php:199
 msgid "Business"
-msgstr "Empresas"
+msgstr "商业"
 
 #. %s: the policies the user is agreeing to (e.g. privacy policy and service terms)
 #: components/Checkout/Checkout.php:481
 #, php-format
 msgid "By creating an account, you agree to the %s."
-msgstr "Al crear una cuenta, acepta las %s."
+msgstr "创建帐户即表示您同意 %s。"
 
 #: admin/SettingsGeneral.php:113
 msgid "Call to Action"
-msgstr "Llamamiento a la acción"
+msgstr "行动呼吁"
 
 #: admin/MetaManager.php:567
 msgid "Can clients select multiple options for this field?"
-msgstr "¿Pueden los clientes seleccionar varias opciones para este campo?"
+msgstr "客户能否为该字段选择多个选项？"
 
 #: admin/partials/booked-services.php:58
 #: components/Booking/BookedService/ServiceStatusForm.php:134
 #: components/Booking/BookedService/BookedServiceList.php:405
 msgid "Canceled"
-msgstr "Cancelado"
+msgstr "已取消"
 
 #: components/Booking/BookedService/CancelRequestForm.php:110
 msgid "Cancellation reason..."
-msgstr "Motivo de la cancelación..."
+msgstr "取消原因..."
 
 #: components/Email/EmailTemplateManager.php:297
 msgid "Cancellation Request"
-msgstr "Solicitud de anulación"
+msgstr "取消申请"
 
 #: components/Email/EmailTemplateManager.php:296
 msgid "Cancellation Request Admin Notification"
-msgstr "Solicitud de anulación Notificación administrativa"
+msgstr "取消申请 管理通知"
 
 #: admin/partials/booked-services.php:57
 #: components/Booking/BookedService/ServiceStatusForm.php:130
 #: components/Booking/BookedService/BookedServiceList.php:404
 msgid "Cancellation Requested"
-msgstr "Anulación solicitada"
+msgstr "申请取消"
 
 #: components/Booking/SettingsBooking.php:63
 msgid "Cancellation Window"
-msgstr "Ventana de cancelación"
+msgstr "取消窗口"
 
 #: admin/AdminTableItem.php:741
 msgid "Cash App Pay"
-msgstr "Cash App Pay"
+msgstr "现金 App 支付"
 
 #: admin/partials/email-log.php:72
 msgid "Change setting."
-msgstr "Cambia el ajuste."
+msgstr "更改设置。"
 
 #: admin/SettingsGeneral.php:114
 msgid ""
 "Change the text and link for the CTA button at the top right of the page. "
 "This setting currently only works with the BuddyBoss Theme.."
-msgstr ""
-"Cambiar el texto y el enlace para el botón CTA en la parte superior derecha "
-"de la página. Este ajuste actualmente sólo funciona con el Tema BuddyBoss.."
+msgstr "更改页面右上方 CTA 按钮的文字和链接。此设置目前仅适用于 BuddyBoss 主题。"
 
 #: BuddyClientsFree-class.php:48 BuddyClientsFree-class.php:56
 msgid "Cheatin&#8217; huh?"
-msgstr "Tramposo, ¿eh?"
+msgstr "作弊？"
 
 #: admin/MetaManager.php:972
 msgid "Checkbox"
-msgstr "Casilla de verificación"
+msgstr "复选框"
 
 #: admin/MetaManager.php:465 admin/MetaManager.php:651
 msgid "Checkboxes"
-msgstr "Casillas de verificación"
+msgstr "复选框"
 
 #: includes/helpers/components.php:38
 msgid "Checkout"
-msgstr "Pedido"
+msgstr "结账"
 
 #: components/Booking/BookingFormSubmission.php:64
 #| msgid "<p>Checkout is unavailable at this time.</p>"
 msgid "Checkout is unavailable at this time."
-msgstr "El pago no está disponible en este momento."
+msgstr "目前无法结账。"
 
 #. %s: the url to add xprofile fields
 #: admin/MetaManager.php:514
@@ -702,63 +668,54 @@ msgstr "El pago no está disponible en este momento."
 msgid ""
 "Choose from checkbox and dropdown Xprofile fields. <a href=\"%s\">Create a "
 "new field.</a>"
-msgstr ""
-"Elija entre los campos de casilla de verificación y desplegable Xprofile. <a "
-"href=\"%s\">Crear un nuevo campo.</a>"
+msgstr "从复选框和下拉 Xprofile 字段中选择。<a href=\"%s\">创建新字段。"
 
 #. %s: page type (e.g., 'service', 'product')
 #: admin/SettingsPages.php:57
 #, php-format
 msgid "Choose or create your %s pages."
-msgstr "Elija o cree sus páginas %s."
+msgstr "选择或创建您的 %s 页面。"
 
 #: includes/FormField.php:716
 msgid "Clear Signature"
-msgstr "Firma clara"
+msgstr "清晰签名"
 
 #: admin/AdminInfo.php:97
 msgid ""
 "Click each booking's services to view detailed information about each of the "
 "services, including each service's team member, status, and files."
-msgstr ""
-"Haga clic en los servicios de cada reserva para ver información detallada "
-"sobre cada uno de los servicios, incluidos los miembros del equipo de cada "
-"servicio, el estado y los archivos."
+msgstr "点击每个预订的服务，可查看每个服务的详细信息，包括每个服务的团队成员、状态和文件。"
 
 #: admin/AdminInfo.php:266
 msgid ""
 "Click each file to view and manage it. If a file is not showing, ensure it "
 "has been attached correctly."
-msgstr ""
-"Haga clic en cada archivo para verlo y gestionarlo. Si un archivo no aparece,"
-" asegúrese de que se ha adjuntado correctamente."
+msgstr "单击每个文件可查看和管理该文件。如果文件未显示，请确保已正确附加。"
 
 #: admin/Metaboxes.php:776
 msgid "Click Here"
-msgstr "Haga clic aquí"
+msgstr "点击此处"
 
 #: components/Email/EmailTemplateManager.php:167
 #: components/Email/EmailTemplateManager.php:187
 msgid "Click here"
-msgstr "Pulse aquí"
+msgstr "点击此处"
 
 #: components/Email/EmailTemplateManager.php:352
 msgid "Click here to finalize your booking."
-msgstr "Haga clic aquí para finalizar su reserva."
+msgstr "点击此处完成预订。"
 
 #. %s: the click action (e.g. view)
 #: components/Brief/GroupBriefs.php:123
 #, php-format
 msgid "Click to %s."
-msgstr "Haga clic en %s."
+msgstr "点击 %s。"
 
 #: admin/AdminInfo.php:126
 msgid ""
 "Clicking the \"Create Page\" button will automatically insert the shortcode "
 "into the page."
-msgstr ""
-"Al hacer clic en el botón \"Crear página\" se insertará automáticamente el "
-"shortcode en la página."
+msgstr "点击 \"创建页面 \"按钮将自动把简码插入页面。"
 
 #: admin/MetaManager.php:1060 admin/AdminColumns.php:75
 #: admin/AdminColumns.php:126 admin/partials/booking-payments.php:18
@@ -768,88 +725,88 @@ msgstr ""
 #: components/Booking/BookedService/BookedServiceList.php:104
 #: components/Booking/BookedService/BookedServiceList.php:244
 msgid "Client"
-msgstr "Cliente"
+msgstr "客户"
 
 #: components/Booking/BookedService/BookedServiceList.php:83
 #: components/Booking/BookedService/BookedServiceList.php:94
 #: components/Booking/BookedService/BookedServiceList.php:245
 msgid "Client Fee"
-msgstr "Honorarios"
+msgstr "客户费用"
 
 #: admin/Nav.php:32
 msgid "Client Payments"
-msgstr "Pagos de clientes"
+msgstr "客户付款"
 
 #: admin/AdminColumns.php:60 admin/AdminColumns.php:78
 msgid "Client Rate"
-msgstr "Tarifa cliente"
+msgstr "客户费率"
 
 #: admin/UpgradePage.php:204
 msgid "Client testimonials"
-msgstr "Testimonios de clientes"
+msgstr "客户评价"
 
 #: admin/SettingsGeneral.php:66
 msgid "Client Types"
-msgstr "Tipos de clientes"
+msgstr "客户类型"
 
 #: admin/MetaManager.php:72
 msgid "Cloning this class is not allowed."
-msgstr "La clonación de esta clase no está permitida."
+msgstr "不允许克隆该类。"
 
 #: components/Booking/SettingsBooking.php:49
 msgid "Closed"
-msgstr "Cerrado"
+msgstr "关闭"
 
 #: admin/partials/booked-services.php:56
 #: components/Booking/BookedService/ServiceStatusForm.php:126
 #: components/Booking/BookedService/BookedServiceList.php:406
 msgid "Complete"
-msgstr "Complete"
+msgstr "完整"
 
 #: components/Brief/GroupBriefs.php:120
 msgid "complete"
-msgstr "completa"
+msgstr "完整"
 
 #: components/Booking/BookedService/BookedServiceList.php:547
 msgid "Complete "
-msgstr "Complete"
+msgstr "完整"
 
 #: components/Checkout/Checkout.php:558 components/Checkout/Checkout.php:576
 msgid "Complete Checkout"
-msgstr "Pago completo"
+msgstr "完成结账"
 
 #: components/Checkout/Confirmation.php:333
 msgid "Complete the briefs for "
-msgstr "Complete los resúmenes para"
+msgstr "完成以下简介"
 
 #. %1$s: url to complete agreement; %2$s: the type of agreement (e.g. affiliate or team)
 #: includes/AlertManager.php:156
 #, php-format
 msgid "Complete your <a href=\"%1$s\">%2$s agreement</a>."
-msgstr "Complete su <a href=\"%1$s\">%2$s acuerdo</a>."
+msgstr "完成您的 <a href=\"%1$s\">%2$s 协议</a>。"
 
 #. %1$s: url to complete agreement; %2$s: the type of agreement (e.g. affiliate or team)
 #: includes/AlertManager.php:147
 #, php-format
 msgid "Complete your <a href=\"%1$s\">new %2$s agreement</a>."
-msgstr "Complete su <a href=\"%1$s\">nuevo acuerdo %2$s</a>."
+msgstr "完成您的 <a href=\"%1$s\"> 新 %2$s 协议</a>。"
 
 #: admin/AdminDashboard.php:181
 msgid "Completed"
-msgstr "Completado"
+msgstr "已完成"
 
 #: admin/Nav.php:45 admin/SettingsComponents.php:32
 #: admin/SettingsComponents.php:36 admin/AdminPageManager.php:73
 msgid "Components"
-msgstr "Componentes"
+msgstr "组件"
 
 #: components/Checkout/Checkout.php:367
 msgid "Confirm Your Booking"
-msgstr "Confirme su reserva"
+msgstr "确认预订"
 
 #: includes/FinalDeletionSubmission.php:46
 msgid "Confirmation does not match. Files not deleted."
-msgstr "La confirmación no coincide. Archivos no eliminados."
+msgstr "确认不匹配。文件未删除。"
 
 #. %s: the name of the plugin (BuddyClients)
 #: admin/WelcomeMessage.php:155
@@ -858,215 +815,191 @@ msgid ""
 "Congratulations on upgrading to %s! We're excited to have you using the full "
 "version of our plugin, packed with even more features to help your business "
 "thrive."
-msgstr ""
-"¡Enhorabuena por actualizar a %s! Estamos encantados de que utilices la "
-"versión completa de nuestro plugin, repleta de aún más funciones para que tu "
-"negocio prospere."
+msgstr "恭喜您升级到 %s！我们很高兴您能使用我们的完整版插件，它具有更多功能，可帮助您的业务蓬勃发展。"
 
 #: admin/AdminInfo.php:135
 msgid ""
 "Connect your Stripe account to BuddyClients in order to accept payments."
-msgstr "Conecta tu cuenta de Stripe a BuddyClients para aceptar pagos."
+msgstr "将您的 Stripe 账户连接至 BuddyClients，以便接受付款。"
 
 #: admin/Nav.php:53 includes/helpers/components.php:45
 msgid "Contact"
-msgstr "Póngase en contacto con"
+msgstr "联系方式"
 
 #: includes/helpers/contact.php:43
 #, php-format
 msgid "Contact %s"
-msgstr "Contacto %s"
+msgstr "联系人 %s"
 
 #. %s: the site name
 #: includes/helpers/contact.php:43
 #, php-format
 msgid "contact %s"
-msgstr "contacto %s"
+msgstr "联系 %s"
 
 #: admin/AdminPageManager.php:107
 msgid "Contact & Leads"
-msgstr "Contactos"
+msgstr "联系方式和线索"
 
 #: admin/UpgradePage.php:207
 msgid "Contact form"
-msgstr "Formulario de contacto"
+msgstr "联系表格"
 
 #: components/Email/EmailTemplateManager.php:317
 msgid "Contact Form Admin Notification"
-msgstr "Notificación del administrador del formulario de contacto"
+msgstr "联系表单管理通知"
 
 #: components/Email/EmailTemplateManager.php:194
 msgid "Contact Form User Confirmation"
-msgstr "Formulario de contacto Confirmación de usuario"
+msgstr "联系表单用户确认"
 
 #: components/Checkout/Confirmation.php:374
 msgid "contact us"
-msgstr "contacto"
+msgstr "联系我们"
 
 #: admin/AdminDashboard.php:715
 msgid "Conversion Rate"
-msgstr "Tasa de conversión"
+msgstr "转换率"
 
 #: admin/AdminTableItem.php:794
 msgid "Copy pay link"
-msgstr "Copiar enlace de pago"
+msgstr "复制支付链接"
 
 #: admin/AdminDashboard.php:450
 msgid "Count"
-msgstr "Cuenta"
+msgstr "计数"
 
 #: components/Booking/BookingForm.php:441
 msgid "Create a New Project"
-msgstr "Crear un nuevo proyecto"
+msgstr "创建新项目"
 
 #: admin/AdminInfo.php:176
 msgid ""
 "Create adjustment fields for the most flexibility in your services' "
 "customization and pricing."
-msgstr ""
-"Cree campos de ajuste para obtener la máxima flexibilidad en la "
-"personalización y tarificación de sus servicios."
+msgstr "创建调整字段，使您的服务定制和定价更具灵活性。"
 
 #: admin/AdminInfo.php:229
 msgid ""
 "Create brief types here. When creating services, select the applicable brief "
 "type(s). A brief of each type will automatically be generated when the "
 "service is booked."
-msgstr ""
-"Cree aquí los tipos de escritos. Al crear servicios, seleccione los tipos de "
-"instrucciones aplicables. Se generará automáticamente un informe de cada "
-"tipo cuando se reserve el servicio."
+msgstr "在此创建摘要类型。创建服务时，请选择适用的摘要类型。预订服务时，将自动生成每种类型的简介。"
 
 #: admin/SettingsComponents.php:90
 msgid "Create custom quotes for one-off projects."
-msgstr "Cree presupuestos personalizados para proyectos puntuales."
+msgstr "为一次性项目创建自定义报价。"
 
 #: admin/AdminInfo.php:232
 msgid ""
 "Create fields for each brief type. For each field, specify how the field "
 "should be displayed on the brief form, including the field type, file upload "
 "settings, and checkbox or dropdown options, as applicable."
-msgstr ""
-"Cree campos para cada tipo de informe. Para cada campo, especifique cómo "
-"debe mostrarse en el formulario, incluido el tipo de campo, la configuración "
-"de carga de archivos y las opciones de casilla de verificación o desplegable,"
-" según corresponda."
+msgstr "为每种摘要类型创建字段。为每个字段指定字段在摘要表单上的显示方式，包括字段类型、文件上传设置以及复选框或下拉选项（如适用）。"
 
 #: admin/AdminInfo.php:198
 msgid ""
 "Create file upload types to require different types of files based on the "
 "service(s) selected."
-msgstr ""
-"Cree tipos de carga de archivos para requerir distintos tipos de archivos en "
-"función de los servicios seleccionados."
+msgstr "创建文件上传类型，根据所选服务要求不同类型的文件。"
 
 #: admin/AdminInfo.php:254
 msgid "Create legal agreements for your team members, affiliates, and clients."
-msgstr ""
-"Cree acuerdos legales para los miembros de su equipo, afiliados y clientes."
+msgstr "为团队成员、关联公司和客户创建法律协议。"
 
 #. %s: label of the field
 #: admin/SettingsPage.php:638
 #, php-format
 msgid "Create New %s"
-msgstr "Crear nuevo %s"
+msgstr "创建新 %s"
 
 #: admin/SettingsPage.php:568
 msgid "Create Page"
-msgstr "Crear página"
+msgstr "创建页面"
 
 #: components/Checkout/Checkout.php:438
 msgid "Create password"
-msgstr "Crear contraseña"
+msgstr "创建密码"
 
 #: admin/SettingsComponents.php:80
 msgid "Create services."
-msgstr "Crear servicios."
+msgstr "创建服务。"
 
 #: admin/AdminInfo.php:173
 msgid ""
 "Create your services to get started. Only valid services will appear on the "
 "booking form."
-msgstr ""
-"Cree sus servicios para empezar. Sólo los servicios válidos aparecerán en el "
-"formulario de reserva."
+msgstr "开始创建您的服务。只有有效的服务才会出现在预订表上。"
 
 #: admin/partials/booking-payments.php:19
 msgid "Created"
-msgstr "Creado"
+msgstr "创建"
 
 #: admin/AdminTableItem.php:739
 msgid "Credit / Debit Card"
-msgstr "Tarjeta de crédito/débito"
+msgstr "信用卡/借记卡"
 
 #: components/Email/SettingsEmail.php:187
 msgid "Critical to plugin function"
-msgstr "Fundamental para el funcionamiento del plugin"
+msgstr "对插件功能至关重要"
 
 #: admin/SettingsGeneral.php:131
 msgid "CTA Button Link"
-msgstr "Enlace al botón CTA"
+msgstr "CTA 按钮链接"
 
 #: admin/SettingsGeneral.php:126
 msgid "CTA Button Text"
-msgstr "Texto del botón CTA"
+msgstr "CTA 按钮文本"
 
 #: admin/AdminTable.php:335
 msgid "Current Page"
-msgstr "Página actual"
+msgstr "当前页"
 
 #. %s: the time to retain email logs (e.g. '30 days' or 'always')
 #: admin/AdminInfo.php:217
 #, php-format
 msgid "Currently retaining email logs for <strong>%s</strong>."
-msgstr ""
-"Actualmente retiene registros de correo electrónico para <strong>%s</strong>."
+msgstr "目前保留<strong>%s</strong>的电子邮件日志。"
 
 #: admin/PostTypeManager.php:210
 msgid "Custom Quote"
-msgstr "Presupuesto personalizado"
+msgstr "自定义报价"
 
 #: admin/Nav.php:87 admin/PostTypeManager.php:211
 msgid "Custom Quotes"
-msgstr "Presupuestos personalizados"
+msgstr "自定义报价"
 
 #: admin/UpgradePage.php:205
 #| msgid "Custom Quotes"
 msgid "Custom quotes"
-msgstr "Presupuestos personalizados"
+msgstr "自定义报价"
 
 #: admin/AdminTableItem.php:742
 msgid "Customer Balance Payment"
-msgstr "Pago del saldo del cliente"
+msgstr "客户余额付款"
 
 #: admin/AdminInfo.php:251
 msgid ""
 "Customize legal agreements for specific individuals. The content of your "
 "legal modification will be appended to the legal agreement for the user(s) "
 "you select."
-msgstr ""
-"Personalice acuerdos legales para individuos específicos. El contenido de su "
-"modificación legal se adjuntará al acuerdo legal del usuario o usuarios que "
-"seleccione."
+msgstr "为特定个人定制法律协议。您的法律修改内容将附加到您所选用户的法律协议中。"
 
 #: admin/AdminInfo.php:202
 msgid ""
 "Customize the BuddyClients plugin emails using these templates. Dynamic "
 "values are enclosed in double brackets, e.g. {{site_name}}."
-msgstr ""
-"Personaliza los correos electrónicos del plugin BuddyClients utilizando "
-"estas plantillas. Los valores dinámicos van entre corchetes dobles, por "
-"ejemplo {{site_name}}."
+msgstr "使用这些模板自定义 BuddyClients 插件的电子邮件。动态值用双括号括起来，例如 {{site_name}}。"
 
 #. %s: the link to customize email templates
 #: admin/AdminInfo.php:151
 #, php-format
 msgid "Customize your %s."
-msgstr "Personaliza tus %s."
+msgstr "定制您的 %s。"
 
 #: admin/AdminDashboard.php:76
 msgid "Dashboard"
-msgstr "Cuadro de mandos"
+msgstr "仪表板"
 
 #: admin/partials/booked-services.php:19 admin/partials/leads.php:21
 #: admin/partials/user-agreements.php:20 admin/partials/all-bookings.php:19
@@ -1075,102 +1008,94 @@ msgstr "Cuadro de mandos"
 #: components/Booking/BookedService/BookedServiceList.php:102
 #: components/Booking/BookedService/BookedServiceList.php:242
 msgid "Date"
-msgstr "Fecha"
+msgstr "日期"
 
 #: admin/partials/payments.php:19
 msgid "Date Created"
-msgstr "Fecha de creación"
+msgstr "创建日期"
 
 #: admin/partials/booking-payments.php:25
 msgid "Date Paid"
-msgstr "Fecha de pago"
+msgstr "付款日期"
 
 #: admin/AdminDashboard.php:385
 msgid "Date Range "
-msgstr "Intervalo de fechas"
+msgstr "日期范围"
 
 #: admin/partials/user-list.php:53
 msgid "Date Registered"
-msgstr "Fecha de registro"
+msgstr "注册日期"
 
 #: components/Email/SettingsEmail.php:95 components/Email/SettingsEmail.php:99
 #| msgid "7 Days"
 msgid "Days"
-msgstr "Días"
+msgstr "天数"
 
 #: admin/AdminInfo.php:218
 msgid "days"
-msgstr "días"
+msgstr "天数"
 
 #: admin/SettingsIntegrations.php:70
 msgid "Default"
-msgstr "Por defecto"
+msgstr "默认值"
 
 #: admin/SettingsGeneral.php:72
 msgid "Default Client Type"
-msgstr "Tipo de cliente por defecto"
+msgstr "默认客户类型"
 
 #: admin/AdminInfo.php:168
 msgid ""
 "Define the rules and content for the help popup and lead generation popup."
-msgstr ""
-"Defina las reglas y el contenido de la ventana emergente de ayuda y la "
-"ventana emergente de generación de clientes potenciales."
+msgstr "定义帮助弹出窗口和线索生成弹出窗口的规则和内容。"
 
 #: admin/AdminInfo.php:174
 msgid ""
 "Define your service types. Services will be grouped by type on the booking "
 "form."
-msgstr ""
-"Defina sus tipos de servicios. Los servicios se agruparán por tipo en el "
-"formulario de reserva."
+msgstr "定义服务类型。预订表上的服务将按类型分组。"
 
 #: admin/AdminTableItem.php:565
 msgid "Delete booking"
-msgstr "Borrar reserva"
+msgstr "删除预订"
 
 #: includes/UserFilesForm.php:222
 msgid "Delete Files"
-msgstr "Eliminar archivos"
+msgstr "删除文件"
 
 #: admin/partials/booking-payments.php:64
 #: components/Booking/BookingPayment.php:288
 msgid "Deposit"
-msgstr "Depósito"
+msgstr "存款"
 
 #: components/Booking/SettingsBooking.php:93
 msgid "Deposit Flat"
-msgstr "Depósito Piso"
+msgstr "存款单位"
 
 #: components/Booking/SettingsBooking.php:88
 msgid "Deposit Percentage"
-msgstr "Porcentaje de depósito"
+msgstr "存款百分比"
 
 #: admin/MetaManager.php:536 admin/MetaManager.php:622
 #: admin/MetaManager.php:668 admin/MetaManager.php:770
 #: admin/MetaManager.php:839 admin/AdminColumns.php:90
 msgid "Description"
-msgstr "Descripción"
+msgstr "说明"
 
 #: admin/partials/email-log.php:17
 msgid "Details"
-msgstr "Detalles"
+msgstr "详细信息"
 
 #: admin/SettingsIntegrations.php:79
 msgid ""
 "Determine how sensitive the spam filter should be. Thresholds above 0.5 may "
 "block valid submissions."
-msgstr ""
-"Determina cómo de sensible debe ser el filtro de spam. Los umbrales "
-"superiores a 0,5 pueden bloquear envíos válidos."
+msgstr "确定垃圾邮件过滤器的敏感度。阈值超过 0.5 可能会阻止有效提交。"
 
 #: components/Booking/SettingsBooking.php:42
 msgid ""
 "Determine the parameters for new bookings. Enable manual bookings in Sales "
 "settings."
-msgstr ""
-"Determine los parámetros de las nuevas reservas. Habilite las reservas "
-"manuales en los ajustes de Ventas."
+msgstr "确定新预订的参数。在销售设置中启用手动预订。"
 
 #: components/Booking/SettingsBooking.php:76
 msgid ""
@@ -1179,251 +1104,236 @@ msgid ""
 "the remainder of the fee on completion of all services. Ensure the \"Final "
 "Payment\" email is enabled in Email settings."
 msgstr ""
-"Determine si desea solicitar un depósito o el pago completo por adelantado "
-"cuando los clientes contraten los servicios. Si se cobra un depósito, los "
-"clientes recibirán un correo electrónico para pagar el resto de la tarifa al "
-"finalizar todos los servicios. Asegúrese de que el correo electrónico de "
-"\"Pago final\" está activado en la configuración de correo electrónico."
+"在客户预订服务时，确定是要求预付定金还是全额费用。如果收取定金，客户将收到一封电子邮件，要求在完成所有服务后支付剩余费用。确保在电子邮件设置中启用 "
+"\"最终付款 \"电子邮件。"
 
 #: includes/Options.php:389
 msgid "Digital Check"
-msgstr "Cheque digital"
+msgstr "数字检查"
 
 #: admin/SettingsIntegrations.php:44 admin/SettingsGeneral.php:121
 #: admin/SettingsGeneral.php:145
 msgid "Disable"
-msgstr "Desactivar"
+msgstr "禁用"
 
 #: components/Booking/SettingsBooking.php:83
 msgid "Disable - Require full fee up front"
-msgstr "Desactivar - Exigir el pago completo por adelantado"
+msgstr "禁用 - 要求预付全部费用"
 
 #: admin/AdminInfo.php:73
 msgid "Disable tips"
-msgstr "Desactivar consejos"
+msgstr "禁用提示"
 
 #: admin/MetaManager.php:969
 msgid "Disabled"
-msgstr "Discapacitados"
+msgstr "残疾"
 
 #: components/Email/SettingsEmail.php:44
 msgid "Disabling starred emails may impact plugin functionality."
-msgstr ""
-"La desactivación de los correos electrónicos destacados puede afectar a la "
-"funcionalidad del plugin."
+msgstr "禁用星级邮件可能会影响插件功能。"
 
 #: admin/WelcomeMessage.php:359
 msgid "Dismiss this message"
-msgstr "Desestimar este mensaje"
+msgstr "删除此信息"
 
 #: admin/SettingsGeneral.php:123 admin/SettingsGeneral.php:148
 msgid "Display plugin info messages in the admin area."
-msgstr ""
-"Mostrar mensajes de información del plugin en el área de administración."
+msgstr "在管理区显示插件信息。"
 
 #: admin/SettingsComponents.php:87
 msgid "Display the next date each team member is available."
-msgstr ""
-"Muestra la próxima fecha en la que cada miembro del equipo estará disponible."
+msgstr "显示每个团队成员的下一个可用日期。"
 
 #: includes/PDF.php:565
 msgid "download"
-msgstr "descargar"
+msgstr "下载"
 
 #. %s: the PDF type (e.g. 'Agreement')
 #: includes/PDF.php:537
 #, php-format
 msgid "Download %s PDF"
-msgstr "Descargar %s PDF"
+msgstr "下载 %s PDF"
 
 #: includes/FileHandler.php:429
 msgid "Download File"
-msgstr "Descargar archivo"
+msgstr "下载文件"
 
 #: includes/FileHandler.php:429
 msgid "Download File: "
-msgstr "Descargar archivo:"
+msgstr "下载文件："
 
 #: includes/PDF.php:542 includes/PDF.php:564 admin/AdminTableItem.php:221
 #: admin/partials/user-agreements.php:23
 msgid "Download PDF"
-msgstr "Descargar PDF"
+msgstr "下载 PDF"
 
 #: admin/AdminInfo.php:116
 msgid "Download PDFs of users' agreements."
-msgstr "Descargue los PDF de los acuerdos de usuarios."
+msgstr "下载 PDF 格式的用户协议。"
 
 #: admin/MetaManager.php:464 admin/MetaManager.php:650
 #: admin/MetaManager.php:973
 msgid "Dropdown"
-msgstr "Desplegable"
+msgstr "下拉式"
 
 #: admin/AdminTableItem.php:435
 msgid "Due since"
-msgstr "Debido desde"
+msgstr "到期日"
 
 #: components/Checkout/CheckoutTable.php:200
 msgid "Due Today"
-msgstr "Vence hoy"
+msgstr "今天到期"
 
 #: admin/MetaManager.php:625
 msgid "e.g. Does awesome things for clients."
-msgstr "por ejemplo, hace cosas increíbles para los clientes."
+msgstr "例如：为客户做了不起的事情。"
 
 #: admin/MetaManager.php:609
 msgid "e.g. Editor"
-msgstr "por ejemplo, Editor"
+msgstr "例如：编辑"
 
 #: admin/MetaManager.php:615
 msgid "e.g. Editors"
-msgstr "por ejemplo, Editores"
+msgstr "例如：编辑"
 
 #: admin/MetaManager.php:822
 msgid "e.g. File, Manuscript"
-msgstr "por ejemplo, Archivo, Manuscrito"
+msgstr "例如：文件、手稿"
 
 #: admin/MetaManager.php:828
 msgid "e.g. Files, Manuscripts"
-msgstr "archivos, manuscritos, etc"
+msgstr "例如档案、手稿"
 
 #: admin/MetaManager.php:1038
 msgid "e.g. Option 1, Option 2"
-msgstr "por ejemplo, Opción 1, Opción 2"
+msgstr "例如：方案 1、方案 2"
 
 #: admin/MetaManager.php:773
 msgid "e.g. Please add your full word count."
-msgstr "por ejemplo, añada el recuento completo de palabras."
+msgstr "例如：请添加您的完整字数。"
 
 #: admin/MetaManager.php:842
 msgid "e.g. Please upload your finalized manuscript."
-msgstr "por ejemplo, cargue su manuscrito finalizado."
+msgstr "例如：请上传您的定稿。"
 
 #: admin/MetaManager.php:533
 msgid "e.g. Preferences"
-msgstr "por ejemplo, Preferencias"
+msgstr "例如，首选项"
 
 #: admin/MetaManager.php:980
 msgid "e.g. Select an option."
-msgstr "por ejemplo, seleccione una opción."
+msgstr "例如，选择一个选项。"
 
 #: admin/MetaManager.php:539
 msgid "e.g. Select applicable preferences."
-msgstr "por ejemplo, seleccione las preferencias aplicables."
+msgstr "例如，选择适用的首选项。"
 
 #: admin/MetaManager.php:757
 msgid "e.g. Word, Hour, Page"
-msgstr "por ejemplo, Word, Hour, Page"
+msgstr "例如：字词, 小时, 页次"
 
 #: admin/MetaManager.php:763
 msgid "e.g. Words, Hours, Pages"
-msgstr "por ejemplo, palabras, horas, páginas"
+msgstr "例如：字数、小时数、页数"
 
 #: admin/MetaManager.php:687
 msgid "Each option will adjust the service fee based on the user response."
-msgstr ""
-"Cada opción ajustará la tarifa del servicio en función de la respuesta del "
-"usuario."
+msgstr "每个选项都会根据用户的反应调整服务费。"
 
 #: admin/AdminInfo.php:183
 msgid ""
 "Each service is assigned a rate type. Examples of potential rate types "
 "including per word, hourly, and per project."
-msgstr ""
-"A cada servicio se le asigna un tipo de tarifa. Algunos ejemplos de posibles "
-"tipos de tarifa son por palabra, por hora y por proyecto."
+msgstr "每项服务都有一个费率类型。可能的费率类型包括按字、按小时和按项目。"
 
 #: admin/MetaManager.php:785
 msgid ""
 "Each time a client books services, will this number be different for each "
 "service or the same for the entire project?"
-msgstr ""
-"Cada vez que un cliente contrate servicios, ¿este número será diferente para "
-"cada servicio o el mismo para todo el proyecto?"
+msgstr "客户每次预订服务时，每次服务的数字都不同，还是整个项目的数字都一样？"
 
 #. %s: singular name of the item
 #. %s: label of the singular item
 #: admin/Taxonomy.php:197 admin/PostType.php:107
 #, php-format
 msgid "Edit %s"
-msgstr "Editar %s"
+msgstr "编辑 %s"
 
 #. %s: label of the field
 #: admin/SettingsPage.php:620
 #, php-format
 msgid "Edit %s Draft"
-msgstr "Editar %s Borrador"
+msgstr "编辑 %s 草稿"
 
 #: components/Booking/BookedService/BookedServiceList.php:499
 msgid "Edit service status"
-msgstr "Editar el estado del servicio"
+msgstr "编辑服务状态"
 
 #: admin/AdminTableItem.php:1055
 msgid "Edit status"
-msgstr "Editar estado"
+msgstr "编辑状态"
 
 #: components/Brief/SingleBrief.php:242
 msgid "Edit Your Brief Submission"
-msgstr "Edite su breve presentación"
+msgstr "编辑您的简报"
 
 #: admin/Metaboxes.php:592 admin/partials/payments.php:66
 #: components/Booking/BookedService/BookedServiceList.php:407
 #: components/Booking/BookedService/PaymentStatusForm.php:63
 msgid "Eligible"
-msgstr "Elegible"
+msgstr "合格"
 
 #: components/Booking/BookedService/BookedServiceList.php:590
 msgid "Eligible "
-msgstr "Elegible"
+msgstr "合格"
 
 #: includes/helpers/components.php:40 admin/partials/user-list.php:54
 #: admin/partials/leads.php:18 admin/partials/email-log.php:18
 #: admin/partials/user-agreements.php:22
 msgid "Email"
-msgstr "Correo electrónico"
+msgstr "电子邮件"
 
 #: admin/Nav.php:77 admin/AdminPageManager.php:150
 #: admin/partials/email-log.php:32 components/Email/SettingsEmail.php:79
 msgid "Email Log"
-msgstr "Registro de correo electrónico"
+msgstr "电子邮件日志"
 
 #: components/Email/SettingsEmail.php:111
 msgid "Email log records older than the selected timeframe will be deleted."
-msgstr ""
-"Se eliminarán los registros de correo electrónico anteriores al periodo de "
-"tiempo seleccionado."
+msgstr "超过所选时限的电子邮件日志记录将被删除。"
 
 #. %s: URL to view the email log
 #: components/Email/SettingsEmail.php:83
 msgid "Email log settings."
-msgstr "Configuración del registro de correo electrónico."
+msgstr "电子邮件日志设置。"
 
 #: components/Email/SettingsEmail.php:89
 msgid "Email Log Time"
-msgstr "Hora de registro del correo electrónico"
+msgstr "电子邮件记录时间"
 
 #: components/Email/SettingsEmail.php:49
 msgid "Email Sender"
-msgstr "Remitente del correo electrónico"
+msgstr "电子邮件发件人"
 
 #: admin/AdminInfo.php:212
 msgid "email settings"
-msgstr "configuración de correo electrónico"
+msgstr "电子邮件设置"
 
 #: admin/MetaManager.php:1249
 msgid "Email Subject"
-msgstr "Asunto del correo electrónico"
+msgstr "电子邮件主题"
 
 #: admin/PostTypeManager.php:142
 msgid "Email Template"
-msgstr "Plantilla de correo electrónico"
+msgstr "电子邮件模板"
 
 #: admin/Nav.php:76 admin/PostTypeManager.php:143
 msgid "Email Templates"
-msgstr "Plantillas de correo electrónico"
+msgstr "电子邮件模板"
 
 #: admin/AdminInfo.php:152
 msgid "email templates"
-msgstr "plantillas de correo electrónico"
+msgstr "电子邮件模板"
 
 #. %1$s: the user email
 #. %1$s: the lead email
@@ -1432,92 +1342,83 @@ msgstr "plantillas de correo electrónico"
 #: components/Email/EmailTemplateManager.php:372
 #, php-format
 msgid "Email: %1$s"
-msgstr "Correo electrónico: %1$s"
+msgstr "电子邮件：%1$s"
 
 #: admin/Nav.php:50 admin/AdminPageManager.php:127
 #: admin/PostTypeManager.php:144
 msgid "Emails"
-msgstr "Correos electrónicos"
+msgstr "电子邮件"
 
 #. %s: the amount of time emails are stored (e.g. for 90 days or forever)
 #: admin/partials/email-log.php:64
 #, php-format
 msgid "Emails are currently stored %s."
-msgstr "Los correos electrónicos se almacenan actualmente %s."
+msgstr "电子邮件目前存储在 %s 中。"
 
 #. %1$s: the name of the client; %2$s: the email address of the client
 #: components/Checkout/Checkout.php:289
 #, php-format
 msgid "Emails are not enabled. %1$s has NOT been notified at %2$s."
-msgstr ""
-"Los correos electrónicos no están habilitados. %1$s NO ha sido notificado en "
-"%2$s."
+msgstr "未启用电子邮件。%1$s 未收到 %2$s 的通知。"
 
 #: admin/SettingsIntegrations.php:45 admin/SettingsGeneral.php:120
 #: admin/SettingsGeneral.php:146
 msgid "Enable"
-msgstr "Activar"
+msgstr "启用"
 
 #: components/Booking/SettingsBooking.php:82
 msgid "Enable - Require partial fee up front"
-msgstr "Permitir - Exigir una cuota parcial por adelantado"
+msgstr "启用 - 要求预付部分费用"
 
 #: admin/SettingsComponents.php:33
 msgid "Enable BuddyClients components."
-msgstr "Habilitar los componentes BuddyClients."
+msgstr "启用 BuddyClients 组件。"
 
 #: admin/SettingsGeneral.php:117
 msgid "Enable CTA Button"
-msgstr "Activar botón CTA"
+msgstr "启用 CTA 按钮"
 
 #: components/Booking/SettingsBooking.php:79
 msgid "Enable Deposits"
-msgstr "Habilitar depósitos"
+msgstr "启用存款"
 
 #: components/Email/SettingsEmail.php:35 components/Email/SettingsEmail.php:39
 msgid "Enable Email Notifications"
-msgstr "Activar las notificaciones por correo electrónico"
+msgstr "启用电子邮件通知"
 
 #: admin/AdminInfo.php:123
 msgid ""
 "Enable or disable individual components. The components available to you "
 "here depend on your BuddyClients subscription level."
-msgstr ""
-"Activar o desactivar componentes individuales. Los componentes disponibles "
-"aquí dependen de tu nivel de suscripción a BuddyClients."
+msgstr "启用或禁用个别组件。这里提供给您的组件取决于您的 BuddyClients 订阅级别。"
 
 #: admin/SettingsIntegrations.php:41
 msgid "Enable reCAPTCHA"
-msgstr "Activar reCAPTCHA"
+msgstr "启用验证码"
 
 #: admin/SettingsIntegrations.php:47
 msgid "Enable reCAPTCHA to protect your forms from spam."
-msgstr "Active reCAPTCHA para proteger sus formularios del spam."
+msgstr "启用 reCAPTCHA 以保护您的表单免受垃圾邮件的侵害。"
 
 #: admin/AdminInfo.php:142
 msgid "Enable sales mode to allow manual and assisted bookings."
-msgstr ""
-"Active el modo de venta para permitir las reservas manuales y asistidas."
+msgstr "启用销售模式，允许手动和辅助预订。"
 
 #: admin/AdminColumns.php:91
 msgid "Enabled"
-msgstr "Activado"
+msgstr "已启用"
 
 #: admin/AdminInfo.php:280
 msgid ""
 "Ensure that all necessary configurations are made to ensure the proper "
 "functionality of the plugin."
-msgstr ""
-"Asegúrese de que se realizan todas las configuraciones necesarias para "
-"garantizar el correcto funcionamiento del plugin."
+msgstr "确保进行所有必要的配置，以保证插件的正常功能。"
 
 #: admin/AdminInfo.php:274
 msgid ""
 "Ensure the CSV file is formatted correctly and contains the appropriate "
 "fields."
-msgstr ""
-"Asegúrese de que el archivo CSV tiene el formato correcto y contiene los "
-"campos adecuados."
+msgstr "确保 CSV 文件格式正确，并包含适当的字段。"
 
 #: components/Booking/SettingsBooking.php:95
 msgid ""
@@ -1525,156 +1426,150 @@ msgid ""
 "specified, the sum of the two will be charged on booking. If the deposit "
 "amount is greater than the full fee, the deposit will be reduced to the "
 "value of the full fee."
-msgstr ""
-"Introduzca una tarifa plana para exigirla por adelantado. Si se especifica "
-"tanto un porcentaje como una tarifa fija, se cobrará la suma de ambos en el "
-"momento de la reserva. Si el importe del depósito es superior a la tarifa "
-"completa, el depósito se reducirá al valor de la tarifa completa."
+msgstr "输入预付的固定费用。如果同时指定了百分比和定额费用，预订时将收取两者的总和。如果定金数额大于全额费用，定金将减至全额费用的数值。"
 
 #: admin/MetaManager.php:1227
 msgid "Enter a name here to override the author info."
-msgstr "Introduzca aquí un nombre para anular la información del autor."
+msgstr "在此输入姓名，以覆盖作者信息。"
 
 #: admin/MetaManager.php:1036
 msgid "Enter all options the client can select from."
-msgstr "Introduzca todas las opciones que el cliente puede seleccionar."
+msgstr "输入客户可以选择的所有选项。"
 
 #: admin/MetaManager.php:334 admin/MetaManager.php:1109
 msgid "Enter the fee for this service."
-msgstr "Introduzca la tarifa de este servicio."
+msgstr "输入此项服务的费用。"
 
 #: admin/MetaManager.php:1250
 msgid "Enter the subject for the email."
-msgstr "Introduzca el asunto del correo electrónico."
+msgstr "输入电子邮件的主题。"
 
 #: admin/WelcomeMessage.php:184
 msgid "Enter your license key"
-msgstr "Introduzca su clave de licencia"
+msgstr "输入许可证密钥"
 
 #: admin/SettingsIntegrations.php:57
 msgid "Enter your secret key."
-msgstr "Introduzca su clave secreta."
+msgstr "输入您的密匙。"
 
 #: admin/SettingsIntegrations.php:52
 msgid "Enter your site key."
-msgstr "Introduzca la clave de su sitio."
+msgstr "输入您的网站密钥。"
 
 #: admin/AdminTableItem.php:743
 msgid "EPS (Bank Redirect - Austria)"
-msgstr "EPS (Redirección bancaria - Austria)"
+msgstr "易辦事（銀行重定向 - 奧地利）"
 
 #. %s: post title
 #: config/Activator.php:171
 #, php-format
 msgid "Error creating post: %s"
-msgstr "Error al crear post: %s"
+msgstr "创建帖子时出错：%s"
 
 #: includes/helpers/create-account.php:117
 msgid "Error creating user: "
-msgstr "Error al crear usuario:"
+msgstr "创建用户出错："
 
 #: admin/UpgradePage.php:188
 msgid "Essential"
-msgstr "Esencial"
+msgstr "必要"
 
 #: admin/AdminInfo.php:101
 msgid ""
 "Evaluate your business with this overview of all bookings for a specified "
 "timeframe."
-msgstr ""
-"Evalúe su negocio con esta visión general de todas las reservas durante un "
-"periodo de tiempo determinado."
+msgstr "通过对指定时间段内所有预订情况的概述来评估您的业务。"
 
 #: admin/UpgradePage.php:202
 msgid "Everything in Essential"
-msgstr "Todo en esencial"
+msgstr "必不可少的一切"
 
 #: admin/UpgradePage.php:191
 msgid "Everything in Free"
-msgstr "Todo gratis"
+msgstr "一切免费"
 
 #: admin/MetaManager.php:559
 msgid "Exact Match"
-msgstr "Coincidencia exacta"
+msgstr "完全匹配"
 
 #: admin/MetaManager.php:562
 msgid "Exclude"
-msgstr "Excluir"
+msgstr "不包括"
 
 #: includes/Options.php:266
 msgid "Expired"
-msgstr "Caducado"
+msgstr "已过期"
 
 #: admin/WelcomeMessage.php:211
 msgid "Explore user guides"
-msgstr "Explorar las guías del usuario"
+msgstr "探索用户指南"
 
 #: admin/AdminTableItem.php:268
 msgid "Faculty"
-msgstr "Facultad"
+msgstr "学院"
 
 #: admin/AdminTableItem.php:923
 msgid "Failed"
-msgstr "Fallido"
+msgstr "失败"
 
 #: admin/helpers/pages.php:53
 msgid "Failed to create a new page."
-msgstr "Error al crear una nueva página."
+msgstr "创建新页面失败。"
 
 #: admin/AdminColumns.php:71
 msgid "Field"
-msgstr "Campo"
+msgstr "现场"
 
 #: admin/MetaManager.php:978
 msgid "Field Description"
-msgstr "Descripción del campo"
+msgstr "领域说明"
 
 #: admin/MetaManager.php:669
 msgid "Field description to display on booking form."
-msgstr "Descripción del campo a mostrar en el formulario de reserva."
+msgstr "在预订表上显示的字段描述。"
 
 #: admin/MetaManager.php:664
 msgid "Field label to display on booking form."
-msgstr "Etiqueta del campo a mostrar en el formulario de reserva."
+msgstr "在预订表上显示的字段标签。"
 
 #: admin/MetaManager.php:1035
 msgid "Field Options"
-msgstr "Opciones de campo"
+msgstr "领域选项"
 
 #: admin/MetaManager.php:965 admin/AdminColumns.php:55
 #: admin/AdminColumns.php:64 admin/AdminColumns.php:68
 #: admin/AdminColumns.php:72
 msgid "Field Type"
-msgstr "Tipo de campo"
+msgstr "字段类型"
 
 #: config/Activator.php:111 config/Activator.php:114
 msgid "File"
-msgstr "Archivo"
+msgstr "文件"
 
 #: includes/helpers/featured-image.php:24
 msgid "File does not exist at the provided path."
-msgstr "El archivo no existe en la ruta indicada."
+msgstr "所提供路径下的文件不存在。"
 
 #: includes/FileHandler.php:421
 msgid "File not found: "
-msgstr "Archivo no encontrado:"
+msgstr "未找到文件："
 
 #: admin/AdminColumns.php:86
 #| msgid "Sales Types"
 msgid "File Types"
-msgstr "Tipos de ficheros"
+msgstr "文件类型"
 
 #: admin/PostTypeManager.php:252
 msgid "File Upload Type"
-msgstr "Tipo de carga de archivos"
+msgstr "文件上传类型"
 
 #: admin/Nav.php:63 admin/PostTypeManager.php:253
 msgid "File Upload Types"
-msgstr "Tipos de carga de archivos"
+msgstr "文件上传类型"
 
 #: admin/MetaManager.php:411 admin/MetaManager.php:1171
 msgid "File Uploads"
-msgstr "Carga de archivos"
+msgstr "文件上传"
 
 #: config/Activator.php:115 includes/ExtensionManager.php:260
 #: admin/partials/booked-services.php:24
@@ -1683,257 +1578,241 @@ msgstr "Carga de archivos"
 #: components/Booking/BookedService/BookedServiceList.php:108
 #: components/Booking/BookedService/BookedServiceList.php:249
 msgid "Files"
-msgstr "Archivos"
+msgstr "文件"
 
 #: admin/AdminDashboard.php:405 admin/AdminTable.php:727
 msgid "Filter"
-msgstr "Filtro"
+msgstr "过滤器"
 
 #: admin/AdminTable.php:692
 msgid "Filter by"
-msgstr "Filtrar por"
+msgstr "筛选方式"
 
 #: admin/PostTypeManager.php:239
 msgid "Filter Field"
-msgstr "Campo de filtro"
+msgstr "过滤字段"
 
 #: admin/Nav.php:62 admin/PostTypeManager.php:240
 msgid "Filter Fields"
-msgstr "Campos de filtro"
+msgstr "筛选字段"
 
 #: admin/UpgradePage.php:194
 msgid "Filter team by preferences"
-msgstr "Filtrar equipo por preferencias"
+msgstr "根据喜好筛选团队"
 
 #: admin/partials/booking-payments.php:65
 #: components/Booking/BookingPayment.php:289
 msgid "Final Payment"
-msgstr "Pago final"
+msgstr "最终付款"
 
 #: includes/Options.php:242 components/Service/RateType.php:118
 msgid "Flat"
-msgstr "Plano"
+msgstr "扁平"
 
 #: components/Service/ServicePost.php:76
 msgid "flat"
-msgstr "plano"
+msgstr "单位"
 
 #: admin/UpgradePage.php:192
 msgid "Flexible pricing structures"
-msgstr "Estructuras de precios flexibles"
+msgstr "灵活的定价结构"
 
 #. %d: the numnber of days emails are retained
 #: admin/partials/email-log.php:58
 msgid "for %d days"
-msgstr "durante %d días"
+msgstr "为 %d 天"
 
 #: admin/AdminInfo.php:195
 msgid "For each filter field, select a corresponding profile field."
-msgstr ""
-"Para cada campo de filtro, seleccione un campo de perfil correspondiente."
+msgstr "为每个过滤器字段选择相应的配置文件字段。"
 
 #: admin/AdminInfo.php:189
 msgid ""
 "For example, a team member who completes proofreading and copyediting may be "
 "assigned a team role called \"Editor.\""
-msgstr ""
-"Por ejemplo, a un miembro del equipo que realiza la corrección de pruebas y "
-"la corrección de textos se le puede asignar una función de equipo denominada "
-"\"Editor\""
+msgstr "例如，完成校对和复制编辑的团队成员可能会被分配一个名为 \"编辑 \"的团队角色。"
 
 #: admin/AdminInfo.php:230
 msgid ""
 "For example, you could create a brief type called \"Editing\" and connect it "
 "to \"Copyediting\" and \"Proofreading\" services."
-msgstr ""
-"Por ejemplo, puede crear un tipo de informe llamado \"Edición\" y conectarlo "
-"a los servicios \"Revisión\" y \"Corrección\"."
+msgstr "例如，您可以创建一个名为 \"编辑 \"的简介类型，并将其与 \"校对 \"和 \"复制 \"服务连接起来。"
 
 #: components/Email/SettingsEmail.php:109
 msgid "Forever"
-msgstr "Para siempre"
+msgstr "永远"
 
 #: admin/partials/email-log.php:59
 msgid "forever"
-msgstr "para siempre"
+msgstr "永远"
 
 #: admin/MetaManager.php:459 admin/MetaManager.php:646
 msgid "Form Field Type"
-msgstr "Tipo de campo de formulario"
+msgstr "表格字段类型"
 
 #: admin/MetaManager.php:530
 msgid "Form Label"
-msgstr "Etiqueta del formulario"
+msgstr "表格标签"
 
 #: admin/AdminTableItem.php:744
 msgid "FPX (Bank Redirect - Malaysia)"
-msgstr "FPX (Redirección bancaria - Malasia)"
+msgstr "FPX（银行重定向 - 马来西亚）"
 
 #: admin/AdminColumns.php:600
 msgid "Free"
-msgstr "Gratis"
+msgstr "免费"
 
 #: components/Booking/SettingsBooking.php:115
 msgid "Freelancer"
-msgstr "Trabajador autónomo"
+msgstr "自由职业者"
 
 #: components/Booking/SettingsBooking.php:111
 msgid "Freelancer Mode"
-msgstr "Modo autónomo"
+msgstr "自由职业者模式"
 
 #. %s: the url to disable freelancer mode
 #: admin/helpers/upgrade.php:252
 #, php-format
 msgid "Freelancer Mode is enabled. <a href=\"%s\">Disable Freelancer Mode</a>."
-msgstr ""
-"El modo Freelancer está activado. <a href=\"%s\">Desactivar el modo "
-"autónomo</a>."
+msgstr "自由职业者模式已启用。<a href=\"%s\">禁用自由职业者模式</a>。"
 
 #: components/Email/SettingsEmail.php:53
 msgid "From Email"
-msgstr "Del correo electrónico"
+msgstr "发件人电子邮件"
 
 #: components/Email/SettingsEmail.php:59
 msgid "From Name"
-msgstr "De Nombre"
+msgstr "发件人姓名"
 
 #. %1$s: the client name
 #: components/Email/EmailTemplateManager.php:331
 #, php-format
 msgid "From: %1$s"
-msgstr "De: %1$s"
+msgstr "来自%1$s"
 
 #: admin/Nav.php:44
 msgid "General"
-msgstr "General"
+msgstr "一般情况"
 
 #: admin/AdminInfo.php:122
 msgid "General settings for the BuddyClients plugin."
-msgstr "Configuración general del plugin BuddyClients."
+msgstr "BuddyClients 插件的常规设置。"
 
 #: admin/SettingsGeneral.php:23
 msgid "Get Started"
-msgstr "Comenzar"
+msgstr "开始"
 
 #: admin/WelcomeMessage.php:115
 msgid "Get Started:"
-msgstr "Póngase en marcha:"
+msgstr "开始吧"
 
 #: admin/MetaManager.php:871 admin/MetaManager.php:1016
 msgid "GIF"
-msgstr "GIF"
+msgstr "图像互换格式"
 
 #: admin/AdminTableItem.php:745
 msgid "giropay (Bank Redirect - Germany)"
-msgstr "giropay (Redirección bancaria - Alemania)"
+msgstr "giropay（银行重定向 - 德国）"
 
 #: components/Booking/BookingForm.php:115
 msgid "Go to Checkout"
-msgstr "Ir a la caja"
+msgstr "前往结账"
 
 #: components/Email/EmailTemplateManager.php:87
 msgid "Go to project briefs."
-msgstr "Ir a informes de proyectos."
+msgstr "转到项目简介。"
 
 #: components/Email/EmailTemplateManager.php:128
 msgid "Go to the project"
-msgstr "Ir al proyecto"
+msgstr "转到项目"
 
 #: admin/AdminTableItem.php:746
 msgid "GrabPay (Digital Wallet - Southeast Asia)"
-msgstr "GrabPay (Billetera digital - Sudeste asiático)"
+msgstr "GrabPay（数字钱包 - 东南亚）"
 
-#: buddyclients-free.php:168
+#: buddyclients-lite.php:168
 msgid ""
 "Groups must be enabled for the BuddyClients Platform to function properly."
-msgstr ""
-"Los grupos deben estar activados para que la Plataforma BuddyClients "
-"funcione correctamente."
+msgstr "必须启用群组，BuddyClients 平台才能正常运行。"
 
 #: admin/UpgradePage.php:253
 msgid "grow your business"
-msgstr "haga crecer su negocio"
+msgstr "发展您的业务"
 
 #: admin/UpgradePage.php:200
 msgid "Grow your service-based business with premium tools."
-msgstr "Haga crecer su negocio basado en servicios con herramientas premium."
+msgstr "使用高级工具发展您的服务型业务。"
 
 #: components/Email/SettingsEmail.php:68
 msgid "Handle how you receive admin notifications."
-msgstr "Controla cómo recibes las notificaciones de los administradores."
+msgstr "处理接收管理员通知的方式。"
 
 #. %1$s: the login url, %2$s: html linking to the privacy policy and/or service terms
 #: components/Checkout/Checkout.php:420
 #, php-format
 msgid "Have an account? <a href=\"%1$s\">Log in here</a><br>%2$s"
-msgstr "¿Tienes una cuenta? <a href=\"%1$s\">Entrar aquí</a><br>%2$s"
+msgstr "有账户吗？<a href=\"%1$s\">在此登录</a><br>%2$s"
 
 #: admin/MetaManager.php:488 admin/MetaManager.php:582
 #: admin/MetaManager.php:678 admin/MetaManager.php:850
 msgid "Help doc to show on booking form."
-msgstr "Documento de ayuda para mostrar en el formulario de reserva."
+msgstr "在预订表上显示帮助文档。"
 
 #: admin/AdminInfo.php:73
 msgid "Help docs"
-msgstr "Documentos de ayuda"
+msgstr "帮助文档"
 
 #: admin/MetaManager.php:487 admin/MetaManager.php:581
 #: admin/MetaManager.php:677 admin/MetaManager.php:849
 #: admin/MetaManager.php:983
 msgid "Help Post"
-msgstr "Ayuda"
+msgstr "帮助帖子"
 
 #: admin/MetaManager.php:432 admin/MetaManager.php:475
 msgid "Hide"
-msgstr "Ocultar"
+msgstr "隐藏"
 
 #: admin/MetaManager.php:479
 msgid ""
 "Hide all services of this category from the booking form. (They will still "
 "appear in shortcodes and archives.)"
-msgstr ""
-"Ocultar todos los servicios de esta categoría del formulario de reserva. "
-"(Seguirán apareciendo en shortcodes y archivos)"
+msgstr "从预订表单中隐藏该类别的所有服务。(它们仍会出现在简码和档案中）。"
 
 #: admin/MetaManager.php:437
 msgid ""
 "Hide from booking form. (The service will still appear in shortcodes and "
 "archives.)"
-msgstr ""
-"Ocultar del formulario de reserva. (El servicio seguirá apareciendo en "
-"shortcodes y archivos)"
+msgstr "从预订表单中隐藏。(该服务仍会出现在简码和档案中）。"
 
 #: admin/MetaManager.php:427 admin/MetaManager.php:470
 msgid "Higher numbers are shown first."
-msgstr "Los números más altos aparecen primero."
+msgstr "数字较高的先显示。"
 
 #: config/Activator.php:100
 msgid "Hour"
-msgstr "Hora"
+msgstr "小时"
 
 #: config/Activator.php:97
 msgid "Hourly"
-msgstr "Por hora"
+msgstr "每小时"
 
 #: config/Activator.php:101
 msgid "Hours"
-msgstr "Horas"
+msgstr "小时数"
 
 #: components/Booking/SettingsBooking.php:65
 msgid "How many days do clients have to cancel bookings?"
-msgstr "¿De cuántos días disponen los clientes para cancelar sus reservas?"
+msgstr "客户必须在多少天内取消预订？"
 
 #: config/Activator.php:102
 msgid "How many hours would you like to book?"
-msgstr "¿Cuántas horas desea reservar?"
+msgstr "您想预订多少小时？"
 
 #: components/Booking/SettingsBooking.php:106
 msgid ""
 "How many minutes after beginning a booking should the abandoned booking "
 "email be sent?"
-msgstr ""
-"¿Cuántos minutos después de iniciar una reserva debe enviarse el correo "
-"electrónico de reserva abandonada?"
+msgstr "应在预订开始多少分钟后发送放弃预订电子邮件？"
 
 #. URI of the plugin
 msgid "https://buddyclients.com"
@@ -1948,280 +1827,262 @@ msgstr "https://victoriagriffin.com/"
 #: components/Booking/BookingForm.php:909 components/Checkout/Checkout.php:534
 #, php-format
 msgid "I agree to the %s."
-msgstr "Estoy de acuerdo con los %s."
+msgstr "我同意 %s。"
 
 #: components/Booking/BookingForm.php:900
 msgid "I confirm that the information above is correct."
-msgstr "Confirmo que la información anterior es correcta."
+msgstr "我确认上述信息正确无误。"
 
 #: admin/AdminTableItem.php:747
 msgid "iDEAL (Bank Redirect - Netherlands)"
-msgstr "iDEAL (Redirección bancaria - Países Bajos)"
+msgstr "iDEAL（银行重定向 - 荷兰）"
 
 #: components/Booking/SettingsBooking.php:85
 msgid ""
 "If deposits are enabled, clients will be charged the deposit percentage "
 "specified below on checkout."
-msgstr ""
-"Si se activan los depósitos, se cobrará a los clientes el porcentaje de "
-"depósito especificado a continuación al realizar el pago."
+msgstr "如果启用了押金功能，客户将在结账时按以下规定的押金比例支付押金。"
 
 #: admin/AdminInfo.php:139
 msgid ""
 "If payments have been processed without webhooks set up correctly, use the "
 "\"Check for Payments\" button to repair bookings."
-msgstr ""
-"Si se han procesado pagos sin que los webhooks estén configurados "
-"correctamente, utilice el botón \"Comprobar pagos\" para reparar las "
-"reservas."
+msgstr "如果在未正确设置网络钩子的情况下处理了付款，请使用 \"检查付款 \"按钮修复预订。"
 
 #: admin/AdminInfo.php:145
 msgid ""
 "If sales commission is enabled, a commission payment will be generated for "
 "the salesperson based on the percentage set below."
-msgstr ""
-"Si la comisión de ventas está activada, se generará un pago de comisión para "
-"el vendedor basado en el porcentaje establecido a continuación."
+msgstr "如果启用了销售佣金，则将根据以下设定的百分比为销售人员生成佣金付款。"
 
 #: admin/AdminInfo.php:132
 msgid ""
 "If you are the only member of your team, enabling Freelancer Mode simplifies "
 "the BuddyClients interface and assigns all services to you."
-msgstr ""
-"Si eres el único miembro de tu equipo, activar el Modo Freelancer simplifica "
-"la interfaz de BuddyClients y te asigna todos los servicios."
+msgstr "如果您是团队中的唯一成员，启用 \"自由职业者模式 \"可简化 BuddyClients 界面，并将所有服务分配给您。"
 
 #: components/Checkout/Confirmation.php:374
 msgid "If you continue to have issues, please <a href=\""
-msgstr "Si sigue teniendo problemas, <a href=\""
+msgstr "如果您仍然遇到问题，请 <a href=\""
 
 #: admin/AdminInfo.php:127
 msgid ""
 "If you create the pages manually, be sure to add each specified shortcode."
-msgstr ""
-"Si crea las páginas manualmente, asegúrese de añadir cada shortcode "
-"especificado."
+msgstr "如果手动创建页面，请务必添加每个指定的简码。"
 
 #: admin/AdminInfo.php:273
 msgid "Import files in bulk by selecting a CSV file with your data."
-msgstr "Importe archivos en bloque seleccionando un archivo CSV con sus datos."
+msgstr "选择包含数据的 CSV 文件，批量导入文件。"
 
 #: admin/AdminInfo.php:182
 msgid ""
 "In addition to flat-rate services, custom rate types allow for specific, "
 "flexible pricing."
-msgstr ""
-"Además de los servicios de tarifa plana, los tipos de tarifas personalizadas "
-"permiten fijar precios específicos y flexibles."
+msgstr "除统一费率服务外，自定义费率类型还可实现具体、灵活的定价。"
 
 #: admin/partials/booked-services.php:55
 #: components/Booking/BookedService/ServiceStatusForm.php:122
 #: components/Booking/BookedService/BookedServiceList.php:403
 msgid "In Progress"
-msgstr "En curso"
+msgstr "进行中"
 
 #: admin/MetaManager.php:561
 msgid "Include All"
-msgstr "Incluir todo"
+msgstr "包括所有"
 
 #: admin/MetaManager.php:560
 msgid "Include Any"
-msgstr "Incluir cualquier"
+msgstr "包括任何"
 
 #: admin/partials/all-bookings.php:60
 msgid "Incomplete"
-msgstr "Incompleto"
+msgstr "不完整"
 
 #: admin/SettingsGeneral.php:142
 msgid "Info Messages"
-msgstr "Mensajes de información"
+msgstr "信息提示"
 
 #: admin/MetaManager.php:971
 msgid "Input"
-msgstr "Entrada"
+msgstr "输入"
 
 #. %s: link to BuddyPress installation
-#: buddyclients-free.php:130
+#: buddyclients-lite.php:130
 #, php-format
 msgid "Install %s or %s."
-msgstr "Instalar %s o %s."
+msgstr "安装 %s 或 %s。"
 
 #: admin/MetaManager.php:771 admin/MetaManager.php:840
 msgid "Instructions for users on booking form."
-msgstr "Instrucciones para los usuarios en el formulario de reserva."
+msgstr "预订表上的用户须知。"
 
 #: admin/Nav.php:54 admin/AdminPageManager.php:135
 msgid "Integrations"
-msgstr "Integraciones"
+msgstr "集成"
 
 #: admin/AdminTableItem.php:748
 msgid "Interac (In-person Debit - Canada)"
-msgstr "Interac (Débito en persona - Canadá)"
+msgstr "Interac（当面借记 - 加拿大）"
 
 #: admin/partials/leads.php:22
 msgid "Interests"
-msgstr "Intereses"
+msgstr "兴趣爱好"
 
 #. %1$s: the lead interest
 #: components/Email/EmailTemplateManager.php:288
 #: components/Email/EmailTemplateManager.php:377
 #, php-format
 msgid "Interests: %1$s"
-msgstr "Intereses: %1$s"
+msgstr "兴趣： %1$s"
 
 #: admin/helpers/pages.php:34
 msgid "Invalid input for creating new page."
-msgstr "Entrada inválida para crear nueva página."
+msgstr "创建新页面的输入无效。"
 
 #: includes/helpers/create-account.php:24
 msgid "Invalid request"
-msgstr "Solicitud no válida"
+msgstr "无效请求"
 
 #: admin/AdminInfo.php:137
 msgid ""
 "It is recommended to first enable Test Mode to check that your Stripe "
 "integration is working properly."
-msgstr ""
-"Se recomienda activar primero el modo de prueba para comprobar que la "
-"integración de Stripe funciona correctamente."
+msgstr "建议首先启用测试模式，检查 Stripe 集成是否正常。"
 
 #: admin/MetaManager.php:868 admin/MetaManager.php:1013
 msgid "JPG Image"
-msgstr "Imagen JPG"
+msgstr "JPG 图片"
 
 #: admin/AdminTableItem.php:749
 msgid "Kakao Pay (Digital Wallet - South Korea)"
-msgstr "Kakao Pay (Billetera digital - Corea del Sur)"
+msgstr "Kakao Pay（数字钱包 - 韩国）"
 
 #: admin/AdminTableItem.php:750
 msgid "Klarna (Buy Now, Pay Later)"
-msgstr "Klarna (Compre ahora, pague después)"
+msgstr "Klarna（立即购买，稍后付款）"
 
 #: admin/AdminTableItem.php:751
 msgid "Konbini (Cash-based Voucher - Japan)"
-msgstr "Konbini (Bono en metálico - Japón)"
+msgstr "Konbini （现金券 - 日本）"
 
 #: admin/AdminTableItem.php:752
 msgid "Korean Credit/Debit Card"
-msgstr "Tarjeta de crédito/débito coreana"
+msgstr "韩国信用卡/借记卡"
 
 #: admin/MetaManager.php:663 admin/MetaManager.php:721
 msgid "Label"
-msgstr "Etiqueta"
+msgstr "标签"
 
 #. %s: the number of days (30)
 #: admin/AdminDashboard.php:425 admin/AdminDashboard.php:430
 #, php-format
 #| msgid "Last 30 Days"
 msgid "Last %s Days"
-msgstr "Últimos %s días"
+msgstr "Derniers %s jours"
 
 #: admin/AdminColumns.php:559
 msgid "Last Update: "
-msgstr "Última actualización:"
+msgstr "最后更新"
 
 #: admin/MetaManager.php:933
 msgid "Last Updated"
-msgstr "Última actualización"
+msgstr "最后更新"
 
 #. %s: the date and time the brief was last updated
 #: components/Brief/SingleBrief.php:326
 #, php-format
 msgid "Last Updated: %s"
-msgstr "Última actualización: %s"
+msgstr "最后更新：%s"
 
 #: components/Email/EmailTemplateManager.php:360
 msgid "Lead Auto Response"
-msgstr "Lead Auto Response"
+msgstr "铅自动响应"
 
 #: admin/Nav.php:35 admin/AdminPageManager.php:180 admin/partials/leads.php:55
 msgid "Leads"
-msgstr "Plomos"
+msgstr "线索"
 
 #: admin/SettingsIntegrations.php:37
 msgid "Learn how to create reCAPTCHA keys."
-msgstr "Aprenda a crear claves reCAPTCHA."
+msgstr "了解如何创建 reCAPTCHA 密钥。"
 
 #: admin/UpgradePage.php:383 includes/helpers/template-parts.php:22
 #| msgid "Learn more."
 msgid "Learn More"
-msgstr "Más información"
+msgstr "了解更多"
 
 #: admin/SettingsIntegrations.php:76
 msgid "Least sensitive"
-msgstr "Menos sensible"
+msgstr "最不敏感"
 
 #: admin/Nav.php:51 admin/AdminPageManager.php:120
 #: admin/AdminPageManager.php:210 includes/helpers/components.php:46
 msgid "Legal"
-msgstr "Legal"
+msgstr "法律"
 
 #: admin/PostTypeManager.php:184
 msgid "Legal Agreement"
-msgstr "Acuerdo jurídico"
+msgstr "法律协议"
 
 #: admin/Nav.php:39 admin/AdminPageManager.php:202
 #: admin/PostTypeManager.php:185
 msgid "Legal Agreements"
-msgstr "Acuerdos jurídicos"
+msgstr "法律协议"
 
 #: admin/UpgradePage.php:208
 #| msgid "Legal Agreements"
 msgid "Legal agreements"
-msgstr "Acuerdos jurídicos"
+msgstr "法律协议"
 
 #: admin/AdminInfo.php:160 admin/AdminInfo.php:246
 msgid "legal agreements"
-msgstr "acuerdos jurídicos"
+msgstr "法律协议"
 
 #: admin/PostTypeManager.php:197 admin/PostTypeManager.php:198
 msgid "Legal Modification"
-msgstr "Modificación legal"
+msgstr "法律修改"
 
 #: admin/Nav.php:40
 msgid "Legal Modifications"
-msgstr "Modificaciones legales"
+msgstr "法律修改"
 
 #: admin/partials/user-agreements.php:18
 msgid "Legal Name"
-msgstr "Nombre legal"
+msgstr "法律名称"
 
 #: admin/MetaManager.php:1202 admin/AdminColumns.php:83
 msgid "Legal Type"
-msgstr "Tipo legal"
+msgstr "法律类型"
 
 #: admin/Nav.php:90
 msgid "License Key"
-msgstr "Clave de licencia"
+msgstr "许可证密钥"
 
 #: admin/AdminPageManager.php:141
 msgid "License Keys"
-msgstr "Claves de licencia"
+msgstr "许可证密钥"
 
 #: admin/AdminInfo.php:165
 msgid ""
 "Lifetime affiliate commission applies to all services new clients ever book, "
 "while first-sale commission applies only to the client's first booking."
-msgstr ""
-"La comisión de afiliación vitalicia se aplica a todos los servicios que "
-"reserven los nuevos clientes, mientras que la comisión de primera venta sólo "
-"se aplica a la primera reserva del cliente."
+msgstr "终身联盟佣金适用于新客户预订的所有服务，而首次销售佣金仅适用于客户的首次预订。"
 
 #: admin/AdminTableItem.php:753
 msgid "Link (Saved Payment Details)"
-msgstr "Enlace (Datos de pago guardados)"
+msgstr "链接（保存的付款详情）"
 
 #: admin/UpgradePage.php:206
 msgid "Live search help docs"
-msgstr "Búsqueda en directo de documentos de ayuda"
+msgstr "实时搜索帮助文档"
 
 #: components/Booking/SettingsBooking.php:130
 msgid "Lock"
-msgstr "Cerradura"
+msgstr "锁"
 
 #: components/Booking/SettingsBooking.php:127
 msgid "Lock Team Members"
-msgstr "Bloquear miembros del equipo"
+msgstr "锁小组成员"
 
 #: components/Booking/SettingsBooking.php:133
 msgid ""
@@ -2231,21 +2092,16 @@ msgid ""
 "project. When unlocked, clients will be able to select new team members on "
 "subsequent bookings for the same project."
 msgstr ""
-"Bloquee los miembros del equipo para requerir que los futuros servicios para "
-"cada proyecto utilicen el mismo miembro del equipo para cada rol. Cuando "
-"esté bloqueado, el miembro del equipo de cada rol se asignará "
-"automáticamente cuando se reserven nuevos servicios para el mismo proyecto. "
-"Cuando esté desbloqueado, los clientes podrán seleccionar nuevos miembros "
-"del equipo en reservas posteriores para el mismo proyecto."
+"锁定团队成员，要求每个项目的未来服务在每个角色上使用相同的团队成员。锁定后，在为同一项目预订新服务时，将自动分配每个角色的团队成员。解锁后，客户可以在同一项目的后续预订中选择新的团队成员。"
 
 #: components/Email/EmailTemplateManager.php:265
 #, php-format
 msgid "Log in to %2$s"
-msgstr "Iniciar sesión en %2$s"
+msgstr "登录 %2$s"
 
 #: components/Checkout/Confirmation.php:349
 msgid "Log In to View Your Projects"
-msgstr "Conéctese para ver sus proyectos"
+msgstr "登录查看您的项目"
 
 #. %s: the site name
 #: components/Email/EmailTemplateManager.php:140
@@ -2257,81 +2113,72 @@ msgid ""
 "Looks like you didn’t finish booking your services with %s. If you have "
 "questions, please respond to this email."
 msgstr ""
-"Parece que no has terminado de reservar tus servicios con %s. Si tienes "
-"alguna pregunta, responde a este correo electrónico."
+"Il semble que vous n'ayez pas terminé la réservation de vos services auprès "
+"de %s. Si vous avez des questions, veuillez répondre à cet e-mail."
 
 #: admin/AdminTableItem.php:1037 admin/partials/leads.php:45
 msgid "Lost"
-msgstr "Perdido"
+msgstr "丢失"
 
 #. %1$s: the gear icon html; %2$s: the url to access a BuddyClients account
 #: admin/helpers/upgrade.php:151
 #, php-format
 msgid ""
 "Manage <a href=\"%2$s\" target=\"_blank\">your BuddyClients subscription</a>."
-msgstr ""
-"Gestiona <a href=\"%2$s\" target=\"_blank\">tu suscripción a BuddyClients</a>"
-"."
+msgstr "管理 <a href=\"%2$s\" target=\"_blank\">您的 BuddyClients 订阅</a>。"
 
 #: includes/ExtensionManager.php:261
 msgid "Manage Files"
-msgstr "Gestionar archivos"
+msgstr "管理文件"
 
 #: admin/SettingsComponents.php:89
 msgid "Manage legal agreements for clients, team members, and affiliates."
-msgstr ""
-"Gestionar acuerdos legales para clientes, miembros del equipo y afiliados."
+msgstr "管理客户、团队成员和分支机构的法律协议。"
 
 #: admin/UpgradePage.php:195
 msgid "Manage team payments"
-msgstr "Gestionar los pagos del equipo"
+msgstr "管理团队付款"
 
 #: admin/AdminInfo.php:164
 msgid ""
 "Manage the settings for your affiliate program, including the available "
 "payout methods and the affiliate commission percentage."
-msgstr ""
-"Gestione la configuración de su programa de afiliación, incluidos los "
-"métodos de pago disponibles y el porcentaje de comisión de afiliación."
+msgstr "管理联属会员计划的设置，包括可用的支付方式和联属会员佣金百分比。"
 
 #: admin/AdminInfo.php:279
 msgid ""
 "Manage various settings for the BuddyClients plugin that do not fall into "
 "other categories."
-msgstr ""
-"Gestiona varios ajustes para el plugin BuddyClients que no entran en otras "
-"categorías."
+msgstr "管理 BuddyClients 插件中不属于其他类别的各种设置。"
 
 #. %1$s: the link to the legal settings; %2$s: the link to add legal modifications
 #: admin/AdminInfo.php:245
 #, php-format
 msgid ""
 "Manage your %1$s. Customize agreements for specific users by adding %2$s."
-msgstr ""
-"Gestione sus %1$s. Personalice los acuerdos para usuarios específicos "
-"añadiendo %2$s."
+msgstr "管理您的 %1$s。通过添加 %2$s 为特定用户定制协议。"
 
 #. %s: link to user list
 #: admin/AdminInfo.php:159
 #, php-format
 msgid "Manage your %s."
-msgstr "Gestiona tus %s."
+msgstr "管理您的 %s。"
 
 #: admin/UpgradePage.php:211
 msgid "Manual and assisted bookings"
-msgstr "Reservas manuales y asistidas"
+msgstr "人工和辅助预订"
 
 #: admin/AdminTableItem.php:774
 msgid "Manually Recorded"
-msgstr "Grabación manual"
+msgstr "手动录制"
 
 #: admin/MetaManager.php:550
 msgid "Match Type"
-msgstr "Tipo de partido"
+msgstr "匹配类型"
 
 #: admin/partials/payments.php:24
 msgid "Memo"
-msgstr "Memo"
+msgstr "备忘录"
 
 #. %1$s: the message
 #. %1$s: the message content
@@ -2339,11 +2186,11 @@ msgstr "Memo"
 #: components/Email/EmailTemplateManager.php:326
 #, php-format
 msgid "Message: %1$s"
-msgstr "Mensaje: %1$s"
+msgstr "信息：%1$s"
 
 #: admin/MetaManager.php:872 admin/MetaManager.php:1017
 msgid "Microsoft Excel"
-msgstr "Microsoft Excel"
+msgstr "微软Excel"
 
 #: admin/MetaManager.php:873 admin/MetaManager.php:1018
 msgid "Microsoft PowerPoint"
@@ -2355,64 +2202,64 @@ msgstr "Microsoft Word"
 
 #: admin/MetaManager.php:794
 msgid "Minimum"
-msgstr "Mínimo"
+msgstr "最低"
 
 #: components/Booking/SettingsBooking.php:68
 msgid "Minimum Fee"
-msgstr "Tasa mínima"
+msgstr "最低收费"
 
 #: admin/AdminTableItem.php:754
 msgid "MobilePay (Nordic Wallet)"
-msgstr "MobilePay (monedero nórdico)"
+msgstr "移动支付（北欧钱包）"
 
 #: admin/AdminInfo.php:247
 msgid "modifications"
-msgstr "modificaciones"
+msgstr "修改"
 
 #: admin/AdminDashboard.php:422
 msgid "Month to Date"
-msgstr "Mes hasta la fecha"
+msgstr "本月至今"
 
 #: components/Email/SettingsEmail.php:103
 #| msgid "6 Months"
 msgid "Months"
-msgstr "Meses"
+msgstr "月数"
 
 #: admin/SettingsIntegrations.php:64
 msgid "Most sensitive"
-msgstr "Más sensibles"
+msgstr "最敏感"
 
 #: admin/MetaManager.php:874 admin/MetaManager.php:1019
 msgid "MP3 Audio"
-msgstr "MP3 Audio"
+msgstr "MP3 音频"
 
 #: admin/AdminTableItem.php:755
 msgid "Multibanco (Voucher Payment)"
-msgstr "Multibanco (Pago de vales)"
+msgstr "多银行（凭单支付）"
 
 #: admin/MetaManager.php:881 admin/MetaManager.php:999
 msgid "Multiple Files"
-msgstr "Varios archivos"
+msgstr "多个文件"
 
 #: admin/MetaManager.php:566
 msgid "Multiple Options"
-msgstr "Múltiples opciones"
+msgstr "多种选择"
 
-#: buddyclients-free.php:70
+#: buddyclients-lite.php:70
 msgid "Multiple versions of the BuddyClients Platform are installed."
-msgstr "Se han instalado varias versiones de la Plataforma BuddyClients."
+msgstr "已安装多个版本的 BuddyClients 平台。"
 
 #: admin/Metaboxes.php:598
 msgid "multiply"
-msgstr "multiplicar"
+msgstr "繁衍"
 
 #: includes/ExtensionManager.php:178
 msgid "My Services"
-msgstr "Mis servicios"
+msgstr "我的服务"
 
 #: admin/partials/booked-services.php:18 admin/partials/leads.php:19
 msgid "Name"
-msgstr "Nombre"
+msgstr "名称"
 
 #. %1$s: the client name
 #. %1$s: the lead name
@@ -2421,286 +2268,259 @@ msgstr "Nombre"
 #: components/Email/EmailTemplateManager.php:367
 #, php-format
 msgid "Name: %1$s"
-msgstr "Nombre: %1$s"
+msgstr "名称：%1$s"
 
 #: admin/AdminTableItem.php:756
 msgid "Naver Pay (Digital Wallet - South Korea)"
-msgstr "Naver Pay (Billetera digital - Corea del Sur)"
+msgstr "Naver Pay（数字钱包 - 韩国）"
 
 #: components/Email/EmailTemplateManager.php:136
 msgid "Need some help?"
-msgstr "¿Necesitas ayuda?"
+msgstr "需要帮助吗？"
 
 #: admin/AdminDashboard.php:452
 msgid "Net"
-msgstr "Red"
+msgstr "净值"
 
 #. %s: singular name of the item
 #. %s: label of the singular item
 #: admin/Taxonomy.php:199 admin/PostType.php:112
 #, php-format
 msgid "New %s"
-msgstr "Nuevo %s"
+msgstr "新 %s"
 
 #: components/Email/EmailTemplateManager.php:241
 msgid "New Affiliate"
-msgstr "Nuevo afiliado"
+msgstr "新加盟商"
 
 #. %s: the name of the service
 #: components/Email/EmailTemplateManager.php:120
 #, php-format
 msgid "New Assignment: %s"
-msgstr "Nueva asignación: %s"
+msgstr "新任务：%s"
 
 #: components/Email/EmailTemplateManager.php:174
 msgid "New Booking Admin Notification"
-msgstr "Notificación de administración de nuevas reservas"
+msgstr "新预订管理通知"
 
 #: components/Email/EmailTemplateManager.php:94
 msgid "New Custom Quote"
-msgstr "Nuevo presupuesto personalizado"
+msgstr "新定制报价"
 
 #: components/Email/EmailTemplateManager.php:95
 msgid "New custom quote"
-msgstr "Nuevo presupuesto personalizado"
+msgstr "新的自定义报价"
 
 #: components/Email/EmailTemplateManager.php:272
 #: components/Email/EmailTemplateManager.php:273
 msgid "New Lead"
-msgstr "Plomo nuevo"
+msgstr "新线索"
 
 #: components/Email/EmailTemplateManager.php:117
 msgid "New Team Member Assignment"
-msgstr "Asignación de nuevos miembros del equipo"
+msgstr "新团队成员分配"
 
 #: components/Email/EmailTemplateManager.php:223
 msgid "New Testimonial Submission"
-msgstr "Nuevo envío de testimonios"
+msgstr "新推荐信提交"
 
 #. %1$s: the site name
 #: components/Email/EmailTemplateManager.php:226
 #, php-format
 msgid "New Testimonial Submission on %1$s"
-msgstr "Nuevo envío de testimonios en %1$s"
+msgstr "在 %1$s 上提交新的推荐信"
 
 #: includes/Pagination.php:135
 msgid "Next"
-msgstr "Siguiente"
+msgstr "下一页"
 
 #: admin/MetaManager.php:885 admin/MetaManager.php:895
 #: admin/MetaManager.php:1003 admin/SettingsGeneral.php:93
 #: components/Booking/SettingsBooking.php:57
 msgid "No"
-msgstr "No"
+msgstr "没有"
 
 #. %s: plural name of the item
 #. %s: label of the plural item
 #: admin/Taxonomy.php:207 admin/PostType.php:128
 #, php-format
 msgid "No %s found"
-msgstr "No se ha encontrado %s"
+msgstr "未找到 %s"
 
 #. %s: plural name of the item
 #. %s: label of the plural item
 #: admin/Taxonomy.php:209 admin/PostType.php:133
 #, php-format
 msgid "No %s found in trash"
-msgstr "No se ha encontrado %s en la papelera"
+msgstr "垃圾中未发现 %s"
 
 #. %s: the plural name for the post type (e.g. posts)
 #: includes/Archive.php:116
 #, php-format
 msgid "No %s found."
-msgstr "No se ha encontrado %s."
+msgstr "未找到 %s。"
 
 #: admin/MetaManager.php:572
 msgid "No (dropdown field)"
-msgstr "No (campo desplegable)"
+msgstr "否（下拉字段）"
 
 #: components/Booking/SettingsBooking.php:140
 msgid "No - Do not require agreement"
-msgstr "No - No requiere acuerdo"
+msgstr "否 - 无需同意"
 
 #: components/Brief/GroupBriefs.php:80
 msgid "No briefs available."
-msgstr "No hay calzoncillos disponibles."
+msgstr "无简报。"
 
 #: includes/UserFilesSubmission.php:55 includes/FinalDeletionSubmission.php:40
 msgid "No files are selected."
-msgstr "No hay archivos seleccionados."
+msgstr "未选择任何文件。"
 
 #: includes/UserFilesForm.php:213
 msgid "No files available."
-msgstr "No hay archivos disponibles."
+msgstr "无可用文件。"
 
 #: admin/AdminTable.php:495
 msgid "No items found"
-msgstr "No se han encontrado artículos"
+msgstr "未找到项目"
 
 #: components/Email/EmailTemplateManager.php:542
 msgid "No placeholders available for this template."
-msgstr "No hay marcadores de posición disponibles para esta plantilla."
+msgstr "此模板没有占位符。"
 
 #: components/Booking/BookingForm.php:194
 msgid "No services are currently available."
-msgstr "Actualmente no hay servicios disponibles."
+msgstr "目前尚未提供任何服务。"
 
 #: admin/SettingsPage.php:195
 msgid "Not available."
-msgstr "No disponible."
+msgstr "不详。"
 
 #: components/Booking/SettingsBooking.php:70
 msgid "Note that paid bookings of less than $1 will fail."
-msgstr "Tenga en cuenta que las reservas pagadas de menos de 1 $ fallarán."
+msgstr "请注意，低于 1 美元的付费预订将失败。"
 
 #: components/Email/SettingsEmail.php:71
 msgid "Notification Email"
-msgstr "Notificación por correo electrónico"
+msgstr "通知电子邮件"
 
 #: components/Email/SettingsEmail.php:56
 msgid "Notifications will be sent to users from this email address."
-msgstr ""
-"Las notificaciones se enviarán a los usuarios desde esta dirección de correo "
-"electrónico."
+msgstr "将通过此电子邮件地址向用户发送通知。"
 
 #: components/Email/EmailTemplateManager.php:171
 msgid ""
 "Notifies a team member or affiliate when the status of their payment changes."
-msgstr ""
-"Notifica a un miembro del equipo o afiliado cuando cambia el estado de su "
-"pago."
+msgstr "当团队成员或联属会员的付款状态发生变化时，通知他们。"
 
 #: components/Email/EmailTemplateManager.php:269
 msgid ""
 "Notifies a team member when their set availability date is about to expire."
-msgstr ""
-"Notifica a un miembro del equipo cuando su fecha de disponibilidad fijada "
-"está a punto de expirar."
+msgstr "在团队成员设定的可用日期即将到期时通知他们。"
 
 #: components/Email/EmailTemplateManager.php:132
 msgid "Notifies a team member when they have a new assignment."
-msgstr "Notifica a un miembro del equipo cuando tiene una nueva misión."
+msgstr "在团队成员有新任务时通知他们。"
 
 #: components/Email/EmailTemplateManager.php:91
 msgid "Notifies team members when a brief is updated."
-msgstr "Notifica a los miembros del equipo cuando se actualiza un informe."
+msgstr "更新简报时通知团队成员。"
 
 #: components/Email/EmailTemplateManager.php:52
 msgid "Notifies the client when the status of their service changes."
-msgstr "Notifica al cliente cuando cambia el estado de su servicio."
+msgstr "在服务状态发生变化时通知客户。"
 
 #: components/Email/EmailTemplateManager.php:114
 msgid "Notifies the client when they have a new custom quote available."
-msgstr ""
-"Notifica al cliente cuando tiene un nuevo presupuesto personalizado "
-"disponible."
+msgstr "在有新的自定义报价时通知客户。"
 
 #: components/Email/EmailTemplateManager.php:292
 msgid ""
 "Notifies the site admin of a new submission to the lead generation form."
-msgstr ""
-"Notifica al administrador del sitio un nuevo envío al formulario de "
-"generación de clientes potenciales."
+msgstr "向网站管理员通知新提交的线索生成表单。"
 
 #: components/Email/EmailTemplateManager.php:313
 msgid ""
 "Notifies the site admin when a client requests the cancellation of a service."
-msgstr ""
-"Notifica al administrador del sitio cuando un cliente solicita la "
-"cancelación de un servicio."
+msgstr "当客户要求取消服务时，通知网站管理员。"
 
 #: components/Email/EmailTemplateManager.php:191
 msgid "Notifies the site admin when a new booking is completed."
-msgstr ""
-"Notifica al administrador del sitio cuando se completa una nueva reserva."
+msgstr "完成新预订时通知网站管理员。"
 
 #: components/Email/EmailTemplateManager.php:341
 msgid "Notifies the site admin when the contact form is submitted."
-msgstr ""
-"Notifica al administrador del sitio cuando se envía el formulario de "
-"contacto."
+msgstr "在提交联系表单时通知网站管理员。"
 
 #: components/Booking/SettingsBooking.php:155
 msgid "OFF"
-msgstr "OFF"
+msgstr "关闭"
 
 #: admin/AdminInfo.php:144
 msgid ""
 "On submission, the client will receive an email with a link to submit "
 "payment and finalize the booking."
-msgstr ""
-"Una vez enviado, el cliente recibirá un correo electrónico con un enlace "
-"para efectuar el pago y finalizar la reserva."
+msgstr "提交后，客户将收到一封电子邮件，其中包含提交付款和完成预订的链接。"
 
 #: admin/AdminInfo.php:136
 msgid ""
 "Once you have added the information, click \"Validate Stripe\" to test your "
 "keys."
-msgstr ""
-"Una vez que haya añadido la información, haga clic en \"Validar Stripe\" "
-"para probar sus claves."
+msgstr "添加信息后，点击 \"验证 Stripe \"测试密钥。"
 
 #: admin/AdminInfo.php:196
 msgid ""
 "Only team members whose response to the profile question aligns with the "
 "required response from the client will be visible on the booking form."
-msgstr ""
-"Sólo los miembros del equipo cuya respuesta a la pregunta del perfil "
-"coincida con la respuesta requerida del cliente serán visibles en el "
-"formulario de reserva."
+msgstr "只有对个人资料问题的回答与客户要求的回答一致的团队成员才能在预订表上看到。"
 
 #: components/Booking/SettingsBooking.php:48
 msgid "Open"
-msgstr "Abrir"
+msgstr "开放"
 
 #: admin/MetaManager.php:726
 msgid "Operator"
-msgstr "Operador"
+msgstr "操作员"
 
 #: admin/MetaManager.php:623
 msgid "Optional."
-msgstr "Opcional."
+msgstr "可选。"
 
 #: admin/MetaManager.php:1067
 msgid "Optionally, select the project this quote applies to."
-msgstr ""
-"Opcionalmente, seleccione el proyecto al que se aplica este presupuesto."
+msgstr "可选择此报价适用的项目。"
 
 #: admin/AdminInfo.php:169
 msgid ""
 "Options for popup content include a help docs live search and a contact form."
 " If both are selected, the user will first see the search. If their search "
 "returns no results, they will have the option to complete the contact form."
-msgstr ""
-"Las opciones para el contenido emergente incluyen una búsqueda en vivo de "
-"documentos de ayuda y un formulario de contacto. Si se seleccionan ambos, el "
-"usuario verá primero la búsqueda. Si la búsqueda no da resultados, tendrá la "
-"opción de rellenar el formulario de contacto."
+msgstr "弹出内容选项包括帮助文档实时搜索和联系表单。如果选择了这两个选项，用户将首先看到搜索。如果搜索没有结果，用户可以选择填写联系表单。"
 
 #: components/Service/ServicePost.php:226
 #: components/Service/ServicePost.php:228
 msgid "or"
-msgstr "o"
+msgstr "或"
 
 #: admin/MetaManager.php:426 admin/MetaManager.php:469
 msgid "Order"
-msgstr "Pida"
+msgstr "订购"
 
 #: admin/Nav.php:33
 msgid "Outgoing Payments"
-msgstr "Pagos salientes"
+msgstr "寄出付款"
 
 #: admin/Nav.php:31
 msgid "Overview"
-msgstr "Visión general"
+msgstr "概述"
 
 #: admin/AdminTableItem.php:757
 msgid "OXXO (Cash-based Voucher - Mexico)"
-msgstr "OXXO (Vale de caja - México)"
+msgstr "OXXO （现金券 - 墨西哥）"
 
 #: admin/Nav.php:46 admin/AdminPageManager.php:114
 msgid "Pages"
-msgstr "Páginas"
+msgstr "页面"
 
 #: admin/Metaboxes.php:593 admin/AdminTableItem.php:585
 #: admin/AdminTableItem.php:917 admin/partials/booking-payments.php:54
@@ -2708,83 +2528,83 @@ msgstr "Páginas"
 #: components/Booking/BookedService/BookedServiceList.php:408
 #: components/Booking/BookedService/PaymentStatusForm.php:67
 msgid "Paid"
-msgstr "Pagado"
+msgstr "已付款"
 
 #: components/Booking/BookedService/BookedServiceList.php:594
 msgid "Paid "
-msgstr "Pagado"
+msgstr "已付款"
 
 #: admin/partials/payments.php:25
 msgid "Paid Date"
-msgstr "Fecha de pago"
+msgstr "付款日期"
 
 #. %d: the number of characters
 #: includes/helpers/create-account.php:149
 msgid "Password must be at least %d characters long."
-msgstr "La contraseña debe tener al menos %d caracteres."
+msgstr "密码必须至少有 %d 个字符。"
 
 #: includes/helpers/create-account.php:155
 msgid "Password must include at least one lowercase letter."
-msgstr "La contraseña debe incluir al menos una letra minúscula."
+msgstr "密码必须至少包含一个小写字母。"
 
 #: includes/helpers/create-account.php:158
 msgid "Password must include at least one number."
-msgstr "La contraseña debe incluir al menos un número."
+msgstr "密码必须至少包含一个数字。"
 
 #: includes/helpers/create-account.php:161
 msgid "Password must include at least one special character."
-msgstr "La contraseña debe incluir al menos un carácter especial."
+msgstr "密码必须至少包含一个特殊字符。"
 
 #: includes/helpers/create-account.php:152
 msgid "Password must include at least one uppercase letter."
-msgstr "La contraseña debe incluir al menos una letra mayúscula."
+msgstr "密码必须至少包含一个大写字母。"
 
 #: admin/AdminTableItem.php:759
 msgid "Pay By Bank (Open Banking - UK)"
-msgstr "Pago por banco (Open Banking - UK)"
+msgstr "银行支付（开放银行 - 英国）"
 
 #: admin/AdminTableItem.php:760
 msgid "PAYCO (Digital Wallet - South Korea)"
-msgstr "PAYCO (Billetera digital - Corea del Sur)"
+msgstr "PAYCO（数字钱包 - 韩国）"
 
 #: admin/partials/payments.php:18
 msgid "Payee"
-msgstr "Beneficiario"
+msgstr "收款人"
 
 #: admin/partials/booking-payments.php:22 admin/partials/payments.php:23
 #| msgid "Payment Methods"
 msgid "Payment Method"
-msgstr "Forma de pago"
+msgstr "付款方式"
 
 #: components/Booking/BookedService/BookedServiceList.php:110
 #: components/Booking/BookedService/BookedServiceList.php:251
 msgid "Payment Status"
-msgstr "Estado de los pagos"
+msgstr "付款状态"
 
 #: components/Email/EmailTemplateManager.php:153
 #: components/Email/EmailTemplateManager.php:154
 msgid "Payment Status Updated"
-msgstr "Estado del pago actualizado"
+msgstr "付款状态已更新"
 
 #: components/Booking/SettingsBooking.php:75
 msgid "Payment Structure"
-msgstr "Estructura de pagos"
+msgstr "付款结构"
 
 #: admin/AdminPageManager.php:165 admin/partials/payments.php:47
 msgid "Payments"
-msgstr "Pagos"
+msgstr "付款"
 
 #: components/Checkout/Checkout.php:605
 msgid "Payments are not enabled on this website. "
-msgstr "Los pagos no están habilitados en este sitio web."
+msgstr "本网站未启用付款功能。"
 
 #: admin/AdminTableItem.php:761
 msgid "PayNow (QR Code Payment - Singapore)"
-msgstr "PayNow (Pago con código QR - Singapur)"
+msgstr "PayNow（二维码支付 - 新加坡）"
 
 #: admin/AdminTableItem.php:762
 msgid "PayPal (Online Wallet)"
-msgstr "PayPal (monedero electrónico)"
+msgstr "贝宝（在线钱包）"
 
 #: admin/MetaManager.php:867 admin/MetaManager.php:1012
 msgid "PDF"
@@ -2794,13 +2614,13 @@ msgstr "PDF"
 #: includes/PDF.php:276
 #, php-format
 msgid "PDF file was not created at %s"
-msgstr "El archivo PDF no se ha creado en %s"
+msgstr "在 %s 处未创建 PDF 文件"
 
 #. %s: the error message
 #: includes/PDF.php:285
 #, php-format
 msgid "PDF generation failed: %s"
-msgstr "Error en la generación del PDF: %s"
+msgstr "PDF 生成失败：%s"
 
 #: admin/Metaboxes.php:591 admin/AdminTableItem.php:920
 #: admin/partials/booked-services.php:54 admin/partials/payments.php:65
@@ -2808,138 +2628,133 @@ msgstr "Error en la generación del PDF: %s"
 #: components/Booking/BookedService/BookedServiceList.php:402
 #: components/Booking/BookedService/PaymentStatusForm.php:59
 msgid "Pending"
-msgstr "Pendiente"
+msgstr "待定"
 
 #: components/Service/ServicePost.php:80
 msgid "per"
-msgstr "por"
+msgstr "论"
 
 #. %s: the singular unit name (e.g. word)
 #: components/Service/RateType.php:121
 #, php-format
 msgid "Per %s"
-msgstr "Por %s"
+msgstr "每 %s"
 
 #: config/Activator.php:87
 msgid "Per Word"
-msgstr "Por palabra"
+msgstr "每字"
 
 #: includes/UserFilesForm.php:152
 msgid "Permanently Delete Files"
-msgstr "Borrar archivos permanentemente"
+msgstr "永久删除文件"
 
 #: includes/Options.php:390
 msgid "Physical Check"
-msgstr "Control físico"
+msgstr "身体检查"
 
 #: admin/AdminTableItem.php:763
 msgid "Pix (Instant Bank Transfer - Brazil)"
-msgstr "Pix (Transferencia bancaria instantánea - Brasil)"
+msgstr "Pix （即时银行转账 - 巴西）"
 
 #. %s: the contact us link
 #: components/Booking/BookingFormSubmission.php:70
 #, php-format
 #| msgid "<p>Please %s for assistance</p>"
 msgid "Please %s for assistance"
-msgstr "Por favor, %s para asistencia"
+msgstr "请 %s 寻求帮助"
 
 #. %s: the link to email the admin
 #: components/Booking/BookingForm.php:182
 #, php-format
 msgid "Please %s to book services."
-msgstr "Por favor, %s para reservar servicios."
+msgstr "请 %s 预订服务。"
 
-#. %s: link to deactivate BuddyClients Free
-#: buddyclients-free.php:76
+#. %s: link to deactivate Buddyclients Lite
+#: buddyclients-lite.php:76
 #, php-format
 msgid "Please %s to continue."
-msgstr "Por favor, %s para continuar."
+msgstr "请按 %s 继续。"
 
 #. %s: the login url
 #: components/Brief/SingleBrief.php:302
 #, php-format
 msgid "Please <a href=\"%s\">log in</a> to access this brief."
-msgstr "Por favor, <a href=\"%s\">conéctese</a> para acceder a este resumen."
+msgstr "请<a href=\"%s\">登录</a>访问本简介。"
 
 #: admin/AdminInfo.php:98
 msgid "Please be cautious when deleting bookings. They cannot be recovered."
-msgstr "Tenga cuidado al borrar reservas. No se pueden recuperar."
+msgstr "删除预订时请谨慎。这些预订无法恢复。"
 
 #: components/Email/EmailTemplateManager.php:354
 msgid "Please complete the checkout process to confirm your booking."
-msgstr "Complete el proceso de pago para confirmar su reserva."
+msgstr "请完成结账流程以确认预订。"
 
 #: components/Email/EmailTemplateManager.php:311
 msgid "Please review the cancellation request and take appropriate action."
-msgstr ""
-"Por favor, revise la solicitud de cancelación y tome las medidas oportunas."
+msgstr "请审查取消申请并采取适当行动。"
 
 #: components/Email/EmailTemplateManager.php:339
 msgid "Please review the contact form submission and respond accordingly."
-msgstr ""
-"Por favor, revise el envío del formulario de contacto y responda en "
-"consecuencia."
+msgstr "请查看提交的联系表并做出相应回复。"
 
 #: includes/FormSubmission.php:266
 msgid "Please try again later."
-msgstr "Vuelva a intentarlo más tarde."
+msgstr "请稍后再试。"
 
 #: components/Email/EmailTemplateManager.php:267
 msgid "Please update your availability as soon as possible."
-msgstr "Por favor, actualice su disponibilidad lo antes posible."
+msgstr "请尽快更新您的空闲时间。"
 
 #: components/Checkout/Checkout.php:368
 msgid ""
 "Please use the button below to confirm. We will be in touch to arrange "
 "payment."
-msgstr ""
-"Por favor, utilice el botón de abajo para confirmar. Nos pondremos en "
-"contacto con usted para organizar el pago."
+msgstr "请使用下面的按钮确认。我们将与您联系安排付款事宜。"
 
 #: admin/MetaManager.php:612 admin/MetaManager.php:760
 #: admin/MetaManager.php:825
 msgid "Plural"
-msgstr "Plural"
+msgstr "复数"
 
 #: admin/MetaManager.php:869 admin/MetaManager.php:1014
 msgid "PNG Image"
-msgstr "Imagen PNG"
+msgstr "PNG 图片"
 
 #. %s: post title
 #: config/Activator.php:147
 #, php-format
 msgid "Post with title \"%s\" already exists. Skipping creation."
-msgstr "El post con el título \"%s\" ya existe. Omitiendo la creación."
+msgstr "标题为\"%s \"的帖子已存在。跳过创建。"
 
 #: includes/Archive.php:104
 msgid "posts"
-msgstr "puestos"
+msgstr "帖子"
 
 #: admin/AdminTableItem.php:728
 msgid "Pre-authorized debit (Canada)"
-msgstr "Débito preautorizado (Canadá)"
+msgstr "预授权借记（加拿大）"
 
 #: admin/helpers/brief-preview.php:15 admin/helpers/brief-preview.php:43
 msgid "Preview"
-msgstr "Vista previa"
+msgstr "预览"
 
 #. %s: the name of the brief type (e.g. Editing)
 #: admin/helpers/brief-preview.php:79
 #, php-format
 msgid "Preview %s Brief"
-msgstr "Vista previa %s Breve"
+msgstr "预览 %s Brief"
 
 #: includes/Pagination.php:119
 msgid "Previous"
-msgstr "Anterior"
+msgstr "上一页"
 
 #: admin/SettingsGeneral.php:44
 msgid "Primary Color"
-msgstr "Color principal"
+msgstr "原色"
 
 #: components/Checkout/Checkout.php:470
 msgid "privacy policy"
-msgstr "política de privacidad"
+msgstr "隐私政策"
 
 #: admin/MetaManager.php:788 admin/MetaManager.php:919
 #: admin/MetaManager.php:1066 admin/AdminColumns.php:50
@@ -2949,21 +2764,21 @@ msgstr "política de privacidad"
 #: components/Booking/BookedService/BookedServiceList.php:105
 #: components/Booking/BookedService/BookedServiceList.php:246
 msgid "Project"
-msgstr "Proyecto"
+msgstr "项目"
 
 #: config/Activator.php:93
 msgid "project"
-msgstr "proyecto"
+msgstr "项目"
 
 #: components/Email/EmailTemplateManager.php:75
 msgid "Project Brief Updated"
-msgstr "Resumen del proyecto actualizado"
+msgstr "更新项目简介"
 
 #: components/Brief/helpers/group-extension.php:15
 #: components/Brief/helpers/group-extension.php:20
 #: components/Brief/helpers/group-extension.php:32
 msgid "Project Briefs"
-msgstr "Resúmenes de proyectos"
+msgstr "项目简介"
 
 #: includes/ExtensionManager.php:64 includes/ExtensionManager.php:65
 #: includes/ExtensionManager.php:71 includes/ExtensionManager.php:276
@@ -2972,277 +2787,261 @@ msgstr "Resúmenes de proyectos"
 #: components/Booking/BookedService/helpers/group-extension.php:20
 #: components/Booking/BookedService/helpers/group-extension.php:32
 msgid "Project Services"
-msgstr "Servicios para proyectos"
+msgstr "项目服务"
 
 #: components/Booking/BookingForm.php:483
 msgid "Project Title"
-msgstr "Título del proyecto"
+msgstr "项目名称"
 
 #: includes/SinglePost.php:264
 msgid "Projects"
-msgstr "Proyectos"
+msgstr "项目"
 
 #: admin/AdminTableItem.php:764
 msgid "PromptPay (Instant Funds Transfer - Thailand)"
-msgstr "PromptPay (Transferencia de fondos instantánea - Tailandia)"
+msgstr "PromptPay（即时资金转账 - 泰国）"
 
 #: admin/SettingsIntegrations.php:35
 msgid "Protect your website against spam with Google reCAPTCHA."
-msgstr "Proteja su sitio web contra el spam con Google reCAPTCHA."
+msgstr "使用 Google reCAPTCHA 保护您的网站免受垃圾邮件的侵害。"
 
 #: admin/AdminTableItem.php:758
 msgid "Przelewy24 (Bank Redirect - Poland)"
-msgstr "Przelewy24 (Redirección bancaria - Polonia)"
+msgstr "Przelewy24 （银行重定向 - 波兰）"
 
 #: admin/WelcomeMessage.php:345
 msgid "Quick Links:"
-msgstr "Enlaces rápidos:"
+msgstr "快速链接"
 
 #: includes/helpers/components.php:47
 msgid "Quote"
-msgstr "Cita"
+msgstr "报价"
 
 #: components/Service/ServicePost.php:91
 msgid "Rate"
-msgstr "Tarifa"
+msgstr "费率"
 
 #: admin/PostTypeManager.php:94
 msgid "Rate Adjustment"
-msgstr "Ajuste de tarifas"
+msgstr "费率调整"
 
 #: admin/PostTypeManager.php:95
 msgid "Rate Adjustments"
-msgstr "Ajustes de las tasas"
+msgstr "费率调整"
 
 #: admin/MetaManager.php:339 admin/MetaManager.php:1114
 #: admin/PostTypeManager.php:106
 msgid "Rate Type"
-msgstr "Tipo de tarifa"
+msgstr "费率类型"
 
 #: admin/Nav.php:59 admin/PostTypeManager.php:107
 msgid "Rate Types"
-msgstr "Tipos de tarifa"
+msgstr "费率类型"
 
 #: admin/AdminInfo.php:184
 msgid ""
 "Rate types can be attached to the service or the project. Attaching a rate "
 "type to the service means the client will be prompted to enter separate "
 "numbers (such as word count, hours, etc.) for each service."
-msgstr ""
-"Los tipos de tarifa pueden adjuntarse al servicio o al proyecto. Adjuntar un "
-"tipo de tarifa al servicio significa que se pedirá al cliente que introduzca "
-"cifras separadas (como recuento de palabras, horas, etc.) para cada servicio."
+msgstr "费率类型可以附加到服务或项目上。将费率类型附加到服务上意味着会提示客户为每项服务输入单独的数字（如字数、小时数等）。"
 
 #: admin/MetaManager.php:333 admin/MetaManager.php:1108
 msgid "Rate Value"
-msgstr "Tasa Valor"
+msgstr "比率值"
 
 #: components/Booking/BookingForm.php:173
 msgid "Read to Get Started?"
-msgstr "¿Leer para empezar?"
+msgstr "开始阅读？"
 
 #: components/Email/EmailTemplateManager.php:346
 msgid "Ready for Checkout"
-msgstr "Listo para el pago"
+msgstr "准备结账"
 
 #. %1$s: the cancellation reason
 #: components/Email/EmailTemplateManager.php:308
 #, php-format
 msgid "Reason: %1$s"
-msgstr "Motivo: %1$s"
+msgstr "原因：%1$s"
 
 #: admin/partials/booked-services.php:26
 #: components/Booking/BookedService/ReassignForm.php:26
 msgid "Reassign"
-msgstr "Reasignar"
+msgstr "重新分配"
 
 #: admin/SettingsIntegrations.php:32
 msgid "reCAPTCHA Integration"
-msgstr "integración de reCAPTCHA"
+msgstr "reCAPTCHA 集成"
 
 #: admin/SettingsIntegrations.php:60
 msgid "reCAPTCHA Threshold"
-msgstr "umbral reCAPTCHA"
+msgstr "reCAPTCHA 临界值"
 
 #: admin/AdminTableItem.php:587
 msgid "Record Payment"
-msgstr "Registre el pago"
+msgstr "记录付款"
 
 #: config/ReferencePosts.php:33
 msgid "Reference"
-msgstr "Referencia"
+msgstr "参考资料"
 
 #: config/ReferencePosts.php:34
 msgid "References"
-msgstr "Referencias"
+msgstr "参考资料"
 
 #: admin/AdminInfo.php:194
 msgid ""
 "Refine which team members are available to clients based on these fields."
-msgstr ""
-"Defina qué miembros del equipo están disponibles para los clientes en "
-"función de estos campos."
+msgstr "根据这些字段细化可为客户提供服务的团队成员。"
 
 #: admin/AdminTableItem.php:593
 msgid "Remove Payment"
-msgstr "Eliminar pago"
+msgstr "取消付款"
 
 #: admin/AdminInfo.php:122
 msgid ""
 "Remove these messages by changing the \"Admin Info Messages\" setting below "
 "to \"disable.\""
-msgstr ""
-"Elimine estos mensajes cambiando la configuración de \"Admin Info Messages\" "
-"a \"disable\""
+msgstr "将下面的 \"管理信息信息 \"设置更改为 \"禁用\"，即可删除这些信息。"
 
 #: admin/RepairButton.php:104
 msgid "Repair"
-msgstr "Repare"
+msgstr "维修"
 
 #. %1$s: the reply-to address
 #: components/Email/EmailTemplateManager.php:336
 #, php-format
 msgid "Reply To: %1$s"
-msgstr "Responder a: %1$s"
+msgstr "答复：%1$s"
 
 #: components/Booking/BookedService/CancelRequestForm.php:64
 msgid "Request Cancellation"
-msgstr "Solicitud de anulación"
+msgstr "申请取消"
 
 #: admin/SettingsComponents.php:83
 msgid "Request information from clients after booking."
-msgstr "Solicitar información a los clientes tras la reserva."
+msgstr "预订后要求客户提供信息。"
 
 #: components/Booking/BookedService/BookedServiceList.php:517
 msgid "Request service cancellation"
-msgstr "Solicitar la anulación del servicio"
+msgstr "申请取消服务"
 
 #: components/Booking/SettingsBooking.php:136
 msgid "Require Active Team Member Agreement"
-msgstr "Exigir acuerdo de miembro activo del equipo"
+msgstr "要求签订活跃团队成员协议"
 
 #: admin/MetaManager.php:891
 msgid "Required"
-msgstr "Requerido"
+msgstr "需要"
 
 #: admin/MetaManager.php:400
 msgid "Required Services"
-msgstr "Servicios requeridos"
+msgstr "所需服务"
 
 #: components/Checkout/Confirmation.php:370
 msgid "Return to Checkout"
-msgstr "Volver a la caja"
+msgstr "返回结账"
 
 #: admin/AdminDashboard.php:543
 msgid "Revenue Over Time"
-msgstr "Ingresos a lo largo del tiempo"
+msgstr "长期收入"
 
 #: admin/AdminTableItem.php:765
 msgid "Revolut Pay (Digital Wallet - UK)"
-msgstr "Revolut Pay (Billetera digital - Reino Unido)"
+msgstr "Revolut Pay（数字钱包 - 英国）"
 
 #: includes/ExtensionManager.php:243 admin/Nav.php:49
 #: admin/AdminPageManager.php:100 includes/helpers/components.php:48
 #: admin/partials/payments.php:56
 msgid "Sales"
-msgstr "Ventas"
+msgstr "销售"
 
 #: includes/AlertManager.php:132
 msgid "sales"
-msgstr "ventas"
+msgstr "销售额"
 
 #: includes/ExtensionManager.php:244
 msgid "Sales Commission"
-msgstr "Comisión de ventas"
+msgstr "销售佣金"
 
 #: admin/Nav.php:68
 msgid "Sales Payments"
-msgstr "Pagos por ventas"
+msgstr "销售付款"
 
 #: components/Email/EmailTemplateManager.php:345
 msgid "Sales Team Booking"
-msgstr "Reservas del equipo de ventas"
+msgstr "销售团队预订"
 
 #: admin/UpgradePage.php:210
 #| msgid "Sales Team Commission"
 msgid "Sales team commission"
-msgstr "Comisión del equipo de ventas"
+msgstr "销售团队佣金"
 
 #: admin/AdminTableItem.php:766
 msgid "Samsung Pay (Digital Wallet - South Korea)"
-msgstr "Samsung Pay (Billetera digital - Corea del Sur)"
+msgstr "三星支付（数字钱包 - 韩国）"
 
 #: admin/SettingsPage.php:164
 msgid "Save Settings"
-msgstr "Guardar configuración"
+msgstr "保存设置"
 
 #. %s: plural name of the item
 #. %s: label of the plural item
 #: admin/Taxonomy.php:205 admin/PostType.php:123
 #, php-format
 msgid "Search %s"
-msgstr "Buscar %s"
+msgstr "搜索 %s"
 
 #: admin/SettingsIntegrations.php:55
 msgid "Secret Key"
-msgstr "Clave secreta"
+msgstr "秘钥"
 
 #. %s: the name of the rate adjustment
 #: components/Booking/BookingForm.php:689
 #, php-format
 msgid "Select %s"
-msgstr "Seleccionar %s"
+msgstr "选择 %s"
 
 #: admin/MetaManager.php:519
 msgid "Select a Field"
-msgstr "Seleccione un campo"
+msgstr "选择一个字段"
 
 #: admin/MetaManager.php:984
 msgid "Select a help doc to show on the brief form."
-msgstr "Seleccione un documento de ayuda para mostrar en el formulario breve."
+msgstr "选择要在简表上显示的帮助文档。"
 
 #: admin/MetaManager.php:557
 msgid "Select a Match Type"
-msgstr "Seleccione un tipo de partido"
+msgstr "选择匹配类型"
 
 #: admin/SettingsPages.php:84
 msgid "Select a Page"
-msgstr "Seleccione una página"
+msgstr "选择页面"
 
 #: admin/MetaManager.php:1093
 msgid ""
 "Select a specific team member to be assigned this quote. Selecting a team "
 "member here disables the Choose a Team Member option on the booking form and "
 "overrides all team member filtering."
-msgstr ""
-"Seleccione un miembro del equipo específico al que se le asignará este "
-"presupuesto. Al seleccionar un miembro del equipo aquí se desactiva la "
-"opción Elegir un miembro del equipo en el formulario de reserva y se anulan "
-"todos los filtros de miembros del equipo."
+msgstr "选择要分配此报价的特定团队成员。在此选择团队成员将禁用预订表上的 \"选择团队成员 \"选项，并覆盖所有团队成员筛选。"
 
 #: admin/MetaManager.php:318
 msgid ""
 "Select a team member to ALWAYS be assigned this service. Selecting a team "
 "member here disables the Choose a Team Member option on the booking form and "
 "overrides all team member filtering."
-msgstr ""
-"Seleccione un miembro del equipo para que SIEMPRE se le asigne este servicio."
-" Al seleccionar aquí a un miembro del equipo, se desactiva la opción Elegir "
-"a un miembro del equipo en el formulario de reserva y se anulan todos los "
-"filtros de miembros del equipo."
+msgstr "选择一名团队成员，以始终分配此项服务。在此选择团队成员将禁用预订表上的 \"选择团队成员 \"选项，并覆盖所有团队成员筛选。"
 
 #: admin/MetaManager.php:864 admin/MetaManager.php:1009
 msgid "Select all file types to accept."
-msgstr "Seleccione todos los tipos de archivo que desea aceptar."
+msgstr "选择要接受的所有文件类型。"
 
 #: admin/MetaManager.php:412 admin/MetaManager.php:1172
 msgid "Select any file upload types that apply to this service."
-msgstr ""
-"Seleccione los tipos de carga de archivos que se aplican a este servicio."
+msgstr "选择适用于该服务的任何文件上传类型。"
 
 #: admin/MetaManager.php:1141
 msgid "Select any rate adjustments that apply to this service."
-msgstr "Seleccione los ajustes de tarifa que se aplican a este servicio."
+msgstr "选择适用于该服务的任何费率调整。"
 
 #. %s: the url to add adjustment fields
 #: admin/MetaManager.php:368
@@ -3250,37 +3049,33 @@ msgstr "Seleccione los ajustes de tarifa que se aplican a este servicio."
 msgid ""
 "Select any rate adjustments that apply to this service. <a href=\"%s\">Add "
 "adjustment fields.</a>"
-msgstr ""
-"Seleccione cualquier ajuste de tarifa que se aplique a este servicio. <a "
-"href=\"%s\">Añadir campos de ajuste.</a>"
+msgstr "选择适用于此服务的任何费率调整。<a href=\"%s\">添加调整字段。"
 
 #: includes/FormField.php:625
 msgid "Select File"
-msgstr "Seleccionar archivo"
+msgstr "选择文件"
 
 #: includes/UserFilesForm.php:264
 msgid ""
 "Select files to delete. Files connected to in-progress services are not "
 "available for deletion."
-msgstr ""
-"Seleccione los archivos que desea eliminar. Los archivos conectados a "
-"servicios en curso no están disponibles para su eliminación."
+msgstr "选择要删除的文件。连接到进行中服务的文件不可删除。"
 
 #: admin/MetaManager.php:569 components/Brief/BriefForm.php:129
 msgid "Select One"
-msgstr "Seleccione uno"
+msgstr "选择一个"
 
 #: admin/MetaManager.php:967 admin/MetaManager.php:987
 msgid "Select one"
-msgstr "Seleccione uno"
+msgstr "选择一个"
 
 #: admin/AdminInfo.php:125
 msgid "Select or create the pages used by the BuddyClients plugin."
-msgstr "Seleccione o cree las páginas utilizadas por el plugin BuddyClients."
+msgstr "选择或创建 BuddyClients 插件使用的页面。"
 
 #: admin/MetaManager.php:922
 msgid "Select Project"
-msgstr "Seleccionar proyecto"
+msgstr "选择项目"
 
 #. %s: the url to add brief types
 #. %s: URL to add brief types
@@ -3289,49 +3084,39 @@ msgstr "Seleccionar proyecto"
 msgid ""
 "Select the brief type(s) to create for this service. <a href=\"%s\">Add "
 "brief types.</a>"
-msgstr ""
-"Seleccione los tipos de sumario que desea crear para este servicio. <a "
-"href=\"%s\">Añadir tipos de escritos.</a>"
+msgstr "选择要为此服务创建的摘要类型。<a href=\"%s\">添加简要类型。"
 
 #: admin/MetaManager.php:956
 msgid "Select the brief types that should display the field."
-msgstr "Seleccione los tipos breves que deben mostrar el campo."
+msgstr "选择应显示字段的简介类型。"
 
 #. %s: the url to add service types
 #: admin/MetaManager.php:290
 #, php-format
 msgid ""
 "Select the category for this service. <a href=\"%s\">Add service types.</a>"
-msgstr ""
-"Seleccione la categoría para este servicio. <a href=\"%s\">Añadir tipos de "
-"servicio.</a>"
+msgstr "选择此服务的类别。<a href=\"%s\">添加服务类型。"
 
 #: admin/MetaManager.php:1061
 msgid "Select the client who can access this custom quote."
-msgstr ""
-"Seleccione el cliente que puede acceder a este presupuesto personalizado."
+msgstr "选择可以访问此自定义报价的客户。"
 
 #: admin/SettingsGeneral.php:75
 msgid "Select the default member type for new clients."
-msgstr "Seleccione el tipo de miembro por defecto para los nuevos clientes."
+msgstr "为新客户选择默认成员类型。"
 
 #: components/Email/SettingsEmail.php:44
 msgid ""
 "Select the events you would like to trigger email notifications for users."
-msgstr ""
-"Seleccione los eventos que desea que activen las notificaciones por correo "
-"electrónico para los usuarios."
+msgstr "选择要触发用户电子邮件通知的事件。"
 
 #: admin/SettingsGeneral.php:63
 msgid "Select the member types for clients, team members, and site admins."
-msgstr ""
-"Seleccione los tipos de miembros para clientes, miembros del equipo y "
-"administradores del sitio."
+msgstr "为客户、团队成员和网站管理员选择成员类型。"
 
 #: admin/SettingsGeneral.php:102
 msgid "Select the payment methods available to team members."
-msgstr ""
-"Seleccione los métodos de pago disponibles para los miembros del equipo."
+msgstr "选择团队成员可用的付款方式。"
 
 #. %s: the url to add rate types
 #. %s: URL to add rate types
@@ -3339,33 +3124,28 @@ msgstr ""
 #, php-format
 msgid ""
 "Select the type of fee entered above. <a href=\"%s\">Add rate types.</a>"
-msgstr ""
-"Seleccione el tipo de tarifa introducido anteriormente. <a href=\"%s\">"
-"Añadir tipos de tasa.</a>"
+msgstr "选择上面输入的收费类型。<a href=\"%s\">添加收费类型。"
 
 #: admin/MetaManager.php:1203
 msgid "Select the type of legal agreement this content is for."
-msgstr ""
-"Seleccione el tipo de acuerdo legal para el que se destina este contenido."
+msgstr "选择该内容适用的法律协议类型。"
 
 #: admin/SettingsGeneral.php:69
 msgid "Select the types for clients."
-msgstr "Seleccione los tipos para los clientes."
+msgstr "为客户选择类型。"
 
 #: admin/SettingsGeneral.php:81
 msgid "Select the types for team members."
-msgstr "Seleccione los tipos para los miembros del equipo."
+msgstr "为团队成员选择类型。"
 
 #: admin/MetaManager.php:1197
 msgid "Select the users to apply this to."
-msgstr "Seleccione los usuarios a los que se aplicará."
+msgstr "选择要应用此功能的用户。"
 
 #: components/Booking/SettingsBooking.php:60
 msgid ""
 "Select this to skip the payment and make every submitted booking successful."
-msgstr ""
-"Seleccione esta opción para omitir el pago y que todas las reservas enviadas "
-"se realicen correctamente."
+msgstr "选择此项可跳过付款，使每次提交的预订都能成功。"
 
 #. %s: URL to add roles
 #: admin/MetaManager.php:1084
@@ -3373,9 +3153,7 @@ msgstr ""
 msgid ""
 "Select which team member role applies to this quote. <a href=\"%s\">Add "
 "roles.</a>"
-msgstr ""
-"Seleccione qué rol de miembro del equipo se aplica a este presupuesto. <a "
-"href=\"%s\">Añadir roles.</a>"
+msgstr "选择适用于该报价的团队成员角色。<a href=\"%s\">添加角色。"
 
 #. %s: the url to add roles
 #: admin/MetaManager.php:309
@@ -3383,104 +3161,80 @@ msgstr ""
 msgid ""
 "Select which team member role applies to this service. <a href=\"%s\">Add "
 "roles.</a>"
-msgstr ""
-"Seleccione qué rol de miembro de equipo se aplica a este servicio. <a "
-"href=\"%s\">Añadir roles.</a>"
+msgstr "选择适用于此服务的团队成员角色。<a href=\"%s\">添加角色。"
 
 #. %s: the singular name of the team member role (e.g. Editor)
 #: components/Booking/BookingForm.php:820
 #, php-format
 msgid "Select Your %s"
-msgstr "Seleccione su %s"
+msgstr "选择您的 %s"
 
 #. %s: the name of the service
 #: components/Booking/BookingForm.php:551
 #, php-format
 msgid "Select Your %s Service"
-msgstr "Seleccione su servicio %s"
+msgstr "选择您的 %s 服务"
 
 #. %s: the singular name of the team member role (e.g. editor)
 #: components/Booking/BookingForm.php:873
 #, php-format
 msgid "Select your %s."
-msgstr "Seleccione su %s."
+msgstr "选择您的 %s。"
 
 #: admin/UpgradePage.php:189
 msgid "Sell services and manage clients' projects in one place."
-msgstr ""
-"Venda servicios y gestione los proyectos de sus clientes en un solo lugar."
+msgstr "在一个地方销售服务和管理客户项目。"
 
 #: admin/SettingsComponents.php:82
 msgid "Send email notifications to clients, team members, and admins."
-msgstr ""
-"Envíe notificaciones por correo electrónico a clientes, miembros del equipo "
-"y administradores."
+msgstr "向客户、团队成员和管理员发送电子邮件通知。"
 
 #: components/Booking/SettingsBooking.php:101
 msgid ""
 "Send emails to users who begin booking services but exit before submitting "
 "payment. Note that the Abandoned Booking email must be enabled in Email "
 "settings."
-msgstr ""
-"Envíe correos electrónicos a los usuarios que comienzan a reservar servicios "
-"pero salen antes de enviar el pago. Tenga en cuenta que el correo "
-"electrónico de reserva abandonada debe estar habilitado en la configuración "
-"de correo electrónico."
+msgstr "向开始预订服务但在提交付款前退出的用户发送电子邮件。请注意，必须在电子邮件设置中启用 \"放弃预订 \"电子邮件。"
 
 #: components/Email/EmailTemplateManager.php:220
 msgid "Sends a confirmation message after a user submits the contact form."
-msgstr ""
-"Envía un mensaje de confirmación después de que un usuario envíe el "
-"formulario de contacto."
+msgstr "在用户提交联系表单后发送确认信息。"
 
 #: components/Email/EmailTemplateManager.php:238
 msgid "Sends a confirmation message when a user submits a testimonial."
-msgstr ""
-"Envía un mensaje de confirmación cuando un usuario envía un testimonio."
+msgstr "在用户提交推荐信时发送确认信息。"
 
 #: components/Email/EmailTemplateManager.php:356
 msgid ""
 "Sends a message with a link to submit payment when a booking is created "
 "manually by the sales team or site admin."
-msgstr ""
-"Envía un mensaje con un enlace para enviar el pago cuando el equipo de "
-"ventas o el administrador del sitio crean una reserva manualmente."
+msgstr "当销售团队或网站管理员手动创建预订时，发送带有提交付款链接的信息。"
 
 #: components/Email/EmailTemplateManager.php:256
 msgid "Sends a welcome message when a user joins the affiliate program."
-msgstr ""
-"Envía un mensaje de bienvenida cuando un usuario se une al programa de "
-"afiliados."
+msgstr "在用户加入联盟计划时发送欢迎信息。"
 
 #: components/Email/EmailTemplateManager.php:382
 msgid ""
 "Sends an auto-response to the user when they submit the lead generation form."
-msgstr ""
-"Envía una respuesta automática al usuario cuando envía el formulario de "
-"generación de prospectos."
+msgstr "当用户提交引导生成表单时，向其发送自动回复。"
 
 #: components/Email/EmailTemplateManager.php:150
 msgid ""
 "Sends an email to convert users who have abandoned bookings before "
 "submitting payment."
-msgstr ""
-"Envía un correo electrónico para convertir a los usuarios que han abandonado "
-"las reservas antes de enviar el pago."
+msgstr "向在提交付款前放弃预订的用户发送电子邮件。"
 
 #: components/Email/EmailTemplateManager.php:72
 msgid ""
 "Sends an email to the client when all services for a single booking have "
 "been completed. Includes a link to pay any unpaid fees, including final "
 "payments if deposits are enabled."
-msgstr ""
-"Envía un correo electrónico al cliente cuando se han completado todos los "
-"servicios de una misma reserva. Incluye un enlace para pagar cualquier "
-"tarifa pendiente, incluidos los pagos finales si los depósitos están "
-"habilitados."
+msgstr "当单个预订的所有服务均已完成时，向客户发送电子邮件。包含一个链接，用于支付任何未支付的费用，包括启用押金后的尾款。"
 
 #: admin/AdminTableItem.php:767
 msgid "SEPA Direct Debit (Euro Payments Area)"
-msgstr "Adeudos directos SEPA (zona de pagos en euros)"
+msgstr "SEPA 直接借记（欧元支付区）"
 
 #: admin/MetaManager.php:789 admin/PostTypeManager.php:80
 #: includes/helpers/components.php:39
@@ -3489,149 +3243,134 @@ msgstr "Adeudos directos SEPA (zona de pagos en euros)"
 #: components/Booking/BookedService/BookedServiceList.php:103
 #: components/Booking/BookedService/BookedServiceList.php:243
 msgid "Service"
-msgstr "Servicio"
+msgstr "服务"
 
 #: config/Activator.php:103
 msgid "service"
-msgstr "servicio"
+msgstr "服务"
 
 #: components/Email/EmailTemplateManager.php:30
 msgid "Service Status Updated"
-msgstr "Estado del servicio actualizado"
+msgstr "更新服务状态"
 
 #: components/Booking/BookingForm.php:910 components/Checkout/Checkout.php:535
 msgid "service terms"
-msgstr "condiciones del servicio"
+msgstr "服务条款"
 
 #: admin/MetaManager.php:287 admin/PostTypeManager.php:118
 msgid "Service Type"
-msgstr "Tipo de servicio"
+msgstr "服务类型"
 
 #: components/Service/Service.php:268
 msgid "Service Type is required."
-msgstr "El tipo de servicio es obligatorio."
+msgstr "需要服务类型。"
 
 #: admin/Nav.php:58 admin/PostTypeManager.php:119
 msgid "Service Types"
-msgstr "Tipos de servicio"
+msgstr "服务类型"
 
 #: includes/ExtensionManager.php:177 includes/SinglePost.php:256
 #: admin/Nav.php:57 admin/PostTypeManager.php:81
 #: admin/partials/all-bookings.php:18 admin/partials/all-bookings.php:21
 msgid "Services"
-msgstr "Servicios"
+msgstr "服务"
 
 #: admin/AdminTableItem.php:346
 msgid "Sessions"
-msgstr "Sesiones"
+msgstr "会议"
 
 #: components/Booking/SettingsBooking.php:90
 msgid ""
 "Set the percentage of the full fee clients are charged up front. The "
 "remaining percentage will be billed on completion of services."
-msgstr ""
-"Establece el porcentaje de la tarifa completa que se cobra a los clientes "
-"por adelantado. El porcentaje restante se facturará al finalizar los "
-"servicios."
+msgstr "设定预先向客户收取全额费用的百分比。其余百分比将在服务完成后结算。"
 
 #: components/Booking/SettingsBooking.php:124
 msgid ""
 "Set the rules for team member selection on the booking form. Team members "
 "will also be filtered by their Filter Field selections."
-msgstr ""
-"Establezca las reglas para la selección de los miembros del equipo en el "
-"formulario de reserva. Los miembros del equipo también se filtrarán por sus "
-"selecciones de Campo de filtro."
+msgstr "在预订表上设置团队成员选择规则。团队成员也将根据他们选择的筛选字段进行筛选。"
 
 #: admin/Nav.php:41 admin/WelcomeMessage.php:293 admin/AdminPageManager.php:57
 #: admin/PluginLinks.php:53
 msgid "Settings"
-msgstr "Ajustes"
+msgstr "设置"
 
 #. %1$s: the affiliate link
 #: components/Email/EmailTemplateManager.php:251
 #, php-format
 msgid "Share your unique affiliate link to begin earning commission: %1$s"
-msgstr ""
-"Comparta su enlace de afiliado exclusivo para empezar a ganar comisiones: "
-"%1$s"
+msgstr "分享您独特的联盟链接，开始赚取佣金： %1$s"
 
 #: admin/MetaManager.php:882
 msgid "Should multiple files be allowed?"
-msgstr "¿Deben permitirse los archivos múltiples?"
+msgstr "是否允许多个文件？"
 
 #: admin/SettingsGeneral.php:87
 msgid "Should team members be allowed to select their own roles?"
-msgstr ""
-"¿Debería permitirse a los miembros del equipo elegir sus propias funciones?"
+msgstr "是否应允许团队成员选择自己的角色？"
 
 #: components/Booking/SettingsBooking.php:142
 msgid ""
 "Should team members without active agreements be disallowed from accepting "
 "new projects? This setting only applies if the Legal component is enabled "
 "and a team member agreement exists."
-msgstr ""
-"¿Se debe impedir que los miembros del equipo sin acuerdos activos acepten "
-"nuevos proyectos? Esta configuración sólo se aplica si el componente Legal "
-"está activado y existe un acuerdo entre los miembros del equipo."
+msgstr "是否应禁止没有有效协议的团队成员接受新项目？只有启用了法律组件且存在团队成员协议时，此设置才适用。"
 
 #: admin/MetaManager.php:1000
 msgid "Should the upload field accept multiple files?"
-msgstr "¿Debe el campo de carga aceptar varios archivos?"
+msgstr "上传栏是否应接受多个文件？"
 
 #: admin/MetaManager.php:892
 msgid "Should this file upload be required?"
-msgstr "¿Debe exigirse la carga de este archivo?"
+msgstr "是否需要上传文件？"
 
 #: includes/FormField.php:714
 msgid "Sign Here"
-msgstr "Firme aquí"
+msgstr "在此签名"
 
 #: admin/MetaManager.php:606 admin/MetaManager.php:754
 #: admin/MetaManager.php:819
 msgid "Singular"
-msgstr "Singular"
+msgstr "单数"
 
 #: admin/SettingsIntegrations.php:50
 msgid "Site Key"
-msgstr "Clave del sitio"
+msgstr "网站关键字"
 
 #: components/Booking/SettingsBooking.php:54
 msgid "Skip Payment"
-msgstr "Omitir pago"
+msgstr "跳过付款"
 
-#: buddyclients-free.php:167
+#: buddyclients-lite.php:167
 msgid "Social groups are disabled."
-msgstr "Los grupos sociales son discapacitados."
+msgstr "社会群体是残疾人。"
 
 #: admin/AdminTableItem.php:768
 msgid "Sofort (Bank Redirect - Europe)"
-msgstr "Sofort (Redirección bancaria - Europa)"
+msgstr "Sofort（银行重定向 - 欧洲）"
 
 #: admin/AdminTableItem.php:1041
 msgid "Spam"
-msgstr "Spam"
+msgstr "垃圾邮件"
 
 #: admin/AdminInfo.php:270
 msgid ""
 "Specify the file types and sizes allowed for uploads. Ensure these settings "
 "align with your needs and storage limits."
-msgstr ""
-"Especifique los tipos y tamaños de archivo permitidos para las cargas. "
-"Asegúrese de que estos ajustes se ajustan a sus necesidades y límites de "
-"almacenamiento."
+msgstr "指定允许上传的文件类型和大小。确保这些设置符合您的需求和存储限制。"
 
 #: components/Email/SettingsEmail.php:50
 msgid "Specify the sent-from name and email."
-msgstr "Especifique el nombre y el correo electrónico del remitente."
+msgstr "指定发件人姓名和电子邮件。"
 
 #: components/Email/SettingsEmail.php:36
 msgid "Specify which email notifications to enable."
-msgstr "Especifique qué notificaciones por correo electrónico desea activar."
+msgstr "指定要启用的电子邮件通知。"
 
 #: components/Service/ServicePost.php:91
 msgid "Starting At"
-msgstr "A partir de"
+msgstr "起价"
 
 #: admin/AdminDashboard.php:449 admin/partials/booking-payments.php:20
 #: admin/partials/booking-payments.php:50 admin/partials/booked-services.php:20
@@ -3644,103 +3383,99 @@ msgstr "A partir de"
 #: components/Booking/BookedService/BookedServiceList.php:107
 #: components/Booking/BookedService/BookedServiceList.php:248
 msgid "Status"
-msgstr "Estado"
+msgstr "现状"
 
 #: includes/helpers/components.php:42
 msgid "Stripe"
-msgstr "Raya"
+msgstr "条纹"
 
 #: admin/AdminTableItem.php:740
 msgid "Stripe Terminal (In-person Card Payment)"
-msgstr "Terminal Stripe (pago con tarjeta en persona)"
+msgstr "Stripe 终端（现场刷卡支付）"
 
 #: admin/SettingsGeneral.php:40
 msgid "Style Settings"
-msgstr "Ajustes de estilo"
+msgstr "风格设置"
 
 #: admin/AdminColumns.php:89
 msgid "Subject"
-msgstr "Asunto"
+msgstr "主题"
 
 #: admin/AdminColumns.php:51
 msgid "Submitted"
-msgstr "Enviado"
+msgstr "已提交"
 
 #: admin/Metaboxes.php:606
 msgid "subtract"
-msgstr "restar"
+msgstr "减掉"
 
 #: admin/AdminTableItem.php:495
 msgid "Succeed Booking"
-msgstr "Reserva con éxito"
+msgstr "成功预订"
 
 #: admin/AdminTableItem.php:493 admin/partials/all-bookings.php:59
 msgid "Succeeded"
-msgstr "Con éxito"
+msgstr "成功"
 
 #: components/Checkout/Confirmation.php:238
 #: components/Checkout/Confirmation.php:268
 #: components/Checkout/Confirmation.php:352
 msgid "Success!"
-msgstr "¡Éxito!"
+msgstr "成功！"
 
 #: admin/WelcomeMessage.php:314
 msgid "Support"
-msgstr "Ayuda"
+msgstr "支持"
 
 #: admin/AdminTableItem.php:769
 msgid "Swish (Wallet - Sweden)"
-msgstr "Swish (Cartera - Suecia)"
+msgstr "Swish （钱包 - 瑞典）"
 
 #: admin/TaxManager.php:59
 msgid "Tag"
-msgstr "Etiqueta"
+msgstr "标签"
 
 #: admin/TaxManager.php:60
 msgid "Tags"
-msgstr "Etiquetas"
+msgstr "标签"
 
 #: admin/Nav.php:80 admin/AdminTableItem.php:267
 #: admin/partials/user-list.php:74 admin/partials/payments.php:54
 #: admin/partials/user-agreements.php:49
 #: components/Booking/SettingsBooking.php:123
 msgid "Team"
-msgstr "Equipo"
+msgstr "团队"
 
 #: includes/ExtensionManager.php:226 includes/ExtensionManager.php:227
 msgid "Team Agreement"
-msgstr "Acuerdo de equipo"
+msgstr "团队协议"
 
 #: admin/AdminInfo.php:242
 msgid ""
 "Team and affiliate agreements will appear here after they are signed and "
 "submitted."
-msgstr ""
-"Los acuerdos de equipo y afiliación aparecerán aquí una vez firmados y "
-"enviados."
+msgstr "团队和联盟协议签署并提交后，将在此处显示。"
 
 #: components/Booking/SettingsBooking.php:65
 msgid ""
 "Team and commission payments will be marked as \"eligible\" after this "
 "timeframe."
-msgstr ""
-"Los pagos de equipos y comisiones se marcarán como \"elegibles\" una vez "
-"transcurrido este plazo."
+msgstr "在此时限之后，团队和佣金付款将被标记为 \"合格\"。"
 
 #: config/ReferencePosts.php:82
 msgid "Team Availability"
-msgstr "Disponibilidad del equipo"
+msgstr "团队可用性"
 
 #: admin/UpgradePage.php:209
 #| msgid "Team Availability"
 msgid "Team availability"
-msgstr "Disponibilidad del equipo"
+msgstr "团队可用性"
 
 #: components/Booking/BookedService/BookedServiceList.php:84
 #: components/Booking/BookedService/BookedServiceList.php:109
 #: components/Booking/BookedService/BookedServiceList.php:250
 msgid "Team Fee"
-msgstr "Cuota de equipo"
+msgstr "团队费用"
 
 #: admin/partials/booked-services.php:22
 #: components/Booking/BookedService/BookedServiceList.php:86
@@ -3748,119 +3483,109 @@ msgstr "Cuota de equipo"
 #: components/Booking/BookedService/BookedServiceList.php:106
 #: components/Booking/BookedService/BookedServiceList.php:247
 msgid "Team Member"
-msgstr "Miembro del equipo"
+msgstr "团队成员"
 
 #: includes/AlertManager.php:131
 msgid "team member"
-msgstr "miembro del equipo"
+msgstr "队员"
 
 #: admin/AdminColumns.php:61 admin/AdminColumns.php:79
 msgid "Team Member %"
-msgstr "Miembro del equipo"
+msgstr "团队成员 %"
 
 #: admin/MetaManager.php:354 admin/MetaManager.php:1129
 msgid "Team Member Percentage"
-msgstr "Porcentaje de miembros del equipo"
+msgstr "团队成员百分比"
 
 #: admin/MetaManager.php:306 admin/MetaManager.php:1081
 #: admin/PostTypeManager.php:130
 msgid "Team Member Role"
-msgstr "Función del miembro del equipo"
+msgstr "团队成员角色"
 
 #: components/Service/Service.php:261
 msgid "Team Member Role is required."
-msgstr "Se requiere una función de miembro del equipo."
+msgstr "需要发挥团队成员的作用。"
 
 #: admin/PostTypeManager.php:131
 msgid "Team Member Roles"
-msgstr "Funciones de los miembros del equipo"
+msgstr "团队成员角色"
 
 #: admin/AdminInfo.php:188
 msgid ""
 "Team member roles allow you to group team members based on the type of "
 "services they complete."
-msgstr ""
-"Las funciones de los miembros del equipo le permiten agruparlos en función "
-"del tipo de servicios que prestan."
+msgstr "团队成员角色允许您根据团队成员完成的服务类型对其进行分组。"
 
 #: admin/AdminInfo.php:255
 msgid ""
 "Team members and affiliates will provide signatures, and clients will check "
 "a box accepting the service agreement when booking services."
-msgstr ""
-"Los miembros del equipo y los afiliados firmarán, y los clientes marcarán "
-"una casilla aceptando el acuerdo de servicio al reservar los servicios."
+msgstr "团队成员和附属机构将提供签名，客户将在预订服务时勾选接受服务协议的方框。"
 
 #: admin/SettingsGeneral.php:101 admin/SettingsGeneral.php:105
 msgid "Team Payment Methods"
-msgstr "Formas de pago del equipo"
+msgstr "团队付款方式"
 
 #: admin/Nav.php:66
 msgid "Team Payments"
-msgstr "Pagos en equipo"
+msgstr "团队付款"
 
 #: admin/Nav.php:60
 msgid "Team Roles"
-msgstr "Funciones del equipo"
+msgstr "团队角色"
 
 #: admin/AdminInfo.php:190
 msgid ""
 "Team roles allow you to easily specify which team members may be assigned to "
 "certain services without identifying every service individually."
-msgstr ""
-"Los roles de equipo permiten especificar fácilmente qué miembros del equipo "
-"pueden asignarse a determinados servicios sin necesidad de identificar cada "
-"servicio individualmente."
+msgstr "团队角色可让您轻松指定哪些团队成员可被分配到某些服务，而无需逐一识别每项服务。"
 
 #: admin/SettingsGeneral.php:78
 msgid "Team Types"
-msgstr "Tipos de equipos"
+msgstr "团队类型"
 
 #: components/Booking/BookingForm.php:174
 msgid "Tell us about your project, and we'll be in touch soon!"
-msgstr "Cuéntenos su proyecto y pronto nos pondremos en contacto con usted"
+msgstr "请向我们介绍您的项目，我们将尽快与您联系！"
 
 #: admin/SettingsGeneral.php:55
 msgid "Tertiary Color"
-msgstr "Color terciario"
+msgstr "三级色"
 
 #: includes/ExtensionManager.php:78 includes/ExtensionManager.php:79
 #: includes/ExtensionManager.php:85
 msgid "Test"
-msgstr "Prueba"
+msgstr "测试"
 
 #: components/Checkout/Checkout.php:230
 msgid "Test Mode"
-msgstr "Modo de prueba"
+msgstr "测试模式"
 
 #: admin/PostTypeManager.php:225 includes/helpers/components.php:49
 msgid "Testimonial"
-msgstr "Testimonio"
+msgstr "推荐信"
 
 #: admin/MetaManager.php:1226
 msgid "Testimonial Author Name"
-msgstr "Nombre del autor del testimonio"
+msgstr "推荐信作者姓名"
 
 #: admin/AdminInfo.php:236
 msgid ""
 "Testimonial drafts are created from submissions to the testimonials form. "
 "Publish a draft to display it on your testimonials page."
-msgstr ""
-"Los borradores de testimonios se crean a partir de los envíos al formulario "
-"de testimonios. Publica un borrador para mostrarlo en tu página de "
-"testimonios."
+msgstr "证词草稿是根据提交到证词表单的内容创建的。发布草稿可将其显示在推荐页面上。"
 
 #: includes/SinglePost.php:260 admin/Nav.php:84 admin/PostTypeManager.php:226
 msgid "Testimonials"
-msgstr "Testimonios"
+msgstr "客户感言"
 
 #: admin/MetaManager.php:877 admin/MetaManager.php:1022
 msgid "Text"
-msgstr "Texto"
+msgstr "文本"
 
 #: admin/MetaManager.php:970
 msgid "Text Area"
-msgstr "Área de texto"
+msgstr "文本区域"
 
 #. %s: the site name
 #: components/Email/EmailTemplateManager.php:48
@@ -3868,61 +3593,59 @@ msgstr "Área de texto"
 #: components/Email/EmailTemplateManager.php:146
 #, php-format
 msgid "Thank you for choosing %s!"
-msgstr "¡Gracias por elegir %s!"
+msgstr "感谢您选择 %s！"
 
 #. %1$s: the site name
 #: components/Email/EmailTemplateManager.php:197
 #, php-format
 msgid "Thank you for contacting %1$s"
-msgstr "Gracias por contactar con %1$s"
+msgstr "感谢您联系 %1$s"
 
 #: components/Email/EmailTemplateManager.php:361
 msgid "Thank you for contacting {{site_name}}"
-msgstr "Gracias por ponerse en contacto con {{site_name}}"
+msgstr "感谢您联系 {{site_name}}"
 
 #: components/Email/EmailTemplateManager.php:363
 msgid ""
 "Thank you for contacting {{site_name}}. We would love to hear more about "
 "your project."
-msgstr ""
-"Gracias por ponerse en contacto con {{site_name}}. Nos encantaría saber más "
-"sobre su proyecto."
+msgstr "感谢您联系 {{site_name}}。我们很乐意听取有关您项目的更多信息。"
 
 #: components/Email/EmailTemplateManager.php:218
 msgid "Thank you for reaching out to us!"
-msgstr "Gracias por ponerse en contacto con nosotros"
+msgstr "感谢您与我们联系！"
 
 #. %s: the name of the site
 #: components/Email/EmailTemplateManager.php:110
 #, php-format
 msgid "Thank you for using %s!"
-msgstr "¡Gracias por usar %s!"
+msgstr "感谢您使用 %s！"
 
 #: components/Email/EmailTemplateManager.php:89
 msgid "Thank you for using {{site_name}}!"
-msgstr "¡Gracias por utilizar {{site_name}}!"
+msgstr "感谢您使用 {{site_name}}！"
 
 #: components/Email/EmailTemplateManager.php:189
 msgid "Thank you for your attention!"
-msgstr "Gracias por su atención"
+msgstr "感谢您的关注！"
 
 #: components/Email/EmailTemplateManager.php:169
 msgid "Thank you for your business!"
-msgstr "Gracias por su confianza"
+msgstr "感谢您的光临！"
 
 #: components/Email/EmailTemplateManager.php:130
 msgid "Thank you for your continued contribution to the team!"
-msgstr "Gracias por su continua contribución al equipo"
+msgstr "感谢您继续为团队做出贡献！"
 
 #: components/Email/EmailTemplateManager.php:236
 msgid "Thank you for your continued support!"
-msgstr "Gracias por su continuo apoyo"
+msgstr "感谢您一如既往的支持！"
 
 #. %1$s: the type of brief; %2$s: the project name; %3$s: the link to the project briefs page
 #: components/Email/EmailTemplateManager.php:84
 #, php-format
 msgid "The %1$s for %2$s has been updated. %3$s"
-msgstr "Se ha actualizado %1$s para %2$s. %3$s"
+msgstr "%2$s 的 %1$s 已更新。%3$s"
 
 #. %1$s: the toggle off icon html; %2$s: the component name (e.g. Booking or Stripe); %3$s: the url to enable plugin components
 #: admin/helpers/upgrade.php:188
@@ -3931,83 +3654,72 @@ msgstr "Se ha actualizado %1$s para %2$s. %3$s"
 #| "The %s component is disabled. <a href=\"%s\">Enable the component</a>."
 msgid ""
 "The %2$s component is disabled. <a href=\"%3$s\">Enable the component</a>."
-msgstr ""
-"El componente %2$s está deshabilitado. <a href=\"%3$s\">Activa el "
-"componente</a>."
+msgstr "%2$s 组件已禁用。 <a href=\"%3$s\">启用该组件</a>。"
 
 #: components/Checkout/Checkout.php:271
 msgid "The booking has been created!"
-msgstr "Se ha creado la reserva"
+msgstr "预订已创建！"
 
-#: buddyclients-free.php:124
+#: buddyclients-lite.php:124
 msgid "The BuddyClients Platform can't work without BuddyPress."
-msgstr "La Plataforma BuddyClients no puede funcionar sin BuddyPress."
+msgstr "没有 BuddyPress，BuddyClients 平台就无法运行。"
 
 #: admin/SettingsGeneral.php:133
 msgid ""
 "The button at the top right of the screen will point to this link. Defaults "
 "to the Booking Page."
-msgstr ""
-"El botón situado en la parte superior derecha de la pantalla apuntará a este "
-"enlace. Por defecto aparece la página de reservas."
+msgstr "屏幕右上方的按钮将指向该链接。默认为预订页面。"
 
 #: components/Checkout/Checkout.php:269
 msgid "The client"
-msgstr "El cliente"
+msgstr "客户"
 
 #: components/Checkout/Checkout.php:297
 msgid "The client can check out at the following link."
-msgstr "El cliente puede comprobarlo en el siguiente enlace."
+msgstr "客户可通过以下链接结账。"
 
 #: admin/MetaManager.php:537
 msgid "The description to display on the booking form."
-msgstr "La descripción que se mostrará en el formulario de reserva."
+msgstr "预订表上显示的说明。"
 
 #: admin/MetaManager.php:531
 msgid "The label to display on the booking form."
-msgstr "La etiqueta que se mostrará en el formulario de reserva."
+msgstr "预订表格上显示的标签。"
 
 #: admin/MetaManager.php:795
 msgid "The minimum number of units allowed."
-msgstr "El número mínimo de unidades permitido."
+msgstr "允许的最小单元数。"
 
 #: admin/AdminInfo.php:102
 msgid ""
 "The net fee represents the total fees minus team member payments, affiliate "
 "commission, and sales commission."
-msgstr ""
-"La cuota neta representa el total de las cuotas menos los pagos a los "
-"miembros del equipo, la comisión de afiliación y la comisión de ventas."
+msgstr "净费用是指总费用减去团队成员付款、联盟佣金和销售佣金后的余额。"
 
 #: admin/AdminInfo.php:107
 msgid ""
 "The payment status will update to \"eligible\" automatically at the end of "
 "your cancellation window. When you have processed a payment, update the "
 "status to \"paid\" to keep track of your outgoing payments."
-msgstr ""
-"El estado del pago se actualizará a \"apto\" automáticamente al final de la "
-"ventana de cancelación. Cuando haya procesado un pago, actualice el estado a "
-"\"pagado\" para realizar un seguimiento de los pagos efectuados."
+msgstr "付款状态将在取消窗口结束时自动更新为 \"合格\"。处理完付款后，请将状态更新为 \"已支付\"，以便跟踪您的流出付款。"
 
 #. %1$s: the name of the service; %2$s: the project name; %3$s: the service status; %4$s: the link to view the project
 #: components/Email/EmailTemplateManager.php:40
 #, php-format
 msgid "The status of your %1$s for %2$s is now %3$s. %4$s"
-msgstr "El estado de su %1$s para %2$s es ahora %3$s. %4$s"
+msgstr "您 %1$s 的 %2$s 状态现在是 %3$s。%4$s"
 
 #. %1$s: the service name; %2$s: the project name; %3$s: the payment status; %4$s: additional payment details
 #: components/Email/EmailTemplateManager.php:158
 #, php-format
 msgid "The status of your payment for %1$s for %2$s is now %3$s. %4$s"
-msgstr "El estado de su pago de %1$s para %2$s es ahora %3$s. %4$s"
+msgstr "您在 %1$s 为 %2$s 付款的状态现在是 %3$s。%4$s"
 
 #: admin/SettingsGeneral.php:128
 msgid ""
 "The text will appear on the button linking to the booking form when user "
 "registration is disabled."
-msgstr ""
-"El texto aparecerá en el botón que enlaza con el formulario de reserva "
-"cuando el registro de usuario esté desactivado."
+msgstr "禁用用户注册时，文字将显示在链接到预订表格的按钮上。"
 
 #: admin/AdminInfo.php:138
 msgid ""
@@ -4015,40 +3727,31 @@ msgid ""
 "of a successful payment. If webhooks are not properly set up, your bookings "
 "will not change to \"succeeded\" when payments are successful."
 msgstr ""
-"La configuración de webhooks permite a Stripe \"hablar\" con su sitio web y "
-"notificarle de un pago exitoso. Si los webhooks no están configurados "
-"correctamente, sus reservas no cambiarán a \"exitoso\" cuando los pagos se "
-"realicen correctamente."
+"网络钩子设置允许 Stripe 与您的网站 \"对话\"，并在付款成功后通知您。如果网络钩子设置不当，付款成功后，您的预订将不会变为 \"成功\"。"
 
 #: admin/MetaManager.php:1030
 msgid "These options only apply to dropdown and checkbox fields."
-msgstr ""
-"Estas opciones sólo se aplican a los campos desplegables y de casilla de "
-"verificación."
+msgstr "这些选项只适用于下拉框和复选框字段。"
 
 #: admin/MetaManager.php:994
 msgid "These options only apply to upload fields."
-msgstr "Estas opciones sólo se aplican a los campos de carga."
+msgstr "这些选项只适用于上传字段。"
 
 #: admin/AdminInfo.php:106
 msgid ""
 "These payments are generated automatically when bookings are completed. You "
 "will find payments for team members, affiliates, and salespeople."
-msgstr ""
-"Estos pagos se generan automáticamente cuando se completan las reservas. "
-"Encontrarás pagos para miembros del equipo, afiliados y vendedores."
+msgstr "这些付款在预订完成后自动生成。您可以找到团队成员、联属会员和销售人员的付款方式。"
 
 #: includes/UserFilesForm.php:197
 msgid "This action is permanent and cannot be undone."
-msgstr "Esta acción es permanente y no puede deshacerse."
+msgstr "该操作是永久性的，无法撤销。"
 
 #: admin/AdminInfo.php:96
 msgid ""
 "This page displays all successful and abandoned bookings. You can filter "
 "bookings by status."
-msgstr ""
-"Esta página muestra todas las reservas realizadas y abandonadas. Puede "
-"filtrar las reservas por estado."
+msgstr "本页显示所有成功和放弃的预订。您可以按状态过滤预订。"
 
 #. %s: the link to update the email settings
 #: admin/AdminInfo.php:208
@@ -4059,94 +3762,83 @@ msgstr ""
 msgid ""
 "This page lists all emails sent by the BuddyClients plugin during the "
 "timeframe specified in the %s."
-msgstr ""
-"Esta página enumera todos los correos electrónicos enviados por el plugin "
-"BuddyClients durante el periodo de tiempo especificado en %s."
+msgstr "此页面列出了 BuddyClients 插件在 %s 中指定的时间范围内发送的所有电子邮件。"
 
 #. %1$s: 'This service requires'; %2$s: the links to the services this service requires
 #: components/Service/ServicePost.php:184
 msgid "This service requires"
-msgstr "Este servicio requiere"
+msgstr "这项服务要求"
 
 #: admin/AdminInfo.php:191
 msgid "This simplifies the process of expanding your team and services."
-msgstr "Esto simplifica el proceso de ampliación de su equipo y sus servicios."
+msgstr "这简化了扩大团队和服务的过程。"
 
 #: components/Booking/SettingsBooking.php:104
 msgid "Timeout (minutes)"
-msgstr "Tiempo de espera (minutos)"
+msgstr "超时（分钟）"
 
 #: admin/WelcomeMessage.php:221
 msgid "to accept payments and enable premium features."
-msgstr "para aceptar pagos y activar funciones premium."
+msgstr "以接受付款并启用高级功能。"
 
 #: admin/WelcomeMessage.php:185
 msgid "to activate premium features"
-msgstr "para activar las funciones premium"
+msgstr "激活高级功能"
 
 #: admin/WelcomeMessage.php:203
 msgid "to ensure all features are enabled"
-msgstr "para asegurarse de que todas las funciones están activadas"
+msgstr "以确保启用所有功能"
 
 #: admin/WelcomeMessage.php:212
 msgid "to get the most out of BuddyClients"
-msgstr "para sacar el máximo partido a BuddyClients"
+msgstr "充分利用 BuddyClients"
 
 #: components/Checkout/Confirmation.php:333
 msgid "to make sure your team has all the information they need."
-msgstr ""
-"para asegurarse de que su equipo dispone de toda la información que necesita."
+msgstr "以确保您的团队获得所需的所有信息。"
 
 #: admin/AdminInfo.php:203
 msgid ""
 "To restore default email templates, delete the templates you wish to restore "
 "and click \"Repair Email Templates.\""
-msgstr ""
-"Para restaurar las plantillas de correo electrónico predeterminadas, elimine "
-"las plantillas que desea restaurar y haga clic en \"Reparar plantillas de "
-"correo electrónico\""
+msgstr "要恢复默认电子邮件模板，请删除要恢复的模板，然后单击 \"修复电子邮件模板\"。"
 
 #: admin/AdminInfo.php:226
 msgid ""
 "To set up briefs, first add brief types. Then create brief fields for each "
 "type. Finally, select the applicable brief type(s) within the settings for "
 "your services."
-msgstr ""
-"Para crear informes, primero añada tipos de informes. A continuación, cree "
-"campos informativos para cada tipo. Por último, seleccione los tipos de "
-"instrucciones aplicables en la configuración de sus servicios."
+msgstr "要设置摘要，首先要添加摘要类型。然后为每种类型创建摘要字段。最后，在服务设置中选择适用的摘要类型。"
 
 #: admin/WelcomeMessage.php:194
 msgid "to your BuddyClients account"
-msgstr "a tu cuenta BuddyClients"
+msgstr "到您的 BuddyClients 账户"
 
 #: admin/AdminDashboard.php:433
 msgid "Today Only"
-msgstr "Sólo hoy"
+msgstr "仅限今日"
 
 #: admin/AdminDashboard.php:451
 msgid "Total"
-msgstr "Total"
+msgstr "总计"
 
 #: admin/partials/all-bookings.php:24
 msgid "Total Fee"
-msgstr "Tasa total"
+msgstr "总费用"
 
 #: components/Checkout/CheckoutTable.php:189
 msgid "Total:"
-msgstr "Total:"
+msgstr "共计"
 
 #: components/Booking/SettingsBooking.php:112
 msgid ""
 "Turn on Freelancer Mode to assign all services to one person. Team member "
 "payments will be disabled."
-msgstr ""
-"Activa el Modo Freelancer para asignar todos los servicios a una sola "
-"persona. Los pagos a los miembros del equipo se desactivarán."
+msgstr "打开自由职业者模式，将所有服务分配给一个人。团队成员的付款将被禁用。"
 
 #: admin/AdminTableItem.php:770
 msgid "TWINT (Payment Method)"
-msgstr "TWINT (Forma de pago)"
+msgstr "TWINT （付款方式）"
 
 #: admin/TaxManager.php:68 admin/partials/booking-payments.php:21
 #: admin/partials/booking-payments.php:60 admin/partials/user-list.php:55
@@ -4154,122 +3846,114 @@ msgstr "TWINT (Forma de pago)"
 #: admin/partials/payments.php:50 admin/partials/user-agreements.php:19
 #: admin/partials/user-agreements.php:44
 msgid "Type"
-msgstr "Tipo"
+msgstr "类型"
 
 #: includes/UserFilesForm.php:151 includes/UserFilesForm.php:196
 msgid "Type DELETE to confirm deletion of the files above."
-msgstr ""
-"Escriba DELETE para confirmar la eliminación de los archivos anteriores."
+msgstr "键入 DELETE 确认删除上述文件。"
 
 #: admin/MetaManager.php:647
 msgid "Type of field on booking form."
-msgstr "Tipo de campo en el formulario de reserva."
+msgstr "预订表格上的字段类型。"
 
 #: admin/MetaManager.php:460
 msgid ""
 "Type of field to display these services on booking form. Choose checkboxes "
 "to allow users to select multiple options."
-msgstr ""
-"Tipo de campo para mostrar estos servicios en el formulario de reserva. "
-"Elija casillas de verificación para que los usuarios puedan seleccionar "
-"varias opciones."
+msgstr "在预订表上显示这些服务的字段类型。选择复选框，允许用户选择多个选项。"
 
 #: admin/TaxManager.php:69
 #| msgid "Styles"
 msgid "Types"
-msgstr "Tipos"
+msgstr "类型"
 
 #: components/Checkout/Confirmation.php:377
 msgid "Uh oh!"
-msgstr "¡Uh oh!"
+msgstr "啊哦"
 
 #: includes/FormSubmission.php:265
 msgid "Uh oh, something went wrong."
-msgstr "Algo salió mal."
+msgstr "哦，出问题了"
 
 #: admin/helpers/brief-preview.php:110
 msgid "Unable to create preview. Please try again."
-msgstr "No se ha podido crear la vista previa. Por favor, inténtelo de nuevo."
+msgstr "无法创建预览。请重试。"
 
 #: admin/Metaboxes.php:690
 #, php-format
 msgid "Unavailable: %s"
-msgstr "No disponible: %s"
+msgstr "不可用：%s"
 
 #: components/Booking/SettingsBooking.php:131
 msgid "Unlock"
-msgstr "Desbloquear"
+msgstr "解锁"
 
 #: admin/AdminTableItem.php:499 admin/AdminTableItem.php:591
 #: admin/partials/booking-payments.php:55
 msgid "Unpaid"
-msgstr "Sin pagar"
+msgstr "未支付"
 
 #: admin/MetaManager.php:81
 msgid "Unserializing instances of this class is not allowed."
-msgstr "No se permite la deserialización de instancias de esta clase."
+msgstr "不允许对该类的实例进行反序列化。"
 
 #: admin/AdminTableItem.php:501
 msgid "Unsucceed Booking"
-msgstr "Reservar sin éxito"
+msgstr "未成功预订"
 
 #: components/Booking/BookedService/PaymentStatusForm.php:35
 msgid "Update"
-msgstr "Actualización"
+msgstr "更新"
 
 #: components/Email/EmailTemplateManager.php:259
 msgid "Update Availability Reminder"
-msgstr "Recordatorio de disponibilidad de actualización"
+msgstr "更新可用性提醒"
 
 #: admin/WelcomeMessage.php:202
 msgid "Update components"
-msgstr "Actualizar componentes"
+msgstr "更新组件"
 
 #: admin/partials/booked-services.php:25 admin/partials/payments.php:26
 #: components/Booking/BookedService/ServiceStatusForm.php:70
 msgid "Update Status"
-msgstr "Estado de actualización"
+msgstr "更新状态"
 
 #: admin/AdminInfo.php:131
 msgid "Update these settings to change the way BuddyClients manages bookings."
-msgstr ""
-"Actualiza estos ajustes para cambiar la forma en que BuddyClients gestiona "
-"las reservas."
+msgstr "更新这些设置，更改 BuddyClients 管理预订的方式。"
 
 #: admin/AdminInfo.php:148
 msgid ""
 "Update these settings to define which emails are sent and the appropriate "
 "email addresses."
-msgstr ""
-"Actualice estos ajustes para definir qué correos electrónicos se envían y "
-"las direcciones de correo electrónico adecuadas."
+msgstr "更新这些设置，以确定发送哪些电子邮件以及相应的电子邮件地址。"
 
 #: components/Email/EmailTemplateManager.php:260
 msgid "Update Your Availability"
-msgstr "Actualice su disponibilidad"
+msgstr "更新您的空闲时间"
 
 #: admin/AdminInfo.php:111
 msgid "Update your cancellation window"
-msgstr "Actualice su plazo de anulación"
+msgstr "更新您的取消窗口"
 
 #: admin/AdminInfo.php:117
 msgid "Update your legal agreements"
-msgstr "Actualice sus acuerdos legales"
+msgstr "更新您的法律协议"
 
 #: admin/WelcomeMessage.php:321 admin/PluginLinks.php:98
 #: admin/UpgradePage.php:147 admin/UpgradePage.php:175
 msgid "Upgrade"
-msgstr "Actualizar"
+msgstr "升级"
 
 #: admin/WelcomeMessage.php:220 admin/AdminPageManager.php:219
 msgid "Upgrade BuddyClients"
-msgstr "Actualizar BuddyClients"
+msgstr "升级 BuddyClients"
 
 #. %s: "grow your business" in bold
 #: admin/UpgradePage.php:250
 #, php-format
 msgid "Upgrade BuddyClients to accept payments, manage projects, and %s."
-msgstr "Actualiza BuddyClients para aceptar pagos, gestionar proyectos y %s."
+msgstr "升级 BuddyClients 以接受付款、管理项目和 %s。"
 
 #. %1$s: the rocket icon html; %2$s: the url to upgrade the plugin
 #: admin/helpers/upgrade.php:106
@@ -4281,540 +3965,502 @@ msgid ""
 "Upgrade to <a href=\"%2$s\" target=\"_blank\">BuddyClients Essential or "
 "BuddyClients Business</a>."
 msgstr ""
-"Actualiza a <a href=\"%2$s\" target=\"_blank\">BuddyClients Essential o "
-"BuddyClients Business</a>."
+"升级至 <a href=\"%2$s\" target=\"_blank\">BuddyClients Essential 或 BuddyClients "
+"Business</a>。"
 
 #: admin/MetaManager.php:974
 msgid "Upload"
-msgstr "Cargar"
+msgstr "上传"
 
 #: admin/AdminInfo.php:269
 msgid "Upload files that may be required for bookings or team member profiles."
-msgstr ""
-"Cargue los archivos necesarios para las reservas o los perfiles de los "
-"miembros del equipo."
+msgstr "上传预订或团队成员简介可能需要的文件。"
 
 #. %s: the plural or singular file type name (e.g. File or Files)
 #: components/Service/FileUpload.php:135
 #, php-format
 msgid "Upload Your %s"
-msgstr "Suba su %s"
+msgstr "上传您的 %s"
 
 #: config/Activator.php:116
 msgid "Upload your file."
-msgstr "Sube tu archivo."
+msgstr "上传文件"
 
 #: includes/helpers/contact.php:41
 msgid "us"
-msgstr "us"
+msgstr "我们"
 
 #: admin/AdminInfo.php:225
 msgid ""
 "Use briefs to request additional info your team may need to complete the "
 "service."
-msgstr ""
-"Utilice los briefs para solicitar información adicional que su equipo pueda "
-"necesitar para completar el servicio."
+msgstr "使用简报要求您的团队提供完成服务所需的额外信息。"
 
 #. %s: the card number
 #: components/Checkout/Checkout.php:236
 #, php-format
 msgid "Use card number %s to simulate a successful payment."
-msgstr "Utilice el número de tarjeta %s para simular un pago correcto."
+msgstr "使用卡号 %s 模拟成功付款。"
 
 #: admin/AdminInfo.php:115
 msgid ""
 "Use this page to quickly view and manage all team members, clients, and "
 "affiliates."
-msgstr ""
-"Utilice esta página para ver y gestionar rápidamente todos los miembros del "
-"equipo, clientes y afiliados."
+msgstr "使用此页面可快速查看和管理所有团队成员、客户和分支机构。"
 
 #: components/Booking/SettingsBooking.php:60
 msgid "Use this setting if you process payments elsewhere."
-msgstr "Utilice esta opción si procesa pagos en otro lugar."
+msgstr "如果您在其他地方处理付款，请使用此设置。"
 
 #: admin/MetaManager.php:1196 admin/AdminColumns.php:82
 #: admin/partials/user-list.php:52 admin/partials/user-agreements.php:55
 msgid "User"
-msgstr "Usuario"
+msgstr "用户"
 
 #: admin/Nav.php:38 admin/partials/user-agreements.php:41
 msgid "User Agreements"
-msgstr "Acuerdos de usuario"
+msgstr "用户协议"
 
 #: admin/WelcomeMessage.php:300 admin/PluginLinks.php:58
 msgid "User Guides"
-msgstr "Guías del usuario"
+msgstr "用户指南"
 
 #: admin/AdminInfo.php:259
 msgid "user list"
-msgstr "lista de usuarios"
+msgstr "用户列表"
 
 #: admin/SettingsGeneral.php:62
 msgid "User Types and Permissions"
-msgstr "Tipos de usuarios y permisos"
+msgstr "用户类型和权限"
 
 #: admin/Nav.php:34 admin/AdminPageManager.php:172
 #: admin/partials/user-list.php:86
 msgid "Users"
-msgstr "Usuarios"
+msgstr "用户"
 
 #. %s: label of the field
 #: admin/SettingsPage.php:669
 #, php-format
 msgid "Users have forever to accept the new %s."
-msgstr "Los usuarios tienen una eternidad para aceptar los nuevos %s."
+msgstr "用户必须永远接受新的 %s。"
 
 #. %s: label of the field
 #: admin/SettingsPage.php:660
 #, php-format
 msgid "Users have until %1$s to accept the new %2$s."
-msgstr "Los usuarios tienen hasta el %1$s para aceptar el nuevo %2$s."
+msgstr "用户必须在 %1$s 之前接受新的 %2$s。"
 
 #: admin/AdminColumns.php:58 admin/AdminColumns.php:76
 #: admin/AdminColumns.php:120 admin/AdminColumns.php:127
 msgid "Valid"
-msgstr "Válido"
+msgstr "有效"
 
 #: admin/MetaManager.php:732
 msgid "Value"
-msgstr "Valor"
+msgstr "价值"
 
 #. Author of the plugin
 msgid "Victoria Griffin"
-msgstr "Victoria Griffin"
+msgstr "维多利亚-格里芬"
 
 #: admin/MetaManager.php:875 admin/MetaManager.php:1020
 msgid "Video"
-msgstr "Vídeo"
+msgstr "视频"
 
 #: admin/AdminTableItem.php:935
 msgid "View"
-msgstr "Ver"
+msgstr "查看"
 
 #: components/Brief/GroupBriefs.php:120
 msgid "view"
-msgstr "ver"
+msgstr "观点"
 
 #. %s: singular name of the item
 #. %s: label of the singular item
 #: admin/Taxonomy.php:203 admin/PostType.php:118
 #, php-format
 msgid "View %s"
-msgstr "Ver %s"
+msgstr "查看 %s"
 
 #. %s: label of the field
 #: admin/SettingsPage.php:609
 #, php-format
 msgid "View Active %s"
-msgstr "Ver activos %s"
+msgstr "查看活动 %s"
 
 #. %1$s: the link to admin bookings
 #: components/Email/EmailTemplateManager.php:186
 #, php-format
 msgid "View all bookings: %1$s"
-msgstr "Ver todas las reservas: %1$s"
+msgstr "查看所有预订： %1$s"
 
 #: admin/AdminInfo.php:265
 msgid "View all files associated with services and bookings here."
-msgstr "Vea aquí todos los archivos asociados a servicios y reservas."
+msgstr "在此查看与服务和预订相关的所有文件。"
 
 #: components/Email/EmailTemplateManager.php:234
 msgid "View all submissions."
-msgstr "Ver todos los envíos."
+msgstr "查看所有提交的材料。"
 
 #: admin/AdminInfo.php:105
 msgid "View and manage all outgoing payments for your business."
-msgstr "Vea y gestione todos los pagos efectuados por su empresa."
+msgstr "查看和管理企业的所有出账付款。"
 
 #: admin/SettingsPage.php:557
 msgid "View Page"
-msgstr "Ver la página"
+msgstr "查看页面"
 
 #: admin/AdminTableItem.php:127
 msgid "View Payments"
-msgstr "Ver pagos"
+msgstr "查看付款"
 
 #: admin/AdminTableItem.php:701
 msgid "View receipt"
-msgstr "Ver recibo"
+msgstr "查看收据"
 
 #: components/Checkout/CheckoutTable.php:108
 msgid "View Summary"
-msgstr "Ver resumen"
+msgstr "查看摘要"
 
 #: components/Email/SettingsEmail.php:85
 msgid "View the email log."
-msgstr "Ver el registro de correo electrónico."
+msgstr "查看电子邮件日志。"
 
 #. %1$s: the link to view the project
 #: components/Email/EmailTemplateManager.php:166
 #, php-format
 msgid "View the project: %1$s"
-msgstr "Ver el proyecto: %1$s"
+msgstr "查看项目： %1$s"
 
 #. %s: Stripe, the name of the payment processor
 #: admin/AdminTableItem.php:143
 #, php-format
 msgid "View transaction on %s"
-msgstr "Ver transacción en %s"
+msgstr "查看 %s 上的交易"
 
 #: components/Brief/SingleBrief.php:248
 msgid "View Your Brief Submission"
-msgstr "Ver su breve presentación"
+msgstr "查看您提交的简介"
 
 #: components/Checkout/Confirmation.php:338
 msgid "View Your Briefs"
-msgstr "Ver sus informes"
+msgstr "查看您的简报"
 
 #: components/Checkout/Confirmation.php:236
 msgid "View Your Event Info"
-msgstr "Ver la información de su evento"
+msgstr "查看活动信息"
 
 #: components/Checkout/Confirmation.php:212
 msgid "View your profile."
-msgstr "Ver tu perfil."
+msgstr "查看您的个人资料。"
 
 #: components/Checkout/Confirmation.php:338
 msgid "View Your Project"
-msgstr "Ver su proyecto"
+msgstr "查看您的项目"
 
 #: components/Email/EmailTemplateManager.php:44
 msgid "View your project."
-msgstr "Vea su proyecto."
+msgstr "查看您的项目。"
 
 #: components/Checkout/Confirmation.php:344
 msgid "View Your Projects"
-msgstr "Ver sus proyectos"
+msgstr "查看您的项目"
 
 #: components/Checkout/Confirmation.php:266
 msgid "View Your Sponsorships"
-msgstr "Ver sus patrocinios"
+msgstr "查看您的赞助"
 
 #: admin/AdminColumns.php:59 admin/AdminColumns.php:67
 #: admin/AdminColumns.php:77 admin/AdminColumns.php:123
 msgid "Visibility"
-msgstr "Visibilidad"
+msgstr "可见性"
 
 #: components/Booking/BookingForm.php:204
 msgid "We are not currently accepting new bookings."
-msgstr "Actualmente no aceptamos nuevas reservas."
+msgstr "我们目前不接受新的预订。"
 
 #: components/Email/EmailTemplateManager.php:201
 msgid "We have received your message and will be in touch as soon as possible."
-msgstr ""
-"Hemos recibido su mensaje y nos pondremos en contacto con usted lo antes "
-"posible."
+msgstr "我们已收到您的信息，将尽快与您联系。"
 
 #: components/Checkout/Confirmation.php:322
 msgid "We will be in touch to arrange payment."
-msgstr "Nos pondremos en contacto con usted para organizar el pago."
+msgstr "我们将与您联系安排付款事宜。"
 
 #: components/Email/EmailTemplateManager.php:380
 msgid ""
 "We will get back to you as soon as possible to discuss your project further."
-msgstr ""
-"Nos pondremos en contacto con usted lo antes posible para hablar de su "
-"proyecto."
+msgstr "我们将尽快与您联系，进一步讨论您的项目。"
 
 #: components/Checkout/Confirmation.php:262
 msgid "We will review your information and be in touch with any questions."
-msgstr ""
-"Revisaremos su información y nos pondremos en contacto con usted si tiene "
-"alguna pregunta."
+msgstr "我们将审查您的信息，如有任何问题，我们将与您联系。"
 
 #: admin/WelcomeMessage.php:161
 msgid "We're excited to help you grow your business."
-msgstr "Estamos encantados de ayudarle a hacer crecer su negocio."
+msgstr "我们很高兴能帮助您拓展业务。"
 
 #: components/Checkout/Checkout.php:473
 msgid "website terms"
-msgstr "condiciones del sitio web"
+msgstr "网站条款"
 
 #: admin/AdminTableItem.php:772
 msgid "WeChat Pay (Digital Wallet - China)"
-msgstr "WeChat Pay (Billetera digital - China)"
+msgstr "微信支付（数字钱包 - 中国）"
 
 #. %1$s: the site name
 #: components/Email/EmailTemplateManager.php:246
 #, php-format
 msgid "Welcome to %1$s’s affiliate program!"
-msgstr "¡Bienvenido al programa de afiliados de %1$s!"
+msgstr "欢迎加入 %1$s 的联盟计划！"
 
 #: admin/WelcomeMessage.php:139
 msgid "Welcome to BuddyClients!"
-msgstr "¡Bienvenido a BuddyClients!"
+msgstr "欢迎来到 BuddyClients！"
 
 #: components/Email/EmailTemplateManager.php:242
 msgid "Welcome to the Affiliate Program!"
-msgstr "Bienvenido al Programa de Afiliación"
+msgstr "欢迎加入会员计划！"
 
 #: components/Email/EmailTemplateManager.php:254
 msgid "We’re excited to have you with us!"
-msgstr "Estamos encantados de tenerle con nosotros"
+msgstr "我们很高兴你能加入我们！"
 
 #: components/Email/EmailTemplateManager.php:143
 msgid "We’re here to help!"
-msgstr "Estamos aquí para ayudarle"
+msgstr "我们在这里提供帮助！"
 
 #: config/Activator.php:92
 msgid "What is the full word count?"
-msgstr "¿Cuál es el número total de palabras?"
+msgstr "全部字数是多少？"
 
 #: components/Booking/SettingsBooking.php:70
 msgid "What is the minimum dollar amount per booking?"
-msgstr "¿Cuál es el importe mínimo por reserva?"
+msgstr "每次预订的最低金额是多少？"
 
 #: components/Email/SettingsEmail.php:62
 msgid "What name should appear on email notifications?"
-msgstr ""
-"¿Qué nombre debe aparecer en las notificaciones por correo electrónico?"
+msgstr "电子邮件通知上应显示什么名称？"
 
 #: admin/MetaManager.php:355 admin/MetaManager.php:1130
 msgid ""
 "What percentage of the client fee do team members receive for this service? "
 "Ex: 50"
-msgstr ""
-"¿Qué porcentaje de los honorarios del cliente reciben los miembros del "
-"equipo por este servicio? Ej: 50"
+msgstr "团队成员的服务费占客户酬金的百分比是多少？例如：50"
 
 #: components/Checkout/Confirmation.php:333
 msgid "What's next?"
-msgstr "¿Y ahora qué?"
+msgstr "下一步是什么？"
 
 #: admin/AdminInfo.php:177
 msgid ""
 "When a user selects a service on the booking form, the attached adjustment "
 "fields will become visible."
-msgstr ""
-"Cuando un usuario selecciona un servicio en el formulario de reserva, los "
-"campos de ajuste adjuntos se hacen visibles."
+msgstr "当用户在预订表上选择一项服务时，所附的调整字段就会显示出来。"
 
 #: admin/AdminInfo.php:143
 msgid ""
 "When this setting is enabled, users with permission will see a form at the "
 "top of the booking page allowing the creation of a booking on behalf of a "
 "client."
-msgstr ""
-"Cuando esta opción está activada, los usuarios con permiso verán un "
-"formulario en la parte superior de la página de reservas que permite la "
-"creación de una reserva en nombre de un cliente."
+msgstr "启用此设置后，有权限的用户将在预订页面顶部看到一个表单，允许代表客户创建预订。"
 
 #: admin/AdminInfo.php:156
 msgid ""
 "When you create new legal agreements, users will be prompted to accept the "
 "new agreement within the timeframe below."
-msgstr ""
-"Al crear nuevos acuerdos legales, se pedirá a los usuarios que acepten el "
-"nuevo acuerdo en el plazo que se indica a continuación."
+msgstr "创建新法律协议时，系统会提示用户在以下时限内接受新协议。"
 
 #: components/Email/SettingsEmail.php:74
 msgid "Where would you like to receive admin email notifications?"
-msgstr ""
-"¿Dónde desea recibir las notificaciones administrativas por correo "
-"electrónico?"
+msgstr "您希望在哪里接收管理电子邮件通知？"
 
 #: admin/MetaManager.php:401
 msgid ""
 "Which service(s) must be booked or selected before this one is available?"
-msgstr ""
-"¿Qué servicio o servicios deben reservarse o seleccionarse antes de que éste "
-"esté disponible?"
+msgstr "必须先预订或选择哪些服务才能使用此服务？"
 
 #: admin/AdminTableItem.php:1033 admin/partials/leads.php:44
 msgid "Won"
-msgstr "Won"
+msgstr "获胜"
 
 #: components/Email/EmailTemplateManager.php:175
 msgid "Woo hoo! New Booking"
-msgstr "¡Woo hoo! Nueva reserva"
+msgstr "呜呼新预订"
 
 #: config/Activator.php:90
 msgid "Word"
-msgstr "Palabra"
+msgstr "字词"
 
 #: config/Activator.php:91
 msgid "Words"
-msgstr "Palabras"
+msgstr "字数"
 
 #: admin/MetaManager.php:511
 msgid "Xprofile Field"
-msgstr "Campo Xprofile"
+msgstr "Xprofile 字段"
 
 #: components/Checkout/Checkout.php:351
 msgid "Yay! Your services are free."
-msgstr "¡Viva! Sus servicios son gratuitos."
+msgstr "耶你们的服务是免费的"
 
 #: components/Email/SettingsEmail.php:107
 #| msgid "1 Year"
 msgid "Year"
-msgstr "Año"
+msgstr "年份"
 
 #: admin/AdminDashboard.php:421
 msgid "Year to Date"
-msgstr "Año hasta la fecha"
+msgstr "年度至今"
 
 #: admin/MetaManager.php:886 admin/MetaManager.php:896
 #: admin/MetaManager.php:1004 admin/SettingsGeneral.php:94
 #: components/Booking/SettingsBooking.php:58
 msgid "Yes"
-msgstr "Sí"
+msgstr "是"
 
 #: admin/MetaManager.php:573
 msgid "Yes (checkbox field)"
-msgstr "Sí (casilla de verificación)"
+msgstr "是（复选框字段）"
 
 #: components/Booking/SettingsBooking.php:139
 msgid "Yes - Require agreement"
-msgstr "Sí - Requiere acuerdo"
+msgstr "是 - 需要协议"
 
 #: admin/AdminDashboard.php:434
 msgid "Yesterday Only"
-msgstr "Sólo ayer"
+msgstr "仅限昨天"
 
 #: admin/AdminInfo.php:237
 msgid ""
 "You can also create testimonials manually, adding the client's name and "
 "photo yourself."
-msgstr ""
-"También puedes crear testimonios manualmente, añadiendo tú mismo el nombre y "
-"la foto del cliente."
+msgstr "您也可以手动创建推荐，自己添加客户的姓名和照片。"
 
 #: admin/AdminInfo.php:179
 msgid ""
 "You can automatically add, subtract, or multiply the service fee based on "
 "the selected adjustment."
-msgstr ""
-"Puede sumar, restar o multiplicar automáticamente la tasa de servicio en "
-"función del ajuste seleccionado."
+msgstr "您可以根据所选调整自动增加、减少或乘以服务费。"
 
 #. %1$s: the link to the booking form
 #: components/Email/EmailTemplateManager.php:105
 #, php-format
 msgid "You can book this service anytime using the %1$s."
-msgstr "Puede reservar este servicio en cualquier momento utilizando el %1$s."
+msgstr "您可以随时使用 %1$s 预订这项服务。"
 
 #: components/Email/EmailTemplateManager.php:162
 msgid "You can check the status and more details on your project."
-msgstr "Puede comprobar el estado y más detalles sobre su proyecto."
+msgstr "您可以查看项目状态和更多详细信息。"
 
 #. %s: link to user list
 #: admin/AdminInfo.php:258
 #, php-format
 msgid "You can download PDF versions of these agreements from the %s."
-msgstr "Puede descargar versiones en PDF de estos acuerdos en la página %s."
+msgstr "您可以从 %s 下载这些协议的 PDF 版本。"
 
 #: components/Email/EmailTemplateManager.php:182
 msgid "You can view more details and manage bookings in the admin area."
-msgstr ""
-"Puede ver más detalles y gestionar las reservas en el área de administración."
+msgstr "您可以在管理区查看更多详情并管理预订。"
 
 #: components/Booking/BookedService/BookedServiceList.php:163
 msgid "You do not have any booked services."
-msgstr "No tiene ningún servicio reservado."
+msgstr "您没有任何预订服务。"
 
 #: components/Brief/SingleBrief.php:307
 msgid "You do not have permission to view this brief."
-msgstr "No tiene permiso para ver este informe."
+msgstr "您无权查看本简报。"
 
 #: components/Checkout/Checkout.php:353
 msgid ""
 "You do not owe anything today! The full fee will be due on completion of "
 "services."
-msgstr ""
-"Hoy no debe nada Deberá abonar la totalidad de los honorarios al finalizar "
-"los servicios."
+msgstr "您今天无需支付任何费用！全额费用将在服务完成后支付。"
 
 #: components/Email/EmailTemplateManager.php:124
 msgid "You have a new assignment!"
-msgstr "¡Tienes una nueva misión!"
+msgstr "你有一项新任务！"
 
 #. %1$s: the service name; %2$s: the quote expiration date
 #: components/Email/EmailTemplateManager.php:99
 #, php-format
 msgid "You have a new custom quote available: %1$s. This quote expires %2$s."
-msgstr ""
-"Tiene un nuevo presupuesto personalizado disponible: %1$s. Este presupuesto "
-"caduca el %2$s."
+msgstr "您有一个新的自定义报价： %1$s。此报价的有效期为 %2$s。"
 
 #. %1$s: the client name; %2$s: the link to admin testimonials
 #: components/Email/EmailTemplateManager.php:232
 #, php-format
 msgid "You have received a new testimonial submission from %1$s. %2$s"
-msgstr "Ha recibido un nuevo testimonio de %1$s. %2$s"
+msgstr "您已收到来自 %1$s 的新推荐信。%2$s"
 
 #. %1$s: the name of the service; %2$s: the status of the service
 #: components/Email/EmailTemplateManager.php:33
 #, php-format
 msgid "Your %1$s is %2$s"
-msgstr "Su %1$s es %2$s"
+msgstr "您的 %1$s 是 %2$s"
 
 #. %1$s: the link to availability page; %2$s: the site name
 #: components/Email/EmailTemplateManager.php:264
 #, php-format
 msgid "Your availability date is expiring. %1$s"
-msgstr "Su fecha de disponibilidad expira. %1$s"
+msgstr "您的可用日期即将到期。%1$s"
 
 #. %s: url to update availability
 #: includes/AlertManager.php:78
 #, php-format
 msgid ""
 "Your availability has expired. <a href=\"%s\">Update your availability.</a>"
-msgstr ""
-"Tu disponibilidad ha expirado. <a href=\"%s\">Actualiza tu disponibilidad."
-"</a>"
+msgstr "您的可用性已过期。<a href=\"%s\">更新您的可用性。"
 
 #: components/Checkout/Checkout.php:431
 msgid "Your email"
-msgstr "Tu correo electrónico"
+msgstr "您的电子邮件"
 
 #: includes/UserFilesForm.php:263
 msgid "Your Files"
-msgstr "Sus archivos"
+msgstr "您的文件"
 
 #: components/Checkout/Confirmation.php:367
 msgid "Your payment failed."
-msgstr "Su pago ha fallado."
+msgstr "您的付款失败。"
 
 #: components/Checkout/Confirmation.php:232
 msgid ""
 "Your payment has been processed, and your registration has been confirmed."
-msgstr "Su pago ha sido procesado y su inscripción ha sido confirmada."
+msgstr "您的付款已处理完毕，您的注册也已确认。"
 
 #: components/Checkout/Confirmation.php:324
 msgid "Your payment has been processed, and your services have been booked."
-msgstr "Su pago ha sido procesado y sus servicios han sido reservados."
+msgstr "您的付款已被处理，您的服务已被预订。"
 
 #: components/Checkout/Confirmation.php:260
 msgid ""
 "Your payment has been processed, and your sponsorship purchase has been "
 "confirmed."
-msgstr ""
-"Su pago ha sido procesado y su compra de patrocinio ha sido confirmada."
+msgstr "您的付款已被处理，您的赞助购买已被确认。"
 
 #: components/Checkout/Confirmation.php:232
 msgid "Your registration has been confirmed."
-msgstr "Su inscripción ha sido confirmada."
+msgstr "您的注册已确认。"
 
 #. %1$s: the site name; %2$s: the link to finalize booking
 #: components/Email/EmailTemplateManager.php:350
 #, php-format
 msgid "Your services from %1$s are ready! %2$s"
-msgstr "¡Sus servicios de %1$s están listos! %2$s"
+msgstr "您从 %1$s 获得的服务已准备就绪！%2$s"
 
 #: components/Checkout/Confirmation.php:320
 msgid "Your services have been booked."
-msgstr "Sus servicios han sido reservados."
+msgstr "您的服务已被预订。"
 
 #: components/Checkout/Confirmation.php:259
 msgid "Your sponsorship purchase has been confirmed."
-msgstr "Su compra de patrocinio ha sido confirmada."
+msgstr "您的赞助购买已确认。"
 
 #: admin/MetaManager.php:876 admin/MetaManager.php:1021
 msgid "ZIP"
-msgstr "ZIP"
+msgstr "压缩包"
 
 #: admin/AdminTableItem.php:773
 msgid "Zip (Buy Now, Pay Later)"
-msgstr "Zip (Compre ahora, pague después)"
+msgstr "Zip（立即购买，稍后付款）"

@@ -29,70 +29,70 @@ class SettingsIntegrations {
     public static function settings() {
         return [
             'recaptcha' => [
-                'title' => __( 'reCAPTCHA Integration', 'buddyclients-free' ),
+                'title' => __( 'reCAPTCHA Integration', 'buddyclients-lite' ),
                 'description' => sprintf(
                     '%1$s <a href="%2$s" target="_blank">%3$s</a>',
-                    __( 'Protect your website against spam with Google reCAPTCHA.', 'buddyclients-free' ),
+                    __( 'Protect your website against spam with Google reCAPTCHA.', 'buddyclients-lite' ),
                     'https://cloud.google.com/recaptcha/docs/create-key-website',
-                    __( 'Learn how to create reCAPTCHA keys.', 'buddyclients-free' )
+                    __( 'Learn how to create reCAPTCHA keys.', 'buddyclients-lite' )
                 ),
                 'fields' => [
                     'enable_recaptcha' => [
-                        'label' => __( 'Enable reCAPTCHA', 'buddyclients-free' ),
+                        'label' => __( 'Enable reCAPTCHA', 'buddyclients-lite' ),
                         'type' => 'dropdown',
                         'options' => [
-                            'disable' => __( 'Disable', 'buddyclients-free' ),
-                            'enable'    => __( 'Enable', 'buddyclients-free' ),
+                            'disable' => __( 'Disable', 'buddyclients-lite' ),
+                            'enable'    => __( 'Enable', 'buddyclients-lite' ),
                         ],
-                        'description' => __( 'Enable reCAPTCHA to protect your forms from spam.', 'buddyclients-free' ),
+                        'description' => __( 'Enable reCAPTCHA to protect your forms from spam.', 'buddyclients-lite' ),
                     ],
                     'recaptcha_site_key' => [
-                        'label' => __( 'Site Key', 'buddyclients-free' ),
+                        'label' => __( 'Site Key', 'buddyclients-lite' ),
                         'type' => 'text',
-                        'description' => __( 'Enter your site key.', 'buddyclients-free' ),
+                        'description' => __( 'Enter your site key.', 'buddyclients-lite' ),
                     ],
                     'recaptcha_secret_key' => [
-                        'label' => __( 'Secret Key', 'buddyclients-free' ),
+                        'label' => __( 'Secret Key', 'buddyclients-lite' ),
                         'type' => 'text',
-                        'description' => __( 'Enter your secret key.', 'buddyclients-free' ),
+                        'description' => __( 'Enter your secret key.', 'buddyclients-lite' ),
                     ],
                     'recaptcha_threshold' => [
-                        'label' => __( 'reCAPTCHA Threshold', 'buddyclients-free' ),
+                        'label' => __( 'reCAPTCHA Threshold', 'buddyclients-lite' ),
                         'type' => 'dropdown',
                         'options' => [
                             '0.9'     => sprintf( '0.9 - %s',
-                                                __( 'Most sensitive', 'buddyclients-free' )
+                                                __( 'Most sensitive', 'buddyclients-lite' )
                                             ),
                             '0.8'     => '0.8',
                             '0.7'     => '0.7',
                             '0.6'     => '0.6',
                             '0.5'     => sprintf( '0.5 - %s',
-                                                __( 'Default', 'buddyclients-free' )
+                                                __( 'Default', 'buddyclients-lite' )
                                             ),
                             '0.4'     => '0.4',
                             '0.3'     => '0.3',
                             '0.2'     => '0.2',
                             '0.1'     => sprintf( '0.1 - %s',
-                                                __( 'Least sensitive', 'buddyclients-free' )
+                                                __( 'Least sensitive', 'buddyclients-lite' )
                                             ),
                         ],
-                        'description' => __( 'Determine how sensitive the spam filter should be. Thresholds above 0.5 may block valid submissions.', 'buddyclients-free' ),
+                        'description' => __( 'Determine how sensitive the spam filter should be. Thresholds above 0.5 may block valid submissions.', 'buddyclients-lite' ),
                     ],
                 ],
             ],
             //'meta' => [
-            //    'title' => __( 'Meta Ads Integration', 'buddyclients-free' ),
-            //    'description' => __( 'Set up the API integration to send conversion events to Meta (Facebook).', 'buddyclients-free' ),
+            //    'title' => __( 'Meta Ads Integration', 'buddyclients-lite' ),
+            //    'description' => __( 'Set up the API integration to send conversion events to Meta (Facebook).', 'buddyclients-lite' ),
             //    'fields' => [
             //        'meta_access_token' => [
-            //            'label' => __( 'Access Token', 'buddyclients-free' ),
+            //            'label' => __( 'Access Token', 'buddyclients-lite' ),
             //            'type' => 'text',
-            //            'description' => __( 'Enter your access token.', 'buddyclients-free' ),
+            //            'description' => __( 'Enter your access token.', 'buddyclients-lite' ),
             //        ],
             //        'meta_pixel_id' => [
-            //            'label' => __( 'Pixel ID', 'buddyclients-free' ),
+            //            'label' => __( 'Pixel ID', 'buddyclients-lite' ),
             //            'type' => 'text',
-            //            'description' => __( 'Enter your pixel ID.', 'buddyclients-free' ),
+            //            'description' => __( 'Enter your pixel ID.', 'buddyclients-lite' ),
             //        ],
             //    ],
             //],

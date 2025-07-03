@@ -93,7 +93,7 @@ class AdminTableFilter {
             $fields_content,
             $filter_list,
             esc_attr( $this->form_key ),
-            __( 'Filter', 'buddyclients-free' )
+            __( 'Filter', 'buddyclients-lite' )
         );
     }
 
@@ -143,7 +143,7 @@ class AdminTableFilter {
            // Build the label
            $label = sprintf(
                     '%1$s %2$s:',
-                    __( 'Filter by', 'buddyclients-free'),
+                    __( 'Filter by', 'buddyclients-lite'),
                     $data['label'] ?? ''
            );
 

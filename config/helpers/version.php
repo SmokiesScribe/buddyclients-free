@@ -7,11 +7,11 @@ if ( ! defined( 'ABSPATH' ) ) exit; // Exit if accessed directly
  * @since 1.0.30
  */
 function buddyc_is_free() {
-    return defined( 'BUDDYC_PLUGIN_NAME' ) && BUDDYC_PLUGIN_NAME === 'BuddyClients Free';
+    return defined( 'BUDDYC_PLUGIN_NAME' ) && BUDDYC_PLUGIN_NAME === 'BuddyClients Lite';
 }
 
 /**
- * Handles switch between BuddyClients and BuddyClients Free.
+ * Handles switch between BuddyClients and BuddyClients Lite.
  *
  * @since 1.0.14
  */
@@ -22,12 +22,12 @@ function buddyc_handle_version_switch() {
     if ( $prev_version && $prev_version !== BUDDYC_PLUGIN_NAME ) {
         $new_version = BUDDYC_PLUGIN_NAME;
         /**
-         * Fires on a switch between BuddyClients and BuddyClients Free.
+         * Fires on a switch between BuddyClients and BuddyClients Lite.
          *
          * @since 1.0.14
          *
          * @param   string  $new_version    The new plugin name.
-         *                                  Accepts 'buddyclients-free' and 'BuddyClients Free'.
+         *                                  Accepts 'buddyclients-lite' and 'BuddyClients Lite'.
          */
         do_action( 'buddyc_version_switch', $new_version );
     }
@@ -49,7 +49,7 @@ function buddyc_handle_version_update() {
     if ( $prev_version && $prev_version !== BUDDYC_PLUGIN_VERSION ) {
         $new_version = BUDDYC_PLUGIN_VERSION;
         /**
-         * Fires on a switch between BuddyClients and BuddyClients Free.
+         * Fires on a switch between BuddyClients and BuddyClients Lite.
          *
          * @since 1.0.14
          *

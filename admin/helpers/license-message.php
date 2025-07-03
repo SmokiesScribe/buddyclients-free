@@ -24,13 +24,13 @@ function buddyc_license_message() {
     // Check if a license key has been entered
     $license_key = buddyc_get_setting( 'license', 'license_key' );
     if ( empty( $license_key ) ) {
-        $license_message .= __( 'Enter your license key.', 'buddyclients-free' );
+        $license_message .= __( 'Enter your license key.', 'buddyclients-lite' );
     }
     
     // Current license
     $license_message = sprintf(
         /* translators: %s: the name of the licensed BuddyClients product */
-        '<h3>' . __( 'Current License: %s', 'buddyclients-free' ) . '</h3>',
+        '<h3>' . __( 'Current License: %s', 'buddyclients-lite' ) . '</h3>',
         $license->product_name
     );
 

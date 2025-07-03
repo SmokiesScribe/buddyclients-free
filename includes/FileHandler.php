@@ -418,7 +418,7 @@ class FileHandler {
             
             // Check if the file exists on the server
             if ( ! file_exists( $file->file_path ) ) {
-                $download = '<div class="no-ms-message">' . __( 'File not found: ', 'buddyclients-free' ) . $file->file_name . '</div>';
+                $download = '<div class="no-ms-message">' . __( 'File not found: ', 'buddyclients-lite' ) . $file->file_name . '</div>';
                 
             } else {
                 
@@ -426,7 +426,7 @@ class FileHandler {
                 $icon = buddyc_icon( 'download' );
                 
                 // Build download link
-                $text = $show_file_name ? __( 'Download File: ', 'buddyclients-free' ) . $file->file_name : __( 'Download File', 'buddyclients-free' );
+                $text = $show_file_name ? __( 'Download File: ', 'buddyclients-lite' ) . $file->file_name : __( 'Download File', 'buddyclients-lite' );
                 $download = '<a class="ms-download-button" title="' . esc_attr( $file->file_name ) . '" href="' . esc_url( $file->file_url ) . '" download>' . $icon . ' ' . esc_html( $text ) . '</a><br><br>';
             }
         }

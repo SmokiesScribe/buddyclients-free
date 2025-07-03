@@ -1,17 +1,17 @@
 <?php
 if ( ! defined( 'ABSPATH' ) ) exit; // Exit if accessed directly
 
-if ( ! class_exists( 'BuddyClientsFree' ) ) {
+if ( ! class_exists( 'BuddyClientsLite' ) ) {
 
 	/**
-	 * BuddyClientsFree Main Class.
+	 * BuddyClientsLite Main Class.
 	 * 
 	 * @since 0.1.0
 	 * 
 	 * @internal
 	 */
 	#[\AllowDynamicProperties]
-	final class BuddyClientsFree {
+	final class BuddyClientsLite {
 	    
 		/**
 		 * The single instance of the main class.
@@ -26,7 +26,7 @@ if ( ! class_exists( 'BuddyClientsFree' ) ) {
     	public $bb_theme;
     	
     	/**
-    	 * Generates the main BuddyClientsFree instance.
+    	 * Generates the main BuddyClientsLite instance.
     	 *
     	 * Ensures only one instance of BuddyClients is loaded.
     	 *
@@ -45,7 +45,7 @@ if ( ! class_exists( 'BuddyClientsFree' ) ) {
     	 * @since 0.1.0
     	 */
     	public function __clone() {
-    		_doing_it_wrong( __FUNCTION__, esc_html__( 'Cheatin&#8217; huh?', 'buddyclients-free' ), '0.1.0' );
+    		_doing_it_wrong( __FUNCTION__, esc_html__( 'Cheatin&#8217; huh?', 'buddyclients-lite' ), '0.1.0' );
     	}
     	/**
     	 * Prevents unserializing instances of this class.
@@ -53,7 +53,7 @@ if ( ! class_exists( 'BuddyClientsFree' ) ) {
     	 * @since 0.1.0
     	 */
     	public function __wakeup() {
-    		_doing_it_wrong( __FUNCTION__, esc_html__( 'Cheatin&#8217; huh?', 'buddyclients-free' ), '0.1.0' );
+    		_doing_it_wrong( __FUNCTION__, esc_html__( 'Cheatin&#8217; huh?', 'buddyclients-lite' ), '0.1.0' );
     	}
     
     	/**
@@ -77,7 +77,7 @@ if ( ! class_exists( 'BuddyClientsFree' ) ) {
     	    
     	    // Plugin name
     		if ( ! defined( 'BUDDYC_PLUGIN_NAME' ) ) {
-    			define( 'BUDDYC_PLUGIN_NAME', 'BuddyClients Free' );
+    			define( 'BUDDYC_PLUGIN_NAME', 'BuddyClients Lite' );
     		}
     		// Path and URL.
     		if ( ! defined( 'BUDDYC_PLUGIN_DIR' ) ) {

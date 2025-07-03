@@ -115,10 +115,10 @@ class RateType extends ServiceComponent {
      */
     private function unit_label( $post_id ) {
         $this->unit_label = ($post_id === 'flat') 
-            ? __('Flat', 'buddyclients-free') 
+            ? __('Flat', 'buddyclients-lite') 
             : sprintf(
                 /* translators: %s: the singular unit name (e.g. word) */
-                __('Per %s', 'buddyclients-free'),
+                __('Per %s', 'buddyclients-lite'),
                 strtolower( $this->singular )
             );
     }

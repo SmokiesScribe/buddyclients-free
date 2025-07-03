@@ -21,12 +21,12 @@ class MetaAdjustment {
                     'Type' => [
                         'meta' => [
                             'form_field_type' => [
-                                'label' => __( 'Form Field Type', 'buddyclients-free' ),
-                                'description' => __( 'Type of field on booking form.', 'buddyclients-free' ),
+                                'label' => __( 'Form Field Type', 'buddyclients-lite' ),
+                                'description' => __( 'Type of field on booking form.', 'buddyclients-lite' ),
                                 'type' => 'dropdown',
                                 'options' => [
-                                    'dropdown' => __( 'Dropdown', 'buddyclients-free' ),
-                                    'checkbox' => __( 'Checkboxes', 'buddyclients-free' ),
+                                    'dropdown' => __( 'Dropdown', 'buddyclients-lite' ),
+                                    'checkbox' => __( 'Checkboxes', 'buddyclients-lite' ),
                                 ],
                             ],
                         ],
@@ -38,13 +38,13 @@ class MetaAdjustment {
                     'Labels' => [
                         'meta' => [
                             'label' => [
-                                'label' => __( 'Label', 'buddyclients-free' ),
-                                'description' => __( 'Field label to display on booking form.', 'buddyclients-free' ),
+                                'label' => __( 'Label', 'buddyclients-lite' ),
+                                'description' => __( 'Field label to display on booking form.', 'buddyclients-lite' ),
                                 'type' => 'text',
                             ],
                             'field_description' => [
-                                'label' => __( 'Description', 'buddyclients-free' ),
-                                'description' => __( 'Field description to display on booking form.', 'buddyclients-free' ),
+                                'label' => __( 'Description', 'buddyclients-lite' ),
+                                'description' => __( 'Field description to display on booking form.', 'buddyclients-lite' ),
                                 'type' => 'text',
                             ],
                         ],
@@ -52,8 +52,8 @@ class MetaAdjustment {
                     'Help Doc' => [
                         'meta' => [
                             'help_post_id' => [
-                                'label' => __( 'Help Post', 'buddyclients-free' ),
-                                'description' => __( 'Help doc to show on booking form.', 'buddyclients-free' ),
+                                'label' => __( 'Help Post', 'buddyclients-lite' ),
+                                'description' => __( 'Help doc to show on booking form.', 'buddyclients-lite' ),
                                 'type' => 'dropdown',
                                 'options' => 'help_docs',
                             ],
@@ -62,12 +62,12 @@ class MetaAdjustment {
                 ],
             ],
             'Options' => [
-                'description' => __( 'Each option will adjust the service fee based on the user response.', 'buddyclients-free' ),
+                'description' => __( 'Each option will adjust the service fee based on the user response.', 'buddyclients-lite' ),
                 'tables' => self::adjustment_options(),
                 'classes' => 'buddyc-adjustment-options'
             ],
             'New Option' => [
-                'description' => '<a id="buddyc_adjustment_create_option" class="button-secondary">' . __( 'Add Option', 'buddyclients-free' ) . '</a><div id="buddyc_adjustment_create_option_message"></div>',
+                'description' => '<a id="buddyc_adjustment_create_option" class="button-secondary">' . __( 'Add Option', 'buddyclients-lite' ) . '</a><div id="buddyc_adjustment_create_option_message"></div>',
                 'tables' => [],
             ],
         ];
@@ -89,18 +89,18 @@ class MetaAdjustment {
             $meta_fields['Option ' . $i] = [
                 'meta' => [
                     'option_' . $i . '_label' => [
-                        'label' => __( 'Label', 'buddyclients-free' ),
+                        'label' => __( 'Label', 'buddyclients-lite' ),
                         'description' => '',
                         'type' => 'text',
                     ],
                     'option_' . $i . '_operator' => [
-                        'label' => __( 'Operator', 'buddyclients-free' ),
+                        'label' => __( 'Operator', 'buddyclients-lite' ),
                         'description' => '',
                         'type' => 'dropdown',
                         'options' => 'operator',
                     ],
                     'option_' . $i . '_value' => [
-                        'label' => __( 'Value', 'buddyclients-free' ),
+                        'label' => __( 'Value', 'buddyclients-lite' ),
                         'description' => '',
                         'type' => 'text',
                     ],

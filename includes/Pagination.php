@@ -116,7 +116,7 @@ class Pagination {
         // Previous page link
         if ( $this->current_page > 1 ) {
             $query_params['page'] = $this->current_page - 1;
-            $content .= '<ga href="' . $url . '?' . http_build_query( $query_params ) . '">&laquo; ' . __( 'Previous', 'buddyclients-free' ) . '</a>';
+            $content .= '<ga href="' . $url . '?' . http_build_query( $query_params ) . '">&laquo; ' . __( 'Previous', 'buddyclients-lite' ) . '</a>';
         }
         
         // Page number links
@@ -132,7 +132,7 @@ class Pagination {
         // Next page link
         if ( $this->current_page < $this->total_pages ) {
             $query_params['page'] = $this->current_page + 1;
-            $content .= '<a href="' . $url . '?' . http_build_query( $query_params ) . '">' . __( 'Next', 'buddyclients-free' ) . ' &raquo;</a>';
+            $content .= '<a href="' . $url . '?' . http_build_query( $query_params ) . '">' . __( 'Next', 'buddyclients-lite' ) . ' &raquo;</a>';
         }
         
         $content .= '</div>';

@@ -253,15 +253,15 @@ class SinglePost {
         $archives = [
             'buddyc_service' => [
                 'link' => site_url( '/services' ),
-                'label' => __( 'Services', 'buddyclients-free' )
+                'label' => __( 'Services', 'buddyclients-lite' )
             ],
             'buddyc_testimonial' => [
                 'link' => site_url( '/testimonials' ),
-                'label' => __( 'Testimonials', 'buddyclients-free' )
+                'label' => __( 'Testimonials', 'buddyclients-lite' )
             ],
             'buddyc_brief' => [
                 'link' => bp_get_loggedin_user_link() . 'groups',
-                'label' => __( 'Projects', 'buddyclients-free' )
+                'label' => __( 'Projects', 'buddyclients-lite' )
             ],
         ];
 
@@ -290,7 +290,7 @@ class SinglePost {
             $items[] = [$group_name => $group_link];
 
             // Group briefs
-            $items[] = [ __( 'Briefs', 'buddyclients-free' ) => $group_link . 'brief'];
+            $items[] = [ __( 'Briefs', 'buddyclients-lite' ) => $group_link . 'brief'];
         }
 
         // Add post title to breadcrumbs
@@ -364,7 +364,7 @@ class SinglePost {
     private function brief() {
         // Class does not exist
         if ( ! class_exists( SingleBrief::class ) ) {
-            return '<p>' . __( 'Briefs are not enabled.', 'buddyclients-free' ) . '</p>';
+            return '<p>' . __( 'Briefs are not enabled.', 'buddyclients-lite' ) . '</p>';
         } else {
             $brief = new SingleBrief( $this->post_id );
             return $brief->display();

@@ -124,7 +124,7 @@ class AdminTableItem extends AdminTable {
         return sprintf(
             '<a href="%1$s" title="%2$s">%3$s</a>',
             esc_url( $url ),
-            __( 'View Payments', 'buddyclients-free' ),
+            __( 'View Payments', 'buddyclients-lite' ),
             '<i class="fa-solid fa-credit-card"></i>'
         );
     }
@@ -140,7 +140,7 @@ class AdminTableItem extends AdminTable {
             $url = 'https://dashboard.stripe.com/payments/' . $payment_id;
             $icon = '<i class="fa-solid fa-arrow-up-right-from-square"></i>';
             /* translators: %s: Stripe, the name of the payment processor */
-            $title = sprintf( __( 'View transaction on %s', 'buddyclients-free' ), 'Stripe' );
+            $title = sprintf( __( 'View transaction on %s', 'buddyclients-lite' ), 'Stripe' );
             $link = '<span class="buddyc-update-booking-icon"><a href="' . esc_url( $url ) . '" target="_blank" title="' . $title . '">' . $icon . '</a></span>';
             return $link;
         }
@@ -218,7 +218,7 @@ class AdminTableItem extends AdminTable {
             
         // Generate download link
         if ( $pdf_link ) {
-            $download_link = '<a href="' . esc_url( $pdf_link ) . '" download><i class="fa-solid fa-download"></i> ' . __( 'Download PDF', 'buddyclients-free' ) . '</a>';
+            $download_link = '<a href="' . esc_url( $pdf_link ) . '" download><i class="fa-solid fa-download"></i> ' . __( 'Download PDF', 'buddyclients-lite' ) . '</a>';
             return $download_link;
         }
     }
@@ -264,9 +264,9 @@ class AdminTableItem extends AdminTable {
         
         // Define agreement types
         $types = [
-            'team'     => __( 'Team', 'buddyclients-free' ),
-            'faculty'  => __( 'Faculty', 'buddyclients-free' ),
-            'affiliate'=> __( 'Affiliate', 'buddyclients-free' )
+            'team'     => __( 'Team', 'buddyclients-lite' ),
+            'faculty'  => __( 'Faculty', 'buddyclients-lite' ),
+            'affiliate'=> __( 'Affiliate', 'buddyclients-lite' )
         ];
         
         // Loop through types
@@ -343,7 +343,7 @@ class AdminTableItem extends AdminTable {
         // Make sure the user has sessions
         if ( $value && is_array( $value ) && ! empty( $value ) ) {
             $url = admin_url( '/admin.php?page=buddyc-sessions&faculty_ids_filter=' . $item_id );
-            return '<a href="' . esc_url( $url ) . '">' . __( 'Sessions', 'buddyclients-free' ) . '</a>';
+            return '<a href="' . esc_url( $url ) . '">' . __( 'Sessions', 'buddyclients-lite' ) . '</a>';
         }
     }
     
@@ -432,7 +432,7 @@ class AdminTableItem extends AdminTable {
         // Build note if due
         $due_note = $due ? sprintf(
             '%1$s: %2$s',
-            __( 'Due since', 'buddyclients-free' ),
+            __( 'Due since', 'buddyclients-lite' ),
             $due_at
         ) : '';
 
@@ -490,15 +490,15 @@ class AdminTableItem extends AdminTable {
         switch ( $value ) {
         case 'unpaid':
             $new_status = 'succeeded';
-            $new_status_label = __( 'Succeeded', 'buddyclients-free' );
+            $new_status_label = __( 'Succeeded', 'buddyclients-lite' );
             $icon_class = 'fa-solid fa-check-to-slot';
-            $title = __( 'Succeed Booking', 'buddyclients-free' );
+            $title = __( 'Succeed Booking', 'buddyclients-lite' );
             break;
         case 'succeeded':
             $new_status = 'unpaid';
-            $new_status_label = __( 'Unpaid', 'buddyclients-free' );
+            $new_status_label = __( 'Unpaid', 'buddyclients-lite' );
             $icon_class = 'fa-solid fa-circle-xmark';
-            $title = __( 'Unsucceed Booking', 'buddyclients-free' );
+            $title = __( 'Unsucceed Booking', 'buddyclients-lite' );
             break;
         default:
             // Exit if status does not match options
@@ -515,7 +515,7 @@ class AdminTableItem extends AdminTable {
     // Define confirmation message
     $message = sprintf(
         /* translators: %s: the new status (Paid or Unpaid) */
-        __( 'Are you sure you want to mark this as %s?', 'buddyclients-free' ),
+        __( 'Are you sure you want to mark this as %s?', 'buddyclients-lite' ),
         $new_status_label
     );
 
@@ -559,10 +559,10 @@ class AdminTableItem extends AdminTable {
         $delete_url = admin_url( 'admin.php?page=buddyc-dashboard&action=delete_booking&booking_id=' . $value );
 
         // Define confirmation message
-        $message = __( 'Are you sure you want to delete this booking? This action cannot be undone.', 'buddyclients-free' );
+        $message = __( 'Are you sure you want to delete this booking? This action cannot be undone.', 'buddyclients-lite' );
 
         // Output button
-        $title = __( 'Delete booking', 'buddyclients-free' );
+        $title = __( 'Delete booking', 'buddyclients-lite' );
         $delete_button = '<span class="buddyc-update-booking-icon"><a href="#" title="' . $title . '" onclick="return buddycConfirmAction(\'' . esc_url( $delete_url ) . '\', \'' . esc_js( $message ) . '\');"><i class="fa-solid fa-trash"></i></a></span>';
 
         return $delete_button;
@@ -582,15 +582,15 @@ class AdminTableItem extends AdminTable {
         switch ( $status ) {
             case 'unpaid':
                 $new_status = 'paid';
-                $new_status_label = __( 'Paid', 'buddyclients-free' );
+                $new_status_label = __( 'Paid', 'buddyclients-lite' );
                 $icon_class = 'fa-solid fa-check-to-slot';
-                $title = __( 'Record Payment', 'buddyclients-free' );
+                $title = __( 'Record Payment', 'buddyclients-lite' );
                 break;
             case 'paid':
                 $new_status = 'unpaid';
-                $new_status_label = __( 'Unpaid', 'buddyclients-free' );
+                $new_status_label = __( 'Unpaid', 'buddyclients-lite' );
                 $icon_class = 'fa-solid fa-circle-xmark';
-                $title = __( 'Remove Payment', 'buddyclients-free' );
+                $title = __( 'Remove Payment', 'buddyclients-lite' );
                 break;
             default:
                 // Exit if status does not match options
@@ -607,7 +607,7 @@ class AdminTableItem extends AdminTable {
         // Define confirmation message
         $message = sprintf(
             /* translators: %s: the new status (Paid or Unpaid) */
-            __( 'Are you sure you want to mark this as %s?', 'buddyclients-free' ),
+            __( 'Are you sure you want to mark this as %s?', 'buddyclients-lite' ),
             $new_status_label
         );
 
@@ -698,7 +698,7 @@ class AdminTableItem extends AdminTable {
         // Download PDF receipt
         $receipt_icon = '<i class="fa-solid fa-receipt"></i>';
         $receipt_url = $payment->receipt_url;
-        $title = __( 'View receipt', 'buddyclients-free' );
+        $title = __( 'View receipt', 'buddyclients-lite' );
         $receipt_link = ! empty( $receipt_url ) ? '<a href="' . $receipt_url . '" title="' . $title . '" target="_blank">' . $receipt_icon . '</a>' : '';
         $buttons['receipt'] = $receipt_link;
 
@@ -725,53 +725,53 @@ class AdminTableItem extends AdminTable {
      */
     protected static function payment_method( $property, $value ) {
         $payment_methods = [
-            'acss_debit'       => __( 'Pre-authorized debit (Canada)', 'buddyclients-free' ),
-            'affirm'          => __( 'Affirm (Buy Now, Pay Later)', 'buddyclients-free' ),
-            'afterpay_clearpay' => __( 'Afterpay / Clearpay (Buy Now, Pay Later)', 'buddyclients-free' ),
-            'alipay'          => __( 'Alipay (Digital Wallet - China)', 'buddyclients-free' ),
-            'alma'            => __( 'Alma (Buy Now, Pay Later - Installments)', 'buddyclients-free' ),
-            'amazon_pay'      => __( 'Amazon Pay (Wallet)', 'buddyclients-free' ),
-            'au_becs_debit'   => __( 'BECS Direct Debit (Australia)', 'buddyclients-free' ),
-            'bacs_debit'      => __( 'Bacs Direct Debit (UK)', 'buddyclients-free' ),
-            'bancontact'      => __( 'Bancontact (Bank Redirect - Belgium)', 'buddyclients-free' ),
-            'blik'            => __( 'BLIK (Single-use Payment - Poland)', 'buddyclients-free' ),
-            'boleto'          => __( 'Boleto (Voucher-based - Brazil)', 'buddyclients-free' ),
-            'card'            => __( 'Credit / Debit Card', 'buddyclients-free' ),
-            'card_present'    => __( 'Stripe Terminal (In-person Card Payment)', 'buddyclients-free' ),
-            'cashapp'         => __( 'Cash App Pay', 'buddyclients-free' ),
-            'customer_balance' => __( 'Customer Balance Payment', 'buddyclients-free' ),
-            'eps'             => __( 'EPS (Bank Redirect - Austria)', 'buddyclients-free' ),
-            'fpx'             => __( 'FPX (Bank Redirect - Malaysia)', 'buddyclients-free' ),
-            'giropay'         => __( 'giropay (Bank Redirect - Germany)', 'buddyclients-free' ),
-            'grabpay'         => __( 'GrabPay (Digital Wallet - Southeast Asia)', 'buddyclients-free' ),
-            'ideal'           => __( 'iDEAL (Bank Redirect - Netherlands)', 'buddyclients-free' ),
-            'interac_present' => __( 'Interac (In-person Debit - Canada)', 'buddyclients-free' ),
-            'kakao_pay'       => __( 'Kakao Pay (Digital Wallet - South Korea)', 'buddyclients-free' ),
-            'klarna'          => __( 'Klarna (Buy Now, Pay Later)', 'buddyclients-free' ),
-            'konbini'         => __( 'Konbini (Cash-based Voucher - Japan)', 'buddyclients-free' ),
-            'kr_card'         => __( 'Korean Credit/Debit Card', 'buddyclients-free' ),
-            'link'            => __( 'Link (Saved Payment Details)', 'buddyclients-free' ),
-            'mobilepay'       => __( 'MobilePay (Nordic Wallet)', 'buddyclients-free' ),
-            'multibanco'      => __( 'Multibanco (Voucher Payment)', 'buddyclients-free' ),
-            'naver_pay'       => __( 'Naver Pay (Digital Wallet - South Korea)', 'buddyclients-free' ),
-            'oxxo'            => __( 'OXXO (Cash-based Voucher - Mexico)', 'buddyclients-free' ),
-            'p24'             => __( 'Przelewy24 (Bank Redirect - Poland)', 'buddyclients-free' ),
-            'pay_by_bank'     => __( 'Pay By Bank (Open Banking - UK)', 'buddyclients-free' ),
-            'payco'           => __( 'PAYCO (Digital Wallet - South Korea)', 'buddyclients-free' ),
-            'paynow'          => __( 'PayNow (QR Code Payment - Singapore)', 'buddyclients-free' ),
-            'paypal'          => __( 'PayPal (Online Wallet)', 'buddyclients-free' ),
-            'pix'             => __( 'Pix (Instant Bank Transfer - Brazil)', 'buddyclients-free' ),
-            'promptpay'       => __( 'PromptPay (Instant Funds Transfer - Thailand)', 'buddyclients-free' ),
-            'revolut_pay'     => __( 'Revolut Pay (Digital Wallet - UK)', 'buddyclients-free' ),
-            'samsung_pay'     => __( 'Samsung Pay (Digital Wallet - South Korea)', 'buddyclients-free' ),
-            'sepa_debit'      => __( 'SEPA Direct Debit (Euro Payments Area)', 'buddyclients-free' ),
-            'sofort'          => __( 'Sofort (Bank Redirect - Europe)', 'buddyclients-free' ),
-            'swish'           => __( 'Swish (Wallet - Sweden)', 'buddyclients-free' ),
-            'twint'           => __( 'TWINT (Payment Method)', 'buddyclients-free' ),
-            'us_bank_account' => __( 'ACH Direct Debit (US Bank Accounts)', 'buddyclients-free' ),
-            'wechat_pay'      => __( 'WeChat Pay (Digital Wallet - China)', 'buddyclients-free' ),
-            'zip'             => __( 'Zip (Buy Now, Pay Later)', 'buddyclients-free' ),
-            'manually_recorded'=> __('Manually Recorded', 'buddyclients-free')
+            'acss_debit'       => __( 'Pre-authorized debit (Canada)', 'buddyclients-lite' ),
+            'affirm'          => __( 'Affirm (Buy Now, Pay Later)', 'buddyclients-lite' ),
+            'afterpay_clearpay' => __( 'Afterpay / Clearpay (Buy Now, Pay Later)', 'buddyclients-lite' ),
+            'alipay'          => __( 'Alipay (Digital Wallet - China)', 'buddyclients-lite' ),
+            'alma'            => __( 'Alma (Buy Now, Pay Later - Installments)', 'buddyclients-lite' ),
+            'amazon_pay'      => __( 'Amazon Pay (Wallet)', 'buddyclients-lite' ),
+            'au_becs_debit'   => __( 'BECS Direct Debit (Australia)', 'buddyclients-lite' ),
+            'bacs_debit'      => __( 'Bacs Direct Debit (UK)', 'buddyclients-lite' ),
+            'bancontact'      => __( 'Bancontact (Bank Redirect - Belgium)', 'buddyclients-lite' ),
+            'blik'            => __( 'BLIK (Single-use Payment - Poland)', 'buddyclients-lite' ),
+            'boleto'          => __( 'Boleto (Voucher-based - Brazil)', 'buddyclients-lite' ),
+            'card'            => __( 'Credit / Debit Card', 'buddyclients-lite' ),
+            'card_present'    => __( 'Stripe Terminal (In-person Card Payment)', 'buddyclients-lite' ),
+            'cashapp'         => __( 'Cash App Pay', 'buddyclients-lite' ),
+            'customer_balance' => __( 'Customer Balance Payment', 'buddyclients-lite' ),
+            'eps'             => __( 'EPS (Bank Redirect - Austria)', 'buddyclients-lite' ),
+            'fpx'             => __( 'FPX (Bank Redirect - Malaysia)', 'buddyclients-lite' ),
+            'giropay'         => __( 'giropay (Bank Redirect - Germany)', 'buddyclients-lite' ),
+            'grabpay'         => __( 'GrabPay (Digital Wallet - Southeast Asia)', 'buddyclients-lite' ),
+            'ideal'           => __( 'iDEAL (Bank Redirect - Netherlands)', 'buddyclients-lite' ),
+            'interac_present' => __( 'Interac (In-person Debit - Canada)', 'buddyclients-lite' ),
+            'kakao_pay'       => __( 'Kakao Pay (Digital Wallet - South Korea)', 'buddyclients-lite' ),
+            'klarna'          => __( 'Klarna (Buy Now, Pay Later)', 'buddyclients-lite' ),
+            'konbini'         => __( 'Konbini (Cash-based Voucher - Japan)', 'buddyclients-lite' ),
+            'kr_card'         => __( 'Korean Credit/Debit Card', 'buddyclients-lite' ),
+            'link'            => __( 'Link (Saved Payment Details)', 'buddyclients-lite' ),
+            'mobilepay'       => __( 'MobilePay (Nordic Wallet)', 'buddyclients-lite' ),
+            'multibanco'      => __( 'Multibanco (Voucher Payment)', 'buddyclients-lite' ),
+            'naver_pay'       => __( 'Naver Pay (Digital Wallet - South Korea)', 'buddyclients-lite' ),
+            'oxxo'            => __( 'OXXO (Cash-based Voucher - Mexico)', 'buddyclients-lite' ),
+            'p24'             => __( 'Przelewy24 (Bank Redirect - Poland)', 'buddyclients-lite' ),
+            'pay_by_bank'     => __( 'Pay By Bank (Open Banking - UK)', 'buddyclients-lite' ),
+            'payco'           => __( 'PAYCO (Digital Wallet - South Korea)', 'buddyclients-lite' ),
+            'paynow'          => __( 'PayNow (QR Code Payment - Singapore)', 'buddyclients-lite' ),
+            'paypal'          => __( 'PayPal (Online Wallet)', 'buddyclients-lite' ),
+            'pix'             => __( 'Pix (Instant Bank Transfer - Brazil)', 'buddyclients-lite' ),
+            'promptpay'       => __( 'PromptPay (Instant Funds Transfer - Thailand)', 'buddyclients-lite' ),
+            'revolut_pay'     => __( 'Revolut Pay (Digital Wallet - UK)', 'buddyclients-lite' ),
+            'samsung_pay'     => __( 'Samsung Pay (Digital Wallet - South Korea)', 'buddyclients-lite' ),
+            'sepa_debit'      => __( 'SEPA Direct Debit (Euro Payments Area)', 'buddyclients-lite' ),
+            'sofort'          => __( 'Sofort (Bank Redirect - Europe)', 'buddyclients-lite' ),
+            'swish'           => __( 'Swish (Wallet - Sweden)', 'buddyclients-lite' ),
+            'twint'           => __( 'TWINT (Payment Method)', 'buddyclients-lite' ),
+            'us_bank_account' => __( 'ACH Direct Debit (US Bank Accounts)', 'buddyclients-lite' ),
+            'wechat_pay'      => __( 'WeChat Pay (Digital Wallet - China)', 'buddyclients-lite' ),
+            'zip'             => __( 'Zip (Buy Now, Pay Later)', 'buddyclients-lite' ),
+            'manually_recorded'=> __('Manually Recorded', 'buddyclients-lite')
         ];
         return $payment_methods[$value] ?? self::uc_format( $value );
     }
@@ -791,7 +791,7 @@ class AdminTableItem extends AdminTable {
         $url_to_copy = buddyc_build_pay_link( $payment_id );
         if ( ! empty( $url_to_copy ) ) {
             $field_id = 'buddyc-pay-link-copy-' . $payment_id;
-            $title = __( 'Copy pay link', 'buddyclients-free' );
+            $title = __( 'Copy pay link', 'buddyclients-lite' );
             
             // Output the HTML directly
             return sprintf(
@@ -914,13 +914,13 @@ class AdminTableItem extends AdminTable {
         $status = '';
         switch ( $value ) {
             case 'paid':
-                $status = __( 'Paid', 'buddyclients-free' );
+                $status = __( 'Paid', 'buddyclients-lite' );
                 break;
             case 'pending':
-                $status = __( 'Pending', 'buddyclients-free' );
+                $status = __( 'Pending', 'buddyclients-lite' );
                 break;
             case 'failed':
-                $status = __( 'Failed', 'buddyclients-free' );
+                $status = __( 'Failed', 'buddyclients-lite' );
                 break;
         }
         return $status;
@@ -932,7 +932,7 @@ class AdminTableItem extends AdminTable {
      * @since 0.1.0
      */
     protected static function link( $property, $value ) {
-        return '<a href="' . esc_url( $value ) . '">' . __( 'View', 'buddyclients-free' ) . '</a>';
+        return '<a href="' . esc_url( $value ) . '">' . __( 'View', 'buddyclients-lite' ) . '</a>';
     }
     
     /**
@@ -1026,19 +1026,19 @@ class AdminTableItem extends AdminTable {
     protected static function lead_status( $property, $value, $item_id ) {
         $statuses = [
             'active'    => [
-                'label' => __( 'Active', 'buddyclients-free' ),
+                'label' => __( 'Active', 'buddyclients-lite' ),
                 'icon'  => 'ready'
             ],
             'won'       => [
-                'label' => __( 'Won', 'buddyclients-free' ),
+                'label' => __( 'Won', 'buddyclients-lite' ),
                 'icon'  => 'check'
             ],
             'lost'      => [
-                'label' => __( 'Lost', 'buddyclients-free' ),
+                'label' => __( 'Lost', 'buddyclients-lite' ),
                 'icon'  => 'x'
             ],
             'spam'      => [
-                'label' => __( 'Spam', 'buddyclients-free' ),
+                'label' => __( 'Spam', 'buddyclients-lite' ),
                 'icon'  => 'x'
             ],
         ];
@@ -1052,7 +1052,7 @@ class AdminTableItem extends AdminTable {
         $div_id = 'buddyc-lead-status-' . $item_id;
 
         // Hover title
-        $title = __( 'Edit status', 'buddyclients-free' );
+        $title = __( 'Edit status', 'buddyclients-lite' );
 
         // Icon
         $content = buddyc_icon( $statuses[$value]['icon'] );

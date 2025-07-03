@@ -29,11 +29,11 @@ class SettingsComponents {
     public static function settings() {
         return [
             'components' => [
-                'title' => __('Components', 'buddyclients-free'),
-                'description' => __('Enable BuddyClients components.', 'buddyclients-free'),
+                'title' => __('Components', 'buddyclients-lite'),
+                'description' => __('Enable BuddyClients components.', 'buddyclients-lite'),
                 'fields' => [
                     'components' => [
-                        'label' => __('Components', 'buddyclients-free'),
+                        'label' => __('Components', 'buddyclients-lite'),
                         'type' => 'checkbox_table',
                         'options' => self::components_options(),
                         'descriptions' => self::components_descriptions(),
@@ -75,21 +75,21 @@ class SettingsComponents {
     private static function components_descriptions() {
         return [
             // Required
-            'Booking'       => __('Allow clients to book services.', 'buddyclients-free'),
-            'Checkout'      => __('Allow clients to check out on your website.', 'buddyclients-free'),
-            'Service'       => __('Create services.', 'buddyclients-free'),
+            'Booking'       => __('Allow clients to book services.', 'buddyclients-lite'),
+            'Checkout'      => __('Allow clients to check out on your website.', 'buddyclients-lite'),
+            'Service'       => __('Create services.', 'buddyclients-lite'),
             // Core
-            'Email'         => __('Send email notifications to clients, team members, and admins.', 'buddyclients-free'),
-            'Brief'         => __('Request information from clients after booking.', 'buddyclients-free'),
-            'Stripe'        => __('Accept payments at checkout.', 'buddyclients-free'),
+            'Email'         => __('Send email notifications to clients, team members, and admins.', 'buddyclients-lite'),
+            'Brief'         => __('Request information from clients after booking.', 'buddyclients-lite'),
+            'Stripe'        => __('Accept payments at checkout.', 'buddyclients-lite'),
             // Premium
-            'Affiliate'     => __('Allow users to earn commission for referring clients.', 'buddyclients-free'),
-            'Availability'  => __('Display the next date each team member is available.', 'buddyclients-free'),
-            'Contact'       => __('Accept messages through a contact page and a floating contact button.', 'buddyclients-free'),
-            'Legal'         => __('Manage legal agreements for clients, team members, and affiliates.', 'buddyclients-free'),
-            'Quote'         => __('Create custom quotes for one-off projects.', 'buddyclients-free'),
-            'Sales'         => __('Allow team members to create bookings on behalf of clients and earn commission.', 'buddyclients-free'),
-            'Testimonial'   => __('Accept and display testimonials from clients.', 'buddyclients-free'),
+            'Affiliate'     => __('Allow users to earn commission for referring clients.', 'buddyclients-lite'),
+            'Availability'  => __('Display the next date each team member is available.', 'buddyclients-lite'),
+            'Contact'       => __('Accept messages through a contact page and a floating contact button.', 'buddyclients-lite'),
+            'Legal'         => __('Manage legal agreements for clients, team members, and affiliates.', 'buddyclients-lite'),
+            'Quote'         => __('Create custom quotes for one-off projects.', 'buddyclients-lite'),
+            'Sales'         => __('Allow team members to create bookings on behalf of clients and earn commission.', 'buddyclients-lite'),
+            'Testimonial'   => __('Accept and display testimonials from clients.', 'buddyclients-lite'),
         ];
     }
 }

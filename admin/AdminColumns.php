@@ -47,48 +47,48 @@ class AdminColumns {
     private static function columns_data( $post_type ) {
         $columns = [
             'buddyc_brief' => [
-                'project_id'                =>  __( 'Project', 'buddyclients-free' ),
-                'updated_date'              =>  __( 'Submitted', 'buddyclients-free' ),
+                'project_id'                =>  __( 'Project', 'buddyclients-lite' ),
+                'updated_date'              =>  __( 'Submitted', 'buddyclients-lite' ),
             ],
             'buddyc_brief_field' => [
-                'brief_types'               =>  __( 'Brief Types', 'buddyclients-free' ),
-                'field_type'                =>  __( 'Field Type', 'buddyclients-free' ),
+                'brief_types'               =>  __( 'Brief Types', 'buddyclients-lite' ),
+                'field_type'                =>  __( 'Field Type', 'buddyclients-lite' ),
             ],
             'buddyc_service' => [
-                'valid'                     =>  __( 'Valid', 'buddyclients-free' ),
-                'visible'                   =>  __( 'Visibility', 'buddyclients-free' ),
-                'rate_value'                =>  __( 'Client Rate', 'buddyclients-free' ),
-                'team_member_percentage'    =>  __( 'Team Member %', 'buddyclients-free' ),
+                'valid'                     =>  __( 'Valid', 'buddyclients-lite' ),
+                'visible'                   =>  __( 'Visibility', 'buddyclients-lite' ),
+                'rate_value'                =>  __( 'Client Rate', 'buddyclients-lite' ),
+                'team_member_percentage'    =>  __( 'Team Member %', 'buddyclients-lite' ),
             ],
             'buddyc_adjustment' => [
-                'form_field_type'           =>  __( 'Field Type', 'buddyclients-free' ),
+                'form_field_type'           =>  __( 'Field Type', 'buddyclients-lite' ),
             ],
             'buddyc_service_type' => [
-                'visible'                   =>  __( 'Visibility', 'buddyclients-free' ),
-                'form_field_type'           =>  __( 'Field Type', 'buddyclients-free' ),
+                'visible'                   =>  __( 'Visibility', 'buddyclients-lite' ),
+                'form_field_type'           =>  __( 'Field Type', 'buddyclients-lite' ),
             ],
             'buddyc_filter' => [
-                'xprofile_field'            =>  __( 'Field', 'buddyclients-free' ),
-                'xprofile_field_type'       =>  __( 'Field Type', 'buddyclients-free' ),
+                'xprofile_field'            =>  __( 'Field', 'buddyclients-lite' ),
+                'xprofile_field_type'       =>  __( 'Field Type', 'buddyclients-lite' ),
             ],
             'buddyc_quote' => [
-                'client_id'                 =>  __( 'Client', 'buddyclients-free' ),
-                'valid'                     =>  __( 'Valid', 'buddyclients-free' ),
-                'visible'                   =>  __( 'Visibility', 'buddyclients-free' ),
-                'rate_value'                =>  __( 'Client Rate', 'buddyclients-free' ),
-                'team_member_percentage'    =>  __( 'Team Member %', 'buddyclients-free' ),
+                'client_id'                 =>  __( 'Client', 'buddyclients-lite' ),
+                'valid'                     =>  __( 'Valid', 'buddyclients-lite' ),
+                'visible'                   =>  __( 'Visibility', 'buddyclients-lite' ),
+                'rate_value'                =>  __( 'Client Rate', 'buddyclients-lite' ),
+                'team_member_percentage'    =>  __( 'Team Member %', 'buddyclients-lite' ),
             ],
             'buddyc_legal_mod' => [
-                'user_id'                   =>  __( 'User', 'buddyclients-free' ),
-                'legal_type'                =>  __( 'Legal Type', 'buddyclients-free' ),
+                'user_id'                   =>  __( 'User', 'buddyclients-lite' ),
+                'legal_type'                =>  __( 'Legal Type', 'buddyclients-lite' ),
             ],
             'buddyc_file_upload' => [
-                'file_types'                =>  __( 'File Types', 'buddyclients-free' )
+                'file_types'                =>  __( 'File Types', 'buddyclients-lite' )
             ],
             'buddyc_email' => [
-                '_buddyc_email_subject'     =>  __( 'Subject', 'buddyclients-free' ),
-                '_buddyc_email_description' =>  __( 'Description', 'buddyclients-free' ),
-                '_buddyc_email_enabled'     =>  __( 'Enabled', 'buddyclients-free' )
+                '_buddyc_email_subject'     =>  __( 'Subject', 'buddyclients-lite' ),
+                '_buddyc_email_description' =>  __( 'Description', 'buddyclients-lite' ),
+                '_buddyc_email_enabled'     =>  __( 'Enabled', 'buddyclients-lite' )
             ],
         ];
         
@@ -114,17 +114,17 @@ class AdminColumns {
     public function sortable_columns() {
         $sortable_columns = [
             'buddyc_brief_field' => [
-                'brief_types'               =>  __( 'Brief Types', 'buddyclients-free' ),
+                'brief_types'               =>  __( 'Brief Types', 'buddyclients-lite' ),
             ],
             'buddyc_service' => [
-                'valid'                     =>  __( 'Valid', 'buddyclients-free' ),
+                'valid'                     =>  __( 'Valid', 'buddyclients-lite' ),
             ],
             'buddyc_service_type' => [
-                'visible'                   =>  __( 'Visibility', 'buddyclients-free' ),
+                'visible'                   =>  __( 'Visibility', 'buddyclients-lite' ),
             ],
             'buddyc_quote' => [
-                'client_id'                 =>  __( 'Client', 'buddyclients-free' ),
-                'valid'                     =>  __( 'Valid', 'buddyclients-free' ),
+                'client_id'                 =>  __( 'Client', 'buddyclients-lite' ),
+                'valid'                     =>  __( 'Valid', 'buddyclients-lite' ),
             ]
         ];
         
@@ -556,7 +556,7 @@ class AdminColumns {
      * @param mixed $value The value of the meta field.
      */
     private function submitted_column( $value ) {
-        return $value ? buddyc_admin_icon('check') . '<br>' . __( 'Last Update: ', 'buddyclients-free' ) . gmdate('F j, Y', strtotime($value)) : buddyc_admin_icon('x');
+        return $value ? buddyc_admin_icon('check') . '<br>' . __( 'Last Update: ', 'buddyclients-lite' ) . gmdate('F j, Y', strtotime($value)) : buddyc_admin_icon('x');
     }
     
     /**
@@ -597,21 +597,21 @@ class AdminColumns {
 
         // Free
         if ( ! $value || $value == 0 ) {
-            return __( 'Free', 'buddyclients-free' );
+            return __( 'Free', 'buddyclients-lite' );
 
         // Value greater than 0
         } else {
 
             // Flat rate type
             if ( $rate_type === 'flat' ) {
-                $type_name = __( ' flat', 'buddyclients-free' );
+                $type_name = __( ' flat', 'buddyclients-lite' );
 
             // Other rate type
             } else {
 
                 if ( ! empty( $rate_type ) && get_post_status( $rate_type ) === 'publish' ) {
                     $singular = get_post_meta( $rate_type, 'singular', true );
-                    $type_name = $singular ? __( ' per ', 'buddyclients-free' ) . strtolower($singular) : '';
+                    $type_name = $singular ? __( ' per ', 'buddyclients-lite' ) . strtolower($singular) : '';
                 }
             }
             

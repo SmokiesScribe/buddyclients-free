@@ -75,15 +75,15 @@ class AdminTableManager {
         return [
             'key'       => 'booking_payments',
             'headings'  => [
-                __( 'Client', 'buddyclients-free' ),
-                __( 'Created', 'buddyclients-free' ),
-                __( 'Status', 'buddyclients-free' ),
-                __( 'Type', 'buddyclients-free' ),
-                __( 'Payment Method', 'buddyclients-free' ),
-                __( 'Amount', 'buddyclients-free' ),
-                __( 'Amount Received', 'buddyclients-free' ),
-                __( 'Date Paid', 'buddyclients-free' ),
-                __( 'Actions', 'buddyclients-free' ),
+                __( 'Client', 'buddyclients-lite' ),
+                __( 'Created', 'buddyclients-lite' ),
+                __( 'Status', 'buddyclients-lite' ),
+                __( 'Type', 'buddyclients-lite' ),
+                __( 'Payment Method', 'buddyclients-lite' ),
+                __( 'Amount', 'buddyclients-lite' ),
+                __( 'Amount Received', 'buddyclients-lite' ),
+                __( 'Date Paid', 'buddyclients-lite' ),
+                __( 'Actions', 'buddyclients-lite' ),
             ],
             'columns'   => [
                 'client_id'         => ['client_id' => 'user_link'],
@@ -97,30 +97,30 @@ class AdminTableManager {
                 'actions'           => ['ID' => 'booking_payment_actions'],
             ],
             'items'     => buddyc_get_all_active_payments(),
-            'title'     => __( 'Booking Payments', 'buddyclients-free' ),
+            'title'     => __( 'Booking Payments', 'buddyclients-lite' ),
             'filters'   => [
                 'status'    => [
-                    'label'     => __( 'Status', 'buddyclients-free' ),
+                    'label'     => __( 'Status', 'buddyclients-lite' ),
                     'property'  =>  'status',
                     'options'   => [
-                        ''          => __( 'All', 'buddyclients-free' ),
-                        'paid'      => __( 'Paid', 'buddyclients-free' ),
-                        'unpaid'    => __( 'Unpaid', 'buddyclients-free' )
+                        ''          => __( 'All', 'buddyclients-lite' ),
+                        'paid'      => __( 'Paid', 'buddyclients-lite' ),
+                        'unpaid'    => __( 'Unpaid', 'buddyclients-lite' )
                     ],
                     'default'   => ''
                 ],
                 'type'    => [
-                    'label'     => __( 'Type', 'buddyclients-free' ),
+                    'label'     => __( 'Type', 'buddyclients-lite' ),
                     'property'  =>  'type',
                     'options'   => [
-                        ''          => __( 'All', 'buddyclients-free' ),
-                        'deposit'   => __( 'Deposit', 'buddyclients-free' ),
-                        'final'     => __( 'Final Payment', 'buddyclients-free' )
+                        ''          => __( 'All', 'buddyclients-lite' ),
+                        'deposit'   => __( 'Deposit', 'buddyclients-lite' ),
+                        'final'     => __( 'Final Payment', 'buddyclients-lite' )
                     ],
                     'default'   => ''
                 ],
                 'booking_intent'    => [
-                    'label'     => __( 'Booking Intent', 'buddyclients-free' ),
+                    'label'     => __( 'Booking Intent', 'buddyclients-lite' ),
                     'property'  =>  'booking_intent_id',
                     'options'   => [],
                     'default'   => ''
@@ -138,15 +138,15 @@ class AdminTableManager {
         return [
             'key'       => 'booked_services',
             'headings'  => [
-                __( 'Name', 'buddyclients-free' ),
-                __( 'Date', 'buddyclients-free' ),
-                __( 'Status', 'buddyclients-free' ),
-                __( 'Client', 'buddyclients-free' ),
-                __( 'Team Member', 'buddyclients-free' ),
-                __( 'Project', 'buddyclients-free' ),
-                __( 'Files', 'buddyclients-free' ),
-                __( 'Update Status', 'buddyclients-free' ),
-                __( 'Reassign', 'buddyclients-free' )
+                __( 'Name', 'buddyclients-lite' ),
+                __( 'Date', 'buddyclients-lite' ),
+                __( 'Status', 'buddyclients-lite' ),
+                __( 'Client', 'buddyclients-lite' ),
+                __( 'Team Member', 'buddyclients-lite' ),
+                __( 'Project', 'buddyclients-lite' ),
+                __( 'Files', 'buddyclients-lite' ),
+                __( 'Update Status', 'buddyclients-lite' ),
+                __( 'Reassign', 'buddyclients-lite' )
             ],
             'columns'   => [
                 'name'          => ['name' => null],
@@ -160,23 +160,23 @@ class AdminTableManager {
                 'reassign'      => ['team_id' => 'reassign_form']
             ],
             'items'     => buddyc_get_all_booked_services(),
-            'title'     => __( 'Bookings', 'buddyclients-free' ),
+            'title'     => __( 'Bookings', 'buddyclients-lite' ),
             'filters'   => [
                 'status'    => [
-                    'label'     => __( 'Status', 'buddyclients-free' ),
+                    'label'     => __( 'Status', 'buddyclients-lite' ),
                     'property'  =>  'status',
                     'options'   => [
-                        ''                          => __( 'All', 'buddyclients-free' ),
-                        'pending'                   => __( 'Pending', 'buddyclients-free' ),
-                        'in_progress'               => __( 'In Progress', 'buddyclients-free' ),
-                        'complete'                  => __( 'Complete', 'buddyclients-free' ),
-                        'cancellation_requested'    => __( 'Cancellation Requested', 'buddyclients-free' ),
-                        'canceled'                  => __( 'Canceled', 'buddyclients-free' )
+                        ''                          => __( 'All', 'buddyclients-lite' ),
+                        'pending'                   => __( 'Pending', 'buddyclients-lite' ),
+                        'in_progress'               => __( 'In Progress', 'buddyclients-lite' ),
+                        'complete'                  => __( 'Complete', 'buddyclients-lite' ),
+                        'cancellation_requested'    => __( 'Cancellation Requested', 'buddyclients-lite' ),
+                        'canceled'                  => __( 'Canceled', 'buddyclients-lite' )
                     ],
                     'default'   => 'succeeded'
                 ],
                 'booking'    => [
-                    'label'     => __( 'Booking', 'buddyclients-free' ),
+                    'label'     => __( 'Booking', 'buddyclients-lite' ),
                     'property'  =>  'booking_intent_id',
                     'options'   => [],
                     'default'   => 'succeeded'
@@ -194,29 +194,29 @@ class AdminTableManager {
         return [
             'key'       => 'emails',
             'headings'  => [
-                __( 'Details', 'buddyclients-free' ),
-                __( 'Email', 'buddyclients-free' )
+                __( 'Details', 'buddyclients-lite' ),
+                __( 'Email', 'buddyclients-lite' )
             ],
             'columns'   => [
                 'details' => ['ID' => 'email_details'],
                 'content' => ['content' => 'direct']
             ],
             'items'     => function_exists( 'buddyc_get_all_emails' ) ? buddyc_get_all_emails() : [],
-            'title'     => __( 'Email Log', 'buddyclients-free' ),
+            'title'     => __( 'Email Log', 'buddyclients-lite' ),
             'filters'   => [
                 'status' => [
-                    'label'     => __( 'Status', 'buddyclients-free' ),
+                    'label'     => __( 'Status', 'buddyclients-lite' ),
                     'property'  => 'status',
                     'options'   => [
-                        ''          => __( 'All', 'buddyclients-free' ),
-                        'sent'      => __( 'Sent', 'buddyclients-free' ),
-                        'failed'    => __( 'Failed', 'buddyclients-free' ),
-                        'pending'   => __( 'Pending', 'buddyclients-free' )
+                        ''          => __( 'All', 'buddyclients-lite' ),
+                        'sent'      => __( 'Sent', 'buddyclients-lite' ),
+                        'failed'    => __( 'Failed', 'buddyclients-lite' ),
+                        'pending'   => __( 'Pending', 'buddyclients-lite' )
                     ],
                     'default'   => ''
                 ],
                 'recipient' => [
-                    'label'     => __( 'Recipient', 'buddyclients-free' ),
+                    'label'     => __( 'Recipient', 'buddyclients-lite' ),
                     'property'  => 'recipient_email',
                     'options'   => [],
                     'default'   => ''
@@ -234,12 +234,12 @@ class AdminTableManager {
         return [
             'key'               => 'users',
             'headings'          => [
-                __( 'Email', 'buddyclients-free' ),
-                __( 'Name', 'buddyclients-free' ),
-                __( 'Status', 'buddyclients-free' ),
-                __( 'Date', 'buddyclients-free' ),
-                __( 'Interests', 'buddyclients-free' ),
-                __( 'Auto Email', 'buddyclients-free' )
+                __( 'Email', 'buddyclients-lite' ),
+                __( 'Name', 'buddyclients-lite' ),
+                __( 'Status', 'buddyclients-lite' ),
+                __( 'Date', 'buddyclients-lite' ),
+                __( 'Interests', 'buddyclients-lite' ),
+                __( 'Auto Email', 'buddyclients-lite' )
             ],
             'columns'           => [
                 'email'      => ['email' => 'direct'],
@@ -250,17 +250,17 @@ class AdminTableManager {
                 'auto-email' => ['sent' => 'lead_auto_email']
             ],
             'items'             => buddyc_get_all_leads(),
-            'title'             => __( 'Leads', 'buddyclients-free' ),
+            'title'             => __( 'Leads', 'buddyclients-lite' ),
             'items_per_page'    => 20,
             'filters'           => [
                 'status' => [
-                    'label'     => __( 'Status', 'buddyclients-free' ),
+                    'label'     => __( 'Status', 'buddyclients-lite' ),
                     'property'  => 'status',
                     'options'   => [
-                        ''       => __( 'All', 'buddyclients-free' ),
-                        'active' => __( 'Active', 'buddyclients-free' ),
-                        'won'    => __( 'Won', 'buddyclients-free' ),
-                        'lost'   => __( 'Lost', 'buddyclients-free' )
+                        ''       => __( 'All', 'buddyclients-lite' ),
+                        'active' => __( 'Active', 'buddyclients-lite' ),
+                        'won'    => __( 'Won', 'buddyclients-lite' ),
+                        'lost'   => __( 'Lost', 'buddyclients-lite' )
                     ],
                 ]
             ],
@@ -276,14 +276,14 @@ class AdminTableManager {
         return [
             'key'       => 'booking_intents',
             'headings'  => [
-                __( 'Services', 'buddyclients-free' ),
-                __( 'Date', 'buddyclients-free' ),
-                __( 'Status', 'buddyclients-free' ),
-                __( 'Services', 'buddyclients-free' ),
-                __( 'Client', 'buddyclients-free' ),
-                __( 'Project', 'buddyclients-free' ),
-                __( 'Total Fee', 'buddyclients-free' ),
-                __( 'Actions', 'buddyclients-free' ),
+                __( 'Services', 'buddyclients-lite' ),
+                __( 'Date', 'buddyclients-lite' ),
+                __( 'Status', 'buddyclients-lite' ),
+                __( 'Services', 'buddyclients-lite' ),
+                __( 'Client', 'buddyclients-lite' ),
+                __( 'Project', 'buddyclients-lite' ),
+                __( 'Total Fee', 'buddyclients-lite' ),
+                __( 'Actions', 'buddyclients-lite' ),
             ],
             'classes'   => [
                 'column-primary'   => ['Date' => 'date'],
@@ -301,14 +301,14 @@ class AdminTableManager {
                 'actions'               => ['ID' => 'booking_actions']
             ],
             'items'     => buddyc_get_all_booking_intents(),
-            'title'     => __( 'Bookings', 'buddyclients-free' ),
+            'title'     => __( 'Bookings', 'buddyclients-lite' ),
             'filters'   => [
                 'status'    => [
-                    'label'     => __( 'Status', 'buddyclients-free' ),
+                    'label'     => __( 'Status', 'buddyclients-lite' ),
                     'property'  => 'status',
                     'options'   => [
-                        'succeeded'   => __( 'Succeeded', 'buddyclients-free' ),
-                        'incomplete'  => __( 'Incomplete', 'buddyclients-free' ),
+                        'succeeded'   => __( 'Succeeded', 'buddyclients-lite' ),
+                        'incomplete'  => __( 'Incomplete', 'buddyclients-lite' ),
                     ],
                     'default'   => 'succeeded'
                 ]
@@ -325,15 +325,15 @@ class AdminTableManager {
         return [
             'key'       => 'payments',
             'headings'  => [
-                __( 'Payee', 'buddyclients-free' ),
-                __( 'Date Created', 'buddyclients-free' ),
-                __( 'Status', 'buddyclients-free' ),
-                __( 'Type', 'buddyclients-free' ),
-                __( 'Amount', 'buddyclients-free' ),
-                __( 'Payment Method', 'buddyclients-free' ),
-                __( 'Memo', 'buddyclients-free' ),
-                __( 'Paid Date', 'buddyclients-free' ),
-                __( 'Update Status', 'buddyclients-free' ),
+                __( 'Payee', 'buddyclients-lite' ),
+                __( 'Date Created', 'buddyclients-lite' ),
+                __( 'Status', 'buddyclients-lite' ),
+                __( 'Type', 'buddyclients-lite' ),
+                __( 'Amount', 'buddyclients-lite' ),
+                __( 'Payment Method', 'buddyclients-lite' ),
+                __( 'Memo', 'buddyclients-lite' ),
+                __( 'Paid Date', 'buddyclients-lite' ),
+                __( 'Update Status', 'buddyclients-lite' ),
             ],
             'columns'   => [
                 'payee_id'                  => ['payee_id' => 'user_link'],
@@ -347,27 +347,27 @@ class AdminTableManager {
                 'update_status'             => ['status' => 'payment_form'],
             ],
             'items'     => buddyc_get_all_payments(),
-            'title'     => __( 'Payments', 'buddyclients-free' ),
+            'title'     => __( 'Payments', 'buddyclients-lite' ),
             'filters'   => [
                 'type'    => [
-                    'label'     => __( 'Type', 'buddyclients-free' ),
+                    'label'     => __( 'Type', 'buddyclients-lite' ),
                     'property'  => 'type',
                     'options'   => [
-                        ''              => __( 'All', 'buddyclients-free' ),
-                        'team'          => __( 'Team', 'buddyclients-free' ),
-                        'affiliate'     => __( 'Affiliate', 'buddyclients-free' ),
-                        'sales'         => __( 'Sales', 'buddyclients-free' ),
+                        ''              => __( 'All', 'buddyclients-lite' ),
+                        'team'          => __( 'Team', 'buddyclients-lite' ),
+                        'affiliate'     => __( 'Affiliate', 'buddyclients-lite' ),
+                        'sales'         => __( 'Sales', 'buddyclients-lite' ),
                     ],
                     'default'   => '',
                 ],
                 'payment_status'    => [
-                    'label'     => __( 'Status', 'buddyclients-free' ),
+                    'label'     => __( 'Status', 'buddyclients-lite' ),
                     'property'  => 'status',
                     'options'   => [
-                        ''          => __( 'All', 'buddyclients-free' ),
-                        'pending'   => __( 'Pending', 'buddyclients-free' ),
-                        'eligible'  => __( 'Eligible', 'buddyclients-free' ),
-                        'paid'      => __( 'Paid', 'buddyclients-free' ),
+                        ''          => __( 'All', 'buddyclients-lite' ),
+                        'pending'   => __( 'Pending', 'buddyclients-lite' ),
+                        'eligible'  => __( 'Eligible', 'buddyclients-lite' ),
+                        'paid'      => __( 'Paid', 'buddyclients-lite' ),
                     ],
                     'default'   => '',
                 ],
@@ -386,12 +386,12 @@ class AdminTableManager {
         return [
             'key'       => 'user_agreements',
             'headings'  => [
-                __( 'Legal Name', 'buddyclients-free' ),
-                __( 'Type', 'buddyclients-free' ),
-                __( 'Date', 'buddyclients-free' ),
-                __( 'Status', 'buddyclients-free' ),  
-                __( 'Email', 'buddyclients-free' ),
-                __( 'Download PDF', 'buddyclients-free' ),
+                __( 'Legal Name', 'buddyclients-lite' ),
+                __( 'Type', 'buddyclients-lite' ),
+                __( 'Date', 'buddyclients-lite' ),
+                __( 'Status', 'buddyclients-lite' ),  
+                __( 'Email', 'buddyclients-lite' ),
+                __( 'Download PDF', 'buddyclients-lite' ),
             ],
             'columns'   => [
                 'legal_name'    => ['legal_name' => null],
@@ -402,21 +402,21 @@ class AdminTableManager {
                 'download_pdf'  => ['pdf' => 'pdf_download'],
             ],
             'items'     => $agreements,
-            'title'     => __( 'User Agreements', 'buddyclients-free' ),
+            'title'     => __( 'User Agreements', 'buddyclients-lite' ),
             'filters'   => [
                 'type'    => [
-                    'label'     => __( 'Type', 'buddyclients-free' ),
+                    'label'     => __( 'Type', 'buddyclients-lite' ),
                     'property'  => 'legal_type',
                     'options'   => [
-                        ''          => __( 'All', 'buddyclients-free' ),
-                        'affiliate' => __( 'Affiliate', 'buddyclients-free' ),
-                        'team'      => __( 'Team', 'buddyclients-free' ),
-                        'client'    => __( 'Client', 'buddyclients-free' ),
+                        ''          => __( 'All', 'buddyclients-lite' ),
+                        'affiliate' => __( 'Affiliate', 'buddyclients-lite' ),
+                        'team'      => __( 'Team', 'buddyclients-lite' ),
+                        'client'    => __( 'Client', 'buddyclients-lite' ),
                     ],
                     'default'   => '',
                 ],
                 'user'    => [
-                    'label'     => __( 'User', 'buddyclients-free' ),
+                    'label'     => __( 'User', 'buddyclients-lite' ),
                     'property'  => 'user_id',
                     'options'   => self::user_agreement_options( $agreements ),
                 ],
@@ -442,7 +442,7 @@ class AdminTableManager {
         $user_ids = array_filter( $user_ids );
 
         // Initialize user options
-        $user_options = ['' => __( 'All', 'buddyclients-free' ) ];
+        $user_options = ['' => __( 'All', 'buddyclients-lite' ) ];
 
         // Build user options
         if ( ! empty( $user_ids ) ) {
@@ -496,11 +496,11 @@ class AdminTableManager {
         return [
             'key'               => 'users',
             'headings'          => [
-                __( 'User', 'buddyclients-free' ),
-                __( 'Date Registered', 'buddyclients-free' ),
-                __( 'Email', 'buddyclients-free' ),
-                __( 'Type', 'buddyclients-free' ),
-                __( 'Agreements', 'buddyclients-free' ),
+                __( 'User', 'buddyclients-lite' ),
+                __( 'Date Registered', 'buddyclients-lite' ),
+                __( 'Email', 'buddyclients-lite' ),
+                __( 'Type', 'buddyclients-lite' ),
+                __( 'Agreements', 'buddyclients-lite' ),
             ],
             'columns'           => [
                 'id'                => ['ID' => 'user_link'],
@@ -510,15 +510,15 @@ class AdminTableManager {
                 'team_agreement'    => ['ID' => 'agreements'],
             ],
             'items'             => $users_array,
-            'title'             => __( 'Users', 'buddyclients-free' ),
+            'title'             => __( 'Users', 'buddyclients-lite' ),
             'items_per_page'    => 20,
             'filters'           => [
                 'type'    => [
-                    'label'     => __( 'Type', 'buddyclients-free' ),
+                    'label'     => __( 'Type', 'buddyclients-lite' ),
                     'property'  => 'type',
                     'options'   => [
-                        'team'   => __( 'Team', 'buddyclients-free' ),
-                        'client' => __( 'Client', 'buddyclients-free' ),
+                        'team'   => __( 'Team', 'buddyclients-lite' ),
+                        'client' => __( 'Client', 'buddyclients-lite' ),
                     ],
                     'default'   => 'team',
                 ],

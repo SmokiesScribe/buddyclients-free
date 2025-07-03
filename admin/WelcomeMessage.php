@@ -10,7 +10,7 @@ if ( ! defined( 'ABSPATH' ) ) exit; // Exit if accessed directly
 class WelcomeMessage {
 
     /**
-     * Whether the current plugin is BuddyClients Free.
+     * Whether the current plugin is BuddyClients Lite.
      * 
      * @var bool
      */
@@ -22,7 +22,7 @@ class WelcomeMessage {
      * @since 1.0.25
      */
     public function __construct() {
-        $this->free = defined( 'BUDDYC_PLUGIN_NAME' ) ? BUDDYC_PLUGIN_NAME === 'BuddyClients Free' : true;
+        $this->free = defined( 'BUDDYC_PLUGIN_NAME' ) ? BUDDYC_PLUGIN_NAME === 'BuddyClients Lite' : true;
         $this->define_hooks();
     }
 
@@ -83,7 +83,7 @@ class WelcomeMessage {
      */
     private function build_key() {
         // Initialize
-        $plugin_name = 'buddyclients-free';
+        $plugin_name = 'buddyclients-lite';
 
         // Format plugin name
         if ( defined( 'BUDDYC_PLUGIN_NAME' ) ) {
@@ -112,7 +112,7 @@ class WelcomeMessage {
         $message .= $this->description();
 
         // Get Started
-        $message .= '<h4 class="buddyc-bot-margin-small">' . __( 'Get Started:', 'buddyclients-free' ) . '</h4>';
+        $message .= '<h4 class="buddyc-bot-margin-small">' . __( 'Get Started:', 'buddyclients-lite' ) . '</h4>';
 
         // List
         $message .= $this->link_list();
@@ -136,7 +136,7 @@ class WelcomeMessage {
      * @since 1.0.25
      */
     private function heading() {
-        return '<h2 class="buddyc-bot-margin-small">🎉 ' . __( 'Welcome to BuddyClients!', 'buddyclients-free' ) . '</h2>';
+        return '<h2 class="buddyc-bot-margin-small">🎉 ' . __( 'Welcome to BuddyClients!', 'buddyclients-lite' ) . '</h2>';
     }
 
     /**
@@ -152,13 +152,13 @@ class WelcomeMessage {
         if ( ! $this->free ) {
             $content .= sprintf(
                 /* translators: %s: the name of the plugin (BuddyClients) */
-                __( 'Congratulations on upgrading to %s! We\'re excited to have you using the full version of our plugin, packed with even more features to help your business thrive.', 'buddyclients-free' ),
+                __( 'Congratulations on upgrading to %s! We\'re excited to have you using the full version of our plugin, packed with even more features to help your business thrive.', 'buddyclients-lite' ),
                 '<strong>BuddyClients</strong>'
             );
 
         // Free description
         } else {
-            $content .= __( 'We\'re excited to help you grow your business.', 'buddyclients-free' );
+            $content .= __( 'We\'re excited to help you grow your business.', 'buddyclients-lite' );
         }
 
         // Close paragraph
@@ -181,8 +181,8 @@ class WelcomeMessage {
                 'icon'          => 'key',
                 'url'           => admin_url( 'admin.php?page=buddyc-license-settings' ),
                 'target'        => '_blank',
-                'link_text'     => __( 'Enter your license key', 'buddyclients-free' ),
-                'follow_text'   => __( 'to activate premium features', 'buddyclients-free' ),
+                'link_text'     => __( 'Enter your license key', 'buddyclients-lite' ),
+                'follow_text'   => __( 'to activate premium features', 'buddyclients-lite' ),
                 'free'          => false,
                 'regular'       => true,
             ],
@@ -190,8 +190,8 @@ class WelcomeMessage {
                 'icon'          => 'globe',
                 'url'           => trailingslashit( BUDDYC_URL ) . 'license',
                 'target'        => '_blank',
-                'link_text'     => __( 'Add this website', 'buddyclients-free' ),
-                'follow_text'   => __( 'to your BuddyClients account', 'buddyclients-free' ),
+                'link_text'     => __( 'Add this website', 'buddyclients-lite' ),
+                'follow_text'   => __( 'to your BuddyClients account', 'buddyclients-lite' ),
                 'free'          => false,
                 'regular'       => true,
             ],
@@ -199,8 +199,8 @@ class WelcomeMessage {
                 'icon'          => 'gear',
                 'url'           => admin_url( 'admin.php?page=buddyc-license-settings' ),
                 'target'        => false,
-                'link_text'     => __( 'Update components', 'buddyclients-free' ),
-                'follow_text'   => __( 'to ensure all features are enabled', 'buddyclients-free' ),
+                'link_text'     => __( 'Update components', 'buddyclients-lite' ),
+                'follow_text'   => __( 'to ensure all features are enabled', 'buddyclients-lite' ),
                 'free'          => false,
                 'regular'       => true,
             ],
@@ -208,8 +208,8 @@ class WelcomeMessage {
                 'icon'          => 'circle-info',
                 'url'           => trailingslashit( BUDDYC_URL ) . 'help',
                 'target'        => '_blank',
-                'link_text'     => __( 'Explore user guides', 'buddyclients-free' ),
-                'follow_text'   => __( 'to get the most out of BuddyClients', 'buddyclients-free' ),
+                'link_text'     => __( 'Explore user guides', 'buddyclients-lite' ),
+                'follow_text'   => __( 'to get the most out of BuddyClients', 'buddyclients-lite' ),
                 'free'          => true,
                 'regular'       => true,
             ],
@@ -217,8 +217,8 @@ class WelcomeMessage {
                 'icon'          => 'rocket',
                 'url'           => trailingslashit( BUDDYC_URL ) . 'pricing',
                 'target'        => '_blank',
-                'link_text'     => __( 'Upgrade BuddyClients', 'buddyclients-free' ),
-                'follow_text'   => __( 'to accept payments and enable premium features.', 'buddyclients-free' ),
+                'link_text'     => __( 'Upgrade BuddyClients', 'buddyclients-lite' ),
+                'follow_text'   => __( 'to accept payments and enable premium features.', 'buddyclients-lite' ),
                 'free'          => true,
                 'regular'       => false,
             ],
@@ -290,35 +290,35 @@ class WelcomeMessage {
         $links = [
             'settings' => [
                 'link'      => admin_url( 'admin.php?page=buddyc-general-settings' ),
-                'text'      => __( 'Settings', 'buddyclients-free' ),
+                'text'      => __( 'Settings', 'buddyclients-lite' ),
                 'target'    => false,
                 'free'      => true,
                 'regular'   => true,
             ],
             'user_guides' => [
                 'link'      => trailingslashit( BUDDYC_URL ) . 'help',
-                'text'      => __( 'User Guides', 'buddyclients-free' ),
+                'text'      => __( 'User Guides', 'buddyclients-lite' ),
                 'target'    => '_blank',
                 'free'      => true,
                 'regular'   => true,
             ],
             'account' => [
                 'link'      => trailingslashit( BUDDYC_URL ) . 'license',
-                'text'      => __( 'Account', 'buddyclients-free' ),
+                'text'      => __( 'Account', 'buddyclients-lite' ),
                 'target'    => '_blank',
                 'free'      => false,
                 'regular'   => true,
             ],
             'support' => [
                 'link'      => trailingslashit( BUDDYC_URL ) . 'support',
-                'text'      => __( 'Support', 'buddyclients-free' ),
+                'text'      => __( 'Support', 'buddyclients-lite' ),
                 'target'    => '_blank',
                 'free'      => true,
                 'regular'   => true,
             ],
             'upgrade' => [
                 'link'      => buddyc_upgrade_url(),
-                'text'      => __( 'Upgrade', 'buddyclients-free' ),
+                'text'      => __( 'Upgrade', 'buddyclients-lite' ),
                 'target'    => '_blank',
                 'free'      => true,
                 'regular'   => true,
@@ -342,7 +342,7 @@ class WelcomeMessage {
 
         // Build content
         $content = '<div class="buddyc-quick-links">';
-        $content .= '<span class="buddyc-quick-links-title">' . __( 'Quick Links:', 'buddyclients-free' ) . '</span>';
+        $content .= '<span class="buddyc-quick-links-title">' . __( 'Quick Links:', 'buddyclients-lite' ) . '</span>';
         $content .= implode( ' | ', $formatted_links );
         $content .= '</div>';
         return $content;
@@ -356,7 +356,7 @@ class WelcomeMessage {
     private function dismiss_btn() {
         $content = '<div class="buddyc-dismiss-admin-btn-container">';
         $content .= '<a class="buddyc-dismiss-admin-btn">';
-        $content .= esc_html__( 'Dismiss this message', 'buddyclients-free' ) . '</a>';
+        $content .= esc_html__( 'Dismiss this message', 'buddyclients-lite' ) . '</a>';
         $content .= '</div>';
         return $content;
     }

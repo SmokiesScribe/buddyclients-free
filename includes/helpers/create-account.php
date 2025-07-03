@@ -21,7 +21,7 @@ use BuddyEvents\Includes\Registration\SponsorIntent;
     function buddyc_checkout_create_account() {
         // Ensure the request is from an authenticated user
         if ( ! defined( 'DOING_AJAX' ) || ! DOING_AJAX ) {
-            wp_send_json_error(__('Invalid request', 'buddyclients-free'));
+            wp_send_json_error(__('Invalid request', 'buddyclients-lite'));
             wp_die();
         }
 
@@ -109,7 +109,7 @@ use BuddyEvents\Includes\Registration\SponsorIntent;
             } else {
                 // Return error message on failure
                 $error_message = $new_user_id->get_error_message();
-                wp_send_json_error(__('Error creating user: ', 'buddyclients-free') . $error_message);
+                wp_send_json_error(__('Error creating user: ', 'buddyclients-lite') . $error_message);
             }
             
             // Terminate script execution
@@ -141,19 +141,19 @@ use BuddyEvents\Includes\Registration\SponsorIntent;
         // Check password against criteria
         if (strlen($password) < $min_length) {
             /* translators: %d: the number of characters */
-            return sprintf(__('Password must be at least %d characters long.', 'buddyclients-free'), $min_length);
+            return sprintf(__('Password must be at least %d characters long.', 'buddyclients-lite'), $min_length);
         }
         if (!$has_uppercase) {
-            return __('Password must include at least one uppercase letter.', 'buddyclients-free');
+            return __('Password must include at least one uppercase letter.', 'buddyclients-lite');
         }
         if (!$has_lowercase) {
-            return __('Password must include at least one lowercase letter.', 'buddyclients-free');
+            return __('Password must include at least one lowercase letter.', 'buddyclients-lite');
         }
         if (!$has_number) {
-            return __('Password must include at least one number.', 'buddyclients-free');
+            return __('Password must include at least one number.', 'buddyclients-lite');
         }
         if (!$has_special) {
-            return __('Password must include at least one special character.', 'buddyclients-free');
+            return __('Password must include at least one special character.', 'buddyclients-lite');
         }
     
         // Return null if all criteria are met

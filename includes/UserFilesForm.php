@@ -148,8 +148,8 @@ class UserFilesForm {
                 'key'                   => 'final-deletion-files',
                 'fields_callback'       => [$this, 'final_deletion_form_fields'],
                 'submission_class'      => __NAMESPACE__ . '\FinalDeletionSubmission',
-                'description'           => __( 'Type DELETE to confirm deletion of the files above.', 'buddyclients-free' ),
-                'submit_text'           => __( 'Permanently Delete Files', 'buddyclients-free' ),
+                'description'           => __( 'Type DELETE to confirm deletion of the files above.', 'buddyclients-lite' ),
+                'submit_text'           => __( 'Permanently Delete Files', 'buddyclients-lite' ),
                 'avatar'                => null
             ];
             
@@ -193,8 +193,8 @@ class UserFilesForm {
         $args[] = [
             'key' => 'verify_delete',
             'type' => 'input',
-            'label' => __( 'Type DELETE to confirm deletion of the files above.', 'buddyclients-free' ),
-            'description' => __( 'This action is permanent and cannot be undone.', 'buddyclients-free' ),
+            'label' => __( 'Type DELETE to confirm deletion of the files above.', 'buddyclients-lite' ),
+            'description' => __( 'This action is permanent and cannot be undone.', 'buddyclients-lite' ),
             'required'  => true
         ];
         
@@ -210,7 +210,7 @@ class UserFilesForm {
         
         // Make sure the user has files
         if ( empty( $this->user_files ) ) {
-            esc_html_e( 'No files available.', 'buddyclients-free' );
+            esc_html_e( 'No files available.', 'buddyclients-lite' );
             return;
         }
         
@@ -219,7 +219,7 @@ class UserFilesForm {
             'key'                   => 'manage-user-files',
             'fields_callback'       => [$this, 'user_files_form_fields'],
             'submission_class'      => __NAMESPACE__ . '\UserFilesSubmission',
-            'submit_text'           => __( 'Delete Files', 'buddyclients-free' ),
+            'submit_text'           => __( 'Delete Files', 'buddyclients-lite' ),
             'avatar'                => null
         ];
         
@@ -260,8 +260,8 @@ class UserFilesForm {
         return [[
             'key' => 'user_files',
             'type' => 'checkbox',
-            'label' => __( 'Your Files', 'buddyclients-free' ),
-            'description' => __( 'Select files to delete. Files connected to in-progress services are not available for deletion.', 'buddyclients-free' ),
+            'label' => __( 'Your Files', 'buddyclients-lite' ),
+            'description' => __( 'Select files to delete. Files connected to in-progress services are not available for deletion.', 'buddyclients-lite' ),
             'options' => $options, // Pass the generated options array
         ]];
     }

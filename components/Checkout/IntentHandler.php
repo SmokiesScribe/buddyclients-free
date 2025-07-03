@@ -111,7 +111,7 @@ class IntentHandler {
      */
     private static function set_cache( $value, $object_type, $data_type, $intent_id = null ) {
         $cache_key = self::cache_key( $object_type, $data_type, $intent_id );
-        wp_cache_set( $cache_key, $value, 'buddyclients-free', 3600 );
+        wp_cache_set( $cache_key, $value, 'buddyclients-lite', 3600 );
     }
 
     /**
@@ -125,7 +125,7 @@ class IntentHandler {
      */
     private static function get_cached( $object_type, $data_type, $intent_id = null ) {
         $cache_key = self::cache_key( $object_type, $data_type, $intent_id );
-        return wp_cache_get( $cache_key, 'buddyclients-free' );
+        return wp_cache_get( $cache_key, 'buddyclients-lite' );
     }
 
     /**

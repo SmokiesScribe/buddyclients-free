@@ -20,7 +20,7 @@ class SettingsGeneral {
             'team_types'            => [],
             'self_select_roles'     => 'no',
             'register_button_url'   => buddyc_get_page_link( 'booking_page' ),
-            'register_button_text'  => __( 'Get Started', 'buddyclients-free' ),
+            'register_button_text'  => __( 'Get Started', 'buddyclients-lite' ),
             'admin_info'            => 'enable',
             'enable_cta'            => 'enable',
             'primary_color'         => '#037AAD',
@@ -37,115 +37,115 @@ class SettingsGeneral {
     public static function settings() {
         return [
             'style' => [
-                'title' => __('Style Settings', 'buddyclients-free'),
-                'description' => __('Adjust global buddyclients styles to match your brand.', 'buddyclients-free'),
+                'title' => __('Style Settings', 'buddyclients-lite'),
+                'description' => __('Adjust global buddyclients styles to match your brand.', 'buddyclients-lite'),
                 'fields' => [
                     'primary_color' => [
-                        'label' => __('Primary Color', 'buddyclients-free'),
+                        'label' => __('Primary Color', 'buddyclients-lite'),
                         'type' => 'color',
                         'class' => 'color-field',
                         'description' => '',
                     ],
                     'accent_color' => [
-                        'label' => __('Accent Color', 'buddyclients-free'),
+                        'label' => __('Accent Color', 'buddyclients-lite'),
                         'type' => 'color',
                         'description' => '',
                     ],
                     'tertiary_color' => [
-                        'label' => __('Tertiary Color', 'buddyclients-free'),
+                        'label' => __('Tertiary Color', 'buddyclients-lite'),
                         'type' => 'color',
                         'description' => '',
                     ],
                 ]
             ],
             'user_types' => [
-                'title' => __('User Types and Permissions', 'buddyclients-free'),
-                'description' => __('Select the member types for clients, team members, and site admins.', 'buddyclients-free'),
+                'title' => __('User Types and Permissions', 'buddyclients-lite'),
+                'description' => __('Select the member types for clients, team members, and site admins.', 'buddyclients-lite'),
                 'fields' => [
                     'client_types' => [
-                        'label' => __('Client Types', 'buddyclients-free'),
+                        'label' => __('Client Types', 'buddyclients-lite'),
                         'type' => 'checkboxes',
                         'options' => buddyc_member_types(),
-                        'description' => __('Select the types for clients.', 'buddyclients-free'),
+                        'description' => __('Select the types for clients.', 'buddyclients-lite'),
                     ],
                     'default_client_type' => [
-                        'label' => __('Default Client Type', 'buddyclients-free'),
+                        'label' => __('Default Client Type', 'buddyclients-lite'),
                         'type' => 'dropdown',
                         'options' => buddyc_member_types(),
-                        'description' => __('Select the default member type for new clients.', 'buddyclients-free'),
+                        'description' => __('Select the default member type for new clients.', 'buddyclients-lite'),
                     ],
                     'team_types' => [
-                        'label' => __('Team Types', 'buddyclients-free'),
+                        'label' => __('Team Types', 'buddyclients-lite'),
                         'type' => 'checkboxes',
                         'options' => buddyc_member_types(),
-                        'description' => __('Select the types for team members.', 'buddyclients-free'),
+                        'description' => __('Select the types for team members.', 'buddyclients-lite'),
                     ],
                 ],
             ],
             'self_select_roles' => [
-                'title' => __('Allow Team to Self-Select Roles', 'buddyclients-free'),
-                'description' => __('Should team members be allowed to select their own roles?', 'buddyclients-free'),
+                'title' => __('Allow Team to Self-Select Roles', 'buddyclients-lite'),
+                'description' => __('Should team members be allowed to select their own roles?', 'buddyclients-lite'),
                 'fields' => [
                     'self_select_role' => [
-                        'label' => __('Allow Self-Selection', 'buddyclients-free'),
+                        'label' => __('Allow Self-Selection', 'buddyclients-lite'),
                         'type' => 'dropdown',
                         'options' => [
-                            'no' => __('No', 'buddyclients-free'),
-                            'yes' => __('Yes', 'buddyclients-free'),
+                            'no' => __('No', 'buddyclients-lite'),
+                            'yes' => __('Yes', 'buddyclients-lite'),
                         ],
-                        'description' => __('Allow team members to select their own roles.', 'buddyclients-free'),
+                        'description' => __('Allow team members to select their own roles.', 'buddyclients-lite'),
                     ],
                 ],
             ],
             'payment_methods' => [
-                'title' => __( 'Team Payment Methods', 'buddyclients-free' ),
-                'description' => __( 'Select the payment methods available to team members.', 'buddyclients-free' ),
+                'title' => __( 'Team Payment Methods', 'buddyclients-lite' ),
+                'description' => __( 'Select the payment methods available to team members.', 'buddyclients-lite' ),
                 'fields' => [
                     'team_payment_methods' => [
-                        'label' => __( 'Team Payment Methods', 'buddyclients-free' ),
+                        'label' => __( 'Team Payment Methods', 'buddyclients-lite' ),
                         'type' => 'checkboxes',
                         'options' => buddyc_options( 'payment_methods' ),
-                        'description' => __( 'Team members can choose their preferred payment method.', 'buddyclients-free' ),
+                        'description' => __( 'Team members can choose their preferred payment method.', 'buddyclients-lite' ),
                     ],
                 ]
             ],
             'registration' => [
-                'title' => __('Call to Action', 'buddyclients-free'),
-                'description' => __('Change the text and link for the CTA button at the top right of the page. This setting currently only works with the BuddyBoss Theme..', 'buddyclients-free'),
+                'title' => __('Call to Action', 'buddyclients-lite'),
+                'description' => __('Change the text and link for the CTA button at the top right of the page. This setting currently only works with the BuddyBoss Theme..', 'buddyclients-lite'),
                 'fields' => [
                     'enable_cta' => [
-                        'label' => __('Enable CTA Button', 'buddyclients-free'),
+                        'label' => __('Enable CTA Button', 'buddyclients-lite'),
                         'type' => 'dropdown',
                         'options' => [
-                            'enable' => __('Enable', 'buddyclients-free'),
-                            'disable' => __('Disable', 'buddyclients-free'),
+                            'enable' => __('Enable', 'buddyclients-lite'),
+                            'disable' => __('Disable', 'buddyclients-lite'),
                         ],
-                        'description' => __('Display plugin info messages in the admin area.', 'buddyclients-free'),
+                        'description' => __('Display plugin info messages in the admin area.', 'buddyclients-lite'),
                     ],
                     'register_button_text' => [
-                        'label' => __('CTA Button Text', 'buddyclients-free'),
+                        'label' => __('CTA Button Text', 'buddyclients-lite'),
                         'type' => 'text',
-                        'description' => __('The text will appear on the button linking to the booking form when user registration is disabled.', 'buddyclients-free'),
+                        'description' => __('The text will appear on the button linking to the booking form when user registration is disabled.', 'buddyclients-lite'),
                     ],
                     'register_button_url' => [
-                        'label' => __('CTA Button Link', 'buddyclients-free'),
+                        'label' => __('CTA Button Link', 'buddyclients-lite'),
                         'type' => 'url',
-                        'description' => __('The button at the top right of the screen will point to this link. Defaults to the Booking Page.', 'buddyclients-free'),
+                        'description' => __('The button at the top right of the screen will point to this link. Defaults to the Booking Page.', 'buddyclients-lite'),
                     ],
                 ],
             ],
             'admin' => [
-                'title' => __('Admin', 'buddyclients-free'),
+                'title' => __('Admin', 'buddyclients-lite'),
                 'description' => '',
                 'fields' => [
                     'admin_info' => [
-                        'label' => __('Info Messages', 'buddyclients-free'),
+                        'label' => __('Info Messages', 'buddyclients-lite'),
                         'type' => 'dropdown',
                         'options' => [
-                            'disable' => __('Disable', 'buddyclients-free'),
-                            'enable' => __('Enable', 'buddyclients-free'),
+                            'disable' => __('Disable', 'buddyclients-lite'),
+                            'enable' => __('Enable', 'buddyclients-lite'),
                         ],
-                        'description' => __('Display plugin info messages in the admin area.', 'buddyclients-free'),
+                        'description' => __('Display plugin info messages in the admin area.', 'buddyclients-lite'),
                     ],
                 ],
             ],

@@ -52,7 +52,7 @@ class UserFilesSubmission {
 
         // No files selected
         if ( empty( $file_ids ) ) {
-            $this->alert( __( 'No files are selected.', 'buddyclients-free' ) );
+            $this->alert( __( 'No files are selected.', 'buddyclients-lite' ) );
             return;
         }
 

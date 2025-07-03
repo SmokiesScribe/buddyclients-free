@@ -112,7 +112,7 @@ class BookingForm {
          *
          * @param string  $submit_text The submit text.
          */
-         $this->submit_text = apply_filters( 'buddyc_booking_submit_text', __( 'Go to Checkout', 'buddyclients-free' ) );
+         $this->submit_text = apply_filters( 'buddyc_booking_submit_text', __( 'Go to Checkout', 'buddyclients-lite' ) );
         
         // Get user projects
         $this->projects = $this->client_id ? (new Client($this->client_id))->projects : false;
@@ -170,8 +170,8 @@ class BookingForm {
         if ( class_exists( ContactForm::class  ) ) {
 
             $args = [
-                'title'     => __( 'Read to Get Started?', 'buddyclients-free' ),
-                'subtitle'  => __( 'Tell us about your project, and we\'ll be in touch soon!', 'buddyclients-free')
+                'title'     => __( 'Read to Get Started?', 'buddyclients-lite' ),
+                'subtitle'  => __( 'Tell us about your project, and we\'ll be in touch soon!', 'buddyclients-lite')
             ];
 
             $contact_form = new ContactForm( $args );
@@ -179,7 +179,7 @@ class BookingForm {
         } else {
             sprintf(
                 /* translators: %s: the link to email the admin */
-                __( 'Please %s to book services.', 'buddyclients-free' ),
+                __( 'Please %s to book services.', 'buddyclients-lite' ),
                 buddyc_contact_message()
             );
         }
@@ -191,7 +191,7 @@ class BookingForm {
      * @since 0.4.0
      */
     private function no_services() {
-        $message = __( 'No services are currently available.', 'buddyclients-free' );
+        $message = __( 'No services are currently available.', 'buddyclients-lite' );
         return $message;
     }
     
@@ -201,7 +201,7 @@ class BookingForm {
      * @since 0.1.0
      */
     private function is_closed() {
-        $message = __( 'We are not currently accepting new bookings.', 'buddyclients-free' );
+        $message = __( 'We are not currently accepting new bookings.', 'buddyclients-lite' );
         $open = buddyc_get_setting('booking', 'accept_bookings');
         return $open !== 'open' ? $message : false;
     }
@@ -438,7 +438,7 @@ class BookingForm {
         
         // Initialize options array with a default option to create a new project
         $project_options[0] = [
-            'label' => __( 'Create a New Project', 'buddyclients-free' ),
+            'label' => __( 'Create a New Project', 'buddyclients-lite' ),
             'value' => 0,
         ];
         
@@ -480,7 +480,7 @@ class BookingForm {
         return [
             'key'               => 'project_title',
             'type'              => 'text',
-            'label'             => __( 'Project Title', 'buddyclients-free' ),
+            'label'             => __( 'Project Title', 'buddyclients-lite' ),
             'field_classes'     => 'create-project',
         ];
     }
@@ -548,7 +548,7 @@ class BookingForm {
                 $options[] = [
                     'label' => sprintf(
                         /* translators: %s: the name of the service */
-                        __( 'Select Your %s Service', 'buddyclients-free' ),
+                        __( 'Select Your %s Service', 'buddyclients-lite' ),
                         $service_type->title
                     ),
                     'value' => '',
@@ -686,7 +686,7 @@ class BookingForm {
                     $options[] = [
                         'label' => sprintf(
                             /* translators: %s: the name of the rate adjustment */
-                            __( 'Select %s', 'buddyclients-free' ),
+                            __( 'Select %s', 'buddyclients-lite' ),
                             $adjustment->label
                         ),
                         'value' => '',
@@ -817,7 +817,7 @@ class BookingForm {
                     '' => [
                         'label' => sprintf(
                             /* translators: %s: the singular name of the team member role (e.g. Editor) */
-                            __( 'Select Your %s', 'buddyclients-free' ),
+                            __( 'Select Your %s', 'buddyclients-lite' ),
                             $role->singular
                         ),
                         'value' => '',
@@ -851,7 +851,7 @@ class BookingForm {
                         $availability = function_exists( 'buddyc_get_availability' ) ? buddyc_get_availability( $team_member->ID ) : '';
                         $availability_message = ! empty( $availability ) ? sprintf(
                             ' - %1$s %2$s',
-                            __( 'Available', 'buddyclients-free' ),
+                            __( 'Available', 'buddyclients-lite' ),
                             $availability
                         ) : '';
                             
@@ -871,7 +871,7 @@ class BookingForm {
                     'label'         => $role->plural,
                     'description'   => sprintf(
                         /* translators: %s: the singular name of the team member role (e.g. editor) */
-                        __( 'Select your %s.', 'buddyclients-free' ),
+                        __( 'Select your %s.', 'buddyclients-lite' ),
                         strtolower( $role->singular )
                     ) . buddyc_team_select_help(),
                     'options'       => $team_options,
@@ -898,7 +898,7 @@ class BookingForm {
         
         // Initialize
         $service_agreement_id = '';
-        $option_label = __( 'I confirm that the information above is correct.', 'buddyclients-free' );
+        $option_label = __( 'I confirm that the information above is correct.', 'buddyclients-lite' );
         
         if ( function_exists( 'buddyc_legal_get_current_version' ) ) {
             // Check for service agreement
@@ -907,8 +907,8 @@ class BookingForm {
             if ( $service_agreement_id ) {
                 $option_label = sprintf(
                     /* translators: %s: the terms being agreed to (e.g. service terms) */
-                    __( 'I agree to the %s.', 'buddyclients-free' ),
-                    buddyc_help_link( $service_agreement_id, __( 'service terms', 'buddyclients-free' ) )
+                    __( 'I agree to the %s.', 'buddyclients-lite' ),
+                    buddyc_help_link( $service_agreement_id, __( 'service terms', 'buddyclients-lite' ) )
                 );
             }
         }

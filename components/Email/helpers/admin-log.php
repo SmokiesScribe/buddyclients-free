@@ -19,13 +19,13 @@ function buddyc_email_log_admin_notice() {
         // Format setting value
         $email_setting = is_numeric( $email_setting )
             /* translators: %d: the numnber of days emails are retained */
-            ? sprintf( __( 'for %d days', 'buddyclients-free' ), $email_setting ) 
-            : __( 'forever', 'buddyclients-free' );
+            ? sprintf( __( 'for %d days', 'buddyclients-lite' ), $email_setting ) 
+            : __( 'forever', 'buddyclients-lite' );
             
         // Build note
         $message = sprintf(
             /* translators: %s: the amount of time emails are stored (e.g. for 90 days or forever) */
-            __('Emails are currently stored %s.', 'buddyclients-free'),
+            __('Emails are currently stored %s.', 'buddyclients-lite'),
             $email_setting
         );
         
@@ -33,7 +33,7 @@ function buddyc_email_log_admin_notice() {
         $notice_args = [
             'repair_link'       => ['/admin.php?page=buddyc-email-settings'],
             'dismissable'       => true,
-            'repair_link_text'  => [__( 'Change setting.', 'buddyclients-free' )],
+            'repair_link_text'  => [__( 'Change setting.', 'buddyclients-lite' )],
             'message'           => $message,
             'color'             => 'blue'
         ];

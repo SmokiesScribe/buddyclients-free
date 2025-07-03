@@ -126,7 +126,7 @@ class BriefForm extends SingleBrief {
 
         // Add empty option for dropdown
         if ( $field_type === 'dropdown' ) {
-            $options_data[] = ['label' => __( 'Select One', 'buddyclients-free' ), 'value' => ''];
+            $options_data[] = ['label' => __( 'Select One', 'buddyclients-lite' ), 'value' => ''];
         }
         
         // Get options array

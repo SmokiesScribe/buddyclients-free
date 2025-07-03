@@ -61,7 +61,7 @@ class CancelRequestForm {
         $args = [
             'key'               => 'cancel_service',
             'fields_callback'   => [$this, 'form_fields'],
-            'submit_text'       => __( 'Request Cancellation', 'buddyclients-free' ),
+            'submit_text'       => __( 'Request Cancellation', 'buddyclients-lite' ),
             'submission_class'  => __NAMESPACE__ . '\CancelRequestSubmission',
             'form_classes'      => 'buddyc-table-form'
         ];
@@ -107,7 +107,7 @@ class CancelRequestForm {
              'cancellation_reason' => [
                 'key'           => 'cancellation_reason',
                 'type'          => 'text',
-                'placeholder'   => __( 'Cancellation reason...', 'buddyclients-free' ),
+                'placeholder'   => __( 'Cancellation reason...', 'buddyclients-lite' ),
                 'required'      => true
             ],
             'booked_service_id' => [

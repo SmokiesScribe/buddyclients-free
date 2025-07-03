@@ -38,9 +38,9 @@ function buddyc_contact_message( $site_name = false, $lowercase = false ) {
         return;
     }
     
-    $name = $site_name ? get_bloginfo( 'name' ) : __('us', 'buddyclients-free');
+    $name = $site_name ? get_bloginfo( 'name' ) : __('us', 'buddyclients-lite');
     /* translators: %s: the site name */
-    $text = $lowercase ? sprintf( __( 'contact %s', 'buddyclients-free' ), $name ) : sprintf( __( 'Contact %s', 'buddyclients-free' ), $name ) . '.';
+    $text = $lowercase ? sprintf( __( 'contact %s', 'buddyclients-lite' ), $name ) : sprintf( __( 'Contact %s', 'buddyclients-lite' ), $name ) . '.';
     $message = '<a href="' . esc_url( $link ) . '">' . $text . '</a>';
     
     return $message;

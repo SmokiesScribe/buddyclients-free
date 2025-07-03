@@ -50,17 +50,17 @@ class PluginLinks {
         $link_data = [
             'settings'  => [
                 'url'       => 'admin.php?page=buddyc-general-settings',
-                'text'      => __( 'Settings', 'buddyclients-free' ),
+                'text'      => __( 'Settings', 'buddyclients-lite' ),
                 'target'    => null
             ],
             'help'  => [
                 'url'       => trailingslashit( BUDDYC_URL ) . 'help',
-                'text'      => __( 'User Guides', 'buddyclients-free' ),
+                'text'      => __( 'User Guides', 'buddyclients-lite' ),
                 'target'    => '_blank'
             ],
             'license'  => [
                 'url'       => trailingslashit( BUDDYC_URL ) . 'license',
-                'text'      => __( 'Account', 'buddyclients-free' ),
+                'text'      => __( 'Account', 'buddyclients-lite' ),
                 'target'    => '_blank'
             ]
         ];
@@ -95,7 +95,7 @@ class PluginLinks {
                 // Add to array
                 $link_data['upgrade'] = [
                     'url'       => trailingslashit( BUDDYC_URL ) . $slug,
-                    'text'      => __( 'Upgrade', 'buddyclients-free' ),
+                    'text'      => __( 'Upgrade', 'buddyclients-lite' ),
                     'target'    => '_blank'
                 ];
             }

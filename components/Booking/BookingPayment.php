@@ -285,8 +285,8 @@ class BookingPayment {
      */
     private static function build_type_label( $type ) {
         return match ( $type ) {
-            'deposit'   => __( 'Deposit', 'buddyclients-free' ),
-            'final'     => __( 'Final Payment', 'buddyclients-free' )
+            'deposit'   => __( 'Deposit', 'buddyclients-lite' ),
+            'final'     => __( 'Final Payment', 'buddyclients-lite' )
         };
     }
 

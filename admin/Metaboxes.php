@@ -610,22 +610,22 @@ class Metaboxes {
             'team', 'client', 'affiliate', 'users' => buddyc_options( 'users', ['user_type' => $option_key] ),
             'projects' => buddyc_options( 'projects' ),
             'payment' => [
-                'pending'  => __( 'Pending', 'buddyclients-free' ),
-                'eligible' => __( 'Eligible', 'buddyclients-free' ),
-                'paid'     => __( 'Paid', 'buddyclients-free' ),
+                'pending'  => __( 'Pending', 'buddyclients-lite' ),
+                'eligible' => __( 'Eligible', 'buddyclients-lite' ),
+                'paid'     => __( 'Paid', 'buddyclients-lite' ),
             ],
             'operator' => [
                 'x' => sprintf(
                     'x (%s)',
-                    __( 'multiply', 'buddyclients-free' )
+                    __( 'multiply', 'buddyclients-lite' )
                 ),
                 '+' => sprintf(
                     '+ (%s)',
-                    __( 'add', 'buddyclients-free' )
+                    __( 'add', 'buddyclients-lite' )
                 ),
                 '-' => sprintf(
                     '- (%s)',
-                    __( 'subtract', 'buddyclients-free' )
+                    __( 'subtract', 'buddyclients-lite' )
                 )
             ],
             'help_docs' => buddyc_options( 'posts', ['post_type' => buddyc_help_post_types()] ),
@@ -712,7 +712,7 @@ class Metaboxes {
                 '<p class="buddyc-meta-unavailable">%s</p>',
                 sprintf(
                     /* translators: %s: the name of the unavailable field */
-                    __('Unavailable: %s', 'buddyclients-free'),
+                    __('Unavailable: %s', 'buddyclients-lite'),
                     esc_html( $display )
                 )
             );
@@ -799,7 +799,7 @@ class Metaboxes {
      */
     private function button( $field_id, $field_data ) {
         // Set default values
-        $label = ! empty( $field_data['value'] ) ? esc_html( $field_data['value'] ) : __( 'Click Here', 'buddyclients-free' );
+        $label = ! empty( $field_data['value'] ) ? esc_html( $field_data['value'] ) : __( 'Click Here', 'buddyclients-lite' );
         $href = ! empty( $field_data['href'] ) ? esc_url( $field_data['href'] ) : '#';
         $class = ! empty( $field_data['class'] ) ? esc_attr( $field_data['class'] ) : 'button-secondary';
 

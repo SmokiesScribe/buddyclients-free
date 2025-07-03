@@ -101,7 +101,7 @@ class Archive {
             return $post_type_object->labels->name;
         }
         // Default to 'posts'
-        return __( 'posts', 'buddyclients-free' );
+        return __( 'posts', 'buddyclients-lite' );
     }
 
     /**
@@ -113,7 +113,7 @@ class Archive {
         $plural_name = $this->get_plural_name();        
         $message = sprintf(
                     /* translators: %s: the plural name for the post type (e.g. posts) */
-                    __( 'No %s found.', 'buddyclients-free' ),
+                    __( 'No %s found.', 'buddyclients-lite' ),
                     strtolower( $plural_name )
                 );
         $content = '<p>' . $message . '</p>';

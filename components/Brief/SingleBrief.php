@@ -239,13 +239,13 @@ class SingleBrief {
         // Is admin viewing completed brief
         if ( ! $this->show_form && $this->is_admin ) {
             $updated_url = $param_manager->add_param( 'brief-view', 'form' );
-            $label = __( 'Edit Your Brief Submission', 'buddyclients-free' );
+            $label = __( 'Edit Your Brief Submission', 'buddyclients-lite' );
             
             
         // Is admin viewing form and the brief has been completed
         } else if ( $this->show_form && $this->is_admin && $this->brief->updated_date ) {
             $updated_url = $param_manager->add_param( 'brief-view', 'completed' );
-            $label = __( 'View Your Brief Submission', 'buddyclients-free' );
+            $label = __( 'View Your Brief Submission', 'buddyclients-lite' );
             
         // Default
         } else {
@@ -299,12 +299,12 @@ class SingleBrief {
             $content .= '<div class="login-options">';
             $content .= '<p>' . sprintf(
                 /* translators: %s: the login url */
-                __('Please <a href="%s">log in</a> to access this brief.', 'buddyclients-free'),
+                __('Please <a href="%s">log in</a> to access this brief.', 'buddyclients-lite'),
                 esc_url(wp_login_url(esc_html($current_url)))
             ) . '</p>';
             $content .= '</div>';
         } else {
-            $content .= '<p>' . __('You do not have permission to view this brief.', 'buddyclients-free') . '</p>';
+            $content .= '<p>' . __('You do not have permission to view this brief.', 'buddyclients-lite') . '</p>';
         }
         
         return $content;
@@ -323,7 +323,7 @@ class SingleBrief {
             $content .= '<p>';
             $content .= sprintf(
                 /* translators: %s: the date and time the brief was last updated */
-                __( 'Last Updated: %s', 'buddyclients-free' ),
+                __( 'Last Updated: %s', 'buddyclients-lite' ),
                 esc_html( gmdate( 'F j, Y, h:i A', strtotime( $this->brief->updated_date ) ) )
             );
             $content .= '</p>';

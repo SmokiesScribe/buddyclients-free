@@ -21,10 +21,10 @@ class MetaService {
                     'Type' => [ 
                         'meta' => [
                             'service_type' => [
-                                'label' => __( 'Service Type', 'buddyclients-free' ),
+                                'label' => __( 'Service Type', 'buddyclients-lite' ),
                                 'description' => sprintf(
                                     /* translators: %s: the url to add service types */
-                                    __( 'Select the category for this service. <a href="%s">Add service types.</a>', 'buddyclients-free' ),
+                                    __( 'Select the category for this service. <a href="%s">Add service types.</a>', 'buddyclients-lite' ),
                                     admin_url('/edit.php?post_type=buddyc_service_type')
                                 ),
                                 'type' => 'dropdown',
@@ -40,10 +40,10 @@ class MetaService {
                     'Team Member' => [
                         'meta' => [
                             'team_member_role' => [
-                                'label' => __( 'Team Member Role', 'buddyclients-free' ),
+                                'label' => __( 'Team Member Role', 'buddyclients-lite' ),
                                 'description' => sprintf(
                                     /* translators: %s: the url to add roles */
-                                    __( 'Select which team member role applies to this service. <a href="%s">Add roles.</a>', 'buddyclients-free' ),
+                                    __( 'Select which team member role applies to this service. <a href="%s">Add roles.</a>', 'buddyclients-lite' ),
                                     admin_url('/edit.php?post_type=buddyc_role')
                                 ),
                                 'type' => 'dropdown',
@@ -51,8 +51,8 @@ class MetaService {
                                 'required' => true,
                             ],
                             'assigned_team_member' => [
-                                'label' => __( 'Assigned Team Member', 'buddyclients-free' ),
-                                'description' => __( 'Select a team member to ALWAYS be assigned this service. Selecting a team member here disables the Choose a Team Member option on the booking form and overrides all team member filtering.', 'buddyclients-free' ),
+                                'label' => __( 'Assigned Team Member', 'buddyclients-lite' ),
+                                'description' => __( 'Select a team member to ALWAYS be assigned this service. Selecting a team member here disables the Choose a Team Member option on the booking form and overrides all team member filtering.', 'buddyclients-lite' ),
                                 'required' => false,
                                 'freelancer' => 'disable',
                                 'type' => 'dropdown',
@@ -67,16 +67,16 @@ class MetaService {
                     'Client' => [
                         'meta' => [
                             'rate_value' => [
-                                'label' => __( 'Rate Value', 'buddyclients-free' ),
-                                'description' => __( 'Enter the fee for this service.', 'buddyclients-free' ),
+                                'label' => __( 'Rate Value', 'buddyclients-lite' ),
+                                'description' => __( 'Enter the fee for this service.', 'buddyclients-lite' ),
                                 'type' => 'number',
                                 'required' => false,
                             ],
                             'rate_type' => [
-                                'label' => __( 'Rate Type', 'buddyclients-free' ),
+                                'label' => __( 'Rate Type', 'buddyclients-lite' ),
                                 'description' => sprintf(
                                     /* translators: %s: the url to add rate types */
-                                    __( 'Select the type of fee entered above. <a href="%s">Add rate types.</a>', 'buddyclients-free' ),
+                                    __( 'Select the type of fee entered above. <a href="%s">Add rate types.</a>', 'buddyclients-lite' ),
                                     admin_url('/edit.php?post_type=buddyc_rate_type')
                                 ),
                                 'type' => 'dropdown',
@@ -88,8 +88,8 @@ class MetaService {
                         'freelancer' => 'disable',
                         'meta' => [
                             'team_member_percentage' => [
-                                'label' => __( 'Team Member Percentage', 'buddyclients-free' ),
-                                'description' => __( 'What percentage of the client fee do team members receive for this service? Ex: 50', 'buddyclients-free' ),
+                                'label' => __( 'Team Member Percentage', 'buddyclients-lite' ),
+                                'description' => __( 'What percentage of the client fee do team members receive for this service? Ex: 50', 'buddyclients-lite' ),
                                 'type' => 'number',
                                 'required_component' => 'stripe',
                                 'freelancer' => 'disable',
@@ -99,10 +99,10 @@ class MetaService {
                     'Adjustments' => [
                         'meta' => [
                             'adjustments' => [
-                                'label' => __( 'Adjustments', 'buddyclients-free' ),
+                                'label' => __( 'Adjustments', 'buddyclients-lite' ),
                                 'description' => sprintf(
                                     /* translators: %s: the url to add adjustment fields */
-                                    __( 'Select any rate adjustments that apply to this service. <a href="%s">Add adjustment fields.</a>', 'buddyclients-free' ),
+                                    __( 'Select any rate adjustments that apply to this service. <a href="%s">Add adjustment fields.</a>', 'buddyclients-lite' ),
                                     admin_url('/edit.php?post_type=buddyc_adjustment')
                                 ),
                                 'type' => 'checkbox',
@@ -118,10 +118,10 @@ class MetaService {
                     'Brief' => [
                         'meta' => [
                             'brief_type' => [
-                                'label' => __( 'Brief Type', 'buddyclients-free' ),
+                                'label' => __( 'Brief Type', 'buddyclients-lite' ),
                                 'description' => sprintf(
                                     /* translators: %s: the url to add brief types */
-                                    __( 'Select the brief type(s) to create for this service. <a href="%s">Add brief types.</a>', 'buddyclients-free' ),
+                                    __( 'Select the brief type(s) to create for this service. <a href="%s">Add brief types.</a>', 'buddyclients-lite' ),
                                     admin_url('/edit-tags.php?taxonomy=brief_type&&post_type=buddyc_brief')
                                 ),
                                 'required' => false,
@@ -134,8 +134,8 @@ class MetaService {
                     'Dependencies' => [
                         'meta' => [
                             'dependency' => [
-                                'label' => __( 'Required Services', 'buddyclients-free' ),
-                                'description' => __( 'Which service(s) must be booked or selected before this one is available?', 'buddyclients-free' ),
+                                'label' => __( 'Required Services', 'buddyclients-lite' ),
+                                'description' => __( 'Which service(s) must be booked or selected before this one is available?', 'buddyclients-lite' ),
                                 'required' => false,
                                 'type' => 'checkbox',
                                 'options' => 'buddyc_service',
@@ -145,8 +145,8 @@ class MetaService {
                     'File Uploads' => [
                         'meta' => [
                             'file_uploads' => [
-                                'label' => __( 'File Uploads', 'buddyclients-free' ),
-                                'description' => __( 'Select any file upload types that apply to this service.', 'buddyclients-free' ),
+                                'label' => __( 'File Uploads', 'buddyclients-lite' ),
+                                'description' => __( 'Select any file upload types that apply to this service.', 'buddyclients-lite' ),
                                 'type' => 'checkbox',
                                 'required' => false,
                                 'options' => 'buddyc_file_upload',
@@ -160,18 +160,18 @@ class MetaService {
                     'Display' => [
                         'meta' => [
                             'order' => [
-                                'label' => __( 'Order', 'buddyclients-free' ),
-                                'description' => __( 'Higher numbers are shown first.', 'buddyclients-free' ),
+                                'label' => __( 'Order', 'buddyclients-lite' ),
+                                'description' => __( 'Higher numbers are shown first.', 'buddyclients-lite' ),
                                 'type' => 'number',
                                 'required' => false,
                             ],
                             'hide' => [
-                                'label' => __( 'Hide', 'buddyclients-free' ),
+                                'label' => __( 'Hide', 'buddyclients-lite' ),
                                 'description' => '',
                                 'required' => false,
                                 'type' => 'checkbox',
                                 'options' => [
-                                    true => __( 'Hide from booking form. (The service will still appear in shortcodes and archives.)', 'buddyclients-free' ),
+                                    true => __( 'Hide from booking form. (The service will still appear in shortcodes and archives.)', 'buddyclients-lite' ),
                                 ],
                             ],
                         ],

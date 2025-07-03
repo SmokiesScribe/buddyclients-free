@@ -209,7 +209,7 @@ class Confirmation {
      */
     private function profile_link() {
         $profile_url = bp_loggedin_user_domain();
-        return '<a href="' . $profile_url . '">' . __( 'View your profile.', 'buddyclients-free' ) . '</a>';
+        return '<a href="' . $profile_url . '">' . __( 'View your profile.', 'buddyclients-lite' ) . '</a>';
     }
     
     /**
@@ -229,13 +229,13 @@ class Confirmation {
      */
     private function registration_success_message() {
         // Free or successful payment
-        $content = $this->free ? '<p>' . __( 'Your registration has been confirmed.', 'buddyclients-free' ) . '</p>' : '<p>' . __( 'Your payment has been processed, and your registration has been confirmed.', 'buddyclients-free' ) . '</p>';
+        $content = $this->free ? '<p>' . __( 'Your registration has been confirmed.', 'buddyclients-lite' ) . '</p>' : '<p>' . __( 'Your payment has been processed, and your registration has been confirmed.', 'buddyclients-lite' ) . '</p>';
         
         // Build button
         $link = trailingslashit( bp_loggedin_user_domain() ) . 'event';
-        $link_text = __( 'View Your Event Info', 'buddyclients-free' );
+        $link_text = __( 'View Your Event Info', 'buddyclients-lite' );
         
-        return $this->output_message( 'success', __( 'Success!', 'buddyclients-free' ), $content, $link, $link_text );
+        return $this->output_message( 'success', __( 'Success!', 'buddyclients-lite' ), $content, $link, $link_text );
     }
     
     /**
@@ -256,16 +256,16 @@ class Confirmation {
     private function sponsor_success_message() {
         // Free or successful payment
         $content = $this->free 
-            ? '<p>' . __('Your sponsorship purchase has been confirmed.', 'buddyclients-free') . '</p>' 
-            : '<p>' . __('Your payment has been processed, and your sponsorship purchase has been confirmed.', 'buddyclients-free') . '</p>';
+            ? '<p>' . __('Your sponsorship purchase has been confirmed.', 'buddyclients-lite') . '</p>' 
+            : '<p>' . __('Your payment has been processed, and your sponsorship purchase has been confirmed.', 'buddyclients-lite') . '</p>';
         
-        $content .= '<p>' . __('We will review your information and be in touch with any questions.', 'buddyclients-free') . '</p>';
+        $content .= '<p>' . __('We will review your information and be in touch with any questions.', 'buddyclients-lite') . '</p>';
         
         // Build button
         $link = buddyc_profile_link(['slug' => 'event?subnav=sponsor']);
-        $link_text = __('View Your Sponsorships', 'buddyclients-free');
+        $link_text = __('View Your Sponsorships', 'buddyclients-lite');
         
-        return $this->output_message('success', __('Success!', 'buddyclients-free'), $content, $link, $link_text);
+        return $this->output_message('success', __('Success!', 'buddyclients-lite'), $content, $link, $link_text);
     }
     
     /**
@@ -317,11 +317,11 @@ class Confirmation {
         
         // Free or successful payment
         if ( $this->free  ) {
-            $content .= '<p>' . __('Your services have been booked.', 'buddyclients-free') . '</p>';
+            $content .= '<p>' . __('Your services have been booked.', 'buddyclients-lite') . '</p>';
         } else if ( $this->unpaid ) {
-            $content .= '<p>' . __('We will be in touch to arrange payment.', 'buddyclients-free') . '</p>';
+            $content .= '<p>' . __('We will be in touch to arrange payment.', 'buddyclients-lite') . '</p>';
         } else {
-            $content .= '<p>' . __('Your payment has been processed, and your services have been booked.', 'buddyclients-free') . '</p>';
+            $content .= '<p>' . __('Your payment has been processed, and your services have been booked.', 'buddyclients-lite') . '</p>';
         }
         
         // Project exists
@@ -330,26 +330,26 @@ class Confirmation {
         
             // Briefs message
             $content .= $has_briefs 
-                ? '<p><strong>' . __('What\'s next?', 'buddyclients-free') . '</strong> ' . __('Complete the briefs for ', 'buddyclients-free') . $project->name . ' ' . __('to make sure your team has all the information they need.', 'buddyclients-free') . '</p>' 
+                ? '<p><strong>' . __('What\'s next?', 'buddyclients-lite') . '</strong> ' . __('Complete the briefs for ', 'buddyclients-lite') . $project->name . ' ' . __('to make sure your team has all the information they need.', 'buddyclients-lite') . '</p>' 
                 : '';
             
             // Build button
             $link = $has_briefs ? trailingslashit($project->permalink) . 'brief' : $project->permalink;
-            $link_text = $has_briefs ? __('View Your Briefs', 'buddyclients-free') : __('View Your Project', 'buddyclients-free');
+            $link_text = $has_briefs ? __('View Your Briefs', 'buddyclients-lite') : __('View Your Project', 'buddyclients-lite');
             
         // No project available - link to groups
         } else if (is_user_logged_in()) {
             // Build button
             $link = buddyc_profile_link(['slug' => 'groups']);
-            $link_text = __('View Your Projects', 'buddyclients-free');
+            $link_text = __('View Your Projects', 'buddyclients-lite');
             
         // Not logged in
         } else {
             $link = wp_login_url();
-            $link_text = __('Log In to View Your Projects', 'buddyclients-free');
+            $link_text = __('Log In to View Your Projects', 'buddyclients-lite');
         }
         
-        return $this->output_message('success', __('Success!', 'buddyclients-free'), $content, $link, $link_text);
+        return $this->output_message('success', __('Success!', 'buddyclients-lite'), $content, $link, $link_text);
     }
     
     /**
@@ -364,17 +364,17 @@ class Confirmation {
         $content = '';
         
         // Failed
-        $content .= '<p>' . __('Your payment failed.', 'buddyclients-free') . '</p>';
+        $content .= '<p>' . __('Your payment failed.', 'buddyclients-lite') . '</p>';
         
         $content .= $this->checkout_page_link !== '#' 
-            ? '<a href="' . esc_url($this->checkout_page_link) . '"><button class="confirmation-page-button buddyc-button">' . __('Return to Checkout', 'buddyclients-free') . '</button></a>' 
+            ? '<a href="' . esc_url($this->checkout_page_link) . '"><button class="confirmation-page-button buddyc-button">' . __('Return to Checkout', 'buddyclients-lite') . '</button></a>' 
             : '';
         
         $content .= $this->contact_page_link !== '#' 
-            ? '<p>' . __('If you continue to have issues, please <a href="', 'buddyclients-free') . esc_url($this->contact_page_link) . '">' . __('contact us', 'buddyclients-free') . '</a>.</p>' 
+            ? '<p>' . __('If you continue to have issues, please <a href="', 'buddyclients-lite') . esc_url($this->contact_page_link) . '">' . __('contact us', 'buddyclients-lite') . '</a>.</p>' 
             : '';
         
-        return $this->output_message('failure', __('Uh oh!', 'buddyclients-free'), $content);
+        return $this->output_message('failure', __('Uh oh!', 'buddyclients-lite'), $content);
     }
     
     /**

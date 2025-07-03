@@ -319,7 +319,7 @@ class AdminTable {
         $output = '<div class="tablenav">';
         $output .= '<div class="tablenav-pages">';
         /* translators: %d: the number of items being displayed */
-        $output .= '<span class="displaying-num">' . sprintf( esc_html__( '%d items', 'buddyclients-free' ), count( $this->filtered_items ) ) . '</span>';
+        $output .= '<span class="displaying-num">' . sprintf( esc_html__( '%d items', 'buddyclients-lite' ), count( $this->filtered_items ) ) . '</span>';
         $output .= '<span class="pagination-links">';
         
         // First page link
@@ -333,11 +333,11 @@ class AdminTable {
         $output .= '</span>';
         
         // Current page number of total
-        $output .= '<span class="tablenav-pages-navspan screen-reader-text">' . esc_html__( 'Current Page', 'buddyclients-free' ) . '</span>';
+        $output .= '<span class="tablenav-pages-navspan screen-reader-text">' . esc_html__( 'Current Page', 'buddyclients-lite' ) . '</span>';
         $output .= '<span id="table-paging" class="paging-input">';
         $output .= '<span class="tablenav-paging-text">' . sprintf(
             /* translators: %1$d: the number of the current page being displayed; %2$d: the total number of pages */
-            esc_html__( '%1$d of %2$d', 'buddyclients-free' ),
+            esc_html__( '%1$d of %2$d', 'buddyclients-lite' ),
             $this->current_page,
             $total_pages )
             . '</span>';
@@ -493,7 +493,7 @@ class AdminTable {
 
         // No items to display
         if ( empty( $items_for_current_page ) ) {
-            $message = __( 'No items found', 'buddyclients-free' );
+            $message = __( 'No items found', 'buddyclients-lite' );
             $colspan = count( $this->headings );
             $content .= '<tr class="buddyc-admin-table-row no-items"><td class="colspanchange" colspan="' . esc_attr( $colspan ) . '">' . esc_html( $message ) . '</td></tr>';
 

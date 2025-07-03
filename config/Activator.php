@@ -84,23 +84,23 @@ class Activator {
         return [
             // Rate types
             'buddyc_rate_type' => [
-                __( 'Per Word', 'buddyclients-free' ) => [
+                __( 'Per Word', 'buddyclients-lite' ) => [
                     'post_content'  => null,
                     'post_meta'     => [
-                        'singular'          => __( 'Word', 'buddyclients-free' ),
-                        'plural'            => __( 'Words', 'buddyclients-free' ),
-                        'form_description'  => __( 'What is the full word count?', 'buddyclients-free' ),
-                        'attach'            => __( 'project', 'buddyclients-free' ),
+                        'singular'          => __( 'Word', 'buddyclients-lite' ),
+                        'plural'            => __( 'Words', 'buddyclients-lite' ),
+                        'form_description'  => __( 'What is the full word count?', 'buddyclients-lite' ),
+                        'attach'            => __( 'project', 'buddyclients-lite' ),
                         'minimum'           => 0
                     ]
                 ],
-                __( 'Hourly', 'buddyclients-free' ) => [
+                __( 'Hourly', 'buddyclients-lite' ) => [
                     'post_content'  => null,
                     'post_meta'     => [
-                        'singular'          => __( 'Hour', 'buddyclients-free' ),
-                        'plural'            => __( 'Hours', 'buddyclients-free' ),
-                        'form_description'  => __( 'How many hours would you like to book?', 'buddyclients-free' ),
-                        'attach'            => __( 'service', 'buddyclients-free' ),
+                        'singular'          => __( 'Hour', 'buddyclients-lite' ),
+                        'plural'            => __( 'Hours', 'buddyclients-lite' ),
+                        'form_description'  => __( 'How many hours would you like to book?', 'buddyclients-lite' ),
+                        'attach'            => __( 'service', 'buddyclients-lite' ),
                         'minimum'           => 1
                     ]
                 ],
@@ -108,12 +108,12 @@ class Activator {
         
             // Upload types
             'buddyc_file_upload' => [
-                __( 'File', 'buddyclients-free' ) => [
+                __( 'File', 'buddyclients-lite' ) => [
                     'post_content'  => null,
                     'post_meta'     => [
-                        'singular'          => __( 'File', 'buddyclients-free' ),
-                        'plural'            => __( 'Files', 'buddyclients-free' ),
-                        'form_description'  => __( 'Upload your file.', 'buddyclients-free' ),
+                        'singular'          => __( 'File', 'buddyclients-lite' ),
+                        'plural'            => __( 'Files', 'buddyclients-lite' ),
+                        'form_description'  => __( 'Upload your file.', 'buddyclients-lite' ),
                         'file_types'        => ['.pdf', '.jpg', '.jpeg', '.png', '.doc', '.docx'],
                         'multiple_files'    => false,
                         'required'          => false
@@ -144,7 +144,7 @@ class Activator {
                     // Skip creating the post if it already exists                    
                     $error_message = sprintf(
                         /* translators: %s: post title */
-                        __( 'Post with title "%s" already exists. Skipping creation.', 'buddyclients-free' ),
+                        __( 'Post with title "%s" already exists. Skipping creation.', 'buddyclients-lite' ),
                         $post_title
                     );
                     continue;
@@ -168,7 +168,7 @@ class Activator {
                 if ( is_wp_error( $post_id ) ) {
                     $error_message = sprintf(
                         /* translators: %s: post title */
-                        __( 'Error creating post: %s', 'buddyclients-free' ),
+                        __( 'Error creating post: %s', 'buddyclients-lite' ),
                         $post_id->get_error_message()
                     );
                     continue;

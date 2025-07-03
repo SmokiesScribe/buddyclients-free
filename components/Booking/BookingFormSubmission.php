@@ -61,13 +61,13 @@ class BookingFormSubmission {
         // Output popup if no checkout page set
         if ( $checkout_url === '#' ) {
             $message = '<p>';
-            $message .= __( 'Checkout is unavailable at this time.', 'buddyclients-free' );
+            $message .= __( 'Checkout is unavailable at this time.', 'buddyclients-lite' );
             $message .= '</p>';
 
             $message = '<p>';
             $message .= sprintf(
                 /* translators: %s: the contact us link */
-                __( 'Please %s for assistance', 'buddyclients-free' ),
+                __( 'Please %s for assistance', 'buddyclients-lite' ),
                 buddyc_contact_message( false, true ) );
             $message .= '</p>';
             

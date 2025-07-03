@@ -36,9 +36,9 @@ class UpgradeLink {
      */
     private static function product_name( $product_key ) {
         return match ( $product_key ) {
-            'free'      => __( 'BuddyClients Free', 'buddyclients-free' ),
-            'basic'     => __( 'BuddyClients Essentials', 'buddyclients-free' ),
-            'premium'   => __( 'BuddyClients Business', 'buddyclients-free' ),
+            'free'      => __( 'BuddyClients Lite', 'buddyclients-lite' ),
+            'basic'     => __( 'BuddyClients Essentials', 'buddyclients-lite' ),
+            'premium'   => __( 'BuddyClients Business', 'buddyclients-lite' ),
         };
     }
 
@@ -115,7 +115,7 @@ class UpgradeLink {
         $link = sprintf(
             '<p class="buddyc-upgrade-link">%1$s %2$s %3$s</p>',
             buddyc_icon( 'rocket' ),
-            __( 'Upgrade to', 'buddyclients-free' ),
+            __( 'Upgrade to', 'buddyclients-lite' ),
             sprintf(
                 '<a href="%1$s" target="_blank">%2$s</a>.',
                 esc_url( self::upgrade_url() ),
@@ -208,11 +208,11 @@ class UpgradeLink {
         return sprintf(
             '<p class="buddyc-upgrade-link">%1$s %2$s %3$s</p>',
             buddyc_icon( 'gear' ),
-            __( 'Manage', 'buddyclients-free' ),
+            __( 'Manage', 'buddyclients-lite' ),
             sprintf(
                 '<a href="%1$s" target="_blank">%2$s</a>.',
                 esc_url( self::account_url() ),
-                __( 'your BuddyClients subscription', 'buddyclients-free' )
+                __( 'your BuddyClients subscription', 'buddyclients-lite' )
             )            
         );
     }
@@ -236,13 +236,13 @@ class UpgradeLink {
             buddyc_icon( 'toggle_off' ),
             sprintf(
                 /* translators: %s: the name of the component */
-                __( 'The %s component is disabled.', 'buddyclients-free' ),
+                __( 'The %s component is disabled.', 'buddyclients-lite' ),
                 buddyc_component_name( $component )
             ),
             sprintf(
                 '<a href="%1$s" target="_blank">%2$s</a>.',
                 esc_url( self::enable_component_url() ),
-                __( 'Enable the component', 'buddyclients-free' )
+                __( 'Enable the component', 'buddyclients-lite' )
             )            
         );
 
@@ -289,11 +289,11 @@ class UpgradeLink {
         $link = sprintf(
             '<p class="buddyc-upgrade-link">%1$s %2$s %3$s</p>',
             buddyc_icon( 'toggle_off' ),
-            __( 'Freelancer Mode is enabled.', 'buddyclients-free' ),
+            __( 'Freelancer Mode is enabled.', 'buddyclients-lite' ),
             sprintf(
                 '<a href="%1$s" target="_blank">%2$s</a>.',
                 esc_url( self::freelancer_mode_url() ),
-                __( 'Disable Freelancer Mode', 'buddyclients-free' )
+                __( 'Disable Freelancer Mode', 'buddyclients-lite' )
             )            
         );
 

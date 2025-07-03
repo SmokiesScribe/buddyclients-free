@@ -148,7 +148,7 @@ class UpgradePage {
         $pages['free_upgrade'] = [
             'key' => 'free-upgrade',
             'settings' => false,
-            'title' => __('Upgrade', 'buddyclients-free'),
+            'title' => __('Upgrade', 'buddyclients-lite'),
             'parent_slug' => 'buddyc-dashboard',
             'buddyc_menu_order' => 30,
             'group' => 'settings',
@@ -176,7 +176,7 @@ class UpgradePage {
         unset( $tabs['license'] );
     
         // Add upgrade tab
-        $tabs['free_upgrade'] = [__( 'Upgrade', 'buddyclients-free' ) => ['page'  => 'buddyc-free-upgrade']];
+        $tabs['free_upgrade'] = [__( 'Upgrade', 'buddyclients-lite' ) => ['page'  => 'buddyc-free-upgrade']];
     
         return $tabs;
     }
@@ -189,30 +189,30 @@ class UpgradePage {
     private static function product_info() {
         return [
             'basic' => [
-                'name'          => 'BuddyClients ' . __( 'Essential', 'buddyclients-free' ),
-                'description'   => __( 'Sell services and manage clients\' projects in one place.', 'buddyclients-free' ),
+                'name'          => 'BuddyClients ' . __( 'Essential', 'buddyclients-lite' ),
+                'description'   => __( 'Sell services and manage clients\' projects in one place.', 'buddyclients-lite' ),
                 'features'      => [
-                    __( 'Everything in Free', 'buddyclients-free' ),
-                    __( 'Flexible pricing structures', 'buddyclients-free' ),
-                    __( 'Adjust prices dynamically', 'buddyclients-free' ),
-                    __( 'Filter team by preferences', 'buddyclients-free' ),
-                    __( 'Manage team payments', 'buddyclients-free' ),
+                    __( 'Everything in Free', 'buddyclients-lite' ),
+                    __( 'Flexible pricing structures', 'buddyclients-lite' ),
+                    __( 'Adjust prices dynamically', 'buddyclients-lite' ),
+                    __( 'Filter team by preferences', 'buddyclients-lite' ),
+                    __( 'Manage team payments', 'buddyclients-lite' ),
                 ],
             ],
             'premium' => [
-                'name'          => 'BuddyClients ' . __( 'Business', 'buddyclients-free' ),
-                'description'   => __( 'Grow your service-based business with premium tools.', 'buddyclients-free' ),
+                'name'          => 'BuddyClients ' . __( 'Business', 'buddyclients-lite' ),
+                'description'   => __( 'Grow your service-based business with premium tools.', 'buddyclients-lite' ),
                 'features'      => [
-                    __( 'Everything in Essential', 'buddyclients-free' ),
-                    __( 'Affiliate program', 'buddyclients-free' ),
-                    __( 'Client testimonials', 'buddyclients-free' ),
-                    __( 'Custom quotes', 'buddyclients-free' ),
-                    __( 'Live search help docs', 'buddyclients-free' ),
-                    __( 'Contact form', 'buddyclients-free' ),
-                    __( 'Legal agreements', 'buddyclients-free' ),
-                    __( 'Team availability', 'buddyclients-free' ),
-                    __( 'Sales team commission', 'buddyclients-free' ),
-                    __( 'Manual and assisted bookings', 'buddyclients-free' ),
+                    __( 'Everything in Essential', 'buddyclients-lite' ),
+                    __( 'Affiliate program', 'buddyclients-lite' ),
+                    __( 'Client testimonials', 'buddyclients-lite' ),
+                    __( 'Custom quotes', 'buddyclients-lite' ),
+                    __( 'Live search help docs', 'buddyclients-lite' ),
+                    __( 'Contact form', 'buddyclients-lite' ),
+                    __( 'Legal agreements', 'buddyclients-lite' ),
+                    __( 'Team availability', 'buddyclients-lite' ),
+                    __( 'Sales team commission', 'buddyclients-lite' ),
+                    __( 'Manual and assisted bookings', 'buddyclients-lite' ),
                 ],
             ]
         ];
@@ -251,10 +251,10 @@ class UpgradePage {
             '<h1>%s</h1>',
             sprintf(
                 /* translators: %s: "grow your business" in bold */
-                __( 'Upgrade BuddyClients to accept payments, manage projects, and %s.', 'buddyclients-free' ),
+                __( 'Upgrade BuddyClients to accept payments, manage projects, and %s.', 'buddyclients-lite' ),
                 sprintf(
                     '<span class="buddyc-text-bold">%s</span>',
-                    __( 'grow your business', 'buddyclients-free' )
+                    __( 'grow your business', 'buddyclients-lite' )
                 )
             )
         );
@@ -377,14 +377,14 @@ class UpgradePage {
         if ( $this->product === $key ) {
             $content .= sprintf(
                 '<span class="buddyc-active-label">%s</span>',
-                __( 'Active', 'buddyclients-free' )
+                __( 'Active', 'buddyclients-lite' )
             );
         }
         
         $content .= sprintf(
             '<a href="%1$s" class="buddyc-upgrade-btn" target="_blank">%2$s<i class="fa-solid fa-arrow-up-right-from-square"></i></a>',
             esc_url( buddyc_upgrade_url() ),
-            __( 'Learn More', 'buddyclients-free' )
+            __( 'Learn More', 'buddyclients-lite' )
         );
         $content .= '</div>';
         return $content;

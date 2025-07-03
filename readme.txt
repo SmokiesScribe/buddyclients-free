@@ -71,6 +71,7 @@ Banner URL: /assets/media/banner-772x250/banner.png
 == Changelog ==
 
 = 1.0.33 - July 3, 2025 =
+* Renamed from BuddyClients Free to BuddyClients Lite.
 * Improvement: Removed deprecated code in File class.
 
 = 1.0.32 - June 17, 2025 =

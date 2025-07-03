@@ -179,7 +179,7 @@ class Email {
         
         // Check for admin
         if ( $args['to_email'] === 'admin' ) {
-            return __( 'Admin', 'buddyclients-free' );
+            return __( 'Admin', 'buddyclients-lite' );
         }
         
         // No user id
