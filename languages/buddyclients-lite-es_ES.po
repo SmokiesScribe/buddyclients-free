@@ -606,7 +606,7 @@ msgstr ""
 
 #. Name of the plugin
 #, fuzzy
-#| msgid "BuddyClients Free"
+#| msgid "BuddyClients Lite"
 msgid "Buddyclients Lite"
 msgstr "BuddyClients Gratis"
 
