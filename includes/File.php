@@ -179,11 +179,6 @@ class File {
         // Reset the upload_dir filter after the upload
         remove_filter('upload_dir', [ $this, 'override_upload_dir' ]);
 
-
-        // OLD
-        $dir_path = $this->dir_path;
-        remove_filter('upload_dir', function() use ( $dir_path ) {});
-
         // Check for upload error
         if (isset($uploaded_file['error'])) {
             return false; // or handle the error as needed
