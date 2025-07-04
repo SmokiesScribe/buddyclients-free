@@ -27,7 +27,7 @@ class BriefForm extends SingleBrief {
         $args = [
             'key'                   => 'brief',
             'fields_callback'       => [$this, 'form_fields'],
-            'submission_class'      => __NAMESPACE__ . '\BriefSubmission',
+            'submission_class'      => 'brief',
         ];
         return buddyc_build_form( $args );
     }

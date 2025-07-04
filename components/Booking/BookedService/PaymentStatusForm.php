@@ -31,7 +31,7 @@ class PaymentStatusForm {
         $args = [
             'key'                   => 'update_payment_status',
             'fields_callback'       => [$this, 'form_fields'],
-            'submission_class'      => __NAMESPACE__ . '\PaymentStatusSubmission',
+            'submission_class'      => 'payment_status',
             'submit_text'           => __( 'Update', 'buddyclients-lite' ),
             'submit_classes'        => 'button action',
             'form_classes'          => 'buddyc-table-form',

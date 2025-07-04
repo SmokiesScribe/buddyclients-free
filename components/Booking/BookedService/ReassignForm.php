@@ -22,7 +22,7 @@ class ReassignForm {
         $args = [
             'key'               => 'reassign',
             'fields_callback'   => [$this, 'form_fields'],
-            'submission_class'  => __NAMESPACE__ . '\ReassignFormSubmission',
+            'submission_class'  => 'reassign',
             'submit_text'       => __( 'Reassign', 'buddyclients-lite' ),
             'submit_classes'    => 'button action',
             'form_classes'      => 'buddyc-table-form',

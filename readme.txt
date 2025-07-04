@@ -70,6 +70,10 @@ Banner URL: /assets/media/banner-772x250/banner.png
 
 == Changelog ==
 
+= 1.0.34 - July 4, 2025 =
+* Improvement: Hardcoded available form submission classes to improve security.
+* Fixed: Corrected error when checking recaptcha response.
+
 = 1.0.33 - July 3, 2025 =
 * Renamed from BuddyClients Lite to BuddyClients Lite.
 * Improvement: Removed deprecated code in File class.

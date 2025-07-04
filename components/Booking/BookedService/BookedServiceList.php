@@ -302,13 +302,13 @@ class BookedServiceList {
                 'key'               => 'cancel_service',
                 'fields_callback'   => [$this, 'cancellation_fields'],
                 'submit_text'       => 'Request Cancellation',
-                'submission_class'  => __NAMESPACE__ . '/CancelRequestSubmission',
+                'submission_class'  => 'cancel_request',
                 'values'            => $values
             ],
             'update_status' => [
                 'key'               => 'update_service_status',
                 'fields_callback'   => [$this, 'status_fields'],
-                'submission_class'  => __NAMESPACE__ . '/ServiceStatusSubmission',
+                'submission_class'  => 'service_status',
                 'submit_text'       => 'Update Status',
                 'values'            => $values
             ],

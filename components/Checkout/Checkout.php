@@ -553,7 +553,7 @@ class Checkout {
         // Define form args
         $args = [
             'key'                   => 'free-checkout',
-            'submission_class'      => __NAMESPACE__ . '\FreeCheckout',
+            'submission_class'      => 'free_checkout',
             'fields_callback'       => [$this, 'free_form_fields'],
             'submit_text'           => __( 'Complete Checkout', 'buddyclients-lite' )
         ];
@@ -571,7 +571,7 @@ class Checkout {
         // Define form args
         $args = [
             'key'                   => 'skip-payment-checkout',
-            'submission_class'      => __NAMESPACE__ . '\SkipPaymentCheckout',
+            'submission_class'      => 'skip_payment_checkout',
             'fields_callback'       => [$this, 'free_form_fields'],
             'submit_text'           => __( 'Complete Checkout', 'buddyclients-lite' )
         ];
