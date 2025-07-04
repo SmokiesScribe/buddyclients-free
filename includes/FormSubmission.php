@@ -174,9 +174,9 @@ class FormSubmission {
         $threshold = buddyc_recaptcha_threshold();
 
         // reCAPTCHA response
+        $recaptcha_response = isset( $_POST['recaptcha_response'] ) ? trim( sanitize_text_field( wp_unslash( $_POST['recaptcha_response'] ) ) ) : null;
 
         if ( ! $recaptcha_response ) {
-            $recaptcha_response = isset( $_POST['recaptcha_response'] ) ? trim( sanitize_text_field( wp_unslash( $_POST['recaptcha_response'] ) ) ) : null;
             return false; // No response, so reject
         }
         
