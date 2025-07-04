@@ -1,4 +1,4 @@
-=== BuddyClients Free ===
+=== BuddyClients Lite ===
 Contributors: victoriagrif7
 Tags: buddypress-integration, service-business, business-tools, team-management, client-management
 Requires at least: 4.9
@@ -15,12 +15,12 @@ BuddyClients is a flexible and comprehensive platform for any service-based busi
 - [Documentation](https://buddyclients.com/docs/)
 - [User Guides](https://buddyclients.com/help/)
 - [Roadmap](https://buddyclients.com/roadmap/)
-- [Source Code on GitHub](https://github.com/SmokiesScribe/buddyclients-free)
-- [Terms of Service](https://buddyclients.com/buddyclients-free-terms/)
+- [Source Code on GitHub](https://github.com/SmokiesScribe/buddyclients-lite)
+- [Terms of Service](https://buddyclients.com/buddyclients-lite-terms/)
 
 == External Services ==
 
-The BuddyClients Free plugin connects to external services to protect forms from spam. These services are optional and disabled by default.
+The BuddyClients Lite plugin connects to external services to protect forms from spam. These services are optional and disabled by default.
 
 ### Google reCAPTCHA Integration (Optional)
 
@@ -46,9 +46,9 @@ To run BuddyClients, we recommend your host supports:
 
 1. Ensure that you have either BuddyPress or BuddyBoss Platform installed on your WordPress site.
 2. Navigate to Plugins > Add New in your WordPress admin dashboard.
-3. In the search bar, type BuddyClients Free and press Enter.
-4. Locate the BuddyClients Free plugin in the search results and click the Install Now button.
-5. Once the installation is complete, click Activate to enable the BuddyClients Free plugin on your site.
+3. In the search bar, type BuddyClients Lite and press Enter.
+4. Locate the BuddyClients Lite plugin in the search results and click the Install Now button.
+5. Once the installation is complete, click Activate to enable the BuddyClients Lite plugin on your site.
 6. After activation, go to the BuddyClients settings to configure the plugin as needed.
 
 == Screenshots ==
@@ -71,7 +71,7 @@ Banner URL: /assets/media/banner-772x250/banner.png
 == Changelog ==
 
 = 1.0.33 - July 3, 2025 =
-* Renamed from BuddyClients Free to BuddyClients Lite.
+* Renamed from BuddyClients Lite to BuddyClients Lite.
 * Improvement: Removed deprecated code in File class.
 
 = 1.0.32 - June 17, 2025 =
@@ -176,7 +176,7 @@ Banner URL: /assets/media/banner-772x250/banner.png
 * Corresponding Premium Version: 1.0.17
 
 = 1.0.6 - October 10, 2024 =
-* Fixed: Updated text domain to buddyclients-free.
+* Fixed: Updated text domain to buddyclients-lite.
 * Improvement: Updated language files.
 * Corresponding Premium Version: 1.0.16
 
