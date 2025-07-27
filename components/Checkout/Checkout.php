@@ -394,7 +394,6 @@ class Checkout {
             $args = [
                 'key'                   => 'create-account',
                 'fields_callback'       => [$this, 'create_account_fields'],
-                'submission_class'      => null,
                 'submit_button'         => false
             ];
 
@@ -497,7 +496,6 @@ class Checkout {
             $args = [
                 'key'                   => 'checkout-terms',
                 'fields_callback'       => [$this, 'checkout_terms_field'],
-                'submission_class'      => null,
                 'submit_button'         => false
             ];
             
@@ -553,7 +551,6 @@ class Checkout {
         // Define form args
         $args = [
             'key'                   => 'free-checkout',
-            'submission_class'      => 'free_checkout',
             'fields_callback'       => [$this, 'free_form_fields'],
             'submit_text'           => __( 'Complete Checkout', 'buddyclients-lite' )
         ];
@@ -571,7 +568,6 @@ class Checkout {
         // Define form args
         $args = [
             'key'                   => 'skip-payment-checkout',
-            'submission_class'      => 'skip_payment_checkout',
             'fields_callback'       => [$this, 'free_form_fields'],
             'submit_text'           => __( 'Complete Checkout', 'buddyclients-lite' )
         ];

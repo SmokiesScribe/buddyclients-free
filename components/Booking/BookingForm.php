@@ -234,7 +234,6 @@ class BookingForm {
         $form_args = [
             'key'                   => 'booking',
             'fields_callback'       => [$this, 'form_fields'],
-            'submission_class'      => 'booking_form',
             'submit_text'           => $this->submit_text,
             'avatar'                => $this->client_id,
             'manual_recaptcha'      => true

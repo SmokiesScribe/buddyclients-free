@@ -147,7 +147,6 @@ class UserFilesForm {
             $form_args = [
                 'key'                   => 'final-deletion-files',
                 'fields_callback'       => [$this, 'final_deletion_form_fields'],
-                'submission_class'      => 'final_deletion',
                 'description'           => __( 'Type DELETE to confirm deletion of the files above.', 'buddyclients-lite' ),
                 'submit_text'           => __( 'Permanently Delete Files', 'buddyclients-lite' ),
                 'avatar'                => null
@@ -218,7 +217,6 @@ class UserFilesForm {
         $form_args = [
             'key'                   => 'manage-user-files',
             'fields_callback'       => [$this, 'user_files_form_fields'],
-            'submission_class'      => 'user_files',
             'submit_text'           => __( 'Delete Files', 'buddyclients-lite' ),
             'avatar'                => null
         ];

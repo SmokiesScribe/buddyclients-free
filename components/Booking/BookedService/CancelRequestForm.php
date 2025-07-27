@@ -62,7 +62,6 @@ class CancelRequestForm {
             'key'               => 'cancel_service',
             'fields_callback'   => [$this, 'form_fields'],
             'submit_text'       => __( 'Request Cancellation', 'buddyclients-lite' ),
-            'submission_class'  => 'cancel_request',
             'form_classes'      => 'buddyc-table-form'
         ];
 

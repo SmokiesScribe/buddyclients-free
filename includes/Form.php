@@ -35,7 +35,6 @@ class Form {
      * 
      *     @type    string      $key                    The form key.
      *     @type    callable    $fields_callback        The callback to generate the form fields.
-     *     @type    string      $submission_class       The class that handles the form submission.
      *     @type    bool        $submit_button          Optional. Whether to include a submit button.
      *     @type    string      $submit_text            Optional. The text of the submit button.
      *                                                  Defaults to 'Submit'.
@@ -104,9 +103,6 @@ class Form {
         
         // Verification field
         $form .= $this->verification_field();
-        
-        // Callback field
-        $form .= $this->submission_class_field();
         
         // Honeypot field
         $form .= $this->honeypot_field();
@@ -202,23 +198,6 @@ class Form {
         $args = [
             'key'           => $this->key,
             'type'          => 'verify',
-        ];
-        
-        // Add the field to the content
-        return ( new FormField( $args ) )->build();
-    }
-    
-    /**
-     * Creates a field to pass the callback for handling submission.
-     *
-     * @since 0.1.0
-     */
-    private function submission_class_field() {
-        $args = [
-            'key'           => 'submission_class',
-            'id'            => $this->key . '_submission_class',
-            'type'          => 'hidden',
-            'value'         => $this->args['submission_class']
         ];
         
         // Add the field to the content

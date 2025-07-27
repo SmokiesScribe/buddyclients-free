@@ -66,7 +66,6 @@ class ServiceStatusForm {
         $args = [
             'key'               => 'update_service_status',
             'fields_callback'   => [$this, 'form_fields'],
-            'submission_class'  => 'service_status',
             'submit_text'       => __( 'Update Status', 'buddyclients-lite' ),
             'submit_classes'    => 'button action button-secondary',
             'form_classes'      => 'buddyc-table-form',

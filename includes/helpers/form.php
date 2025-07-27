@@ -11,7 +11,6 @@ use BuddyClients\Includes\FormField;
  * 
  *     @type    string      $key                    The form key.
  *     @type    callable    $fields_callback        The callback to generate the form fields.
- *     @type    string      $submission_class       The class that handles the form submission.
  *     @type    bool        $submit_button          Optional. Whether to include a submit button.
  *     @type    string      $submit_text            Optional. The text of the submit button.
  *                                                  Defaults to 'Submit'.
@@ -36,7 +35,6 @@ function buddyc_build_form( $args ) {
  * 
  *     @type    string      $key                    The form key.
  *     @type    callable    $fields_callback        The callback to generate the form fields.
- *     @type    string      $submission_class       The class that handles the form submission.
  *     @type    bool        $submit_button          Optional. Whether to include a submit button.
  *     @type    string      $submit_text            Optional. The text of the submit button.
  *                                                  Defaults to 'Submit'.

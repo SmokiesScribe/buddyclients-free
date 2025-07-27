@@ -4,7 +4,7 @@ Tags: buddypress-integration, service-business, business-tools, team-management,
 Requires at least: 4.9
 Tested up to: 6.8
 Requires PHP: 8.0
-Stable tag: 1.0.34
+Stable tag: 1.0.35
 License: GPL-2.0-or-later
 License URI: https://www.gnu.org/licenses/gpl-2.0.html
 
@@ -69,6 +69,9 @@ The banner image used for the plugin page:
 Banner URL: /assets/media/banner-772x250/banner.png
 
 == Changelog ==
+
+= 1.0.35 - July 27, 2025 =
+* Improvement: Removed deprecated submission class arg.
 
 = 1.0.34 - July 4, 2025 =
 * Improvement: Hardcoded available form submission classes to improve security.

@@ -238,14 +238,10 @@ class FormSubmission {
      */
     private function handle_submission() {
 
-        // Retrieve callback class
-        if ( isset( $_POST['submission_class'] ) ) {
-            // Get the key from post
-            $submission_class_key = sanitize_text_field( wp_unslash( $_POST['submission_class'] ) );
-
+        if ( $this->form_key ) {
             // Get the fully qualified class name
-            $submission_class = self::get_class( $submission_class_key );
-            
+            $submission_class = self::get_class( $this->form_key );
+
             // Make sure the class exists
             if ( class_exists( $submission_class ) ) {
                 // New instance
@@ -255,38 +251,40 @@ class FormSubmission {
     }
 
     /**
-     * Defines the available submission classes.
+     * Defines all valid submission classes keyed by form key.
      * 
      * @since 1.0.34
      * 
-     * @param   string  $class_key  The class key to search by.
+     * @param   string  $form_key   The form identifier.
      * @return  string  The fully qualified class name.
      */
-    private static function get_class( $class_key ) {
+    private static function get_class( $form_key ) {
 
         // Define all classes
         $classes = [
-            'booking_form'          => 'BuddyClients\Components\Booking\BookingFormSubmission',
-            'user_files'            => 'BuddyClients\Includes\UserFilesSubmission',
-            'final_deletion'        => 'BuddyClients\Includes\FinalDeletionSubmission',
+            'booking'               => 'BuddyClients\Components\Booking\BookingFormSubmission',
+            'manage-user-files'     => 'BuddyClients\Includes\UserFilesSubmission',
+            'final-deletion-files'  => 'BuddyClients\Includes\FinalDeletionSubmission',
             'click_data_filter'     => 'BuddyClients\Components\Affiliate\ClickDataFilterFormSubmission',
             'availability'          => 'BuddyClients\Components\Availability\AvailabilitySubmission',
-            'cancel_request'        => 'BuddyClients\Components\Booking\BookedService\CancelRequestSubmission',
-            'payment_status'        => 'BuddyClients\Components\Booking\BookedService\PaymentStatusSubmission',
+            'cancel_service'        => 'BuddyClients\Components\Booking\BookedService\CancelRequestSubmission',
+            'update_payment_status' => 'BuddyClients\Components\Booking\BookedService\PaymentStatusSubmission',
             'reassign'              => 'BuddyClients\Components\Booking\BookedService\ReassignFormSubmission',
-            'service_status'        => 'BuddyClients\Components\Booking\BookedService\ServiceStatusSubmission',
+            'update_service_status' => 'BuddyClients\Components\Booking\BookedService\ServiceStatusSubmission',
             'brief'                 => 'BuddyClients\Components\Brief\BriefSubmission',
             'contact'               => 'BuddyClients\Components\Contact\ContactSubmission',
-            'legal'                 => 'BuddyClients\Components\Legal\LegalSubmission',
+            'team_legal'            => 'BuddyClients\Components\Legal\LegalSubmission',
+            'affiliate_legal'       => 'BuddyClients\Components\Legal\LegalSubmission',
+            'client_legal'          => 'BuddyClients\Components\Legal\LegalSubmission',
             'sales'                 => 'BuddyClients\Components\Sales\SalesFormSubmission',
             'testimonial'           => 'BuddyClients\Components\Testimonial\TestimonialSubmission',
-            'free_checkout'         => 'BuddyClients\Components\Checkout\FreeCheckout',
-            'skip_payment_checkout' => 'BuddyClients\Components\Checkout\SkipPaymentCheckout',
-            'lead_gen'              => 'BuddyClients\Components\Contact\Lead\LeadGenSubmission',
-            'lead_status'           => 'BuddyClients\Components\Contact\Lead\LeadStatusSubmission',
+            'free-checkout'         => 'BuddyClients\Components\Checkout\FreeCheckout',
+            'skip-payment-checkout' => 'BuddyClients\Components\Checkout\SkipPaymentCheckout',
+            'lead-gen'              => 'BuddyClients\Components\Contact\Lead\LeadGenSubmission',
+            'update_lead_status'    => 'BuddyClients\Components\Contact\Lead\LeadStatusSubmission'
         ];
 
         // Return fully qualified class
-        return $classes[$class_key] ?? null;
+        return $classes[$form_key] ?? null;
     }
 }

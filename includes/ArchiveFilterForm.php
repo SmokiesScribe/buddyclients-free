@@ -103,7 +103,6 @@ class ArchiveFilterForm {
         $form_args = [
             'key'                   => 'archive-filter',
             'fields_callback'       => [$this, 'form_fields'],
-            'submission_class'      => null,
             'no_submit'             => true
         ];
 
