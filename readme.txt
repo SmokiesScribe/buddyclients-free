@@ -53,15 +53,11 @@ To run BuddyClients, we recommend your host supports:
 
 == Screenshots ==
 
-1. Screenshot 1: The form that clients use to book services.
-   Screenshot URL: /assets/media/screenshots/screenshot-2.png
-   
-2. Screenshot 2: The admin area bookings overview, displaying the gross and net values for completed and abandoned bookings for a certain time period.
-   Screenshot URL: /assets/media/screenshots/screenshot-4.png
+1. The form that clients use to book services.
 
+2. The admin area bookings overview, displaying the gross and net values for completed and abandoned bookings for a certain time period.
 
-3. Screenshot 3: The bookings dashboard in the admin area.
-   Screenshot URL: /assets/media/screenshots/screenshot-5.png
+3. The bookings dashboard in the admin area.
 
 == Banner ==
 
